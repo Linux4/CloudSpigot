@@ -1,9 +1,0 @@
---- a/net/minecraft/server/IDataManager.java
-+++ b/net/minecraft/server/IDataManager.java
-@@ -23,4 +23,6 @@
-     File getDataFile(String s);
- 
-     String g();
-+
-+    java.util.UUID getUUID(); // CraftBukkit
- }
