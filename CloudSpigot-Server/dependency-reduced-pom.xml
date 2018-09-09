@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <artifactId>cloudspigot-parent</artifactId>
-    <groupId>eu.server24_7.cloudspigot</groupId>
+    <groupId>eu.server24-7.cloudspigot</groupId>
     <version>dev-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>eu.server24_7.cloudspigot</groupId>
+  <groupId>eu.server24-7.cloudspigot</groupId>
   <artifactId>cloudspigot</artifactId>
   <name>CloudSpigot</name>
   <version>1.8.8-R0.1-SNAPSHOT</version>

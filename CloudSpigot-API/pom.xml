@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>eu.server24_7.cloudspigot</groupId>
+        <groupId>eu.server24-7.cloudspigot</groupId>
         <artifactId>cloudspigot-parent</artifactId>
         <version>dev-SNAPSHOT</version>
     </parent>
 
-    <groupId>eu.server24_7.cloudspigot</groupId>
+    <groupId>eu.server24-7.cloudspigot</groupId>
     <artifactId>cloudspigot-api</artifactId>
     <version>1.8.8-R0.1-SNAPSHOT</version>
     <packaging>jar</packaging>

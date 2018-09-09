@@ -9,7 +9,7 @@
         <version>7</version>
     </parent>
 
-    <groupId>eu.server24_7.cloudspigot</groupId>
+    <groupId>eu.server24-7.cloudspigot</groupId>
     <artifactId>cloudspigot-parent</artifactId>
     <version>dev-SNAPSHOT</version>
     <packaging>pom</packaging>
