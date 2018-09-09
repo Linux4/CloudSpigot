@@ -1,0 +1,47 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <groupId>eu.server24_7.cloudspigot</groupId>
+    <artifactId>cloudspigot-parent</artifactId>
+    <version>dev-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>CloudSpigot-Parent</name>
+    <description>Parent project for all CloudSpigot modules.</description>
+    <url>https://cloudspigot.server24-7.eu</url>
+
+    <modules>
+        <module>CloudSpigot-Server</module>
+        <module>CloudSpigot-API</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>md_5-releases</id>
+            <url>http://repo.md-5.net/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>destroystokyo-releases</id>
+            <url>https://repo.destroystokyo.com/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>destroystokyo-snapshots</id>
+            <url>https://repo.destroystokyo.com/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
