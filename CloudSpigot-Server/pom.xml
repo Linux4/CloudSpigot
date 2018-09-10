@@ -4,13 +4,13 @@
     <groupId>eu.server24-7.cloudspigot</groupId>
     <artifactId>cloudspigot</artifactId>
     <packaging>jar</packaging>
-    <version>1.8.8-R0.1-SNAPSHOT</version>
+    <version>1.8.9-R0.1-SNAPSHOT</version>
     <name>CloudSpigot</name>
     <url>https://hub.spigotmc.org/stash/projects/PAPER/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <api.version>unknown</api.version>
+        <api.version>1.8.8-R0.1-SNAPSHOT</api.version>
         <junit.version>4.11</junit.version>
         <minecraft.version>1.8.9</minecraft.version>
         <minecraft_version>1_8_R3</minecraft_version>
@@ -37,7 +37,7 @@
         <dependency>
             <groupId>eu.server24-7.cloudspigot</groupId>
             <artifactId>cloudspigot-api</artifactId>
-            <version>${project.version}</version>
+            <version>${api.version}</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
@@ -45,7 +45,6 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>minecraft-server</artifactId>
             <version>${minecraft.version}-SNAPSHOT</version>
-            <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
