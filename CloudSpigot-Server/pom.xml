@@ -50,7 +50,7 @@
         <dependency>
             <groupId>net.sf.jopt-simple</groupId>
             <artifactId>jopt-simple</artifactId>
-            <version>3.2</version>
+            <version>5.0.4</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
@@ -64,7 +64,7 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.7.2</version>
+            <version>3.23.1</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
