@@ -9,7 +9,7 @@ import org.bukkit.Bukkit;
 
 public final class Version {
     public static String getCloudSpigotVersion() {
-        return "2";
+        return "3";
     }
 }
 
