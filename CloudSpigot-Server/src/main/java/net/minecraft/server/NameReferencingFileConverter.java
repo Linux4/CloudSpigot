@@ -26,8 +26,8 @@ import java.util.UUID;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bukkit.Bukkit;
-import org.github.paperspigot.event.ServerExceptionEvent;
-import org.github.paperspigot.exception.ServerInternalException;
+import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 public class NameReferencingFileConverter {
 

@@ -8,6 +8,6 @@ public class MobEffectAttackDamage extends MobEffectList {
 
     public double a(int i, AttributeModifier attributemodifier) {
         // CloudSpigot - Configurable modifiers for strength and weakness effects
-        return this.id == MobEffectList.WEAKNESS.id ? (double) (org.github.paperspigot.CloudSpigotConfig.weaknessEffectModifier * (float) (i + 1)) : org.github.paperspigot.CloudSpigotConfig.strengthEffectModifier * (double) (i + 1);
+        return this.id == MobEffectList.WEAKNESS.id ? (double) (eu.server24_7.cloudspigot.CloudSpigotConfig.weaknessEffectModifier * (float) (i + 1)) : eu.server24_7.cloudspigot.CloudSpigotConfig.strengthEffectModifier * (double) (i + 1);
     }
 }

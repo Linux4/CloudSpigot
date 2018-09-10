@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Maps;
-import org.github.paperspigot.exception.ServerInternalException;
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

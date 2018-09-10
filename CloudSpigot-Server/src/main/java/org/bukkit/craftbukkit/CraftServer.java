@@ -713,7 +713,7 @@ public final class CraftServer implements Server {
         }
 
         org.spigotmc.SpigotConfig.init((File) console.options.valueOf("spigot-settings")); // Spigot
-        org.github.paperspigot.CloudSpigotConfig.init((File) console.options.valueOf("paper-settings")); // CloudSpigot
+        eu.server24_7.cloudspigot.CloudSpigotConfig.init((File) console.options.valueOf("paper-settings")); // CloudSpigot
         for (WorldServer world : console.worlds) {
             world.worldData.setDifficulty(difficulty);
             world.setSpawnFlags(monsters, animals);
@@ -736,7 +736,7 @@ public final class CraftServer implements Server {
         commandMap.clearCommands();
         resetRecipes();
         org.spigotmc.SpigotConfig.registerCommands(); // Spigot
-        org.github.paperspigot.CloudSpigotConfig.registerCommands(); // CloudSpigot
+        eu.server24_7.cloudspigot.CloudSpigotConfig.registerCommands(); // CloudSpigot
 
         overrideAllCommandBlockCommands = commandsConfiguration.getStringList("command-block-overrides").contains("*");
 
@@ -1803,7 +1803,7 @@ public final class CraftServer implements Server {
         @Override
         public YamlConfiguration getCloudSpigotConfig()
         {
-            return org.github.paperspigot.CloudSpigotConfig.config;
+            return eu.server24_7.cloudspigot.CloudSpigotConfig.config;
         }
 
         @Override

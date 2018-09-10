@@ -20,7 +20,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.messaging.PluginMessageRecipient;
 import org.bukkit.scoreboard.Scoreboard;
 // CloudSpigot start
-import org.github.paperspigot.Title;
+import eu.server24_7.cloudspigot.Title;
 // CloudSpigot end
 
 /**

@@ -25,7 +25,7 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.permissions.ServerOperator;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-import org.github.paperspigot.CloudSpigotConfig;
+import eu.server24_7.cloudspigot.CloudSpigotConfig;
 
 public abstract class CraftEntity implements org.bukkit.entity.Entity {
     private static final PermissibleBase perm = new PermissibleBase(new ServerOperator() {

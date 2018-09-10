@@ -10,7 +10,7 @@ import java.util.Set;
 import org.bukkit.craftbukkit.util.LongHash;
 import org.bukkit.craftbukkit.util.LongHashSet;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
-import org.github.paperspigot.exception.ServerInternalException;
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
 // CraftBukkit end
 
 public final class SpawnerCreature {

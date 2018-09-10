@@ -17,9 +17,9 @@ import org.bukkit.Server;
 import org.bukkit.command.defaults.*;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
-import org.github.paperspigot.event.ServerExceptionEvent;
-import org.github.paperspigot.exception.ServerCommandException;
-import org.github.paperspigot.exception.ServerTabCompleteException;
+import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
+import eu.server24_7.cloudspigot.exception.ServerCommandException;
+import eu.server24_7.cloudspigot.exception.ServerTabCompleteException;
 
 public class SimpleCommandMap implements CommandMap {
     private static final Pattern PATTERN_ON_SPACE = Pattern.compile(" ", Pattern.LITERAL);

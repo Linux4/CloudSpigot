@@ -21,9 +21,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
-import org.github.paperspigot.ServerSchedulerReportingWrapper;
-import org.github.paperspigot.event.ServerExceptionEvent;
-import org.github.paperspigot.exception.ServerSchedulerException;
+import eu.server24_7.cloudspigot.ServerSchedulerReportingWrapper;
+import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
+import eu.server24_7.cloudspigot.exception.ServerSchedulerException;
 
 /**
  * The fundamental concepts for this implementation:

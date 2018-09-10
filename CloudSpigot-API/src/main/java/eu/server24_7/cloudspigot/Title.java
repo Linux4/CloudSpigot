@@ -1,4 +1,4 @@
-package org.github.paperspigot;
+package eu.server24_7.cloudspigot;
 
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;

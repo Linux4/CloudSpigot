@@ -65,7 +65,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scoreboard.Scoreboard;
 // CloudSpigot start
-import org.github.paperspigot.Title;
+import eu.server24_7.cloudspigot.Title;
 // CloudSpigot end
 
 @DelegateDeserialization(CraftOfflinePlayer.class)

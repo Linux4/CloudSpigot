@@ -1,4 +1,4 @@
-package org.github.paperspigot.exception;
+package eu.server24_7.cloudspigot.exception;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

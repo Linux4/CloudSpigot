@@ -1,4 +1,4 @@
-package org.github.paperspigot.exception;
+package eu.server24_7.cloudspigot.exception;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang.Validate;

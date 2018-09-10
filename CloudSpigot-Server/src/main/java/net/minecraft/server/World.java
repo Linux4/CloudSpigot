@@ -24,8 +24,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import org.github.paperspigot.event.ServerExceptionEvent;
-import org.github.paperspigot.exception.ServerInternalException;
+import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
 // CloudSpigot end
 
 // CraftBukkit start
@@ -161,7 +161,7 @@ public abstract class World implements IBlockAccess {
 
     public final org.spigotmc.SpigotWorldConfig spigotConfig; // Spigot
 
-    public final org.github.paperspigot.CloudSpigotWorldConfig paperSpigotConfig; // CloudSpigot
+    public final eu.server24_7.cloudspigot.CloudSpigotWorldConfig paperSpigotConfig; // CloudSpigot
 
     public final co.aikar.timings.WorldTimingsHandler timings; // Spigot
 
@@ -179,7 +179,7 @@ public abstract class World implements IBlockAccess {
 
     protected World(IDataManager idatamanager, WorldData worlddata, WorldProvider worldprovider, MethodProfiler methodprofiler, boolean flag, ChunkGenerator gen, org.bukkit.World.Environment env) {
         this.spigotConfig = new org.spigotmc.SpigotWorldConfig( worlddata.getName() ); // Spigot
-        this.paperSpigotConfig = new org.github.paperspigot.CloudSpigotWorldConfig( worlddata.getName() ); // CloudSpigot
+        this.paperSpigotConfig = new eu.server24_7.cloudspigot.CloudSpigotWorldConfig( worlddata.getName() ); // CloudSpigot
         this.generator = gen;
         this.world = new CraftWorld((WorldServer) this, gen, env);
         this.ticksPerAnimalSpawns = this.getServer().getTicksPerAnimalSpawns(); // CraftBukkit

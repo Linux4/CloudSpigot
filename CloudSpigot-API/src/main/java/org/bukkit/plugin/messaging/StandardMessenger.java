@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Set;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.github.paperspigot.event.ServerExceptionEvent;
-import org.github.paperspigot.exception.ServerPluginMessageException;
+import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
+import eu.server24_7.cloudspigot.exception.ServerPluginMessageException;
 
 /**
  * Standard implementation to {@link Messenger}

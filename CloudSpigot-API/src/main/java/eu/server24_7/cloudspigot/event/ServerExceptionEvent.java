@@ -1,10 +1,10 @@
-package org.github.paperspigot.event;
+package eu.server24_7.cloudspigot.event;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang.Validate;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-import org.github.paperspigot.exception.ServerException;
+import eu.server24_7.cloudspigot.exception.ServerException;
 
 /**
  * Called whenever an exception is thrown in a recoverable section of the server.

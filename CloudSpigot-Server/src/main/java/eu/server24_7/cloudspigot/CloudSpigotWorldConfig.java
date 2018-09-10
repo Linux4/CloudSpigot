@@ -1,4 +1,4 @@
-package org.github.paperspigot;
+package eu.server24_7.cloudspigot;
 
 import java.util.List;
 import org.bukkit.Bukkit;

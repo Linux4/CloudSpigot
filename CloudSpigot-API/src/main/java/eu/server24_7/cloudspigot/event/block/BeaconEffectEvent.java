@@ -1,4 +1,4 @@
-package org.github.paperspigot.event.block;
+package eu.server24_7.cloudspigot.event.block;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;

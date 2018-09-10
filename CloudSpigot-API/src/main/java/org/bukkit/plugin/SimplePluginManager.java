@@ -33,9 +33,9 @@ import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.util.FileUtil;
 
 import com.google.common.collect.ImmutableSet;
-import org.github.paperspigot.event.ServerExceptionEvent;
-import org.github.paperspigot.exception.ServerEventException;
-import org.github.paperspigot.exception.ServerPluginEnableDisableException;
+import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
+import eu.server24_7.cloudspigot.exception.ServerEventException;
+import eu.server24_7.cloudspigot.exception.ServerPluginEnableDisableException;
 
 /**
  * Handles all plugin management from the Server

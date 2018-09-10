@@ -1,8 +1,8 @@
-package org.github.paperspigot.exception;
+package eu.server24_7.cloudspigot.exception;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.ThrownExpBottle;
-import org.github.paperspigot.event.ServerExceptionEvent;
+import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
 
 /**
  * Thrown when the internal server throws a recoverable exception.

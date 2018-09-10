@@ -178,8 +178,8 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
             org.spigotmc.SpigotConfig.registerCommands();
             // Spigot end
             // CloudSpigot start
-            org.github.paperspigot.CloudSpigotConfig.init((File) options.valueOf("paper-settings"));
-            org.github.paperspigot.CloudSpigotConfig.registerCommands();
+            eu.server24_7.cloudspigot.CloudSpigotConfig.init((File) options.valueOf("paper-settings"));
+            eu.server24_7.cloudspigot.CloudSpigotConfig.registerCommands();
             // CloudSpigot end
 
             DedicatedServer.LOGGER.info("Generating keypair");

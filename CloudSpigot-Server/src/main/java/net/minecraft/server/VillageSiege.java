@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-import org.github.paperspigot.exception.ServerInternalException;
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 import java.util.Iterator;
 import java.util.List;

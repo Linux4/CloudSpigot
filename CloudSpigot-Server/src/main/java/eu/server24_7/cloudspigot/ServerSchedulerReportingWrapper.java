@@ -1,10 +1,10 @@
-package org.github.paperspigot;
+package eu.server24_7.cloudspigot;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang.Validate;
 import org.bukkit.craftbukkit.scheduler.CraftTask;
-import org.github.paperspigot.event.ServerExceptionEvent;
-import org.github.paperspigot.exception.ServerSchedulerException;
+import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
+import eu.server24_7.cloudspigot.exception.ServerSchedulerException;
 
 /**
  * Reporting wrapper to catch exceptions not natively

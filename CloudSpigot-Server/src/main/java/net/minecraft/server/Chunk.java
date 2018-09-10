@@ -19,8 +19,8 @@ import org.apache.logging.log4j.Logger;
 import com.google.common.collect.Lists; // CraftBukkit
 import org.bukkit.Bukkit; // CraftBukkit
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
-import org.github.paperspigot.event.ServerExceptionEvent;
-import org.github.paperspigot.exception.ServerInternalException;
+import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 public class Chunk {
 

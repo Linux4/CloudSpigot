@@ -18,7 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.world.StructureGrowEvent;
 // CraftBukkit end
 
-import org.github.paperspigot.CloudSpigotConfig; // CloudSpigot
+import eu.server24_7.cloudspigot.CloudSpigotConfig; // CloudSpigot
 
 public final class ItemStack {
 

@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 // CraftBukkit end
 
-import org.github.paperspigot.CloudSpigotConfig; // CloudSpigot
+import eu.server24_7.cloudspigot.CloudSpigotConfig; // CloudSpigot
 
 public class ItemBucket extends Item {
 

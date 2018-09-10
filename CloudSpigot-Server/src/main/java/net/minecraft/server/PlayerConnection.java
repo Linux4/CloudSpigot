@@ -63,7 +63,7 @@ import org.bukkit.util.NumberConversions;
 import co.aikar.timings.SpigotTimings; // Spigot
 // CraftBukkit end
 
-import org.github.paperspigot.CloudSpigotConfig; // CloudSpigot
+import eu.server24_7.cloudspigot.CloudSpigotConfig; // CloudSpigot
 
 public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerListBox {
 
@@ -665,7 +665,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
         WorldServer worldserver = this.minecraftServer.getWorldServer(this.player.dimension);
         boolean throttled = false;
         // CloudSpigot - Allow disabling the player interaction limiter
-        if (org.github.paperspigot.CloudSpigotConfig.interactLimitEnabled && lastPlace != -1 && packetplayinblockplace.timestamp - lastPlace < 30 && packets++ >= 4) {
+        if (eu.server24_7.cloudspigot.CloudSpigotConfig.interactLimitEnabled && lastPlace != -1 && packetplayinblockplace.timestamp - lastPlace < 30 && packets++ >= 4) {
             throttled = true;
         } else if ( packetplayinblockplace.timestamp - lastPlace >= 30 || lastPlace == -1 )
         {

@@ -15,7 +15,7 @@ import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.github.paperspigot.event.block.BeaconEffectEvent;
+import eu.server24_7.cloudspigot.event.block.BeaconEffectEvent;
 // CloudSpigot end
 
 public class TileEntityBeacon extends TileEntityContainer implements IUpdatePlayerListBox, IInventory {

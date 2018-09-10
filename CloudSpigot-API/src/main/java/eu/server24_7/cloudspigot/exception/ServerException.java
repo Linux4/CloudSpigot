@@ -1,4 +1,4 @@
-package org.github.paperspigot.exception;
+package eu.server24_7.cloudspigot.exception;
 
 /**
  * Wrapper exception for all exceptions that are thrown by the server.

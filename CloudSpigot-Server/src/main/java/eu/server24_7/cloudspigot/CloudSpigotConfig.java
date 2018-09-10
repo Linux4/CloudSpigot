@@ -1,4 +1,4 @@
-package org.github.paperspigot;
+package eu.server24_7.cloudspigot;
 
 import com.google.common.base.Throwables;
 import java.io.File;
