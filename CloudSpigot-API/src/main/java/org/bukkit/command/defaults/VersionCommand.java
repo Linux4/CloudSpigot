@@ -234,7 +234,7 @@ public class VersionCommand extends BukkitCommand {
              return getFromJenkins(currentVer);
          } catch (NumberFormatException ex) {
              verInfo = verInfo.replace("\"", "");
-             return getFromRepo("PaperMC/Paper", verInfo);
+             return getFromRepo("Server24-7/CloudSpigot", verInfo);
          }
     }
 
@@ -271,7 +271,7 @@ public class VersionCommand extends BukkitCommand {
      private static int getFromJenkins(int currentVer) { //CloudSpigot
          try {
              BufferedReader reader = Resources.asCharSource(
-                     new URL("https://ci.destroystokyo.com/job/Paper/lastSuccessfulBuild/buildNumber"), // Paper
+                     new URL("https://cloudspigot.server24-7.eu/job/CloudSpigot/lastSuccessfulBuild/buildNumber"), // Paper
                      Charsets.UTF_8
              ).openBufferedStream();
              try {
