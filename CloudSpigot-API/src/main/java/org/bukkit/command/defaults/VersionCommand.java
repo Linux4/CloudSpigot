@@ -192,7 +192,7 @@ public class VersionCommand extends BukkitCommand {
         String version = Bukkit.getVersion();
         if (version == null) version = "Custom";
         if (version.startsWith("git-CloudSpigot-")) {
-             String[] parts = version.substring("git-Paper-".length()).split("[-\\s]");
+             String[] parts = version.substring("git-CloudSpigot-".length()).split("[-\\s]");
              int distance = getDistance(null, parts[0]);
              switch (distance) {
                  case -1:
