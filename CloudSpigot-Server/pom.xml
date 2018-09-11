@@ -19,6 +19,7 @@
         <!--CloudSpigot - Bump to 1.8 - This will haunt me -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <build>${buildNumber}</build>
     </properties>
 
     <parent>

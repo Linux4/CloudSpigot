@@ -28,10 +28,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import eu.server24_7.cloudspigot.util.Version;
-
 public class VersionCommand extends BukkitCommand {
-    private String cloudSpigotVersion;
 
     public VersionCommand(String name) {
         super(name);
@@ -41,7 +38,6 @@ public class VersionCommand extends BukkitCommand {
         this.setPermission("bukkit.command.version");
         this.setAliases(Arrays.asList("ver", "about"));
 
-        this.cloudSpigotVersion = Version.getCloudSpigotVersion();
     }
 
     @Override
@@ -193,7 +189,7 @@ public class VersionCommand extends BukkitCommand {
         if (version == null) version = "Custom";
         // CloudSpigot start
         if (version.startsWith("git-CloudSpigot-")) {
-            int cloudSpigotVersions = getDistance("cloudspigot", cloudSpigotVersion);
+            int cloudSpigotVersions = String[] parts = version.substring("git-CloudSpigot-".length()).split("[-\\s]");;
             if (cloudSpigotVersions == -1) {
                 setVersionMessage("Error obtaining version information");
             } else {
@@ -254,7 +250,7 @@ public class VersionCommand extends BukkitCommand {
     private static int getDistance(String repo, String currentVerInt) { // CloudSpigot
         try {
             BufferedReader reader = Resources.asCharSource(
-                    new URL("https://cloudspigot.server24-7.eu/.version"), // CloudSpigot
+                    new URL("https://cloudspigot.server24-7.eu/job/CloudSpigot/lastSuccessfulBuild/buildNumber"), // CloudSpigot
                     Charsets.UTF_8
             ).openBufferedStream();
             try {
