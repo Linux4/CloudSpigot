@@ -24,6 +24,10 @@ import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+//CloudSpigot start
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+//CloudSpigot end
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -184,48 +188,25 @@ public class VersionCommand extends BukkitCommand {
         }
     }
 
-    private void obtainVersion() {
+    private void obtainVersion() { //CloudSpigot
         String version = Bukkit.getVersion();
         if (version == null) version = "Custom";
-        // CloudSpigot start
         if (version.startsWith("git-CloudSpigot-")) {
-            int cloudSpigotVersions = String[] parts = version.substring("git-CloudSpigot-".length()).split("[-\\s]");;
-            if (cloudSpigotVersions == -1) {
-                setVersionMessage("Error obtaining version information");
-            } else {
-                if (cloudSpigotVersions == 0) {
-                    setVersionMessage("You are running the latest version");
-                } else {
-                    setVersionMessage("You are " + cloudSpigotVersions + " version(s) behind");
-                }
-            }
-        } else if (version.startsWith("git-Spigot-")) {
-        // CloudSpigot end
-            String[] parts = version.substring("git-Spigot-".length()).split("-");
-            int cbVersions = getDistance("craftbukkit", parts[1].substring(0, parts[1].indexOf(' ')));
-            int spigotVersions = getDistance("spigot", parts[0]);
-            if (cbVersions == -1 || spigotVersions == -1) {
-                setVersionMessage("Error obtaining version information");
-            } else {
-                if (cbVersions == 0 && spigotVersions == 0) {
-                    setVersionMessage("You are running the latest version");
-                } else {
-                    setVersionMessage("You are " + (cbVersions + spigotVersions) + " version(s) behind");
-                }
-            }
-
-        } else if (version.startsWith("git-Bukkit-")) {
-            version = version.substring("git-Bukkit-".length());
-            int cbVersions = getDistance("craftbukkit", version.substring(0, version.indexOf(' ')));
-            if (cbVersions == -1) {
-                setVersionMessage("Error obtaining version information");
-            } else {
-                if (cbVersions == 0) {
-                    setVersionMessage("You are running the latest version");
-                } else {
-                    setVersionMessage("You are " + cbVersions + " version(s) behind");
-                }
-            }
+             String[] parts = version.substring("git-Paper-".length()).split("[-\\s]");
+             int distance = getDistance(null, parts[0]);
+             switch (distance) {
+                 case -1:
+                     setVersionMessage("Error obtaining version information");
+                     break;
+                 case 0:
+                     setVersionMessage("You are running the latest version");
+                     break;
+                 case -2:
+                     setVersionMessage("Unknown version");
+                     break;
+                 default:
+                    setVersionMessage("You are " + distance + " version(s) behind");
+             }
         } else {
             setVersionMessage("Unknown version, custom build?");
         }
@@ -247,27 +228,64 @@ public class VersionCommand extends BukkitCommand {
         }
     }
 
-    private static int getDistance(String repo, String currentVerInt) { // CloudSpigot
-        try {
-            BufferedReader reader = Resources.asCharSource(
-                    new URL("https://cloudspigot.server24-7.eu/job/CloudSpigot/lastSuccessfulBuild/buildNumber"), // CloudSpigot
-                    Charsets.UTF_8
-            ).openBufferedStream();
-            try {
-                // CloudSpigot start
-                int newVer = Integer.decode(reader.readLine());
-                int currentVer = Integer.decode(currentVerInt);
-                return newVer - currentVer;
-            } catch (NumberFormatException ex) {
-                //ex.printStackTrace();
-                // CloudSpigot end
-                return -1;
-            } finally {
-                reader.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return -1;
-        }
+    private static int getDistance(String repo, String verInfo) { // CloudSpigot
+         try {
+             int currentVer = Integer.decode(verInfo);
+             return getFromJenkins(currentVer);
+         } catch (NumberFormatException ex) {
+             verInfo = verInfo.replace("\"", "");
+             return getFromRepo("PaperMC/Paper", verInfo);
+         }
+    }
+
+
+    private static final String BRANCH = "master";
+    private static int getFromRepo(String repo, String hash) { //CloudSpigot
+         try {
+             HttpURLConnection connection = (HttpURLConnection) new URL("https://api.github.com/repos/" + repo + "/compare/" + BRANCH + "..." + hash).openConnection();
+             connection.connect();
+             if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) return -2; // Unknown commit
+             try (
+                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charsets.UTF_8))
+             ) {
+                 JSONObject obj = (JSONObject) new JSONParser().parse(reader);
+                 String status = (String) obj.get("status");
+                 switch (status) {
+                     case "identical":
+                         return 0;
+                     case "behind":
+                         return ((Number) obj.get("behind_by")).intValue();
+                     default:
+                         return -1;
+                 }
+             } catch (ParseException | NumberFormatException e) {
+                 e.printStackTrace();
+                 return -1;
+             }
+         } catch (IOException e) {
+             e.printStackTrace();
+             return -1;
+         }
+     }
+
+     private static int getFromJenkins(int currentVer) { //CloudSpigot
+         try {
+             BufferedReader reader = Resources.asCharSource(
+                     new URL("https://ci.destroystokyo.com/job/Paper/lastSuccessfulBuild/buildNumber"), // Paper
+                     Charsets.UTF_8
+             ).openBufferedStream();
+             try {
+                 int newVer = Integer.decode(reader.readLine());
+                 return newVer - currentVer;
+             } catch (NumberFormatException ex) {
+                 ex.printStackTrace();
+                 return -2;
+             } finally {
+                 reader.close();
+             }
+         } catch (IOException e) {
+             e.printStackTrace();
+             return -1;
+         }
     }
 }
