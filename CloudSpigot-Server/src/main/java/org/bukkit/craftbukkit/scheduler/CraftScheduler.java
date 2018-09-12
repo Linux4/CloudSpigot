@@ -189,7 +189,7 @@ public class CraftScheduler implements BukkitScheduler {
                             }
                         }
                         return false;
-                    }}){{this.timings=co.aikar.timings.SpigotTimings.getCancelTasksTimer();}}; // Spigot
+                    }});
         handle(task, 0l);
         for (CraftTask taskPending = head.getNext(); taskPending != null; taskPending = taskPending.getNext()) {
             if (taskPending == task) {
@@ -222,7 +222,7 @@ public class CraftScheduler implements BukkitScheduler {
                             }
                         }
                     }
-                }){{this.timings=co.aikar.timings.SpigotTimings.getCancelTasksTimer(plugin);}}; // Spigot
+                });
         handle(task, 0l);
         for (CraftTask taskPending = head.getNext(); taskPending != null; taskPending = taskPending.getNext()) {
             if (taskPending == task) {
@@ -254,7 +254,7 @@ public class CraftScheduler implements BukkitScheduler {
                         CraftScheduler.this.pending.clear();
                         CraftScheduler.this.temp.clear();
                     }
-                }){{this.timings=co.aikar.timings.SpigotTimings.getCancelTasksTimer();}}; // Spigot
+                });
         handle(task, 0l);
         for (CraftTask taskPending = head.getNext(); taskPending != null; taskPending = taskPending.getNext()) {
             if (taskPending == task) {

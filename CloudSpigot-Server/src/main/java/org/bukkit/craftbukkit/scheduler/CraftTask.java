@@ -1,8 +1,6 @@
 package org.bukkit.craftbukkit.scheduler;
 
 import org.bukkit.Bukkit;
-import co.aikar.timings.SpigotTimings; // Spigot
-import co.aikar.timings.Timing; // Spigot
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -21,7 +19,6 @@ public class CraftTask implements BukkitTask, Runnable { // Spigot
     private volatile long period;
     private long nextRun;
     public final Runnable task; //Spigot
-    public Timing timings; // Spigot
     private final Plugin plugin;
     private final int id;
 
@@ -39,7 +36,6 @@ public class CraftTask implements BukkitTask, Runnable { // Spigot
         this.task = task;
         this.id = id;
         this.period = period;
-        timings = task != null ? SpigotTimings.getPluginTaskTimings(this, period) : null; // Spigot
     }
 
     public final int getTaskId() {
@@ -55,9 +51,7 @@ public class CraftTask implements BukkitTask, Runnable { // Spigot
     }
 
     public void run() {
-        if (timings != null && isSync()) timings.startTiming(); // Spigot
         task.run();
-        if (timings != null && isSync()) timings.stopTiming(); // Spigot
     }
 
     long getPeriod() {

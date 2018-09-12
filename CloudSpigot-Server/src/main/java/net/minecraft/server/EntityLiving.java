@@ -23,8 +23,6 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 // CraftBukkit end
 
-import co.aikar.timings.SpigotTimings; // Spigot
-
 // CloudSpigot start
 import org.bukkit.Bukkit;
 import org.spigotmc.event.entity.EntityDismountEvent;

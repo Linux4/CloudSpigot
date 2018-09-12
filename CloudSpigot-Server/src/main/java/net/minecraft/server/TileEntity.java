@@ -6,14 +6,11 @@ import java.util.concurrent.Callable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import co.aikar.timings.SpigotTimings; // Spigot
-import co.aikar.timings.Timing; // Spigot
 import org.bukkit.inventory.InventoryHolder; // CraftBukkit
 import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 public abstract class TileEntity {
 
-    public Timing tickTimer = SpigotTimings.getTileEntityTimings(this); // Spigot
     private static final Logger a = LogManager.getLogger();
     private static Map<String, Class<? extends TileEntity>> f = Maps.newHashMap();
     private static Map<Class<? extends TileEntity>, String> g = Maps.newHashMap();

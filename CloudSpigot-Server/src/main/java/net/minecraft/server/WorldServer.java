@@ -223,13 +223,10 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         // CraftBukkit start - Only call spawner if we have players online and the world allows for mobs or animals
         long time = this.worldData.getTime();
         if (this.getGameRules().getBoolean("doMobSpawning") && this.worldData.getType() != WorldType.DEBUG_ALL_BLOCK_STATES && (this.allowMonsters || this.allowAnimals) && (this instanceof WorldServer && this.players.size() > 0)) {
-            timings.mobSpawn.startTiming(); // Spigot
             this.R.a(this, this.allowMonsters && (this.ticksPerMonsterSpawns != 0 && time % this.ticksPerMonsterSpawns == 0L), this.allowAnimals && (this.ticksPerAnimalSpawns != 0 && time % this.ticksPerAnimalSpawns == 0L), this.worldData.getTime() % 400L == 0L);
-            timings.mobSpawn.stopTiming(); // Spigot
             // CraftBukkit end
         }
         // CraftBukkit end
-        timings.doChunkUnload.startTiming(); // Spigot
         this.methodProfiler.c("chunkSource");
         this.chunkProvider.unloadChunks();
         int j = this.a(1.0F);
@@ -243,35 +240,22 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             this.worldData.setDayTime(this.worldData.getDayTime() + 1L);
         }
 
-        timings.doChunkUnload.stopTiming(); // Spigot
         this.methodProfiler.c("tickPending");
-        timings.scheduledBlocks.startTiming(); // Spigot
         this.a(false);
-        timings.scheduledBlocks.stopTiming(); // Spigot
         this.methodProfiler.c("tickBlocks");
-        timings.chunkTicks.startTiming(); // Spigot
         this.h();
-        timings.chunkTicks.stopTiming(); // Spigot
         spigotConfig.antiXrayInstance.flushUpdates(this); // CloudSpigot
         this.methodProfiler.c("chunkMap");
-        timings.doChunkMap.startTiming(); // Spigot
         this.manager.flush();
-        timings.doChunkMap.stopTiming(); // Spigot
         this.methodProfiler.c("village");
-        timings.doVillages.startTiming(); // Spigot
         this.villages.tick();
         this.siegeManager.a();
-        timings.doVillages.stopTiming(); // Spigot
         this.methodProfiler.c("portalForcer");
-        timings.doPortalForcer.startTiming(); // Spigot
         this.Q.a(this.getTime());
-        timings.doPortalForcer.stopTiming(); // Spigot
         this.methodProfiler.b();
-        timings.doSounds.startTiming(); // Spigot
         this.ak();
 
         this.getWorld().processChunkGC(); // CraftBukkit
-        timings.doChunkGC.stopTiming(); // Spigot
     }
 
     public BiomeBase.BiomeMeta a(EnumCreatureType enumcreaturetype, BlockPosition blockposition) {
@@ -471,7 +455,6 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 }
 
                 this.methodProfiler.c("tickBlocks");
-                timings.chunkTicksBlocks.startTiming(); // Spigot
                 i1 = this.getGameRules().c("randomTickSpeed");
                 if (i1 > 0) {
                     ChunkSection[] achunksection = chunk.getSections();
@@ -500,7 +483,6 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                         }
                     }
                 }
-                timings.chunkTicksBlocks.stopTiming(); // Spigot
             }
 
         }
@@ -632,7 +614,6 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
                 this.methodProfiler.a("cleaning");
 
-                timings.scheduledBlocksCleanup.startTiming(); // Spigot
                 NextTickListEntry nextticklistentry;
 
                 for (int j = 0; j < i; ++j) {
@@ -645,7 +626,6 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                     this.M.remove(nextticklistentry);
                     this.V.add(nextticklistentry);
                 }
-                timings.scheduledBlocksCleanup.stopTiming(); // Spigot
 
                 // CloudSpigot start - Allow redstone ticks to bypass the tickNextTickListCap
                 if (paperSpigotConfig.tickNextTickListCapIgnoresRedstone) {
@@ -666,7 +646,6 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
                 this.methodProfiler.b();
                 this.methodProfiler.a("ticking");
-                timings.scheduledBlocksTicking.startTiming(); // Spigot
                 Iterator iterator = this.V.iterator();
 
                 while (iterator.hasNext()) {
@@ -676,8 +655,6 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
                     if (this.areChunksLoadedBetween(nextticklistentry.a.a(-b0, -b0, -b0), nextticklistentry.a.a(b0, b0, b0))) {
                         IBlockData iblockdata = this.getType(nextticklistentry.a);
-                        co.aikar.timings.Timing timing = iblockdata.getBlock().getTiming(); // Spigot
-                        timing.startTiming(); // Spigot
 
                         if (iblockdata.getBlock().getMaterial() != Material.AIR && Block.a(iblockdata.getBlock(), nextticklistentry.a())) {
                             try {
@@ -690,12 +667,10 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                                 throw new ReportedException(crashreport);
                             }
                         }
-                        timing.stopTiming(); // Spigot
                     } else {
                         this.a(nextticklistentry.a, nextticklistentry.a(), 0);
                     }
                 }
-                timings.scheduledBlocksTicking.stopTiming(); // Spigot
 
                 this.methodProfiler.b();
                 this.V.clear();

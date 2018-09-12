@@ -60,7 +60,6 @@ import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.util.NumberConversions;
-import co.aikar.timings.SpigotTimings; // Spigot
 // CraftBukkit end
 
 import eu.server24_7.cloudspigot.CloudSpigotConfig; // CloudSpigot
@@ -1170,7 +1169,6 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
     // CraftBukkit end
 
    private void handleCommand(String s) {
-        SpigotTimings.playerCommandTimer.startTiming(); // Spigot
        // CraftBukkit start - whole method
         if ( org.spigotmc.SpigotConfig.logCommands ) // Spigot
         this.c.info(this.player.getName() + " issued server command: " + s);
@@ -1181,22 +1179,18 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
         this.server.getPluginManager().callEvent(event);
 
         if (event.isCancelled()) {
-            SpigotTimings.playerCommandTimer.stopTiming(); // Spigot
             return;
         }
 
         try {
             if (this.server.dispatchCommand(event.getPlayer(), event.getMessage().substring(1))) {
-                SpigotTimings.playerCommandTimer.stopTiming(); // Spigot
                 return;
             }
         } catch (org.bukkit.command.CommandException ex) {
             player.sendMessage(org.bukkit.ChatColor.RED + "An internal error occurred while attempting to perform this command");
             java.util.logging.Logger.getLogger(PlayerConnection.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            SpigotTimings.playerCommandTimer.stopTiming(); // Spigot
             return;
         }
-        SpigotTimings.playerCommandTimer.stopTiming(); // Spigot
         // this.minecraftServer.getCommandHandler().a(this.player, s);
         // CraftBukkit end
     }

@@ -7,7 +7,6 @@ import net.minecraft.server.BlockPosition;
 import net.minecraft.server.Blocks;
 import net.minecraft.server.World;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
-import co.aikar.timings.SpigotTimings;
 
 // CloudSpigot start
 import java.util.HashSet;
@@ -84,9 +83,7 @@ public class AntiXray
                 return;
             }
             // CloudSpigot end
-            SpigotTimings.antiXrayUpdateTimer.startTiming();
             updateNearbyBlocks( world, position, 2, false ); // 2 is the radius, we shouldn't change it as that would make it exponentially slower
-            SpigotTimings.antiXrayUpdateTimer.stopTiming();
         }
     }
 
@@ -98,9 +95,7 @@ public class AntiXray
     {
         if ( world.spigotConfig.antiXray )
         {
-            SpigotTimings.antiXrayObfuscateTimer.startTiming();
             obfuscate( chunkX, chunkY, bitmask, buffer, world );
-            SpigotTimings.antiXrayObfuscateTimer.stopTiming();
         }
     }
 

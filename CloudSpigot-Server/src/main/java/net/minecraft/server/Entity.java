@@ -16,8 +16,6 @@ import org.bukkit.entity.Hanging;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Vehicle;
-import co.aikar.timings.SpigotTimings; // Spigot
-import co.aikar.timings.Timing; // Spigot
 import org.bukkit.event.entity.EntityCombustByEntityEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.painting.PaintingBreakByEntityEvent;
@@ -133,7 +131,6 @@ public abstract class Entity implements ICommandListener {
     public boolean loadChunks = false; // CloudSpigot - Entities can load chunks they move through and keep them loaded
 
     // Spigot start
-    public Timing tickTimer = SpigotTimings.getEntityTimings(this); // Spigot
     public final byte activationType = org.spigotmc.ActivationRange.initializeEntityActivationType(this);
     public final boolean defaultActivationState;
     public long activatedTick = Integer.MIN_VALUE;
