@@ -37,10 +37,6 @@ public class SimpleCommandMap implements CommandMap {
         register("bukkit", new PluginsCommand("plugins"));
     }
 
-    public void setFallbackCommands() {
-        register("bukkit", new HelpCommand());
-    }
-
     /**
      * {@inheritDoc}
      */
