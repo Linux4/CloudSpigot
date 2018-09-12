@@ -34,7 +34,7 @@
         </repository>
         <repository>
             <id>server24-7</id>
-            <url>https://cloudspigot.server24-7.eu/repo/</url>
+            <url>https://mvn.server24-7.eu/</url>
         </repository>
     </repositories>
 

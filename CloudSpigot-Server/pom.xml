@@ -43,7 +43,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc</groupId>
+            <groupId>eu.server24-7</groupId>
             <artifactId>minecraft-server</artifactId>
             <version>${minecraft.version}-SNAPSHOT</version>
             <scope>compile</scope>
