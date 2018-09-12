@@ -271,7 +271,7 @@ public class VersionCommand extends BukkitCommand {
      private static int getFromJenkins(int currentVer) { //CloudSpigot
          try {
              BufferedReader reader = Resources.asCharSource(
-                     new URL("https://cloudspigot.server24-7.eu/job/CloudSpigot/lastSuccessfulBuild/buildNumber"), // CloudSpigot
+                     new URL("https://ci.server24-7.eu/job/CloudSpigot/lastSuccessfulBuild/buildNumber"), // CloudSpigot
                      Charsets.UTF_8
              ).openBufferedStream();
              try {
