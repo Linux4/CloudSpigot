@@ -17,6 +17,11 @@ public class Main {
     public static boolean useConsole = true;
 
     public static void main(String[] args) {
+        try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch(ClassNotFoundException ex) {
+                ex.printStackTrace();
+        }
         // Todo: Installation script
         OptionParser parser = new OptionParser() {
             {
