@@ -12,42 +12,21 @@ public class CommandDispatcher extends CommandHandler implements ICommandDispatc
         this.a((ICommand) (new CommandKill()));
         this.a((ICommand) (new CommandToggleDownfall()));
         this.a((ICommand) (new CommandWeather()));
-        this.a((ICommand) (new CommandXp()));
         this.a((ICommand) (new CommandTp()));
         this.a((ICommand) (new CommandGive()));
-        this.a((ICommand) (new CommandReplaceItem()));
-        this.a((ICommand) (new CommandStats()));
-        this.a((ICommand) (new CommandEffect()));
-        this.a((ICommand) (new CommandEnchant()));
-        this.a((ICommand) (new CommandParticle()));
-        this.a((ICommand) (new CommandMe()));
         this.a((ICommand) (new CommandSeed()));
         this.a((ICommand) (new CommandHelp()));
-        this.a((ICommand) (new CommandDebug()));
         this.a((ICommand) (new CommandTell()));
         this.a((ICommand) (new CommandSay()));
         this.a((ICommand) (new CommandSpawnpoint()));
         this.a((ICommand) (new CommandSetWorldSpawn()));
         this.a((ICommand) (new CommandGamerule()));
         this.a((ICommand) (new CommandClear()));
-        this.a((ICommand) (new CommandTestFor()));
-        this.a((ICommand) (new CommandSpreadPlayers()));
-        this.a((ICommand) (new CommandPlaySound()));
         this.a((ICommand) (new CommandScoreboard()));
         this.a((ICommand) (new CommandExecute()));
-        this.a((ICommand) (new CommandTrigger()));
-        this.a((ICommand) (new CommandAchievement()));
         this.a((ICommand) (new CommandSummon()));
-        this.a((ICommand) (new CommandSetBlock()));
-        this.a((ICommand) (new CommandFill()));
-        this.a((ICommand) (new CommandClone()));
-        this.a((ICommand) (new CommandTestForBlocks()));
-        this.a((ICommand) (new CommandBlockData()));
-        this.a((ICommand) (new CommandTestForBlock()));
-        this.a((ICommand) (new CommandTellRaw()));
         this.a((ICommand) (new CommandWorldBorder()));
         this.a((ICommand) (new CommandTitle()));
-        this.a((ICommand) (new CommandEntityData()));
         if (MinecraftServer.getServer().ae()) {
             this.a((ICommand) (new CommandOp()));
             this.a((ICommand) (new CommandDeop()));
@@ -63,7 +42,6 @@ public class CommandDispatcher extends CommandHandler implements ICommandDispatc
             this.a((ICommand) (new CommandKick()));
             this.a((ICommand) (new CommandList()));
             this.a((ICommand) (new CommandWhitelist()));
-            this.a((ICommand) (new CommandIdleTimeout()));
         } else {
             this.a((ICommand) (new CommandPublish()));
         }
