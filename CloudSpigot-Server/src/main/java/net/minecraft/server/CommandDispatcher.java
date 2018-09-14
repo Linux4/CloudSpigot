@@ -15,7 +15,6 @@ public class CommandDispatcher extends CommandHandler implements ICommandDispatc
         this.a((ICommand) (new CommandTp()));
         this.a((ICommand) (new CommandGive()));
         this.a((ICommand) (new CommandSeed()));
-        this.a((ICommand) (new CommandHelp()));
         this.a((ICommand) (new CommandTell()));
         this.a((ICommand) (new CommandSay()));
         this.a((ICommand) (new CommandSpawnpoint()));
