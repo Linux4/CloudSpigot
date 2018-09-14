@@ -70,7 +70,6 @@ public class PacketPlayOutMapChunkBulk implements Packet<PacketListenerPlayOut> 
         }
 
         for (i = 0; i < this.a.length; ++i) {
-            world.spigotConfig.antiXrayInstance.obfuscate(this.a[i], this.b[i], this.c[i].b, this.c[i].a, world); // Spigot
             packetdataserializer.writeBytes(this.c[i].a);
         }
 

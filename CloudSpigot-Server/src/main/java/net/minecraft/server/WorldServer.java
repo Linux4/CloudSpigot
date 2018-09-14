@@ -244,7 +244,6 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         this.a(false);
         this.methodProfiler.c("tickBlocks");
         this.h();
-        spigotConfig.antiXrayInstance.flushUpdates(this); // CloudSpigot
         this.methodProfiler.c("chunkMap");
         this.manager.flush();
         this.methodProfiler.c("village");

@@ -94,7 +94,6 @@ public class BlockFlowing extends BlockFluids {
                     world.d(blockposition.up(), this);
                     world.d(blockposition.north(), this);
                     world.d(blockposition.south(), this);
-                    world.spigotConfig.antiXrayInstance.updateNearbyBlocks(world, blockposition); // Spigot
                     // CloudSpigot end
                 }
             }

@@ -228,7 +228,6 @@ public class Explosion {
                 blockposition = (BlockPosition) iterator.next();
                 Block block = this.world.getType(blockposition).getBlock();
 
-                world.spigotConfig.antiXrayInstance.updateNearbyBlocks(world, blockposition); // Spigot
                 if (flag) {
                     double d0 = (double) ((float) blockposition.getX() + this.world.random.nextFloat());
                     double d1 = (double) ((float) blockposition.getY() + this.world.random.nextFloat());

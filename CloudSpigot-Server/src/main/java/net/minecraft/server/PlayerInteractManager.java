@@ -197,7 +197,6 @@ public class PlayerInteractManager {
             }
 
         }
-        world.spigotConfig.antiXrayInstance.updateNearbyBlocks(world, blockposition); // Spigot
     }
 
     public void a(BlockPosition blockposition) {
