@@ -71,7 +71,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>20.0</version>
+            <version>26.0-jre</version>
             <scope>compile</scope>
         </dependency>
         <!-- bundled with Minecraft, should be kept in sync -->
