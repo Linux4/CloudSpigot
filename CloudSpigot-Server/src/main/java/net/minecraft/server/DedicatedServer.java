@@ -45,7 +45,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
     public DedicatedServer(joptsimple.OptionSet options) {
         super(options, Proxy.NO_PROXY, DedicatedServer.a);
         // CraftBukkit end
-        Thread thread = new Thread("Server Infinisleeper") {
+        /* Thread thread = new Thread("Server Infinisleeper") {
             {
                 this.setDaemon(true);
                 this.start();
@@ -60,7 +60,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                     }
                 }
             }
-        };
+        }; */ //CloudSpigot
     }
 
     protected boolean init() throws IOException {
