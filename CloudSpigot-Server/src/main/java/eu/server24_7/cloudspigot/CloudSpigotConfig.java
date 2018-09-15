@@ -31,7 +31,7 @@ public class CloudSpigotConfig
             + "If you need help with the configuration or have any questions related to CloudSpigot,\n"
             + "join us at the IRC.\n"
             + "\n"
-            + "IRC: #paperspigot @ irc.spi.gt ( http://irc.spi.gt/iris/?channels=CloudSpigot )\n";
+            + "IRC: #cloudspigot @ irc.spi.gt ( http://irc.spi.gt/iris/?channels=CloudSpigot )\n";
     /*========================================================================*/
     public static YamlConfiguration config;
     static int version;
