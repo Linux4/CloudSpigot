@@ -174,7 +174,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.12</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -198,7 +198,7 @@
   </dependencies>
   <properties>
     <minecraft.version>1.8.9</minecraft.version>
-    <junit.version>4.11</junit.version>
+    <junit.version>4.12</junit.version>
     <api.version>1.8.8-R0.1-SNAPSHOT</api.version>
     <minecraft_version>1_8_R3</minecraft_version>
     <maven.compiler.target>1.8</maven.compiler.target>

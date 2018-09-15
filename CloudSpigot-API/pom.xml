@@ -24,7 +24,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <build>${buildNumber}</build>
     </properties>
 
     <!-- just until we get deployment to central approved -->
@@ -72,7 +71,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <version>19.0</version>
             <scope>compile</scope>
         </dependency>
         <!-- bundled with Minecraft, should be kept in sync -->
