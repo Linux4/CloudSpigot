@@ -25,6 +25,10 @@ import org.bukkit.craftbukkit.util.Waitable;
 import org.bukkit.event.server.RemoteServerCommandEvent;
 // CraftBukkit end
 
+//CloudSpigot start
+import eu.server24_7.cloudspigot.CloudSpigotEULA;
+//CloudSpigot end
+
 public class DedicatedServer extends MinecraftServer implements IMinecraftServer {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -32,7 +36,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
     private RemoteStatusListener m;
     private RemoteControlListener n;
     public PropertyManager propertyManager;
-    private EULA p;
+    private CloudSpigotEULA p; //CloudSpigot
     private boolean generateStructures;
     private WorldSettings.EnumGamemode r;
     private boolean s;
@@ -121,17 +125,14 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
 
         DedicatedServer.LOGGER.info("Loading properties");
         this.propertyManager = new PropertyManager(this.options); // CraftBukkit - CLI argument support
-        this.p = new EULA(new File("eula.txt"));
-        // Spigot Start
-        boolean eulaAgreed = Boolean.getBoolean( "com.mojang.eula.agree" );
-        if ( eulaAgreed )
-        {
-            System.err.println( "You have used the Spigot command line EULA agreement flag." );
-            System.err.println( "By using this setting you are indicating your agreement to Mojang's EULA (https://account.mojang.com/documents/minecraft_eula)." );
-            System.err.println( "If you do not agree to the above EULA please stop your server and remove this flag immediately." );
+        // CloudSpigot Start
+        File eula = new File("eula.txt");
+        if(!eula.exists()) {
+            DedicatedServer.LOGGER.info("You automatically agreed to the EULA. Go to eula.txt for more info.");
         }
-        // Spigot End
-        if (!this.p.a() && !eulaAgreed) { // Spigot
+        this.p = new CloudSpigotEULA(eula);
+        // CloudSpigot End
+        if (!this.p.a()) { // Spigot
             DedicatedServer.LOGGER.info("You need to agree to the EULA in order to run the server. Go to eula.txt for more info.");
             this.p.b();
             return false;
