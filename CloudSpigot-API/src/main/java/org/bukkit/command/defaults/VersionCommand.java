@@ -49,7 +49,7 @@ public class VersionCommand extends BukkitCommand {
         if (!testPermission(sender)) return true;
 
         if (args.length == 0) {
-            sender.sendMessage("This server is running " + Bukkit.getName() + " version " + Bukkit.getVersion() + " (Implementing API version " + Bukkit.getBukkitVersion() + ")");
+            sender.sendMessage("§8┃ §6Server §8» §9Running " + Bukkit.getVersion());
             sendVersion(sender);
         } else {
             StringBuilder name = new StringBuilder();
@@ -172,7 +172,7 @@ public class VersionCommand extends BukkitCommand {
                 return;
             }
             versionWaiters.add(sender);
-            sender.sendMessage("Checking version, please wait...");
+            sender.sendMessage("§8┃ §6Server §8» §9Checking version, please wait...");
             if (!versionTaskStarted) {
                 versionTaskStarted = true;
                 new Thread(new Runnable() {
@@ -196,16 +196,16 @@ public class VersionCommand extends BukkitCommand {
              int distance = getDistance(null, parts[0]);
              switch (distance) {
                  case -1:
-                     setVersionMessage("Error obtaining version information");
+                     setVersionMessage("§8┃ §6Server §8» §cError obtaining version information");
                      break;
                  case 0:
-                     setVersionMessage("You are running the latest version");
+                     setVersionMessage("§8┃ §6Server §8» §9You are running the latest version");
                      break;
                  case -2:
-                     setVersionMessage("Unknown version");
+                     setVersionMessage("§8┃ §6Server §8» §9Unknown version");
                      break;
                  default:
-                    setVersionMessage("You are " + distance + " version(s) behind");
+                    setVersionMessage("§8┃ §6Server §8» §9You are " + distance + " version(s) behind");
              }
         } else {
             setVersionMessage("Unknown version, custom build?");
