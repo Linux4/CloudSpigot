@@ -191,7 +191,7 @@ public class SpigotConfig
         }
 
         whitelistMessage = transform( getString( "messages.whitelist", "You are not whitelisted on this server!" ) );
-        unknownCommandMessage = transform( getString( "messages.unknown-command", "Unknown command. Type \"/help\" for help." ) );
+        unknownCommandMessage = transform( getString( "messages.unknown-command", "Unknown command." ) );
         serverFullMessage = transform( getString( "messages.server-full", "The server is full!" ) );
         outdatedClientMessage = transform( getString( "messages.outdated-client", outdatedClientMessage ) );
         outdatedServerMessage = transform( getString( "messages.outdated-server", outdatedServerMessage ) );
@@ -281,7 +281,7 @@ public class SpigotConfig
     public static int playerSample;
     private static void playerSample()
     {
-        playerSample = getInt( "settings.sample-count", 12 );
+        playerSample = getInt( "settings.sample-count", 0 );
         System.out.println( "Server Ping Player Sample Count: " + playerSample );
     }
 
