@@ -159,7 +159,7 @@ public class BlockPosition extends BaseBlockPosition {
                         }
                     }
 
-                    protected Object computeNext() {
+                    protected BlockPosition computeNext() { // CloudSpigot - decompile fix
                         return this.a();
                     }
                 };
@@ -207,7 +207,7 @@ public class BlockPosition extends BaseBlockPosition {
                         }
                     }
 
-                    protected Object computeNext() {
+                    protected BlockPosition.MutableBlockPosition computeNext() { // CloudSpigot - decompile fix
                         return this.a();
                     }
                 };

@@ -38,7 +38,8 @@ public class NBTTagByteArray extends NBTBase {
         return "[" + this.data.length + " bytes]";
     }
 
-    public NBTBase clone() {
+    @Override
+    public NBTTagByteArray clone() { // CloudSpigot - decompile fix
         byte[] abyte = new byte[this.data.length];
 
         System.arraycopy(this.data, 0, abyte, 0, this.data.length);

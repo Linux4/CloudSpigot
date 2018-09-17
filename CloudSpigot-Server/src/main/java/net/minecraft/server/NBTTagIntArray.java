@@ -56,7 +56,7 @@ public class NBTTagIntArray extends NBTBase {
         return s + "]";
     }
 
-    public NBTBase clone() {
+    public NBTTagIntArray clone() { // CloudSpigot - decompile fix
         int[] aint = new int[this.data.length];
 
         System.arraycopy(this.data, 0, aint, 0, this.data.length);

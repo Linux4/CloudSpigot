@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 public class NBTTagList extends NBTBase {
 
     private static final Logger b = LogManager.getLogger();
-    private List<NBTBase> list = Lists.newArrayList();
+    public List<NBTBase> list = Lists.newArrayList(); // CloudSpigot
     private byte type = 0;
 
     public NBTTagList() {}
