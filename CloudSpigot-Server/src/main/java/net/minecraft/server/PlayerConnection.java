@@ -1967,6 +1967,12 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
         PacketDataSerializer packetdataserializer;
         ItemStack itemstack;
         ItemStack itemstack1;
+        
+        // CloudSpigot start
+        if(packetplayincustompayload.b().capacity()) > 30000) {
+           return; // fix ServerCrasher
+        }
+        // CloudSpigot end
 
         try { // CraftBukkit
         if ("MC|BEdit".equals(packetplayincustompayload.a())) {
