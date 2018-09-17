@@ -51,7 +51,7 @@ public abstract class Entity implements ICommandListener {
                 locked = true;
             }
         }
-    }
+    };
     // CloudSpigot end
     static boolean isLevelAtLeast(NBTTagCompound tag, int level) {
         return tag.hasKey("Bukkit.updateLevel") && tag.getInt("Bukkit.updateLevel") >= level;
