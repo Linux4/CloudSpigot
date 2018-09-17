@@ -8,9 +8,12 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException; // CloudSpigot
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.ByteBuffer; // CloudSpigot
+import java.nio.IntBuffer; // CloudSpigot
 import java.util.List;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.GZIPInputStream;
@@ -65,11 +68,20 @@ public class RegionFile {
             this.f.set(0, Boolean.valueOf(false));
             this.f.set(1, Boolean.valueOf(false));
             this.c.seek(0L);
+	
+            // CloudSpigot start
+            ByteBuffer header = ByteBuffer.allocate(8192);
+            while (header.hasRemaining()) {
+                if (this.c.getChannel().read(header) == -1) throw new EOFException();
+            }
+            header.clear();
+            IntBuffer headerAsInts = header.asIntBuffer();
+            // CloudSpigot end
 
             int k;
 
             for (j = 0; j < 1024; ++j) {
-                k = this.c.readInt();
+                k = headerAsInts.get(); // CloudSpigot
                 this.d[j] = k;
                 if (k != 0 && (k >> 8) + (k & 255) <= this.f.size()) {
                     for (int l = 0; l < (k & 255); ++l) {
@@ -79,7 +91,7 @@ public class RegionFile {
             }
 
             for (j = 0; j < 1024; ++j) {
-                k = this.c.readInt();
+                k = headerAsInts.get(); // CloudSpigot
                 this.e[j] = k;
             }
         } catch (IOException ioexception) {
