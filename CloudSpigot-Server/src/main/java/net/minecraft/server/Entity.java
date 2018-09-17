@@ -39,6 +39,20 @@ public abstract class Entity implements ICommandListener {
 
     // CraftBukkit start
     private static final int CURRENT_LEVEL = 2;
+    // CloudSpigot start
+    public static Random SHARED_RANDOM = new Random() {
+        private boolean locked = false;
+        @Override
+        public synchronized void setSeed(long seed) {
+            if(locked) {
+                LogManager.getLogger().error("Ignoring setSeed on Entity.SHARED_RANDOM", new Throwable());
+            } else {
+                super.setSeed(seed);
+                locked = true;
+            }
+        }
+    }
+    // CloudSpigot end
     static boolean isLevelAtLeast(NBTTagCompound tag, int level) {
         return tag.hasKey("Bukkit.updateLevel") && tag.getInt("Bukkit.updateLevel") >= level;
     }
@@ -157,7 +171,7 @@ public abstract class Entity implements ICommandListener {
         this.width = 0.6F;
         this.length = 1.8F;
         this.h = 1;
-        this.random = new Random();
+        this.random = SHARED_RANDOM; // CloudSpigot
         this.maxFireTicks = 1;
         this.justCreated = true;
         this.uniqueID = MathHelper.a(this.random);
