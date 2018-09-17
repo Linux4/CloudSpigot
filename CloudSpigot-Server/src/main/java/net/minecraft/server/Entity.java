@@ -45,7 +45,7 @@ public abstract class Entity implements ICommandListener {
         @Override
         public synchronized void setSeed(long seed) {
             if(locked) {
-                LogManager.getLogger().error("Ignoring setSeed on Entity.SHARED_RANDOM", new Throwable());
+                 System.err.println("Ignoring setSeed on Entity.SHARED_RANDOM");
             } else {
                 super.setSeed(seed);
                 locked = true;
