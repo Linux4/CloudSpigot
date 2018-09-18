@@ -35,6 +35,8 @@ import org.apache.logging.log4j.core.helpers.Loader;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.apache.logging.log4j.util.PropertiesUtil;
 
+import org.bukkit.craftbukkit.Main; // CloudSpigot
+
 /**
  * ConsoleAppender appends log events to <code>System.out</code> or
  * <code>System.err</code> using a layout specified by the user. The
@@ -115,8 +117,11 @@ public final class ConsoleAppender extends AbstractOutputStreamAppender {
         } catch (final UnsupportedEncodingException ex) { // should never happen
             throw new IllegalStateException("Unsupported default encoding " + enc, ex);
         }
-        /*final PropertiesUtil propsUtil = PropertiesUtil.getProperties();
-        if (!propsUtil.getStringProperty("os.name").startsWith("Windows") ||
+        final PropertiesUtil propsUtil = PropertiesUtil.getProperties();
+        if(propsUtil.getStringProperty("os.name").startsWith("Windows) {
+            Main.useJline = false;
+        }
+        /*if (!propsUtil.getStringProperty("os.name").startsWith("Windows") ||
                 propsUtil.getBooleanProperty("log4j.skipJansi")) {
             return printStream;
         }
