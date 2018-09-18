@@ -56,7 +56,7 @@ public class WatchdogThread extends Thread
             {
                 Logger log = Bukkit.getServer().getLogger();
                 log.log( Level.SEVERE, "The server has stopped responding!" );
-                log.log( Level.SEVERE, "Please report this to CloudSpigot directly!" );
+                log.log( Level.SEVERE, "Please report this to https://github.com/Server24-7/CloudSpigot/issues" );
                 log.log( Level.SEVERE, "Be sure to include ALL relevant console errors and Minecraft crash reports" );
                 log.log( Level.SEVERE, "CloudSpigot version: " + Bukkit.getServer().getVersion() );
                 //
