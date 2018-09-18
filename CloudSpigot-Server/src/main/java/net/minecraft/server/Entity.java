@@ -39,20 +39,7 @@ public abstract class Entity implements ICommandListener {
 
     // CraftBukkit start
     private static final int CURRENT_LEVEL = 2;
-    // CloudSpigot start
-    public static Random SHARED_RANDOM = new Random() {
-        private boolean locked = false;
-        @Override
-        public synchronized void setSeed(long seed) {
-            if(locked) {
-                 System.err.println("Ignoring setSeed on Entity.SHARED_RANDOM");
-            } else {
-                super.setSeed(seed);
-                locked = true;
-            }
-        }
-    };
-    // CloudSpigot end
+    public static Random SHARED_RANDOM = new Random(); // CloudSpigot
     static boolean isLevelAtLeast(NBTTagCompound tag, int level) {
         return tag.hasKey("Bukkit.updateLevel") && tag.getInt("Bukkit.updateLevel") >= level;
     }
