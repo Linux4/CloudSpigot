@@ -37,7 +37,7 @@
         <dependency>
             <groupId>eu.server24-7.cloudspigot</groupId>
             <artifactId>cloudspigot-api</artifactId>
-            <version>${project.version}</version>
+            <version>${api.version}</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
