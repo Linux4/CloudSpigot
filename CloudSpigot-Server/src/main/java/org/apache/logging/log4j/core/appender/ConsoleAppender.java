@@ -115,7 +115,7 @@ public final class ConsoleAppender extends AbstractOutputStreamAppender {
         } catch (final UnsupportedEncodingException ex) { // should never happen
             throw new IllegalStateException("Unsupported default encoding " + enc, ex);
         }
-        final PropertiesUtil propsUtil = PropertiesUtil.getProperties();
+        /*final PropertiesUtil propsUtil = PropertiesUtil.getProperties();
         if (!propsUtil.getStringProperty("os.name").startsWith("Windows") ||
                 propsUtil.getBooleanProperty("log4j.skipJansi")) {
             return printStream;
@@ -132,7 +132,7 @@ public final class ConsoleAppender extends AbstractOutputStreamAppender {
             LOGGER.warn("{} is missing the proper constructor", JANSI_CLASS);
         } catch (final Throwable ex) { // CraftBukkit - Exception -> Throwable
             LOGGER.warn("Unable to instantiate {}", JANSI_CLASS);
-        }
+        }*/ // CloudSpigot
         return printStream;
     }
 
