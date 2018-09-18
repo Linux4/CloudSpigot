@@ -144,7 +144,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
 
         // CloudSpigot start
         if(os.getName().startsWith("Windows")) {
-            LOGGER.warn("Running on Windows. Disabling JLine...");
+            System.err.println("Running on Windows. Disabling JLine...");
             Main.useJline = false;
             System.setProperty("jline.terminal", "jline.UnsupportedTerminal");
             System.setProperty("user.language", "en");
