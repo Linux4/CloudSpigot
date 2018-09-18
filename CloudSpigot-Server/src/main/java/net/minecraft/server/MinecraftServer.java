@@ -47,14 +47,8 @@ import joptsimple.OptionSet;
 import org.bukkit.craftbukkit.Main;
 // CraftBukkit end
 
-// CloudSpigot start
-import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
-// CloudSpigot end
-
 public abstract class MinecraftServer implements Runnable, ICommandListener, IAsyncTaskHandler, IMojangStatistics {
 
-    static OperatingSystemMXBean os = ManagementFactory.getOperatingSystemMXBean();
     public static final Logger LOGGER = LogManager.getLogger();
     public static final File a = new File("usercache.json");
     private static MinecraftServer l;
@@ -141,15 +135,6 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
             System.setProperty("jline.terminal", "jline.UnsupportedTerminal");
             Main.useJline = false;
         }
-
-        // CloudSpigot start
-        if(os.getName().startsWith("Windows")) {
-            System.err.println("Running on Windows. Disabling JLine...");
-            Main.useJline = false;
-            System.setProperty("jline.terminal", "jline.UnsupportedTerminal");
-            System.setProperty("user.language", "en");
-        }
-        // CloudSpigot end
 
         try {
             reader = new ConsoleReader(System.in, System.out);
