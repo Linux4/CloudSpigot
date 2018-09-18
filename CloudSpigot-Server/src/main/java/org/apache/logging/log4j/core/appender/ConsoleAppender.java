@@ -116,7 +116,7 @@ public final class ConsoleAppender extends AbstractOutputStreamAppender {
             throw new IllegalStateException("Unsupported default encoding " + enc, ex);
         }
         final PropertiesUtil propsUtil = PropertiesUtil.getProperties();
-        if(propsUtil.getStringProperty("os.name").startsWith("Windows) {
+        if(propsUtil.getStringProperty("os.name").startsWith("Windows")) {
             org.bukkit.craftbukkit.Main.useJline = false;
         }
         /*if (!propsUtil.getStringProperty("os.name").startsWith("Windows") ||
