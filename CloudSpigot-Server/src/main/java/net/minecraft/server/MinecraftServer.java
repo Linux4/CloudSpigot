@@ -130,6 +130,11 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         this.Y = this.V.createProfileRepository();
         // CraftBukkit start
         this.options = options;
+        // CloudSpigot start
+        if(System.getProperty("os.name").toLowerCase().startsWith("win")) {
+            Main.useJline = false;
+        }
+        // CloudSpigot end
         // Try to see if we're actually running in a terminal, disable jline if not
         if (System.console() == null && System.getProperty("jline.terminal") == null) {
             System.setProperty("jline.terminal", "jline.UnsupportedTerminal");

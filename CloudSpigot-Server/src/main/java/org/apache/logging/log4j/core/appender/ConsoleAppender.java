@@ -115,11 +115,8 @@ public final class ConsoleAppender extends AbstractOutputStreamAppender {
         } catch (final UnsupportedEncodingException ex) { // should never happen
             throw new IllegalStateException("Unsupported default encoding " + enc, ex);
         }
-        final PropertiesUtil propsUtil = PropertiesUtil.getProperties();
-        if(propsUtil.getStringProperty("os.name").startsWith("Windows")) {
-            org.bukkit.craftbukkit.Main.useJline = false;
-        }
-        /*if (!propsUtil.getStringProperty("os.name").startsWith("Windows") ||
+        /*final PropertiesUtil propsUtil = PropertiesUtil.getProperties();
+        if (!propsUtil.getStringProperty("os.name").startsWith("Windows") ||
                 propsUtil.getBooleanProperty("log4j.skipJansi")) {
             return printStream;
         }
