@@ -67,6 +67,12 @@
             <version>4.5.2</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-iostreams</artifactId>
+            <version>2.11.1</version>
+            <scope>compile</scope>
+        </dependency>
         <!--
           Required to add the missing Log4j2Plugins.dat file from log4j-core
           which has been removed by Mojang. Without it, log4j has to classload
