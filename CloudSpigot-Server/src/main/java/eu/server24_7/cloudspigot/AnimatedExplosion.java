@@ -25,9 +25,9 @@ public class AnimatedExplosion {
 				fb.setDropItem(false);
 				fb.setCustomName("AnimatedExplosion");
 				fb.setCustomNameVisible(false);
-				float x = -1F + (float) (Math.random() * ((1 - -1) + 1));
-				float y = -1F + (float) (Math.random() * ((1 - -1) + 1));
-				float z = -1F + (float) (Math.random() * ((1 - -1) + 1));
+				float x = -0.25F + (float) (Math.random() * ((0.25 - -0.25) + 0.25));
+				float y = -0.25F + (float) (Math.random() * ((0.25 - -0.25) + 0.25));
+				float z = -0.25F + (float) (Math.random() * ((0.25 - -0.25) + 0.25));
 				fb.setVelocity(new Vector(x, y, z));
 			}
 		}
