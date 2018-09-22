@@ -16,6 +16,8 @@ import org.bukkit.Location;
 import org.bukkit.event.block.BlockExplodeEvent;
 // CraftBukkit end
 
+import eu.server24_7.cloudspigot.AnimatedExplosion; // CloudSpigot
+
 public class Explosion {
 
     private final boolean a;
@@ -222,6 +224,10 @@ public class Explosion {
                 return;
             }
             // CraftBukkit end
+            if(eu.server24_7.cloudspigot.CloudSpigotConfig.animateExplosions) {
+               new AnimatedExplosion(bukkitBlocks);
+            }
+
             iterator = this.blocks.iterator();
 
             while (iterator.hasNext()) {

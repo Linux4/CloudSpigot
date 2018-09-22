@@ -159,6 +159,11 @@ public class CloudSpigotConfig
         }
     }
 
+    public static boolean animateExplosions;
+    private static void animateExplosions() {
+        animateExplosions = getBoolean("settings.animate-explosions", true);
+    }
+
     public static double strengthEffectModifier;
     public static double weaknessEffectModifier;
     private static void effectModifiers()
