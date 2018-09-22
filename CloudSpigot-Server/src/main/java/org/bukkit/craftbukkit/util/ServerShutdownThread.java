@@ -18,7 +18,7 @@ public class ServerShutdownThread extends Thread {
             ex.printStackTrace();
         } finally {
             try {
-                server.reader.getTerminal().restore();
+                net.minecrell.terminalconsole.TerminalConsoleAppender.close(); // CloudSpigot - Use TerminalConsoleAppender
             } catch (Exception e) {
             }
         }

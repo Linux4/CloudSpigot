@@ -56,10 +56,39 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>jline</groupId>
-            <artifactId>jline</artifactId>
-            <version>2.12</version>
-            <type>jar</type>
+            <groupId>org.jline</groupId>
+            <artifactId>jline-reader</artifactId>
+            <version>3.9.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jline</groupId>
+            <artifactId>jline-terminal</artifactId>
+            <version>3.9.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jline</groupId>
+            <artifactId>jline-terminal-jna</artifactId>
+            <version>3.9.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>4.5.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--
+          Required to add the missing Log4j2Plugins.dat file from log4j-core
+          which has been removed by Mojang. Without it, log4j has to classload
+          all its classes to check if they are plugins.
+          Scanning takes about 1-2 seconds so adding this speeds up the server start.
+        -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.11.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -175,14 +204,13 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <transformers>
+                                <transformer implementation="com.github.edwgiz.mavenShadePlugin.log4j2CacheTransformer.PluginsCacheFileTransformer" />
+                            </transformers>
                             <relocations>
                                 <relocation>
                                     <pattern>joptsimple</pattern>
                                     <shadedPattern>org.bukkit.craftbukkit.libs.joptsimple</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>jline</pattern>
-                                    <shadedPattern>org.bukkit.craftbukkit.libs.jline</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>org.ibex</pattern>
@@ -207,25 +235,15 @@
                         </configuration>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.github.edwgiz</groupId>
+                        <artifactId>maven-shade-plugin.log4j2-cachefile-transformer</artifactId>
+                        <version>2.8.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <!-- Gotta go after shade plugin -->
-            <plugin>
-                <groupId>net.md-5</groupId>
-                <artifactId>specialsource-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>remap</goal>
-                        </goals>
-                        <configuration>
-                            <srgIn>${project.basedir}/deprecation-mappings.csrg</srgIn>
-                            <accessIn>${project.basedir}/deprecation-mappings.at</accessIn>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

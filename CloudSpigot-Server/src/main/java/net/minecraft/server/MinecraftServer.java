@@ -41,7 +41,6 @@ import org.apache.logging.log4j.Logger;
 // CraftBukkit start
 import java.io.IOException;
 
-import jline.console.ConsoleReader;
 import joptsimple.OptionSet;
 
 import org.bukkit.craftbukkit.Main;
@@ -109,7 +108,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     public OptionSet options;
     public org.bukkit.command.ConsoleCommandSender console;
     public org.bukkit.command.RemoteConsoleCommandSender remoteConsole;
-    public ConsoleReader reader;
+    //public ConsoleReader reader; // CloudSpigot
     public static int currentTick = 0; // CloudSpigot - Further improve tick loop
     public final Thread primaryThread;
     public java.util.Queue<Runnable> processQueue = new java.util.concurrent.ConcurrentLinkedQueue<Runnable>();
@@ -130,12 +129,10 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         this.Y = this.V.createProfileRepository();
         // CraftBukkit start
         this.options = options;
-        // CloudSpigot start
-        if(System.getProperty("os.name").toLowerCase().startsWith("win")) {
-            Main.useJline = false;
-        }
-        // CloudSpigot end
+        // CloudSpigot
+        // CloudSpigot start - Handled by TerminalConsoleAppender
         // Try to see if we're actually running in a terminal, disable jline if not
+        /*
         if (System.console() == null && System.getProperty("jline.terminal") == null) {
             System.setProperty("jline.terminal", "jline.UnsupportedTerminal");
             Main.useJline = false;
@@ -156,6 +153,8 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
                 LOGGER.warn((String) null, ex);
             }
         }
+        */
+        // CloudSpigot end
         Runtime.getRuntime().addShutdownHook(new org.bukkit.craftbukkit.util.ServerShutdownThread(this));
 
         this.serverThread = primaryThread = new Thread(this, "Server thread"); // Moved from main
@@ -658,7 +657,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
             } finally {
                 // CraftBukkit start - Restore terminal to original settings
                 try {
-                    reader.getTerminal().restore();
+                    net.minecrell.terminalconsole.TerminalConsoleAppender.close(); // CloudSpigot - Use TerminalConsoleAppender
                 } catch (Exception ignored) {
                 }
                 // CraftBukkit end
@@ -1147,7 +1146,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     public void sendMessage(IChatBaseComponent ichatbasecomponent) {
-        MinecraftServer.LOGGER.info(ichatbasecomponent.c());
+        MinecraftServer.LOGGER.info(org.bukkit.craftbukkit.util.CraftChatMessage.fromComponent(ichatbasecomponent, net.minecraft.server.EnumChatFormat.WHITE)); // CloudSpigot - Log message with colors
     }
 
     public boolean a(int i, String s) {

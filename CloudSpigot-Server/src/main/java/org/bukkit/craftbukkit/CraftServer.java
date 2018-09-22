@@ -122,7 +122,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.base64.Base64;
-import jline.console.ConsoleReader;
+import org.apache.commons.lang.StringUtils;
 import net.md_5.bungee.api.chat.BaseComponent;
 
 public final class CraftServer implements Server {
@@ -1065,9 +1065,13 @@ public final class CraftServer implements Server {
         return logger;
     }
 
+    // CloudSpigot start - JLine update
+    /*
     public ConsoleReader getReader() {
         return console.reader;
     }
+    */
+    // CloudSpigot end
 
     @Override
     public PluginCommand getPluginCommand(String name) {

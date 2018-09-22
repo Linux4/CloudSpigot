@@ -71,7 +71,9 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                     return;
                 }
                 // CraftBukkit end
-
+                // CloudSpigot start - Use TerminalConsoleAppender
+                new eu.server24_7.cloudspigot.console.CloudSpigotConsole(DedicatedServer.this).start();
+                /*
                 jline.console.ConsoleReader bufferedreader = reader; // CraftBukkit
                 String s;
 
@@ -92,6 +94,9 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                     DedicatedServer.LOGGER.error("Exception handling console input", ioexception);
                 }
 
+                */
+                // CloudSpigot end
+
             }
         };
 
@@ -103,6 +108,9 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
         }
         global.addHandler(new org.bukkit.craftbukkit.util.ForwardLogHandler());
 
+        // CloudSpigot start - Not needed with TerminalConsoleAppender
+        final org.apache.logging.log4j.Logger logger = LogManager.getRootLogger();
+        /*
         final org.apache.logging.log4j.core.Logger logger = ((org.apache.logging.log4j.core.Logger) LogManager.getRootLogger());
         for (org.apache.logging.log4j.core.Appender appender : logger.getAppenders().values()) {
             if (appender instanceof org.apache.logging.log4j.core.appender.ConsoleAppender) {
@@ -111,6 +119,8 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
         }
 
         new Thread(new org.bukkit.craftbukkit.util.TerminalConsoleWriterThread(System.out, this.reader)).start();
+        */
+        // CloudSpigot end
 
         System.setOut(new PrintStream(new LoggerOutputStream(logger, Level.INFO), true));
         System.setErr(new PrintStream(new LoggerOutputStream(logger, Level.WARN), true));

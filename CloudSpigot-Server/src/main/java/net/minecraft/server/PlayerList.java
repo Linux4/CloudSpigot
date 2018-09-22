@@ -69,10 +69,9 @@ public abstract class PlayerList {
 
     public PlayerList(MinecraftServer minecraftserver) {
         this.cserver = minecraftserver.server = new CraftServer(minecraftserver, this);
-        minecraftserver.console = org.bukkit.craftbukkit.command.ColouredConsoleSender.getInstance();
-        minecraftserver.reader.addCompleter(new org.bukkit.craftbukkit.command.ConsoleCommandCompleter(minecraftserver.server));
+        minecraftserver.console = new eu.server24_7.cloudspigot.console.TerminalConsoleCommandSender(); // CloudSpigot
         // CraftBukkit end
-        
+
         this.k = new GameProfileBanList(PlayerList.a);
         this.l = new IpBanList(PlayerList.b);
         this.operators = new OpList(PlayerList.c);
