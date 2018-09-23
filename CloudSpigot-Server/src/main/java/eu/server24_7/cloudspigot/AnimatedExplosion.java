@@ -18,7 +18,7 @@ public class AnimatedExplosion {
 	public AnimatedExplosion(List<Block> blockList) {
 		for (Block b : blockList) {
 			Material material = b.getType();
-			if (material != Material.AIR) {
+			if (material != Material.AIR && material != Material.TNT) {
 				byte data = b.getData();
 				FallingBlock fb = b.getWorld().spawnFallingBlock(b.getLocation(), b.getType(), b.getData());
 				b.setType(Material.AIR);
