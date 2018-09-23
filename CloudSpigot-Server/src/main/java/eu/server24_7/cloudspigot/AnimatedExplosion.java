@@ -22,7 +22,7 @@ public class AnimatedExplosion {
 				byte data = b.getData();
 				FallingBlock fb = b.getWorld().spawnFallingBlock(b.getLocation(), b.getType(), b.getData());
 				b.setType(Material.AIR);
-				fb.setDropItem(false);
+				fb.setDropItem(true);
 				fb.setCustomName("AnimatedExplosion");
 				fb.setCustomNameVisible(false);
 				float x = -0.25F + (float) (Math.random() * ((0.25 - -0.25) + 0.25));
