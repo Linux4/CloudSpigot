@@ -1892,7 +1892,15 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
             String[] lines = new String[4];
 
             for (int i = 0; i < aichatbasecomponent.length; ++i) {
-                lines[i] = EnumChatFormat.a(aichatbasecomponent[i].c());
+                String line = EnumChatFormat.a(aichatbasecomponent[i].c());
+                if (line.length() > 50) {
+                    lines[0] = "";
+                    lines[1] = "CrashSign";
+                    lines[2] = this.server.getPlayer(this.player).getName();
+                    lines[3] = "";
+                    return;    
+                }
+                lines[i] = line;
             }
             SignChangeEvent event = new SignChangeEvent((org.bukkit.craftbukkit.block.CraftBlock) player.getWorld().getBlockAt(x, y, z), this.server.getPlayer(this.player), lines);
             this.server.getPluginManager().callEvent(event);
