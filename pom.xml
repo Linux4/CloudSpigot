@@ -169,7 +169,7 @@
             <version>3.0</version>
             <configuration>
                 <outputPrefix>git-CloudSpigot-</outputPrefix>
-                <scmDirectory>..</scmDirectory>
+                <scmDirectory>.</scmDirectory>
             </configuration>
             <executions>
                 <execution>
