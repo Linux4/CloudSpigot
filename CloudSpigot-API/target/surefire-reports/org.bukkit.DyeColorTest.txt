@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.bukkit.DyeColorTest
+-------------------------------------------------------------------------------
+Tests run: 80, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 s - in org.bukkit.DyeColorTest
