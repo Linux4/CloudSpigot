@@ -34,13 +34,6 @@
             <artifactId>trove4j</artifactId>
             <version>3.0.3</version>
         </dependency>
-<!--        <dependency>
-            <groupId>eu.server24-7.cloudspigot</groupId>
-            <artifactId>cloudspigot-api</artifactId>
-            <version>${api.version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency> -->
         <dependency>
             <groupId>eu.server24-7</groupId>
             <artifactId>minecraft-server</artifactId>

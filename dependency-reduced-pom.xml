@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <parent>
-    <artifactId>cloudspigot-parent</artifactId>
-    <groupId>eu.server24-7.cloudspigot</groupId>
-    <version>dev-SNAPSHOT</version>
-  </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>eu.server24-7.cloudspigot</groupId>
   <artifactId>cloudspigot</artifactId>
   <name>CloudSpigot</name>
   <version>1.8.10-R0.1-SNAPSHOT</version>
-  <url>https://hub.spigotmc.org/stash/projects/PAPER/</url>
+  <url>https://cloudspigot.server24-7.eu/</url>
   <build>
     <defaultGoal>install</defaultGoal>
     <plugins>
@@ -28,7 +23,7 @@
         </executions>
         <configuration>
           <outputPrefix>git-CloudSpigot-</outputPrefix>
-          <scmDirectory>..</scmDirectory>
+          <scmDirectory>.</scmDirectory>
         </configuration>
       </plugin>
       <plugin>
@@ -139,6 +134,12 @@
       </plugin>
     </plugins>
   </build>
+  <repositories>
+    <repository>
+      <id>server24-7</id>
+      <url>https://mvn.server24-7.eu/</url>
+    </repository>
+  </repositories>
   <pluginRepositories>
     <pluginRepository>
       <id>spigotmc-public</id>
