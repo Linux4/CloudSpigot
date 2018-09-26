@@ -32,6 +32,7 @@ import org.bukkit.event.weather.LightningStrikeEvent;
 public class WorldServer extends World implements IAsyncTaskHandler {
 
     private static final Logger a = LogManager.getLogger();
+    boolean stopPhysicsEvent = false; // CloudSpigot
     private final MinecraftServer server;
     public EntityTracker tracker;
     private final PlayerChunkMap manager;
@@ -530,6 +531,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                     IBlockData iblockdata = this.getType(nextticklistentry.a);
 
                     if (iblockdata.getBlock().getMaterial() != Material.AIR && iblockdata.getBlock() == nextticklistentry.a()) {
+                        stopPhysicsEvent = !paperSpigotConfig.firePhysicsEventForRedstone && (iblockdata.getBlock() instanceof BlockDiodeAbstract || iblockdata.getBlock() instanceof BlockRedstoneTorch); // CloudSpigot
                         iblockdata.getBlock().b((World) this, nextticklistentry.a, iblockdata, this.random);
                     }
                 }

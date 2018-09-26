@@ -72,12 +72,12 @@
           all its classes to check if they are plugins.
           Scanning takes about 1-2 seconds so adding this speeds up the server start.
         -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.11.1</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>

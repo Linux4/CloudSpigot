@@ -75,6 +75,11 @@ public class CloudSpigotWorldConfig
         return config.getString( "world-settings." + worldName + "." + path, config.getString( "world-settings.default." + path ) );
     }
 
+    public boolean firePhysicsEventForRedstone = false;
+    private void firePhysicsEventForRedstone() {
+        firePhysicsEventForRedstone = getBoolean("fire-physics-event-for-redstone", firePhysicsEventForRedstone);
+    }
+
     public boolean allowUndeadHorseLeashing;
     private void allowUndeadHorseLeashing()
     {
