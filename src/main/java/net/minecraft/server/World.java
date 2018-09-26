@@ -524,6 +524,7 @@ public abstract class World implements IBlockAccess {
     }
 
     public void applyPhysics(BlockPosition blockposition, Block block) {
+        if (captureBlockStates) { return; } // CloudSpigot - Cancel all physics during placement
         this.d(blockposition.west(), block);
         this.d(blockposition.east(), block);
         this.d(blockposition.down(), block);
