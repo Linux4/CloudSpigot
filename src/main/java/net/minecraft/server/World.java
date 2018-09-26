@@ -639,6 +639,7 @@ public abstract class World implements IBlockAccess {
             if (blockposition.getY() >= 256) {
                 blockposition = new BlockPosition(blockposition.getX(), 255, blockposition.getZ());
             }
+            if (!this.isLoaded(blockposition)) return 0; // CloudSpigot
 
             return this.getChunkAtWorldCoords(blockposition).a(blockposition, 0);
         }
