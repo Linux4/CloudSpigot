@@ -133,6 +133,13 @@ public class ChunkProviderServer implements IChunkProvider {
                 return null;
             } else {
                 chunk = ChunkIOExecutor.syncChunkLoad(world, loader, this, i, j);
+
+                // CloudSpigot start - If there was an issue loading the chunk from region, stage1 will fail and stage2 will load it sync
+                // all we need to do is fetch an instance
+                if (chunk == null) {
+                    chunk = getChunkIfLoaded(i, j);
+                }
+                // CloudSpigot end
             }
         } else if (chunk == null) {
             chunk = originalGetChunkAt(i, j);
