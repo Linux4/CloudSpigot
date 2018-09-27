@@ -21,7 +21,7 @@ public class EntityTNTPrimed extends Entity {
     // CloudSpigot end
         this.k = true;
         this.setSize(0.98F, 0.98F);
-        this.loadChunks = world.paperSpigotConfig.loadUnloadedTNTEntities; // CloudSpigot
+        this.loadChunks = world.cloudSpigotConfig.loadUnloadedTNTEntities; // CloudSpigot
     }
 
     public EntityTNTPrimed(org.bukkit.Location loc, World world, double d0, double d1, double d2, EntityLiving entityliving) {
@@ -37,7 +37,7 @@ public class EntityTNTPrimed extends Entity {
         this.lastY = d1;
         this.lastZ = d2;
         this.source = entityliving;
-        if (world.paperSpigotConfig.fixCannons) this.motX = this.motZ = 0.0F; // CloudSpigot - Fix cannons
+        if (world.cloudSpigotConfig.fixCannons) this.motX = this.motZ = 0.0F; // CloudSpigot - Fix cannons
     }
 
     protected void h() {}
@@ -59,13 +59,13 @@ public class EntityTNTPrimed extends Entity {
         this.move(this.motX, this.motY, this.motZ);
 
         // CloudSpigot start - Drop TNT entities above the specified height
-        if (this.world.paperSpigotConfig.tntEntityHeightNerf != 0 && this.locY > this.world.paperSpigotConfig.tntEntityHeightNerf) {
+        if (this.world.cloudSpigotConfig.tntEntityHeightNerf != 0 && this.locY > this.world.cloudSpigotConfig.tntEntityHeightNerf) {
             this.die();
         }
         // CloudSpigot end
 
         // CloudSpigot start - Remove entities in unloaded chunks
-        if (this.inUnloadedChunk && world.paperSpigotConfig.removeUnloadedTNTEntities) {
+        if (this.inUnloadedChunk && world.cloudSpigotConfig.removeUnloadedTNTEntities) {
             this.die();
             this.fuseTicks = 2;
         }
@@ -102,7 +102,7 @@ public class EntityTNTPrimed extends Entity {
         // CloudSpigot start - Force load chunks during TNT explosions
         ChunkProviderServer chunkProviderServer = ((ChunkProviderServer) world.chunkProvider);
         boolean forceChunkLoad = chunkProviderServer.forceChunkLoad;
-        if (world.paperSpigotConfig.loadUnloadedTNTEntities) {
+        if (world.cloudSpigotConfig.loadUnloadedTNTEntities) {
             chunkProviderServer.forceChunkLoad = true;
         }
         // CloudSpigot end
@@ -118,7 +118,7 @@ public class EntityTNTPrimed extends Entity {
         // CraftBukkit end
 
         // CloudSpigot start - Force load chunks during TNT explosions
-        if (world.paperSpigotConfig.loadUnloadedTNTEntities) {
+        if (world.cloudSpigotConfig.loadUnloadedTNTEntities) {
             chunkProviderServer.forceChunkLoad = forceChunkLoad;
         }
         // CloudSpigot end
@@ -154,7 +154,7 @@ public class EntityTNTPrimed extends Entity {
     // CloudSpigot start - Fix cannons
     @Override
     public double f(double d0, double d1, double d2) {
-        if (!world.paperSpigotConfig.fixCannons) return super.f(d0, d1, d2);
+        if (!world.cloudSpigotConfig.fixCannons) return super.f(d0, d1, d2);
 
         double d3 = this.locX - d0;
         double d4 = this.locY + this.getHeadHeight() - d1;
@@ -165,12 +165,12 @@ public class EntityTNTPrimed extends Entity {
 
     @Override
     public boolean aL() {
-        return !world.paperSpigotConfig.fixCannons && super.aL();
+        return !world.cloudSpigotConfig.fixCannons && super.aL();
     }
 
     @Override
     public float getHeadHeight() {
-        return world.paperSpigotConfig.fixCannons ? this.length / 2 : 0.0F;
+        return world.cloudSpigotConfig.fixCannons ? this.length / 2 : 0.0F;
     }
 
     /**
@@ -178,7 +178,7 @@ public class EntityTNTPrimed extends Entity {
      */
     @Override
     public boolean W() {
-        if (!world.paperSpigotConfig.fixCannons) return super.W();
+        if (!world.cloudSpigotConfig.fixCannons) return super.W();
 
         // Preserve velocity while calling the super method
         double oldMotX = this.motX;

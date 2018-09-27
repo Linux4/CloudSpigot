@@ -58,7 +58,7 @@ public class ChunkProviderServer implements IChunkProvider {
     public void queueUnload(int i, int j) {
         // CloudSpigot start - Asynchronous lighting updates
         Chunk chunk = chunks.get(LongHash.toLong(i, j));
-        if (chunk != null && chunk.world.paperSpigotConfig.useAsyncLighting && (chunk.pendingLightUpdates.get() > 0 || chunk.world.getTime() - chunk.lightUpdateTime < 20)) {
+        if (chunk != null && chunk.world.cloudSpigotConfig.useAsyncLighting && (chunk.pendingLightUpdates.get() > 0 || chunk.world.getTime() - chunk.lightUpdateTime < 20)) {
             return;
         }
         // CloudSpigot end

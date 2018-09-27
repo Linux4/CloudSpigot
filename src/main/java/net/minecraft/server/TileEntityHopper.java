@@ -200,7 +200,7 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
                 }
             }
             // CloudSpigot start
-            if (world.paperSpigotConfig.useHopperCheck && !this.n()) {
+            if (world.cloudSpigotConfig.useHopperCheck && !this.n()) {
                 this.d(world.spigotConfig.hopperCheck);
             }
             // CloudSpigot end

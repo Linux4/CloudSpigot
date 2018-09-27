@@ -74,7 +74,7 @@ public class BlockFlowing extends BlockFluids {
                 }
             }
 
-            if (!world.paperSpigotConfig.fastDrainLava && this.material == Material.LAVA && i < 8 && i1 < 8 && i1 > i && random.nextInt(4) != 0) { // CloudSpigot
+            if (!world.cloudSpigotConfig.fastDrainLava && this.material == Material.LAVA && i < 8 && i1 < 8 && i1 > i && random.nextInt(4) != 0) { // CloudSpigot
                 j *= 4;
             }
 
@@ -276,14 +276,14 @@ public class BlockFlowing extends BlockFluids {
      */
     public int getFlowSpeed(World world, BlockPosition blockposition) {
         if (this.getMaterial() == Material.LAVA) {
-            return world.worldProvider.o() ? world.paperSpigotConfig.lavaFlowSpeedNether : world.paperSpigotConfig.lavaFlowSpeedNormal;
+            return world.worldProvider.o() ? world.cloudSpigotConfig.lavaFlowSpeedNether : world.cloudSpigotConfig.lavaFlowSpeedNormal;
         }
         if (this.getMaterial() == Material.WATER && (
                 world.getType(blockposition.north(1)).getBlock().getMaterial() == Material.LAVA ||
                         world.getType(blockposition.south(1)).getBlock().getMaterial() == Material.LAVA ||
                         world.getType(blockposition.west(1)).getBlock().getMaterial() == Material.LAVA ||
                         world.getType(blockposition.east(1)).getBlock().getMaterial() == Material.LAVA)) {
-            return world.paperSpigotConfig.waterOverLavaFlowSpeed;
+            return world.cloudSpigotConfig.waterOverLavaFlowSpeed;
         }
         return super.a(world);
     }
@@ -303,7 +303,7 @@ public class BlockFlowing extends BlockFluids {
         boolean result = false;
         int data = getData(world, position);
         if (this.material == Material.WATER) {
-            if (world.paperSpigotConfig.fastDrainWater) {
+            if (world.cloudSpigotConfig.fastDrainWater) {
                 result = true;
                 if (getData(world, position.down()) < 0) {
                     result = false;
@@ -318,7 +318,7 @@ public class BlockFlowing extends BlockFluids {
                 }
             }
         } else if (this.material == Material.LAVA) {
-            if (world.paperSpigotConfig.fastDrainLava) {
+            if (world.cloudSpigotConfig.fastDrainLava) {
                 result = true;
                 if (getData(world, position.down()) < 0 || world.getType(position.up()).getBlock().getMaterial() != Material.AIR) {
                     result = false;

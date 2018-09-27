@@ -411,7 +411,7 @@ public class BlockChest extends BlockContainer {
 
     private boolean p(World world, BlockPosition blockposition) {
         // CloudSpigot start - Option to disable chest's cat detection (Performance++)
-        if (world.paperSpigotConfig.disableChestCatDetection) {
+        if (world.cloudSpigotConfig.disableChestCatDetection) {
             return false;
         }
         // CloudSpigot end

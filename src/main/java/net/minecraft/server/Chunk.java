@@ -63,7 +63,7 @@ public class Chunk {
     private int emptySectionBits;
 
     public PacketPlayOutMapChunk.ChunkMap getChunkMap(boolean groundUpContinuous, int primaryBitMask) {
-        if (!world.paperSpigotConfig.cacheChunkMaps || !groundUpContinuous || (primaryBitMask != 0 && primaryBitMask != '\uffff')) {
+        if (!world.cloudSpigotConfig.cacheChunkMaps || !groundUpContinuous || (primaryBitMask != 0 && primaryBitMask != '\uffff')) {
             return PacketPlayOutMapChunk.a(this, groundUpContinuous, !world.worldProvider.o(), primaryBitMask);
         }
 
@@ -867,7 +867,7 @@ public class Chunk {
             this.tileEntities.put(blockposition, tileentity);
             // CraftBukkit start
             // CloudSpigot start - Remove invalid mob spawner tile entities
-        } else if (this.world.paperSpigotConfig.removeInvalidMobSpawnerTEs && tileentity instanceof TileEntityMobSpawner &&
+        } else if (this.world.cloudSpigotConfig.removeInvalidMobSpawnerTEs && tileentity instanceof TileEntityMobSpawner &&
                 org.bukkit.craftbukkit.util.CraftMagicNumbers.getMaterial(getType(blockposition)) != org.bukkit.Material.MOB_SPAWNER) {
             this.tileEntities.remove(blockposition);
             // CloudSpigot end
@@ -1173,7 +1173,7 @@ public class Chunk {
      * CloudSpigot - Recheck gaps asynchronously.
      */
     public void recheckGaps(final boolean isClientSide) {
-        if (!world.paperSpigotConfig.useAsyncLighting) {
+        if (!world.cloudSpigotConfig.useAsyncLighting) {
             this.h(isClientSide);
             return;
         }

@@ -143,7 +143,7 @@ public class BlockRedstoneWire extends Block {
 
             this.R.add(blockposition);
             // CloudSpigot start - Fix cannons
-            if (world.paperSpigotConfig.fixCannons) {
+            if (world.cloudSpigotConfig.fixCannons) {
                 this.R.add(blockposition.shift(EnumDirection.WEST));
                 this.R.add(blockposition.shift(EnumDirection.EAST));
                 this.R.add(blockposition.shift(EnumDirection.DOWN));
@@ -170,7 +170,7 @@ public class BlockRedstoneWire extends Block {
         if (world.getType(blockposition).getBlock() == this) {
             world.applyPhysics(blockposition, this);
             // CloudSpigot start - Fix cannons
-            if (world.paperSpigotConfig.fixCannons) {
+            if (world.cloudSpigotConfig.fixCannons) {
                 world.applyPhysics(blockposition.shift(EnumDirection.WEST), this);
                 world.applyPhysics(blockposition.shift(EnumDirection.EAST), this);
                 world.applyPhysics(blockposition.shift(EnumDirection.NORTH), this);

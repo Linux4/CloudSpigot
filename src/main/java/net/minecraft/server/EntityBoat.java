@@ -486,7 +486,7 @@ public class EntityBoat extends Entity {
      * CloudSpigot - Handles boat drops depending on the user's config setting
      */
     public void breakNaturally() {
-        if (this.world.paperSpigotConfig.boatsDropBoats) {
+        if (this.world.cloudSpigotConfig.boatsDropBoats) {
             this.a(Items.BOAT, 1, 0.0F);
         } else {
             for (int k = 0; k < 3; ++k) {

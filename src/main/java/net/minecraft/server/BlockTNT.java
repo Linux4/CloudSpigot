@@ -32,7 +32,7 @@ public class BlockTNT extends Block {
             org.bukkit.Location loc = explosion.source instanceof EntityTNTPrimed ? ((EntityTNTPrimed) explosion.source).sourceLoc : new org.bukkit.Location(world.getWorld(), blockposition.getX(), blockposition.getY(), blockposition.getZ()); // CloudSpigot
             // CloudSpigot start - Fix cannons
             double y = blockposition.getY();
-            if (!world.paperSpigotConfig.fixCannons) y += 0.5;
+            if (!world.cloudSpigotConfig.fixCannons) y += 0.5;
             EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(loc, world, (double) ((float) blockposition.getX() + 0.5F), y, (double) ((float) blockposition.getZ() + 0.5F), explosion.getSource()); // CloudSpigot - add loc
             // CloudSpigot end
 
@@ -51,7 +51,7 @@ public class BlockTNT extends Block {
                 org.bukkit.Location loc = new org.bukkit.Location(world.getWorld(), blockposition.getX(), blockposition.getY(), blockposition.getZ()); // CloudSpigot
                 // CloudSpigot start - Fix cannons
                 double y = blockposition.getY();
-                if (!world.paperSpigotConfig.fixCannons) y += 0.5;
+                if (!world.cloudSpigotConfig.fixCannons) y += 0.5;
                 EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(loc, world, (double) ((float) blockposition.getX() + 0.5F), y, (double) ((float) blockposition.getZ() + 0.5F), entityliving); // CloudSpigot - add loc
                 // CloudSpigot end
 

@@ -156,31 +156,31 @@ public class ChunkProviderGenerate implements IChunkProvider {
         this.a(i, j, chunksnapshot);
         this.B = this.m.getWorldChunkManager().getBiomeBlock(this.B, i * 16, j * 16, 16, 16);
         this.a(i, j, chunksnapshot, this.B);
-        if (this.r.r && this.m.paperSpigotConfig.generateCaves) { // CloudSpigot
+        if (this.r.r && this.m.cloudSpigotConfig.generateCaves) { // CloudSpigot
             this.u.a(this, this.m, i, j, chunksnapshot);
         }
 
-        if (this.r.z && this.m.paperSpigotConfig.generateCanyon) { // CloudSpigot
+        if (this.r.z && this.m.cloudSpigotConfig.generateCanyon) { // CloudSpigot
             this.z.a(this, this.m, i, j, chunksnapshot);
         }
 
-        if (this.r.w && this.n && this.m.paperSpigotConfig.generateMineshaft) { // CloudSpigot
+        if (this.r.w && this.n && this.m.cloudSpigotConfig.generateMineshaft) { // CloudSpigot
             this.x.a(this, this.m, i, j, chunksnapshot);
         }
 
-        if (this.r.v && this.n && this.m.paperSpigotConfig.generateVillage) { // CloudSpigot
+        if (this.r.v && this.n && this.m.cloudSpigotConfig.generateVillage) { // CloudSpigot
             this.w.a(this, this.m, i, j, chunksnapshot);
         }
 
-        if (this.r.u && this.n && this.m.paperSpigotConfig.generateStronghold) { // CloudSpigot
+        if (this.r.u && this.n && this.m.cloudSpigotConfig.generateStronghold) { // CloudSpigot
             this.v.a(this, this.m, i, j, chunksnapshot);
         }
 
-        if (this.r.x && this.n && this.m.paperSpigotConfig.generateTemple) { // CloudSpigot
+        if (this.r.x && this.n && this.m.cloudSpigotConfig.generateTemple) { // CloudSpigot
             this.y.a(this, this.m, i, j, chunksnapshot);
         }
 
-        if (this.r.y && this.n && this.m.paperSpigotConfig.generateMonument) { // CloudSpigot
+        if (this.r.y && this.n && this.m.cloudSpigotConfig.generateMonument) { // CloudSpigot
             this.A.a(this, this.m, i, j, chunksnapshot);
         }
 
@@ -319,23 +319,23 @@ public class ChunkProviderGenerate implements IChunkProvider {
         boolean flag = false;
         ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(i, j);
 
-        if (this.r.w && this.n && this.m.paperSpigotConfig.generateMineshaft) { // CloudSpigot
+        if (this.r.w && this.n && this.m.cloudSpigotConfig.generateMineshaft) { // CloudSpigot
             this.x.a(this.m, this.h, chunkcoordintpair);
         }
 
-        if (this.r.v && this.n && this.m.paperSpigotConfig.generateVillage) { // CloudSpigot
+        if (this.r.v && this.n && this.m.cloudSpigotConfig.generateVillage) { // CloudSpigot
             flag = this.w.a(this.m, this.h, chunkcoordintpair);
         }
 
-        if (this.r.u && this.n && this.m.paperSpigotConfig.generateStronghold) { // CloudSpigot
+        if (this.r.u && this.n && this.m.cloudSpigotConfig.generateStronghold) { // CloudSpigot
             this.v.a(this.m, this.h, chunkcoordintpair);
         }
 
-        if (this.r.x && this.n && this.m.paperSpigotConfig.generateTemple) { // CloudSpigot
+        if (this.r.x && this.n && this.m.cloudSpigotConfig.generateTemple) { // CloudSpigot
             this.y.a(this.m, this.h, chunkcoordintpair);
         }
 
-        if (this.r.y && this.n && this.m.paperSpigotConfig.generateMonument) { // CloudSpigot
+        if (this.r.y && this.n && this.m.cloudSpigotConfig.generateMonument) { // CloudSpigot
             this.A.a(this.m, this.h, chunkcoordintpair);
         }
 
@@ -359,7 +359,7 @@ public class ChunkProviderGenerate implements IChunkProvider {
             }
         }
 
-        if (this.r.s && this.m.paperSpigotConfig.generateDungeon) { // CloudSpigot
+        if (this.r.s && this.m.cloudSpigotConfig.generateDungeon) { // CloudSpigot
             for (k1 = 0; k1 < this.r.t; ++k1) {
                 l1 = this.h.nextInt(16) + 8;
                 i2 = this.h.nextInt(256);
@@ -444,23 +444,23 @@ public class ChunkProviderGenerate implements IChunkProvider {
     }
 
     public void recreateStructures(Chunk chunk, int i, int j) {
-        if (this.r.w && this.n && this.m.paperSpigotConfig.generateMineshaft) { // CloudSpigot
+        if (this.r.w && this.n && this.m.cloudSpigotConfig.generateMineshaft) { // CloudSpigot
             this.x.a(this, this.m, i, j, (ChunkSnapshot) null);
         }
 
-        if (this.r.v && this.n && this.m.paperSpigotConfig.generateVillage) { // CloudSpigot
+        if (this.r.v && this.n && this.m.cloudSpigotConfig.generateVillage) { // CloudSpigot
             this.w.a(this, this.m, i, j, (ChunkSnapshot) null);
         }
 
-        if (this.r.u && this.n && this.m.paperSpigotConfig.generateStronghold) { // CloudSpigot
+        if (this.r.u && this.n && this.m.cloudSpigotConfig.generateStronghold) { // CloudSpigot
             this.v.a(this, this.m, i, j, (ChunkSnapshot) null);
         }
 
-        if (this.r.x && this.n && this.m.paperSpigotConfig.generateTemple) { // CloudSpigot
+        if (this.r.x && this.n && this.m.cloudSpigotConfig.generateTemple) { // CloudSpigot
             this.y.a(this, this.m, i, j, (ChunkSnapshot) null);
         }
 
-        if (this.r.y && this.n && this.m.paperSpigotConfig.generateMonument) { // CloudSpigot
+        if (this.r.y && this.n && this.m.cloudSpigotConfig.generateMonument) { // CloudSpigot
             this.A.a(this, this.m, i, j, (ChunkSnapshot) null);
         }
 

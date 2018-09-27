@@ -784,7 +784,7 @@ public abstract class EntityLiving extends Entity {
 
                 // CloudSpigot start - Disable explosion knockback
                 boolean knockbackCancelled = false;
-                if (flag && !(knockbackCancelled = world.paperSpigotConfig.disableExplosionKnockback && damagesource.isExplosion() && this instanceof EntityHuman)) {
+                if (flag && !(knockbackCancelled = world.cloudSpigotConfig.disableExplosionKnockback && damagesource.isExplosion() && this instanceof EntityHuman)) {
                 // CloudSpigot end
                     this.world.broadcastEntityEffect(this, (byte) 2);
                     if (damagesource != DamageSource.DROWN) {

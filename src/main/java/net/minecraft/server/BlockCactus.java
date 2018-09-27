@@ -26,7 +26,7 @@ public class BlockCactus extends Block {
                 ;
             }
 
-            if (i < world.paperSpigotConfig.cactusMaxHeight) { // CloudSpigot - Configurable max growth height for cactus blocks) {
+            if (i < world.cloudSpigotConfig.cactusMaxHeight) { // CloudSpigot - Configurable max growth height for cactus blocks) {
                 int j = ((Integer) iblockdata.get(BlockCactus.AGE)).intValue();
 
                 if (j >= (byte) range(3, (world.growthOdds / world.spigotConfig.cactusModifier * 15) + 0.5F, 15)) { // Spigot

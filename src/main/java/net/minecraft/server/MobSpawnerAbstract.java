@@ -59,7 +59,7 @@ public abstract class MobSpawnerAbstract {
     public void c() {
         // CloudSpigot start - Configurable mob spawner tick rate
         if (spawnDelay > 0 && --tickDelay > 0) return;
-        tickDelay = this.a().paperSpigotConfig.mobSpawnerTickRate;
+        tickDelay = this.a().cloudSpigotConfig.mobSpawnerTickRate;
         // CloudSpigot end
         if (this.g()) {
             BlockPosition blockposition = this.b();

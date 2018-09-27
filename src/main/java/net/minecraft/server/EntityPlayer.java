@@ -202,7 +202,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         // CloudSpigot start - Configurable container update tick rate
         if (--containerUpdateDelay <= 0) {
             this.activeContainer.b();
-            containerUpdateDelay = world.paperSpigotConfig.containerUpdateTickRate;
+            containerUpdateDelay = world.cloudSpigotConfig.containerUpdateTickRate;
         }
         // CloudSpigot end
         if (!this.world.isClientSide && !this.activeContainer.a((EntityHuman) this)) {
@@ -520,7 +520,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         boolean endPortal = this.dimension == 1 && i == 1;
         if (endPortal) {
             this.b((Statistic) AchievementList.D);
-            if (!world.paperSpigotConfig.disableEndCredits) {
+            if (!world.cloudSpigotConfig.disableEndCredits) {
                 this.world.kill(this);
                 this.viewingCredits = true;
                 this.playerConnection.sendPacket(new PacketPlayOutGameStateChange(4, 0.0F));
@@ -546,7 +546,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         }
 
         // CloudSpigot start - Allow configurable end portal credits
-        if (!endPortal || world.paperSpigotConfig.disableEndCredits) {
+        if (!endPortal || world.cloudSpigotConfig.disableEndCredits) {
             // CraftBukkit start
             TeleportCause cause = (endPortal || (this.dimension == 1 || i == 1)) ? TeleportCause.END_PORTAL : TeleportCause.NETHER_PORTAL;
             this.server.getPlayerList().changeDimension(this, i, cause);

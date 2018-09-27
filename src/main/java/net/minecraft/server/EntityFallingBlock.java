@@ -26,7 +26,7 @@ public class EntityFallingBlock extends Entity {
     public EntityFallingBlock(org.bukkit.Location loc, World world) {
         super(world);
         sourceLoc = loc;
-        this.loadChunks = world.paperSpigotConfig.loadUnloadedFallingBlocks; // CloudSpigot
+        this.loadChunks = world.cloudSpigotConfig.loadUnloadedFallingBlocks; // CloudSpigot
     }
 
     public EntityFallingBlock(World world, double d0, double d1, double d2, IBlockData iblockdata) {
@@ -47,7 +47,7 @@ public class EntityFallingBlock extends Entity {
         this.lastX = d0;
         this.lastY = d1;
         this.lastZ = d2;
-        this.loadChunks = world.paperSpigotConfig.loadUnloadedFallingBlocks; // CloudSpigot
+        this.loadChunks = world.cloudSpigotConfig.loadUnloadedFallingBlocks; // CloudSpigot
     }
 
     protected boolean s_() {
@@ -85,13 +85,13 @@ public class EntityFallingBlock extends Entity {
             this.move(this.motX, this.motY, this.motZ);
 
             // CloudSpigot start - Remove entities in unloaded chunks
-            if (this.inUnloadedChunk && world.paperSpigotConfig.removeUnloadedFallingBlocks) {
+            if (this.inUnloadedChunk && world.cloudSpigotConfig.removeUnloadedFallingBlocks) {
                 this.die();
             }
             // CloudSpigot end
 
             // CloudSpigot start - Drop falling blocks above the specified height
-            if (this.world.paperSpigotConfig.fallingBlockHeightNerf != 0 && this.locY > this.world.paperSpigotConfig.fallingBlockHeightNerf) {
+            if (this.world.cloudSpigotConfig.fallingBlockHeightNerf != 0 && this.locY > this.world.cloudSpigotConfig.fallingBlockHeightNerf) {
                 if (this.dropItem) {
                     this.a(new ItemStack(block, 1, block.getDropData(this.block)), 0.0F);
                 }
@@ -284,7 +284,7 @@ public class EntityFallingBlock extends Entity {
     // CloudSpigot start - Fix cannons
     @Override
     public double f(double d0, double d1, double d2) {
-        if (!world.paperSpigotConfig.fixCannons) return super.f(d0, d1, d2);
+        if (!world.cloudSpigotConfig.fixCannons) return super.f(d0, d1, d2);
 
         double d3 = this.locX - d0;
         double d4 = this.locY + this.getHeadHeight() - d1;
@@ -295,7 +295,7 @@ public class EntityFallingBlock extends Entity {
 
     @Override
     public float getHeadHeight() {
-        return world.paperSpigotConfig.fixCannons ? this.length / 2 : super.getHeadHeight();
+        return world.cloudSpigotConfig.fixCannons ? this.length / 2 : super.getHeadHeight();
     }
     // CloudSpigot end
 }

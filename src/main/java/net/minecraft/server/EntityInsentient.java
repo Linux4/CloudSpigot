@@ -439,13 +439,13 @@ public abstract class EntityInsentient extends EntityLiving {
                 double d2 = entityhuman.locZ - this.locZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
 
-                if (d3 > this.world.paperSpigotConfig.hardDespawnDistance) { // CraftBukkit - remove isTypeNotPersistent() check // CloudSpigot - custom despawn distances
+                if (d3 > this.world.cloudSpigotConfig.hardDespawnDistance) { // CraftBukkit - remove isTypeNotPersistent() check // CloudSpigot - custom despawn distances
                     this.die();
                 }
 
-                if (this.ticksFarFromPlayer > 600 && this.random.nextInt(800) == 0 && d3 > this.world.paperSpigotConfig.softDespawnDistance) { // CraftBukkit - remove isTypeNotPersistent() check // CloudSpigot - custom despawn distance
+                if (this.ticksFarFromPlayer > 600 && this.random.nextInt(800) == 0 && d3 > this.world.cloudSpigotConfig.softDespawnDistance) { // CraftBukkit - remove isTypeNotPersistent() check // CloudSpigot - custom despawn distance
                     this.die();
-                } else if (d3 < this.world.paperSpigotConfig.softDespawnDistance) { // CloudSpigot - custom despawn distances
+                } else if (d3 < this.world.cloudSpigotConfig.softDespawnDistance) { // CloudSpigot - custom despawn distances
                     this.ticksFarFromPlayer = 0;
                 }
             }

@@ -25,7 +25,7 @@ public class ChunkProviderFlat implements IChunkProvider {
         if (flag) {
             Map map = this.d.b();
 
-            if (map.containsKey("village") && world.paperSpigotConfig.generateVillage) { // CloudSpigot
+            if (map.containsKey("village") && world.cloudSpigotConfig.generateVillage) { // CloudSpigot
                 Map map1 = (Map) map.get("village");
 
                 if (!map1.containsKey("size")) {
@@ -35,19 +35,19 @@ public class ChunkProviderFlat implements IChunkProvider {
                 this.e.add(new WorldGenVillage(map1));
             }
 
-            if (map.containsKey("biome_1") && world.paperSpigotConfig.generateTemple) { // CloudSpigot
+            if (map.containsKey("biome_1") && world.cloudSpigotConfig.generateTemple) { // CloudSpigot
                 this.e.add(new WorldGenLargeFeature((Map) map.get("biome_1")));
             }
 
-            if (map.containsKey("mineshaft") && world.paperSpigotConfig.generateMineshaft) { // CloudSpigot
+            if (map.containsKey("mineshaft") && world.cloudSpigotConfig.generateMineshaft) { // CloudSpigot
                 this.e.add(new WorldGenMineshaft((Map) map.get("mineshaft")));
             }
 
-            if (map.containsKey("stronghold") && world.paperSpigotConfig.generateStronghold) { // CloudSpigot
+            if (map.containsKey("stronghold") && world.cloudSpigotConfig.generateStronghold) { // CloudSpigot
                 this.e.add(new WorldGenStronghold((Map) map.get("stronghold")));
             }
 
-            if (map.containsKey("oceanmonument") && world.paperSpigotConfig.generateMonument) { // CloudSpigot
+            if (map.containsKey("oceanmonument") && world.cloudSpigotConfig.generateMonument) { // CloudSpigot
                 this.e.add(new WorldGenMonument((Map) map.get("oceanmonument")));
             }
         }
@@ -60,7 +60,7 @@ public class ChunkProviderFlat implements IChunkProvider {
             this.i = new WorldGenLakes(Blocks.LAVA);
         }
 
-        this.g = world.paperSpigotConfig.generateDungeon && this.d.b().containsKey("dungeon");  // CloudSpigot
+        this.g = world.cloudSpigotConfig.generateDungeon && this.d.b().containsKey("dungeon");  // CloudSpigot
         int j = 0;
         int k = 0;
         boolean flag1 = true;

@@ -66,7 +66,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         this.manager = new PlayerChunkMap(this, spigotConfig.viewDistance); // Spigot
         this.worldProvider.a(this);
         this.chunkProvider = this.k();
-        this.Q = ((org.bukkit.craftbukkit.CraftTravelAgent) new org.bukkit.craftbukkit.CraftTravelAgent(this).setSearchRadius(paperSpigotConfig.portalSearchRadius)); // CraftBukkit // Paper - configurable search radius
+        this.Q = ((org.bukkit.craftbukkit.CraftTravelAgent) new org.bukkit.craftbukkit.CraftTravelAgent(this).setSearchRadius(cloudSpigotConfig.portalSearchRadius)); // CraftBukkit // Paper - configurable search radius
         this.B();
         this.C();
         this.getWorldBorder().a(minecraftserver.aI());
@@ -407,7 +407,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 int i1;
                 BlockPosition blockposition;
 
-                if (!this.paperSpigotConfig.disableThunder && this.random.nextInt(100000) == 0 && this.S() && this.R()) { // CloudSpigot - Disable thunder
+                if (!this.cloudSpigotConfig.disableThunder && this.random.nextInt(100000) == 0 && this.S() && this.R()) { // CloudSpigot - Disable thunder
                     this.m = this.m * 3 + 1013904223;
                     i1 = this.m >> 2;
                     blockposition = this.a(new BlockPosition(k + (i1 & 15), 0, l + (i1 >> 8 & 15)));
@@ -417,7 +417,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 }
 
                 this.methodProfiler.c("iceandsnow");
-                if (!this.paperSpigotConfig.disableIceAndSnow && this.random.nextInt(16) == 0) { // CloudSpigot - Disable ice and snow
+                if (!this.cloudSpigotConfig.disableIceAndSnow && this.random.nextInt(16) == 0) { // CloudSpigot - Disable ice and snow
                     this.m = this.m * 3 + 1013904223;
                     i1 = this.m >> 2;
                     blockposition = this.q(new BlockPosition(k + (i1 & 15), 0, l + (i1 >> 8 & 15)));
@@ -531,7 +531,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                     IBlockData iblockdata = this.getType(nextticklistentry.a);
 
                     if (iblockdata.getBlock().getMaterial() != Material.AIR && iblockdata.getBlock() == nextticklistentry.a()) {
-                        stopPhysicsEvent = !paperSpigotConfig.firePhysicsEventForRedstone && (iblockdata.getBlock() instanceof BlockDiodeAbstract || iblockdata.getBlock() instanceof BlockRedstoneTorch); // CloudSpigot
+                        stopPhysicsEvent = !cloudSpigotConfig.firePhysicsEventForRedstone && (iblockdata.getBlock() instanceof BlockDiodeAbstract || iblockdata.getBlock() instanceof BlockRedstoneTorch); // CloudSpigot
                         iblockdata.getBlock().b((World) this, nextticklistentry.a, iblockdata, this.random);
                     }
                 }
@@ -608,8 +608,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                     }
                     // CraftBukkit end
                 */
-                if (i > paperSpigotConfig.tickNextTickCap) {
-                    i = paperSpigotConfig.tickNextTickCap;
+                if (i > cloudSpigotConfig.tickNextTickCap) {
+                    i = cloudSpigotConfig.tickNextTickCap;
                 }
                 // CloudSpigot end
 
@@ -629,7 +629,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 }
 
                 // CloudSpigot start - Allow redstone ticks to bypass the tickNextTickListCap
-                if (paperSpigotConfig.tickNextTickListCapIgnoresRedstone) {
+                if (cloudSpigotConfig.tickNextTickListCapIgnoresRedstone) {
                     Iterator<NextTickListEntry> iterator = this.M.iterator();
                     while (iterator.hasNext()) {
                         NextTickListEntry next = iterator.next();

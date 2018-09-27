@@ -339,7 +339,7 @@ public class EntityFishingHook extends Entity {
                                 this.ax = MathHelper.nextInt(this.random, 20, 80);
                             }
                         } else {
-                            this.aw = MathHelper.nextInt(this.random, this.world.paperSpigotConfig.fishingMinTicks, this.world.paperSpigotConfig.fishingMaxTicks); // CloudSpigot - Configurable fishing tick range
+                            this.aw = MathHelper.nextInt(this.random, this.world.cloudSpigotConfig.fishingMinTicks, this.world.cloudSpigotConfig.fishingMaxTicks); // CloudSpigot - Configurable fishing tick range
                             this.aw -= EnchantmentManager.h(this.owner) * 20 * 5;
                         }
                     }

@@ -143,7 +143,7 @@ public class Explosion {
                             continue;
                         }
                         // CraftBukkit end
-                        double d14 = entity instanceof EntityHuman && world.paperSpigotConfig.disableExplosionKnockback ? 0 : EnchantmentProtection.a(entity, d13); // CloudSpigot
+                        double d14 = entity instanceof EntityHuman && world.cloudSpigotConfig.disableExplosionKnockback ? 0 : EnchantmentProtection.a(entity, d13); // CloudSpigot
 
                         // CloudSpigot start - Fix cannons
                         /*
@@ -155,7 +155,7 @@ public class Explosion {
                         entity.g(d8 * d14, d9 * d14, d10 * d14);
                         // CloudSpigot end
 
-                        if (entity instanceof EntityHuman && !((EntityHuman) entity).abilities.isInvulnerable && !world.paperSpigotConfig.disableExplosionKnockback) { // CloudSpigot
+                        if (entity instanceof EntityHuman && !((EntityHuman) entity).abilities.isInvulnerable && !world.cloudSpigotConfig.disableExplosionKnockback) { // CloudSpigot
                             this.k.put((EntityHuman) entity, new Vec3D(d8 * d13, d9 * d13, d10 * d13));
                         }
                     }
@@ -167,7 +167,7 @@ public class Explosion {
 
     public void a(boolean flag) {
         // CloudSpigot start - Configurable TNT explosion volume.
-        float volume = source instanceof EntityTNTPrimed ? world.paperSpigotConfig.tntExplosionVolume : 4.0F;
+        float volume = source instanceof EntityTNTPrimed ? world.cloudSpigotConfig.tntExplosionVolume : 4.0F;
         this.world.makeSound(this.posX, this.posY, this.posZ, "random.explode", volume, (1.0F + (this.world.random.nextFloat() - this.world.random.nextFloat()) * 0.2F) * 0.7F);
         // CloudSpigot end
         if (this.size >= 2.0F && this.b) {
@@ -305,7 +305,7 @@ public class Explosion {
 
     // CloudSpigot start - Optimize explosions
     private float getBlockDensity(Vec3D vec3d, AxisAlignedBB aabb) {
-        if (!this.world.paperSpigotConfig.optimizeExplosions) {
+        if (!this.world.cloudSpigotConfig.optimizeExplosions) {
             return this.world.a(vec3d, aabb);
         }
 

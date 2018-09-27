@@ -265,7 +265,7 @@ public abstract class Entity implements ICommandListener {
      * CloudSpigot - Checks if the feature is enabled and the entity is above the nether world bedrock height
      */
     private boolean paperNetherCheck() {
-        return this.world.paperSpigotConfig.netherVoidTopDamage && this.world.getWorld().getEnvironment() == org.bukkit.World.Environment.NETHER && this.locY >= 128.0D;
+        return this.world.cloudSpigotConfig.netherVoidTopDamage && this.world.getWorld().getEnvironment() == org.bukkit.World.Environment.NETHER && this.locY >= 128.0D;
     }
 
     public void K() {

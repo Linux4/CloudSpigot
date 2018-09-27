@@ -73,7 +73,7 @@ public abstract class BlockDiodeAbstract extends BlockDirectional {
             this.b(world, blockposition, iblockdata, 0);
             world.setAir(blockposition);
             // CloudSpigot start - Fix cannons
-            if (world.paperSpigotConfig.fixCannons) {
+            if (world.cloudSpigotConfig.fixCannons) {
                 world.applyPhysics(blockposition.shift(EnumDirection.EAST), this);
                 world.applyPhysics(blockposition.shift(EnumDirection.WEST), this);
                 world.applyPhysics(blockposition.shift(EnumDirection.SOUTH), this);
@@ -181,7 +181,7 @@ public abstract class BlockDiodeAbstract extends BlockDirectional {
     public void postBreak(World world, BlockPosition blockposition, IBlockData iblockdata) {
         if (this.N) {
             // CloudSpigot start - Fix cannons
-            if (world.paperSpigotConfig.fixCannons) {
+            if (world.cloudSpigotConfig.fixCannons) {
                 world.applyPhysics(blockposition.shift(EnumDirection.EAST), this);
                 world.applyPhysics(blockposition.shift(EnumDirection.WEST), this);
                 world.applyPhysics(blockposition.shift(EnumDirection.NORTH), this);

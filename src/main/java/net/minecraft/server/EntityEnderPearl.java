@@ -12,13 +12,13 @@ public class EntityEnderPearl extends EntityProjectile {
 
     public EntityEnderPearl(World world) {
         super(world);
-        this.loadChunks = world.paperSpigotConfig.loadUnloadedEnderPearls; // CloudSpigot
+        this.loadChunks = world.cloudSpigotConfig.loadUnloadedEnderPearls; // CloudSpigot
     }
 
     public EntityEnderPearl(World world, EntityLiving entityliving) {
         super(world, entityliving);
         this.c = entityliving;
-        this.loadChunks = world.paperSpigotConfig.loadUnloadedEnderPearls; // CloudSpigot
+        this.loadChunks = world.cloudSpigotConfig.loadUnloadedEnderPearls; // CloudSpigot
     }
 
     protected void a(MovingObjectPosition movingobjectposition) {
@@ -33,7 +33,7 @@ public class EntityEnderPearl extends EntityProjectile {
         }
 
         // CloudSpigot start - Remove entities in unloaded chunks
-        if (this.inUnloadedChunk && world.paperSpigotConfig.removeUnloadedEnderPearls) {
+        if (this.inUnloadedChunk && world.cloudSpigotConfig.removeUnloadedEnderPearls) {
             this.die();
         }
         // CloudSpigot end

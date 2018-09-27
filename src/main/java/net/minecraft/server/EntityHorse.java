@@ -180,7 +180,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener {
 
     public boolean cb() {
         // CloudSpigot start - Configurable undead horse leashing
-        if (this.world.paperSpigotConfig.allowUndeadHorseLeashing) {
+        if (this.world.cloudSpigotConfig.allowUndeadHorseLeashing) {
             return super.cb();
         }
         // CloudSpigot end

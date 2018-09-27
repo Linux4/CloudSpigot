@@ -53,7 +53,7 @@ public class BlockRedstoneTorch extends BlockTorch {
     public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
         if (this.isOn) {
             // CloudSpigot start - Fix cannons
-            if (world.paperSpigotConfig.fixCannons) {
+            if (world.cloudSpigotConfig.fixCannons) {
                 world.applyPhysics(blockposition.shift(EnumDirection.DOWN), this);
                 world.applyPhysics(blockposition.shift(EnumDirection.UP), this);
                 world.applyPhysics(blockposition.shift(EnumDirection.WEST), this);
@@ -78,7 +78,7 @@ public class BlockRedstoneTorch extends BlockTorch {
     public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
         if (this.isOn) {
             // CloudSpigot start - Fix cannons
-            if (world.paperSpigotConfig.fixCannons) {
+            if (world.cloudSpigotConfig.fixCannons) {
                 world.applyPhysics(blockposition.shift(EnumDirection.DOWN), this);
                 world.applyPhysics(blockposition.shift(EnumDirection.UP), this);
                 world.applyPhysics(blockposition.shift(EnumDirection.WEST), this);

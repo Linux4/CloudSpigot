@@ -567,7 +567,7 @@ public class Block {
 
     public void a(World world, EntityHuman entityhuman, BlockPosition blockposition, IBlockData iblockdata, TileEntity tileentity) {
         entityhuman.b(StatisticList.MINE_BLOCK_COUNT[getId(this)]);
-        entityhuman.applyExhaustion(world.paperSpigotConfig.blockBreakExhaustion); // CloudSpigot - Configurable block break exhaustion
+        entityhuman.applyExhaustion(world.cloudSpigotConfig.blockBreakExhaustion); // CloudSpigot - Configurable block break exhaustion
         if (this.I() && EnchantmentManager.hasSilkTouchEnchantment(entityhuman)) {
             ItemStack itemstack = this.i(iblockdata);
 

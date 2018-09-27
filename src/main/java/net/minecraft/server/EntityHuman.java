@@ -862,7 +862,7 @@ public abstract class EntityHuman extends EntityLiving {
         // CraftBukkit end
         if (!this.isInvulnerable(damagesource)) {
             if (!damagesource.ignoresArmor() && this.isBlocking() && f > 0.0F) {
-                f = (1.0F + f) * this.world.paperSpigotConfig.playerBlockingDamageMultiplier; // CloudSpigot - Configurable damage multiplier for blocking;
+                f = (1.0F + f) * this.world.cloudSpigotConfig.playerBlockingDamageMultiplier; // CloudSpigot - Configurable damage multiplier for blocking;
             }
 
             f = this.applyArmorModifier(damagesource, f);
@@ -974,7 +974,7 @@ public abstract class EntityHuman extends EntityLiving {
                 }
 
                 if (f > 0.0F || f1 > 0.0F) {
-                    boolean flag = !world.paperSpigotConfig.disablePlayerCrits && this.fallDistance > 0.0F && !this.onGround && !this.k_() && !this.V() && !this.hasEffect(MobEffectList.BLINDNESS) && this.vehicle == null && entity instanceof EntityLiving; // CloudSpigot
+                    boolean flag = !world.cloudSpigotConfig.disablePlayerCrits && this.fallDistance > 0.0F && !this.onGround && !this.k_() && !this.V() && !this.hasEffect(MobEffectList.BLINDNESS) && this.vehicle == null && entity instanceof EntityLiving; // CloudSpigot
 
                     if (flag && f > 0.0F) {
                         f *= 1.5F;
@@ -1381,13 +1381,13 @@ public abstract class EntityHuman extends EntityLiving {
                 i = Math.round(MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2) * 100.0F);
                 if (i > 0) {
                     this.a(StatisticList.p, i);
-                    this.applyExhaustion(world.paperSpigotConfig.playerSwimmingExhaustion * (float) i * 0.01F); // CloudSpigot - Configurable swimming exhaustion
+                    this.applyExhaustion(world.cloudSpigotConfig.playerSwimmingExhaustion * (float) i * 0.01F); // CloudSpigot - Configurable swimming exhaustion
                 }
             } else if (this.V()) {
                 i = Math.round(MathHelper.sqrt(d0 * d0 + d2 * d2) * 100.0F);
                 if (i > 0) {
                     this.a(StatisticList.l, i);
-                    this.applyExhaustion(world.paperSpigotConfig.playerSwimmingExhaustion * (float) i * 0.01F); // CloudSpigot - Configurable swimming (diving) exhaustion
+                    this.applyExhaustion(world.cloudSpigotConfig.playerSwimmingExhaustion * (float) i * 0.01F); // CloudSpigot - Configurable swimming (diving) exhaustion
                 }
             } else if (this.k_()) {
                 if (d1 > 0.0D) {

@@ -143,8 +143,8 @@ public class ChunkProviderHell implements IChunkProvider {
 
                 for (int l1 = 127; l1 >= 0; --l1) {
                     // CloudSpigot start - Configurable flat bedrock worldgen
-                    if (l1 < 127 - (h.paperSpigotConfig.generateFlatBedrock ? 0 : this.j.nextInt(5)) &&
-                            l1 > (h.paperSpigotConfig.generateFlatBedrock ? 0 : this.j.nextInt(5))) {
+                    if (l1 < 127 - (h.cloudSpigotConfig.generateFlatBedrock ? 0 : this.j.nextInt(5)) &&
+                            l1 > (h.cloudSpigotConfig.generateFlatBedrock ? 0 : this.j.nextInt(5))) {
                     // CloudSpigot end
                         IBlockData iblockdata2 = chunksnapshot.a(i1, l1, l);
 
@@ -201,8 +201,8 @@ public class ChunkProviderHell implements IChunkProvider {
 
         this.a(i, j, chunksnapshot);
         this.b(i, j, chunksnapshot);
-        if (this.h.paperSpigotConfig.generateCaves) this.C.a(this, this.h, i, j, chunksnapshot); // CloudSpigot
-        if (this.i && this.h.paperSpigotConfig.generateFortress) { // CloudSpigot
+        if (this.h.cloudSpigotConfig.generateCaves) this.C.a(this, this.h, i, j, chunksnapshot); // CloudSpigot
+        if (this.i && this.h.cloudSpigotConfig.generateFortress) { // CloudSpigot
             this.B.a(this, this.h, i, j, chunksnapshot);
         }
 
@@ -387,7 +387,7 @@ public class ChunkProviderHell implements IChunkProvider {
     }
 
     public void recreateStructures(Chunk chunk, int i, int j) {
-        if (this.h.paperSpigotConfig.generateFortress) this.B.a(this, this.h, i, j, (ChunkSnapshot) null); // CloudSpigot
+        if (this.h.cloudSpigotConfig.generateFortress) this.B.a(this, this.h, i, j, (ChunkSnapshot) null); // CloudSpigot
     }
 
     public Chunk getChunkAt(BlockPosition blockposition) {

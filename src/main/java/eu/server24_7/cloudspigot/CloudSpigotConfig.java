@@ -29,9 +29,9 @@ public class CloudSpigotConfig
             + "with caution, and make sure you know what each option does before configuring.\n"
             + "\n"
             + "If you need help with the configuration or have any questions related to CloudSpigot,\n"
-            + "join us at the IRC.\n"
+            + "join us at Discord.\n"
             + "\n"
-            + "IRC: #cloudspigot @ irc.spi.gt ( http://irc.spi.gt/iris/?channels=CloudSpigot )\n";
+            + "Discord: https://discord.gg/5qp26hf\n";
     /*========================================================================*/
     public static YamlConfiguration config;
     static int version;

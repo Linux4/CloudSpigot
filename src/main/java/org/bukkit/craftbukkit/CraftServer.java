@@ -726,7 +726,7 @@ public final class CraftServer implements Server {
                 world.ticksPerMonsterSpawns = this.getTicksPerMonsterSpawns();
             }
             world.spigotConfig.init(); // Spigot
-            world.paperSpigotConfig.init(); // CloudSpigot
+            world.cloudSpigotConfig.init(); // CloudSpigot
         }
 
         pluginManager.clearPlugins();
@@ -1657,7 +1657,7 @@ public final class CraftServer implements Server {
         try {
             // send location info if present
             // completions = getCommandMap().tabComplete(player, message.substring(1));
-            if (blockPosition == null || !((CraftWorld) player.getWorld()).getHandle().paperSpigotConfig.allowBlockLocationTabCompletion) {
+            if (blockPosition == null || !((CraftWorld) player.getWorld()).getHandle().cloudSpigotConfig.allowBlockLocationTabCompletion) {
                 completions = getCommandMap().tabComplete(player, message.substring(1));
             } else {
                 completions = getCommandMap().tabComplete(player, message.substring(1), new Location(player.getWorld(), blockPosition.getX(), blockPosition.getY(), blockPosition.getZ()));

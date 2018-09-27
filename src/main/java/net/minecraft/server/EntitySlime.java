@@ -235,7 +235,7 @@ public class EntitySlime extends EntityInsentient implements IMonster {
                 }
 
                 // CloudSpigot - Toggle to make all chunks spawn chunks
-                boolean isSlimeChunk = world.paperSpigotConfig.allChunksAreSlimeChunks || chunk.a(987234911L).nextInt(10) == 0;
+                boolean isSlimeChunk = world.cloudSpigotConfig.allChunksAreSlimeChunks || chunk.a(987234911L).nextInt(10) == 0;
                 if (this.random.nextInt(10) == 0 && isSlimeChunk && this.locY < 40.0D) {
                     return super.bR();
                 }

@@ -160,7 +160,7 @@ public abstract class World implements IBlockAccess {
 
     public final org.spigotmc.SpigotWorldConfig spigotConfig; // Spigot
 
-    public final eu.server24_7.cloudspigot.CloudSpigotWorldConfig paperSpigotConfig; // CloudSpigot
+    public final eu.server24_7.cloudspigot.CloudSpigotWorldConfig cloudSpigotConfig; // CloudSpigot
 
     public CraftWorld getWorld() {
         return this.world;
@@ -176,7 +176,7 @@ public abstract class World implements IBlockAccess {
 
     protected World(IDataManager idatamanager, WorldData worlddata, WorldProvider worldprovider, MethodProfiler methodprofiler, boolean flag, ChunkGenerator gen, org.bukkit.World.Environment env) {
         this.spigotConfig = new org.spigotmc.SpigotWorldConfig( worlddata.getName() ); // Spigot
-        this.paperSpigotConfig = new eu.server24_7.cloudspigot.CloudSpigotWorldConfig( worlddata.getName() ); // CloudSpigot
+        this.cloudSpigotConfig = new eu.server24_7.cloudspigot.CloudSpigotWorldConfig( worlddata.getName() ); // CloudSpigot
         this.generator = gen;
         this.world = new CraftWorld((WorldServer) this, gen, env);
         this.ticksPerAnimalSpawns = this.getServer().getTicksPerAnimalSpawns(); // CraftBukkit
@@ -227,7 +227,7 @@ public abstract class World implements IBlockAccess {
         }); 
         this.getServer().addWorld(this.world); 
         // CraftBukkit end
-        this.keepSpawnInMemory = this.paperSpigotConfig.keepSpawnInMemory; // CloudSpigot
+        this.keepSpawnInMemory = this.cloudSpigotConfig.keepSpawnInMemory; // CloudSpigot
         this.entityLimiter = new org.spigotmc.TickLimiter(spigotConfig.entityMaxTickTime);
         this.tileLimiter = new org.spigotmc.TickLimiter(spigotConfig.tileMaxTickTime);
     }
@@ -1211,7 +1211,7 @@ public abstract class World implements IBlockAccess {
                             {
                                 // CloudSpigot start - FallingBlocks and TNT collide with specific non-collidable blocks
                                 Block b = block.getBlock();
-                                if (entity.world.paperSpigotConfig.fallingBlocksCollideWithSigns && (entity instanceof EntityTNTPrimed || entity instanceof EntityFallingBlock) && (b instanceof BlockSign || b instanceof BlockFenceGate || b instanceof BlockTorch || b instanceof BlockButtonAbstract || b instanceof BlockLever || b instanceof BlockTripwireHook || b instanceof BlockTripwire || b instanceof BlockChest || b instanceof BlockSlowSand || b instanceof BlockBed || b instanceof BlockEnderChest || b instanceof BlockEnchantmentTable || b instanceof BlockBrewingStand)) {
+                                if (entity.world.cloudSpigotConfig.fallingBlocksCollideWithSigns && (entity instanceof EntityTNTPrimed || entity instanceof EntityFallingBlock) && (b instanceof BlockSign || b instanceof BlockFenceGate || b instanceof BlockTorch || b instanceof BlockButtonAbstract || b instanceof BlockLever || b instanceof BlockTripwireHook || b instanceof BlockTripwire || b instanceof BlockChest || b instanceof BlockSlowSand || b instanceof BlockBed || b instanceof BlockEnderChest || b instanceof BlockEnchantmentTable || b instanceof BlockBrewingStand)) {
                                     AxisAlignedBB aabb = AxisAlignedBB.a(x, y, z, x + 1.0, y + 1.0, z + 1.0);
                                     if (axisalignedbb.b(aabb)) arraylist.add(aabb);
                                 } else {
@@ -1603,9 +1603,9 @@ public abstract class World implements IBlockAccess {
             entity.ticksLived++;
             entity.inactiveTick();
             // CloudSpigot start - Remove entities in unloaded chunks
-            if (!this.isChunkLoaded(i, j, true) && ((entity instanceof EntityEnderPearl && this.paperSpigotConfig.removeUnloadedEnderPearls) ||
-                    (entity instanceof EntityFallingBlock && this.paperSpigotConfig.removeUnloadedFallingBlocks) ||
-                    (entity instanceof EntityTNTPrimed && this.paperSpigotConfig.removeUnloadedTNTEntities))) {
+            if (!this.isChunkLoaded(i, j, true) && ((entity instanceof EntityEnderPearl && this.cloudSpigotConfig.removeUnloadedEnderPearls) ||
+                    (entity instanceof EntityFallingBlock && this.cloudSpigotConfig.removeUnloadedFallingBlocks) ||
+                    (entity instanceof EntityTNTPrimed && this.cloudSpigotConfig.removeUnloadedTNTEntities))) {
                 entity.inUnloadedChunk = true;
                 entity.die();
             }
@@ -2236,7 +2236,7 @@ public abstract class World implements IBlockAccess {
 
     protected void a(int i, int j, Chunk chunk) {
         this.methodProfiler.c("moodSound");
-        if (!this.paperSpigotConfig.disableMoodSounds && this.L == 0 && !this.isClientSide) { // CloudSpigot - Disable mood sounds
+        if (!this.cloudSpigotConfig.disableMoodSounds && this.L == 0 && !this.isClientSide) { // CloudSpigot - Disable mood sounds
             this.m = this.m * 3 + 1013904223;
             int k = this.m >> 2;
             int l = k & 15;
@@ -2508,7 +2508,7 @@ public abstract class World implements IBlockAccess {
             }
 
             // CloudSpigot start - Asynchronous light updates
-            if (chunk.world.paperSpigotConfig.useAsyncLighting) {
+            if (chunk.world.cloudSpigotConfig.useAsyncLighting) {
                 chunk.pendingLightUpdates.decrementAndGet();
                 if (neighbors != null) {
                     for (Chunk neighbor : neighbors) {
@@ -2533,7 +2533,7 @@ public abstract class World implements IBlockAccess {
             return false;
         }
 
-        if (!chunk.world.paperSpigotConfig.useAsyncLighting) {
+        if (!chunk.world.cloudSpigotConfig.useAsyncLighting) {
             return this.c(enumskyblock, position, chunk, null);
         }
 
