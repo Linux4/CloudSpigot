@@ -295,7 +295,7 @@ public abstract class World implements IBlockAccess {
     }
 
     public boolean a(BlockPosition blockposition, boolean flag) {
-        return !this.isValidLocation(blockposition) ? false : this.isChunkLoaded(blockposition.getX() >> 4, blockposition.getZ() >> 4, flag);
+        return getChunkIfLoaded(blockposition.getX() >> 4, blockposition.getZ() >> 4) != null; // CloudSpigot
     }
 
     public boolean areChunksLoaded(BlockPosition blockposition, int i) {
