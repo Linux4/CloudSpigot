@@ -157,7 +157,7 @@ public final class CraftServer implements Server {
     private WarningState warningState = WarningState.DEFAULT;
     private final BooleanWrapper online = new BooleanWrapper();
     public CraftScoreboardManager scoreboardManager;
-    public boolean playerCommandState;
+    public volatile boolean playerCommandState; // CloudSpigot add async support
     private boolean printSaveWarning;
     private CraftIconCache icon;
     private boolean overrideAllCommandBlockCommands = false;
@@ -541,7 +541,7 @@ public final class CraftServer implements Server {
         return this.getConfigBoolean("white-list", false);
     }
 
-    // NOTE: Temporary calls through to server.properies until its replaced
+    // NOTE: Temporary calls through to server.properties until its replaced
     private String getConfigString(String variable, String defaultValue) {
         return this.console.getPropertyManager().getString(variable, defaultValue);
     }
@@ -637,7 +637,8 @@ public final class CraftServer implements Server {
         Validate.notNull(sender, "Sender cannot be null");
         Validate.notNull(commandLine, "CommandLine cannot be null");
 
-        // CloudSpigot Start
+        // CloudSpigot Start - remove asynchronized waiting
+        /*
         if (!Bukkit.isPrimaryThread()) {
             final CommandSender fSender = sender;
             final String fCommandLine = commandLine;
@@ -658,6 +659,7 @@ public final class CraftServer implements Server {
                 throw new RuntimeException("Exception processing dispatch command", e.getCause());
             }
         }
+        */
         // CloudSpigot End
 
         if (commandMap.dispatch(sender, commandLine)) {
