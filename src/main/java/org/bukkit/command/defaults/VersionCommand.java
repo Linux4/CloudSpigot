@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 //CloudSpigot start
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import eu.server24_7.cloudspigot.CloudSpigot;
 //CloudSpigot end
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -49,7 +50,7 @@ public class VersionCommand extends BukkitCommand {
         if (!testPermission(sender)) return true;
 
         if (args.length == 0) {
-            sender.sendMessage("§8┃ §6Server §8» §9Running " + Bukkit.getVersion());
+            sender.sendMessage(CloudSpigot.serverPrefix + "§9Running " + Bukkit.getVersion());
             sendVersion(sender);
         } else {
             StringBuilder name = new StringBuilder();
@@ -172,7 +173,7 @@ public class VersionCommand extends BukkitCommand {
                 return;
             }
             versionWaiters.add(sender);
-            sender.sendMessage("§8┃ §6Server §8» §9Checking version, please wait...");
+            sender.sendMessage(CloudSpigot.serverPrefix + "§9Checking version, please wait...");
             if (!versionTaskStarted) {
                 versionTaskStarted = true;
                 new Thread(new Runnable() {
@@ -196,19 +197,19 @@ public class VersionCommand extends BukkitCommand {
              int distance = getDistance(null, parts[0]);
              switch (distance) {
                  case -1:
-                     setVersionMessage("§8┃ §6Server §8» §cError obtaining version information");
+                     setVersionMessage(CloudSpigot.serverPrefix + "§cError obtaining version information");
                      break;
                  case 0:
-                     setVersionMessage("§8┃ §6Server §8» §9You are running the latest version");
+                     setVersionMessage(CloudSpigot.serverPrefix + "§9You are running the latest version");
                      break;
                  case -2:
-                     setVersionMessage("§8┃ §6Server §8» §9Unknown version");
+                     setVersionMessage(CloudSpigot.serverPrefix + "§9Unknown version");
                      break;
                  default:
-                    setVersionMessage("§8┃ §6Server §8» §9You are " + distance + " version(s) behind");
+                    setVersionMessage(CloudSpigot.serverPrefix + "§9You are " + distance + " version(s) behind");
              }
         } else {
-            setVersionMessage("Unknown version, custom build?");
+            setVersionMessage(CloudSpigot.serverPrefix + "Unknown version, custom build?");
         }
     }
 
