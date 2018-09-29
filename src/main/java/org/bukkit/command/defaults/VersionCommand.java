@@ -209,7 +209,7 @@ public class VersionCommand extends BukkitCommand {
                     setVersionMessage(CloudSpigot.serverPrefix + "§9You are " + distance + " version(s) behind");
              }
         } else {
-            setVersionMessage(CloudSpigot.serverPrefix + "Unknown version, custom build?");
+            setVersionMessage(CloudSpigot.serverPrefix + "§9Unknown version, custom build?");
         }
     }
 
