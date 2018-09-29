@@ -191,6 +191,8 @@ public class Main {
                     System.setProperty(TerminalConsoleAppender.JLINE_OVERRIDE_PROPERTY, "false"); // CloudSpigot
                 }
 
+                // CloudSpigot start
+                /*
                 // Spigot Start
                 int maxPermGen = 0; // In kb
                 for ( String s : java.lang.management.ManagementFactory.getRuntimeMXBean().getInputArguments() )
@@ -207,6 +209,8 @@ public class Main {
                     System.out.println( "Please see http://www.spigotmc.org/wiki/changing-permgen-size/ for more details and more in-depth instructions." );
                 }
                 // Spigot End
+                */
+                // CloudSpigot end
                 System.out.println("Loading libraries, please wait...");
                 MinecraftServer.main(options);
             } catch (Throwable t) {
