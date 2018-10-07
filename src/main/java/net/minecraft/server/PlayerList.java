@@ -783,7 +783,7 @@ public abstract class PlayerList {
 
         // worldserver.methodProfiler.b();
         if (i != 1) {
-            worldserver.methodProfiler.a("placing");
+            //worldserver.methodProfiler.a("placing"); // CloudSpigot
             d0 = (double) MathHelper.clamp((int) d0, -29999872, 29999872);
             d1 = (double) MathHelper.clamp((int) d1, -29999872, 29999872);
             /*
@@ -856,9 +856,9 @@ public abstract class PlayerList {
         }
         */
 
-        worldserver.methodProfiler.b();
+        //worldserver.methodProfiler.b(); // CloudSpigot
         if (i != 1) {
-            worldserver.methodProfiler.a("placing");
+            //worldserver.methodProfiler.a("placing"); // CloudSpigot
             /*
             d0 = (double) MathHelper.clamp((int) d0, -29999872, 29999872);
             d1 = (double) MathHelper.clamp((int) d1, -29999872, 29999872);
@@ -878,7 +878,7 @@ public abstract class PlayerList {
                 worldserver1.entityJoinedWorld(entity, false);
             }
 
-            worldserver.methodProfiler.b();
+            //worldserver.methodProfiler.b(); // CloudSpigot
         }
 
         entity.spawnIn(worldserver1);

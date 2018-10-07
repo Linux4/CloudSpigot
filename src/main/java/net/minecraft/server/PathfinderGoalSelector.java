@@ -13,12 +13,12 @@ public class PathfinderGoalSelector {
     private static final Logger a = LogManager.getLogger();
     private List<PathfinderGoalSelector.PathfinderGoalSelectorItem> b = new UnsafeList<PathfinderGoalSelector.PathfinderGoalSelectorItem>();
     private List<PathfinderGoalSelector.PathfinderGoalSelectorItem> c = new UnsafeList<PathfinderGoalSelector.PathfinderGoalSelectorItem>();
-    private final MethodProfiler d;
+    //private final MethodProfiler d; // CLoudSpigot
     private int e;
     private int f = 3;
 
     public PathfinderGoalSelector(MethodProfiler methodprofiler) {
-        this.d = methodprofiler;
+        //this.d = methodprofiler; // CloudSpigot
     }
 
     public void a(int i, PathfinderGoal pathfindergoal) {
@@ -45,7 +45,7 @@ public class PathfinderGoalSelector {
     }
 
     public void a() {
-        this.d.a("goalSetup");
+        //this.d.a("goalSetup"); // CloudSpigot
         Iterator iterator;
         PathfinderGoalSelector.PathfinderGoalSelectorItem pathfindergoalselector_pathfindergoalselectoritem;
 
@@ -82,8 +82,8 @@ public class PathfinderGoalSelector {
             }
         }
 
-        this.d.b();
-        this.d.a("goalTick");
+        //this.d.b(); // CloudSpigot
+        //this.d.a("goalTick"); // CloudSpigot
         iterator = this.c.iterator();
 
         while (iterator.hasNext()) {
@@ -91,7 +91,7 @@ public class PathfinderGoalSelector {
             pathfindergoalselector_pathfindergoalselectoritem.a.e();
         }
 
-        this.d.b();
+        //this.d.b(); // CloudSpigot
     }
 
     private boolean a(PathfinderGoalSelector.PathfinderGoalSelectorItem pathfindergoalselector_pathfindergoalselectoritem) {

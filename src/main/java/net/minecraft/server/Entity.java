@@ -273,7 +273,7 @@ public abstract class Entity implements ICommandListener {
     }
 
     public void K() {
-        this.world.methodProfiler.a("entityBaseTick");
+        //this.world.methodProfiler.a("entityBaseTick"); // CloudSpigot
         if (this.vehicle != null && this.vehicle.dead) {
             this.vehicle = null;
         }
@@ -285,7 +285,7 @@ public abstract class Entity implements ICommandListener {
         this.lastPitch = this.pitch;
         this.lastYaw = this.yaw;
         if (!this.world.isClientSide && this.world instanceof WorldServer) {
-            this.world.methodProfiler.a("portal");
+            //this.world.methodProfiler.a("portal"); // CloudSpigot
             MinecraftServer minecraftserver = ((WorldServer) this.world).getMinecraftServer();
             int i = this.L();
 
@@ -321,7 +321,7 @@ public abstract class Entity implements ICommandListener {
                 --this.portalCooldown;
             }
 
-            this.world.methodProfiler.b();
+            //this.world.methodProfiler.b(); // CloudSpigot
         }
 
         this.Y();
@@ -357,7 +357,7 @@ public abstract class Entity implements ICommandListener {
         }
 
         this.justCreated = false;
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b(); // CloudSpigot
     }
 
     public int L() {
@@ -454,7 +454,7 @@ public abstract class Entity implements ICommandListener {
                 return;
             }
             // CraftBukkit end
-            this.world.methodProfiler.a("move");
+            //this.world.methodProfiler.a("move"); // CloudSpigot
             double d3 = this.locX;
             double d4 = this.locY;
             double d5 = this.locZ;
@@ -639,8 +639,8 @@ public abstract class Entity implements ICommandListener {
                 }
             }
 
-            this.world.methodProfiler.b();
-            this.world.methodProfiler.a("rest");
+            //this.world.methodProfiler.b(); // CloudSpigot
+            //this.world.methodProfiler.a("rest"); // CloudSpigot
             this.recalcPosition();
             this.positionChanged = d6 != d0 || d8 != d2;
             this.E = d7 != d1;
@@ -768,7 +768,7 @@ public abstract class Entity implements ICommandListener {
                 this.fireTicks = -this.maxFireTicks;
             }
 
-            this.world.methodProfiler.b();
+            //this.world.methodProfiler.b(); // CloudSpigot
         }
     }
 
@@ -1932,7 +1932,7 @@ public abstract class Entity implements ICommandListener {
 
     public void c(int i) {
         if (!this.world.isClientSide && !this.dead) {
-            this.world.methodProfiler.a("changeDimension");
+            //this.world.methodProfiler.a("changeDimension"); // CloudSpigot
             MinecraftServer minecraftserver = MinecraftServer.getServer();
             // CraftBukkit start - Move logic into new function "teleportToLocation"
             // int j = this.dimension;
@@ -1981,7 +1981,7 @@ public abstract class Entity implements ICommandListener {
 
             this.world.kill(this);
             this.dead = false;
-            this.world.methodProfiler.a("reposition");
+            //this.world.methodProfiler.a("reposition"); // CloudSpigot
             // CraftBukkit start - Ensure chunks are loaded in case TravelAgent is not used which would initially cause chunks to load during find/create
             // minecraftserver.getPlayerList().changeWorld(this, j, worldserver, worldserver1);
             boolean before = worldserver1.chunkProviderServer.forceChunkLoad;
@@ -1989,7 +1989,7 @@ public abstract class Entity implements ICommandListener {
             worldserver1.getMinecraftServer().getPlayerList().repositionEntity(this, exit, portal);
             worldserver1.chunkProviderServer.forceChunkLoad = before;
             // CraftBukkit end
-            this.world.methodProfiler.c("reloading");
+            //this.world.methodProfiler.c("reloading"); // CloudSpigot
             Entity entity = EntityTypes.createEntityByName(EntityTypes.b(this), worldserver1);
 
             if (entity != null) {
@@ -2014,10 +2014,10 @@ public abstract class Entity implements ICommandListener {
             }
 
             this.dead = true;
-            this.world.methodProfiler.b();
+            //this.world.methodProfiler.b(); // CloudSpigot
             worldserver.j();
             worldserver1.j();
-            this.world.methodProfiler.b();
+            //this.world.methodProfiler.b(); // CloudSpigot
         }
     }
 

@@ -228,7 +228,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             // CraftBukkit end
         }
         // CraftBukkit end
-        this.methodProfiler.c("chunkSource");
+        //this.methodProfiler.c("chunkSource"); // CloudSpigot
         this.chunkProvider.unloadChunks();
         int j = this.a(1.0F);
 
@@ -241,18 +241,18 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             this.worldData.setDayTime(this.worldData.getDayTime() + 1L);
         }
 
-        this.methodProfiler.c("tickPending");
+        //this.methodProfiler.c("tickPending"); // CloudSpigot
         this.a(false);
-        this.methodProfiler.c("tickBlocks");
+        //this.methodProfiler.c("tickBlocks"); // CloudSpigot
         this.h();
-        this.methodProfiler.c("chunkMap");
+        //this.methodProfiler.c("chunkMap"); // CloudSpigot
         this.manager.flush();
-        this.methodProfiler.c("village");
+        //this.methodProfiler.c("village"); // CloudSpigot
         this.villages.tick();
         this.siegeManager.a();
-        this.methodProfiler.c("portalForcer");
+        //this.methodProfiler.c("portalForcer"); // CloudSpigot
         this.Q.a(this.getTime());
-        this.methodProfiler.b();
+        //this.methodProfiler.b(); // CloudSpigot
         this.ak();
 
         this.getWorld().processChunkGC(); // CraftBukkit
@@ -396,14 +396,14 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 int k = chunkX * 16;
                 int l = chunkZ * 16;
 
-                this.methodProfiler.a("getChunk");
+                //this.methodProfiler.a("getChunk"); // CloudSpigot
                 Chunk chunk = this.getChunkAt(chunkX, chunkZ);
                 // CraftBukkit end
 
                 this.a(k, l, chunk);
-                this.methodProfiler.c("tickChunk");
+                //this.methodProfiler.c("tickChunk"); // CloudSpigot
                 chunk.b(false);
-                this.methodProfiler.c("thunder");
+                //this.methodProfiler.c("thunder"); // CloudSpigot
                 int i1;
                 BlockPosition blockposition;
 
@@ -416,7 +416,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                     }
                 }
 
-                this.methodProfiler.c("iceandsnow");
+                //this.methodProfiler.c("iceandsnow"); // CloudSpigot
                 if (!this.cloudSpigotConfig.disableIceAndSnow && this.random.nextInt(16) == 0) { // CloudSpigot - Disable ice and snow
                     this.m = this.m * 3 + 1013904223;
                     i1 = this.m >> 2;
@@ -454,7 +454,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                     }
                 }
 
-                this.methodProfiler.c("tickBlocks");
+                //this.methodProfiler.c("tickBlocks"); // CloudSpigot
                 i1 = this.getGameRules().c("randomTickSpeed");
                 if (i1 > 0) {
                     ChunkSection[] achunksection = chunk.getSections();
@@ -613,7 +613,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 }
                 // CloudSpigot end
 
-                this.methodProfiler.a("cleaning");
+                //this.methodProfiler.a("cleaning"); // CloudSpigot
 
                 NextTickListEntry nextticklistentry;
 
@@ -645,8 +645,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 }
                 // CloudSpigot end
 
-                this.methodProfiler.b();
-                this.methodProfiler.a("ticking");
+                //this.methodProfiler.b(); // CloudSpigot
+                //this.methodProfiler.a("ticking"); // CloudSpigot
                 Iterator iterator = this.V.iterator();
 
                 while (iterator.hasNext()) {
@@ -673,7 +673,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                     }
                 }
 
-                this.methodProfiler.b();
+                //this.methodProfiler.b(); // CloudSpigot
                 this.V.clear();
                 return !this.M.isEmpty();
             }

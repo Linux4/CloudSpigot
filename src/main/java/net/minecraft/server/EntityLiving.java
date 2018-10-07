@@ -170,7 +170,7 @@ public abstract class EntityLiving extends Entity {
     public void K() {
         this.ay = this.az;
         super.K();
-        this.world.methodProfiler.a("livingEntityBaseTick");
+        //this.world.methodProfiler.a("livingEntityBaseTick"); // CloudSpigot
         boolean flag = this instanceof EntityHuman;
 
         if (this.isAlive()) {
@@ -263,7 +263,7 @@ public abstract class EntityLiving extends Entity {
         this.aL = this.aK;
         this.lastYaw = this.yaw;
         this.lastPitch = this.pitch;
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b(); // CloudSpigot
     }
 
     // CraftBukkit start
@@ -1516,10 +1516,10 @@ public abstract class EntityLiving extends Entity {
         }
 
         this.aS += (f3 - this.aS) * 0.3F;
-        this.world.methodProfiler.a("headTurn");
+        //this.world.methodProfiler.a("headTurn"); // CloudSpigot
         f2 = this.h(f1, f2);
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("rangeChecks");
+        //this.world.methodProfiler.b(); // CloudSpigot
+        //this.world.methodProfiler.a("rangeChecks"); // CloudSpigot
 
         while (this.yaw - this.lastYaw < -180.0F) {
             this.lastYaw -= 360.0F;
@@ -1553,7 +1553,7 @@ public abstract class EntityLiving extends Entity {
             this.aL += 360.0F;
         }
 
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b(); // CloudSpigot
         this.aT += f2;
     }
 
@@ -1618,20 +1618,20 @@ public abstract class EntityLiving extends Entity {
             this.motZ = 0.0D;
         }
 
-        this.world.methodProfiler.a("ai");
+        //this.world.methodProfiler.a("ai"); // CloudSpigot
         if (this.bD()) {
             this.aY = false;
             this.aZ = 0.0F;
             this.ba = 0.0F;
             this.bb = 0.0F;
         } else if (this.bM()) {
-            this.world.methodProfiler.a("newAi");
+            //this.world.methodProfiler.a("newAi"); // CloudSpigot
             this.doTick();
-            this.world.methodProfiler.b();
+            //this.world.methodProfiler.b(); // CloudSpigot
         }
 
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("jump");
+        //this.world.methodProfiler.b(); // CloudSpigot
+        //this.world.methodProfiler.a("jump"); // CloudSpigot
         if (this.aY) {
             if (this.V()) {
                 this.bG();
@@ -1645,19 +1645,19 @@ public abstract class EntityLiving extends Entity {
             this.bn = 0;
         }
 
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("travel");
+        //this.world.methodProfiler.b(); // CloudSpigot
+        //this.world.methodProfiler.a("travel"); // CloudSpigot
         this.aZ *= 0.98F;
         this.ba *= 0.98F;
         this.bb *= 0.9F;
         this.g(this.aZ, this.ba);
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("push");
+        //this.world.methodProfiler.b(); // CloudSpigot
+        //this.world.methodProfiler.a("push"); // CloudSpigot
         if (!this.world.isClientSide) {
             this.bL();
         }
 
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b(); // CloudSpigot
     }
 
     protected void doTick() {}

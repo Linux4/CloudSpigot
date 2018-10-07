@@ -37,8 +37,8 @@ public abstract class EntityInsentient extends EntityLiving {
 
     public EntityInsentient(World world) {
         super(world);
-        this.goalSelector = new PathfinderGoalSelector(world != null && world.methodProfiler != null ? world.methodProfiler : null);
-        this.targetSelector = new PathfinderGoalSelector(world != null && world.methodProfiler != null ? world.methodProfiler : null);
+        this.goalSelector = new PathfinderGoalSelector(null); // CloudSpigot
+        this.targetSelector = new PathfinderGoalSelector(null); // CloudSpigot
         this.lookController = new ControllerLook(this);
         this.moveController = new ControllerMove(this);
         this.g = new ControllerJump(this);
@@ -148,13 +148,13 @@ public abstract class EntityInsentient extends EntityLiving {
 
     public void K() {
         super.K();
-        this.world.methodProfiler.a("mobBaseTick");
+        //this.world.methodProfiler.a("mobBaseTick"); // CloudSpigot
         if (this.isAlive() && this.random.nextInt(1000) < this.a_++) {
             this.a_ = -this.w();
             this.x();
         }
 
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b(); // CloudSpigot
     }
 
     protected int getExpValue(EntityHuman entityhuman) {
@@ -337,7 +337,7 @@ public abstract class EntityInsentient extends EntityLiving {
 
     public void m() {
         super.m();
-        this.world.methodProfiler.a("looting");
+        //this.world.methodProfiler.a("looting"); // CloudSpigot
         if (!this.world.isClientSide && this.bY() && !this.aP && this.world.getGameRules().getBoolean("mobGriefing")) {
             List list = this.world.a(EntityItem.class, this.getBoundingBox().grow(1.0D, 0.0D, 1.0D));
             Iterator iterator = list.iterator();
@@ -351,7 +351,7 @@ public abstract class EntityInsentient extends EntityLiving {
             }
         }
 
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b(); // CloudSpigot
     }
 
     protected void a(EntityItem entityitem) {
@@ -455,9 +455,9 @@ public abstract class EntityInsentient extends EntityLiving {
 
     protected final void doTick() {
         ++this.ticksFarFromPlayer;
-        this.world.methodProfiler.a("checkDespawn");
+        //this.world.methodProfiler.a("checkDespawn"); // CloudSpigot
         this.D();
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b(); // CloudSpigot
         // Spigot Start
         if ( this.fromMobSpawner )
         {
@@ -470,30 +470,30 @@ public abstract class EntityInsentient extends EntityLiving {
             return;
         }
         // Spigot End
-        this.world.methodProfiler.a("sensing");
+        //this.world.methodProfiler.a("sensing"); // CloudSpigot
         this.bk.a();
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("targetSelector");
+        //this.world.methodProfiler.b(); // CloudSpigot
+        //this.world.methodProfiler.a("targetSelector"); // CloudSpigot
         this.targetSelector.a();
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("goalSelector");
+        //this.world.methodProfiler.b(); // CloudSpigot
+        //this.world.methodProfiler.a("goalSelector"); // CloudSpigot
         this.goalSelector.a();
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("navigation");
+        //this.world.methodProfiler.b(); // CloudSpigot
+        //this.world.methodProfiler.a("navigation"); // CloudSpigot
         this.navigation.k();
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("mob tick");
+        //this.world.methodProfiler.b(); // CloudSpigot
+        //this.world.methodProfiler.a("mob tick"); // CloudSpigot
         this.E();
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("controls");
-        this.world.methodProfiler.a("move");
+        //this.world.methodProfiler.b(); // CloudSpigot
+        //this.world.methodProfiler.a("controls"); // CloudSpigot
+        //this.world.methodProfiler.a("move"); // CloudSpigot
         this.moveController.c();
-        this.world.methodProfiler.c("look");
+        //this.world.methodProfiler.c("look"); // CloudSpigot
         this.lookController.a();
-        this.world.methodProfiler.c("jump");
+        //this.world.methodProfiler.c("jump"); // CloudSpigot
         this.g.b();
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b(); // CloudSpigot
+        //this.world.methodProfiler.b(); // CloudSpigot
     }
 
     protected void E() {}

@@ -86,7 +86,7 @@ public abstract class World implements IBlockAccess {
     protected boolean isLoading;
     public PersistentCollection worldMaps; // CraftBukkit - public
     protected PersistentVillage villages;
-    public final MethodProfiler methodProfiler;
+    //public final MethodProfiler methodProfiler; // CloudSpigot
     private final Calendar K = Calendar.getInstance();
     public Scoreboard scoreboard = new Scoreboard(); // CraftBukkit - public
     public final boolean isClientSide;
@@ -192,7 +192,7 @@ public abstract class World implements IBlockAccess {
         this.allowAnimals = true;
         this.H = new int['\u8000'];
         this.dataManager = idatamanager;
-        this.methodProfiler = methodprofiler;
+        //this.methodProfiler = methodprofiler; // CloudSpigot
         this.worldData = worlddata;
         this.worldProvider = worldprovider;
         this.isClientSide = flag;
@@ -405,9 +405,9 @@ public abstract class World implements IBlockAccess {
                 Block block1 = iblockdata1.getBlock();
 
                 if (block.p() != block1.p() || block.r() != block1.r()) {
-                    this.methodProfiler.a("checkLight");
+                    //this.methodProfiler.a("checkLight"); // CloudSpigot
                     this.x(blockposition);
-                    this.methodProfiler.b();
+                    //this.methodProfiler.b(); // CloudSpigot
                 }
 
                 /*
@@ -1352,8 +1352,8 @@ public abstract class World implements IBlockAccess {
     public void b(BlockPosition blockposition, Block block, int i, int j) {}
 
     public void tickEntities() {
-        this.methodProfiler.a("entities");
-        this.methodProfiler.a("global");
+        //this.methodProfiler.a("entities"); // CloudSpigot
+        //this.methodProfiler.a("global"); // CloudSpigot
 
         int i;
         Entity entity;
@@ -1388,7 +1388,7 @@ public abstract class World implements IBlockAccess {
             }
         }
 
-        this.methodProfiler.c("remove");
+        //this.methodProfiler.c("remove"); // CloudSpigot
         this.entityList.removeAll(this.g);
 
         int j;
@@ -1409,7 +1409,7 @@ public abstract class World implements IBlockAccess {
         // Paper end
 
         this.g.clear();
-        this.methodProfiler.c("regular");
+        //this.methodProfiler.c("regular"); // CloudSpigot
 
         org.spigotmc.ActivationRange.activateEntities(this); // Spigot
         guardEntityList = true; // Spigot
@@ -1431,7 +1431,7 @@ public abstract class World implements IBlockAccess {
                 entity.vehicle = null;
             }
 
-            this.methodProfiler.a("tick");
+            //this.methodProfiler.a("tick"); // CloudSpigot
             if (!entity.dead) {
                 try {
                     this.g(entity);
@@ -1447,8 +1447,8 @@ public abstract class World implements IBlockAccess {
                 }
             }
 
-            this.methodProfiler.b();
-            this.methodProfiler.a("remove");
+            //this.methodProfiler.b(); // CloudSpigot
+            //this.methodProfiler.a("remove"); // CloudSpigot
             if (entity.dead) {
                 j = entity.ae;
                 k = entity.ag;
@@ -1462,11 +1462,11 @@ public abstract class World implements IBlockAccess {
                 this.b(entity);
             }
 
-            this.methodProfiler.b();
+            //this.methodProfiler.b(); // CloudSpigot
         }
         guardEntityList = false; // Spigot
 
-        this.methodProfiler.c("blockEntities");
+        //this.methodProfiler.c("blockEntities"); // CloudSpigot
         this.M = true;
         // CraftBukkit start - From below, clean up tile entities before ticking them
         if (!this.c.isEmpty()) {
@@ -1529,7 +1529,7 @@ public abstract class World implements IBlockAccess {
         }
         // CraftBukkit end */
 
-        this.methodProfiler.c("pendingBlockEntities");
+        //this.methodProfiler.c("pendingBlockEntities"); // CloudSpigot
         if (!this.b.isEmpty()) {
             for (int l = 0; l < this.b.size(); ++l) {
                 TileEntity tileentity1 = (TileEntity) this.b.get(l);
@@ -1552,8 +1552,8 @@ public abstract class World implements IBlockAccess {
             this.b.clear();
         }
 
-        this.methodProfiler.b();
-        this.methodProfiler.b();
+        //this.methodProfiler.b(); // CloudSpigot
+        //this.methodProfiler.b(); // CloudSpigot
     }
 
     public boolean a(TileEntity tileentity) {
@@ -1621,7 +1621,7 @@ public abstract class World implements IBlockAccess {
                 }
             }
 
-            this.methodProfiler.a("chunkCheck");
+            //this.methodProfiler.a("chunkCheck"); // CloudSpigot
             if (Double.isNaN(entity.locX) || Double.isInfinite(entity.locX)) {
                 entity.locX = entity.P;
             }
@@ -1660,7 +1660,7 @@ public abstract class World implements IBlockAccess {
                 }
             }
 
-            this.methodProfiler.b();
+            //this.methodProfiler.b(); // CloudSpigot
             if (flag && entity.ad && entity.passenger != null) {
                 if (!entity.passenger.dead && entity.passenger.vehicle == entity) {
                     this.g(entity.passenger);
@@ -2159,7 +2159,7 @@ public abstract class World implements IBlockAccess {
 
     protected void D() {
         // this.chunkTickList.clear(); // CraftBukkit - removed
-        this.methodProfiler.a("buildList");
+        //this.methodProfiler.a("buildList"); // CloudSpigot
 
         int i;
         EntityHuman entityhuman;
@@ -2205,12 +2205,12 @@ public abstract class World implements IBlockAccess {
             // Spigot End
         }
 
-        this.methodProfiler.b();
+        //this.methodProfiler.b(); // CloudSpigot
         if (this.L > 0) {
             --this.L;
         }
 
-        this.methodProfiler.a("playerCheckLight");
+        //this.methodProfiler.a("playerCheckLight"); // CloudSpigot
         if (spigotConfig.randomLightUpdates && !this.players.isEmpty()) { // Spigot
             i = this.random.nextInt(this.players.size());
             entityhuman = (EntityHuman) this.players.get(i);
@@ -2220,13 +2220,13 @@ public abstract class World implements IBlockAccess {
             this.x(new BlockPosition(j, k, l));
         }
 
-        this.methodProfiler.b();
+        //this.methodProfiler.b(); // CloudSpigot
     }
 
     protected abstract int q();
 
     protected void a(int i, int j, Chunk chunk) {
-        this.methodProfiler.c("moodSound");
+        //this.methodProfiler.c("moodSound"); // CloudSpigot
         if (!this.cloudSpigotConfig.disableMoodSounds && this.L == 0 && !this.isClientSide) { // CloudSpigot - Disable mood sounds
             this.m = this.m * 3 + 1013904223;
             int k = this.m >> 2;
@@ -2248,7 +2248,7 @@ public abstract class World implements IBlockAccess {
             }
         }
 
-        this.methodProfiler.c("checkLight");
+        //this.methodProfiler.c("checkLight"); // CloudSpigot
         chunk.m();
     }
 
@@ -2387,7 +2387,7 @@ public abstract class World implements IBlockAccess {
             int i = 0;
             int j = 0;
 
-            this.methodProfiler.a("getBrightness");
+            //this.methodProfiler.a("getBrightness"); // CloudSpigot
             int k = this.b(enumskyblock, blockposition);
             int l = this.a(blockposition, enumskyblock);
             int i1 = blockposition.getX();
@@ -2449,8 +2449,8 @@ public abstract class World implements IBlockAccess {
                 i = 0;
             }
 
-            this.methodProfiler.b();
-            this.methodProfiler.a("checkedPosition < toCheckCount");
+            //this.methodProfiler.b(); // CloudSpigot
+            //this.methodProfiler.a("checkedPosition < toCheckCount"); // CloudSpigot
 
             while (i < j) {
                 l1 = this.H[i++];
@@ -2508,7 +2508,7 @@ public abstract class World implements IBlockAccess {
                 }
             }
             // CloudSpigot end
-            this.methodProfiler.b();
+            //this.methodProfiler.b(); // CloudSpigot
             return true;
         }
     }

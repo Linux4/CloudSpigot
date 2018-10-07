@@ -277,7 +277,7 @@ public class Chunk {
     }
 
     private void h(boolean flag) {
-        this.world.methodProfiler.a("recheckGaps");
+        //this.world.methodProfiler.a("recheckGaps"); // CloudSpigot
         if (this.world.areChunksLoaded(new BlockPosition(this.locX * 16 + 8, 0, this.locZ * 16 + 8), 16)) {
             for (int i = 0; i < 16; ++i) {
                 for (int j = 0; j < 16; ++j) {
@@ -304,7 +304,7 @@ public class Chunk {
                         }
 
                         if (flag) {
-                            this.world.methodProfiler.b();
+                            //this.world.methodProfiler.b(); // CloudSpigot
                             return;
                         }
                     }
@@ -314,7 +314,7 @@ public class Chunk {
             this.k = false;
         }
 
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b(); // CloudSpigot
     }
 
     private void c(int i, int j, int k) {
