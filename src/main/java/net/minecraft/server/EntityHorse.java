@@ -18,13 +18,13 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener {
         }
     };
     public static final IAttribute attributeJumpStrength = (new AttributeRanged((IAttribute) null, "horse.jumpStrength", 0.7D, 0.0D, 2.0D)).a("Jump Strength").a(true);
-    private static final String[] bu = new String[] { null, "textures/entity/horse/armor/horse_armor_iron.png", "textures/entity/horse/armor/horse_armor_gold.png", "textures/entity/horse/armor/horse_armor_diamond.png"};
-    private static final String[] bv = new String[] { "", "meo", "goo", "dio"};
+    //private static final String[] bu = new String[] { null, "textures/entity/horse/armor/horse_armor_iron.png", "textures/entity/horse/armor/horse_armor_gold.png", "textures/entity/horse/armor/horse_armor_diamond.png"}; // CloudSpigot
+    //private static final String[] bv = new String[] { "", "meo", "goo", "dio"}; // CloudSpigot
     private static final int[] bw = new int[] { 0, 5, 7, 11};
-    private static final String[] bx = new String[] { "textures/entity/horse/horse_white.png", "textures/entity/horse/horse_creamy.png", "textures/entity/horse/horse_chestnut.png", "textures/entity/horse/horse_brown.png", "textures/entity/horse/horse_black.png", "textures/entity/horse/horse_gray.png", "textures/entity/horse/horse_darkbrown.png"};
-    private static final String[] by = new String[] { "hwh", "hcr", "hch", "hbr", "hbl", "hgr", "hdb"};
-    private static final String[] bz = new String[] { null, "textures/entity/horse/horse_markings_white.png", "textures/entity/horse/horse_markings_whitefield.png", "textures/entity/horse/horse_markings_whitedots.png", "textures/entity/horse/horse_markings_blackdots.png"};
-    private static final String[] bA = new String[] { "", "wo_", "wmo", "wdo", "bdo"};
+    //private static final String[] bx = new String[] { "textures/entity/horse/horse_white.png", "textures/entity/horse/horse_creamy.png", "textures/entity/horse/horse_chestnut.png", "textures/entity/horse/horse_brown.png", "textures/entity/horse/horse_black.png", "textures/entity/horse/horse_gray.png", "textures/entity/horse/horse_darkbrown.png"}; // CloudSpigot
+    //private static final String[] by = new String[] { "hwh", "hcr", "hch", "hbr", "hbl", "hgr", "hdb"}; // CloudSpigot
+    //private static final String[] bz = new String[] { null, "textures/entity/horse/horse_markings_white.png", "textures/entity/horse/horse_markings_whitefield.png", "textures/entity/horse/horse_markings_whitedots.png", "textures/entity/horse/horse_markings_blackdots.png"}; // CloudSpigot
+    //private static final String[] bA = new String[] { "", "wo_", "wmo", "wdo", "bdo"}; // CloudSpigot
     private int bB;
     private int bC;
     private int bD;
@@ -37,15 +37,15 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener {
     protected float br;
     private boolean bG;
     private float bH;
-    private float bI;
+    //private float bI; // CloudSpigot
     private float bJ;
     private float bK;
     private float bL;
-    private float bM;
+    //private float bM; // CloudSpigot
     private int bN;
-    private String bO;
-    private String[] bP = new String[3];
-    private boolean bQ = false;
+    //private String bO; // CloudSpigot
+    //private String[] bP = new String[3]; // CloudSpigot
+    //private boolean bQ = false; // CloudSpigot
     public int maxDomestication = 100; // CraftBukkit - store max domestication value
 
     public EntityHorse(World world) {
@@ -511,7 +511,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener {
     }
 
     private void dc() {
-        this.bO = null;
+        //this.bO = null; // CloudSpigot
     }
 
     public void g(EntityHuman entityhuman) {
@@ -784,7 +784,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener {
             }
         }
 
-        this.bI = this.bH;
+        //this.bI = this.bH; // CloudSpigot
         if (this.cy()) {
             this.bH += (1.0F - this.bH) * 0.4F + 0.05F;
             if (this.bH > 1.0F) {
@@ -799,7 +799,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener {
 
         this.bK = this.bJ;
         if (this.cz()) {
-            this.bI = this.bH = 0.0F;
+            /*this.bI = */this.bH = 0.0F; // CloudSpigot
             this.bJ += (1.0F - this.bJ) * 0.4F + 0.05F;
             if (this.bJ > 1.0F) {
                 this.bJ = 1.0F;
@@ -812,7 +812,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener {
             }
         }
 
-        this.bM = this.bL;
+        //this.bM = this.bL; // CloudSpigot
         if (this.w(128)) {
             this.bL += (1.0F - this.bL) * 0.7F + 0.05F;
             if (this.bL > 1.0F) {

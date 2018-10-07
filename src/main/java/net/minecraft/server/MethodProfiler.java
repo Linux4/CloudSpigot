@@ -1,20 +1,19 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
+//import com.google.common.collect.Lists; // CloudSpigot
+//import com.google.common.collect.Maps; // CloudSpigot
+//import java.util.ArrayList; // CloudSpigot
+//import java.util.Collections; // CloudSpigot
+//import java.util.Iterator; // CloudSpigot
 import java.util.List;
-import java.util.Map;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+//import java.util.Map; // CloudSpigot
+//import org.apache.logging.log4j.LogManager; // CloudSpigot
+//import org.apache.logging.log4j.Logger; // CloudSpigot
 
 // CraftBukkit start - Strip down to empty methods, performance cost
 public class MethodProfiler {
 
     public boolean a;
-    public MethodProfiler() {}
 
     public void a() {
     }
