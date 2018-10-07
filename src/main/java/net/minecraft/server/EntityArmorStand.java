@@ -335,43 +335,41 @@ public class EntityArmorStand extends EntityLiving {
     private void a(EntityHuman entityhuman, int i) {
         ItemStack itemstack = this.items[i];
 
-        if (itemstack == null || (this.bi & 1 << i + 8) == 0) {
-            if (itemstack != null || (this.bi & 1 << i + 16) == 0) {
-                int j = entityhuman.inventory.itemInHandIndex;
-                ItemStack itemstack1 = entityhuman.inventory.getItem(j);
-                ItemStack itemstack2;
+        if ((itemstack == null || (this.bi & 1 << i + 8) == 0) && (itemstack != null || (this.bi & 1 << i + 16) == 0)) {
+            int j = entityhuman.inventory.itemInHandIndex;
+            ItemStack itemstack1 = entityhuman.inventory.getItem(j);
+            ItemStack itemstack2;
 
-                // CraftBukkit start
-                org.bukkit.inventory.ItemStack armorStandItem = CraftItemStack.asCraftMirror(itemstack);
-                org.bukkit.inventory.ItemStack playerHeldItem = CraftItemStack.asCraftMirror(itemstack1);
+            // CraftBukkit start
+            org.bukkit.inventory.ItemStack armorStandItem = CraftItemStack.asCraftMirror(itemstack);
+            org.bukkit.inventory.ItemStack playerHeldItem = CraftItemStack.asCraftMirror(itemstack1);
 
-                Player player = (Player) entityhuman.getBukkitEntity();
-                ArmorStand self = (ArmorStand) this.getBukkitEntity();
+            Player player = (Player) entityhuman.getBukkitEntity();
+            ArmorStand self = (ArmorStand) this.getBukkitEntity();
 
-                EquipmentSlot slot = CraftEquipmentSlot.getSlot(i);
-                PlayerArmorStandManipulateEvent armorStandManipulateEvent = new PlayerArmorStandManipulateEvent(player,self,playerHeldItem,armorStandItem,slot);
-                this.world.getServer().getPluginManager().callEvent(armorStandManipulateEvent);
+            EquipmentSlot slot = CraftEquipmentSlot.getSlot(i);
+            PlayerArmorStandManipulateEvent armorStandManipulateEvent = new PlayerArmorStandManipulateEvent(player,self,playerHeldItem,armorStandItem,slot);
+            this.world.getServer().getPluginManager().callEvent(armorStandManipulateEvent);
 
-                if (armorStandManipulateEvent.isCancelled()) {
-                    return;
-                }
-                // CraftBukkit end
+            if (armorStandManipulateEvent.isCancelled()) {
+                return;
+            }
+            // CraftBukkit end
 
-                if (entityhuman.abilities.canInstantlyBuild && (itemstack == null || itemstack.getItem() == Item.getItemOf(Blocks.AIR)) && itemstack1 != null) {
+            if (entityhuman.abilities.canInstantlyBuild && (itemstack == null || itemstack.getItem() == Item.getItemOf(Blocks.AIR)) && itemstack1 != null) {
+                itemstack2 = itemstack1.cloneItemStack();
+                itemstack2.count = 1;
+                this.setEquipment(i, itemstack2);
+            } else if (itemstack1 != null && itemstack1.count > 1) {
+                if (itemstack == null) {
                     itemstack2 = itemstack1.cloneItemStack();
                     itemstack2.count = 1;
                     this.setEquipment(i, itemstack2);
-                } else if (itemstack1 != null && itemstack1.count > 1) {
-                    if (itemstack == null) {
-                        itemstack2 = itemstack1.cloneItemStack();
-                        itemstack2.count = 1;
-                        this.setEquipment(i, itemstack2);
-                        --itemstack1.count;
-                    }
-                } else {
-                    this.setEquipment(i, itemstack1);
-                    entityhuman.inventory.setItem(j, itemstack);
+                    --itemstack1.count;
                 }
+            } else {
+                this.setEquipment(i, itemstack1);
+                entityhuman.inventory.setItem(j, itemstack);
             }
         }
     }

@@ -81,10 +81,8 @@ public class BlockTripwire extends Block {
     }
 
     public void a(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman) {
-        if (!world.isClientSide) {
-            if (entityhuman.bZ() != null && entityhuman.bZ().getItem() == Items.SHEARS) {
-                world.setTypeAndData(blockposition, iblockdata.set(BlockTripwire.DISARMED, true), 4);
-            }
+        if (!world.isClientSide && entityhuman.bZ() != null && entityhuman.bZ().getItem() == Items.SHEARS) {
+            world.setTypeAndData(blockposition, iblockdata.set(BlockTripwire.DISARMED, true), 4);
 
         }
     }
@@ -121,20 +119,16 @@ public class BlockTripwire extends Block {
     }
 
     public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Entity entity) {
-        if (!world.isClientSide) {
-            if (!((Boolean) iblockdata.get(BlockTripwire.POWERED)).booleanValue()) {
-                this.e(world, blockposition);
-            }
+        if (!world.isClientSide && !iblockdata.get(BlockTripwire.POWERED).booleanValue()) {
+            this.e(world, blockposition);
         }
     }
 
     public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {}
 
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
-        if (!world.isClientSide) {
-            if (((Boolean) world.getType(blockposition).get(BlockTripwire.POWERED)).booleanValue()) {
-                this.e(world, blockposition);
-            }
+        if (!world.isClientSide && world.getType(blockposition).get(BlockTripwire.POWERED).booleanValue()) {
+            this.e(world, blockposition);
         }
     }
 

@@ -96,13 +96,13 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
             try {
                 BlockPressurePlateBinary.SyntheticClass_1.a[BlockPressurePlateBinary.EnumMobType.EVERYTHING.ordinal()] = 1;
             } catch (NoSuchFieldError nosuchfielderror) {
-                ;
+                //;
             }
 
             try {
                 BlockPressurePlateBinary.SyntheticClass_1.a[BlockPressurePlateBinary.EnumMobType.MOBS.ordinal()] = 2;
             } catch (NoSuchFieldError nosuchfielderror1) {
-                ;
+                //;
             }
 
         }
@@ -112,6 +112,6 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
 
         EVERYTHING, MOBS;
 
-        private EnumMobType() {}
+        //private EnumMobType() {} // CloudSpigot
     }
 }

@@ -198,14 +198,14 @@ public class UserCache {
                 }
             }
         } catch (FileNotFoundException filenotfoundexception) {
-            ;
+            //;
         // Spigot Start
         } catch (com.google.gson.JsonSyntaxException ex) {
             JsonList.a.warn( "Usercache.json is corrupted or has bad formatting. Deleting it to prevent further issues." );
             this.g.delete();
         // Spigot End
         } catch (JsonParseException jsonparseexception) {
-            ;
+            //;
         } finally {
             IOUtils.closeQuietly(bufferedreader);
         }
@@ -223,7 +223,7 @@ public class UserCache {
         } catch (FileNotFoundException filenotfoundexception) {
             return;
         } catch (IOException ioexception) {
-            ;
+            //;
         } finally {
             IOUtils.closeQuietly(bufferedwriter);
         }

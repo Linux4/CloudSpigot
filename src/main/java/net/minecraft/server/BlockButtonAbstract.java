@@ -174,27 +174,24 @@ public abstract class BlockButtonAbstract extends Block {
     public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {}
 
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
-        if (!world.isClientSide) {
-            if (((Boolean) iblockdata.get(BlockButtonAbstract.POWERED)).booleanValue()) {
-                if (this.N) {
-                    this.f(world, blockposition, iblockdata);
-                } else {
-                    // CraftBukkit start
-                    org.bukkit.block.Block block = world.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ());
+        if (!world.isClientSide && iblockdata.get(BlockButtonAbstract.POWERED).booleanValue()) { // CloudSpigot
+            if (this.N) {
+                this.f(world, blockposition, iblockdata);
+            } else {
+                // CraftBukkit start
+                org.bukkit.block.Block block = world.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ());
 
-                    BlockRedstoneEvent eventRedstone = new BlockRedstoneEvent(block, 15, 0);
-                    world.getServer().getPluginManager().callEvent(eventRedstone);
+                BlockRedstoneEvent eventRedstone = new BlockRedstoneEvent(block, 15, 0);
+                world.getServer().getPluginManager().callEvent(eventRedstone);
 
-                    if (eventRedstone.getNewCurrent() > 0) {
-                        return;
-                    }
-                    // CraftBukkit end
-                    world.setTypeUpdate(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, false));
-                    this.c(world, blockposition, (EnumDirection) iblockdata.get(BlockButtonAbstract.FACING));
-                    world.makeSound((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D, "random.click", 0.3F, 0.5F);
-                    world.b(blockposition, blockposition);
+                if (eventRedstone.getNewCurrent() > 0) {
+                    return;
                 }
-
+                // CraftBukkit end
+                world.setTypeUpdate(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, false));
+                this.c(world, blockposition, (EnumDirection) iblockdata.get(BlockButtonAbstract.FACING));
+                world.makeSound((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D, "random.click", 0.3F, 0.5F);
+                world.b(blockposition, blockposition);
             }
         }
     }

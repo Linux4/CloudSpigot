@@ -120,7 +120,8 @@ public class BlockSkull extends BlockContainer {
         if (!world.isClientSide) {
             // CraftBukkit start - Drop item in code above, not here
             // if (!((Boolean) iblockdata.get(BlockSkull.NODROP)).booleanValue()) {
-            if (false) {
+            // CloudSpigot start
+            /*if (false) {
                 // CraftBukkit end
                 TileEntity tileentity = world.getTileEntity(blockposition);
 
@@ -138,7 +139,8 @@ public class BlockSkull extends BlockContainer {
 
                     a(world, blockposition, itemstack);
                 }
-            }
+            }*/
+            // CloudSpigot end
 
             super.remove(world, blockposition, iblockdata);
         }
@@ -267,31 +269,31 @@ public class BlockSkull extends BlockContainer {
             try {
                 BlockSkull.SyntheticClass_1.a[EnumDirection.UP.ordinal()] = 1;
             } catch (NoSuchFieldError nosuchfielderror) {
-                ;
+                //;
             }
 
             try {
                 BlockSkull.SyntheticClass_1.a[EnumDirection.NORTH.ordinal()] = 2;
             } catch (NoSuchFieldError nosuchfielderror1) {
-                ;
+                //;
             }
 
             try {
                 BlockSkull.SyntheticClass_1.a[EnumDirection.SOUTH.ordinal()] = 3;
             } catch (NoSuchFieldError nosuchfielderror2) {
-                ;
+                //;
             }
 
             try {
                 BlockSkull.SyntheticClass_1.a[EnumDirection.WEST.ordinal()] = 4;
             } catch (NoSuchFieldError nosuchfielderror3) {
-                ;
+                //;
             }
 
             try {
                 BlockSkull.SyntheticClass_1.a[EnumDirection.EAST.ordinal()] = 5;
             } catch (NoSuchFieldError nosuchfielderror4) {
-                ;
+                //;
             }
 
         }

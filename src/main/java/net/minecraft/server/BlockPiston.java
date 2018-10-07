@@ -278,11 +278,7 @@ public class BlockPiston extends Block {
                     }
 
                     if (block.k() == 1) {
-                        if (!flag) {
-                            return false;
-                        }
-
-                        return true;
+                        return flag; // CloudSpigot
                     }
                 } else if (((Boolean) world.getType(blockposition).get(BlockPiston.EXTENDED)).booleanValue()) {
                     return false;

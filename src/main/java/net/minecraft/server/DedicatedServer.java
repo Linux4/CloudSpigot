@@ -36,7 +36,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
     private RemoteStatusListener m;
     private RemoteControlListener n;
     public PropertyManager propertyManager;
-    private CloudSpigotEULA p; //CloudSpigot
+    //private CloudSpigotEULA p; //CloudSpigot
     private boolean generateStructures;
     private WorldSettings.EnumGamemode r;
     private boolean s;
@@ -142,11 +142,11 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
         if(!eula.exists()) {
             DedicatedServer.LOGGER.info("You automatically agreed to the EULA. Go to eula.txt for more info.");
         }
-        this.p = new CloudSpigotEULA(eula);
+        CloudSpigotEULA p = new CloudSpigotEULA(eula);
         // CloudSpigot End
-        if (!this.p.a()) { // Spigot
+        if (!p.a()) { // Spigot
             DedicatedServer.LOGGER.info("You need to agree to the EULA in order to run the server. Go to eula.txt for more info.");
-            this.p.b();
+            p.b();
             return false;
         } else {
             if (this.T()) {

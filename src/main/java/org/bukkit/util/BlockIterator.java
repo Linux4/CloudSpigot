@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
  */
 public class BlockIterator implements Iterator<Block> {
 
-    private final World world;
+    //private final World world; // CloudSpigot
     private final int maxDistance;
 
     private static final int gridSize = 1 << 24;
@@ -52,7 +52,7 @@ public class BlockIterator implements Iterator<Block> {
      *
      */
     public BlockIterator(World world, Vector start, Vector direction, double yOffset, int maxDistance) {
-        this.world = world;
+        //this.world = world; // CloudSpigot
         this.maxDistance = maxDistance;
 
         Vector startClone = start.clone();
@@ -69,7 +69,7 @@ public class BlockIterator implements Iterator<Block> {
         double secondPosition = 0;
         double thirdPosition = 0;
 
-        Block startBlock = this.world.getBlockAt(floor(startClone.getX()), floor(startClone.getY()), floor(startClone.getZ()));
+        Block startBlock = world.getBlockAt(floor(startClone.getX()), floor(startClone.getY()), floor(startClone.getZ()));
 
         if (getXLength(direction) > mainDirection) {
             mainFace = getXFace(direction);

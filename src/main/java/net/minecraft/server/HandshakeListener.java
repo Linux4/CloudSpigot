@@ -117,13 +117,13 @@ public class HandshakeListener implements PacketHandshakingInListener {
             try {
                 HandshakeListener.SyntheticClass_1.a[EnumProtocol.LOGIN.ordinal()] = 1;
             } catch (NoSuchFieldError nosuchfielderror) {
-                ;
+                //;
             }
 
             try {
                 HandshakeListener.SyntheticClass_1.a[EnumProtocol.STATUS.ordinal()] = 2;
             } catch (NoSuchFieldError nosuchfielderror1) {
-                ;
+               // ;
             }
 
         }

@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 public class EntityWolf extends EntityTameableAnimal {
 
     private float bo;
-    private float bp;
+    //private float bp; // CloudSpigot
     private boolean bq;
     private boolean br;
     private float bs;
@@ -149,7 +149,7 @@ public class EntityWolf extends EntityTameableAnimal {
 
     public void t_() {
         super.t_();
-        this.bp = this.bo;
+        //this.bp = this.bo; // CloudSpigot
         if (this.cx()) {
             this.bo += (1.0F - this.bo) * 0.4F;
         } else {

@@ -576,11 +576,11 @@ public final class SimplePluginManager implements PluginManager {
             throw new IllegalPluginAccessException("Plugin attempted to register " + event + " while not enabled");
         }
 
-        if (false) {
+        /*if (false) {
             getEventListeners(event).register(new TimedRegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
-        } else {
-            getEventListeners(event).register(new RegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
-        }
+        } else {*/
+        getEventListeners(event).register(new RegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
+        //} // CloudSpigot
     }
 
     private HandlerList getEventListeners(Class<? extends Event> type) {

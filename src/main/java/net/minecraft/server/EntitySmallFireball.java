@@ -47,11 +47,9 @@ public class EntitySmallFireball extends EntityFireball {
                 if (flag) {
                     BlockPosition blockposition = movingobjectposition.a().shift(movingobjectposition.direction);
 
-                    if (this.world.isEmpty(blockposition)) {
-                        // CraftBukkit start
-                        if (isIncendiary && !org.bukkit.craftbukkit.event.CraftEventFactory.callBlockIgniteEvent(world, blockposition.getX(), blockposition.getY(), blockposition.getZ(), this).isCancelled()) {
-                            this.world.setTypeUpdate(blockposition, Blocks.FIRE.getBlockData());
-                        }
+                    // CraftBukkit start
+                    if (this.world.isEmpty(blockposition) && isIncendiary && !org.bukkit.craftbukkit.event.CraftEventFactory.callBlockIgniteEvent(world, blockposition.getX(), blockposition.getY(), blockposition.getZ(), this).isCancelled()) {
+                        this.world.setTypeUpdate(blockposition, Blocks.FIRE.getBlockData());
                         // CraftBukkit end
                     }
                 }
