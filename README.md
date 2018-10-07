@@ -1,4 +1,4 @@
-CloudSpigot [![Build Status](https://ci.server24-7.eu/job/CloudSpigot/badge/icon)](https://ci.server24-7.eu/job/CloudSpigot/)
+CloudSpigot [![Build Status](https://ci.server24-7.eu/job/CloudSpigot/badge/icon)](https://ci.server24-7.eu/job/CloudSpigot/) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/dc1145f52ea1431dbceff3b51c164e43)](https://www.codacy.com/app/Server24-7/CloudSpigot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Server24-7/CloudSpigot&amp;utm_campaign=Badge_Grade)  
 ===========
 
 High performance PaperSpigot fork used by Minecraft Server Cloudz.ml.
