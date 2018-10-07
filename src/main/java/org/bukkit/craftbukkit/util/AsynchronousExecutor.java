@@ -28,6 +28,9 @@ import org.apache.commons.lang.Validate;
  */
 public final class AsynchronousExecutor<P, T, C, E extends Throwable> {
 
+    @SuppressWarnings("rawtypes")
+    public static final AtomicIntegerFieldUpdater STATE_FIELD = AtomicIntegerFieldUpdater.newUpdater(AsynchronousExecutor.Task.class, "state");
+
     public static interface CallBackProvider<P, T, C, E extends Throwable> extends ThreadFactory {
 
         /**
@@ -56,26 +59,23 @@ public final class AsynchronousExecutor<P, T, C, E extends Throwable> {
         void callStage3(P parameter, T object, C callback) throws E;
     }
 
-    @SuppressWarnings("rawtypes")
-    static final AtomicIntegerFieldUpdater STATE_FIELD = AtomicIntegerFieldUpdater.newUpdater(AsynchronousExecutor.Task.class, "state");
-
     @SuppressWarnings({ "unchecked", "rawtypes" })
     private static boolean set(AsynchronousExecutor.Task $this, int expected, int value) {
         return STATE_FIELD.compareAndSet($this, expected, value);
     }
 
     class Task implements Runnable {
-        static final int PENDING = 0x0;
-        static final int STAGE_1_ASYNC = PENDING + 1;
-        static final int STAGE_1_SYNC = STAGE_1_ASYNC + 1;
-        static final int STAGE_1_COMPLETE = STAGE_1_SYNC + 1;
-        static final int FINISHED = STAGE_1_COMPLETE + 1;
+        public static final int PENDING = 0x0;
+        public static final int STAGE_1_ASYNC = PENDING + 1;
+        public static final int STAGE_1_SYNC = STAGE_1_ASYNC + 1;
+        public static final int STAGE_1_COMPLETE = STAGE_1_SYNC + 1;
+        public static final int FINISHED = STAGE_1_COMPLETE + 1;
 
-        volatile int state = PENDING;
-        final P parameter;
-        T object;
-        final List<C> callbacks = new LinkedList<C>();
-        E t = null;
+        public volatile int state = PENDING;
+        public final P parameter;
+        public T object;
+        public final List<C> callbacks = new LinkedList<C>();
+        public E t = null;
 
         Task(final P parameter) {
             this.parameter = parameter;
@@ -87,23 +87,19 @@ public final class AsynchronousExecutor<P, T, C, E extends Throwable> {
             }
         }
 
-        boolean initAsync() {
+        public boolean initAsync() {
             if (set(this, PENDING, STAGE_1_ASYNC)) {
                 boolean ret = true;
 
                 try {
                     init();
                 } finally {
-                    if (set(this, STAGE_1_ASYNC, STAGE_1_COMPLETE)) {
-                        // No one is/will be waiting
-                    } else {
+                    if (!set(this, STAGE_1_ASYNC, STAGE_1_COMPLETE)) {
                         // We know that the sync thread will be waiting
                         synchronized (this) {
                             if (state != STAGE_1_SYNC) {
                                 // They beat us to the synchronized block
                                 this.notifyAll();
-                            } else {
-                                // We beat them to the synchronized block
                             }
                             state = STAGE_1_COMPLETE; // They're already synchronized, atomic locks are not needed
                         }
@@ -118,7 +114,7 @@ public final class AsynchronousExecutor<P, T, C, E extends Throwable> {
             }
         }
 
-        void initSync() {
+        public void initSync() {
             if (set(this, PENDING, STAGE_1_COMPLETE)) {
                 // If we succeed that variable switch, good as done
                 init();
@@ -145,7 +141,7 @@ public final class AsynchronousExecutor<P, T, C, E extends Throwable> {
         }
 
         @SuppressWarnings("unchecked")
-        void init() {
+        public void init() {
             try {
                 object = provider.callStage1(parameter);
             } catch (final Throwable t) {
@@ -165,7 +161,7 @@ public final class AsynchronousExecutor<P, T, C, E extends Throwable> {
             return object;
         }
 
-        void finish() throws E {
+        public void finish() throws E {
             switch (state) {
                 default:
                 case PENDING:
@@ -202,7 +198,7 @@ public final class AsynchronousExecutor<P, T, C, E extends Throwable> {
             }
         }
 
-        boolean drop() {
+        public boolean drop() {
             if (set(this, PENDING, FINISHED)) {
                 // If we succeed that variable switch, good as forgotten
                 tasks.remove(parameter);
@@ -214,10 +210,10 @@ public final class AsynchronousExecutor<P, T, C, E extends Throwable> {
         }
     }
 
-    final CallBackProvider<P, T, C, E> provider;
-    final Queue<Task> finished = new ConcurrentLinkedQueue<Task>();
-    final Map<P, Task> tasks = new HashMap<P, Task>();
-    final ThreadPoolExecutor pool;
+    public final CallBackProvider<P, T, C, E> provider;
+    public final Queue<Task> finished = new ConcurrentLinkedQueue<Task>();
+    public final Map<P, Task> tasks = new HashMap<P, Task>();
+    public final ThreadPoolExecutor pool;
 
     /**
      * Uses a thread pool to pass executions to the provider.
