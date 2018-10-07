@@ -22,7 +22,7 @@ public class BlockPiston extends Block {
 
     public BlockPiston(boolean flag) {
         super(Material.PISTON);
-        this.j(this.blockStateList.getBlockData().set(BlockPiston.FACING, EnumDirection.NORTH).set(BlockPiston.EXTENDED, Boolean.valueOf(false)));
+        this.j(this.blockStateList.getBlockData().set(BlockPiston.FACING, EnumDirection.NORTH).set(BlockPiston.EXTENDED, false));
         this.sticky = flag;
         this.a(BlockPiston.i);
         this.c(0.5F);
@@ -56,7 +56,7 @@ public class BlockPiston extends Block {
     }
 
     public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        return this.getBlockData().set(BlockPiston.FACING, a(world, blockposition, entityliving)).set(BlockPiston.EXTENDED, Boolean.valueOf(false));
+        return this.getBlockData().set(BlockPiston.FACING, a(world, blockposition, entityliving)).set(BlockPiston.EXTENDED, false);
     }
 
     private void e(World world, BlockPosition blockposition, IBlockData iblockdata) {
@@ -79,7 +79,7 @@ public class BlockPiston extends Block {
                 }
             }
             // CraftBukkit end
-            world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, Boolean.valueOf(false)), 2);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, false), 2);
             world.playBlockAction(blockposition, this, 1, enumdirection.a());
         }
 
@@ -126,7 +126,7 @@ public class BlockPiston extends Block {
             boolean flag = this.a(world, blockposition, enumdirection);
 
             if (flag && i == 1) {
-                world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, Boolean.valueOf(true)), 2);
+                world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, true), 2);
                 return false;
             }
 
@@ -140,7 +140,7 @@ public class BlockPiston extends Block {
                 return false;
             }
 
-            world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, Boolean.valueOf(true)), 2);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, true), 2);
             world.makeSound((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D, "tile.piston.out", 0.5F, world.random.nextFloat() * 0.25F + 0.6F);
         } else if (i == 1) {
             TileEntity tileentity = world.getTileEntity(blockposition.shift(enumdirection));

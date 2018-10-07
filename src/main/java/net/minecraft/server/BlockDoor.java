@@ -15,7 +15,7 @@ public class BlockDoor extends Block {
 
     protected BlockDoor(Material material) {
         super(material);
-        this.j(this.blockStateList.getBlockData().set(BlockDoor.FACING, EnumDirection.NORTH).set(BlockDoor.OPEN, Boolean.valueOf(false)).set(BlockDoor.HINGE, BlockDoor.EnumDoorHinge.LEFT).set(BlockDoor.POWERED, Boolean.valueOf(false)).set(BlockDoor.HALF, BlockDoor.EnumDoorHalf.LOWER));
+        this.j(this.blockStateList.getBlockData().set(BlockDoor.FACING, EnumDirection.NORTH).set(BlockDoor.OPEN, false).set(BlockDoor.HINGE, BlockDoor.EnumDoorHinge.LEFT).set(BlockDoor.POWERED, false).set(BlockDoor.HALF, BlockDoor.EnumDoorHalf.LOWER));
     }
 
     public String getName() {

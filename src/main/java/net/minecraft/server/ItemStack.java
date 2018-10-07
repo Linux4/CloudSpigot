@@ -699,7 +699,7 @@ public final class ItemStack {
         ChatComponentText chatcomponenttext = new ChatComponentText(this.getName());
 
         if (this.hasName()) {
-            chatcomponenttext.getChatModifier().setItalic(Boolean.valueOf(true));
+            chatcomponenttext.getChatModifier().setItalic(true);
         }
 
         IChatBaseComponent ichatbasecomponent = (new ChatComponentText("[")).addSibling(chatcomponenttext).a("]");

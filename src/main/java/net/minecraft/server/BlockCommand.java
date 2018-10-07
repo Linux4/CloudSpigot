@@ -10,7 +10,7 @@ public class BlockCommand extends BlockContainer {
 
     public BlockCommand() {
         super(Material.ORE, MaterialMapColor.q);
-        this.j(this.blockStateList.getBlockData().set(BlockCommand.TRIGGERED, Boolean.valueOf(false)));
+        this.j(this.blockStateList.getBlockData().set(BlockCommand.TRIGGERED, false));
     }
 
     public TileEntity a(World world, int i) {
@@ -32,10 +32,10 @@ public class BlockCommand extends BlockContainer {
             // CraftBukkit end
 
             if (eventRedstone.getNewCurrent() > 0 && !(eventRedstone.getOldCurrent() > 0)) { // CraftBukkit
-                world.setTypeAndData(blockposition, iblockdata.set(BlockCommand.TRIGGERED, Boolean.valueOf(true)), 4);
+                world.setTypeAndData(blockposition, iblockdata.set(BlockCommand.TRIGGERED, true), 4);
                 world.a(blockposition, (Block) this, this.a(world));
             } else if (eventRedstone.getNewCurrent() <= 0 && eventRedstone.getOldCurrent() > 0) { // CraftBukkit
-                world.setTypeAndData(blockposition, iblockdata.set(BlockCommand.TRIGGERED, Boolean.valueOf(false)), 4);
+                world.setTypeAndData(blockposition, iblockdata.set(BlockCommand.TRIGGERED, false), 4);
             }
         }
 
@@ -115,6 +115,6 @@ public class BlockCommand extends BlockContainer {
     }
 
     public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        return this.getBlockData().set(BlockCommand.TRIGGERED, Boolean.valueOf(false));
+        return this.getBlockData().set(BlockCommand.TRIGGERED, false);
     }
 }

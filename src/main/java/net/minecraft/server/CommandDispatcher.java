@@ -59,7 +59,7 @@ public class CommandDispatcher extends CommandHandler implements ICommandDispatc
         ChatMessage chatmessage = new ChatMessage("chat.type.admin", new Object[] { icommandlistener.getName(), new ChatMessage(s, aobject)});
 
         chatmessage.getChatModifier().setColor(EnumChatFormat.GRAY);
-        chatmessage.getChatModifier().setItalic(Boolean.valueOf(true));
+        chatmessage.getChatModifier().setItalic(true);
         if (flag) {
             Iterator iterator = minecraftserver.getPlayerList().v().iterator();
 

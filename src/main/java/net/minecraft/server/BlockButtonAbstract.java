@@ -16,7 +16,7 @@ public abstract class BlockButtonAbstract extends Block {
 
     protected BlockButtonAbstract(boolean flag) {
         super(Material.ORIENTABLE);
-        this.j(this.blockStateList.getBlockData().set(BlockButtonAbstract.FACING, EnumDirection.NORTH).set(BlockButtonAbstract.POWERED, Boolean.valueOf(false)));
+        this.j(this.blockStateList.getBlockData().set(BlockButtonAbstract.FACING, EnumDirection.NORTH).set(BlockButtonAbstract.POWERED, false));
         this.a(true);
         this.a(CreativeModeTab.d);
         this.N = flag;
@@ -64,7 +64,7 @@ public abstract class BlockButtonAbstract extends Block {
     }
 
     public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        return a(world, blockposition, enumdirection.opposite()) ? this.getBlockData().set(BlockButtonAbstract.FACING, enumdirection).set(BlockButtonAbstract.POWERED, Boolean.valueOf(false)) : this.getBlockData().set(BlockButtonAbstract.FACING, EnumDirection.DOWN).set(BlockButtonAbstract.POWERED, Boolean.valueOf(false));
+        return a(world, blockposition, enumdirection.opposite()) ? this.getBlockData().set(BlockButtonAbstract.FACING, enumdirection).set(BlockButtonAbstract.POWERED, false) : this.getBlockData().set(BlockButtonAbstract.FACING, EnumDirection.DOWN).set(BlockButtonAbstract.POWERED, false);
     }
 
     public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
@@ -142,7 +142,7 @@ public abstract class BlockButtonAbstract extends Block {
                 return true;
             }
             // CraftBukkit end
-            world.setTypeAndData(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, Boolean.valueOf(true)), 3);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, true), 3);
             world.b(blockposition, blockposition);
             world.makeSound((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D, "random.click", 0.3F, 0.6F);
             this.c(world, blockposition, (EnumDirection) iblockdata.get(BlockButtonAbstract.FACING));
@@ -189,7 +189,7 @@ public abstract class BlockButtonAbstract extends Block {
                         return;
                     }
                     // CraftBukkit end
-                    world.setTypeUpdate(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, Boolean.valueOf(false)));
+                    world.setTypeUpdate(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, false));
                     this.c(world, blockposition, (EnumDirection) iblockdata.get(BlockButtonAbstract.FACING));
                     world.makeSound((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D, "random.click", 0.3F, 0.5F);
                     world.b(blockposition, blockposition);
@@ -258,7 +258,7 @@ public abstract class BlockButtonAbstract extends Block {
                 return;
             }
             // CraftBukkit end
-            world.setTypeUpdate(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, Boolean.valueOf(true)));
+            world.setTypeUpdate(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, true));
             this.c(world, blockposition, (EnumDirection) iblockdata.get(BlockButtonAbstract.FACING));
             world.b(blockposition, blockposition);
             world.makeSound((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D, "random.click", 0.3F, 0.6F);
@@ -275,7 +275,7 @@ public abstract class BlockButtonAbstract extends Block {
                 return;
             }
             // CraftBukkit end
-            world.setTypeUpdate(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, Boolean.valueOf(false)));
+            world.setTypeUpdate(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, false));
             this.c(world, blockposition, (EnumDirection) iblockdata.get(BlockButtonAbstract.FACING));
             world.b(blockposition, blockposition);
             world.makeSound((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D, "random.click", 0.3F, 0.5F);
@@ -321,7 +321,7 @@ public abstract class BlockButtonAbstract extends Block {
             enumdirection = EnumDirection.UP;
         }
 
-        return this.getBlockData().set(BlockButtonAbstract.FACING, enumdirection).set(BlockButtonAbstract.POWERED, Boolean.valueOf((i & 8) > 0));
+        return this.getBlockData().set(BlockButtonAbstract.FACING, enumdirection).set(BlockButtonAbstract.POWERED, (i & 8) > 0);
     }
 
     public int toLegacyData(IBlockData iblockdata) {

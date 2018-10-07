@@ -257,10 +257,10 @@ public class WorldGenRegistration {
                 this.a(world, structureboundingbox, 7, -2, 1, 9, -2, 1, false, random, WorldGenRegistration.WorldGenJungleTemple.k);
                 this.a(world, structureboundingbox, 6, -3, 1, 6, -3, 1, false, random, WorldGenRegistration.WorldGenJungleTemple.k);
                 this.a(world, structureboundingbox, 6, -1, 1, 6, -1, 1, false, random, WorldGenRegistration.WorldGenJungleTemple.k);
-                this.a(world, Blocks.TRIPWIRE_HOOK.fromLegacyData(this.a(Blocks.TRIPWIRE_HOOK, EnumDirection.EAST.b())).set(BlockTripwireHook.ATTACHED, Boolean.valueOf(true)), 1, -3, 8, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE_HOOK.fromLegacyData(this.a(Blocks.TRIPWIRE_HOOK, EnumDirection.WEST.b())).set(BlockTripwireHook.ATTACHED, Boolean.valueOf(true)), 4, -3, 8, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, Boolean.valueOf(true)), 2, -3, 8, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, Boolean.valueOf(true)), 3, -3, 8, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE_HOOK.fromLegacyData(this.a(Blocks.TRIPWIRE_HOOK, EnumDirection.EAST.b())).set(BlockTripwireHook.ATTACHED, true), 1, -3, 8, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE_HOOK.fromLegacyData(this.a(Blocks.TRIPWIRE_HOOK, EnumDirection.WEST.b())).set(BlockTripwireHook.ATTACHED, true), 4, -3, 8, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, true), 2, -3, 8, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, true), 3, -3, 8, structureboundingbox);
                 this.a(world, Blocks.REDSTONE_WIRE.getBlockData(), 5, -3, 7, structureboundingbox);
                 this.a(world, Blocks.REDSTONE_WIRE.getBlockData(), 5, -3, 6, structureboundingbox);
                 this.a(world, Blocks.REDSTONE_WIRE.getBlockData(), 5, -3, 5, structureboundingbox);
@@ -275,11 +275,11 @@ public class WorldGenRegistration {
                 }
 
                 this.a(world, Blocks.VINE.fromLegacyData(15), 3, -2, 2, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE_HOOK.fromLegacyData(this.a(Blocks.TRIPWIRE_HOOK, EnumDirection.NORTH.b())).set(BlockTripwireHook.ATTACHED, Boolean.valueOf(true)), 7, -3, 1, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE_HOOK.fromLegacyData(this.a(Blocks.TRIPWIRE_HOOK, EnumDirection.SOUTH.b())).set(BlockTripwireHook.ATTACHED, Boolean.valueOf(true)), 7, -3, 5, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, Boolean.valueOf(true)), 7, -3, 2, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, Boolean.valueOf(true)), 7, -3, 3, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, Boolean.valueOf(true)), 7, -3, 4, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE_HOOK.fromLegacyData(this.a(Blocks.TRIPWIRE_HOOK, EnumDirection.NORTH.b())).set(BlockTripwireHook.ATTACHED, true), 7, -3, 1, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE_HOOK.fromLegacyData(this.a(Blocks.TRIPWIRE_HOOK, EnumDirection.SOUTH.b())).set(BlockTripwireHook.ATTACHED, true), 7, -3, 5, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, true), 7, -3, 2, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, true), 7, -3, 3, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, true), 7, -3, 4, structureboundingbox);
                 this.a(world, Blocks.REDSTONE_WIRE.getBlockData(), 8, -3, 6, structureboundingbox);
                 this.a(world, Blocks.REDSTONE_WIRE.getBlockData(), 9, -3, 6, structureboundingbox);
                 this.a(world, Blocks.REDSTONE_WIRE.getBlockData(), 9, -3, 5, structureboundingbox);

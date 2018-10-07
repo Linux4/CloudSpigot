@@ -16,7 +16,7 @@ public class BlockVine extends Block {
 
     public BlockVine() {
         super(Material.REPLACEABLE_PLANT);
-        this.j(this.blockStateList.getBlockData().set(BlockVine.UP, Boolean.valueOf(false)).set(BlockVine.NORTH, Boolean.valueOf(false)).set(BlockVine.EAST, Boolean.valueOf(false)).set(BlockVine.SOUTH, Boolean.valueOf(false)).set(BlockVine.WEST, Boolean.valueOf(false)));
+        this.j(this.blockStateList.getBlockData().set(BlockVine.UP, false).set(BlockVine.NORTH, false).set(BlockVine.EAST, false).set(BlockVine.SOUTH, false).set(BlockVine.WEST, false));
         this.a(true);
         this.a(CreativeModeTab.c);
     }
@@ -139,7 +139,7 @@ public class BlockVine extends Block {
                 IBlockData iblockdata2 = world.getType(blockposition.up());
 
                 if (iblockdata2.getBlock() != this || !((Boolean) iblockdata2.get(blockstateboolean)).booleanValue()) {
-                    iblockdata = iblockdata.set(blockstateboolean, Boolean.valueOf(false));
+                    iblockdata = iblockdata.set(blockstateboolean, false);
                 }
             }
         }
@@ -197,7 +197,7 @@ public class BlockVine extends Block {
                         while (iterator.hasNext()) {
                             enumdirection1 = (EnumDirection) iterator.next();
                             if (random.nextBoolean() || !this.c(world.getType(blockposition1.shift(enumdirection1)).getBlock())) {
-                                iblockdata1 = iblockdata1.set(getDirection(enumdirection1), Boolean.valueOf(false));
+                                iblockdata1 = iblockdata1.set(getDirection(enumdirection1), false);
                             }
                         }
 
@@ -233,26 +233,26 @@ public class BlockVine extends Block {
                                 org.bukkit.block.Block bukkitBlock = world.getWorld().getBlockAt(blockposition2.getX(), blockposition2.getY(), blockposition2.getZ());
 
                                 if (flag1 && this.c(world.getType(blockposition3).getBlock())) {
-                                    // world.setTypeAndData(blockposition2, this.getBlockData().set(a(enumdirection1), Boolean.valueOf(true)), 2);
-                                    CraftEventFactory.handleBlockSpreadEvent(bukkitBlock, source, this, toLegacyData(this.getBlockData().set(getDirection(enumdirection1), Boolean.valueOf(true))));
+                                    // world.setTypeAndData(blockposition2, this.getBlockData().set(a(enumdirection1), true), 2);
+                                    CraftEventFactory.handleBlockSpreadEvent(bukkitBlock, source, this, toLegacyData(this.getBlockData().set(getDirection(enumdirection1), true)));
                                 } else if (flag2 && this.c(world.getType(blockposition4).getBlock())) {
-                                    // world.setTypeAndData(blockposition2, this.getBlockData().set(a(enumdirection2), Boolean.valueOf(true)), 2);
-                                    CraftEventFactory.handleBlockSpreadEvent(bukkitBlock, source, this, toLegacyData(this.getBlockData().set(getDirection(enumdirection2), Boolean.valueOf(true))));
+                                    // world.setTypeAndData(blockposition2, this.getBlockData().set(a(enumdirection2), true), 2);
+                                    CraftEventFactory.handleBlockSpreadEvent(bukkitBlock, source, this, toLegacyData(this.getBlockData().set(getDirection(enumdirection2), true)));
                                 } else if (flag1 && world.isEmpty(blockposition3) && this.c(world.getType(blockposition.shift(enumdirection1)).getBlock())) {
-                                    // world.setTypeAndData(blockposition3, this.getBlockData().set(a(enumdirection.opposite()), Boolean.valueOf(true)), 2);
+                                    // world.setTypeAndData(blockposition3, this.getBlockData().set(a(enumdirection.opposite()), true), 2);
                                     bukkitBlock = world.getWorld().getBlockAt(blockposition3.getX(), blockposition3.getY(), blockposition3.getZ());
-                                    CraftEventFactory.handleBlockSpreadEvent(bukkitBlock, source, this, toLegacyData(this.getBlockData().set(getDirection(enumdirection.opposite()), Boolean.valueOf(true))));
+                                    CraftEventFactory.handleBlockSpreadEvent(bukkitBlock, source, this, toLegacyData(this.getBlockData().set(getDirection(enumdirection.opposite()), true)));
                                 } else if (flag2 && world.isEmpty(blockposition4) && this.c(world.getType(blockposition.shift(enumdirection2)).getBlock())) {
-                                    // world.setTypeAndData(blockposition4, this.getBlockData().set(a(enumdirection.opposite()), Boolean.valueOf(true)), 2);
+                                    // world.setTypeAndData(blockposition4, this.getBlockData().set(a(enumdirection.opposite()), true), 2);
                                     bukkitBlock = world.getWorld().getBlockAt(blockposition4.getX(), blockposition4.getY(), blockposition4.getZ());
-                                    CraftEventFactory.handleBlockSpreadEvent(bukkitBlock, source, this, toLegacyData(this.getBlockData().set(getDirection(enumdirection.opposite()), Boolean.valueOf(true))));
+                                    CraftEventFactory.handleBlockSpreadEvent(bukkitBlock, source, this, toLegacyData(this.getBlockData().set(getDirection(enumdirection.opposite()), true)));
                                 } else if (this.c(world.getType(blockposition2.up()).getBlock())) {
                                     // world.setTypeAndData(blockposition2, this.getBlockData(), 2);
                                     CraftEventFactory.handleBlockSpreadEvent(bukkitBlock, source, this, toLegacyData(this.getBlockData()));
                                 }
                                 // CraftBukkit end
                             } else if (block.material.k() && block.d()) {
-                                world.setTypeAndData(blockposition, iblockdata.set(getDirection(enumdirection), Boolean.valueOf(true)), 2);
+                                world.setTypeAndData(blockposition, iblockdata.set(getDirection(enumdirection), true), 2);
                             }
 
                         }
@@ -272,7 +272,7 @@ public class BlockVine extends Block {
                                 while (iterator1.hasNext()) {
                                     enumdirection3 = (EnumDirection) iterator1.next();
                                     if (random.nextBoolean()) {
-                                        iblockdata3 = iblockdata3.set(getDirection(enumdirection3), Boolean.valueOf(false));
+                                        iblockdata3 = iblockdata3.set(getDirection(enumdirection3), false);
                                     }
                                 }
 
@@ -293,7 +293,7 @@ public class BlockVine extends Block {
                                     BlockStateBoolean blockstateboolean = getDirection(enumdirection3);
 
                                     if (random.nextBoolean() && ((Boolean) iblockdata.get(blockstateboolean)).booleanValue()) {
-                                        iblockdata3 = iblockdata3.set(blockstateboolean, Boolean.valueOf(true));
+                                        iblockdata3 = iblockdata3.set(blockstateboolean, true);
                                     }
                                 }
 
@@ -310,9 +310,9 @@ public class BlockVine extends Block {
     }
 
     public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        IBlockData iblockdata = this.getBlockData().set(BlockVine.UP, Boolean.valueOf(false)).set(BlockVine.NORTH, Boolean.valueOf(false)).set(BlockVine.EAST, Boolean.valueOf(false)).set(BlockVine.SOUTH, Boolean.valueOf(false)).set(BlockVine.WEST, Boolean.valueOf(false));
+        IBlockData iblockdata = this.getBlockData().set(BlockVine.UP, false).set(BlockVine.NORTH, false).set(BlockVine.EAST, false).set(BlockVine.SOUTH, false).set(BlockVine.WEST, false);
 
-        return enumdirection.k().c() ? iblockdata.set(getDirection(enumdirection.opposite()), Boolean.valueOf(true)) : iblockdata;
+        return enumdirection.k().c() ? iblockdata.set(getDirection(enumdirection.opposite()), true) : iblockdata;
     }
 
     public Item getDropType(IBlockData iblockdata, Random random, int i) {
