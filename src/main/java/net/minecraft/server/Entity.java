@@ -37,14 +37,6 @@ import org.spigotmc.event.entity.EntityDismountEvent;
 
 public abstract class Entity implements ICommandListener {
 
-    // CraftBukkit start
-    private static final int CURRENT_LEVEL = 2;
-    public static Random SHARED_RANDOM = new Random(); // CloudSpigot
-    static boolean isLevelAtLeast(NBTTagCompound tag, int level) {
-        return tag.hasKey("Bukkit.updateLevel") && tag.getInt("Bukkit.updateLevel") >= level;
-    }
-    // CraftBukikt end
-
     private static final AxisAlignedBB a = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
     private static int entityCount;
     private int id;
@@ -101,18 +93,7 @@ public abstract class Entity implements ICommandListener {
     private double ar;
     private double as;
     public boolean ad;
-    // CloudSpigot start - EAR: Fix bug with teleporting entities
-    public boolean isAddedToChunk() {
-        int chunkX = MathHelper.floor(locX / 16.0D);
-        int chunkY = MathHelper.floor(locY / 16.0D);
-        int chunkZ = MathHelper.floor(locZ / 16.0D);
 
-        return ad && getChunkX() == chunkX && getChunkY() == chunkY || getChunkZ() == chunkZ;
-    }
-    public int ae; public int getChunkX() { return ae; } // PAIL
-    public int af; public int getChunkY() { return af; } // PAIL
-    public int ag; public int getChunkZ() { return ag; } // PAIL
-    // CloudSpigot end
     public boolean ah;
     public boolean ai;
     public int portalCooldown;
@@ -130,6 +111,12 @@ public abstract class Entity implements ICommandListener {
     public boolean forceExplosionKnockback; // CraftBukkit - SPIGOT-949
     public boolean inUnloadedChunk = false; // CloudSpigot - Remove entities in unloaded chunks
     public boolean loadChunks = false; // CloudSpigot - Entities can load chunks they move through and keep them loaded
+    
+    // CloudSpigot start
+    public int ae; public int getChunkX() { return ae; } // PAIL
+    public int af; public int getChunkY() { return af; } // PAIL
+    public int ag; public int getChunkZ() { return ag; } // PAIL
+    // CloudSpigot end
 
     // Spigot start
     public final byte activationType = org.spigotmc.ActivationRange.initializeEntityActivationType(this);
@@ -138,6 +125,23 @@ public abstract class Entity implements ICommandListener {
     public boolean fromMobSpawner;
     public void inactiveTick() { }
     // Spigot end
+
+    // CraftBukkit start
+    private static final int CURRENT_LEVEL = 2;
+    public static Random SHARED_RANDOM = new Random(); // CloudSpigot
+    public static boolean isLevelAtLeast(NBTTagCompound tag, int level) {
+        return tag.hasKey("Bukkit.updateLevel") && tag.getInt("Bukkit.updateLevel") >= level;
+    }
+    // CraftBukikt end
+    // CloudSpigot start - EAR: Fix bug with teleporting entities
+    public boolean isAddedToChunk() {
+        int chunkX = MathHelper.floor(locX / 16.0D);
+        int chunkY = MathHelper.floor(locY / 16.0D);
+        int chunkZ = MathHelper.floor(locZ / 16.0D);
+
+        return ad && getChunkX() == chunkX && getChunkY() == chunkY || getChunkZ() == chunkZ;
+    }
+    // CloudSpigot end
 
     public int getId() {
         return this.id;

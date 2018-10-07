@@ -73,7 +73,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
     private int e;
     private int f;
     private int g;
-    private boolean h;
+    //private boolean h; // CloudSpigot
     private int i;
     private long j;
     private long k;
@@ -89,19 +89,9 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
     private boolean checkMovement = true;
     private boolean processedDisconnect; // CraftBukkit - added
 
-    public PlayerConnection(MinecraftServer minecraftserver, NetworkManager networkmanager, EntityPlayer entityplayer) {
-        this.minecraftServer = minecraftserver;
-        this.networkManager = networkmanager;
-        networkmanager.a((PacketListener) this);
-        this.player = entityplayer;
-        entityplayer.playerConnection = this;
-
-        // CraftBukkit start - add fields and methods
-        this.server = minecraftserver.server;
-    }
-
+    // CraftBukkit start - add fields
     private final org.bukkit.craftbukkit.CraftServer server;
-    private int lastTick = MinecraftServer.currentTick;
+    //private int lastTick = MinecraftServer.currentTick; // CloudSpigot
     private int lastDropTick = MinecraftServer.currentTick;
     private int dropCount = 0;
     private static final int SURVIVAL_PLACE_DISTANCE_SQUARED = 6 * 6;
@@ -115,15 +105,27 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
     private float lastYaw = Float.MAX_VALUE;
     private boolean justTeleported = false;
     private boolean hasMoved; // Spigot
+    private final static HashSet<Integer> invalidItems = new HashSet<Integer>(java.util.Arrays.asList(8, 9, 10, 11, 26, 34, 36, 43, 51, 52, 55, 59, 60, 62, 63, 64, 68, 71, 74, 75, 83, 90, 92, 93, 94, 104, 105, 115, 117, 118, 119, 125, 127, 132, 140, 141, 142, 144)); // TODO: Check after every update.
+    // CraftBukkit end
+
+    public PlayerConnection(MinecraftServer minecraftserver, NetworkManager networkmanager, EntityPlayer entityplayer) {
+        this.minecraftServer = minecraftserver;
+        this.networkManager = networkmanager;
+        networkmanager.a((PacketListener) this);
+        this.player = entityplayer;
+        entityplayer.playerConnection = this;
+
+        // CraftBukkit start - add fields and methods
+        this.server = minecraftserver.server;
+    }
 
     public CraftPlayer getPlayer() {
         return (this.player == null) ? null : (CraftPlayer) this.player.getBukkitEntity();
     }
-    private final static HashSet<Integer> invalidItems = new HashSet<Integer>(java.util.Arrays.asList(8, 9, 10, 11, 26, 34, 36, 43, 51, 52, 55, 59, 60, 62, 63, 64, 68, 71, 74, 75, 83, 90, 92, 93, 94, 104, 105, 115, 117, 118, 119, 125, 127, 132, 140, 141, 142, 144)); // TODO: Check after every update.
     // CraftBukkit end
 
     public void c() {
-        this.h = false;
+        //this.h = false; // CloudSpigot 
         ++this.e;
         this.minecraftServer.methodProfiler.a("keepAlive");
         if ((long) this.e - this.k > 40L) {
@@ -208,7 +210,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
         } else {
             WorldServer worldserver = this.minecraftServer.getWorldServer(this.player.dimension);
 
-            this.h = true;
+            //this.h = true; // CloudSpigot
             if (!this.player.viewingCredits) {
                 double d0 = this.player.locX;
                 double d1 = this.player.locY;
@@ -266,7 +268,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
                     this.lastPitch = to.getPitch();
 
                     // Skip the first time we do this
-                    if (true) { // Spigot - don't skip any move events
+                    //if (true) { // Spigot - don't skip any move events // CloudSpigot
                         Location oldTo = to.clone();
                         PlayerMoveEvent event = new PlayerMoveEvent(player, from, to);
                         this.server.getPluginManager().callEvent(event);
@@ -291,7 +293,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
                             this.justTeleported = false;
                             return;
                         }
-                    }
+                    //} // CloudSpigot
                 }
 
                 if (this.checkMovement && !this.player.dead) {
@@ -664,7 +666,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
         WorldServer worldserver = this.minecraftServer.getWorldServer(this.player.dimension);
         boolean throttled = false;
         // CloudSpigot - Allow disabling the player interaction limiter
-        if (eu.server24_7.cloudspigot.CloudSpigotConfig.interactLimitEnabled && lastPlace != -1 && packetplayinblockplace.timestamp - lastPlace < 30 && packets++ >= 4) {
+        if (CloudSpigotConfig.interactLimitEnabled && lastPlace != -1 && packetplayinblockplace.timestamp - lastPlace < 30 && packets++ >= 4) {
             throttled = true;
         } else if ( packetplayinblockplace.timestamp - lastPlace >= 30 || lastPlace == -1 )
         {
@@ -795,8 +797,8 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
         PlayerConnectionUtils.ensureMainThread(packetplayinspectate, this, this.player.u());
         if (this.player.isSpectator()) {
             Entity entity = null;
-            WorldServer[] aworldserver = this.minecraftServer.worldServer;
-            int i = aworldserver.length;
+            //WorldServer[] aworldserver = this.minecraftServer.worldServer; // CloudSpigot
+            //int i = aworldserver.length; // CloudSpigot
 
             // CraftBukkit - use the worlds array list
             for (WorldServer worldserver : minecraftServer.worlds) {
@@ -1021,14 +1023,14 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 
                 chatmessage.getChatModifier().setColor(EnumChatFormat.RED);
                 this.sendPacket(new PacketPlayOutChat(chatmessage));
-            } else if (true) {
+            } else /*if (true)*/ { // CloudSpigot
                 this.chat(s, true);
                 // CraftBukkit end - the below is for reference. :)
-            } else {
+            }/* else {
                 ChatMessage chatmessage1 = new ChatMessage("chat.type.text", new Object[] { this.player.getScoreboardDisplayName(), s});
 
                 this.minecraftServer.getPlayerList().sendMessage(chatmessage1, false);
-            }
+            }*/ // CloudSpigot
 
             // Spigot start - spam exclusions
             boolean counted = true;
