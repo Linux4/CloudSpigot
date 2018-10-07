@@ -108,13 +108,13 @@ public class ContainerAnvil extends Container {
     }
 
     public void e() {
-        boolean flag = false;
+        /*boolean flag = false;
         boolean flag1 = true;
         boolean flag2 = true;
         boolean flag3 = true;
         boolean flag4 = true;
         boolean flag5 = true;
-        boolean flag6 = true;
+        boolean flag6 = true;*/ // CloudSpigot
         ItemStack itemstack = this.h.getItem(0);
 
         this.a = 1;

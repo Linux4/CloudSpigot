@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CommandGamerule extends CommandAbstract {
 
-    public CommandGamerule() {}
+    //public CommandGamerule() {} // CloudSpigot
 
     public String getCommand() {
         return "gamerule";

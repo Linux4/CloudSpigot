@@ -34,7 +34,7 @@ public class BlockCommand extends BlockContainer {
             if (eventRedstone.getNewCurrent() > 0 && !(eventRedstone.getOldCurrent() > 0)) { // CraftBukkit
                 world.setTypeAndData(blockposition, iblockdata.set(BlockCommand.TRIGGERED, Boolean.valueOf(true)), 4);
                 world.a(blockposition, (Block) this, this.a(world));
-            } else if (!(eventRedstone.getNewCurrent() > 0) && eventRedstone.getOldCurrent() > 0) { // CraftBukkit
+            } else if (eventRedstone.getNewCurrent() <= 0 && eventRedstone.getOldCurrent() > 0) { // CraftBukkit
                 world.setTypeAndData(blockposition, iblockdata.set(BlockCommand.TRIGGERED, Boolean.valueOf(false)), 4);
             }
         }

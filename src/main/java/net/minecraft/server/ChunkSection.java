@@ -8,7 +8,7 @@ public class ChunkSection {
     private char[] blockIds;
     private NibbleArray emittedLight;
     private NibbleArray skyLight;
-    boolean isDirty; // CloudSpigot
+    public boolean isDirty; // CloudSpigot
 
     public ChunkSection(int i, boolean flag) {
         this.yPos = i;

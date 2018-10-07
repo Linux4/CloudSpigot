@@ -389,12 +389,10 @@ public class EntityEnderman extends EntityMonster {
             Block block = world.getType(blockposition).getBlock();
             Block block1 = world.getType(blockposition.down()).getBlock();
 
-            if (this.a(world, blockposition, this.a.getCarried().getBlock(), block, block1)) {
-                // CraftBukkit start - Place event
-                if (!org.bukkit.craftbukkit.event.CraftEventFactory.callEntityChangeBlockEvent(this.a, blockposition.getX(), blockposition.getY(), blockposition.getZ(), this.a.getCarried().getBlock(), this.a.getCarried().getBlock().toLegacyData(this.a.getCarried())).isCancelled()) {
+            // CraftBukkit start - Place event
+            if (this.a(world, blockposition, this.a.getCarried().getBlock(), block, block1) && !org.bukkit.craftbukkit.event.CraftEventFactory.callEntityChangeBlockEvent(this.a, blockposition.getX(), blockposition.getY(), blockposition.getZ(), this.a.getCarried().getBlock(), this.a.getCarried().getBlock().toLegacyData(this.a.getCarried())).isCancelled()) {
                 world.setTypeAndData(blockposition, this.a.getCarried(), 3);
                 this.a.setCarried(Blocks.AIR.getBlockData());
-                }
                 // CraftBukkit end
             }
 
