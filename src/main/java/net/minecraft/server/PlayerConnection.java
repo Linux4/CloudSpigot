@@ -3,7 +3,7 @@ package net.minecraft.server;
 import com.google.common.collect.Lists;
 import com.google.common.primitives.Doubles;
 import com.google.common.primitives.Floats;
-import com.google.common.util.concurrent.Futures;
+//import com.google.common.util.concurrent.Futures; // CloudSpigot
 import io.netty.buffer.Unpooled;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
@@ -1104,9 +1104,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
             }
             // CloudSpigot End
             this.handleCommand(s);
-        } else if (this.player.getChatFlags() == EntityHuman.EnumChatVisibility.SYSTEM) {
-            // Do nothing, this is coming from a plugin
-        } else {
+        } else if (this.player.getChatFlags() != EntityHuman.EnumChatVisibility.SYSTEM) {
             Player player = this.getPlayer();
             AsyncPlayerChatEvent event = new AsyncPlayerChatEvent(async, player, s, new LazyPlayerSet());
             this.server.getPluginManager().callEvent(event);
@@ -1442,7 +1440,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
         this.player.resetIdleTimer();
         if (this.player.activeContainer.windowId == packetplayinwindowclick.a() && this.player.activeContainer.c(this.player)) {
             boolean cancelled = this.player.isSpectator(); // CraftBukkit - see below if
-            if (false) { // this.player.isSpectator()) {
+            /*if (false) { // this.player.isSpectator()) {
                 ArrayList arraylist = Lists.newArrayList();
 
                 for (int i = 0; i < this.player.activeContainer.c.size(); ++i) {
@@ -1450,7 +1448,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
                 }
 
                 this.player.a(this.player.activeContainer, (List) arraylist);
-            } else {
+            } else {*/ // CloudSpigot
                 // ItemStack itemstack = this.player.activeContainer.clickItem(packetplayinwindowclick.b(), packetplayinwindowclick.c(), packetplayinwindowclick.f(), this.player);
                 // CraftBukkit start - Call InventoryClickEvent
                 if (packetplayinwindowclick.b() < -1 && packetplayinwindowclick.b() != -999) {
@@ -1511,13 +1509,9 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
                                         } else if (cursor.count <= slot.getMaxStackSize()) {
                                             action = InventoryAction.SWAP_WITH_CURSOR;
                                         }
-                                    } else if (cursor.getItem() == clickedItem.getItem() && (!cursor.usesData() || cursor.getData() == clickedItem.getData()) && ItemStack.equals(cursor, clickedItem)) {
-                                        if (clickedItem.count >= 0) {
-                                            if (clickedItem.count + cursor.count <= cursor.getMaxStackSize()) {
-                                                // As of 1.5, this is result slots only
-                                                action = InventoryAction.PICKUP_ALL;
-                                            }
-                                        }
+                                    } else if (cursor.getItem() == clickedItem.getItem() && (!cursor.usesData() || cursor.getData() == clickedItem.getData()) && ItemStack.equals(cursor, clickedItem) && clickedItem.count >= 0 && clickedItem.count + cursor.count <= cursor.getMaxStackSize()) { // CloudSpigot
+                                        // As of 1.5, this is result slots only
+                                        action = InventoryAction.PICKUP_ALL;
                                     }
                                 }
                             }
@@ -1747,7 +1741,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 
                     this.player.a(this.player.activeContainer, (List) arraylist1);
                 }
-            }
+            //}
         }
 
     }
