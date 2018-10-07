@@ -46,13 +46,13 @@ import joptsimple.OptionSet;
 import org.bukkit.craftbukkit.Main;
 // CraftBukkit end
 
-public abstract class MinecraftServer implements Runnable, ICommandListener, IAsyncTaskHandler, IMojangStatistics {
+public abstract class MinecraftServer implements Runnable, ICommandListener, IAsyncTaskHandler/*, IMojangStatistics*/ { // CloudSpigot
 
     public static final Logger LOGGER = LogManager.getLogger();
     public static final File a = new File("usercache.json");
     private static MinecraftServer l;
     public Convertable convertable;
-    private final MojangStatisticsGenerator n = new MojangStatisticsGenerator("server", this, az());
+    //private final MojangStatisticsGenerator n = new MojangStatisticsGenerator("server", this, az());
     public File universe;
     private final List<IUpdatePlayerListBox> p = Lists.newArrayList();
     protected final ICommandHandler b;
@@ -493,9 +493,11 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
                 // CraftBukkit end */
             }
 
-            if (this.n.d()) {
+            // CloudSpigot start - disable MojangStatisticsGenerator
+            /*if (this.n.d()) {
                 this.n.e();
-            }
+            }*/
+            // CloudSpigot end
             // Spigot start
             if( org.spigotmc.SpigotConfig.saveUserCacheOnStopOnly )
             {
@@ -706,11 +708,11 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         ++this.ticks;
         if (this.T) {
             this.T = false;
-            this.methodProfiler.a = true;
-            this.methodProfiler.a();
+            /*this.methodProfiler.a = true;
+            this.methodProfiler.a();*/ // CloudSpigot
         }
 
-        this.methodProfiler.a("root");
+        //this.methodProfiler.a("root"); // CloudSpigot
         this.B();
         if (i - this.X >= 5000000000L) {
             this.X = i;
@@ -727,7 +729,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         }
 
         if (autosavePeriod > 0 && this.ticks % autosavePeriod == 0) { // CraftBukkit
-            this.methodProfiler.a("save");
+            //this.methodProfiler.a("save"); // CloudSpigot
             this.v.savePlayers();
             // Spigot Start
             // We replace this with saving each individual world as this.saveChunks(...) is broken,
@@ -740,13 +742,13 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
             server.playerCommandState = false;
             // this.saveChunks(true);
             // Spigot End
-            this.methodProfiler.b();
+           //this.methodProfiler.b(); // CloudSpigot
         }
 
-        this.methodProfiler.a("tallying");
+        //this.methodProfiler.a("tallying"); // CloudSpigot
         this.h[this.ticks % 100] = System.nanoTime() - i;
-        this.methodProfiler.b();
-        this.methodProfiler.a("snooper");
+        //this.methodProfiler.b(); // CloudSpigot
+        /*this.methodProfiler.a("snooper");
         if (getSnooperEnabled() && !this.n.d() && this.ticks > 100) {  // Spigot
             this.n.a();
         }
@@ -756,12 +758,12 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         }
 
         this.methodProfiler.b();
-        this.methodProfiler.b();
+        this.methodProfiler.b();*/ // CloudSpigot
         org.spigotmc.WatchdogThread.tick(); // Spigot
     }
 
     public void B() {
-        this.methodProfiler.a("jobs");
+        //this.methodProfiler.a("jobs"); // CloudSpigot
         //Queue queue = this.j; // CloudSpigot
 
         // Spigot start
@@ -772,7 +774,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
          }
         // Spigot end
 
-        this.methodProfiler.c("levels");
+        //this.methodProfiler.c("levels"); // CloudSpigot
 
         // CraftBukkit start
         this.server.getScheduler().mainThreadHeartbeat(this.ticks);
@@ -800,7 +802,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
             // if (i == 0 || this.getAllowNether()) {
                 WorldServer worldserver = this.worlds.get(i);
 
-                this.methodProfiler.a(worldserver.getWorldData().getName());
+                //this.methodProfiler.a(worldserver.getWorldData().getName()); // CloudSpigot
                 /* Drop global time updates
                 if (this.ticks % 20 == 0) {
                     this.methodProfiler.a("timeSync");
@@ -809,7 +811,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
                 }
                 // CraftBukkit end */
 
-                this.methodProfiler.a("tick");
+                //this.methodProfiler.a("tick"); // CloudSpigot
 
                 CrashReport crashreport;
 
@@ -841,28 +843,28 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
                     throw new ReportedException(crashreport);
                 }
 
-                this.methodProfiler.b();
-                this.methodProfiler.a("tracker");
+                /*this.methodProfiler.b();
+                this.methodProfiler.a("tracker");*/ // CloudSpigot
                 worldserver.getTracker().updatePlayers();
-                this.methodProfiler.b();
-                this.methodProfiler.b();
+                /*this.methodProfiler.b();
+                this.methodProfiler.b();*/ // CloudSpigot
                 worldserver.explosionDensityCache.clear(); // CloudSpigot - Optimize explosions
             // } // CraftBukkit
 
             // this.i[i][this.ticks % 100] = System.nanoTime() - j; // CraftBukkit
         }
 
-        this.methodProfiler.c("connection");
+        //this.methodProfiler.c("connection"); // CloudSpigot
         this.aq().c();
-        this.methodProfiler.c("players");
+        //this.methodProfiler.c("players"); // CloudSpigot
         this.v.tick();
-        this.methodProfiler.c("tickables");
+        //this.methodProfiler.c("tickables"); // CloudSpigot
 
         for (i = 0; i < this.p.size(); ++i) {
             ((IUpdatePlayerListBox) this.p.get(i)).c();
         }
 
-        this.methodProfiler.b();
+        //this.methodProfiler.b(); // CloudSpigot
     }
 
     public boolean getAllowNether() {
@@ -1066,7 +1068,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     public CrashReport b(CrashReport crashreport) {
         crashreport.g().a("Profiler Position", new Callable() {
             public String a() throws Exception {
-                return MinecraftServer.this.methodProfiler.a ? MinecraftServer.this.methodProfiler.c() : "N/A (disabled)";
+                return "N/A (disabled)"; // CloudSpigot
             }
 
             public Object call() throws Exception {
@@ -1267,7 +1269,8 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     public void a(MojangStatisticsGenerator mojangstatisticsgenerator) {
-        mojangstatisticsgenerator.a("whitelist_enabled", false);
+	// CloudSpigot start - disable MojangStatisticsGenerator
+        /*mojangstatisticsgenerator.a("whitelist_enabled", false);
         mojangstatisticsgenerator.a("whitelist_count", Integer.valueOf(0));
         if (this.v != null) {
             mojangstatisticsgenerator.a("players_current", Integer.valueOf(this.I()));
@@ -1302,18 +1305,21 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
             }
         }
 
-        mojangstatisticsgenerator.a("worlds", Integer.valueOf(i));
+        mojangstatisticsgenerator.a("worlds", Integer.valueOf(i));*/
+        // CloudSpigot end
     }
 
     public void b(MojangStatisticsGenerator mojangstatisticsgenerator) {
-        mojangstatisticsgenerator.b("singleplayer", this.T());
+        // CloudSpigot start - disable MojangStatisticsGenerator
+        /*mojangstatisticsgenerator.b("singleplayer", this.T());
         mojangstatisticsgenerator.b("server_brand", this.getServerModName());
         mojangstatisticsgenerator.b("gui_supported", GraphicsEnvironment.isHeadless() ? "headless" : "supported");
-        mojangstatisticsgenerator.b("dedicated", this.ae());
+        mojangstatisticsgenerator.b("dedicated", this.ae());*/
+        // CloudSpigot end
     }
 
     public boolean getSnooperEnabled() {
-        return false;
+        return false; // CloudSpigot - disable Snooper
     }
 
     public abstract boolean ae();
