@@ -34,7 +34,7 @@ public abstract class BlockLeaves extends BlockTransparent {
                         IBlockData iblockdata1 = world.getType(blockposition1);
 
                         if (iblockdata1.getBlock().getMaterial() == Material.LEAVES && !((Boolean) iblockdata1.get(BlockLeaves.CHECK_DECAY)).booleanValue()) {
-                            world.setTypeAndData(blockposition1, iblockdata1.set(BlockLeaves.CHECK_DECAY, Boolean.valueOf(true)), 4);
+                            world.setTypeAndData(blockposition1, iblockdata1.set(BlockLeaves.CHECK_DECAY, true), 4);
                         }
                     }
                 }
@@ -122,7 +122,7 @@ public abstract class BlockLeaves extends BlockTransparent {
                 int k2 = this.N[j1 * i1 + j1 * b1 + j1];
 
                 if (k2 >= 0) {
-                    world.setTypeAndData(blockposition, iblockdata.set(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false)), 4);
+                    world.setTypeAndData(blockposition, iblockdata.set(BlockLeaves.CHECK_DECAY, false), 4);
                 } else {
                     this.e(world, blockposition);
                 }

@@ -16,13 +16,13 @@ public class BlockTripwireHook extends Block {
 
     public BlockTripwireHook() {
         super(Material.ORIENTABLE);
-        this.j(this.blockStateList.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.NORTH).set(BlockTripwireHook.POWERED, Boolean.valueOf(false)).set(BlockTripwireHook.ATTACHED, Boolean.valueOf(false)).set(BlockTripwireHook.SUSPENDED, Boolean.valueOf(false)));
+        this.j(this.blockStateList.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.NORTH).set(BlockTripwireHook.POWERED, false).set(BlockTripwireHook.ATTACHED, false).set(BlockTripwireHook.SUSPENDED, false));
         this.a(CreativeModeTab.d);
         this.a(true);
     }
 
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
-        return iblockdata.set(BlockTripwireHook.SUSPENDED, Boolean.valueOf(!World.a(iblockaccess, blockposition.down())));
+        return iblockdata.set(BlockTripwireHook.SUSPENDED, !World.a(iblockaccess, blockposition.down()));
     }
 
     public AxisAlignedBB a(World world, BlockPosition blockposition, IBlockData iblockdata) {
@@ -58,7 +58,7 @@ public class BlockTripwireHook extends Block {
     }
 
     public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        IBlockData iblockdata = this.getBlockData().set(BlockTripwireHook.POWERED, Boolean.valueOf(false)).set(BlockTripwireHook.ATTACHED, Boolean.valueOf(false)).set(BlockTripwireHook.SUSPENDED, Boolean.valueOf(false));
+        IBlockData iblockdata = this.getBlockData().set(BlockTripwireHook.POWERED, false).set(BlockTripwireHook.ATTACHED, false).set(BlockTripwireHook.SUSPENDED, false);
 
         if (enumdirection.k().c()) {
             iblockdata = iblockdata.set(BlockTripwireHook.FACING, enumdirection);
@@ -132,7 +132,7 @@ public class BlockTripwireHook extends Block {
 
         flag5 &= j > 1;
         flag6 &= flag5;
-        IBlockData iblockdata3 = this.getBlockData().set(BlockTripwireHook.ATTACHED, Boolean.valueOf(flag5)).set(BlockTripwireHook.POWERED, Boolean.valueOf(flag6));
+        IBlockData iblockdata3 = this.getBlockData().set(BlockTripwireHook.ATTACHED, flag5).set(BlockTripwireHook.POWERED, flag6);
 
         if (j > 0) {
             blockposition1 = blockposition.shift(enumdirection, j);
@@ -168,7 +168,7 @@ public class BlockTripwireHook extends Block {
                 IBlockData iblockdata4 = aiblockdata[l];
 
                 if (iblockdata4 != null && world.getType(blockposition2).getBlock() != Blocks.AIR) {
-                    world.setTypeAndData(blockposition2, iblockdata4.set(BlockTripwireHook.ATTACHED, Boolean.valueOf(flag5)), 3);
+                    world.setTypeAndData(blockposition2, iblockdata4.set(BlockTripwireHook.ATTACHED, flag5), 3);
                 }
             }
         }
@@ -260,7 +260,7 @@ public class BlockTripwireHook extends Block {
     }
 
     public IBlockData fromLegacyData(int i) {
-        return this.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.fromType2(i & 3)).set(BlockTripwireHook.POWERED, Boolean.valueOf((i & 8) > 0)).set(BlockTripwireHook.ATTACHED, Boolean.valueOf((i & 4) > 0));
+        return this.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.fromType2(i & 3)).set(BlockTripwireHook.POWERED, (i & 8) > 0).set(BlockTripwireHook.ATTACHED, (i & 4) > 0);
     }
 
     public int toLegacyData(IBlockData iblockdata) {

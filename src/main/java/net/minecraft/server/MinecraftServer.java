@@ -1267,7 +1267,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     public void a(MojangStatisticsGenerator mojangstatisticsgenerator) {
-        mojangstatisticsgenerator.a("whitelist_enabled", Boolean.valueOf(false));
+        mojangstatisticsgenerator.a("whitelist_enabled", false);
         mojangstatisticsgenerator.a("whitelist_count", Integer.valueOf(0));
         if (this.v != null) {
             mojangstatisticsgenerator.a("players_current", Integer.valueOf(this.I()));
@@ -1275,7 +1275,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
             mojangstatisticsgenerator.a("players_seen", Integer.valueOf(this.v.getSeenPlayers().length));
         }
 
-        mojangstatisticsgenerator.a("uses_auth", Boolean.valueOf(this.onlineMode));
+        mojangstatisticsgenerator.a("uses_auth", this.onlineMode);
         mojangstatisticsgenerator.a("gui_state", this.as() ? "enabled" : "disabled");
         mojangstatisticsgenerator.a("run_time", Long.valueOf((az() - mojangstatisticsgenerator.g()) / 60L * 1000L));
         mojangstatisticsgenerator.a("avg_tick_ms", Integer.valueOf((int) (MathHelper.a(this.h) * 1.0E-6D)));
@@ -1292,7 +1292,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
                     mojangstatisticsgenerator.a("world[" + i + "][dimension]", Integer.valueOf(worldserver.worldProvider.getDimension()));
                     mojangstatisticsgenerator.a("world[" + i + "][mode]", worlddata.getGameType());
                     mojangstatisticsgenerator.a("world[" + i + "][difficulty]", worldserver.getDifficulty());
-                    mojangstatisticsgenerator.a("world[" + i + "][hardcore]", Boolean.valueOf(worlddata.isHardcore()));
+                    mojangstatisticsgenerator.a("world[" + i + "][hardcore]", worlddata.isHardcore());
                     mojangstatisticsgenerator.a("world[" + i + "][generator_name]", worlddata.getType().name());
                     mojangstatisticsgenerator.a("world[" + i + "][generator_version]", Integer.valueOf(worlddata.getType().getVersion()));
                     mojangstatisticsgenerator.a("world[" + i + "][height]", Integer.valueOf(this.F));
@@ -1306,10 +1306,10 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     public void b(MojangStatisticsGenerator mojangstatisticsgenerator) {
-        mojangstatisticsgenerator.b("singleplayer", Boolean.valueOf(this.T()));
+        mojangstatisticsgenerator.b("singleplayer", this.T());
         mojangstatisticsgenerator.b("server_brand", this.getServerModName());
         mojangstatisticsgenerator.b("gui_supported", GraphicsEnvironment.isHeadless() ? "headless" : "supported");
-        mojangstatisticsgenerator.b("dedicated", Boolean.valueOf(this.ae()));
+        mojangstatisticsgenerator.b("dedicated", this.ae());
     }
 
     public boolean getSnooperEnabled() {
