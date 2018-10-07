@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/57818453429443c69c1d72f169156b28)](https://app.codacy.com/app/Server24-7/CloudSpigot?utm_source=github.com&utm_medium=referral&utm_content=Server24-7/CloudSpigot&utm_campaign=Badge_Grade_Dashboard)
 CloudSpigot [![Build Status](https://ci.server24-7.eu/job/CloudSpigot/badge/icon)](https://ci.server24-7.eu/job/CloudSpigot/)
 ===========
 
