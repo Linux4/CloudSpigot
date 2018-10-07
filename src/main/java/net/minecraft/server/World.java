@@ -220,9 +220,9 @@ public abstract class World implements IBlockAccess {
                 getServer().getHandle().sendAll(new PacketPlayOutWorldBorder(worldborder, PacketPlayOutWorldBorder.EnumWorldBorderAction.SET_WARNING_BLOCKS), World.this);
             }
 
-            public void b(WorldBorder worldborder, double d0) { return; } // CloudSpigot
+            public void b(WorldBorder worldborder, double d0) {}
 
-            public void c(WorldBorder worldborder, double d0) { return; } // CloudSpigot
+            public void c(WorldBorder worldborder, double d0) {}
         }); 
         this.getServer().addWorld(this.world); 
         // CraftBukkit end
@@ -955,7 +955,7 @@ public abstract class World implements IBlockAccess {
 
     }
 
-    public void a(double d0, double d1, double d2, String s, float f, float f1, boolean flag) { return; } // CloudSpigot
+    public void a(double d0, double d1, double d2, String s, float f, float f1, boolean flag) {}
 
     public void a(BlockPosition blockposition, String s) {
         for (int i = 0; i < this.u.size(); ++i) {
@@ -1345,11 +1345,11 @@ public abstract class World implements IBlockAccess {
         return blockposition1;
     }
 
-    public void a(BlockPosition blockposition, Block block, int i) { return; } // CloudSpigot
+    public void a(BlockPosition blockposition, Block block, int i) {}
 
-    public void a(BlockPosition blockposition, Block block, int i, int j) { return; } // CloudSpigot
+    public void a(BlockPosition blockposition, Block block, int i, int j) {}
 
-    public void b(BlockPosition blockposition, Block block, int i, int j) { return; } // CloudSpigot
+    public void b(BlockPosition blockposition, Block block, int i, int j) {}
 
     public void tickEntities() {
         this.methodProfiler.a("entities");
@@ -2976,7 +2976,7 @@ public abstract class World implements IBlockAccess {
         return true;
     }
 
-    public void broadcastEntityEffect(Entity entity, byte b0) { return; } // CloudSpigot
+    public void broadcastEntityEffect(Entity entity, byte b0) {}
 
     public IChunkProvider N() {
         return this.chunkProvider;
@@ -2998,7 +2998,7 @@ public abstract class World implements IBlockAccess {
         return this.worldData.x();
     }
 
-    public void everyoneSleeping() { return; } // CloudSpigot
+    public void everyoneSleeping() {}
 
     // CraftBukkit start
     // Calls the method that checks to see if players are sleeping

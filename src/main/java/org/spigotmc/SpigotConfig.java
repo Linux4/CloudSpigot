@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import gnu.trove.map.hash.TObjectIntHashMap;
-import com.google.common.collect.Lists;
+//import com.google.common.collect.Lists; // CloudSpigot
 import net.minecraft.server.AttributeRanged;
 import net.minecraft.server.GenericAttributes;
 import net.minecraft.server.MinecraftServer;
@@ -46,8 +46,8 @@ public class SpigotConfig
             + "Forums: http://www.spigotmc.org/\n";
     /*========================================================================*/
     public static YamlConfiguration config;
-    static int version;
-    static Map<String, Command> commands;
+    public static int version;
+    public static Map<String, Command> commands;
     /*========================================================================*/
 
     public static void init(File configFile)
@@ -83,25 +83,22 @@ public class SpigotConfig
         }
     }
 
-    static void readConfig(Class<?> clazz, Object instance)
+    public static void readConfig(Class<?> clazz, Object instance)
     {
         for ( Method method : clazz.getDeclaredMethods() )
         {
-            if ( Modifier.isPrivate( method.getModifiers() ) )
+            if ( Modifier.isPrivate( method.getModifiers() ) && ( method.getParameterTypes().length == 0 && method.getReturnType() == Void.TYPE ) )
             {
-                if ( method.getParameterTypes().length == 0 && method.getReturnType() == Void.TYPE )
+                try
                 {
-                    try
-                    {
-                        method.setAccessible( true );
-                        method.invoke( instance );
-                    } catch ( InvocationTargetException ex )
-                    {
-                        throw Throwables.propagate( ex.getCause() );
-                    } catch ( Exception ex )
-                    {
-                        Bukkit.getLogger().log( Level.SEVERE, "Error invoking " + method, ex );
-                    }
+                    method.setAccessible( true );
+                    method.invoke( instance );
+                } catch ( InvocationTargetException ex )
+                {
+                    throw Throwables.propagate( ex.getCause() );
+                } catch ( Exception ex )
+                {
+                    Bukkit.getLogger().log( Level.SEVERE, "Error invoking " + method, ex );
                 }
             }
         }
