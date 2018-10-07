@@ -2,7 +2,7 @@ package net.minecraft.server;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Queues;
+//import com.google.common.collect.Queues; // CloudSpigot
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListenableFutureTask;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
+//import java.util.Iterator; // CloudSpigot
 import java.util.List;
 import java.util.Queue;
 import java.util.Random;
@@ -84,16 +84,16 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     private String I;
     private String J;
     private boolean demoMode;
-    private boolean M;
+    //private boolean M; // CloudSpigot
     private boolean N;
     private String O = "";
     private String P = "";
-    private boolean Q;
-    private long R;
-    private String S;
+    //private boolean Q; // CloudSpigot
+    //private long R; // CloudSpigot
+    //private String S; // CloudSpigot
     private boolean T;
     private boolean U;
-    private final YggdrasilAuthenticationService V;
+    //private final YggdrasilAuthenticationService V; // CloudSpigot
     private final MinecraftSessionService W;
     private long X = 0L;
     private final GameProfileRepository Y;
@@ -111,9 +111,25 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     //public ConsoleReader reader; // CloudSpigot
     public static int currentTick = 0; // CloudSpigot - Further improve tick loop
     public final Thread primaryThread;
-    public java.util.Queue<Runnable> processQueue = new java.util.concurrent.ConcurrentLinkedQueue<Runnable>();
+    public Queue<Runnable> processQueue = new java.util.concurrent.ConcurrentLinkedQueue<Runnable>();
     public int autosavePeriod;
     // CraftBukkit end
+
+    // CraftBukkit start
+    private boolean hasStopped = false;
+    private final Object stopLock = new Object();
+    // CraftBukkit end
+
+    // CloudSpigot start - Further improve tick loop
+    private static final int TPS = 20;
+    private static final long SEC_IN_NANO = 1000000000;
+    private static final long TICK_TIME = SEC_IN_NANO / TPS;
+    private static final long MAX_CATCHUP_BUFFER = TICK_TIME * TPS * 60L;
+    private static final int SAMPLE_INTERVAL = 20;
+    public final RollingAverage tps1 = new RollingAverage(60);
+    public final RollingAverage tps5 = new RollingAverage(60 * 5);
+    public final RollingAverage tps15 = new RollingAverage(60 * 15);
+    public double[] recentTps = new double[ 3 ]; // CloudSpigot - Fine have your darn compat with bad plugins
 
     public MinecraftServer(OptionSet options, Proxy proxy, File file1) {
         io.netty.util.ResourceLeakDetector.setEnabled( false ); // Spigot - disable
@@ -124,9 +140,9 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         this.Z = new UserCache(this, file1);
         this.b = this.h();
         // this.convertable = new WorldLoaderServer(file); // CraftBukkit - moved to DedicatedServer.init
-        this.V = new YggdrasilAuthenticationService(proxy, UUID.randomUUID().toString());
-        this.W = this.V.createMinecraftSessionService();
-        this.Y = this.V.createProfileRepository();
+        YggdrasilAuthenticationService V = new YggdrasilAuthenticationService(proxy, UUID.randomUUID().toString()); // CloudSpigot
+        this.W = V.createMinecraftSessionService();
+        this.Y = V.createProfileRepository();
         // CraftBukkit start
         this.options = options;
         // CloudSpigot
@@ -193,7 +209,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     protected synchronized void b(String s) {
-        this.S = s;
+        //this.S = s; // CloudSpigot
     }
 
     protected void a(String s, String s1, long i, WorldType worldtype, String s2) {
@@ -331,14 +347,14 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     protected void k() {
-        boolean flag = true;
-        boolean flag1 = true;
-        boolean flag2 = true;
-        boolean flag3 = true;
+        //boolean flag = true; // CloudSpigot
+        //boolean flag1 = true; // CloudSpigot
+        //boolean flag2 = true; // CloudSpigot
+        //boolean flag3 = true; // CloudSpigot
         int i = 0;
 
         this.b("menu.generatingTerrain");
-        byte b0 = 0;
+        //byte b0 = 0; // CloudSpigot
 
         // CraftBukkit start - fire WorldLoadEvent and handle whether or not to keep the spawn in memory
         for (int m = 0; m < worlds.size(); m++) {
@@ -413,8 +429,8 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
 
     protected void saveChunks(boolean flag) throws ExceptionWorldConflict { // CraftBukkit - added throws
         if (!this.N) {
-            WorldServer[] aworldserver = this.worldServer;
-            int i = aworldserver.length;
+            //WorldServer[] aworldserver = this.worldServer; // CloudSpigot
+            //int i = aworldserver.length; // CloudSpigot
 
             // CraftBukkit start
             for (int j = 0; j < worlds.size(); ++j) {
@@ -437,11 +453,6 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
 
         }
     }
-
-    // CraftBukkit start
-    private boolean hasStopped = false;
-    private final Object stopLock = new Object();
-    // CraftBukkit end
 
     public void stop() throws ExceptionWorldConflict { // CraftBukkit - added throws
         // CraftBukkit start - prevent double stopping on multiple threads
@@ -511,17 +522,6 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         this.isRunning = false;
     }
 
-    // CloudSpigot start - Further improve tick loop
-    private static final int TPS = 20;
-    private static final long SEC_IN_NANO = 1000000000;
-    private static final long TICK_TIME = SEC_IN_NANO / TPS;
-    private static final long MAX_CATCHUP_BUFFER = TICK_TIME * TPS * 60L;
-    private static final int SAMPLE_INTERVAL = 20;
-    public final RollingAverage tps1 = new RollingAverage(60);
-    public final RollingAverage tps5 = new RollingAverage(60 * 5);
-    public final RollingAverage tps15 = new RollingAverage(60 * 15);
-    public double[] recentTps = new double[ 3 ]; // CloudSpigot - Fine have your darn compat with bad plugins
-
     public static class RollingAverage {
         private final int size;
         private long time;
@@ -564,7 +564,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         try {
             if (this.init()) {
                 this.ab = az();
-                long i = 0L;
+                //long i = 0L; // CloudSpigot
 
                 this.r.setMOTD(new ChatComponentText(this.motd));
                 this.r.setServerInfo(new ServerPing.ServerData("1.8.10", 47));
@@ -616,7 +616,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
                     lastTick = curTime;
 
                     this.A();
-                    this.Q = true;
+                    //this.Q = true; // CloudSpigot
                 }
                 // Spigot end
             } else {
@@ -762,7 +762,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
 
     public void B() {
         this.methodProfiler.a("jobs");
-        Queue queue = this.j;
+        //Queue queue = this.j; // CloudSpigot
 
         // Spigot start
         FutureTask<?> entry;
@@ -795,7 +795,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         int i;
 
         for (i = 0; i < this.worlds.size(); ++i) {
-            long j = System.nanoTime();
+            //long j = System.nanoTime(); // CloudSpigot
 
             // if (i == 0 || this.getAllowNether()) {
                 WorldServer worldserver = this.worlds.get(i);
@@ -1228,7 +1228,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     public void c(boolean flag) {
-        this.M = flag;
+        //this.M = flag; // CloudSpigot
     }
 
     public Convertable getConvertable() {
@@ -1313,7 +1313,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     public boolean getSnooperEnabled() {
-        return true;
+        return false;
     }
 
     public abstract boolean ae();
