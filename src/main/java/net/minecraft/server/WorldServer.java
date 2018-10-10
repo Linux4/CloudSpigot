@@ -3,14 +3,14 @@ package net.minecraft.server;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+//import com.google.common.collect.Sets; // CloudSpigot
 import com.google.common.util.concurrent.ListenableFuture;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
+//import java.util.Set; // CloudSpigot
 import java.util.TreeSet;
 import java.util.UUID;
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +22,7 @@ import java.util.logging.Level;
 
 import org.bukkit.WeatherType;
 import org.bukkit.block.BlockState;
-import org.bukkit.craftbukkit.util.LongHash;
+//import org.bukkit.craftbukkit.util.LongHash; // CloudSpigot
 import org.bukkit.craftbukkit.util.HashTreeSet;
 
 import org.bukkit.event.block.BlockFormEvent;
@@ -594,9 +594,9 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         } else {
             int i = this.M.size();
 
-            if (false) { // CraftBukkit
-                throw new IllegalStateException("TickNextTick list out of synch");
-            } else {
+            /*if (false) { // CraftBukkit
+                throw new IllegalStateException("TickNextTick list out of sync");
+            } else {*/ // CloudSpigot
                 // CloudSpigot start - No, stop doing this, it affects things like redstone
                 /*
                 if (i > 1000) {
@@ -630,15 +630,15 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
                 // CloudSpigot start - Allow redstone ticks to bypass the tickNextTickListCap
                 if (cloudSpigotConfig.tickNextTickListCapIgnoresRedstone) {
-                    Iterator<NextTickListEntry> iterator = this.M.iterator();
-                    while (iterator.hasNext()) {
-                        NextTickListEntry next = iterator.next();
+                    Iterator<NextTickListEntry> iterator1 = this.M.iterator(); // CloudSpigot
+                    while (iterator1.hasNext()) { // CloudSpigot
+                        NextTickListEntry next = iterator1.next(); // CloudSpigot
                         if (!flag && next.b > this.worldData.getTime()) {
                             break;
                         }
 
                         if (next.a().isPowerSource() || next.a() instanceof IContainer) {
-                            iterator.remove();
+                            iterator1.remove(); // CloudSpigot
                             this.V.add(next);
                         }
                     }
@@ -676,8 +676,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 //this.methodProfiler.b(); // CloudSpigot
                 this.V.clear();
                 return !this.M.isEmpty();
-            }
-        }
+            //} // CloudSpigot
+        } 
     }
 
     public List<NextTickListEntry> a(Chunk chunk, boolean flag) {
@@ -742,9 +742,9 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         return this.server.getSpawnNPCs();
     }
 
-    private boolean getSpawnAnimals() {
+    /*private boolean getSpawnAnimals() {
         return this.server.getSpawnAnimals();
-    }
+    }*/ // CloudSpigot
 
     protected IChunkProvider k() {
         IChunkLoader ichunkloader = this.dataManager.createChunkLoader(this.worldProvider);

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map; // CloudSpigot
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.apache.commons.lang3.ObjectUtils;
@@ -19,8 +19,8 @@ public class DataWatcher {
     private static final gnu.trove.map.TObjectIntMap classToId = new gnu.trove.map.hash.TObjectIntHashMap( 10, 0.5f, -1 );
     private final gnu.trove.map.TIntObjectMap dataValues = new gnu.trove.map.hash.TIntObjectHashMap( 10, 0.5f, -1 );
     // These exist as an attempt at backwards compatability for (broken) NMS plugins
-    private static final Map<Class<?>, Integer> c = gnu.trove.TDecorators.wrap( classToId );
-    private final Map<Integer, DataWatcher.WatchableObject> d = gnu.trove.TDecorators.wrap( dataValues );
+    //private static final Map<Class<?>, Integer> c = gnu.trove.TDecorators.wrap( classToId ); // CloudSpigot
+    //private final Map<Integer, DataWatcher.WatchableObject> d = gnu.trove.TDecorators.wrap( dataValues ); // CloudSpigot
     // Spigot End
     private boolean e;
     private ReadWriteLock f = new ReentrantReadWriteLock();

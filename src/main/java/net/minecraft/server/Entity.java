@@ -703,9 +703,9 @@ public abstract class Entity implements ICommandListener {
                     d22 = 0.0D;
                 }
 
-                if (block != null && this.onGround) {
+                /*if (block != null && this.onGround) {
                     // block.a(this.world, blockposition, this); // CraftBukkit moved down
-                }
+                }*/ // CloudSpigot
 
                 this.M = (float) ((double) this.M + (double) MathHelper.sqrt(d21 * d21 + d23 * d23) * 0.6D);
                 this.N = (float) ((double) this.N + (double) MathHelper.sqrt(d21 * d21 + d22 * d22 + d23 * d23) * 0.6D);

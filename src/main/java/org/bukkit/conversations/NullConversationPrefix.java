@@ -1,6 +1,6 @@
 package org.bukkit.conversations;
 
-import org.bukkit.command.CommandSender;
+//import org.bukkit.command.CommandSender; // CloudSpigot
 
 /**
  * NullConversationPrefix is a {@link ConversationPrefix} implementation that

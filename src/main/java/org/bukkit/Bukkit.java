@@ -2,9 +2,9 @@ package org.bukkit;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.Serializable;
+//import java.io.Serializable; // CloudSpigot
 import java.util.Collection;
-import java.util.Collections;
+//import java.util.Collections; // CloudSpigot
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.server.ServerListPingEvent;
+//import org.bukkit.event.server.ServerListPingEvent; // CloudSpigot
 import org.bukkit.help.HelpMap;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;

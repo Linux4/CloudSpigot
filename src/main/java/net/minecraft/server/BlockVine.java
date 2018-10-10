@@ -42,7 +42,7 @@ public class BlockVine extends Block {
     }
 
     public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
-        float f = 0.0625F;
+        //float f = 0.0625F; // CloudSpigot
         float f1 = 1.0F;
         float f2 = 1.0F;
         float f3 = 1.0F;

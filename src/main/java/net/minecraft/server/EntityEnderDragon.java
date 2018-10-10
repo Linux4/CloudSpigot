@@ -613,8 +613,8 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
 
     private void a(BlockPosition blockposition) {
         boolean flag = true;
-        double d0 = 12.25D;
-        double d1 = 6.25D;
+        //double d0 = 12.25D; // CloudSpigot
+        //double d1 = 6.25D; // CloudSpigot
 
         // CraftBukkit start - Replace any "this.world" in the following with just "world"!
         BlockStateListPopulator world = new BlockStateListPopulator(this.world.getWorld());

@@ -1,6 +1,6 @@
 package org.bukkit.entity;
 
-import org.bukkit.Material;
+//import org.bukkit.Material; // CloudSpigot
 import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
 

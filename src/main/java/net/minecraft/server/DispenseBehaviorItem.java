@@ -19,7 +19,7 @@ public class DispenseBehaviorItem implements IDispenseBehavior {
 
     protected ItemStack b(ISourceBlock isourceblock, ItemStack itemstack) {
         EnumDirection enumdirection = BlockDispenser.b(isourceblock.f());
-        IPosition iposition = BlockDispenser.a(isourceblock);
+        //IPosition iposition = BlockDispenser.a(isourceblock); // CloudSpigot
         ItemStack itemstack1 = itemstack.cloneAndSubtract(1);
 
         // CraftBukkit start

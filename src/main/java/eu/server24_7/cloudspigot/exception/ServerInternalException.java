@@ -1,7 +1,7 @@
 package eu.server24_7.cloudspigot.exception;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.ThrownExpBottle;
+//import org.bukkit.entity.ThrownExpBottle; // CloudSpigot
 import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
 
 /**
