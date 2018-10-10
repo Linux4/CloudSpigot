@@ -50,10 +50,10 @@ public class MobEffectList {
     public static final MobEffectList G = null;
     public final int id;
     private final Map<IAttribute, AttributeModifier> J = Maps.newHashMap();
-    private final boolean K;
+    //private final boolean K; // cloudSpigot
     private final int L;
     private String M = "";
-    private int N = -1;
+    //private int N = -1; // CloudSpigot
     private double O;
     private boolean P;
 
@@ -61,7 +61,7 @@ public class MobEffectList {
         this.id = i;
         MobEffectList.byId[i] = this;
         MobEffectList.I.put(minecraftkey, this);
-        this.K = flag;
+        //this.K = flag; // CloudSpigot
         if (flag) {
             this.O = 0.5D;
         } else {
@@ -81,7 +81,7 @@ public class MobEffectList {
     }
 
     protected MobEffectList b(int i, int j) {
-        this.N = i + j * 8;
+        //this.N = i + j * 8; // CloudSpigot
         return this;
     }
 

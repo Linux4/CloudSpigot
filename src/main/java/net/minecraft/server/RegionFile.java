@@ -22,7 +22,7 @@ import java.util.zip.InflaterInputStream;
 public class RegionFile {
 
     private static final byte[] a = new byte[4096]; // Spigot - note: if this ever changes to not be 4096 bytes, update constructor! // PAIL: empty 4k block
-    private final File b;
+    //private final File b; // CloudSpigot
     private RandomAccessFile c;
     private final int[] d = new int[1024];
     private final int[] e = new int[1024];
@@ -31,7 +31,7 @@ public class RegionFile {
     private long h;
 
     public RegionFile(File file) {
-        this.b = file;
+        //this.b = file; // CloudSpigot
         this.g = 0;
 
         try {

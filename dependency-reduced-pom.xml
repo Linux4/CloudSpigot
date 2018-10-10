@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>eu.server24-7.cloudspigot</groupId>
+  <groupId>eu.server24-7</groupId>
   <artifactId>cloudspigot</artifactId>
   <name>CloudSpigot</name>
   <version>1.8.10-R0.1-SNAPSHOT</version>
@@ -115,16 +115,15 @@
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.2</version>
         <dependencies>
           <dependency>
             <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-compiler-eclipse</artifactId>
-            <version>2.5.0-spigotmc</version>
+            <artifactId>plexus-compiler-javac</artifactId>
+            <version>2.6</version>
           </dependency>
         </dependencies>
         <configuration>
-          <compilerId>eclipse</compilerId>
           <optimize>true</optimize>
         </configuration>
       </plugin>

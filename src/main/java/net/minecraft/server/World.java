@@ -76,7 +76,7 @@ public abstract class World implements IBlockAccess {
     protected float p;
     protected float q;
     protected float r;
-    private int J;
+    //private int J; // CloudSpigot
     public final Random random = new Random();
     public WorldProvider worldProvider; // CraftBukkit - remove final
     protected List<IWorldAccess> u = Lists.newArrayList();
@@ -3212,7 +3212,7 @@ public abstract class World implements IBlockAccess {
     }
 
     public void d(int i) {
-        this.J = i;
+        //this.J = i; // CloudSpigot
     }
 
     public boolean ad() {

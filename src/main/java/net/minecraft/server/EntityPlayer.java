@@ -43,7 +43,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     public int lastSentExp = -99999999;
     public int invulnerableTicks = 60;
     private EntityHuman.EnumChatVisibility bR;
-    private boolean bS = true;
+    //private boolean bS = true; // CloudSpigot
     private long bT = System.currentTimeMillis();
     private Entity bU = null;
     private int containerCounter;
@@ -1020,7 +1020,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         }
         // CloudSpigot end
         this.bR = packetplayinsettings.c();
-        this.bS = packetplayinsettings.d();
+        //this.bS = packetplayinsettings.d(); // CloudSpigot
         this.getDataWatcher().watch(10, Byte.valueOf((byte) packetplayinsettings.e()));
     }
 

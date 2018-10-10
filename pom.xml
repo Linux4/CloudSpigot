@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>eu.server24-7.cloudspigot</groupId>
+    <groupId>eu.server24-7</groupId>
     <artifactId>cloudspigot</artifactId>
     <packaging>jar</packaging>
     <version>1.8.10-R0.1-SNAPSHOT</version>
@@ -262,27 +262,20 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <!-- Gotta go after shade plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <!-- versions after this appear to be broken -->
-                <version>3.1</version>
+                <version>3.2</version>
                 <configuration>
-                    <!-- we use the Eclipse compiler as it doesn't need a JDK -->
-                    <compilerId>eclipse</compilerId>
-                    <!-- source and target are ignored if this isn't true -->
                     <optimize>true</optimize>
                 </configuration>
-                <dependencies>
-                    <!-- we need our custom version as it fixes some bugs on case sensitive file systems -->
-                    <dependency>
-                        <groupId>org.codehaus.plexus</groupId>
-                        <artifactId>plexus-compiler-eclipse</artifactId>
-                        <!-- versions after this appear to be broken -->
-                        <version>2.5.0-spigotmc</version>
-                    </dependency>
-                </dependencies>
+		<dependencies>
+			<dependency>
+                       		<groupId>org.codehaus.plexus</groupId>
+                       		<artifactId>plexus-compiler-javac</artifactId>
+                       		<version>2.6</version>
+                    </dependency>			
+		</dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

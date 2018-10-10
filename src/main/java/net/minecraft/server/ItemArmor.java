@@ -169,13 +169,13 @@ public class ItemArmor extends Item {
 
         LEATHER("leather", 5, new int[] { 1, 3, 2, 1}, 15), CHAIN("chainmail", 15, new int[] { 2, 5, 4, 1}, 12), IRON("iron", 15, new int[] { 2, 6, 5, 2}, 9), GOLD("gold", 7, new int[] { 2, 5, 3, 1}, 25), DIAMOND("diamond", 33, new int[] { 3, 8, 6, 3}, 10);
 
-        private final String f;
+        //private final String f; // CloudSpigot
         private final int g;
         private final int[] h;
         private final int i;
 
         private EnumArmorMaterial(String s, int i, int[] aint, int j) {
-            this.f = s;
+            //this.f = s; // CloudSpigot
             this.g = i;
             this.h = aint;
             this.i = j;

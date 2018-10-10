@@ -131,13 +131,13 @@ public final class AsynchronousExecutor<P, T, C, E extends Throwable> {
                                 throw new RuntimeException("Unable to handle interruption on " + parameter, e);
                             }
                         }
-                    } else {
+                    } /*else {
                         // They beat us to the synchronized block
-                    }
+                    }*/ // CloudSpigot
                 }
-            } else {
+            } /*else {
                 // Async thread is not pending, the more likely situation for a task not pending
-            }
+            }*/ // CloudSpigot
         }
 
         @SuppressWarnings("unchecked")

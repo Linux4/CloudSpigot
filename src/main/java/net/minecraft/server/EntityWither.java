@@ -15,8 +15,8 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
 
     private float[] a = new float[2];
     private float[] b = new float[2];
-    private float[] c = new float[2];
-    private float[] bm = new float[2];
+    //private float[] c = new float[2]; // CloudSpigot
+    //private float[] bm = new float[2]; // CloudSpigot
     private int[] bn = new int[2];
     private int[] bo = new int[2];
     private int bp;
@@ -114,10 +114,10 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
 
         int i;
 
-        for (i = 0; i < 2; ++i) {
+        /*for (i = 0; i < 2; ++i) {
             this.bm[i] = this.b[i];
             this.c[i] = this.a[i];
-        }
+        }*/ // CloudSpigot
 
         int j;
 

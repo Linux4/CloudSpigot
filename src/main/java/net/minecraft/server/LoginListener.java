@@ -117,10 +117,10 @@ public class LoginListener implements PacketLoginInListener, IUpdatePlayerListBo
         // CraftBukkit start - fire PlayerLoginEvent
         EntityPlayer s = this.server.getPlayerList().attemptLogin(this, this.i, hostname);
 
-        if (s == null) {
+        if (s != null) { // CloudSpigot
             // this.disconnect(s);
             // CraftBukkit end
-        } else {
+        /*} else {*/ // CloudSpigot
             this.g = LoginListener.EnumProtocolState.ACCEPTED;
             if (this.server.aK() >= 0 && !this.networkManager.c()) {
                 this.networkManager.a(new PacketLoginOutSetCompression(this.server.aK()), new ChannelFutureListener() {

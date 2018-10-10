@@ -222,10 +222,7 @@ public class CraftBlockState implements BlockState {
         if (this.type != other.type) {
             return false;
         }
-        if (this.data != other.data && (this.data == null || !this.data.equals(other.data))) {
-            return false;
-        }
-        return true;
+        return !(this.data != other.data && (this.data == null || !this.data.equals(other.data)));
     }
 
     @Override

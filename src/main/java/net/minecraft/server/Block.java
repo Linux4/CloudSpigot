@@ -9,7 +9,7 @@ public class Block {
     private static final MinecraftKey a = new MinecraftKey("air");
     public static final RegistryBlocks<MinecraftKey, Block> REGISTRY = new RegistryBlocks(Block.a);
     public static final RegistryID<IBlockData> d = new RegistryID();
-    private CreativeModeTab creativeTab;
+    //private CreativeModeTab creativeTab; // CloudSpigot
     public static final Block.StepSound e = new Block.StepSound("stone", 1.0F, 1.0F);
     public static final Block.StepSound f = new Block.StepSound("wood", 1.0F, 1.0F);
     public static final Block.StepSound g = new Block.StepSound("gravel", 1.0F, 1.0F);
@@ -650,7 +650,7 @@ public class Block {
     }
 
     public Block a(CreativeModeTab creativemodetab) {
-        this.creativeTab = creativemodetab;
+        //this.creativeTab = creativemodetab; // CloudSpigot
         return this;
     }
 

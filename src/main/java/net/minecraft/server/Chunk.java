@@ -44,7 +44,7 @@ public class Chunk {
     // CloudSpigot end
     private boolean done;
     private boolean lit;
-    private boolean p;
+    //private boolean p; // CloudSpigot
     private boolean q;
     private boolean r;
     private long lastSaved;
@@ -1151,7 +1151,7 @@ public class Chunk {
             this.recheckGaps(this.world.isClientSide); // CloudSpigot - Asynchronous lighting updates
         }
 
-        this.p = true;
+        //this.p = true; // CloudSpigot
         if (!this.lit && this.done && this.world.spigotConfig.randomLightUpdates) { // Spigot - also use random light updates setting to determine if we should relight
             this.n();
         }

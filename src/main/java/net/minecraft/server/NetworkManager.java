@@ -60,7 +60,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
             return this.a();
         }
     };
-    private final EnumProtocolDirection h;
+    //private final EnumProtocolDirection h; // CloudSpigot
     private final Queue<NetworkManager.QueuedPacket> i = Queues.newConcurrentLinkedQueue();
     private final ReentrantReadWriteLock j = new ReentrantReadWriteLock();
     public Channel channel;
@@ -72,11 +72,11 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
     // Spigot End
     private PacketListener m;
     private IChatBaseComponent n;
-    private boolean o;
+    //private boolean o; // CloudSpigot
     private boolean p;
 
     public NetworkManager(EnumProtocolDirection enumprotocoldirection) {
-        this.h = enumprotocoldirection;
+        //this.h = enumprotocoldirection; // CloudSpigot
     }
 
     public void channelActive(ChannelHandlerContext channelhandlercontext) throws Exception {
@@ -254,7 +254,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
     }
 
     public void a(SecretKey secretkey) {
-        this.o = true;
+        //this.o = true; // CloudSpigot
         this.channel.pipeline().addBefore("splitter", "decrypt", new PacketDecrypter(MinecraftEncryption.a(2, secretkey)));
         this.channel.pipeline().addBefore("prepender", "encrypt", new PacketEncrypter(MinecraftEncryption.a(1, secretkey)));
     }

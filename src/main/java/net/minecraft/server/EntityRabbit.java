@@ -10,13 +10,13 @@ public class EntityRabbit extends EntityAnimal {
     private int bs = 0;
     private EntityRabbit.EnumRabbitState bt;
     private int bu;
-    private EntityHuman bv;
+    //private EntityHuman bv; // CloudSpigot
 
     public EntityRabbit(World world) {
         super(world);
         this.bt = EntityRabbit.EnumRabbitState.HOP;
         this.bu = 0;
-        this.bv = null;
+        //this.bv = null; // CloudSpigot
         this.setSize(0.6F, 0.7F);
         this.g = new EntityRabbit.ControllerJumpRabbit(this);
         this.moveController = new EntityRabbit.ControllerMoveRabbit(this);

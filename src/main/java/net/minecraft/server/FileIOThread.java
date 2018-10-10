@@ -10,7 +10,7 @@ public class FileIOThread implements Runnable {
     private List<IAsyncChunkSaver> b = Collections.synchronizedList(Lists.<IAsyncChunkSaver>newArrayList());
     private volatile long c;
     private volatile long d;
-    private volatile boolean e;
+    //private volatile boolean e; // CloudSpigot
 
     private FileIOThread() {
         Thread thread = new Thread(this, "File IO Thread");
@@ -65,12 +65,12 @@ public class FileIOThread implements Runnable {
     }
 
     public void b() throws InterruptedException {
-        this.e = true;
+        //this.e = true; // CloudSpigot
 
         while (this.c != this.d) {
             Thread.sleep(10L);
         }
 
-        this.e = false;
+        //this.e = false; // CloudSpigot
     }
 }

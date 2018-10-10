@@ -11,7 +11,7 @@ import org.bukkit.inventory.ShapelessRecipe;
 
 public class CraftShapelessRecipe extends ShapelessRecipe implements CraftRecipe {
     // TODO: Could eventually use this to add a matches() method or some such
-    private ShapelessRecipes recipe;
+    //private ShapelessRecipes recipe; // CloudSpigot
 
     public CraftShapelessRecipe(ItemStack result) {
         super(result);
@@ -19,7 +19,7 @@ public class CraftShapelessRecipe extends ShapelessRecipe implements CraftRecipe
 
     public CraftShapelessRecipe(ItemStack result, ShapelessRecipes recipe) {
         this(result);
-        this.recipe = recipe;
+        //this.recipe = recipe; // CloudSpigot
     }
 
     public static CraftShapelessRecipe fromBukkitRecipe(ShapelessRecipe recipe) {

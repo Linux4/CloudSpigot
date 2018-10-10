@@ -856,11 +856,11 @@ public abstract class EntityHuman extends EntityLiving {
 
     // CraftBukkit start
     protected boolean d(DamageSource damagesource, float f) { // void -> boolean
-        if (true) {
+        //if (true) { // CloudSpigot
             return super.d(damagesource, f);
-        }
+        //} // CloudSpigot
         // CraftBukkit end
-        if (!this.isInvulnerable(damagesource)) {
+        /*if (!this.isInvulnerable(damagesource)) {
             if (!damagesource.ignoresArmor() && this.isBlocking() && f > 0.0F) {
                 f = (1.0F + f) * this.world.cloudSpigotConfig.playerBlockingDamageMultiplier; // CloudSpigot - Configurable damage multiplier for blocking;
             }
@@ -883,7 +883,7 @@ public abstract class EntityHuman extends EntityLiving {
 
             }
         }
-        return false; // CraftBukkit
+        return false; // CraftBukkit*/ // CloudSpigot
     }
 
     public void openSign(TileEntitySign tileentitysign) {}
@@ -1817,11 +1817,11 @@ public abstract class EntityHuman extends EntityLiving {
 
         private static final EntityHuman.EnumChatVisibility[] d = new EntityHuman.EnumChatVisibility[values().length];
         private final int e;
-        private final String f;
+        //private final String f; // CloudSpigot
 
         private EnumChatVisibility(int i, String s) {
             this.e = i;
-            this.f = s;
+            //this.f = s; // CloudSpigot
         }
 
         public int a() {

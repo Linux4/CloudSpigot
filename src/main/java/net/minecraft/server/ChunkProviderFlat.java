@@ -11,7 +11,7 @@ public class ChunkProviderFlat implements IChunkProvider {
     private World a;
     private Random b;
     private final IBlockData[] c = new IBlockData[256];
-    private final WorldGenFlatInfo d;
+    //private final WorldGenFlatInfo d; // CloudSpigot
     private final List<StructureGenerator> e = Lists.newArrayList();
     private final boolean f;
     private final boolean g;
@@ -21,9 +21,9 @@ public class ChunkProviderFlat implements IChunkProvider {
     public ChunkProviderFlat(World world, long i, boolean flag, String s) {
         this.a = world;
         this.b = new Random(i);
-        this.d = WorldGenFlatInfo.a(s);
+        WorldGenFlatInfo d = WorldGenFlatInfo.a(s); // CloudSpigot
         if (flag) {
-            Map map = this.d.b();
+            Map map = d.b();
 
             if (map.containsKey("village") && world.cloudSpigotConfig.generateVillage) { // CloudSpigot
                 Map map1 = (Map) map.get("village");
@@ -52,19 +52,19 @@ public class ChunkProviderFlat implements IChunkProvider {
             }
         }
 
-        if (this.d.b().containsKey("lake")) {
+        if (d.b().containsKey("lake")) {
             this.h = new WorldGenLakes(Blocks.WATER);
         }
 
-        if (this.d.b().containsKey("lava_lake")) {
+        if (d.b().containsKey("lava_lake")) {
             this.i = new WorldGenLakes(Blocks.LAVA);
         }
 
-        this.g = world.cloudSpigotConfig.generateDungeon && this.d.b().containsKey("dungeon");  // CloudSpigot
+        this.g = world.cloudSpigotConfig.generateDungeon && d.b().containsKey("dungeon");  // CloudSpigot
         int j = 0;
         int k = 0;
         boolean flag1 = true;
-        Iterator iterator = this.d.c().iterator();
+        Iterator iterator = d.c().iterator();
 
         while (iterator.hasNext()) {
             WorldGenFlatLayerInfo worldgenflatlayerinfo = (WorldGenFlatLayerInfo) iterator.next();
@@ -87,7 +87,7 @@ public class ChunkProviderFlat implements IChunkProvider {
         }
 
         world.b(j);
-        this.f = flag1 ? false : this.d.b().containsKey("decoration");
+        this.f = flag1 ? false : d.b().containsKey("decoration");
     }
 
     public Chunk getOrCreateChunk(int i, int j) {

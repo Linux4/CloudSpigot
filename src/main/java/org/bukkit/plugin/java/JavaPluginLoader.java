@@ -305,11 +305,11 @@ public final class JavaPluginLoader implements PluginLoader {
                  }
              };
 
-            if (false) { // Spigot - RL handles useTimings check now
+            /*if (false) { // Spigot - RL handles useTimings check now
                 eventSet.add(new TimedRegisteredListener(listener, executor, eh.priority(), plugin, eh.ignoreCancelled()));
-            } else {
+            } else {*/ // CloudSpigot
                 eventSet.add(new RegisteredListener(listener, executor, eh.priority(), plugin, eh.ignoreCancelled()));
-            }
+            //} // CloudSpigot
         }
         return ret;
     }

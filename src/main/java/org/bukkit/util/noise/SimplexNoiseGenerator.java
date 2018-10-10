@@ -41,7 +41,7 @@ public class SimplexNoiseGenerator extends PerlinNoiseGenerator {
         {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0},
         {2, 0, 1, 3}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {3, 0, 1, 2}, {3, 0, 2, 1}, {0, 0, 0, 0}, {3, 1, 2, 0},
         {2, 1, 0, 3}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {3, 1, 0, 2}, {0, 0, 0, 0}, {3, 2, 0, 1}, {3, 2, 1, 0}};
-    protected static double offsetW;
+    //protected static double offsetW; // CloudSpigot
     private static final SimplexNoiseGenerator instance = new SimplexNoiseGenerator();
 
     protected SimplexNoiseGenerator() {
@@ -73,7 +73,7 @@ public class SimplexNoiseGenerator extends PerlinNoiseGenerator {
      */
     public SimplexNoiseGenerator(Random rand) {
         super(rand);
-        offsetW = rand.nextDouble() * 256;
+        //offsetW = rand.nextDouble() * 256; // CloudSpigot
     }
 
     protected static double dot(int g[], double x, double y) {
@@ -367,7 +367,7 @@ public class SimplexNoiseGenerator extends PerlinNoiseGenerator {
         x += offsetX;
         y += offsetY;
         z += offsetZ;
-        w += offsetW;
+        //w += offsetW; // CloudSpigot
 
         double n0, n1, n2, n3, n4; // Noise contributions from the five corners
 

@@ -9,7 +9,7 @@ public class PacketPlayOutMapChunkBulk implements Packet<PacketListenerPlayOut> 
     private int[] b;
     private PacketPlayOutMapChunk.ChunkMap[] c;
     private boolean d;
-    private World world; // Spigot
+    //private World world; // Spigot // CloudSpigot
 
     public PacketPlayOutMapChunkBulk() {}
 
@@ -30,7 +30,7 @@ public class PacketPlayOutMapChunkBulk implements Packet<PacketListenerPlayOut> 
             this.c[j] = packetplayoutmapchunk_chunkmap;
         }
         
-        world = ((Chunk) list.get(0)).getWorld(); // Spigot
+        //world = ((Chunk) list.get(0)).getWorld(); // Spigot // CloudSpigot
     }
 
     public void a(PacketDataSerializer packetdataserializer) throws IOException {

@@ -20,7 +20,7 @@ public class InventoryCrafting implements IInventory {
     public IRecipe currentRecipe;
     public IInventory resultInventory;
     private EntityHuman owner;
-    private int maxStack = MAX_STACK;
+    //private int maxStack = MAX_STACK; // CloudSpigot
 
     public ItemStack[] getContents() {
         return this.items;
@@ -47,7 +47,7 @@ public class InventoryCrafting implements IInventory {
     }
 
     public void setMaxStackSize(int size) {
-        maxStack = size;
+        //maxStack = size; // CloudSpigot
         resultInventory.setMaxStackSize(size);
     }
 

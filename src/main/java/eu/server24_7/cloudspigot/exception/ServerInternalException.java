@@ -27,7 +27,7 @@ public class ServerInternalException extends ServerException {
 
     public static void reportInternalException(Throwable cause) {
         try {
-            Bukkit.getPluginManager().callEvent(new ServerExceptionEvent(new ServerInternalException(cause)));;
+            Bukkit.getPluginManager().callEvent(new ServerExceptionEvent(new ServerInternalException(cause)));
         } catch (Throwable t) {
             t.printStackTrace(); // Don't want to rethrow!
         }

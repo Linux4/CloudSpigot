@@ -70,7 +70,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     protected final Proxy e;
     public String f;
     public int g;
-    private boolean onlineMode;
+    //private boolean onlineMode; // CloudSpigot
     private boolean spawnAnimals;
     private boolean spawnNPCs;
     private boolean pvpMode;
@@ -1329,7 +1329,7 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     public void setOnlineMode(boolean flag) {
-        this.onlineMode = flag;
+        //this.onlineMode = flag; // CloudSpigot
     }
 
     public boolean getSpawnAnimals() {

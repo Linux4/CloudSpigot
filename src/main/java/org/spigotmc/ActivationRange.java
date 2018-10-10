@@ -71,7 +71,7 @@ public class ActivationRange
      */
     public static boolean initializeEntityActivationState(Entity entity, SpigotWorldConfig config)
     {
-        if ( ( entity.activationType == 3 && config.miscActivationRange == 0 )
+        /*if ( ( entity.activationType == 3 && config.miscActivationRange == 0 )
                 || ( entity.activationType == 2 && config.animalActivationRange == 0 )
                 || ( entity.activationType == 1 && config.monsterActivationRange == 0 )
                 || entity instanceof EntityHuman
@@ -89,7 +89,21 @@ public class ActivationRange
             return true;
         }
 
-        return false;
+        return false;*/ // CloudSpigot
+	return (entity.activationType == 3 && config.miscActivationRange == 0 )
+                || ( entity.activationType == 2 && config.animalActivationRange == 0 )
+                || ( entity.activationType == 1 && config.monsterActivationRange == 0 )
+                || entity instanceof EntityHuman
+                || entity instanceof EntityProjectile
+                || entity instanceof EntityEnderDragon
+                || entity instanceof EntityComplexPart
+                || entity instanceof EntityWither
+                || entity instanceof EntityFireball
+                || entity instanceof EntityWeather
+                || entity instanceof EntityTNTPrimed
+                || entity instanceof EntityFallingBlock // CloudSpigot - Always tick falling blocks
+                || entity instanceof EntityEnderCrystal
+                || entity instanceof EntityFireworks; // CloudSpigot
     }
 
     /**

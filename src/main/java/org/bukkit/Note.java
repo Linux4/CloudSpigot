@@ -264,9 +264,7 @@ public class Note {
         if (getClass() != obj.getClass())
             return false;
         Note other = (Note) obj;
-        if (note != other.note)
-            return false;
-        return true;
+        return note == other.note; // CloudSpigot
     }
 
     @Override

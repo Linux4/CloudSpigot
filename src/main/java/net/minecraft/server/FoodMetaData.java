@@ -7,7 +7,7 @@ public class FoodMetaData {
     public float exhaustionLevel;
     private int foodTickTimer;
     private EntityHuman entityhuman; // CraftBukkit
-    private int e = 20;
+    //private int e = 20; // CloudSpigot
 
     public FoodMetaData() { throw new AssertionError("Whoopsie, we missed the bukkit."); } // CraftBukkit start - throw an error
 
@@ -40,7 +40,7 @@ public class FoodMetaData {
     public void a(EntityHuman entityhuman) {
         EnumDifficulty enumdifficulty = entityhuman.world.getDifficulty();
 
-        this.e = this.foodLevel;
+        //this.e = this.foodLevel; // CloudSpigot
         if (this.exhaustionLevel > 4.0F) {
             this.exhaustionLevel -= 4.0F;
             if (this.saturationLevel > 0.0F) {

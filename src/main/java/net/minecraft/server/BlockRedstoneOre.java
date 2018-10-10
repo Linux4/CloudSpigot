@@ -9,15 +9,11 @@ import org.bukkit.event.entity.EntityInteractEvent;
 
 public class BlockRedstoneOre extends Block {
 
-    private final boolean a;
-
     public BlockRedstoneOre(boolean flag) {
         super(Material.STONE);
         if (flag) {
             this.a(true);
         }
-
-        this.a = flag;
     }
 
     public int a(World world) {

@@ -60,9 +60,9 @@ public class Explosion {
             for (i = 0; i < 16; ++i) {
                 for (j = 0; j < 16; ++j) {
                     if (k == 0 || k == 15 || i == 0 || i == 15 || j == 0 || j == 15) {
-                        double d0 = (double) ((float) k / 15.0F * 2.0F - 1.0F);
-                        double d1 = (double) ((float) i / 15.0F * 2.0F - 1.0F);
-                        double d2 = (double) ((float) j / 15.0F * 2.0F - 1.0F);
+                        double d0 = (double) ((double) k / 15.0 * 2.0 - 1.0);
+                        double d1 = (double) ((double) i / 15.0 * 2.0 - 1.0);
+                        double d2 = (double) ((double) j / 15.0 * 2.0 - 1.0);
                         double d3 = Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
 
                         d0 /= d3;
@@ -73,17 +73,17 @@ public class Explosion {
                         double d5 = this.posY;
                         double d6 = this.posZ;
 
-                        for (float f1 = 0.3F; f > 0.0F; f -= 0.22500001F) {
+                        for (double f1 = 0.3; f > 0.0; f -= 0.22500001) {
                             BlockPosition blockposition = new BlockPosition(d4, d5, d6);
                             IBlockData iblockdata = this.world.getType(blockposition);
 
                             if (iblockdata.getBlock().getMaterial() != Material.AIR) {
-                                float f2 = this.source != null ? this.source.a(this, this.world, blockposition, iblockdata) : iblockdata.getBlock().a((Entity) null);
+                                double f2 = this.source != null ? this.source.a(this, this.world, blockposition, iblockdata) : iblockdata.getBlock().a((Entity) null);
 
-                                f -= (f2 + 0.3F) * 0.3F;
+                                f -= (f2 + 0.3) * 0.3;
                             }
 
-                            if (f > 0.0F && (this.source == null || this.source.a(this, this.world, blockposition, iblockdata, f)) && blockposition.getY() < 256 && blockposition.getY() >= 0) { // CraftBukkit - don't wrap explosions
+                            if (f > 0.0 && (this.source == null || this.source.a(this, this.world, blockposition, iblockdata, f)) && blockposition.getY() < 256 && blockposition.getY() >= 0) { // CraftBukkit - don't wrap explosions
                                 hashset.add(blockposition);
                             }
 
