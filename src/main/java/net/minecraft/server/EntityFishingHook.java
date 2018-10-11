@@ -489,7 +489,7 @@ public class EntityFishingHook extends Entity {
                 this.owner.b(StatisticList.E);
                 return ((PossibleFishingResult) WeightedRandom.a(this.random, EntityFishingHook.e)).a(this.random);
             } else {
-                float f3 = f - f2;
+                //float f3 = f - f2; // CloudSpigot
 
                 this.owner.b(StatisticList.C);
                 return ((PossibleFishingResult) WeightedRandom.a(this.random, EntityFishingHook.f)).a(this.random);

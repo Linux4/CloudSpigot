@@ -6,8 +6,8 @@ public class TileEntityBanner extends TileEntity {
 
     public int color;
     public NBTTagList patterns;
-    private boolean g;
-    private List<TileEntityBanner.EnumBannerPatternType> h;
+    //private boolean g; // CloudSpigot
+    //private List<TileEntityBanner.EnumBannerPatternType> h; // CloudSpigot
     private List<EnumColor> i;
     private String j;
 
@@ -36,10 +36,10 @@ public class TileEntityBanner extends TileEntity {
             this.color = itemstack.getData() & 15;
         }
 
-        this.h = null;
+        //this.h = null; // CloudSpigot
         this.i = null;
         this.j = "";
-        this.g = true;
+        //this.g = true; // CloudSpigot
     }
 
     public void b(NBTTagCompound nbttagcompound) {
@@ -64,10 +64,10 @@ public class TileEntityBanner extends TileEntity {
             this.patterns.a(20); // PAIL Rename remove
         }
         // CraftBukkit end
-        this.h = null;
+        //this.h = null; // CloudSpigot
         this.i = null;
         this.j = null;
-        this.g = true;
+        //this.g = true; // CloudSpigot
     }
 
     public Packet getUpdatePacket() {

@@ -31,8 +31,8 @@ public class PortalTravelAgent {
             }
         } else {
             int i = MathHelper.floor(entity.locX);
-            int j = MathHelper.floor(entity.locY) - 1;
-            int k = MathHelper.floor(entity.locZ);
+            //int j = MathHelper.floor(entity.locY) - 1; // CloudSpigot
+            //int k = MathHelper.floor(entity.locZ); // CloudSpigot
             // CraftBukkit start - Modularize end portal creation
             BlockPosition created = this.createEndPortal(entity.locX, entity.locY, entity.locZ);
             entity.setPositionRotation((double) created.getX(), (double) created.getY(), (double) created.getZ(), entity.yaw, 0.0F);

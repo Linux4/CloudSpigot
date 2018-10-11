@@ -39,7 +39,7 @@ public class PlayerChunkMap {
 
     public void flush() {
         long i = this.world.getTime();
-        int j;
+        //int j; // CloudSpigot
         PlayerChunkMap.PlayerChunk playerchunkmap_playerchunk;
 
         if (i - this.h > 8000L) {

@@ -5,7 +5,7 @@ import java.util.List;
 // CraftBukkit start
 import java.util.AbstractList;
 import java.util.Collection;
-import java.util.Iterator;
+//import java.util.Iterator; // CloudSpigot
 import java.util.ListIterator;
 
 import com.google.common.collect.ImmutableList;
@@ -186,7 +186,7 @@ public class BlockPiston extends Block {
         IBlockData iblockdata = iblockaccess.getType(blockposition);
 
         if (iblockdata.getBlock() == this && ((Boolean) iblockdata.get(BlockPiston.EXTENDED)).booleanValue()) {
-            float f = 0.25F;
+            //float f = 0.25F; // CloudSpigot
             EnumDirection enumdirection = (EnumDirection) iblockdata.get(BlockPiston.FACING);
 
             if (enumdirection != null) {

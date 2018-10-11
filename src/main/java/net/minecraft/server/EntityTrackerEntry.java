@@ -15,7 +15,7 @@ import org.bukkit.event.player.PlayerVelocityEvent;
 
 public class EntityTrackerEntry {
 
-    private static final Logger p = LogManager.getLogger();
+    //private static final Logger p = LogManager.getLogger(); // CloudSpigot
     public Entity tracker;
     public int b;
     public int c;

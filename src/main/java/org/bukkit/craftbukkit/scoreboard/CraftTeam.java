@@ -22,7 +22,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     public String getName() throws IllegalStateException {
-        CraftScoreboard scoreboard = checkState();
+        CraftScoreboard scoreboard = checkState(); // CloudSpigot
 
         return team.getName();
     }

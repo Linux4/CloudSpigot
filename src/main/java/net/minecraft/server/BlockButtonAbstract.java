@@ -95,8 +95,8 @@ public abstract class BlockButtonAbstract extends Block {
         float f = 0.25F;
         float f1 = 0.375F;
         float f2 = (float) (flag ? 1 : 2) / 16.0F;
-        float f3 = 0.125F;
-        float f4 = 0.1875F;
+        //float f3 = 0.125F; // CloudSpigot
+        //float f4 = 0.1875F; // CloudSpigot
 
         switch (BlockButtonAbstract.SyntheticClass_1.a[enumdirection.ordinal()]) {
         case 1:

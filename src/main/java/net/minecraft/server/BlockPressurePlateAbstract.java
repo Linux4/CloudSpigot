@@ -22,7 +22,7 @@ public abstract class BlockPressurePlateAbstract extends Block {
 
     protected void d(IBlockData iblockdata) {
         boolean flag = this.e(iblockdata) > 0;
-        float f = 0.0625F;
+        //float f = 0.0625F; // CloudSpigot
 
         if (flag) {
             this.a(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.03125F, 0.9375F);
@@ -134,7 +134,7 @@ public abstract class BlockPressurePlateAbstract extends Block {
     }
 
     protected AxisAlignedBB getBoundingBox(BlockPosition blockposition) {
-        float f = 0.125F;
+        //float f = 0.125F; // CloudSpigot
 
         return new AxisAlignedBB((double) ((float) blockposition.getX() + 0.125F), (double) blockposition.getY(), (double) ((float) blockposition.getZ() + 0.125F), (double) ((float) (blockposition.getX() + 1) - 0.125F), (double) blockposition.getY() + 0.25D, (double) ((float) (blockposition.getZ() + 1) - 0.125F));
     }
@@ -165,9 +165,9 @@ public abstract class BlockPressurePlateAbstract extends Block {
     }
 
     public void j() {
-        float f = 0.5F;
-        float f1 = 0.125F;
-        float f2 = 0.5F;
+        //float f = 0.5F; // CloudSpigot
+        //float f1 = 0.125F; // CloudSpigot
+        //float f2 = 0.5F; // CloudSpigot
 
         this.a(0.0F, 0.375F, 0.0F, 1.0F, 0.625F, 1.0F);
     }

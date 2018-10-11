@@ -306,7 +306,7 @@ public class NameReferencingFileConverter {
 
     public static boolean a(final DedicatedServer dedicatedserver, PropertyManager propertymanager) {
         final File file = d(propertymanager);
-        final File file1 = new File(file.getParentFile(), "playerdata");
+        //final File file1 = new File(file.getParentFile(), "playerdata"); // CloudSpigot
         final File file2 = new File(file.getParentFile(), "unknownplayers");
 
         if (file.exists() && file.isDirectory()) {
