@@ -18,6 +18,25 @@ Run the CloudSpigot jar directly from your server. Just like old times
 
   * For a sneak peak on upcoming features, [see here](https://github.com/Server24-7/CloudSpigot/projects)
 
+How To (Plugin Developers)
+------
+ * Maven Repo (for cloudspigot):
+```xml
+<repository>
+    <id>papermc</id>
+    <url>https://mvn.server24-7.eu/</url>
+</repository>
+```
+ * Artifact Information:
+```xml
+<dependency>
+    <groupId>eu.server24-7</groupId>
+    <artifactId>cloudspigot</artifactId>
+    <version>1.8.10-R0.1-SNAPSHOT</version>
+    <scope>provided</scope>
+ </dependency>
+ ```
+
 How To (Compiling Jar From Source)
 ------
 To compile CloudSpigot, you need JDK 8, maven, and an internet connection.
