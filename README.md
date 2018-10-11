@@ -23,7 +23,7 @@ How To (Plugin Developers)
  * Maven Repo (for cloudspigot):
 ```xml
 <repository>
-    <id>papermc</id>
+    <id>server24-7.eu</id>
     <url>https://mvn.server24-7.eu/</url>
 </repository>
 ```
