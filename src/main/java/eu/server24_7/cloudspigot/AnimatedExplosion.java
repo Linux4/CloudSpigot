@@ -1,12 +1,7 @@
 package eu.server24_7.cloudspigot;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.FallingBlock;
@@ -19,7 +14,6 @@ public class AnimatedExplosion {
 		for (Block b : blockList) {
 			Material material = b.getType();
 			if (material != Material.AIR && material != Material.TNT) {
-				byte data = b.getData();
 				FallingBlock fb = b.getWorld().spawnFallingBlock(b.getLocation(), b.getType(), b.getData());
 				b.setType(Material.AIR);
 				fb.setDropItem(true);
