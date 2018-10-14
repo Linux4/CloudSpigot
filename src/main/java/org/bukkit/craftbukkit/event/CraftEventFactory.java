@@ -546,6 +546,22 @@ public class CraftEventFactory {
         EntityDamageEvent event;
         if (damager != null) {
             event = new EntityDamageByEntityEvent(damager.getBukkitEntity(), damagee.getBukkitEntity(), cause, modifiers, modifierFunctions);
+	    // CloudSpigot start - AntiReach
+	    if(damager.getBukkitEntity() instanceof Player) {
+		final Player player = (Player) damager.getBukkitEntity();
+		final org.bukkit.entity.LivingEntity entity = (org.bukkit.entity.LivingEntity) damagee.getBukkitEntity();
+		final org.bukkit.Location playerLoc = player.getLocation().add(0.0, player.getEyeHeight(), 0.0);
+		final org.bukkit.Location entityLoc = entity.getLocation().add(0.0, entity.getEyeHeight(), 0.0);
+		double xSqr = ((playerLoc.getX() - entityLoc.getX()) * (playerLoc.getX() - entityLoc.getX()));
+		double ySqr = ((playerLoc.getY() - entityLoc.getY()) * (playerLoc.getY() - entityLoc.getY()));
+		double zSqr = ((playerLoc.getZ() - entityLoc.getZ()) * (playerLoc.getZ() - entityLoc.getZ()));
+		double sqrt = Math.sqrt(xSqr + ySqr + zSqr);
+		final double distance = Math.abs(sqrt);
+		if(distance > 3.9) {
+		    event.setCancelled(true);
+		}
+	    }
+	    // CloudSpigot end
         } else {
             event = new EntityDamageEvent(damagee.getBukkitEntity(), cause, modifiers, modifierFunctions);
         }
