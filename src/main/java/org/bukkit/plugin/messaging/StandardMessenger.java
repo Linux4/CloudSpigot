@@ -420,6 +420,12 @@ public class StandardMessenger implements Messenger {
         }
         validateChannel(channel);
 
+	// CloudSpigot start - kick players with worlddownloader
+	if("WDL|INIT".equalsIgnoreCase(channel)) {
+		source.kickPlayer("Worlddownloader is not allowed!");
+	}
+	// CloudSpigot end
+
         Set<PluginMessageListenerRegistration> registrations = getIncomingChannelRegistrations(channel);
 
         for (PluginMessageListenerRegistration registration : registrations) {
