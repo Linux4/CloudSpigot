@@ -14,7 +14,7 @@ public class AnimatedExplosion {
 		for (Block b : blockList) {
 			Material material = b.getType();
 			if (material != Material.AIR && material != Material.TNT) {
-				FallingBlock fb = b.getWorld().spawnFallingBlock(b.getLocation(), b.getType(), b.getData());
+				FallingBlock fb = b.getWorld().spawnFallingBlock(b.getLocation(), material, b.getData());
 				b.setType(Material.AIR);
 				fb.setDropItem(true);
 				fb.setCustomName("AnimatedExplosion");
