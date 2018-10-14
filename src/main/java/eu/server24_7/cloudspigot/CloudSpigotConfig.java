@@ -164,6 +164,11 @@ public class CloudSpigotConfig
         animateExplosions = getBoolean("settings.animate-explosions", false);
     }
 
+    public static boolean autoRespawnPlayers;
+    private static void autoRespawnPlayers() {
+	autoRespawnPlayers = getBoolean("settings.autorespawn-players", false);
+    }
+
     public static double strengthEffectModifier;
     public static double weaknessEffectModifier;
     private static void effectModifiers()

@@ -24,6 +24,12 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 // CraftBukkit end
 
+// CloudSpigot start
+import eu.server24_7.cloudspigot.CloudSpigotConfig;
+import eu.server24_7.cloudspigot.event.player.PlayerPreAutoRespawnEvent;
+import eu.server24_7.cloudspigot.event.player.PlayerAutoRespawnEvent;
+// CloudSpigot end
+
 public class EntityPlayer extends EntityHuman implements ICrafting {
 
     private static final Logger bH = LogManager.getLogger();
@@ -474,6 +480,19 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         this.b(StatisticList.y);
         this.a(StatisticList.h);
         this.bs().g();
+
+	// CloudSpigot start - Autorespawn
+	if(CloudSpigotConfig.autoRespawnPlayers) {
+		final org.bukkit.entity.Player bPlayer = this.getBukkitEntity();
+		final org.bukkit.Location deathLoc = bPlayer.getLocation();
+		PlayerPreAutoRespawnEvent ppare = new PlayerPreAutoRespawnEvent(bPlayer, deathLoc);
+		Bukkit.getPluginManager().callEvent(ppare);
+		if(!ppare.isCancelled()) {
+			bPlayer.spigot().respawn();
+			Bukkit.getPluginManager().callEvent(new PlayerAutoRespawnEvent(bPlayer, deathLoc, bPlayer.getLocation()));
+		}
+	}
+	// CloudSpigot end
     }
 
     public boolean damageEntity(DamageSource damagesource, float f) {
