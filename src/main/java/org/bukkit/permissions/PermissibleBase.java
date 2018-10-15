@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
+import eu.server24_7.cloudspigot.event.permission.PermissionCheckEvent; // CloudSpigot -add PermissionCheckEvent
+
 /**
  * Base Permissible for use in any Permissible object via proxy or extension
  */
@@ -67,18 +69,27 @@ public class PermissibleBase implements Permissible {
         }
 
         String name = inName.toLowerCase();
+	PermissionCheckEvent event = new PermissionCheckEvent(this, opable, name, false); // CloudSpigot - add PermissionCheckEvent
 
         if (isPermissionSet(name)) {
-            return permissions.get(name).getValue();
+            //return permissions.get(name).getValue(); // CloudSpigot
+	    event = new PermissionCheckEvent(this, opable, name, permissions.get(name).getValue()); // CloudSpigot - add PermissionCheckEvent
         } else {
             Permission perm = Bukkit.getServer().getPluginManager().getPermission(name);
 
             if (perm != null) {
-                return perm.getDefault().getValue(isOp());
+                //return perm.getDefault().getValue(isOp()); // CloudSpigot
+		event = new PermissionCheckEvent(this, opable, name, perm.getDefault().getValue(isOp())); // CloudSpigot- add PermissionCheckEvent
             } else {
-                return Permission.DEFAULT_PERMISSION.getValue(isOp());
+                //return Permission.DEFAULT_PERMISSION.getValue(isOp()); // CloudSpigot
+		event = new PermissionCheckEvent(this, opable, name, Permission.DEFAULT_PERMISSION.getValue(isOp())); // CloudSpigot - add PermissionCheckEvent
             }
         }
+	
+	// CloudSpigot start - add PermissionCheckEvent
+	Bukkit.getPluginManager().callEvent(event);
+	return event.getHasPermission();
+	// CloudSpigot end
     }
 
     public boolean hasPermission(Permission perm) {
@@ -87,11 +98,19 @@ public class PermissibleBase implements Permissible {
         }
 
         String name = perm.getName().toLowerCase();
+	PermissionCheckEvent event = new PermissionCheckEvent(this, opable, name, false); // CloudSpigot - add PermissionCheckEvent
 
         if (isPermissionSet(name)) {
-            return permissions.get(name).getValue();
+            //return permissions.get(name).getValue(); // CloudSpigot
+	    event = new PermissionCheckEvent(this, opable, name, permissions.get(name).getValue()); // CloudSpigot - add PermissionCheckEvent
         }
-        return perm.getDefault().getValue(isOp());
+        //return perm.getDefault().getValue(isOp()); // CloudSpigot
+	event = new PermissionCheckEvent(this, opable, name, perm.getDefault().getValue(isOp())); // CloudSpigot - add PermissionCheckEvent
+	
+	// CloudSpigot start - add PermissionCheckEvent
+	Bukkit.getPluginManager().callEvent(event);
+	return event.getHasPermission();
+	// CloudSpigot end
     }
 
     public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
