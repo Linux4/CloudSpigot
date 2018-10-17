@@ -34,7 +34,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
 
     private static final Logger bH = LogManager.getLogger();
     public String locale = "en_US"; // Spigot
-    public PlayerConnection playerConnection;
+    public volatile PlayerConnection playerConnection;
     public final MinecraftServer server;
     public final PlayerInteractManager playerInteractManager;
     public double d;

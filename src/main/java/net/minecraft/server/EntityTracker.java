@@ -14,7 +14,7 @@ public class EntityTracker {
     private static final Logger a = LogManager.getLogger();
     private final WorldServer world;
     private Set<EntityTrackerEntry> c = Sets.newHashSet();
-    public IntHashMap<EntityTrackerEntry> trackedEntities = new IntHashMap();
+    public volatile IntHashMap<EntityTrackerEntry> trackedEntities = new IntHashMap();
     private int e;
 
     public EntityTracker(WorldServer worldserver) {
@@ -94,7 +94,7 @@ public class EntityTracker {
     }
 
     public void addEntity(Entity entity, int i, final int j, boolean flag) {
-        org.spigotmc.AsyncCatcher.catchOp( "entity track"); // Spigot
+        //org.spigotmc.AsyncCatcher.catchOp( "entity track"); // Spigot // CloudSpigot
         i = org.spigotmc.TrackingRange.getEntityTrackingRange(entity, i); // Spigot
         if (i > this.e) {
             i = this.e;
@@ -146,7 +146,7 @@ public class EntityTracker {
     }
 
     public void untrackEntity(Entity entity) {
-        org.spigotmc.AsyncCatcher.catchOp( "entity untrack"); // Spigot
+        //org.spigotmc.AsyncCatcher.catchOp( "entity untrack"); // Spigot // CloudSpigot
         if (entity instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer) entity;
             Iterator iterator = this.c.iterator();

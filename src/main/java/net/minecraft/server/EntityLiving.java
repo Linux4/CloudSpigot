@@ -34,7 +34,7 @@ public abstract class EntityLiving extends Entity {
     private static final AttributeModifier b = (new AttributeModifier(EntityLiving.a, "Sprinting speed boost", 0.30000001192092896D, 2)).a(false);
     private AttributeMapBase c;
     public CombatTracker combatTracker = new CombatTracker(this);
-    public final Map<Integer, MobEffect> effects = Maps.newHashMap();
+    public volatile Map<Integer, MobEffect> effects = Maps.newHashMap(); // CloudSpigot
     private final ItemStack[] h = new ItemStack[5];
     public boolean ar;
     public int as;
@@ -464,7 +464,7 @@ public abstract class EntityLiving extends Entity {
 
     // CraftBukkit start
     private boolean isTickingEffects = false;
-    private List<Object> effectsToProcess = Lists.newArrayList();
+    private volatile List<Object> effectsToProcess = Lists.newArrayList(); // CloudSpigot
     // CraftBukkit end
 
     protected void bi() {
@@ -582,7 +582,7 @@ public abstract class EntityLiving extends Entity {
     }
 
     public void addEffect(MobEffect mobeffect) {
-        org.spigotmc.AsyncCatcher.catchOp( "effect add"); // Spigot
+        //org.spigotmc.AsyncCatcher.catchOp( "effect add"); // Spigot // CloudSpigot
         // CraftBukkit start
         if (isTickingEffects) {
             effectsToProcess.add(mobeffect);

@@ -43,7 +43,7 @@ public class EntityTrackerEntry {
     // Replace trackedPlayers Set with a Map. The value is true until the player receives
     // their first update (which is forced to have absolute coordinates), false afterward.
     public java.util.Map<EntityPlayer, Boolean> trackedPlayerMap = new java.util.HashMap<EntityPlayer, Boolean>();
-    public Set<EntityPlayer> trackedPlayers = trackedPlayerMap.keySet();
+    public volatile Set<EntityPlayer> trackedPlayers = trackedPlayerMap.keySet();
     // CloudSpigot end
 
     public EntityTrackerEntry(Entity entity, int i, int j, boolean flag) {
@@ -334,7 +334,7 @@ public class EntityTrackerEntry {
     }
 
     public void updatePlayer(EntityPlayer entityplayer) {
-        org.spigotmc.AsyncCatcher.catchOp( "player tracker update"); // Spigot
+        //org.spigotmc.AsyncCatcher.catchOp( "player tracker update"); // Spigot // CloudSpigot
         if (entityplayer != this.tracker) {
             if (this.c(entityplayer)) {
                 if (!this.trackedPlayers.contains(entityplayer) && (this.e(entityplayer) || this.tracker.attachedToPlayer)) {
@@ -565,7 +565,7 @@ public class EntityTrackerEntry {
     }
 
     public void clear(EntityPlayer entityplayer) {
-        org.spigotmc.AsyncCatcher.catchOp( "player tracker clear"); // Spigot
+        //org.spigotmc.AsyncCatcher.catchOp( "player tracker clear"); // Spigot // CloudSpigot
         if (this.trackedPlayers.contains(entityplayer)) {
             this.trackedPlayers.remove(entityplayer);
             entityplayer.d(this.tracker);

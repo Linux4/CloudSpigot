@@ -35,7 +35,7 @@ public abstract class World implements IBlockAccess {
     private int a = 63;
     protected boolean e;
     // Spigot start - guard entity list from removals
-    public final List<Entity> entityList = new ArrayList<Entity>() // CloudSpigot
+    public volatile List<Entity> entityList = new ArrayList<Entity>() // CloudSpigot
     {
         @Override
         public Entity remove(int index)
@@ -65,7 +65,7 @@ public abstract class World implements IBlockAccess {
     public final List<TileEntity> tileEntityList = Lists.newArrayList();
     private final List<TileEntity> b = Lists.newArrayList();
     private final Set<TileEntity> c = Sets.newHashSet(); // Paper
-    public final List<EntityHuman> players = Lists.newArrayList();
+    public volatile List<EntityHuman> players = Lists.newArrayList();
     public final List<Entity> k = Lists.newArrayList();
     protected final IntHashMap<Entity> entitiesById = new IntHashMap();
     private long d = 16777215L;
@@ -986,7 +986,7 @@ public abstract class World implements IBlockAccess {
     }
 
     public boolean addEntity(Entity entity, SpawnReason spawnReason) { // Changed signature, added SpawnReason
-        org.spigotmc.AsyncCatcher.catchOp( "entity add"); // Spigot
+        //org.spigotmc.AsyncCatcher.catchOp( "entity add"); // Spigot // CloudSpigot
         if (entity == null) return false;
         // CraftBukkit end
         int i = MathHelper.floor(entity.locX / 16.0D);
@@ -1109,7 +1109,7 @@ public abstract class World implements IBlockAccess {
     }
 
     public void removeEntity(Entity entity) {
-        org.spigotmc.AsyncCatcher.catchOp( "entity remove"); // Spigot
+        //org.spigotmc.AsyncCatcher.catchOp( "entity remove"); // Spigot // CloudSpigot
         entity.die();
         if (entity instanceof EntityHuman) {
             this.players.remove(entity);
@@ -2701,7 +2701,7 @@ public abstract class World implements IBlockAccess {
     }
 
     public void b(Collection<Entity> collection) {
-        org.spigotmc.AsyncCatcher.catchOp( "entity world add"); // Spigot
+        //org.spigotmc.AsyncCatcher.catchOp( "entity world add"); // Spigot // CloudSpigot
         // CraftBukkit start
         // this.entityList.addAll(collection);
         Iterator iterator = collection.iterator();

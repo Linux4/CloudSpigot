@@ -311,11 +311,11 @@ public class Block {
     }
 
     public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
-        org.spigotmc.AsyncCatcher.catchOp( "block onPlace"); // Spigot
+        //org.spigotmc.AsyncCatcher.catchOp( "block onPlace"); // Spigot // CloudSpigot
     }
 
     public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
-        org.spigotmc.AsyncCatcher.catchOp( "block remove"); // Spigot
+        //org.spigotmc.AsyncCatcher.catchOp( "block remove"); // Spigot // CloudSpigot
     }
 
     public int a(Random random) {
