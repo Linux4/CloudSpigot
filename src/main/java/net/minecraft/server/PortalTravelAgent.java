@@ -30,7 +30,7 @@ public class PortalTravelAgent {
                 this.b(entity, f);
             }
         } else {
-            int i = MathHelper.floor(entity.locX);
+            //int i = MathHelper.floor(entity.locX); // CloudSpigot
             //int j = MathHelper.floor(entity.locY) - 1; // CloudSpigot
             //int k = MathHelper.floor(entity.locZ); // CloudSpigot
             // CraftBukkit start - Modularize end portal creation

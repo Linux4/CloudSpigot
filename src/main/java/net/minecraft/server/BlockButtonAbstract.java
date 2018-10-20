@@ -91,9 +91,9 @@ public abstract class BlockButtonAbstract extends Block {
 
     private void d(IBlockData iblockdata) {
         EnumDirection enumdirection = (EnumDirection) iblockdata.get(BlockButtonAbstract.FACING);
-        boolean flag = ((Boolean) iblockdata.get(BlockButtonAbstract.POWERED)).booleanValue();
-        float f = 0.25F;
-        float f1 = 0.375F;
+        boolean flag = iblockdata.get(BlockButtonAbstract.POWERED).booleanValue();
+        //float f = 0.25F; // CloudSpigot
+        //float f1 = 0.375F; // CloudSpigot
         float f2 = (float) (flag ? 1 : 2) / 16.0F;
         //float f3 = 0.125F; // CloudSpigot
         //float f4 = 0.1875F; // CloudSpigot
@@ -199,9 +199,9 @@ public abstract class BlockButtonAbstract extends Block {
     public void j() {
         float f = 0.1875F;
         float f1 = 0.125F;
-        float f2 = 0.125F;
+        //float f2 = 0.125F; // CloudSpigot
 
-        this.a(0.5F - f, 0.5F - f1, 0.5F - f2, 0.5F + f, 0.5F + f1, 0.5F + f2);
+        this.a(0.5F - f, 0.5F - f1, 0.5F - f1, 0.5F + f, 0.5F + f1, 0.5F + f1); // CloudSpigot
     }
 
     public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Entity entity) {

@@ -83,7 +83,7 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
         MinecraftServer minecraftserver = MinecraftServer.getServer();
 
         if (minecraftserver != null && minecraftserver.O() && minecraftserver.getEnableCommandBlock()) {
-            ICommandHandler icommandhandler = minecraftserver.getCommandHandler();
+            //ICommandHandler icommandhandler = minecraftserver.getCommandHandler(); // CloudSpigot
 
             try {
                 this.d = null;
