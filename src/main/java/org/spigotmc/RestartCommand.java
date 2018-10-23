@@ -42,7 +42,7 @@ public class RestartCommand extends Command
 
     public static void restart(final File script)
     {
-        AsyncCatcher.enabled = false; // Disable async catcher incase it interferes with us
+        //AsyncCatcher.enabled = false; // Disable async catcher incase it interferes with us // CloudSpigot
         try
         {
             if ( script.isFile() )

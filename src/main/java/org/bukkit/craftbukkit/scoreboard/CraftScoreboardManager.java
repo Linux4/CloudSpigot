@@ -28,7 +28,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 public final class CraftScoreboardManager implements ScoreboardManager {
     private final CraftScoreboard mainScoreboard;
     private final MinecraftServer server;
-    private final Collection<CraftScoreboard> scoreboards = new WeakCollection<CraftScoreboard>();
+    private volatile Collection<CraftScoreboard> scoreboards = new WeakCollection<CraftScoreboard>(); // CloudSpigot
     private final Map<CraftPlayer, CraftScoreboard> playerBoards = new HashMap<CraftPlayer, CraftScoreboard>();
 
     public CraftScoreboardManager(MinecraftServer minecraftserver, net.minecraft.server.Scoreboard scoreboardServer) {
@@ -42,7 +42,7 @@ public final class CraftScoreboardManager implements ScoreboardManager {
     }
 
     public CraftScoreboard getNewScoreboard() {
-        org.spigotmc.AsyncCatcher.catchOp( "scoreboard creation"); // Spigot
+        //org.spigotmc.AsyncCatcher.catchOp( "scoreboard creation"); // Spigot // CloudSpigot
         CraftScoreboard scoreboard = new CraftScoreboard(new ScoreboardServer(server));
         scoreboards.add(scoreboard);
         return scoreboard;

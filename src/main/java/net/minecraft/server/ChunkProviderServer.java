@@ -29,12 +29,12 @@ import eu.server24_7.cloudspigot.exception.ServerInternalException;
 public class ChunkProviderServer implements IChunkProvider {
 
     private static final Logger b = LogManager.getLogger();
-    public LongHashSet unloadQueue = new LongHashSet(); // CraftBukkit - LongHashSet
+    public volatile LongHashSet unloadQueue = new LongHashSet(); // CraftBukkit - LongHashSet // CloudSpigot
     public Chunk emptyChunk;
     public IChunkProvider chunkProvider;
     private IChunkLoader chunkLoader;
     public boolean forceChunkLoad = false; // CraftBukkit - true -> false
-    public LongObjectHashMap<Chunk> chunks = new LongObjectHashMap<Chunk>();
+    public volatile LongObjectHashMap<Chunk> chunks = new LongObjectHashMap<Chunk>(); // CloudSpigot
     public WorldServer world;
 
     public ChunkProviderServer(WorldServer worldserver, IChunkLoader ichunkloader, IChunkProvider ichunkprovider) {
