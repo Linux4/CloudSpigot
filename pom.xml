@@ -281,6 +281,9 @@
                 <version>3.8.0</version>
                 <configuration>
                     <optimize>true</optimize>
+		    <compilerArgs>
+			<arg></arg>
+		    </compilerArgs>
                 </configuration>
 		<dependencies>
 			<dependency>
