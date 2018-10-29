@@ -5,6 +5,7 @@ import org.bukkit.projectiles.BlockProjectileSource;
 /**
  * Represents a dispenser.
  */
+@SuppressWarnings("deprecation")
 public interface Dispenser extends BlockState, ContainerBlock {
 
     /**

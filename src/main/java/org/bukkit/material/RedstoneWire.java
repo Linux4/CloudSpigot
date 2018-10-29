@@ -49,7 +49,8 @@ public class RedstoneWire extends MaterialData implements Redstone {
      *
      * @return true if powered, otherwise false
      */
-    public boolean isPowered() {
+    @SuppressWarnings("deprecation")
+	public boolean isPowered() {
         return getData() > 0;
     }
 

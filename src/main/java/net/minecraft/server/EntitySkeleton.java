@@ -9,7 +9,8 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
     private PathfinderGoalArrowAttack a = new PathfinderGoalArrowAttack(this, 1.0D, 20, 60, 15.0F);
     private PathfinderGoalMeleeAttack b = new PathfinderGoalMeleeAttack(this, EntityHuman.class, 1.2D, false);
 
-    public EntitySkeleton(World world) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public EntitySkeleton(World world) {
         super(world);
         this.goalSelector.a(1, new PathfinderGoalFloat(this));
         this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));

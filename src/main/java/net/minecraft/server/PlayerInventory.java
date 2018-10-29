@@ -288,12 +288,12 @@ public class PlayerInventory implements IInventory {
 
                 crashreportsystemdetails.a("Item ID", (Object) Integer.valueOf(Item.getId(itemstack.getItem())));
                 crashreportsystemdetails.a("Item data", (Object) Integer.valueOf(itemstack.getData()));
-                crashreportsystemdetails.a("Item name", new Callable() {
+                crashreportsystemdetails.a("Item name", new Callable<String>() {
                     public String a() throws Exception {
                         return itemstack.getName();
                     }
 
-                    public Object call() throws Exception {
+                    public String call() throws Exception {
                         return this.a();
                     }
                 });

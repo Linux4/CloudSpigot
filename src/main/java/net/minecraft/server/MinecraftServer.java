@@ -1,20 +1,5 @@
 package net.minecraft.server;
 
-import com.google.common.base.Charsets;
-import com.google.common.collect.Lists;
-//import com.google.common.collect.Queues; // CloudSpigot
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListenableFutureTask;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.GameProfileRepository;
-import com.mojang.authlib.minecraft.MinecraftSessionService;
-import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-import io.netty.handler.codec.base64.Base64;
-import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -33,18 +18,29 @@ import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
+
 import javax.imageio.ImageIO;
+
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// CraftBukkit start
-import java.io.IOException;
+import com.google.common.base.Charsets;
+import com.google.common.collect.Lists;
+//import com.google.common.collect.Queues; // CloudSpigot
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListenableFutureTask;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.GameProfileRepository;
+import com.mojang.authlib.minecraft.MinecraftSessionService;
+import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+import io.netty.handler.codec.base64.Base64;
 import joptsimple.OptionSet;
-
-import org.bukkit.craftbukkit.Main;
-// CraftBukkit end
 
 public abstract class MinecraftServer implements Runnable, ICommandListener, IAsyncTaskHandler/*, IMojangStatistics*/ { // CloudSpigot
 
@@ -131,7 +127,8 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     public final RollingAverage tps15 = new RollingAverage(60 * 15);
     public double[] recentTps = new double[ 3 ]; // CloudSpigot - Fine have your darn compat with bad plugins
 
-    public MinecraftServer(OptionSet options, Proxy proxy, File file1) {
+    @SuppressWarnings("deprecation")
+	public MinecraftServer(OptionSet options, Proxy proxy, File file1) {
         io.netty.util.ResourceLeakDetector.setEnabled( false ); // Spigot - disable
         this.e = proxy;
         MinecraftServer.l = this;
@@ -212,7 +209,8 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
         //this.S = s; // CloudSpigot
     }
 
-    protected void a(String s, String s1, long i, WorldType worldtype, String s2) {
+    @SuppressWarnings("deprecation")
+	protected void a(String s, String s1, long i, WorldType worldtype, String s2) {
         this.a(s);
         this.b("menu.loadingLevel");
         this.worldServer = new WorldServer[3];
@@ -1066,22 +1064,22 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     public CrashReport b(CrashReport crashreport) {
-        crashreport.g().a("Profiler Position", new Callable() {
+        crashreport.g().a("Profiler Position", new Callable<String>() {
             public String a() throws Exception {
                 return "N/A (disabled)"; // CloudSpigot
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
         if (this.v != null) {
-            crashreport.g().a("Player Count", new Callable() {
+            crashreport.g().a("Player Count", new Callable<String>() {
                 public String a() {
                     return MinecraftServer.this.v.getPlayerCount() + " / " + MinecraftServer.this.v.getMaxPlayers() + "; " + MinecraftServer.this.v.v();
                 }
 
-                public Object call() throws Exception {
+                public String call() throws Exception {
                     return this.a();
                 }
             });
@@ -1505,8 +1503,8 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     }
 
     public Entity a(UUID uuid) {
-        WorldServer[] aworldserver = this.worldServer;
-        int i = aworldserver.length;
+        //WorldServer[] aworldserver = this.worldServer; // CloudSpigot
+        //int i = aworldserver.length; // CloudSpigot
 
         // CraftBukkit start
         for (int j = 0; j < worlds.size(); ++j) {
@@ -1538,8 +1536,8 @@ public abstract class MinecraftServer implements Runnable, ICommandListener, IAs
     public <V> ListenableFuture<V> a(Callable<V> callable) {
         Validate.notNull(callable);
         if (!this.isMainThread()) { // CraftBukkit && !this.isStopped()) {
-            ListenableFutureTask listenablefuturetask = ListenableFutureTask.create(callable);
-            Queue queue = this.j;
+            ListenableFutureTask<V> listenablefuturetask = ListenableFutureTask.create(callable);
+            //Queue<FutureTask<?>> queue = this.j; // CloudSpigot
 
             // Spigot start
             this.j.add(listenablefuturetask);

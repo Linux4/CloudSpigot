@@ -8,7 +8,8 @@ import org.bukkit.event.block.EntityBlockFormEvent;
 
 public class EntitySnowman extends EntityGolem implements IRangedEntity {
 
-    public EntitySnowman(World world) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public EntitySnowman(World world) {
         super(world);
         this.setSize(0.7F, 1.9F);
         ((Navigation) this.getNavigation()).a(true);

@@ -105,7 +105,8 @@ public class TileEntitySign extends TileEntity {
         this.i.a(nbttagcompound);
     }
 
-    public Packet getUpdatePacket() {
+    @SuppressWarnings("rawtypes")
+	public Packet getUpdatePacket() {
         IChatBaseComponent[] aichatbasecomponent = new IChatBaseComponent[4];
 
         System.arraycopy(this.lines, 0, aichatbasecomponent, 0, 4);
@@ -129,7 +130,7 @@ public class TileEntitySign extends TileEntity {
     }
 
     public boolean b(final EntityHuman entityhuman) {
-        ICommandListener icommandlistener = new ICommandListener() {
+        /*ICommandListener icommandlistener = new ICommandListener() {
             public String getName() {
                 return entityhuman.getName();
             }
@@ -167,7 +168,7 @@ public class TileEntitySign extends TileEntity {
             public void a(CommandObjectiveExecutor.EnumCommandResult commandobjectiveexecutor_enumcommandresult, int i) {
                 TileEntitySign.this.i.a(this, commandobjectiveexecutor_enumcommandresult, i);
             }
-        };
+        };*/ // CloudSpigot
 
         for (int i = 0; i < this.lines.length; ++i) {
             ChatModifier chatmodifier = this.lines[i] == null ? null : this.lines[i].getChatModifier();

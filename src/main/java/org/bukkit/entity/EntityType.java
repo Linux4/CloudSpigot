@@ -159,7 +159,8 @@ public enum EntityType {
     /**
      * A fishing line and bobber.
      */
-    FISHING_HOOK(null, Fish.class, -1, false),
+    @SuppressWarnings("deprecation")
+	FISHING_HOOK(null, Fish.class, -1, false),
     /**
      * A bolt of lightning.
      * <p>

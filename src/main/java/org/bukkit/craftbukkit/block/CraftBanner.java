@@ -19,7 +19,8 @@ public class CraftBanner extends CraftBlockState implements Banner {
     private DyeColor base;
     private List<Pattern> patterns = new ArrayList<Pattern>();
 
-    public CraftBanner(final Block block) {
+    @SuppressWarnings("deprecation")
+	public CraftBanner(final Block block) {
         super(block);
 
         CraftWorld world = (CraftWorld) block.getWorld();
@@ -35,7 +36,8 @@ public class CraftBanner extends CraftBlockState implements Banner {
         }
     }
 
-    public CraftBanner(final Material material, final TileEntityBanner te) {
+    @SuppressWarnings("deprecation")
+	public CraftBanner(final Material material, final TileEntityBanner te) {
         super(material);
         banner = te;
 
@@ -94,7 +96,8 @@ public class CraftBanner extends CraftBlockState implements Banner {
         return patterns.size();
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public boolean update(boolean force, boolean applyPhysics) {
         boolean result = super.update(force, applyPhysics);
 

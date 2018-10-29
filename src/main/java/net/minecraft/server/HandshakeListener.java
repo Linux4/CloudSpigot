@@ -4,6 +4,8 @@ package net.minecraft.server;
 import java.net.InetAddress;
 import java.util.HashMap;
 // CraftBukkit end
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 public class HandshakeListener implements PacketHandshakingInListener {
 
@@ -48,9 +50,9 @@ public class HandshakeListener implements PacketHandshakingInListener {
                         throttleCounter = 0;
 
                         // Cleanup stale entries
-                        java.util.Iterator iter = throttleTracker.entrySet().iterator();
+                        Iterator<Entry<InetAddress, Long>> iter = throttleTracker.entrySet().iterator();
                         while (iter.hasNext()) {
-                            java.util.Map.Entry<InetAddress, Long> entry = (java.util.Map.Entry) iter.next();
+                            java.util.Map.Entry<InetAddress, Long> entry = iter.next();
                             if (entry.getValue() > connectionThrottle) {
                                 iter.remove();
                             }

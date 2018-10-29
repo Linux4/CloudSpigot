@@ -1,15 +1,13 @@
 package net.minecraft.server;
 
-import java.util.List;
-
 public class TileEntityBanner extends TileEntity {
 
     public int color;
     public NBTTagList patterns;
     //private boolean g; // CloudSpigot
     //private List<TileEntityBanner.EnumBannerPatternType> h; // CloudSpigot
-    private List<EnumColor> i;
-    private String j;
+    //private List<EnumColor> i; // CloudSpigot
+    //private String j; // CloudSpigot
 
     public TileEntityBanner() {}
 
@@ -37,8 +35,8 @@ public class TileEntityBanner extends TileEntity {
         }
 
         //this.h = null; // CloudSpigot
-        this.i = null;
-        this.j = "";
+        //this.i = null; // CloudSpigot
+        //this.j = ""; // CloudSpigot
         //this.g = true; // CloudSpigot
     }
 
@@ -65,12 +63,13 @@ public class TileEntityBanner extends TileEntity {
         }
         // CraftBukkit end
         //this.h = null; // CloudSpigot
-        this.i = null;
-        this.j = null;
+        //this.i = null; // CloudSpigot
+        //this.j = null; // CloudSpigot
         //this.g = true; // CloudSpigot
     }
 
-    public Packet getUpdatePacket() {
+    @SuppressWarnings("rawtypes")
+	public Packet getUpdatePacket() {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
 
         this.b(nbttagcompound);

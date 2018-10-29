@@ -170,7 +170,8 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
         return getHandle().activeContainer.getBukkitView();
     }
 
-    public InventoryView openInventory(Inventory inventory) {
+    @SuppressWarnings("incomplete-switch")
+	public InventoryView openInventory(Inventory inventory) {
         if(!(getHandle() instanceof EntityPlayer)) return null;
         EntityPlayer player = (EntityPlayer) getHandle();
         InventoryType type = inventory.getType();

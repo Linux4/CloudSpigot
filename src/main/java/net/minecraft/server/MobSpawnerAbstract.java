@@ -17,11 +17,11 @@ public abstract class MobSpawnerAbstract {
     private final List<MobSpawnerAbstract.a> mobs = Lists.newArrayList();
     private MobSpawnerAbstract.a spawnData;
     private double e;
-    private double f;
+    //private double f; // CloudSpigot
     private int minSpawnDelay = 200;
     private int maxSpawnDelay = 800;
     private int spawnCount = 4;
-    private Entity j;
+    //private Entity j; // CloudSpigot
     private int maxNearbyEntities = 6;
     private int requiredPlayerRange = 16;
     private int spawnRange = 4;
@@ -76,7 +76,7 @@ public abstract class MobSpawnerAbstract {
                     this.spawnDelay -= tickDelay; // CloudSpigot
                 }
 
-                this.f = this.e;
+                //this.f = this.e; // CloudSpigot
                 this.e = (this.e + (double) (1000.0F / ((float) this.spawnDelay + 200.0F))) % 360.0D;
             } else {
                 if (this.spawnDelay < -tickDelay) { // CloudSpigot
@@ -134,7 +134,7 @@ public abstract class MobSpawnerAbstract {
             NBTTagCompound nbttagcompound = new NBTTagCompound();
 
             entity.d(nbttagcompound);
-            Iterator iterator = this.i().c.c().iterator();
+            Iterator<String> iterator = this.i().c.c().iterator();
 
             while (iterator.hasNext()) {
                 String s = (String) iterator.next();
@@ -169,7 +169,7 @@ public abstract class MobSpawnerAbstract {
                     NBTTagCompound nbttagcompound2 = new NBTTagCompound();
 
                     entity2.d(nbttagcompound2);
-                    Iterator iterator1 = nbttagcompound1.c().iterator();
+                    Iterator<String> iterator1 = nbttagcompound1.c().iterator();
 
                     while (iterator1.hasNext()) {
                         String s1 = (String) iterator1.next();
@@ -264,9 +264,9 @@ public abstract class MobSpawnerAbstract {
             this.spawnRange = nbttagcompound.getShort("SpawnRange");
         }
 
-        if (this.a() != null) {
+        /*if (this.a() != null) {
             this.j = null;
-        }
+        }*/ // CloudSpigot
 
     }
 
@@ -290,7 +290,7 @@ public abstract class MobSpawnerAbstract {
                 NBTTagList nbttaglist = new NBTTagList();
 
                 if (this.mobs.size() > 0) {
-                    Iterator iterator = this.mobs.iterator();
+                    Iterator<net.minecraft.server.MobSpawnerAbstract.a> iterator = this.mobs.iterator();
 
                     while (iterator.hasNext()) {
                         MobSpawnerAbstract.a mobspawnerabstract_a = (MobSpawnerAbstract.a) iterator.next();

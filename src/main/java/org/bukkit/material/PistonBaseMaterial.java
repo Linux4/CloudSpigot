@@ -47,7 +47,8 @@ public class PistonBaseMaterial extends MaterialData implements Directional, Red
         super(type, data);
     }
 
-    @Override
+    @SuppressWarnings({ "deprecation", "incomplete-switch" })
+	@Override
     public void setFacingDirection(BlockFace face) {
         byte data = (byte) (getData() & 0x8);
 
@@ -71,7 +72,8 @@ public class PistonBaseMaterial extends MaterialData implements Directional, Red
         setData(data);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public BlockFace getFacing() {
         byte dir = (byte) (getData() & 7);
 
@@ -93,7 +95,8 @@ public class PistonBaseMaterial extends MaterialData implements Directional, Red
         }
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public boolean isPowered() {
         return (getData() & 0x8) == 0x8;
     }
@@ -103,7 +106,8 @@ public class PistonBaseMaterial extends MaterialData implements Directional, Red
      *
      * @param powered true if the piston is extended {@literal &} powered, or false
      */
-    public void setPowered(boolean powered) {
+    @SuppressWarnings("deprecation")
+	public void setPowered(boolean powered) {
         setData((byte) (powered ? (getData() | 0x8) : (getData() & ~0x8)));
     }
 

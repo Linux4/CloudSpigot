@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import com.google.common.collect.Lists;
 
 public class WorldGenVillagePieces {
 
@@ -25,7 +26,7 @@ public class WorldGenVillagePieces {
     }
 
     public static List<WorldGenVillagePieces.WorldGenVillagePieceWeight> a(Random random, int i) {
-        ArrayList arraylist = Lists.newArrayList();
+        ArrayList<WorldGenVillagePieceWeight> arraylist = Lists.newArrayList();
 
         arraylist.add(new WorldGenVillagePieces.WorldGenVillagePieceWeight(WorldGenVillagePieces.WorldGenVillageHouse.class, 4, MathHelper.nextInt(random, 2 + i, 4 + i * 2)));
         arraylist.add(new WorldGenVillagePieces.WorldGenVillagePieceWeight(WorldGenVillagePieces.WorldGenVillageTemple.class, 20, MathHelper.nextInt(random, 0 + i, 1 + i)));
@@ -36,7 +37,7 @@ public class WorldGenVillagePieces {
         arraylist.add(new WorldGenVillagePieces.WorldGenVillagePieceWeight(WorldGenVillagePieces.WorldGenVillageFarm.class, 3, MathHelper.nextInt(random, 2 + i, 4 + i * 2)));
         arraylist.add(new WorldGenVillagePieces.WorldGenVillagePieceWeight(WorldGenVillagePieces.WorldGenVillageBlacksmith.class, 15, MathHelper.nextInt(random, 0, 1 + i)));
         arraylist.add(new WorldGenVillagePieces.WorldGenVillagePieceWeight(WorldGenVillagePieces.WorldGenVillageHouse2.class, 8, MathHelper.nextInt(random, 0 + i, 3 + i * 2)));
-        Iterator iterator = arraylist.iterator();
+        Iterator<WorldGenVillagePieceWeight> iterator = arraylist.iterator();
 
         while (iterator.hasNext()) {
             if (((WorldGenVillagePieces.WorldGenVillagePieceWeight) iterator.next()).d == 0) {
@@ -53,7 +54,7 @@ public class WorldGenVillagePieces {
 
         WorldGenVillagePieces.WorldGenVillagePieceWeight worldgenvillagepieces_worldgenvillagepieceweight;
 
-        for (Iterator iterator = list.iterator(); iterator.hasNext(); i += worldgenvillagepieces_worldgenvillagepieceweight.b) {
+        for (Iterator<WorldGenVillagePieceWeight> iterator = list.iterator(); iterator.hasNext(); i += worldgenvillagepieces_worldgenvillagepieceweight.b) {
             worldgenvillagepieces_worldgenvillagepieceweight = (WorldGenVillagePieces.WorldGenVillagePieceWeight) iterator.next();
             if (worldgenvillagepieces_worldgenvillagepieceweight.d > 0 && worldgenvillagepieces_worldgenvillagepieceweight.c < worldgenvillagepieces_worldgenvillagepieceweight.d) {
                 flag = true;
@@ -64,7 +65,7 @@ public class WorldGenVillagePieces {
     }
 
     private static WorldGenVillagePieces.WorldGenVillagePiece a(WorldGenVillagePieces.WorldGenVillageStartPiece worldgenvillagepieces_worldgenvillagestartpiece, WorldGenVillagePieces.WorldGenVillagePieceWeight worldgenvillagepieces_worldgenvillagepieceweight, List<StructurePiece> list, Random random, int i, int j, int k, EnumDirection enumdirection, int l) {
-        Class oclass = worldgenvillagepieces_worldgenvillagepieceweight.a;
+        Class<? extends WorldGenVillagePiece> oclass = worldgenvillagepieces_worldgenvillagepieceweight.a;
         Object object = null;
 
         if (oclass == WorldGenVillagePieces.WorldGenVillageHouse.class) {
@@ -101,7 +102,7 @@ public class WorldGenVillagePieces {
             while (j1 < 5) {
                 ++j1;
                 int k1 = random.nextInt(i1);
-                Iterator iterator = worldgenvillagepieces_worldgenvillagestartpiece.e.iterator();
+                Iterator<WorldGenVillagePieceWeight> iterator = worldgenvillagepieces_worldgenvillagestartpiece.e.iterator();
 
                 while (iterator.hasNext()) {
                     WorldGenVillagePieces.WorldGenVillagePieceWeight worldgenvillagepieces_worldgenvillagepieceweight = (WorldGenVillagePieces.WorldGenVillagePieceWeight) iterator.next();

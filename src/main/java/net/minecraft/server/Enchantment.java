@@ -124,7 +124,7 @@ public abstract class Enchantment {
     public void b(EntityLiving entityliving, Entity entity, int i) {}
 
     static {
-        ArrayList arraylist = Lists.newArrayList();
+        ArrayList<Enchantment> arraylist = Lists.newArrayList();
         Enchantment[] aenchantment = Enchantment.byId;
         int i = aenchantment.length;
 

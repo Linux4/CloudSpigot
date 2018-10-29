@@ -1,17 +1,11 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.mojang.authlib.GameProfile;
-import io.netty.buffer.Unpooled;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 // CraftBukkit start
 import org.bukkit.Bukkit;
@@ -24,15 +18,20 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 // CraftBukkit end
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.mojang.authlib.GameProfile;
+
 // CloudSpigot start
 import eu.server24_7.cloudspigot.CloudSpigotConfig;
-import eu.server24_7.cloudspigot.event.player.PlayerPreAutoRespawnEvent;
 import eu.server24_7.cloudspigot.event.player.PlayerAutoRespawnEvent;
+import eu.server24_7.cloudspigot.event.player.PlayerPreAutoRespawnEvent;
+import io.netty.buffer.Unpooled;
 // CloudSpigot end
 
 public class EntityPlayer extends EntityHuman implements ICrafting {
 
-    private static final Logger bH = LogManager.getLogger();
+    //private static final Logger bH = LogManager.getLogger(); // CloudSpigot
     public String locale = "en_US"; // Spigot
     public volatile PlayerConnection playerConnection;
     public final MinecraftServer server;
@@ -193,7 +192,8 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         this.playerConnection.sendPacket(new PacketPlayOutCombatEvent(this.bs(), PacketPlayOutCombatEvent.EnumCombatEventType.END_COMBAT));
     }
 
-    public void t_() {
+    @SuppressWarnings("rawtypes")
+	public void t_() {
         // CraftBukkit start
         if (this.joining) {
             this.joining = false;
@@ -219,7 +219,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         while (!this.removeQueue.isEmpty()) {
             int i = Math.min(this.removeQueue.size(), Integer.MAX_VALUE);
             int[] aint = new int[i];
-            Iterator iterator = this.removeQueue.iterator();
+            Iterator<Integer> iterator = this.removeQueue.iterator();
             int j = 0;
 
             while (iterator.hasNext() && j < i) {
@@ -231,9 +231,9 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         }
 
         if (!this.chunkCoordIntPairQueue.isEmpty()) {
-            ArrayList arraylist = Lists.newArrayList();
-            Iterator iterator1 = this.chunkCoordIntPairQueue.iterator();
-            ArrayList arraylist1 = Lists.newArrayList();
+            ArrayList<Chunk> arraylist = Lists.newArrayList();
+            Iterator<ChunkCoordIntPair> iterator1 = this.chunkCoordIntPairQueue.iterator();
+            ArrayList<TileEntity> arraylist1 = Lists.newArrayList();
 
             Chunk chunk;
 
@@ -302,7 +302,8 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
                 ItemStack itemstack = this.inventory.getItem(i);
 
                 if (itemstack != null && itemstack.getItem().f()) {
-                    Packet packet = ((ItemWorldMapBase) itemstack.getItem()).c(itemstack, this.world, this);
+                    @SuppressWarnings("rawtypes")
+					Packet packet = ((ItemWorldMapBase) itemstack.getItem()).c(itemstack, this.world, this);
 
                     if (packet != null) {
                         this.playerConnection.sendPacket(packet);
@@ -320,8 +321,8 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
 
             if (this.getHealth() + this.getAbsorptionHearts() != this.bL) {
                 this.bL = this.getHealth() + this.getAbsorptionHearts();
-                Collection collection = this.getScoreboard().getObjectivesForCriteria(IScoreboardCriteria.g);
-                Iterator iterator = collection.iterator();
+                Collection<ScoreboardObjective> collection = this.getScoreboard().getObjectivesForCriteria(IScoreboardCriteria.g);
+                Iterator<ScoreboardObjective> iterator = collection.iterator();
 
                 while (iterator.hasNext()) {
                     ScoreboardObjective scoreboardobjective = (ScoreboardObjective) iterator.next();
@@ -376,12 +377,12 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
 
         achievementset.add(s);
         if (this.getStatisticManager().b(AchievementList.L) && achievementset.size() >= BiomeBase.n.size()) {
-            HashSet hashset = Sets.newHashSet(BiomeBase.n);
-            Iterator iterator = achievementset.iterator();
+            HashSet<BiomeBase> hashset = Sets.newHashSet(BiomeBase.n);
+            Iterator<String> iterator = achievementset.iterator();
 
             while (iterator.hasNext()) {
                 String s1 = (String) iterator.next();
-                Iterator iterator1 = hashset.iterator();
+                Iterator<BiomeBase> iterator1 = hashset.iterator();
 
                 while (iterator1.hasNext()) {
                     BiomeBase biomebase1 = (BiomeBase) iterator1.next();
@@ -456,8 +457,8 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         // CraftBukkit end
 
         // CraftBukkit - Get our scores instead
-        Collection collection = this.world.getServer().getScoreboardManager().getScoreboardScores(IScoreboardCriteria.d, this.getName(), new java.util.ArrayList<ScoreboardScore>());
-        Iterator iterator = collection.iterator();
+        Collection<ScoreboardScore> collection = this.world.getServer().getScoreboardManager().getScoreboardScores(IScoreboardCriteria.d, this.getName(), new java.util.ArrayList<ScoreboardScore>());
+        Iterator<ScoreboardScore> iterator = collection.iterator();
 
         while (iterator.hasNext()) {
             ScoreboardScore scoreboardscore = (ScoreboardScore) iterator.next(); // CraftBukkit - Use our scores instead
@@ -584,7 +585,8 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
 
     private void a(TileEntity tileentity) {
         if (tileentity != null) {
-            Packet packet = tileentity.getUpdatePacket();
+            @SuppressWarnings("rawtypes")
+			Packet packet = tileentity.getUpdatePacket();
 
             if (packet != null) {
                 this.playerConnection.sendPacket(packet);
@@ -598,7 +600,8 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         this.activeContainer.b();
     }
 
-    public EntityHuman.EnumBedResult a(BlockPosition blockposition) {
+    @SuppressWarnings("rawtypes")
+	public EntityHuman.EnumBedResult a(BlockPosition blockposition) {
         EntityHuman.EnumBedResult entityhuman_enumbedresult = super.a(blockposition);
 
         if (entityhuman_enumbedresult == EntityHuman.EnumBedResult.OK) {
@@ -855,7 +858,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     public void a(Statistic statistic, int i) {
         if (statistic != null) {
             this.bK.b(this, statistic, i);
-            Iterator iterator = this.getScoreboard().getObjectivesForCriteria(statistic.k()).iterator();
+            Iterator<ScoreboardObjective> iterator = this.getScoreboard().getObjectivesForCriteria(statistic.k()).iterator();
 
             while (iterator.hasNext()) {
                 ScoreboardObjective scoreboardobjective = (ScoreboardObjective) iterator.next();
@@ -873,7 +876,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     public void a(Statistic statistic) {
         if (statistic != null) {
             this.bK.setStatistic(this, statistic, 0);
-            Iterator iterator = this.getScoreboard().getObjectivesForCriteria(statistic.k()).iterator();
+            Iterator<ScoreboardObjective> iterator = this.getScoreboard().getObjectivesForCriteria(statistic.k()).iterator();
 
             while (iterator.hasNext()) {
                 ScoreboardObjective scoreboardobjective = (ScoreboardObjective) iterator.next();
@@ -975,7 +978,8 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         return (WorldServer) this.world;
     }
 
-    public void a(WorldSettings.EnumGamemode worldsettings_enumgamemode) {
+    @SuppressWarnings("deprecation")
+	public void a(WorldSettings.EnumGamemode worldsettings_enumgamemode) {
         getBukkitEntity().setGameMode(org.bukkit.GameMode.getByValue(worldsettings_enumgamemode.getId()));
         /* CraftBukkit start - defer to our setGameMode
         this.playerInteractManager.setGameMode(worldsettings_enumgamemode);

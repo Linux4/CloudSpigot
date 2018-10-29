@@ -1,14 +1,13 @@
 package eu.server24_7.cloudspigot.exception;
 
-import com.google.common.base.Preconditions;
-import org.apache.commons.lang.Validate;
-import org.bukkit.plugin.Plugin;
+import static com.google.common.base.Preconditions.checkNotNull;
 
-import static com.google.common.base.Preconditions.*;
+import org.bukkit.plugin.Plugin;
 
 /**
  * Wrapper exception for all cases to which a plugin can be immediately blamed for
  */
+@SuppressWarnings("serial")
 public class ServerPluginException extends ServerException {
     public ServerPluginException(String message, Throwable cause, Plugin responsiblePlugin) {
         super(message, cause);

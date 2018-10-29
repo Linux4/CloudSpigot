@@ -16,7 +16,8 @@ public class EntityWolf extends EntityTameableAnimal {
     private float bs;
     private float bt;
 
-    public EntityWolf(World world) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public EntityWolf(World world) {
         super(world);
         this.setSize(0.6F, 0.8F);
         ((Navigation) this.getNavigation()).a(true);
@@ -33,12 +34,12 @@ public class EntityWolf extends EntityTameableAnimal {
         this.targetSelector.a(1, new PathfinderGoalOwnerHurtByTarget(this));
         this.targetSelector.a(2, new PathfinderGoalOwnerHurtTarget(this));
         this.targetSelector.a(3, new PathfinderGoalHurtByTarget(this, true, new Class[0]));
-        this.targetSelector.a(4, new PathfinderGoalRandomTargetNonTamed(this, EntityAnimal.class, false, new Predicate() {
+        this.targetSelector.a(4, new PathfinderGoalRandomTargetNonTamed(this, EntityAnimal.class, false, new Predicate<Entity>() {
             public boolean a(Entity entity) {
                 return entity instanceof EntitySheep || entity instanceof EntityRabbit;
             }
 
-            public boolean apply(Object object) {
+            public boolean apply(Entity object) {
                 return this.a((Entity) object);
             }
         }));

@@ -7,29 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import net.minecraft.server.DamageSource;
-import net.minecraft.server.EntityArmorStand;
-import net.minecraft.server.EntityArrow;
-import net.minecraft.server.EntityEgg;
-import net.minecraft.server.EntityEnderDragon;
-import net.minecraft.server.EntityEnderPearl;
-import net.minecraft.server.EntityFishingHook;
-import net.minecraft.server.EntityHuman;
-import net.minecraft.server.EntityFireball;
-import net.minecraft.server.EntityInsentient;
-import net.minecraft.server.EntityLargeFireball;
-import net.minecraft.server.EntityLiving;
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.EntityPotion;
-import net.minecraft.server.EntitySmallFireball;
-import net.minecraft.server.EntitySnowball;
-import net.minecraft.server.EntityThrownExpBottle;
-import net.minecraft.server.EntityWither;
-import net.minecraft.server.EntityWitherSkull;
-import net.minecraft.server.GenericAttributes;
-import net.minecraft.server.MobEffect;
-import net.minecraft.server.MobEffectList;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -63,6 +40,29 @@ import org.bukkit.util.BlockIterator;
 import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
 
+import net.minecraft.server.DamageSource;
+import net.minecraft.server.EntityArmorStand;
+import net.minecraft.server.EntityArrow;
+import net.minecraft.server.EntityEgg;
+import net.minecraft.server.EntityEnderPearl;
+import net.minecraft.server.EntityFireball;
+import net.minecraft.server.EntityFishingHook;
+import net.minecraft.server.EntityHuman;
+import net.minecraft.server.EntityInsentient;
+import net.minecraft.server.EntityLargeFireball;
+import net.minecraft.server.EntityLiving;
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.EntityPotion;
+import net.minecraft.server.EntitySmallFireball;
+import net.minecraft.server.EntitySnowball;
+import net.minecraft.server.EntityThrownExpBottle;
+import net.minecraft.server.EntityWither;
+import net.minecraft.server.EntityWitherSkull;
+import net.minecraft.server.GenericAttributes;
+import net.minecraft.server.MobEffect;
+import net.minecraft.server.MobEffectList;
+
+@SuppressWarnings("deprecation")
 public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     private CraftEntityEquipment equipment;
 

@@ -88,7 +88,7 @@ public class ServerStatisticManager extends StatisticManager {
     }
 
     public Set<Statistic> c() {
-        HashSet hashset = Sets.newHashSet(this.e);
+        HashSet<Statistic> hashset = Sets.newHashSet(this.e);
 
         this.e.clear();
         this.g = false;
@@ -102,11 +102,11 @@ public class ServerStatisticManager extends StatisticManager {
             return Maps.newHashMap();
         } else {
             JsonObject jsonobject = jsonelement.getAsJsonObject();
-            HashMap hashmap = Maps.newHashMap();
-            Iterator iterator = jsonobject.entrySet().iterator();
+            HashMap<Statistic, StatisticWrapper> hashmap = Maps.newHashMap();
+            Iterator<Entry<String, JsonElement>> iterator = jsonobject.entrySet().iterator();
 
             while (iterator.hasNext()) {
-                Entry entry = (Entry) iterator.next();
+                Entry<String, JsonElement> entry = iterator.next();
                 Statistic statistic = StatisticList.getStatistic((String) entry.getKey());
 
                 if (statistic != null) {
@@ -123,7 +123,7 @@ public class ServerStatisticManager extends StatisticManager {
 
                         if (jsonobject1.has("progress") && statistic.l() != null) {
                             try {
-                                Constructor constructor = statistic.l().getConstructor(new Class[0]);
+                                Constructor<? extends IJsonStatistic> constructor = statistic.l().getConstructor(new Class[0]);
                                 IJsonStatistic ijsonstatistic = (IJsonStatistic) constructor.newInstance(new Object[0]);
 
                                 ijsonstatistic.a(jsonobject1.get("progress"));
@@ -146,10 +146,10 @@ public class ServerStatisticManager extends StatisticManager {
 
     public static String a(Map<Statistic, StatisticWrapper> map) {
         JsonObject jsonobject = new JsonObject();
-        Iterator iterator = map.entrySet().iterator();
+        Iterator<Entry<Statistic, StatisticWrapper>> iterator = map.entrySet().iterator();
 
         while (iterator.hasNext()) {
-            Entry entry = (Entry) iterator.next();
+            Entry<Statistic, StatisticWrapper> entry = iterator.next();
 
             if (((StatisticWrapper) entry.getValue()).b() != null) {
                 JsonObject jsonobject1 = new JsonObject();
@@ -172,7 +172,7 @@ public class ServerStatisticManager extends StatisticManager {
     }
 
     public void d() {
-        Iterator iterator = this.a.keySet().iterator();
+        Iterator<Statistic> iterator = this.a.keySet().iterator();
 
         while (iterator.hasNext()) {
             Statistic statistic = (Statistic) iterator.next();
@@ -184,11 +184,11 @@ public class ServerStatisticManager extends StatisticManager {
 
     public void a(EntityPlayer entityplayer) {
         int i = this.c.at();
-        HashMap hashmap = Maps.newHashMap();
+        HashMap<Statistic, Integer> hashmap = Maps.newHashMap();
 
         if (this.g || i - this.f > 300) {
             this.f = i;
-            Iterator iterator = this.c().iterator();
+            Iterator<Statistic> iterator = this.c().iterator();
 
             while (iterator.hasNext()) {
                 Statistic statistic = (Statistic) iterator.next();
@@ -201,8 +201,8 @@ public class ServerStatisticManager extends StatisticManager {
     }
 
     public void updateStatistics(EntityPlayer entityplayer) {
-        HashMap hashmap = Maps.newHashMap();
-        Iterator iterator = AchievementList.e.iterator();
+        HashMap<Statistic, Integer> hashmap = Maps.newHashMap();
+        Iterator<Achievement> iterator = AchievementList.e.iterator();
 
         while (iterator.hasNext()) {
             Achievement achievement = (Achievement) iterator.next();

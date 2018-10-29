@@ -6,7 +6,8 @@ public class EntitySilverfish extends EntityMonster {
 
     private EntitySilverfish.PathfinderGoalSilverfishWakeOthers a;
 
-    public EntitySilverfish(World world) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public EntitySilverfish(World world) {
         super(world);
         this.setSize(0.4F, 0.3F);
         this.goalSelector.a(1, new PathfinderGoalFloat(this));

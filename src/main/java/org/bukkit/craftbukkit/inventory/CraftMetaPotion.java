@@ -41,7 +41,8 @@ class CraftMetaPotion extends CraftMetaItem implements PotionMeta {
         }
     }
 
-    CraftMetaPotion(NBTTagCompound tag) {
+    @SuppressWarnings("deprecation")
+	CraftMetaPotion(NBTTagCompound tag) {
         super(tag);
 
         if (tag.hasKey(POTION_EFFECTS.NBT)) {
@@ -77,7 +78,8 @@ class CraftMetaPotion extends CraftMetaItem implements PotionMeta {
         }
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     void applyToItem(NBTTagCompound tag) {
         super.applyToItem(tag);
         if (customEffects != null) {

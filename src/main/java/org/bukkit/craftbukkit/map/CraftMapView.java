@@ -45,11 +45,13 @@ public final class CraftMapView implements MapView {
         return renderers.size() > 0 && !(renderers.get(0) instanceof CraftMapRenderer);
     }
 
-    public Scale getScale() {
+    @SuppressWarnings("deprecation")
+	public Scale getScale() {
         return Scale.valueOf(worldMap.scale);
     }
 
-    public void setScale(Scale scale) {
+    @SuppressWarnings("deprecation")
+	public void setScale(Scale scale) {
         worldMap.scale = scale.getValue();
     }
 

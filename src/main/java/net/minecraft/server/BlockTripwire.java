@@ -136,10 +136,10 @@ public class BlockTripwire extends Block {
         IBlockData iblockdata = world.getType(blockposition);
         boolean flag = ((Boolean) iblockdata.get(BlockTripwire.POWERED)).booleanValue();
         boolean flag1 = false;
-        List list = world.getEntities((Entity) null, new AxisAlignedBB((double) blockposition.getX() + this.minX, (double) blockposition.getY() + this.minY, (double) blockposition.getZ() + this.minZ, (double) blockposition.getX() + this.maxX, (double) blockposition.getY() + this.maxY, (double) blockposition.getZ() + this.maxZ));
+        List<Entity> list = world.getEntities((Entity) null, new AxisAlignedBB((double) blockposition.getX() + this.minX, (double) blockposition.getY() + this.minY, (double) blockposition.getZ() + this.minZ, (double) blockposition.getX() + this.maxX, (double) blockposition.getY() + this.maxY, (double) blockposition.getZ() + this.maxZ));
 
         if (!list.isEmpty()) {
-            Iterator iterator = list.iterator();
+            Iterator<Entity> iterator = list.iterator();
 
             while (iterator.hasNext()) {
                 Entity entity = (Entity) iterator.next();

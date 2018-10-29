@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import java.util.Iterator;
+
 import org.bukkit.event.entity.EntityInteractEvent; // CraftBukkit
 
 public class BlockPressurePlateWeighted extends BlockPressurePlateAbstract {
@@ -21,7 +23,7 @@ public class BlockPressurePlateWeighted extends BlockPressurePlateAbstract {
         // CraftBukkit start
         //int i = Math.min(world.a(Entity.class, this.a(blockposition)).size(), this.b);
         int i = 0;
-        java.util.Iterator iterator = world.a(Entity.class, this.getBoundingBox(blockposition)).iterator();
+        Iterator<Entity> iterator = world.a(Entity.class, this.getBoundingBox(blockposition)).iterator();
 
         while (iterator.hasNext()) {
             Entity entity = (Entity) iterator.next();

@@ -1,29 +1,21 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.google.common.primitives.Doubles;
-import com.google.common.primitives.Floats;
-//import com.google.common.util.concurrent.Futures; // CloudSpigot
-import io.netty.buffer.Unpooled;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 // CraftBukkit start
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
-import java.util.HashSet;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.bukkit.Location;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
@@ -31,8 +23,6 @@ import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
 import org.bukkit.craftbukkit.util.LazyPlayerSet;
 import org.bukkit.craftbukkit.util.Waitable;
-
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.Action;
@@ -47,8 +37,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -62,8 +52,18 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.util.NumberConversions;
 // CraftBukkit end
 
-import eu.server24_7.cloudspigot.CloudSpigotConfig; // CloudSpigot
+import com.google.common.collect.Lists;
+import com.google.common.primitives.Doubles;
+import com.google.common.primitives.Floats;
 
+import eu.server24_7.cloudspigot.CloudSpigotConfig; // CloudSpigot
+//import com.google.common.util.concurrent.Futures; // CloudSpigot
+import io.netty.buffer.Unpooled;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
+import net.minecraft.server.PacketPlayOutPosition.EnumPlayerTeleportFlags;
+
+@SuppressWarnings("deprecation")
 public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerListBox {
 
     private static final Logger c = LogManager.getLogger();
@@ -79,10 +79,10 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
     private long k;
     // CraftBukkit start - multithreaded fields
     private volatile int chatThrottle;
-    private static final AtomicIntegerFieldUpdater chatSpamField = AtomicIntegerFieldUpdater.newUpdater(PlayerConnection.class, "chatThrottle");
+    private static final AtomicIntegerFieldUpdater<PlayerConnection> chatSpamField = AtomicIntegerFieldUpdater.newUpdater(PlayerConnection.class, "chatThrottle");
     // CraftBukkit end
     private int m;
-    private IntHashMap<Short> n = new IntHashMap();
+    private IntHashMap<Short> n = new IntHashMap<Short>();
     private double o;
     private double p;
     private double q;
@@ -160,7 +160,8 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
         return this.networkManager;
     }
 
-    public void disconnect(String s) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public void disconnect(String s) {
         // CraftBukkit start - fire PlayerKickEvent
         String leaveMessage = EnumChatFormat.YELLOW + this.player.getName() + " left the game.";
 
@@ -518,7 +519,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
         internalTeleport(dest.getX(), dest.getY(), dest.getZ(), dest.getYaw(), dest.getPitch(), Collections.emptySet());
     }
 
-    private void internalTeleport(double d0, double d1, double d2, float f, float f1, Set set) {
+    private void internalTeleport(double d0, double d1, double d2, float f, float f1, Set<EnumPlayerTeleportFlags> set) {
         if (Float.isNaN(f)) {
             f = 0;
         }
@@ -567,7 +568,8 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
         this.player.playerConnection.sendPacket(new PacketPlayOutPosition(d0, d1, d2, f, f1, set));
     }
 
-    public void a(PacketPlayInBlockDig packetplayinblockdig) {
+    @SuppressWarnings("static-access")
+	public void a(PacketPlayInBlockDig packetplayinblockdig) {
         PlayerConnectionUtils.ensureMainThread(packetplayinblockdig, this, this.player.u());
         if (this.player.dead) return; // CraftBukkit
         WorldServer worldserver = this.minecraftServer.getWorldServer(this.player.dimension);
@@ -885,7 +887,8 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 
     }
 
-    public void sendPacket(final Packet packet) {
+    @SuppressWarnings("rawtypes")
+	public void sendPacket(final Packet packet) {
         if (packet instanceof PacketPlayOutChat) {
             PacketPlayOutChat packetplayoutchat = (PacketPlayOutChat) packet;
             EntityHuman.EnumChatVisibility entityhuman_enumchatvisibility = this.player.getChatFlags();
@@ -914,12 +917,12 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
             CrashReport crashreport = CrashReport.a(throwable, "Sending packet");
             CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Packet being sent");
 
-            crashreportsystemdetails.a("Packet class", new Callable() {
+            crashreportsystemdetails.a("Packet class", new Callable<String>() {
                 public String a() throws Exception {
                     return packet.getClass().getCanonicalName();
                 }
 
-                public Object call() throws Exception {
+                public String call() throws Exception {
                     return this.a();
                 }
             });
@@ -970,7 +973,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
                 if (!SharedConstants.isAllowedChatCharacter(s.charAt(i))) {
                     // CraftBukkit start - threadsafety
                     if (!isSync) {
-                        Waitable waitable = new Waitable() {
+                        Waitable<Object> waitable = new Waitable<Object>() {
                             @Override
                             protected Object evaluate() {
                                 PlayerConnection.this.disconnect("Illegal characters in chat");
@@ -1008,7 +1011,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
             } else if (getPlayer().isConversing()) {
                 // Spigot start
                 final String message = s;
-                this.minecraftServer.processQueue.add( new Waitable()
+				this.minecraftServer.processQueue.add(new Waitable<Object>()
                 {
                     @Override
                     protected Object evaluate()
@@ -1047,7 +1050,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
             // this.chatThrottle += 20;
             if (counted && chatSpamField.addAndGet(this, 20) > 200 && !this.minecraftServer.getPlayerList().isOp(this.player.getProfile())) { // Spigot
                 if (!isSync) {
-                    Waitable waitable = new Waitable() {
+                    Waitable<Object> waitable = new Waitable<Object>() {
                         @Override
                         protected Object evaluate() {
                             PlayerConnection.this.disconnect("disconnect.spam");
@@ -1085,7 +1088,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
                 final String fCommandLine = s;
                 MinecraftServer.LOGGER.log(org.apache.logging.log4j.Level.ERROR, "Command Dispatched Async: " + fCommandLine);
                 MinecraftServer.LOGGER.log(org.apache.logging.log4j.Level.ERROR, "Please notify author of plugin causing this execution to fix this bug! see: http://bit.ly/1oSiM6C", new Throwable());
-                Waitable wait = new Waitable() {
+                Waitable<Object> wait = new Waitable<Object>() {
                     @Override
                     protected Object evaluate() {
                         chat(fCommandLine, false);
@@ -1113,7 +1116,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
                 // Evil plugins still listening to deprecated event
                 final PlayerChatEvent queueEvent = new PlayerChatEvent(player, event.getMessage(), event.getFormat(), event.getRecipients());
                 queueEvent.setCancelled(event.isCancelled());
-                Waitable waitable = new Waitable() {
+                Waitable<Object> waitable = new Waitable<Object>() {
                     @Override
                     protected Object evaluate() {
                         org.bukkit.Bukkit.getPluginManager().callEvent(queueEvent);
@@ -1168,7 +1171,8 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
     }
     // CraftBukkit end
 
-   private void handleCommand(String s) {
+   @SuppressWarnings("static-access")
+private void handleCommand(String s) {
        // CraftBukkit start - whole method
         if ( org.spigotmc.SpigotConfig.logCommands ) // Spigot
         this.c.info(this.player.getName() + " issued server command: " + s);
@@ -1230,7 +1234,8 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
         this.player.bw();
     }
 
-    public void a(PacketPlayInEntityAction packetplayinentityaction) {
+    @SuppressWarnings("incomplete-switch")
+	public void a(PacketPlayInEntityAction packetplayinentityaction) {
         PlayerConnectionUtils.ensureMainThread(packetplayinentityaction, this, this.player.u());
         // CraftBukkit start
         if (this.player.dead) return;
@@ -1733,13 +1738,13 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
                     this.n.a(this.player.activeContainer.windowId, Short.valueOf(packetplayinwindowclick.d()));
                     this.player.playerConnection.sendPacket(new PacketPlayOutTransaction(packetplayinwindowclick.a(), packetplayinwindowclick.d(), false));
                     this.player.activeContainer.a(this.player, false);
-                    ArrayList arraylist1 = Lists.newArrayList();
+                    ArrayList<ItemStack> arraylist1 = Lists.newArrayList();
 
                     for (int j = 0; j < this.player.activeContainer.c.size(); ++j) {
                         arraylist1.add(((Slot) this.player.activeContainer.c.get(j)).getItem());
                     }
 
-                    this.player.a(this.player.activeContainer, (List) arraylist1);
+                    this.player.a(this.player.activeContainer, arraylist1);
                 }
             //}
         }
@@ -1951,8 +1956,8 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
             return;
         }
         // CraftBukkit end
-        ArrayList arraylist = Lists.newArrayList();
-        Iterator iterator = this.minecraftServer.tabCompleteCommand(this.player, packetplayintabcomplete.a(), packetplayintabcomplete.b()).iterator();
+        ArrayList<String> arraylist = Lists.newArrayList();
+        Iterator<String> iterator = this.minecraftServer.tabCompleteCommand(this.player, packetplayintabcomplete.a(), packetplayintabcomplete.b()).iterator();
 
         while (iterator.hasNext()) {
             String s = (String) iterator.next();

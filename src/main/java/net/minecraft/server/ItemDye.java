@@ -85,7 +85,8 @@ public class ItemDye extends Item {
         return false;
     }
 
-    public boolean a(ItemStack itemstack, EntityHuman entityhuman, EntityLiving entityliving) {
+    @SuppressWarnings("deprecation")
+	public boolean a(ItemStack itemstack, EntityHuman entityhuman, EntityLiving entityliving) {
         if (entityliving instanceof EntitySheep) {
             EntitySheep entitysheep = (EntitySheep) entityliving;
             EnumColor enumcolor = EnumColor.fromInvColorIndex(itemstack.getData());

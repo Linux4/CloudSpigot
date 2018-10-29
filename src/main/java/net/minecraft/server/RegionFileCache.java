@@ -44,7 +44,7 @@ public class RegionFileCache {
     }
 
     public static void a() { //  CloudSpigot - remove synchronization
-        Iterator iterator = RegionFileCache.a.values().iterator();
+        Iterator<RegionFile> iterator = RegionFileCache.a.values().iterator();
 
         while (iterator.hasNext()) {
             RegionFile regionfile = (RegionFile) iterator.next();

@@ -36,7 +36,8 @@ public class CraftNoteBlock extends CraftBlockState implements NoteBlock {
         return note.note;
     }
 
-    public void setNote(Note n) {
+    @SuppressWarnings("deprecation")
+	public void setNote(Note n) {
         note.note = n.getId();
     }
 
@@ -67,7 +68,8 @@ public class CraftNoteBlock extends CraftBlockState implements NoteBlock {
         }
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public boolean play(Instrument instrument, Note note) {
         Block block = getBlock();
 

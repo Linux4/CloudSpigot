@@ -37,7 +37,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
 import org.bukkit.plugin.RegisteredListener;
-import org.bukkit.plugin.TimedRegisteredListener;
 import org.bukkit.plugin.UnknownDependencyException;
 import org.yaml.snakeyaml.error.YAMLException;
 
@@ -344,7 +343,8 @@ public final class JavaPluginLoader implements PluginLoader {
         }
     }
 
-    public void disablePlugin(Plugin plugin) {
+    @SuppressWarnings("resource")
+	public void disablePlugin(Plugin plugin) {
         Validate.isTrue(plugin instanceof JavaPlugin, "Plugin is not associated with this PluginLoader");
 
         if (plugin.isEnabled()) {

@@ -20,7 +20,7 @@ public class PathfinderGoalTargetNearestPlayer extends PathfinderGoal {
             PathfinderGoalTargetNearestPlayer.a.warn("Use NearestAttackableTargetGoal.class for PathfinerMob mobs!");
         }
 
-        this.c = new Predicate() {
+        this.c = new Predicate<Entity>() {
             public boolean a(Entity entity) {
                 if (!(entity instanceof EntityHuman)) {
                     return false;
@@ -47,7 +47,7 @@ public class PathfinderGoalTargetNearestPlayer extends PathfinderGoal {
                 }
             }
 
-            public boolean apply(Object object) {
+            public boolean apply(Entity object) {
                 return this.a((Entity) object);
             }
         };
@@ -56,7 +56,7 @@ public class PathfinderGoalTargetNearestPlayer extends PathfinderGoal {
 
     public boolean a() {
         double d0 = this.f();
-        List list = this.b.world.a(EntityHuman.class, this.b.getBoundingBox().grow(d0, 4.0D, d0), this.c);
+        List<EntityHuman> list = this.b.world.a(EntityHuman.class, this.b.getBoundingBox().grow(d0, 4.0D, d0), this.c);
 
         Collections.sort(list, this.d);
         if (list.isEmpty()) {

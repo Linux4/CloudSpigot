@@ -179,7 +179,7 @@ public class NBTTagList extends NBTBase {
         NBTTagList nbttaglist = new NBTTagList();
 
         nbttaglist.type = this.type;
-        Iterator iterator = this.list.iterator();
+        Iterator<NBTBase> iterator = this.list.iterator();
 
         while (iterator.hasNext()) {
             NBTBase nbtbase = (NBTBase) iterator.next();

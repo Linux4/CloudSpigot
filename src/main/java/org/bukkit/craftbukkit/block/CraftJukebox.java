@@ -35,7 +35,8 @@ public class CraftJukebox extends CraftBlockState implements Jukebox {
         return CraftMagicNumbers.getMaterial(record.getItem());
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void setPlaying(Material record) {
         if (record == null || CraftMagicNumbers.getItem(record) == null) {
             record = Material.AIR;

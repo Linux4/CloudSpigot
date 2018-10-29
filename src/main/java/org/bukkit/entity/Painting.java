@@ -6,6 +6,7 @@ import org.bukkit.event.painting.PaintingBreakEvent;
 /**
  * Represents a Painting.
  */
+@SuppressWarnings("deprecation")
 public interface Painting extends Hanging {
 
     /**

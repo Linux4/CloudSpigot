@@ -53,7 +53,7 @@ public class WorldManager implements IWorldAccess {
     }
 
     public void b(int i, BlockPosition blockposition, int j) {
-        Iterator iterator = this.a.getPlayerList().v().iterator();
+        Iterator<EntityPlayer> iterator = this.a.getPlayerList().v().iterator();
 
         // CraftBukkit start
         EntityHuman entityhuman = null;

@@ -1,18 +1,15 @@
 package net.minecraft.server;
 
-import java.util.List;
-
 // CraftBukkit start
 import java.util.AbstractList;
-import java.util.Collection;
-//import java.util.Iterator; // CloudSpigot
-import java.util.ListIterator;
+import java.util.List;
 
-import com.google.common.collect.ImmutableList;
 import org.bukkit.craftbukkit.block.CraftBlock;
-import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 // CraftBukkit end
+import org.bukkit.event.block.BlockPistonRetractEvent;
+
+import com.google.common.collect.ImmutableList;
 
 public class BlockPiston extends Block {
 
@@ -299,8 +296,8 @@ public class BlockPiston extends Block {
         }
 
         PistonExtendsChecker pistonextendschecker = new PistonExtendsChecker(world, blockposition, enumdirection, flag);
-        List list = pistonextendschecker.getMovedBlocks();
-        List list1 = pistonextendschecker.getBrokenBlocks();
+        List<BlockPosition> list = pistonextendschecker.getMovedBlocks();
+        List<BlockPosition> list1 = pistonextendschecker.getBrokenBlocks();
 
         if (!pistonextendschecker.a()) {
             return false;

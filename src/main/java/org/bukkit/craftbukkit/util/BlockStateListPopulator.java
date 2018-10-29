@@ -23,13 +23,15 @@ public class BlockStateListPopulator {
         this.list = list;
     }
 
-    public void setTypeAndData(int x, int y, int z, Block block, int data, int light) {
+    @SuppressWarnings("deprecation")
+	public void setTypeAndData(int x, int y, int z, Block block, int data, int light) {
         BlockState state = world.getBlockAt(x, y, z).getState();
         state.setTypeId(Block.getId(block));
         state.setRawData((byte) data);
         list.add(state);
     }
-    public void setTypeId(int x, int y, int z, int type) {
+    @SuppressWarnings("deprecation")
+	public void setTypeId(int x, int y, int z, int type) {
         BlockState state = world.getBlockAt(x, y, z).getState();
         state.setTypeId(type);
         list.add(state);
@@ -44,7 +46,8 @@ public class BlockStateListPopulator {
         
     }
 
-    public void setType(int x, int y, int z, Block block) {
+    @SuppressWarnings("deprecation")
+	public void setType(int x, int y, int z, Block block) {
         BlockState state = world.getBlockAt(x, y, z).getState();
         state.setTypeId(Block.getId(block));
         list.add(state);

@@ -95,7 +95,7 @@ public class CommandExecute extends CommandAbstract {
                     entity.a(commandobjectiveexecutor_enumcommandresult, i);
                 }
             };
-            ICommandHandler icommandhandler = MinecraftServer.getServer().getCommandHandler();
+            //ICommandHandler icommandhandler = MinecraftServer.getServer().getCommandHandler(); // CloudSpigot
 
             try {
                 // CraftBukkit start
@@ -128,7 +128,8 @@ public class CommandExecute extends CommandAbstract {
         }
     }
 
-    public List<String> tabComplete(ICommandListener icommandlistener, String[] astring, BlockPosition blockposition) {
+    @SuppressWarnings("rawtypes")
+	public List<String> tabComplete(ICommandListener icommandlistener, String[] astring, BlockPosition blockposition) {
         return astring.length == 1 ? a(astring, MinecraftServer.getServer().getPlayers()) : (astring.length > 1 && astring.length <= 4 ? a(astring, 1, blockposition) : (astring.length > 5 && astring.length <= 8 && "detect".equals(astring[4]) ? a(astring, 5, blockposition) : (astring.length == 9 && "detect".equals(astring[4]) ? a(astring, (Collection) Block.REGISTRY.keySet()) : null)));
     }
 

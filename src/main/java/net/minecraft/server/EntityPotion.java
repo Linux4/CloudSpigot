@@ -62,14 +62,14 @@ public class EntityPotion extends EntityProjectile {
 
     protected void a(MovingObjectPosition movingobjectposition) {
         if (!this.world.isClientSide) {
-            List list = Items.POTION.h(this.item);
+            List<MobEffect> list = Items.POTION.h(this.item);
 
-            if (true || list != null && !list.isEmpty()) { // CraftBukkit - Call event even if no effects to apply
+            if (true) { // CraftBukkit - Call event even if no effects to apply // CloudSpigot
                 AxisAlignedBB axisalignedbb = this.getBoundingBox().grow(4.0D, 2.0D, 4.0D);
-                List list1 = this.world.a(EntityLiving.class, axisalignedbb);
+                List<EntityLiving> list1 = this.world.a(EntityLiving.class, axisalignedbb);
 
-                if (true || !list1.isEmpty()) { // CraftBukkit - Run code even if there are no entities around
-                    Iterator iterator = list1.iterator();
+                if (true) { // CraftBukkit - Run code even if there are no entities around // CloudSpigot
+                    Iterator<EntityLiving> iterator = list1.iterator();
 
                     // CraftBukkit
                     HashMap<LivingEntity, Double> affected = new HashMap<LivingEntity, Double>();
@@ -101,7 +101,7 @@ public class EntityPotion extends EntityProjectile {
                             double d1 = event.getIntensity(victim);
                             // CraftBukkit end
 
-                            Iterator iterator1 = list.iterator();
+                            Iterator<MobEffect> iterator1 = list.iterator();
 
                             while (iterator1.hasNext()) {
                                 MobEffect mobeffect = (MobEffect) iterator1.next();

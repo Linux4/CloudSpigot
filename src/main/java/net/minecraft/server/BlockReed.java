@@ -52,7 +52,7 @@ public class BlockReed extends Block {
         } else if (block != Blocks.GRASS && block != Blocks.DIRT && block != Blocks.SAND) {
             return false;
         } else {
-            Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+            Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
             EnumDirection enumdirection;
 

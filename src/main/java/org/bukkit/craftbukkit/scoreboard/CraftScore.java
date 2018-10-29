@@ -26,7 +26,8 @@ final class CraftScore implements Score {
         this.entry = entry;
     }
 
-    public OfflinePlayer getPlayer() {
+    @SuppressWarnings("deprecation")
+	public OfflinePlayer getPlayer() {
         return Bukkit.getOfflinePlayer(entry);
     }
 

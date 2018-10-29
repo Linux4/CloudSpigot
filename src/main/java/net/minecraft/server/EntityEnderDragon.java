@@ -326,10 +326,10 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
 
         if (this.random.nextInt(10) == 0) {
             float f = 32.0F;
-            List list = this.world.a(EntityEnderCrystal.class, this.getBoundingBox().grow((double) f, (double) f, (double) f));
+            List<EntityEnderCrystal> list = this.world.a(EntityEnderCrystal.class, this.getBoundingBox().grow((double) f, (double) f, (double) f));
             EntityEnderCrystal entityendercrystal = null;
             double d0 = Double.MAX_VALUE;
-            Iterator iterator = list.iterator();
+            Iterator<EntityEnderCrystal> iterator = list.iterator();
 
             while (iterator.hasNext()) {
                 EntityEnderCrystal entityendercrystal1 = (EntityEnderCrystal) iterator.next();
@@ -349,7 +349,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
     private void a(List<Entity> list) {
         double d0 = (this.bo.getBoundingBox().a + this.bo.getBoundingBox().d) / 2.0D;
         double d1 = (this.bo.getBoundingBox().c + this.bo.getBoundingBox().f) / 2.0D;
-        Iterator iterator = list.iterator();
+        Iterator<Entity> iterator = list.iterator();
 
         while (iterator.hasNext()) {
             Entity entity = (Entity) iterator.next();
@@ -379,8 +379,8 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
 
     private void cf() {
         this.bw = false;
-        ArrayList arraylist = Lists.newArrayList(this.world.players);
-        Iterator iterator = arraylist.iterator();
+        ArrayList<EntityHuman> arraylist = Lists.newArrayList(this.world.players);
+        Iterator<EntityHuman> iterator = arraylist.iterator();
 
         while (iterator.hasNext()) {
             if (((EntityHuman) iterator.next()).isSpectator()) {
@@ -427,7 +427,8 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         return (float) MathHelper.g(d0);
     }
 
-    private boolean b(AxisAlignedBB axisalignedbb) {
+    @SuppressWarnings("deprecation")
+	private boolean b(AxisAlignedBB axisalignedbb) {
         int i = MathHelper.floor(axisalignedbb.a);
         int j = MathHelper.floor(axisalignedbb.b);
         int k = MathHelper.floor(axisalignedbb.c);
@@ -612,7 +613,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
     }
 
     private void a(BlockPosition blockposition) {
-        boolean flag = true;
+        //boolean flag = true; // CloudSpigot
         //double d0 = 12.25D; // CloudSpigot
         //double d1 = 6.25D; // CloudSpigot
 
@@ -665,7 +666,7 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
         } else {
             for (BlockState state : event.getBlocks()) {
                 PacketPlayOutBlockChange packet = new PacketPlayOutBlockChange(this.world, new BlockPosition(state.getX(), state.getY(), state.getZ()));
-                for (Iterator it = this.world.players.iterator(); it.hasNext();) {
+                for (Iterator<EntityHuman> it = this.world.players.iterator(); it.hasNext();) {
                     EntityHuman entity = (EntityHuman) it.next();
                     if (entity instanceof EntityPlayer) {
                         ((EntityPlayer) entity).playerConnection.sendPacket(packet);

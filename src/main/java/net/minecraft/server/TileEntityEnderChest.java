@@ -5,7 +5,7 @@ public class TileEntityEnderChest extends TileEntity { // CloudSpigot - remove I
     public float a; // CloudSpigot - lidAngle
     public float f;
     public int g; // CloudSpigot - numPlayersUsing
-    private int h;
+    //private int h; // CloudSpigot
 
     public TileEntityEnderChest() {}
 

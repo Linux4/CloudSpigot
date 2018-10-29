@@ -37,7 +37,8 @@ public class CraftMetaBanner extends CraftMetaItem implements BannerMeta {
         patterns = new ArrayList<Pattern>(banner.patterns);
     }
 
-    CraftMetaBanner(NBTTagCompound tag) {
+    @SuppressWarnings("deprecation")
+	CraftMetaBanner(NBTTagCompound tag) {
         super(tag);
         
         if (!tag.hasKey("BlockEntityTag")) {
@@ -77,7 +78,8 @@ public class CraftMetaBanner extends CraftMetaItem implements BannerMeta {
             addPattern((Pattern) obj);
         }
     }
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     void applyToItem(NBTTagCompound tag) {
         super.applyToItem(tag);
         

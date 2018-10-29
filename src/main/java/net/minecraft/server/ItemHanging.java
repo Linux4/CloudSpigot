@@ -6,6 +6,7 @@ import org.bukkit.event.hanging.HangingPlaceEvent;
 import org.bukkit.event.painting.PaintingPlaceEvent;
 // CraftBukkit end
 
+@SuppressWarnings("deprecation")
 public class ItemHanging extends Item {
 
     private final Class<? extends EntityHanging> a;

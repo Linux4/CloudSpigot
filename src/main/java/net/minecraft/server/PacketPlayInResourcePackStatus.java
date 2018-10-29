@@ -16,7 +16,7 @@ public class PacketPlayInResourcePackStatus implements Packet<PacketListenerPlay
 
     public void b(PacketDataSerializer packetdataserializer) throws IOException {
         packetdataserializer.a(this.a);
-        packetdataserializer.a((Enum) this.b);
+        packetdataserializer.a(this.b);
     }
 
     public void a(PacketListenerPlayIn packetlistenerplayin) {

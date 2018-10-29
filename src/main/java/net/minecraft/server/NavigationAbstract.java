@@ -149,14 +149,14 @@ public abstract class NavigationAbstract {
                 vec3d = this.d.a((Entity) this.b);
                 if (vec3d != null) {
                     AxisAlignedBB axisalignedbb = (new AxisAlignedBB(vec3d.a, vec3d.b, vec3d.c, vec3d.a, vec3d.b, vec3d.c)).grow(0.5D, 0.5D, 0.5D);
-                    List list = this.c.getCubes(this.b, axisalignedbb.a(0.0D, -1.0D, 0.0D));
+                    List<AxisAlignedBB> list = this.c.getCubes(this.b, axisalignedbb.a(0.0D, -1.0D, 0.0D));
                     double d0 = -1.0D;
 
                     axisalignedbb = axisalignedbb.c(0.0D, 1.0D, 0.0D);
 
                     AxisAlignedBB axisalignedbb1;
 
-                    for (Iterator iterator = list.iterator(); iterator.hasNext(); d0 = axisalignedbb1.b(axisalignedbb, d0)) {
+                    for (Iterator<AxisAlignedBB> iterator = list.iterator(); iterator.hasNext(); d0 = axisalignedbb1.b(axisalignedbb, d0)) {
                         axisalignedbb1 = (AxisAlignedBB) iterator.next();
                     }
 

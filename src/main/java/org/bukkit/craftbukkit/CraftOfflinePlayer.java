@@ -1,15 +1,10 @@
 package org.bukkit.craftbukkit;
 
-import com.mojang.authlib.GameProfile;
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.NBTTagCompound;
-import net.minecraft.server.WorldNBTStorage;
 
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -21,6 +16,11 @@ import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+
+import com.mojang.authlib.GameProfile;
+
+import net.minecraft.server.NBTTagCompound;
+import net.minecraft.server.WorldNBTStorage;
 
 @SerializableAs("Player")
 public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializable {
@@ -129,7 +129,8 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
         return result;
     }
 
-    public static OfflinePlayer deserialize(Map<String, Object> args) {
+    @SuppressWarnings("deprecation")
+	public static OfflinePlayer deserialize(Map<String, Object> args) {
         // Backwards comparability
         if (args.get("name") != null) {
             return Bukkit.getServer().getOfflinePlayer((String) args.get("name"));

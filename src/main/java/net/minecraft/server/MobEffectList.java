@@ -201,10 +201,10 @@ public class MobEffectList {
     }
 
     public void a(EntityLiving entityliving, AttributeMapBase attributemapbase, int i) {
-        Iterator iterator = this.J.entrySet().iterator();
+        Iterator<Entry<IAttribute, AttributeModifier>> iterator = this.J.entrySet().iterator();
 
         while (iterator.hasNext()) {
-            Entry entry = (Entry) iterator.next();
+            Entry<IAttribute, AttributeModifier> entry = iterator.next();
             AttributeInstance attributeinstance = attributemapbase.a((IAttribute) entry.getKey());
 
             if (attributeinstance != null) {
@@ -215,10 +215,10 @@ public class MobEffectList {
     }
 
     public void b(EntityLiving entityliving, AttributeMapBase attributemapbase, int i) {
-        Iterator iterator = this.J.entrySet().iterator();
+        Iterator<Entry<IAttribute, AttributeModifier>> iterator = this.J.entrySet().iterator();
 
         while (iterator.hasNext()) {
-            Entry entry = (Entry) iterator.next();
+            Entry<IAttribute, AttributeModifier> entry = iterator.next();
             AttributeInstance attributeinstance = attributemapbase.a((IAttribute) entry.getKey());
 
             if (attributeinstance != null) {

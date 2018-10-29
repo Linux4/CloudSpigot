@@ -1,16 +1,13 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import org.bukkit.craftbukkit.util.UnsafeList; // CraftBukkit
 
 public class PathfinderGoalSelector {
 
-    private static final Logger a = LogManager.getLogger();
+    //private static final Logger a = LogManager.getLogger(); // CloudSpigot
     private List<PathfinderGoalSelector.PathfinderGoalSelectorItem> b = new UnsafeList<PathfinderGoalSelector.PathfinderGoalSelectorItem>();
     private List<PathfinderGoalSelector.PathfinderGoalSelectorItem> c = new UnsafeList<PathfinderGoalSelector.PathfinderGoalSelectorItem>();
     //private final MethodProfiler d; // CLoudSpigot
@@ -26,7 +23,7 @@ public class PathfinderGoalSelector {
     }
 
     public void a(PathfinderGoal pathfindergoal) {
-        Iterator iterator = this.b.iterator();
+        Iterator<PathfinderGoalSelectorItem> iterator = this.b.iterator();
 
         while (iterator.hasNext()) {
             PathfinderGoalSelector.PathfinderGoalSelectorItem pathfindergoalselector_pathfindergoalselectoritem = (PathfinderGoalSelector.PathfinderGoalSelectorItem) iterator.next();
@@ -46,7 +43,7 @@ public class PathfinderGoalSelector {
 
     public void a() {
         //this.d.a("goalSetup"); // CloudSpigot
-        Iterator iterator;
+        Iterator<PathfinderGoalSelectorItem> iterator;
         PathfinderGoalSelector.PathfinderGoalSelectorItem pathfindergoalselector_pathfindergoalselectoritem;
 
         if (this.e++ % this.f == 0) {
@@ -100,8 +97,9 @@ public class PathfinderGoalSelector {
         return flag;
     }
 
-    private boolean b(PathfinderGoalSelector.PathfinderGoalSelectorItem pathfindergoalselector_pathfindergoalselectoritem) {
-        Iterator iterator = this.b.iterator();
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	private boolean b(PathfinderGoalSelector.PathfinderGoalSelectorItem pathfindergoalselector_pathfindergoalselectoritem) {
+        Iterator<PathfinderGoalSelectorItem> iterator = this.b.iterator();
 
         while (iterator.hasNext()) {
             PathfinderGoalSelector.PathfinderGoalSelectorItem pathfindergoalselector_pathfindergoalselectoritem1 = (PathfinderGoalSelector.PathfinderGoalSelectorItem) iterator.next();

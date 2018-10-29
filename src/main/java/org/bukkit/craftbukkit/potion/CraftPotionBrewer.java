@@ -16,7 +16,8 @@ import com.google.common.collect.Maps;
 public class CraftPotionBrewer implements PotionBrewer {
     private static final Map<Integer, Collection<PotionEffect>> cache = Maps.newHashMap();
 
-    public Collection<PotionEffect> getEffectsFromDamage(int damage) {
+    @SuppressWarnings("deprecation")
+	public Collection<PotionEffect> getEffectsFromDamage(int damage) {
         if (cache.containsKey(damage))
             return cache.get(damage);
 

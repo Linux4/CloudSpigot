@@ -1,11 +1,5 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import org.bukkit.Bukkit;
-import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
-import eu.server24_7.cloudspigot.exception.ServerInternalException;
-
 import java.io.DataInputStream;
 import java.io.DataOutput;
 import java.io.DataOutputStream;
@@ -17,6 +11,11 @@ import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 public class PersistentCollection {
 
@@ -127,7 +126,7 @@ public class PersistentCollection {
                 NBTTagCompound nbttagcompound = NBTCompressedStreamTools.a(datainputstream);
 
                 datainputstream.close();
-                Iterator iterator = nbttagcompound.c().iterator();
+                Iterator<String> iterator = nbttagcompound.c().iterator();
 
                 while (iterator.hasNext()) {
                     String s = (String) iterator.next();
@@ -165,7 +164,7 @@ public class PersistentCollection {
 
                 if (file != null) {
                     NBTTagCompound nbttagcompound = new NBTTagCompound();
-                    Iterator iterator = this.d.keySet().iterator();
+                    Iterator<String> iterator = this.d.keySet().iterator();
 
                     while (iterator.hasNext()) {
                         String s1 = (String) iterator.next();

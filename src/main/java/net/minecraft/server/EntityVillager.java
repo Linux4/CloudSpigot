@@ -28,7 +28,8 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
         this(world, 0);
     }
 
-    public EntityVillager(World world, int i) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public EntityVillager(World world, int i) {
         super(world);
         this.inventory = new InventorySubcontainer("Items", false, 8, (CraftVillager) this.getBukkitEntity()); // CraftBukkit add argument
         this.setProfession(i);
@@ -101,7 +102,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
             --this.bs;
             if (this.bs <= 0) {
                 if (this.bt) {
-                    Iterator iterator = this.br.iterator();
+                    Iterator<MerchantRecipe> iterator = this.br.iterator();
 
                     while (iterator.hasNext()) {
                         MerchantRecipe merchantrecipe = (MerchantRecipe) iterator.next();

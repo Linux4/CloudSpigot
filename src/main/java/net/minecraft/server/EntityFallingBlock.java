@@ -129,7 +129,7 @@ public class EntityFallingBlock extends Entity {
                                         NBTTagCompound nbttagcompound = new NBTTagCompound();
 
                                         tileentity.b(nbttagcompound);
-                                        Iterator iterator = this.tileEntityData.c().iterator();
+                                        Iterator<String> iterator = this.tileEntityData.c().iterator();
 
                                         while (iterator.hasNext()) {
                                             String s = (String) iterator.next();
@@ -168,10 +168,10 @@ public class EntityFallingBlock extends Entity {
             int i = MathHelper.f(f - 1.0F);
 
             if (i > 0) {
-                ArrayList arraylist = Lists.newArrayList(this.world.getEntities(this, this.getBoundingBox()));
+                ArrayList<Entity> arraylist = Lists.newArrayList(this.world.getEntities(this, this.getBoundingBox()));
                 boolean flag = block == Blocks.ANVIL;
                 DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
-                Iterator iterator = arraylist.iterator();
+                Iterator<Entity> iterator = arraylist.iterator();
 
                 while (iterator.hasNext()) {
                     Entity entity = (Entity) iterator.next();

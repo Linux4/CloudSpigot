@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -11,11 +10,13 @@ import org.bukkit.event.entity.EntityPortalExitEvent;
 import org.bukkit.util.Vector;
 // CraftBukkit end
 
+import com.google.common.collect.Lists;
+
 public class PortalTravelAgent {
 
     private final WorldServer a;
     private final Random b;
-    private final LongHashMap<PortalTravelAgent.ChunkCoordinatesPortal> c = new LongHashMap();
+    private final LongHashMap<PortalTravelAgent.ChunkCoordinatesPortal> c = new LongHashMap<ChunkCoordinatesPortal>();
     private final List<Long> d = Lists.newArrayList();
 
     public PortalTravelAgent(WorldServer worldserver) {
@@ -456,7 +457,7 @@ public class PortalTravelAgent {
 
     public void a(long i) {
         if (i % 100L == 0L) {
-            Iterator iterator = this.d.iterator();
+            Iterator<Long> iterator = this.d.iterator();
             long j = i - 300L;
 
             while (iterator.hasNext()) {

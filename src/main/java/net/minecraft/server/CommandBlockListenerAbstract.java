@@ -95,21 +95,21 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
                 CrashReport crashreport = CrashReport.a(throwable, "Executing command block");
                 CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Command to be executed");
 
-                crashreportsystemdetails.a("Command", new Callable() {
+                crashreportsystemdetails.a("Command", new Callable<String>() {
                     public String a() throws Exception {
                         return CommandBlockListenerAbstract.this.getCommand();
                     }
 
-                    public Object call() throws Exception {
+                    public String call() throws Exception {
                         return this.a();
                     }
                 });
-                crashreportsystemdetails.a("Name", new Callable() {
+                crashreportsystemdetails.a("Name", new Callable<String>() {
                     public String a() throws Exception {
                         return CommandBlockListenerAbstract.this.getName();
                     }
 
-                    public Object call() throws Exception {
+                    public String call() throws Exception {
                         return this.a();
                     }
                 });

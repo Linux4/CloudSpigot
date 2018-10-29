@@ -5,6 +5,7 @@ import org.bukkit.inventory.BrewerInventory;
 /**
  * Represents a brewing stand.
  */
+@SuppressWarnings("deprecation")
 public interface BrewingStand extends BlockState, ContainerBlock {
 
     /**

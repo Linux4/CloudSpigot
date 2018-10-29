@@ -129,7 +129,7 @@ public class BlockVine extends Block {
 
     private boolean e(World world, BlockPosition blockposition, IBlockData iblockdata) {
         IBlockData iblockdata1 = iblockdata;
-        Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+        Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
         while (iterator.hasNext()) {
             EnumDirection enumdirection = (EnumDirection) iterator.next();
@@ -192,7 +192,7 @@ public class BlockVine extends Block {
                 if (enumdirection == EnumDirection.UP && blockposition.getY() < 255 && world.isEmpty(blockposition1)) {
                     if (!flag) {
                         IBlockData iblockdata1 = iblockdata;
-                        Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+                        Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
                         while (iterator.hasNext()) {
                             enumdirection1 = (EnumDirection) iterator.next();
@@ -262,7 +262,7 @@ public class BlockVine extends Block {
                             IBlockData iblockdata2 = world.getType(blockposition2);
                             Block block1 = iblockdata2.getBlock();
                             IBlockData iblockdata3;
-                            Iterator iterator1;
+                            Iterator<EnumDirection> iterator1;
                             EnumDirection enumdirection3;
 
                             if (block1.material == Material.AIR) {

@@ -54,7 +54,8 @@ public class Coal extends MaterialData {
      *
      * @return CoalType of this coal
      */
-    public CoalType getType() {
+    @SuppressWarnings("deprecation")
+	public CoalType getType() {
         return CoalType.getByData(getData());
     }
 
@@ -63,7 +64,8 @@ public class Coal extends MaterialData {
      *
      * @param type New type of this coal
      */
-    public void setType(CoalType type) {
+    @SuppressWarnings("deprecation")
+	public void setType(CoalType type) {
         setData(type.getData());
     }
 

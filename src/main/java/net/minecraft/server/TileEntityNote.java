@@ -23,7 +23,8 @@ public class TileEntityNote extends TileEntity {
         this.update();
     }
 
-    public void play(World world, BlockPosition blockposition) {
+    @SuppressWarnings("deprecation")
+	public void play(World world, BlockPosition blockposition) {
         if (world.getType(blockposition.up()).getBlock().getMaterial() == Material.AIR) {
             Material material = world.getType(blockposition.down()).getBlock().getMaterial();
             byte b0 = 0;

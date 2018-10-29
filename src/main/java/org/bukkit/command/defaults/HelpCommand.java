@@ -24,6 +24,7 @@ import org.bukkit.util.ChatPaginator;
 
 import com.google.common.collect.ImmutableList;
 
+@SuppressWarnings("deprecation")
 public class HelpCommand extends VanillaCommand {
     public HelpCommand() {
         super("help");

@@ -14,12 +14,12 @@ public class BlockPumpkin extends BlockDirectional {
     private ShapeDetector snowGolem;
     private ShapeDetector ironGolemPart;
     private ShapeDetector ironGolem;
-    private static final Predicate<IBlockData> Q = new Predicate() {
+    private static final Predicate<IBlockData> Q = new Predicate<IBlockData>() {
         public boolean a(IBlockData iblockdata) {
             return iblockdata != null && (iblockdata.getBlock() == Blocks.PUMPKIN || iblockdata.getBlock() == Blocks.LIT_PUMPKIN);
         }
 
-        public boolean apply(Object object) {
+        public boolean apply(IBlockData object) {
             return this.a((IBlockData) object);
         }
     };

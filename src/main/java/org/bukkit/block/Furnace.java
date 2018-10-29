@@ -5,6 +5,7 @@ import org.bukkit.inventory.FurnaceInventory;
 /**
  * Represents a furnace.
  */
+@SuppressWarnings("deprecation")
 public interface Furnace extends BlockState, ContainerBlock {
 
     /**

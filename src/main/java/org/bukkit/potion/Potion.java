@@ -28,7 +28,8 @@ public class Potion {
      * @param type The potion type
      * @see #Potion(int)
      */
-    public Potion(PotionType type) {
+    @SuppressWarnings("deprecation")
+	public Potion(PotionType type) {
         this.type = type;
         if (type != null) {
             this.name = type.getDamageValue();
@@ -124,7 +125,8 @@ public class Potion {
      *
      * @param name The name index (0-63)
      */
-    public Potion(int name) {
+    @SuppressWarnings("deprecation")
+	public Potion(int name) {
         this(PotionType.getByDamageValue(name & POTION_BIT));
         this.name = name & NAME_BIT;
         if ((name & POTION_BIT) == 0) {
@@ -197,7 +199,8 @@ public class Potion {
      * @see Potion#toDamageValue()
      * @return The effects that this potion applies
      */
-    public Collection<PotionEffect> getEffects() {
+    @SuppressWarnings("deprecation")
+	public Collection<PotionEffect> getEffects() {
         if (type == null) return ImmutableList.<PotionEffect>of();
         return getBrewer().getEffectsFromDamage(toDamageValue());
     }

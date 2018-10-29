@@ -203,8 +203,8 @@ public class ChunkProviderGenerate implements IChunkProvider {
         this.d = this.k.a(this.d, i, j, k, 5, 33, 5, (double) (f / this.r.h), (double) (f1 / this.r.i), (double) (f / this.r.j));
         this.e = this.i.a(this.e, i, j, k, 5, 33, 5, (double) f, (double) f1, (double) f);
         this.f = this.j.a(this.f, i, j, k, 5, 33, 5, (double) f, (double) f1, (double) f);
-        boolean flag = false;
-        boolean flag1 = false;
+        //boolean flag = false; // CloudSpigot
+        //boolean flag1 = false; // CloudSpigot
         int l = 0;
         int i1 = 0;
 

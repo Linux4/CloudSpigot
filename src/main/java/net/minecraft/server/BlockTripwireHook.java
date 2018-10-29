@@ -9,7 +9,7 @@ import org.bukkit.event.block.BlockRedstoneEvent; // CraftBukkit
 
 public class BlockTripwireHook extends Block {
 
-    public static final BlockStateDirection FACING = BlockStateDirection.of("facing", (Predicate) EnumDirection.EnumDirectionLimit.HORIZONTAL);
+    public static final BlockStateDirection FACING = BlockStateDirection.of("facing", (Predicate<EnumDirection>) EnumDirection.EnumDirectionLimit.HORIZONTAL);
     public static final BlockStateBoolean POWERED = BlockStateBoolean.of("powered");
     public static final BlockStateBoolean ATTACHED = BlockStateBoolean.of("attached");
     public static final BlockStateBoolean SUSPENDED = BlockStateBoolean.of("suspended");
@@ -42,7 +42,7 @@ public class BlockTripwireHook extends Block {
     }
 
     public boolean canPlace(World world, BlockPosition blockposition) {
-        Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+        Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
         EnumDirection enumdirection;
 

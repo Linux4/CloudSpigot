@@ -15,7 +15,8 @@ public class EnchantmentWrapper extends Enchantment {
      *
      * @return Enchantment
      */
-    public Enchantment getEnchantment() {
+    @SuppressWarnings("deprecation")
+	public Enchantment getEnchantment() {
         return Enchantment.getById(getId());
     }
 

@@ -44,7 +44,8 @@ public class TileEntityCommand extends TileEntity {
         this.a.b(nbttagcompound);
     }
 
-    public Packet getUpdatePacket() {
+    @SuppressWarnings("rawtypes")
+	public Packet getUpdatePacket() {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
 
         this.b(nbttagcompound);

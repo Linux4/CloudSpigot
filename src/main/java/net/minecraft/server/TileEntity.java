@@ -63,7 +63,8 @@ public abstract class TileEntity {
         }
     }
 
-    public static TileEntity c(NBTTagCompound nbttagcompound) {
+    @SuppressWarnings("rawtypes")
+	public static TileEntity c(NBTTagCompound nbttagcompound) {
         TileEntity tileentity = null;
 
         try {
@@ -121,7 +122,8 @@ public abstract class TileEntity {
         return this.e;
     }
 
-    public Packet getUpdatePacket() {
+    @SuppressWarnings("rawtypes")
+	public Packet getUpdatePacket() {
         return null;
     }
 
@@ -147,12 +149,12 @@ public abstract class TileEntity {
     }
 
     public void a(CrashReportSystemDetails crashreportsystemdetails) {
-        crashreportsystemdetails.a("Name", new Callable() {
+        crashreportsystemdetails.a("Name", new Callable<String>() {
             public String a() throws Exception {
                 return (String) TileEntity.g.get(TileEntity.this.getClass()) + " // " + TileEntity.this.getClass().getCanonicalName();
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
@@ -163,7 +165,7 @@ public abstract class TileEntity {
                 CrashReportSystemDetails.a(crashreportsystemdetails, this.position, this.w(), this.u());
             }
             // CloudSpigot end
-            crashreportsystemdetails.a("Actual block type", new Callable() {
+            crashreportsystemdetails.a("Actual block type", new Callable<String>() {
                 public String a() throws Exception {
                     int i = Block.getId(TileEntity.this.world.getType(TileEntity.this.position).getBlock());
 
@@ -174,11 +176,11 @@ public abstract class TileEntity {
                     }
                 }
 
-                public Object call() throws Exception {
+                public String call() throws Exception {
                     return this.a();
                 }
             });
-            crashreportsystemdetails.a("Actual block data value", new Callable() {
+            crashreportsystemdetails.a("Actual block data value", new Callable<String>() {
                 public String a() throws Exception {
                     IBlockData iblockdata = TileEntity.this.world.getType(TileEntity.this.position);
                     int i = iblockdata.getBlock().toLegacyData(iblockdata);
@@ -192,7 +194,7 @@ public abstract class TileEntity {
                     }
                 }
 
-                public Object call() throws Exception {
+                public String call() throws Exception {
                     return this.a();
                 }
             });

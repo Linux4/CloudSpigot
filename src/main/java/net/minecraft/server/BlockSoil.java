@@ -5,6 +5,9 @@ import java.util.Random;
 
 // CraftBukkit start
 import org.bukkit.event.entity.EntityInteractEvent;
+
+import net.minecraft.server.BlockPosition.MutableBlockPosition;
+
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 // CraftBukkit end
 
@@ -93,7 +96,7 @@ public class BlockSoil extends Block {
     }
 
     private boolean f(World world, BlockPosition blockposition) {
-        Iterator iterator = BlockPosition.b(blockposition.a(-4, 0, -4), blockposition.a(4, 1, 4)).iterator();
+        Iterator<MutableBlockPosition> iterator = BlockPosition.b(blockposition.a(-4, 0, -4), blockposition.a(4, 1, 4)).iterator();
 
         BlockPosition.MutableBlockPosition blockposition_mutableblockposition;
 

@@ -2,15 +2,13 @@ package net.minecraft.server;
 
 import java.util.Iterator;
 import java.util.Map;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView; // CraftBukkit
 
 public class ContainerAnvil extends Container {
 
-    private static final Logger f = LogManager.getLogger();
+    //private static final Logger f = LogManager.getLogger(); // CloudSpigot
     private IInventory g = new InventoryCraftResult();
     private IInventory h = new InventorySubcontainer("Repair", true, 2) {
         public void update() {
@@ -128,7 +126,7 @@ public class ContainerAnvil extends Container {
         } else {
             ItemStack itemstack1 = itemstack.cloneItemStack();
             ItemStack itemstack2 = this.h.getItem(1);
-            Map map = EnchantmentManager.a(itemstack1);
+            Map<Integer, Integer> map = EnchantmentManager.a(itemstack1);
             boolean flag7 = false;
             int j = b0 + itemstack.getRepairCost() + (itemstack2 == null ? 0 : itemstack2.getRepairCost());
 
@@ -182,8 +180,8 @@ public class ContainerAnvil extends Container {
                         }
                     }
 
-                    Map map1 = EnchantmentManager.a(itemstack2);
-                    Iterator iterator = map1.keySet().iterator();
+                    Map<Integer, Integer> map1 = EnchantmentManager.a(itemstack2);
+                    Iterator<Integer> iterator = map1.keySet().iterator();
 
                     while (iterator.hasNext()) {
                         i1 = ((Integer) iterator.next()).intValue();
@@ -208,7 +206,7 @@ public class ContainerAnvil extends Container {
                                 flag8 = true;
                             }
 
-                            Iterator iterator1 = map.keySet().iterator();
+                            Iterator<Integer> iterator1 = map.keySet().iterator();
 
                             while (iterator1.hasNext()) {
                                 int j2 = ((Integer) iterator1.next()).intValue();

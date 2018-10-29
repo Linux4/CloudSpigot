@@ -54,7 +54,7 @@ public class PacketPlayOutMapChunk implements Packet<PacketListenerPlayOut> {
     public static PacketPlayOutMapChunk.ChunkMap a(Chunk chunk, boolean flag, boolean flag1, int i) {
         ChunkSection[] achunksection = chunk.getSections();
         PacketPlayOutMapChunk.ChunkMap packetplayoutmapchunk_chunkmap = new PacketPlayOutMapChunk.ChunkMap();
-        ArrayList arraylist = Lists.newArrayList();
+        ArrayList<ChunkSection> arraylist = Lists.newArrayList();
 
         int j;
 
@@ -69,7 +69,7 @@ public class PacketPlayOutMapChunk implements Packet<PacketListenerPlayOut> {
 
         packetplayoutmapchunk_chunkmap.a = new byte[a(Integer.bitCount(packetplayoutmapchunk_chunkmap.b), flag1, flag)];
         j = 0;
-        Iterator iterator = arraylist.iterator();
+        Iterator<ChunkSection> iterator = arraylist.iterator();
 
         ChunkSection chunksection1;
 

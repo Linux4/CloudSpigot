@@ -41,7 +41,8 @@ public class SpawnEgg extends MaterialData {
      *
      * @return The entity type.
      */
-    public EntityType getSpawnedType() {
+    @SuppressWarnings("deprecation")
+	public EntityType getSpawnedType() {
         return EntityType.fromId(getData());
     }
 
@@ -50,7 +51,8 @@ public class SpawnEgg extends MaterialData {
      *
      * @param type The entity type.
      */
-    public void setSpawnedType(EntityType type) {
+    @SuppressWarnings("deprecation")
+	public void setSpawnedType(EntityType type) {
         setData((byte) type.getTypeId());
     }
 

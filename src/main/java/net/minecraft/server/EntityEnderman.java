@@ -1,7 +1,5 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Sets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -10,9 +8,11 @@ import java.util.UUID;
 
 // CraftBukkit start
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.event.entity.EntityTeleportEvent;
 // CraftBukkit end
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Sets;
 
 public class EntityEnderman extends EntityMonster {
 
@@ -21,7 +21,8 @@ public class EntityEnderman extends EntityMonster {
     private static final Set<Block> c = Sets.newIdentityHashSet();
     private boolean bm;
 
-    public EntityEnderman(World world) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public EntityEnderman(World world) {
         super(world);
         this.setSize(0.6F, 2.9F);
         this.S = 1.0F;
@@ -34,12 +35,12 @@ public class EntityEnderman extends EntityMonster {
         this.goalSelector.a(11, new EntityEnderman.PathfinderGoalEndermanPickupBlock(this));
         this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
         this.targetSelector.a(2, new EntityEnderman.PathfinderGoalPlayerWhoLookedAtTarget(this));
-        this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityEndermite.class, 10, true, false, new Predicate() {
+        this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityEndermite.class, 10, true, false, new Predicate<EntityEndermite>() {
             public boolean a(EntityEndermite entityendermite) {
                 return entityendermite.n();
             }
 
-            public boolean apply(Object object) {
+            public boolean apply(EntityEndermite object) {
                 return this.a((EntityEndermite) object);
             }
         }));
@@ -403,19 +404,22 @@ public class EntityEnderman extends EntityMonster {
         }
     }
 
-    static class PathfinderGoalPlayerWhoLookedAtTarget extends PathfinderGoalNearestAttackableTarget {
+    @SuppressWarnings("rawtypes")
+	static class PathfinderGoalPlayerWhoLookedAtTarget extends PathfinderGoalNearestAttackableTarget {
 
         private EntityHuman g;
         private int h;
         private int i;
         private EntityEnderman j;
 
-        public PathfinderGoalPlayerWhoLookedAtTarget(EntityEnderman entityenderman) {
+        @SuppressWarnings("unchecked")
+		public PathfinderGoalPlayerWhoLookedAtTarget(EntityEnderman entityenderman) {
             super(entityenderman, EntityHuman.class, true);
             this.j = entityenderman;
         }
 
-        public boolean a() {
+		@SuppressWarnings("unchecked")
+		public boolean a() {
             double d0 = this.f();
             List list = this.e.world.a(EntityHuman.class, this.e.getBoundingBox().grow(d0, 4.0D, d0), this.c);
 
@@ -456,7 +460,8 @@ public class EntityEnderman extends EntityMonster {
             }
         }
 
-        public void e() {
+        @SuppressWarnings("unchecked")
+		public void e() {
             if (this.g != null) {
                 if (--this.h <= 0) {
                     this.d = this.g;

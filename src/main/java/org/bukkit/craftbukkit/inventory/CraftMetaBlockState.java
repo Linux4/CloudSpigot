@@ -151,7 +151,8 @@ public class CraftMetaBlockState extends CraftMetaItem implements BlockStateMeta
         return super.isEmpty() && blockEntityTag == null;
     }
 
-    @Override
+    @SuppressWarnings("incomplete-switch")
+	@Override
     boolean applicableTo(Material type) {
         switch(type){         
             case FURNACE:

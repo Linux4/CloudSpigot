@@ -20,6 +20,7 @@ import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.minecart.CommandMinecart;
 
+@SuppressWarnings("deprecation")
 public final class VanillaCommandWrapper extends VanillaCommand {
     protected final CommandAbstract vanillaCommand;
 

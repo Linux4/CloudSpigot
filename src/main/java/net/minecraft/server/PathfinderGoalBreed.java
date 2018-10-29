@@ -49,10 +49,10 @@ public class PathfinderGoalBreed extends PathfinderGoal {
 
     private EntityAnimal f() {
         float f = 8.0F;
-        List list = this.a.a(this.d.getClass(), this.d.getBoundingBox().grow((double) f, (double) f, (double) f));
+        List<? extends EntityAnimal> list = this.a.a(this.d.getClass(), this.d.getBoundingBox().grow((double) f, (double) f, (double) f));
         double d0 = Double.MAX_VALUE;
         EntityAnimal entityanimal = null;
-        Iterator iterator = list.iterator();
+        Iterator<? extends EntityAnimal> iterator = list.iterator();
 
         while (iterator.hasNext()) {
             EntityAnimal entityanimal1 = (EntityAnimal) iterator.next();

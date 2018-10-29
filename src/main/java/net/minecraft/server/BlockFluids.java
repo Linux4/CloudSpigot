@@ -73,7 +73,7 @@ public abstract class BlockFluids extends Block {
     protected Vec3D h(IBlockAccess iblockaccess, BlockPosition blockposition) {
         Vec3D vec3d = new Vec3D(0.0D, 0.0D, 0.0D);
         int i = this.f(iblockaccess, blockposition);
-        Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+        Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
         EnumDirection enumdirection;
         BlockPosition blockposition1;

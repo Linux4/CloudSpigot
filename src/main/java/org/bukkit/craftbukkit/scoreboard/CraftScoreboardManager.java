@@ -8,6 +8,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.Validate;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.util.WeakCollection;
+import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.ScoreboardManager;
+
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.IScoreboardCriteria;
 import net.minecraft.server.MinecraftServer;
@@ -18,12 +24,6 @@ import net.minecraft.server.ScoreboardObjective;
 import net.minecraft.server.ScoreboardScore;
 import net.minecraft.server.ScoreboardServer;
 import net.minecraft.server.ScoreboardTeam;
-
-import org.apache.commons.lang.Validate;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
-import org.bukkit.craftbukkit.util.WeakCollection;
-import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.ScoreboardManager;
 
 public final class CraftScoreboardManager implements ScoreboardManager {
     private final CraftScoreboard mainScoreboard;
@@ -111,7 +111,8 @@ public final class CraftScoreboardManager implements ScoreboardManager {
     }
 
     // CraftBukkit method
-    public void updateAllScoresForList(IScoreboardCriteria criteria, String name, List<EntityPlayer> of) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public void updateAllScoresForList(IScoreboardCriteria criteria, String name, List<EntityPlayer> of) {
         for (ScoreboardScore score : getScoreboardScores(criteria, name, new ArrayList<ScoreboardScore>())) {
             score.updateForList((List) of);
         }

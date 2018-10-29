@@ -41,7 +41,8 @@ public class BlockPhysicsEvent extends BlockEvent implements Cancellable {
      *
      * @return Changed block's type
      */
-    public Material getChangedType() {
+    @SuppressWarnings("deprecation")
+	public Material getChangedType() {
         return Material.getMaterial(changed);
     }
 

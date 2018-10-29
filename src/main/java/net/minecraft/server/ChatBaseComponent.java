@@ -29,10 +29,10 @@ public abstract class ChatBaseComponent implements IChatBaseComponent {
 
     public IChatBaseComponent setChatModifier(ChatModifier chatmodifier) {
         this.b = chatmodifier;
-        Iterator iterator = this.a.iterator();
+        Iterator<IChatBaseComponent> iterator = this.a.iterator();
 
         while (iterator.hasNext()) {
-            IChatBaseComponent ichatbasecomponent = (IChatBaseComponent) iterator.next();
+            IChatBaseComponent ichatbasecomponent = iterator.next();
 
             ichatbasecomponent.getChatModifier().setChatModifier(this.getChatModifier());
         }
@@ -43,10 +43,10 @@ public abstract class ChatBaseComponent implements IChatBaseComponent {
     public ChatModifier getChatModifier() {
         if (this.b == null) {
             this.b = new ChatModifier();
-            Iterator iterator = this.a.iterator();
+            Iterator<IChatBaseComponent> iterator = this.a.iterator();
 
             while (iterator.hasNext()) {
-                IChatBaseComponent ichatbasecomponent = (IChatBaseComponent) iterator.next();
+                IChatBaseComponent ichatbasecomponent = iterator.next();
 
                 ichatbasecomponent.getChatModifier().setChatModifier(this.b);
             }
@@ -56,12 +56,12 @@ public abstract class ChatBaseComponent implements IChatBaseComponent {
     }
 
     public Iterator<IChatBaseComponent> iterator() {
-        return Iterators.concat(Iterators.forArray(new ChatBaseComponent[] { this}), a((Iterable) this.a));
+        return Iterators.concat(Iterators.forArray(new ChatBaseComponent[] { this}), a((Iterable<IChatBaseComponent>) this.a));
     }
 
     public final String c() {
         StringBuilder stringbuilder = new StringBuilder();
-        Iterator iterator = this.iterator();
+        Iterator<IChatBaseComponent> iterator = this.iterator();
 
         while (iterator.hasNext()) {
             IChatBaseComponent ichatbasecomponent = (IChatBaseComponent) iterator.next();
@@ -73,17 +73,17 @@ public abstract class ChatBaseComponent implements IChatBaseComponent {
     }
 
     public static Iterator<IChatBaseComponent> a(Iterable<IChatBaseComponent> iterable) {
-        Iterator iterator = Iterators.concat(Iterators.transform(iterable.iterator(), new Function() {
+        Iterator<IChatBaseComponent> iterator = Iterators.concat(Iterators.transform(iterable.iterator(), new Function<IChatBaseComponent, Iterator<IChatBaseComponent>>() {
             public Iterator<IChatBaseComponent> a(IChatBaseComponent ichatbasecomponent) {
                 return ichatbasecomponent.iterator();
             }
 
-            public Object apply(Object object) {
+            public Iterator<IChatBaseComponent> apply(IChatBaseComponent object) {
                 return this.a((IChatBaseComponent) object);
             }
         }));
 
-        iterator = Iterators.transform(iterator, new Function() {
+        iterator = Iterators.transform(iterator, new Function<IChatBaseComponent, IChatBaseComponent>() {
             public IChatBaseComponent a(IChatBaseComponent ichatbasecomponent) {
                 IChatBaseComponent ichatbasecomponent1 = ichatbasecomponent.f();
 
@@ -91,7 +91,7 @@ public abstract class ChatBaseComponent implements IChatBaseComponent {
                 return ichatbasecomponent1;
             }
 
-            public Object apply(Object object) {
+            public IChatBaseComponent apply(IChatBaseComponent object) {
                 return this.a((IChatBaseComponent) object);
             }
         });

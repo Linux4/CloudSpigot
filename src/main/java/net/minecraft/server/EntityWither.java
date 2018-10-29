@@ -20,17 +20,18 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
     private int[] bn = new int[2];
     private int[] bo = new int[2];
     private int bp;
-    private static final Predicate<Entity> bq = new Predicate() {
+    private static final Predicate<Entity> bq = new Predicate<Entity>() {
         public boolean a(Entity entity) {
             return entity instanceof EntityLiving && ((EntityLiving) entity).getMonsterType() != EnumMonsterType.UNDEAD;
         }
 
-        public boolean apply(Object object) {
+        public boolean apply(Entity object) {
             return this.a((Entity) object);
         }
     };
 
-    public EntityWither(World world) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public EntityWither(World world) {
         super(world);
         this.setHealth(this.getMaxHealth());
         this.setSize(0.9F, 3.5F);
@@ -250,7 +251,7 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
                             this.b(i, 0);
                         }
                     } else {
-                        List list = this.world.a(EntityLiving.class, this.getBoundingBox().grow(20.0D, 8.0D, 20.0D), Predicates.and(EntityWither.bq, IEntitySelector.d));
+                        List<EntityLiving> list = this.world.a(EntityLiving.class, this.getBoundingBox().grow(20.0D, 8.0D, 20.0D), Predicates.and(EntityWither.bq, IEntitySelector.d));
 
                         for (int i1 = 0; i1 < 10 && !list.isEmpty(); ++i1) {
                             EntityLiving entityliving = (EntityLiving) list.get(this.random.nextInt(list.size()));
@@ -447,7 +448,7 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
         }
 
         if (!this.world.isClientSide) {
-            Iterator iterator = this.world.a(EntityHuman.class, this.getBoundingBox().grow(50.0D, 100.0D, 50.0D)).iterator();
+            Iterator<EntityHuman> iterator = this.world.a(EntityHuman.class, this.getBoundingBox().grow(50.0D, 100.0D, 50.0D)).iterator();
 
             while (iterator.hasNext()) {
                 EntityHuman entityhuman = (EntityHuman) iterator.next();

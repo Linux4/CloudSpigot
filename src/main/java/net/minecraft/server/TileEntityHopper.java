@@ -375,7 +375,7 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
                 }
             }
         } else {
-            Iterator iterator = a(ihopper.getWorld(), ihopper.A(), ihopper.B() + 1.0D, ihopper.C()).iterator();
+            Iterator<EntityItem> iterator = a(ihopper.getWorld(), ihopper.A(), ihopper.B() + 1.0D, ihopper.C()).iterator();
 
             while (iterator.hasNext()) {
                 EntityItem entityitem = (EntityItem) iterator.next();
@@ -569,7 +569,7 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
         }
 
         if (object == null) {
-            List list = world.a((Entity) null, new AxisAlignedBB(d0 - 0.5D, d1 - 0.5D, d2 - 0.5D, d0 + 0.5D, d1 + 0.5D, d2 + 0.5D), IEntitySelector.c);
+            List<Entity> list = world.a((Entity) null, new AxisAlignedBB(d0 - 0.5D, d1 - 0.5D, d2 - 0.5D, d0 + 0.5D, d1 + 0.5D, d2 + 0.5D), IEntitySelector.c);
 
             if (list.size() > 0) {
                 object = (IInventory) list.get(world.random.nextInt(list.size()));

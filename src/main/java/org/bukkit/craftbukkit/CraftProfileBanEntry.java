@@ -1,14 +1,15 @@
 package org.bukkit.craftbukkit;
 
-import com.mojang.authlib.GameProfile;
-import net.minecraft.server.GameProfileBanEntry;
-import net.minecraft.server.GameProfileBanList;
-import net.minecraft.server.MinecraftServer;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
+
+import com.mojang.authlib.GameProfile;
+
+import net.minecraft.server.GameProfileBanEntry;
+import net.minecraft.server.GameProfileBanList;
 
 public final class CraftProfileBanEntry implements org.bukkit.BanEntry {
     private final GameProfileBanList list;
@@ -57,7 +58,8 @@ public final class CraftProfileBanEntry implements org.bukkit.BanEntry {
         return this.expiration == null ? null : (Date) this.expiration.clone();
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void setExpiration(Date expiration) {
         if (expiration != null && expiration.getTime() == new Date(0, 0, 0, 0, 0, 0).getTime()) {
             expiration = null; // Forces "forever"

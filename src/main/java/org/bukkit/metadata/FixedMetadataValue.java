@@ -13,6 +13,7 @@ import java.util.concurrent.Callable;
  * overrides all the implementation methods. it is possible that in the future
  * that the inheritance hierarchy may change.
  */
+@SuppressWarnings("unused")
 public class FixedMetadataValue extends LazyMetadataValue {
 
     /**

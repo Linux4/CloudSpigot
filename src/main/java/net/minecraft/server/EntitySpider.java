@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class EntitySpider extends EntityMonster {
 
-    public EntitySpider(World world) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public EntitySpider(World world) {
         super(world);
         this.setSize(1.4F, 0.9F);
         this.goalSelector.a(1, new PathfinderGoalFloat(this));
@@ -138,9 +139,11 @@ public class EntitySpider extends EntityMonster {
         return 0.65F;
     }
 
-    static class PathfinderGoalSpiderNearestAttackableTarget<T extends EntityLiving> extends PathfinderGoalNearestAttackableTarget {
+    @SuppressWarnings("rawtypes")
+	static class PathfinderGoalSpiderNearestAttackableTarget<T extends EntityLiving> extends PathfinderGoalNearestAttackableTarget {
 
-        public PathfinderGoalSpiderNearestAttackableTarget(EntitySpider entityspider, Class<T> oclass) {
+        @SuppressWarnings("unchecked")
+		public PathfinderGoalSpiderNearestAttackableTarget(EntitySpider entityspider, Class<T> oclass) {
             super(entityspider, oclass, true);
         }
 

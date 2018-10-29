@@ -64,7 +64,8 @@ public class EntityLightning extends EntityWeather {
     }
     // Spigot end
 
-    public void t_() {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public void t_() {
         super.t_();
         if (!isSilent && this.lifeTicks == 2) { // Spigot
             // CraftBukkit start - Use relative location for far away sounds

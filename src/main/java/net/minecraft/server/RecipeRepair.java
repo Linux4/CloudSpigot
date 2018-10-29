@@ -12,7 +12,7 @@ public class RecipeRepair extends ShapelessRecipes implements IRecipe { // Craft
     // CraftBukkit end
 
     public boolean a(InventoryCrafting inventorycrafting, World world) {
-        ArrayList arraylist = Lists.newArrayList();
+        ArrayList<ItemStack> arraylist = Lists.newArrayList();
 
         for (int i = 0; i < inventorycrafting.getSize(); ++i) {
             ItemStack itemstack = inventorycrafting.getItem(i);
@@ -33,7 +33,7 @@ public class RecipeRepair extends ShapelessRecipes implements IRecipe { // Craft
     }
 
     public ItemStack craftItem(InventoryCrafting inventorycrafting) {
-        ArrayList arraylist = Lists.newArrayList();
+        ArrayList<ItemStack> arraylist = Lists.newArrayList();
 
         ItemStack itemstack;
 

@@ -11,6 +11,7 @@ import org.bukkit.event.hanging.HangingBreakEvent;
 import org.bukkit.event.painting.PaintingBreakEvent;
 // CraftBukkit end
 
+@SuppressWarnings("deprecation")
 public abstract class EntityHanging extends Entity {
 
     private int c;
@@ -88,9 +89,9 @@ public abstract class EntityHanging extends Entity {
         }
     }
 
-    private double a(int i) {
+    /*private double a(int i) {
         return i % 32 == 0 ? 0.5D : 0.0D;
-    }
+    }*/ // CloudSpigot
 
     public void t_() {
         this.lastX = this.locX;
@@ -152,8 +153,8 @@ public abstract class EntityHanging extends Entity {
                 }
             }
 
-            List list = this.world.getEntities(this, this.getBoundingBox());
-            Iterator iterator = list.iterator();
+            List<Entity> list = this.world.getEntities(this, this.getBoundingBox());
+            Iterator<Entity> iterator = list.iterator();
 
             Entity entity;
 
@@ -242,10 +243,10 @@ public abstract class EntityHanging extends Entity {
     }
 
     public void g(double d0, double d1, double d2) {
-        if (false && !this.world.isClientSide && !this.dead && d0 * d0 + d1 * d1 + d2 * d2 > 0.0D) { // CraftBukkit - not needed
+        /*if (false && !this.world.isClientSide && !this.dead && d0 * d0 + d1 * d1 + d2 * d2 > 0.0D) { // CraftBukkit - not needed
             this.die();
             this.b((Entity) null);
-        }
+        }*/ //CloudSpigot
 
     }
 

@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 public class BlockChest extends BlockContainer {
 
-    public static final BlockStateDirection FACING = BlockStateDirection.of("facing", (Predicate) EnumDirection.EnumDirectionLimit.HORIZONTAL);
+    public static final BlockStateDirection FACING = BlockStateDirection.of("facing", (Predicate<EnumDirection>) EnumDirection.EnumDirectionLimit.HORIZONTAL);
     public final int b;
 
     protected BlockChest(int i) {
@@ -45,7 +45,7 @@ public class BlockChest extends BlockContainer {
 
     public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
         this.e(world, blockposition, iblockdata);
-        Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+        Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
         while (iterator.hasNext()) {
             EnumDirection enumdirection = (EnumDirection) iterator.next();
@@ -191,7 +191,7 @@ public class BlockChest extends BlockContainer {
 
     public IBlockData f(World world, BlockPosition blockposition, IBlockData iblockdata) {
         EnumDirection enumdirection = null;
-        Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+        Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
         while (iterator.hasNext()) {
             EnumDirection enumdirection1 = (EnumDirection) iterator.next();
@@ -278,7 +278,7 @@ public class BlockChest extends BlockContainer {
         if (world.getType(blockposition).getBlock() != this) {
             return false;
         } else {
-            Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+            Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
             EnumDirection enumdirection;
 
@@ -345,7 +345,7 @@ public class BlockChest extends BlockContainer {
             if (this.n(world, blockposition)) {
                 return null;
             } else {
-                Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+                Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
                 while (iterator.hasNext()) {
                     EnumDirection enumdirection = (EnumDirection) iterator.next();
@@ -415,7 +415,7 @@ public class BlockChest extends BlockContainer {
             return false;
         }
         // CloudSpigot end
-        Iterator iterator = world.a(EntityOcelot.class, new AxisAlignedBB((double) blockposition.getX(), (double) (blockposition.getY() + 1), (double) blockposition.getZ(), (double) (blockposition.getX() + 1), (double) (blockposition.getY() + 2), (double) (blockposition.getZ() + 1))).iterator();
+        Iterator<EntityOcelot> iterator = world.a(EntityOcelot.class, new AxisAlignedBB((double) blockposition.getX(), (double) (blockposition.getY() + 1), (double) blockposition.getZ(), (double) (blockposition.getX() + 1), (double) (blockposition.getY() + 2), (double) (blockposition.getZ() + 1))).iterator();
 
         EntityOcelot entityocelot;
 

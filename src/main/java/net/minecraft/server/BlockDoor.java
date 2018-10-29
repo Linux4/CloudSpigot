@@ -7,7 +7,7 @@ import org.bukkit.event.block.BlockRedstoneEvent; // CraftBukkit
 
 public class BlockDoor extends Block {
 
-    public static final BlockStateDirection FACING = BlockStateDirection.of("facing", (Predicate) EnumDirection.EnumDirectionLimit.HORIZONTAL);
+    public static final BlockStateDirection FACING = BlockStateDirection.of("facing", (Predicate<EnumDirection>) EnumDirection.EnumDirectionLimit.HORIZONTAL);
     public static final BlockStateBoolean OPEN = BlockStateBoolean.of("open");
     public static final BlockStateEnum<BlockDoor.EnumDoorHinge> HINGE = BlockStateEnum.of("hinge", BlockDoor.EnumDoorHinge.class);
     public static final BlockStateBoolean POWERED = BlockStateBoolean.of("powered");

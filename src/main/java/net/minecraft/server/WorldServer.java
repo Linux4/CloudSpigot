@@ -1,33 +1,32 @@
 package net.minecraft.server;
 
+// CraftBukkit start
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
+import java.util.logging.Level;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.bukkit.WeatherType;
+import org.bukkit.block.BlockState;
+//import org.bukkit.craftbukkit.util.LongHash; // CloudSpigot
+import org.bukkit.craftbukkit.util.HashTreeSet;
+import org.bukkit.event.block.BlockFormEvent;
+import org.bukkit.event.weather.LightningStrikeEvent;
+// CraftBukkit end
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 //import com.google.common.collect.Sets; // CloudSpigot
 import com.google.common.util.concurrent.ListenableFuture;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-//import java.util.Set; // CloudSpigot
-import java.util.TreeSet;
-import java.util.UUID;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-// CraftBukkit start
-import java.util.*;
-import java.util.logging.Level;
-
-import org.bukkit.WeatherType;
-import org.bukkit.block.BlockState;
-//import org.bukkit.craftbukkit.util.LongHash; // CloudSpigot
-import org.bukkit.craftbukkit.util.HashTreeSet;
-
-import org.bukkit.event.block.BlockFormEvent;
-import org.bukkit.event.weather.LightningStrikeEvent;
-// CraftBukkit end
+import net.minecraft.server.BiomeBase.BiomeMeta;
 
 public class WorldServer extends World implements IAsyncTaskHandler {
 
@@ -42,7 +41,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     public ChunkProviderServer chunkProviderServer;
     public boolean savingDisabled;
     private boolean O;
-    private int emptyTime;
+    //private int emptyTime; // CloudSpigot
     private final PortalTravelAgent Q;
     private final SpawnerCreature R = new SpawnerCreature();
     protected final VillageSiege siegeManager = new VillageSiege(this);
@@ -55,7 +54,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     public final int dimension;
 
     // Add env and gen to constructor
-    public WorldServer(MinecraftServer minecraftserver, IDataManager idatamanager, WorldData worlddata, int i, MethodProfiler methodprofiler, org.bukkit.World.Environment env, org.bukkit.generator.ChunkGenerator gen) {
+    @SuppressWarnings("deprecation")
+	public WorldServer(MinecraftServer minecraftserver, IDataManager idatamanager, WorldData worlddata, int i, MethodProfiler methodprofiler, org.bukkit.World.Environment env, org.bukkit.generator.ChunkGenerator gen) {
         super(idatamanager, worlddata, WorldProvider.byDimension(env.getId()), methodprofiler, false, gen, env);
         this.dimension = i;
         this.pvpMode = minecraftserver.getPVP();
@@ -180,7 +180,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         return result;
     }
 
-    private TileEntity fixTileEntity(BlockPosition pos, Block type, TileEntity found) {
+    @SuppressWarnings("deprecation")
+	private TileEntity fixTileEntity(BlockPosition pos, Block type, TileEntity found) {
         this.getServer().getLogger().log(Level.SEVERE, "Block at {0},{1},{2} is {3} but has {4}" + ". "
                 + "Bukkit will attempt to fix this, but there may be additional damage that we cannot recover.", new Object[]{pos.getX(), pos.getY(), pos.getZ(), org.bukkit.Material.getMaterial(Block.getId(type)).toString(), found});
 
@@ -259,13 +260,13 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
 
     public BiomeBase.BiomeMeta a(EnumCreatureType enumcreaturetype, BlockPosition blockposition) {
-        List list = this.N().getMobsFor(enumcreaturetype, blockposition);
+        List<BiomeMeta> list = this.N().getMobsFor(enumcreaturetype, blockposition);
 
         return list != null && !list.isEmpty() ? (BiomeBase.BiomeMeta) WeightedRandom.a(this.random, list) : null;
     }
 
     public boolean a(EnumCreatureType enumcreaturetype, BiomeBase.BiomeMeta biomebase_biomemeta, BlockPosition blockposition) {
-        List list = this.N().getMobsFor(enumcreaturetype, blockposition);
+        List<BiomeMeta> list = this.N().getMobsFor(enumcreaturetype, blockposition);
 
         return list != null && !list.isEmpty() ? list.contains(biomebase_biomemeta) : false;
     }
@@ -275,7 +276,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         if (!this.players.isEmpty()) {
             int i = 0;
             int j = 0;
-            Iterator iterator = this.players.iterator();
+            Iterator<EntityHuman> iterator = this.players.iterator();
 
             while (iterator.hasNext()) {
                 EntityHuman entityhuman = (EntityHuman) iterator.next();
@@ -294,7 +295,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
     protected void e() {
         this.O = false;
-        Iterator iterator = this.players.iterator();
+        Iterator<EntityHuman> iterator = this.players.iterator();
 
         while (iterator.hasNext()) {
             EntityHuman entityhuman = (EntityHuman) iterator.next();
@@ -328,7 +329,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
     public boolean everyoneDeeplySleeping() {
         if (this.O && !this.isClientSide) {
-            Iterator iterator = this.players.iterator();
+            Iterator<EntityHuman> iterator = this.players.iterator();
 
             // CraftBukkit - This allows us to assume that some people are in bed but not really, allowing time to pass in spite of AFKers
             boolean foundActualSleepers = false;
@@ -355,7 +356,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         }
     }
 
-    protected void h() {
+    @SuppressWarnings("deprecation")
+	protected void h() {
         super.h();
         if (this.worldData.getType() == WorldType.DEBUG_ALL_BLOCK_STATES) {
             // Spigot start
@@ -370,8 +372,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             }
 
         } else {
-            int i = 0;
-            int j = 0;
+            //int i = 0; // CloudSpigot
+            //int j = 0; // CloudSpigot
 
             // CraftBukkit start
             //for (Iterator iterator1 = this.chunkTickList.iterator(); iterator1.hasNext(); this.methodProfiler.b()) {
@@ -471,12 +473,12 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                                 int k2 = i2 >> 8 & 15;
                                 int l2 = i2 >> 16 & 15;
 
-                                ++j;
+                                //++j; // CloudSpigot
                                 IBlockData iblockdata = chunksection.getType(j2, l2, k2);
                                 Block block = iblockdata.getBlock();
 
                                 if (block.isTicking()) {
-                                    ++i;
+                                    //++i; // CloudSpigot
                                     block.a((World) this, new BlockPosition(j2 + k, l2 + chunksection.getYPosition(), k2 + l), iblockdata, this.random);
                                 }
                             }
@@ -497,12 +499,12 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     protected BlockPosition a(BlockPosition blockposition) {
         BlockPosition blockposition1 = this.q(blockposition);
         AxisAlignedBB axisalignedbb = (new AxisAlignedBB(blockposition1, new BlockPosition(blockposition1.getX(), this.getHeight(), blockposition1.getZ()))).grow(3.0D, 3.0D, 3.0D);
-        List list = this.a(EntityLiving.class, axisalignedbb, new Predicate() {
+        List<EntityLiving> list = this.a(EntityLiving.class, axisalignedbb, new Predicate<EntityLiving>() {
             public boolean a(EntityLiving entityliving) {
                 return entityliving != null && entityliving.isAlive() && WorldServer.this.i(entityliving.getChunkCoordinates());
             }
 
-            public boolean apply(Object object) {
+            public boolean apply(EntityLiving object) {
                 return this.a((EntityLiving) object);
             }
         });
@@ -572,20 +574,20 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
 
     public void tickEntities() {
-        if (false && this.players.isEmpty()) { // CraftBukkit - this prevents entity cleanup, other issues on servers with no players
+        /*if (false && this.players.isEmpty()) { // CraftBukkit - this prevents entity cleanup, other issues on servers with no players
             if (this.emptyTime++ >= 1200) {
                 return;
             }
-        } else {
+        } else {*/ // CloudSpigot
             this.j();
-        }
+        //} // CloudSpigot
 
         super.tickEntities();
         spigotConfig.currentPrimedTnt = 0; // Spigot
     }
 
     public void j() {
-        this.emptyTime = 0;
+        //this.emptyTime = 0; // CloudSpigot
     }
 
     public boolean a(boolean flag) {
@@ -647,7 +649,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
                 //this.methodProfiler.b(); // CloudSpigot
                 //this.methodProfiler.a("ticking"); // CloudSpigot
-                Iterator iterator = this.V.iterator();
+                Iterator<NextTickListEntry> iterator = this.V.iterator();
 
                 while (iterator.hasNext()) {
                     nextticklistentry = (NextTickListEntry) iterator.next();
@@ -691,10 +693,10 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
 
     public List<NextTickListEntry> a(StructureBoundingBox structureboundingbox, boolean flag) {
-        ArrayList arraylist = null;
+        ArrayList<NextTickListEntry> arraylist = null;
 
         for (int i = 0; i < 2; ++i) {
-            Iterator iterator;
+            Iterator<NextTickListEntry> iterator;
 
             if (i == 0) {
                 iterator = this.M.iterator();
@@ -738,9 +740,9 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
     // CraftBukkit end */
 
-    private boolean getSpawnNPCs() {
+    /*private boolean getSpawnNPCs() {
         return this.server.getSpawnNPCs();
-    }
+    }*/ // CloudSpigot
 
     /*private boolean getSpawnAnimals() {
         return this.server.getSpawnAnimals();
@@ -768,7 +770,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
 
     public List<TileEntity> getTileEntities(int i, int j, int k, int l, int i1, int j1) {
-        ArrayList arraylist = Lists.newArrayList();
+        ArrayList<TileEntity> arraylist = Lists.newArrayList();
 
         // CraftBukkit start - Get tile entities from chunks instead of world
         for (int chunkX = (i >> 4); chunkX <= ((l - 1) >> 4); chunkX++) {
@@ -852,7 +854,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         } else {
             this.isLoading = true;
             WorldChunkManager worldchunkmanager = this.worldProvider.m();
-            List list = worldchunkmanager.a();
+            List<BiomeBase> list = worldchunkmanager.a();
             Random random = new Random(this.getSeed());
             BlockPosition blockposition = worldchunkmanager.a(0, 0, 256, list, random);
             int i = 0;
@@ -922,7 +924,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         return this.worldProvider.h();
     }
 
-    public void save(boolean flag, IProgressUpdate iprogressupdate) throws ExceptionWorldConflict {
+    @SuppressWarnings("unchecked")
+	public void save(boolean flag, IProgressUpdate iprogressupdate) throws ExceptionWorldConflict {
         if (this.chunkProvider.canSave()) {
             org.bukkit.Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.WorldSaveEvent(getWorld())); // CraftBukkit
             if (iprogressupdate != null) {
@@ -936,11 +939,11 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
             this.chunkProvider.saveChunks(flag, iprogressupdate);
             // CraftBukkit - ArrayList -> Collection
-            Collection arraylist = this.chunkProviderServer.a();
-            Iterator iterator = arraylist.iterator();
+            Collection<Chunk> arraylist = this.chunkProviderServer.a();
+            Iterator<Chunk> iterator = arraylist.iterator();
 
             while (iterator.hasNext()) {
-                Chunk chunk = (Chunk) iterator.next();
+                Chunk chunk = iterator.next();
 
                 if (chunk != null && !this.manager.a(chunk.locX, chunk.locZ)) {
                     this.chunkProviderServer.queueUnload(chunk.locX, chunk.locZ);
@@ -1043,7 +1046,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             explosion.clearBlocks();
         }
 
-        Iterator iterator = this.players.iterator();
+        Iterator<EntityHuman> iterator = this.players.iterator();
 
         while (iterator.hasNext()) {
             EntityHuman entityhuman = (EntityHuman) iterator.next();
@@ -1058,7 +1061,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
     public void playBlockAction(BlockPosition blockposition, Block block, int i, int j) {
         BlockActionData blockactiondata = new BlockActionData(blockposition, block, i, j);
-        Iterator iterator = this.S[this.T].iterator();
+        Iterator<BlockActionData> iterator = this.S[this.T].iterator();
 
         BlockActionData blockactiondata1;
 
@@ -1078,7 +1081,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             int i = this.T;
 
             this.T ^= 1;
-            Iterator iterator = this.S[i].iterator();
+            Iterator<BlockActionData> iterator = this.S[i].iterator();
 
             while (iterator.hasNext()) {
                 BlockActionData blockactiondata = (BlockActionData) iterator.next();
@@ -1203,7 +1206,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         return this.server.isMainThread();
     }
 
-    static class BlockActionDataList extends ArrayList<BlockActionData> {
+    @SuppressWarnings("serial")
+	static class BlockActionDataList extends ArrayList<BlockActionData> {
 
         private BlockActionDataList() {}
 

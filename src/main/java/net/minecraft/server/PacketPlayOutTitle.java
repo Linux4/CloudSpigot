@@ -55,7 +55,7 @@ public class PacketPlayOutTitle implements Packet<PacketListenerPlayOut> {
     }
 
     public void b(PacketDataSerializer packetdataserializer) throws IOException {
-        packetdataserializer.a((Enum) this.a);
+        packetdataserializer.a(this.a);
         if (this.a == EnumTitleAction.TITLE || this.a == EnumTitleAction.SUBTITLE) {
             // Paper start
             if (this.components != null) {

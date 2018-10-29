@@ -96,7 +96,8 @@ public class SimpleCommandMap implements CommandMap {
      *     unique address
      * @return true if command was registered, false otherwise.
      */
-    private synchronized boolean register(String label, Command command, boolean isAlias, String fallbackPrefix) {
+    @SuppressWarnings("deprecation")
+	private synchronized boolean register(String label, Command command, boolean isAlias, String fallbackPrefix) {
         knownCommands.put(fallbackPrefix + ":" + label, command);
         if ((command instanceof VanillaCommand || isAlias) && knownCommands.containsKey(label)) {
             // Request is for an alias/fallback command and it conflicts with

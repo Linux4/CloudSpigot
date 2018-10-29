@@ -369,7 +369,7 @@ public abstract class BlockMinecartTrackAbstract extends Block {
 
         protected int a() {
             int i = 0;
-            Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+            Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
             while (iterator.hasNext()) {
                 EnumDirection enumdirection = (EnumDirection) iterator.next();

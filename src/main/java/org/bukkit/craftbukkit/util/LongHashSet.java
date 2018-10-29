@@ -44,7 +44,8 @@ public class LongHashSet {
         modCount = 0;
     }
 
-    public Iterator iterator() {
+    @SuppressWarnings("rawtypes")
+	public Iterator iterator() {
         return new Itr();
     }
 
@@ -243,7 +244,8 @@ public class LongHashSet {
         freeEntries = values.length - elements;
     }
 
-    private class Itr implements Iterator {
+    @SuppressWarnings("rawtypes")
+	private class Itr implements Iterator {
         private int index;
         private int lastReturned = -1;
         private int expectedModCount;

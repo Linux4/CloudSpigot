@@ -7,9 +7,11 @@ public class PathfinderGoalHurtByTarget extends PathfinderGoalTarget {
 
     private boolean a;
     private int b;
-    private final Class[] c;
+    @SuppressWarnings("rawtypes")
+	private final Class[] c;
 
-    public PathfinderGoalHurtByTarget(EntityCreature entitycreature, boolean flag, Class... aclass) {
+    @SuppressWarnings("rawtypes")
+	public PathfinderGoalHurtByTarget(EntityCreature entitycreature, boolean flag, Class... aclass) {
         super(entitycreature, false);
         this.a = flag;
         this.c = aclass;
@@ -22,16 +24,17 @@ public class PathfinderGoalHurtByTarget extends PathfinderGoalTarget {
         return i != this.b && this.a(this.e.getLastDamager(), false);
     }
 
-    public void c() {
+    @SuppressWarnings("rawtypes")
+	public void c() {
         this.e.setGoalTarget(this.e.getLastDamager(), org.bukkit.event.entity.EntityTargetEvent.TargetReason.TARGET_ATTACKED_ENTITY, true); // CraftBukkit - reason
         this.b = this.e.be();
         if (this.a) {
             double d0 = this.f();
-            List list = this.e.world.a(this.e.getClass(), (new AxisAlignedBB(this.e.locX, this.e.locY, this.e.locZ, this.e.locX + 1.0D, this.e.locY + 1.0D, this.e.locZ + 1.0D)).grow(d0, 10.0D, d0));
-            Iterator iterator = list.iterator();
+            List<? extends EntityCreature> list = this.e.world.a(this.e.getClass(), (new AxisAlignedBB(this.e.locX, this.e.locY, this.e.locZ, this.e.locX + 1.0D, this.e.locY + 1.0D, this.e.locZ + 1.0D)).grow(d0, 10.0D, d0));
+            Iterator<? extends EntityCreature> iterator = list.iterator();
 
             while (iterator.hasNext()) {
-                EntityCreature entitycreature = (EntityCreature) iterator.next();
+                EntityCreature entitycreature = iterator.next();
 
                 if (this.e != entitycreature && entitycreature.getGoalTarget() == null && !entitycreature.c(this.e.getLastDamager())) {
                     boolean flag = false;

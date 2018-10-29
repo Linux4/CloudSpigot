@@ -16,11 +16,13 @@ public class CraftOcelot extends CraftTameableAnimal implements Ocelot {
         return (EntityOcelot) entity;
     }
 
-    public Type getCatType() {
+    @SuppressWarnings("deprecation")
+	public Type getCatType() {
         return Type.getType(getHandle().getCatType());
     }
 
-    public void setCatType(Type type) {
+    @SuppressWarnings("deprecation")
+	public void setCatType(Type type) {
         Validate.notNull(type, "Cat type cannot be null");
         getHandle().setCatType(type.getId());
     }

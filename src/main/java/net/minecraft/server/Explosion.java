@@ -50,8 +50,8 @@ public class Explosion {
             return;
         }
         // CraftBukkit end
-        HashSet hashset = Sets.newHashSet();
-        boolean flag = true;
+        HashSet<BlockPosition> hashset = Sets.newHashSet();
+        //boolean flag = true; // CloudSpigot
 
         int i;
         int j;
@@ -73,7 +73,7 @@ public class Explosion {
                         double d5 = this.posY;
                         double d6 = this.posZ;
 
-                        for (double f1 = 0.3; f > 0.0; f -= 0.22500001) {
+                        for (; f > 0.0; f -= 0.22500001) { // CloudSpigot
                             BlockPosition blockposition = new BlockPosition(d4, d5, d6);
                             IBlockData iblockdata = this.world.getType(blockposition);
 
@@ -106,7 +106,7 @@ public class Explosion {
         int j1 = MathHelper.floor(this.posZ - (double) f3 - 1.0D);
         int k1 = MathHelper.floor(this.posZ + (double) f3 + 1.0D);
         // CloudSpigot start - Fix lag from explosions processing dead entities
-        List list = this.world.a(this.source, new AxisAlignedBB((double) i, (double) l, (double) j1, (double) j, (double) i1, (double) k1), new com.google.common.base.Predicate<Entity>() {
+        List<Entity> list = this.world.a(this.source, new AxisAlignedBB((double) i, (double) l, (double) j1, (double) j, (double) i1, (double) k1), new com.google.common.base.Predicate<Entity>() {
             @Override
             public boolean apply(Entity entity) {
                 return IEntitySelector.d.apply(entity) && !entity.dead;
@@ -176,7 +176,7 @@ public class Explosion {
             this.world.addParticle(EnumParticle.EXPLOSION_LARGE, this.posX, this.posY, this.posZ, 1.0D, 0.0D, 0.0D, new int[0]);
         }
 
-        Iterator iterator;
+        Iterator<BlockPosition> iterator;
         BlockPosition blockposition;
 
         if (this.b) {

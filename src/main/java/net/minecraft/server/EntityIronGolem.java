@@ -9,7 +9,8 @@ public class EntityIronGolem extends EntityGolem {
     private int c;
     private int bm;
 
-    public EntityIronGolem(World world) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public EntityIronGolem(World world) {
         super(world);
         this.setSize(1.4F, 2.9F);
         ((Navigation) this.getNavigation()).a(true);
@@ -186,7 +187,7 @@ public class EntityIronGolem extends EntityGolem {
 
         public PathfinderGoalNearestGolemTarget(final EntityCreature entitycreature, Class<T> oclass, int i, boolean flag, boolean flag1, final Predicate<? super T> predicate) {
             super(entitycreature, oclass, i, flag, flag1, predicate);
-            this.c = new Predicate() {
+            this.c = new Predicate<T>() {
                 public boolean a(T t0) {
                     if (predicate != null && !predicate.apply(t0)) {
                         return false;
@@ -219,7 +220,7 @@ public class EntityIronGolem extends EntityGolem {
                     }
                 }
 
-                public boolean apply(Object object) {
+                public boolean apply(T object) {
                     return this.a((T) object); // CraftBukkit - fix decompiler error
                 }
             };

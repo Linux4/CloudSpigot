@@ -10,7 +10,8 @@ public class ItemFishingRod extends Item {
         this.a(CreativeModeTab.i);
     }
 
-    public ItemStack a(ItemStack itemstack, World world, EntityHuman entityhuman) {
+    @SuppressWarnings("deprecation")
+	public ItemStack a(ItemStack itemstack, World world, EntityHuman entityhuman) {
         if (entityhuman.hookedFish != null) {
             int i = entityhuman.hookedFish.l();
 

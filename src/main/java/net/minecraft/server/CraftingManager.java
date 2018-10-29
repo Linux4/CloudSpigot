@@ -178,12 +178,12 @@ public class CraftingManager {
 
     // CraftBukkit start
     public void sort() {
-       Collections.sort(this.recipes, new Comparator() {
+       Collections.sort(this.recipes, new Comparator<IRecipe>() {
             public int a(IRecipe irecipe, IRecipe irecipe1) {
                 return irecipe instanceof ShapelessRecipes && irecipe1 instanceof ShapedRecipes ? 1 : (irecipe1 instanceof ShapelessRecipes && irecipe instanceof ShapedRecipes ? -1 : (irecipe1.a() < irecipe.a() ? -1 : (irecipe1.a() > irecipe.a() ? 1 : 0)));
             }
 
-            public int compare(Object object, Object object1) {
+            public int compare(IRecipe object, IRecipe object1) {
                 return this.a((IRecipe) object, (IRecipe) object1);
             }
         });
@@ -215,7 +215,7 @@ public class CraftingManager {
             }
         }
 
-        HashMap hashmap;
+        HashMap<Character, ItemStack> hashmap;
 
         for (hashmap = Maps.newHashMap(); i < aobject.length; i += 2) {
             Character character = (Character) aobject[i];
@@ -251,7 +251,7 @@ public class CraftingManager {
     }
 
     public void registerShapelessRecipe(ItemStack itemstack, Object... aobject) {
-        ArrayList arraylist = Lists.newArrayList();
+        ArrayList<ItemStack> arraylist = Lists.newArrayList();
         Object[] aobject1 = aobject;
         int i = aobject.length;
 
@@ -279,7 +279,7 @@ public class CraftingManager {
     }
 
     public ItemStack craft(InventoryCrafting inventorycrafting, World world) {
-        Iterator iterator = this.recipes.iterator();
+        Iterator<IRecipe> iterator = this.recipes.iterator();
 
         IRecipe irecipe;
 
@@ -300,7 +300,7 @@ public class CraftingManager {
     }
 
     public ItemStack[] b(InventoryCrafting inventorycrafting, World world) {
-        Iterator iterator = this.recipes.iterator();
+        Iterator<IRecipe> iterator = this.recipes.iterator();
 
         while (iterator.hasNext()) {
             IRecipe irecipe = (IRecipe) iterator.next();

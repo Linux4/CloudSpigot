@@ -13,7 +13,7 @@ public class RecipeArmorDye extends ShapelessRecipes implements IRecipe { // Cra
 
     public boolean a(InventoryCrafting inventorycrafting, World world) {
         ItemStack itemstack = null;
-        ArrayList arraylist = Lists.newArrayList();
+        ArrayList<ItemStack> arraylist = Lists.newArrayList();
 
         for (int i = 0; i < inventorycrafting.getSize(); ++i) {
             ItemStack itemstack1 = inventorycrafting.getItem(i);

@@ -67,7 +67,8 @@ public class BlockCanBuildEvent extends BlockEvent {
      *
      * @return The Material that we are trying to place
      */
-    public Material getMaterial() {
+    @SuppressWarnings("deprecation")
+	public Material getMaterial() {
         return Material.getMaterial(material);
     }
 

@@ -7,14 +7,15 @@ import org.bukkit.event.entity.ExplosionPrimeEvent;
 
 public class EntityCreeper extends EntityMonster {
 
-    private int a;
+    //private int a; // CloudSpigot
     private int fuseTicks;
     private int maxFuseTicks = 30;
     private int explosionRadius = 3;
     private int bn = 0;
     private int record = -1; // CraftBukkit
 
-    public EntityCreeper(World world) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public EntityCreeper(World world) {
         super(world);
         this.goalSelector.a(1, new PathfinderGoalFloat(this));
         this.goalSelector.a(2, new PathfinderGoalSwell(this));
@@ -82,7 +83,7 @@ public class EntityCreeper extends EntityMonster {
 
     public void t_() {
         if (this.isAlive()) {
-            this.a = this.fuseTicks;
+            //this.a = this.fuseTicks; // CloudSpigot
             if (this.cn()) {
                 this.a(1);
             }

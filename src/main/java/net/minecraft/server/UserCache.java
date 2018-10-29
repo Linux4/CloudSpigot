@@ -1,5 +1,25 @@
 package net.minecraft.server;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
+
+import org.apache.commons.io.IOUtils;
+
 import com.google.common.base.Charsets;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -17,25 +37,6 @@ import com.google.gson.JsonSerializer;
 import com.mojang.authlib.Agent;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.ProfileLookupCallback;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.UUID;
-import org.apache.commons.io.IOUtils;
 
 public class UserCache {
 
@@ -108,7 +109,7 @@ public class UserCache {
             date = calendar.getTime();
         }
 
-        String s = gameprofile.getName().toLowerCase(Locale.ROOT);
+        //String s = gameprofile.getName().toLowerCase(Locale.ROOT); // CloudSpigot
         UserCache.UserCacheEntry usercache_usercacheentry = new UserCache.UserCacheEntry(gameprofile, date, null);
 
         if (this.d.containsKey(uuid)) {
@@ -154,7 +155,7 @@ public class UserCache {
     }
 
     public String[] a() {
-        ArrayList arraylist = Lists.newArrayList(this.c.keySet());
+        ArrayList<String> arraylist = Lists.newArrayList(this.c.keySet());
 
         return (String[]) arraylist.toArray(new String[arraylist.size()]);
     }
@@ -183,12 +184,12 @@ public class UserCache {
 
         try {
             bufferedreader = Files.newReader(this.g, Charsets.UTF_8);
-            List list = (List) this.b.fromJson(bufferedreader, UserCache.h);
+            List<?> list = this.b.fromJson(bufferedreader, UserCache.h);
 
             this.c.clear();
             this.d.clear();
             this.e.clear();
-            Iterator iterator = Lists.reverse(list).iterator();
+            Iterator<?> iterator = Lists.reverse(list).iterator();
 
             while (iterator.hasNext()) {
                 UserCache.UserCacheEntry usercache_usercacheentry = (UserCache.UserCacheEntry) iterator.next();
@@ -231,9 +232,9 @@ public class UserCache {
     }
 
     private List<UserCache.UserCacheEntry> a(int i) {
-        ArrayList arraylist = Lists.newArrayList();
-        ArrayList arraylist1 = Lists.newArrayList(Iterators.limit(this.e.iterator(), i));
-        Iterator iterator = arraylist1.iterator();
+        ArrayList<UserCacheEntry> arraylist = Lists.newArrayList();
+        ArrayList<GameProfile> arraylist1 = Lists.newArrayList(Iterators.limit(this.e.iterator(), i));
+        Iterator<GameProfile> iterator = arraylist1.iterator();
 
         while (iterator.hasNext()) {
             GameProfile gameprofile = (GameProfile) iterator.next();

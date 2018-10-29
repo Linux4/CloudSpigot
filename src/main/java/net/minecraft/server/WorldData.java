@@ -584,7 +584,8 @@ public class WorldData {
         return this.z;
     }
 
-    public void setDifficulty(EnumDifficulty enumdifficulty) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public void setDifficulty(EnumDifficulty enumdifficulty) {
         this.z = enumdifficulty;
         // CraftBukkit start
         PacketPlayOutServerDifficulty packet = new PacketPlayOutServerDifficulty(this.getDifficulty(), this.isDifficultyLocked());
@@ -603,61 +604,61 @@ public class WorldData {
     }
 
     public void a(CrashReportSystemDetails crashreportsystemdetails) {
-        crashreportsystemdetails.a("Level seed", new Callable() {
+        crashreportsystemdetails.a("Level seed", new Callable<String>() {
             public String a() throws Exception {
                 return String.valueOf(WorldData.this.getSeed());
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
-        crashreportsystemdetails.a("Level generator", new Callable() {
+        crashreportsystemdetails.a("Level generator", new Callable<String>() {
             public String a() throws Exception {
                 return String.format("ID %02d - %s, ver %d. Features enabled: %b", new Object[] { Integer.valueOf(WorldData.this.c.g()), WorldData.this.c.name(), Integer.valueOf(WorldData.this.c.getVersion()), Boolean.valueOf(WorldData.this.v)});
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
-        crashreportsystemdetails.a("Level generator options", new Callable() {
+        crashreportsystemdetails.a("Level generator options", new Callable<String>() {
             public String a() throws Exception {
                 return WorldData.this.d;
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
-        crashreportsystemdetails.a("Level spawn location", new Callable() {
+        crashreportsystemdetails.a("Level spawn location", new Callable<String>() {
             public String a() throws Exception {
                 return CrashReportSystemDetails.a((double) WorldData.this.e, (double) WorldData.this.f, (double) WorldData.this.g);
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
-        crashreportsystemdetails.a("Level time", new Callable() {
+        crashreportsystemdetails.a("Level time", new Callable<String>() {
             public String a() throws Exception {
                 return String.format("%d game time, %d day time", new Object[] { Long.valueOf(WorldData.this.h), Long.valueOf(WorldData.this.i)});
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
-        crashreportsystemdetails.a("Level dimension", new Callable() {
+        crashreportsystemdetails.a("Level dimension", new Callable<String>() {
             public String a() throws Exception {
                 return String.valueOf(WorldData.this.m);
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
-        crashreportsystemdetails.a("Level storage version", new Callable() {
+        crashreportsystemdetails.a("Level storage version", new Callable<String>() {
             public String a() throws Exception {
                 String s = "Unknown?";
 
@@ -677,25 +678,25 @@ public class WorldData {
                 return String.format("0x%05X - %s", new Object[] { Integer.valueOf(WorldData.this.o), s});
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
-        crashreportsystemdetails.a("Level weather", new Callable() {
+        crashreportsystemdetails.a("Level weather", new Callable<String>() {
             public String a() throws Exception {
                 return String.format("Rain time: %d (now: %b), thunder time: %d (now: %b)", new Object[] { Integer.valueOf(WorldData.this.r), Boolean.valueOf(WorldData.this.q), Integer.valueOf(WorldData.this.t), Boolean.valueOf(WorldData.this.s)});
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
-        crashreportsystemdetails.a("Level game mode", new Callable() {
+        crashreportsystemdetails.a("Level game mode", new Callable<String>() {
             public String a() throws Exception {
                 return String.format("Game mode: %s (ID %d). Hardcore: %b. Cheats: %b", new Object[] { WorldData.this.u.b(), Integer.valueOf(WorldData.this.u.getId()), Boolean.valueOf(WorldData.this.w), Boolean.valueOf(WorldData.this.x)});
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });

@@ -1,12 +1,9 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Sets;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 // CraftBukkit start
 import org.bukkit.entity.Player;
@@ -68,7 +65,8 @@ public class EntityTrackerEntry {
         return this.tracker.getId();
     }
 
-    public void track(List<EntityHuman> list) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public void track(List<EntityHuman> list) {
         this.n = false;
         if (!this.isMoving || this.tracker.e(this.q, this.r, this.s) > 16.0D) {
             this.q = this.tracker.locX;
@@ -90,7 +88,7 @@ public class EntityTrackerEntry {
 
             if (this.m % 10 == 0 && itemstack != null && itemstack.getItem() instanceof ItemWorldMap) { // CraftBukkit - Moved this.m % 10 logic here so item frames do not enter the other blocks
                 WorldMap worldmap = Items.FILLED_MAP.getSavedMap(itemstack, this.tracker.world);
-                Iterator iterator = this.trackedPlayers.iterator(); // CraftBukkit
+                Iterator<EntityPlayer> iterator = this.trackedPlayers.iterator(); // CraftBukkit
 
                 while (iterator.hasNext()) {
                     EntityHuman entityhuman = (EntityHuman) iterator.next();
@@ -279,7 +277,7 @@ public class EntityTrackerEntry {
 
         if (this.tracker instanceof EntityLiving) {
             AttributeMapServer attributemapserver = (AttributeMapServer) ((EntityLiving) this.tracker).getAttributeMap();
-            Set set = attributemapserver.getAttributes();
+            Set<AttributeInstance> set = attributemapserver.getAttributes();
 
             if (!set.isEmpty()) {
                 // CraftBukkit start - Send scaled max health
@@ -295,8 +293,9 @@ public class EntityTrackerEntry {
 
     }
 
-    public void broadcast(Packet packet) {
-        Iterator iterator = this.trackedPlayers.iterator();
+    @SuppressWarnings("rawtypes")
+	public void broadcast(Packet packet) {
+        Iterator<EntityPlayer> iterator = this.trackedPlayers.iterator();
 
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
@@ -306,7 +305,8 @@ public class EntityTrackerEntry {
 
     }
 
-    public void broadcastIncludingSelf(Packet packet) {
+    @SuppressWarnings("rawtypes")
+	public void broadcastIncludingSelf(Packet packet) {
         this.broadcast(packet);
         if (this.tracker instanceof EntityPlayer) {
             ((EntityPlayer) this.tracker).playerConnection.sendPacket(packet);
@@ -315,7 +315,7 @@ public class EntityTrackerEntry {
     }
 
     public void a() {
-        Iterator iterator = this.trackedPlayers.iterator();
+        Iterator<EntityPlayer> iterator = this.trackedPlayers.iterator();
 
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
@@ -333,7 +333,8 @@ public class EntityTrackerEntry {
 
     }
 
-    public void updatePlayer(EntityPlayer entityplayer) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public void updatePlayer(EntityPlayer entityplayer) {
         //org.spigotmc.AsyncCatcher.catchOp( "player tracker update"); // Spigot // CloudSpigot
         if (entityplayer != this.tracker) {
             if (this.c(entityplayer)) {
@@ -454,7 +455,8 @@ public class EntityTrackerEntry {
 
     }
 
-    private Packet c() {
+    @SuppressWarnings("rawtypes")
+	private Packet c() {
         if (this.tracker.dead) {
             // CraftBukkit start - Remove useless error spam, just return
             // EntityTrackerEntry.p.warn("Fetching addPacket for removed entity");

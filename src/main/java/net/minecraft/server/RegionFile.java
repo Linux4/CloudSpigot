@@ -27,17 +27,17 @@ public class RegionFile {
     private final int[] d = new int[1024];
     private final int[] e = new int[1024];
     private List<Boolean> f;
-    private int g;
-    private long h;
+    //private int g; // CloudSpigot
+    //private long h; // CloudSpigot
 
     public RegionFile(File file) {
         //this.b = file; // CloudSpigot
-        this.g = 0;
+        //this.g = 0; // CloudSpigot
 
         try {
-            if (file.exists()) {
+            /*if (file.exists()) {
                 this.h = file.lastModified();
-            }
+            }*/ // cloudSpigot
 
             this.c = new RandomAccessFile(file, "rw");
             int i;
@@ -47,7 +47,7 @@ public class RegionFile {
                 this.c.write(RegionFile.a); // Spigot
                 this.c.write(RegionFile.a); // Spigot
 
-                this.g += 8192;
+                //this.g += 8192; // CloudSpigot
             }
 
             if ((this.c.length() & 4095L) != 0L) {
@@ -253,7 +253,7 @@ public class RegionFile {
                         this.f.add(false);
                     }
 
-                    this.g += 4096 * k1;
+                    //this.g += 4096 * k1; // CloudSpigot
                     this.a(i1, abyte, k);
                     this.a(i, j, i1 << 8 | k1);
                 }

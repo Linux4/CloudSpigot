@@ -146,7 +146,7 @@ public class EntityItem extends Entity {
     private void w() {
         // Spigot start
         double radius = world.spigotConfig.itemMerge;
-        Iterator iterator = this.world.a(EntityItem.class, this.getBoundingBox().grow(radius, radius, radius)).iterator();
+        Iterator<EntityItem> iterator = this.world.a(EntityItem.class, this.getBoundingBox().grow(radius, radius, radius)).iterator();
         // Spigot end
 
         while (iterator.hasNext()) {

@@ -21,7 +21,8 @@ public class ShapedRecipes implements IRecipe {
     }
 
     // CraftBukkit start
-    public org.bukkit.inventory.ShapedRecipe toBukkitRecipe() {
+    @SuppressWarnings("deprecation")
+	public org.bukkit.inventory.ShapedRecipe toBukkitRecipe() {
         CraftItemStack result = CraftItemStack.asCraftMirror(this.result);
         CraftShapedRecipe recipe = new CraftShapedRecipe(result, this);
         switch (this.height) {

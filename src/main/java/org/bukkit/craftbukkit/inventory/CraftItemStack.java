@@ -6,11 +6,6 @@ import static org.bukkit.craftbukkit.inventory.CraftMetaItem.ENCHANTMENTS_LVL;
 
 import java.util.Map;
 
-import net.minecraft.server.EnchantmentManager;
-import net.minecraft.server.Item;
-import net.minecraft.server.NBTTagCompound;
-import net.minecraft.server.NBTTagList;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
@@ -20,12 +15,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.server.IChatBaseComponent.ChatSerializer;
-import net.minecraft.server.Items;
-import net.minecraft.server.NBTTagString;
-import org.bukkit.craftbukkit.util.CraftChatMessage;
+
+import net.minecraft.server.EnchantmentManager;
+import net.minecraft.server.Item;
+import net.minecraft.server.NBTTagCompound;
+import net.minecraft.server.NBTTagList;
 
 @DelegateDeserialization(ItemStack.class)
+@SuppressWarnings("deprecation")
 public final class CraftItemStack extends ItemStack {
 
     public static net.minecraft.server.ItemStack asNMSCopy(ItemStack original) {

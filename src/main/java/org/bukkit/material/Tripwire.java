@@ -35,7 +35,8 @@ public class Tripwire extends MaterialData {
      *
      * @return true if activated, false if not
      */
-    public boolean isActivated() {
+    @SuppressWarnings("deprecation")
+	public boolean isActivated() {
         return (getData() & 0x4) != 0;
     }
     
@@ -44,7 +45,8 @@ public class Tripwire extends MaterialData {
      *
      * @param act - true if activated, false if not
      */
-    public void setActivated(boolean act) {
+    @SuppressWarnings("deprecation")
+	public void setActivated(boolean act) {
         int dat = getData() & (0x8 | 0x3);
         if (act) {
             dat |= 0x4;
@@ -57,7 +59,8 @@ public class Tripwire extends MaterialData {
      *
      * @return true if object activating tripwire, false if not
      */
-    public boolean isObjectTriggering() {
+    @SuppressWarnings("deprecation")
+	public boolean isObjectTriggering() {
         return (getData() & 0x1) != 0;
     }
 
@@ -66,7 +69,8 @@ public class Tripwire extends MaterialData {
      *
      * @param trig - true if object activating tripwire, false if not
      */
-    public void setObjectTriggering(boolean trig) {
+    @SuppressWarnings("deprecation")
+	public void setObjectTriggering(boolean trig) {
         int dat = getData() & 0xE;
         if (trig) {
             dat |= 0x1;

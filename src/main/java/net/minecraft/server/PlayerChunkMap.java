@@ -1,26 +1,27 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 // CraftBukkit start
 import java.util.Collections;
-import java.util.Queue;
-import java.util.LinkedList;
-import org.bukkit.craftbukkit.chunkio.ChunkIOExecutor;
 import java.util.HashMap;
 // CraftBukkit end
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.bukkit.craftbukkit.chunkio.ChunkIOExecutor;
+
+import com.google.common.collect.Lists;
 
 public class PlayerChunkMap {
 
     private static final Logger a = LogManager.getLogger();
     private final WorldServer world;
     private final List<EntityPlayer> managedPlayers = Lists.newArrayList();
-    private final LongHashMap<PlayerChunkMap.PlayerChunk> d = new LongHashMap();
+    private final LongHashMap<PlayerChunkMap.PlayerChunk> d = new LongHashMap<PlayerChunk>();
     private final Queue<PlayerChunkMap.PlayerChunk> e = new java.util.concurrent.ConcurrentLinkedQueue<PlayerChunkMap.PlayerChunk>(); // CraftBukkit ArrayList -> ConcurrentLinkedQueue
     private final Queue<PlayerChunkMap.PlayerChunk> f = new java.util.concurrent.ConcurrentLinkedQueue<PlayerChunkMap.PlayerChunk>(); // CraftBukkit ArrayList -> ConcurrentLinkedQueue
     private int g;
@@ -46,14 +47,14 @@ public class PlayerChunkMap {
             this.h = i;
 
             // CraftBukkit start - Use iterator
-            java.util.Iterator iterator = this.f.iterator();
+            Iterator<PlayerChunk> iterator = this.f.iterator();
             while (iterator.hasNext()) {
                 playerchunkmap_playerchunk = (PlayerChunk) iterator.next();
                 playerchunkmap_playerchunk.b();
                 playerchunkmap_playerchunk.a();
             }
         } else {
-            java.util.Iterator iterator = this.e.iterator();
+            Iterator<PlayerChunk> iterator = this.e.iterator();
             while (iterator.hasNext()) {
                 playerchunkmap_playerchunk = (PlayerChunk) iterator.next();
                 playerchunkmap_playerchunk.b();
@@ -148,7 +149,7 @@ public class PlayerChunkMap {
     }
 
     public void b(EntityPlayer entityplayer) {
-        ArrayList arraylist = Lists.newArrayList(entityplayer.chunkCoordIntPairQueue);
+        ArrayList<ChunkCoordIntPair> arraylist = Lists.newArrayList(entityplayer.chunkCoordIntPairQueue);
         int i = 0;
         int j = entityplayer.viewDistance; // CloudSpigot - Player view distance API
         int k = (int) entityplayer.locX >> 4;
@@ -278,8 +279,8 @@ public class PlayerChunkMap {
         i = MathHelper.clamp(i, 3, 32);
         if (i != this.g) {
             int j = i - this.g;
-            ArrayList arraylist = Lists.newArrayList(this.managedPlayers);
-            Iterator iterator = arraylist.iterator();
+            ArrayList<EntityPlayer> arraylist = Lists.newArrayList(this.managedPlayers);
+            Iterator<EntityPlayer> iterator = arraylist.iterator();
 
             while (iterator.hasNext()) {
                 EntityPlayer entityplayer = (EntityPlayer) iterator.next();
@@ -473,7 +474,8 @@ public class PlayerChunkMap {
 
         }
 
-        public void a(Packet packet) {
+        @SuppressWarnings("rawtypes")
+		public void a(Packet packet) {
             for (int i = 0; i < this.b.size(); ++i) {
                 EntityPlayer entityplayer = (EntityPlayer) this.b.get(i);
 
@@ -484,7 +486,8 @@ public class PlayerChunkMap {
 
         }
 
-        public void b() {
+        @SuppressWarnings("rawtypes")
+		public void b() {
             if (this.dirtyCount != 0) {
                 int i;
                 int j;
@@ -539,7 +542,8 @@ public class PlayerChunkMap {
             }
         }
 
-        private void a(TileEntity tileentity) {
+        @SuppressWarnings("rawtypes")
+		private void a(TileEntity tileentity) {
             if (tileentity != null) {
                 Packet packet = tileentity.getUpdatePacket();
 

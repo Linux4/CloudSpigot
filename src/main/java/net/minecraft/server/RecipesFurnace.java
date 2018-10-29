@@ -10,7 +10,7 @@ public class RecipesFurnace {
     private static final RecipesFurnace a = new RecipesFurnace();
     public Map<ItemStack, ItemStack> recipes = Maps.newHashMap();
     private Map<ItemStack, Float> c = Maps.newHashMap();
-    public Map customRecipes = Maps.newHashMap(); // CraftBukkit - add field
+    public Map<ItemStack, ItemStack> customRecipes = Maps.newHashMap(); // CraftBukkit - add field
 
     public static RecipesFurnace getInstance() {
         return RecipesFurnace.a;
@@ -76,10 +76,10 @@ public class RecipesFurnace {
     public ItemStack getResult(ItemStack itemstack) {
         // CraftBukkit start - initialize to customRecipes
         boolean vanilla = false;
-        Iterator iterator = this.customRecipes.entrySet().iterator();
+        Iterator<Entry<ItemStack, ItemStack>> iterator = this.customRecipes.entrySet().iterator();
         // CraftBukkit end
 
-        Entry entry;
+        Entry<ItemStack, ItemStack> entry;
 
         do {
             if (!iterator.hasNext()) {
@@ -93,7 +93,7 @@ public class RecipesFurnace {
                 // CraftBukkit end
             }
 
-            entry = (Entry) iterator.next();
+            entry = iterator.next();
         } while (!this.a(itemstack, (ItemStack) entry.getKey()));
 
         return (ItemStack) entry.getValue();
@@ -108,16 +108,16 @@ public class RecipesFurnace {
     }
 
     public float b(ItemStack itemstack) {
-        Iterator iterator = this.c.entrySet().iterator();
+        Iterator<Entry<ItemStack, Float>> iterator = this.c.entrySet().iterator();
 
-        Entry entry;
+        Entry<ItemStack, Float> entry;
 
         do {
             if (!iterator.hasNext()) {
                 return 0.0F;
             }
 
-            entry = (Entry) iterator.next();
+            entry = iterator.next();
         } while (!this.a(itemstack, (ItemStack) entry.getKey()));
 
         return ((Float) entry.getValue()).floatValue();

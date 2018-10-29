@@ -98,7 +98,8 @@ public class CraftStatistic {
         return (net.minecraft.server.Achievement) StatisticList.getStatistic(achievements.inverse().get(achievement));
     }
 
-    public static net.minecraft.server.Statistic getMaterialStatistic(org.bukkit.Statistic stat, Material material) {
+    @SuppressWarnings("deprecation")
+	public static net.minecraft.server.Statistic getMaterialStatistic(org.bukkit.Statistic stat, Material material) {
         try {
             if (stat == Statistic.MINE_BLOCK) {
                 return StatisticList.MINE_BLOCK_COUNT[material.getId()];
@@ -118,7 +119,8 @@ public class CraftStatistic {
         return null;
     }
 
-    public static net.minecraft.server.Statistic getEntityStatistic(org.bukkit.Statistic stat, EntityType entity) {
+    @SuppressWarnings("deprecation")
+	public static net.minecraft.server.Statistic getEntityStatistic(org.bukkit.Statistic stat, EntityType entity) {
         MonsterEggInfo monsteregginfo = (MonsterEggInfo) EntityTypes.eggInfo.get(Integer.valueOf(entity.getTypeId()));
 
         if (monsteregginfo != null) {
@@ -127,12 +129,14 @@ public class CraftStatistic {
         return null;
     }
 
-    public static EntityType getEntityTypeFromStatistic(net.minecraft.server.Statistic statistic) {
+    @SuppressWarnings("deprecation")
+	public static EntityType getEntityTypeFromStatistic(net.minecraft.server.Statistic statistic) {
         String statisticString = statistic.name;
         return EntityType.fromName(statisticString.substring(statisticString.lastIndexOf(".") + 1));
     }
 
-    public static Material getMaterialFromStatistic(net.minecraft.server.Statistic statistic) {
+    @SuppressWarnings("deprecation")
+	public static Material getMaterialFromStatistic(net.minecraft.server.Statistic statistic) {
         String statisticString = statistic.name;
         String val = statisticString.substring(statisticString.lastIndexOf(".") + 1);
         Item item = (Item) Item.REGISTRY.get(new MinecraftKey(val));

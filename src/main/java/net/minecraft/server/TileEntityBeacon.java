@@ -67,7 +67,8 @@ public class TileEntityBeacon extends TileEntityContainer implements IUpdatePlay
         this.A();
     }
 
-    private void A() {
+    @SuppressWarnings("deprecation")
+	private void A() {
         if (this.i && this.j > 0 && !this.world.isClientSide && this.k > 0) {
             double d0 = (double) (this.j * 10 + 10);
             byte b0 = 0;
@@ -80,8 +81,8 @@ public class TileEntityBeacon extends TileEntityContainer implements IUpdatePlay
             int j = this.position.getY();
             int k = this.position.getZ();
             AxisAlignedBB axisalignedbb = (new AxisAlignedBB((double) i, (double) j, (double) k, (double) (i + 1), (double) (j + 1), (double) (k + 1))).grow(d0, d0, d0).a(0.0D, (double) this.world.getHeight(), 0.0D);
-            List list = this.world.a(EntityHuman.class, axisalignedbb);
-            Iterator iterator = list.iterator();
+            List<EntityHuman> list = this.world.a(EntityHuman.class, axisalignedbb);
+            Iterator<EntityHuman> iterator = list.iterator();
 
             EntityHuman entityhuman;
             // CloudSpigot start
@@ -203,7 +204,7 @@ public class TileEntityBeacon extends TileEntityContainer implements IUpdatePlay
         }
 
         if (!this.world.isClientSide && this.j == 4 && i < this.j) {
-            Iterator iterator = this.world.a(EntityHuman.class, (new AxisAlignedBB((double) j, (double) k, (double) l, (double) j, (double) (k - 4), (double) l)).grow(10.0D, 5.0D, 10.0D)).iterator();
+            Iterator<EntityHuman> iterator = this.world.a(EntityHuman.class, (new AxisAlignedBB((double) j, (double) k, (double) l, (double) j, (double) (k - 4), (double) l)).grow(10.0D, 5.0D, 10.0D)).iterator();
 
             while (iterator.hasNext()) {
                 EntityHuman entityhuman = (EntityHuman) iterator.next();
@@ -214,7 +215,8 @@ public class TileEntityBeacon extends TileEntityContainer implements IUpdatePlay
 
     }
 
-    public Packet getUpdatePacket() {
+    @SuppressWarnings("rawtypes")
+	public Packet getUpdatePacket() {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
 
         this.b(nbttagcompound);
@@ -375,15 +377,15 @@ public class TileEntityBeacon extends TileEntityContainer implements IUpdatePlay
     public static class BeaconColorTracker {
 
         private final float[] a;
-        private int b;
+        //private int b; // CloudSpigot
 
         public BeaconColorTracker(float[] afloat) {
             this.a = afloat;
-            this.b = 1;
+            //this.b = 1; // CloudSpigot
         }
 
         protected void a() {
-            ++this.b;
+            //++this.b; // CloudSpigot
         }
 
         public float[] b() {

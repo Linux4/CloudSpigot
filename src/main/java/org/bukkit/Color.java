@@ -317,7 +317,6 @@ public final class Color implements ConfigurationSerializable {
         );
     }
 
-    @SuppressWarnings("javadoc")
     public static Color deserialize(Map<String, Object> map) {
         return fromRGB(
             asInt("RED", map),

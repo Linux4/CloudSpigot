@@ -45,7 +45,7 @@ public class BlockFlowing extends BlockFluids {
 
             EnumDirection enumdirection;
 
-            for (Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator(); iterator.hasNext(); l = this.a(world, blockposition.shift(enumdirection), l)) {
+            for (Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator(); iterator.hasNext(); l = this.a(world, blockposition.shift(enumdirection), l)) {
                 enumdirection = (EnumDirection) iterator.next();
             }
 
@@ -125,7 +125,7 @@ public class BlockFlowing extends BlockFluids {
             }
             // CraftBukkit end
         } else if (i >= 0 && (i == 0 || this.g(world, blockposition.down(), iblockdata2))) {
-            Set set = this.f(world, blockposition);
+            Set<EnumDirection> set = this.f(world, blockposition);
 
             k = i + b0;
             if (i >= 8) {
@@ -136,7 +136,7 @@ public class BlockFlowing extends BlockFluids {
                 return;
             }
 
-            Iterator iterator1 = set.iterator();
+            Iterator<EnumDirection> iterator1 = set.iterator();
 
             while (iterator1.hasNext()) {
                 EnumDirection enumdirection1 = (EnumDirection) iterator1.next();
@@ -173,7 +173,7 @@ public class BlockFlowing extends BlockFluids {
 
     private int a(World world, BlockPosition blockposition, int i, EnumDirection enumdirection) {
         int j = 1000;
-        Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+        Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
         while (iterator.hasNext()) {
             EnumDirection enumdirection1 = (EnumDirection) iterator.next();
@@ -203,8 +203,8 @@ public class BlockFlowing extends BlockFluids {
 
     private Set<EnumDirection> f(World world, BlockPosition blockposition) {
         int i = 1000;
-        EnumSet enumset = EnumSet.noneOf(EnumDirection.class);
-        Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+        EnumSet<EnumDirection> enumset = EnumSet.noneOf(EnumDirection.class);
+        Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
         while (iterator.hasNext()) {
             EnumDirection enumdirection = (EnumDirection) iterator.next();

@@ -101,7 +101,8 @@ public class CraftInventoryCrafting extends CraftInventory implements CraftingIn
         return null;
     }
 
-    public void setMatrix(ItemStack[] contents) {
+    @SuppressWarnings("deprecation")
+	public void setMatrix(ItemStack[] contents) {
         if (getMatrixInventory().getContents().length > contents.length) {
             throw new IllegalArgumentException("Invalid inventory size; expected " + getMatrixInventory().getContents().length + " or less");
         }
@@ -122,7 +123,8 @@ public class CraftInventoryCrafting extends CraftInventory implements CraftingIn
         }
     }
 
-    public void setResult(ItemStack item) {
+    @SuppressWarnings("deprecation")
+	public void setResult(ItemStack item) {
         net.minecraft.server.ItemStack[] contents = getResultInventory().getContents();
         if (item == null || item.getTypeId() <= 0) {
             contents[0] = null;

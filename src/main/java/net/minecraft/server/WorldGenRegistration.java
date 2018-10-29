@@ -565,7 +565,7 @@ public class WorldGenRegistration {
             this.a(world, Blocks.AIR.getBlockData(), 10, -10, 12, structureboundingbox);
             this.a(world, Blocks.SANDSTONE.fromLegacyData(BlockSandStone.EnumSandstoneVariant.CHISELED.a()), 10, -10, 13, structureboundingbox);
             this.a(world, Blocks.SANDSTONE.fromLegacyData(BlockSandStone.EnumSandstoneVariant.SMOOTH.a()), 10, -11, 13, structureboundingbox);
-            Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+            Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
             while (iterator.hasNext()) {
                 EnumDirection enumdirection = (EnumDirection) iterator.next();

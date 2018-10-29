@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
+
+import com.google.common.collect.Lists;
 
 public class EntityPainting extends EntityHanging {
 
@@ -14,7 +15,7 @@ public class EntityPainting extends EntityHanging {
 
     public EntityPainting(World world, BlockPosition blockposition, EnumDirection enumdirection) {
         super(world, blockposition);
-        ArrayList arraylist = Lists.newArrayList();
+        ArrayList<EnumArt> arraylist = Lists.newArrayList();
         EntityPainting.EnumArt[] aentitypainting_enumart = EntityPainting.EnumArt.values();
         int i = aentitypainting_enumart.length;
 

@@ -1,20 +1,13 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 // CraftBukkit start
 import java.util.Random;
-import java.util.logging.Level;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.craftbukkit.chunkio.ChunkIOExecutor;
@@ -22,6 +15,7 @@ import org.bukkit.craftbukkit.util.LongHash;
 import org.bukkit.craftbukkit.util.LongHashSet;
 import org.bukkit.craftbukkit.util.LongObjectHashMap;
 import org.bukkit.event.world.ChunkUnloadEvent;
+
 import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
 import eu.server24_7.cloudspigot.exception.ServerInternalException;
 // CraftBukkit end
@@ -49,7 +43,8 @@ public class ChunkProviderServer implements IChunkProvider {
     }
 
     // CraftBukkit start - Change return type to Collection and return the values of our chunk map
-    public java.util.Collection a() {
+    @SuppressWarnings("rawtypes")
+	public java.util.Collection a() {
         // return this.chunkList;
         return this.chunks.values();
         // CraftBukkit end
@@ -98,7 +93,7 @@ public class ChunkProviderServer implements IChunkProvider {
     }
 
     public void b() {
-        Iterator iterator = this.chunks.values().iterator();
+        Iterator<Chunk> iterator = this.chunks.values().iterator();
 
         while (iterator.hasNext()) {
             Chunk chunk = (Chunk) iterator.next();
@@ -338,10 +333,10 @@ public class ChunkProviderServer implements IChunkProvider {
     }
 
     public boolean saveChunks(boolean flag, IProgressUpdate iprogressupdate) {
-        int i = 0;
+        //int i = 0; // CloudSpigot
 
         // CraftBukkit start
-        Iterator iterator = this.chunks.values().iterator();
+        Iterator<Chunk> iterator = this.chunks.values().iterator();
         while (iterator.hasNext()) {
             Chunk chunk = (Chunk) iterator.next();
             // CraftBukkit end
@@ -353,10 +348,10 @@ public class ChunkProviderServer implements IChunkProvider {
             if (chunk.a(flag)) {
                 this.saveChunk(chunk);
                 chunk.f(false);
-                ++i;
+                /*++i;
                 if (i == 24 && !flag && false) { // Spigot
                     return false;
-                }
+                }*/ // CloudSpigot
             }
         }
 

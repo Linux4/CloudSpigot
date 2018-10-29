@@ -157,7 +157,8 @@ public class LongObjectHashMap<V> implements Cloneable, Serializable {
         return null;
     }
 
-    public void putAll(Map<? extends Long, ? extends V> map) {
+    @SuppressWarnings("rawtypes")
+	public void putAll(Map<? extends Long, ? extends V> map) {
         for (Map.Entry entry : map.entrySet()) {
             put((Long) entry.getKey(), (V) entry.getValue());
         }
@@ -200,7 +201,8 @@ public class LongObjectHashMap<V> implements Cloneable, Serializable {
         return set;
     }
 
-    public Object clone() throws CloneNotSupportedException {
+    @SuppressWarnings("rawtypes")
+	public Object clone() throws CloneNotSupportedException {
         LongObjectHashMap clone = (LongObjectHashMap) super.clone();
         // Make sure we clear any existing information from the clone
         clone.clear();
@@ -292,7 +294,8 @@ public class LongObjectHashMap<V> implements Cloneable, Serializable {
             expectedModCount = LongObjectHashMap.this.modCount;
         }
 
-        public V next() {
+        @SuppressWarnings("unused")
+		public V next() {
             if (LongObjectHashMap.this.modCount != expectedModCount) {
                 throw new ConcurrentModificationException();
             }

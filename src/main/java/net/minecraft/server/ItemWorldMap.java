@@ -70,7 +70,7 @@ public class ItemWorldMap extends ItemWorldMapBase {
                             boolean flag1 = i2 * i2 + j2 * j2 > (j1 - 2) * (j1 - 2);
                             int k2 = (j / i + k1 - 64) * i;
                             int l2 = (k / i + l1 - 64) * i;
-                            HashMultiset hashmultiset = HashMultiset.create();
+                            HashMultiset<MaterialMapColor> hashmultiset = HashMultiset.create();
                             Chunk chunk = world.getChunkAtWorldCoords(new BlockPosition(k2, 0, l2));
 
                             if (!chunk.isEmpty()) {
@@ -185,7 +185,8 @@ public class ItemWorldMap extends ItemWorldMapBase {
         }
     }
 
-    public Packet c(ItemStack itemstack, World world, EntityHuman entityhuman) {
+    @SuppressWarnings("rawtypes")
+	public Packet c(ItemStack itemstack, World world, EntityHuman entityhuman) {
         return this.getSavedMap(itemstack, world).a(itemstack, world, entityhuman);
     }
 

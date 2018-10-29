@@ -24,7 +24,8 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
         return iblockdata.set(BlockPressurePlateBinary.POWERED, Boolean.valueOf(i > 0));
     }
 
-    protected int f(World world, BlockPosition blockposition) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	protected int f(World world, BlockPosition blockposition) {
         AxisAlignedBB axisalignedbb = this.getBoundingBox(blockposition);
         List list;
 
@@ -42,10 +43,10 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
         }
 
         if (!list.isEmpty()) {
-            Iterator iterator = list.iterator();
+            Iterator<EntityLiving> iterator = list.iterator();
 
             while (iterator.hasNext()) {
-                Entity entity = (Entity) iterator.next();
+                Entity entity = iterator.next();
 
                 // CraftBukkit start - Call interact event when turning on a pressure plate
                 if (this.e(world.getType(blockposition)) == 0) {

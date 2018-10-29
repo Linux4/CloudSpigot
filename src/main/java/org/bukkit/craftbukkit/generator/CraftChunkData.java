@@ -35,32 +35,38 @@ public final class CraftChunkData implements ChunkGenerator.ChunkData {
         return maxHeight;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void setBlock(int x, int y, int z, Material material) {
         setBlock(x, y, z, material.getId());
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void setBlock(int x, int y, int z, MaterialData material) {
         setBlock(x, y, z, material.getItemTypeId(), material.getData());
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, Material material) {
         setRegion(xMin, yMin, zMin, xMax, yMax, zMax, material.getId());
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, MaterialData material) {
         setRegion(xMin, yMin, zMin, xMax, yMax, zMax, material.getItemTypeId(), material.getData());
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public Material getType(int x, int y, int z) {
         return Material.getMaterial(getTypeId(x, y, z));
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public MaterialData getTypeAndData(int x, int y, int z) {
         return getType(x, y, z).getNewData(getData(x, y, z));
     }

@@ -26,7 +26,8 @@ public class EntityRabbit extends EntityAnimal {
     }
 
     // CraftBukkit start - code from constructor
-    public void initializePathFinderGoals(){
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public void initializePathFinderGoals(){
         this.navigation.a(2.5F);
         this.goalSelector.a(1, new PathfinderGoalFloat(this));
         this.goalSelector.a(1, new EntityRabbit.PathfinderGoalRabbitPanic(this, 1.33D));
@@ -277,7 +278,8 @@ public class EntityRabbit extends EntityAnimal {
         return this.datawatcher.getByte(18);
     }
 
-    public void setRabbitType(int i) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public void setRabbitType(int i) {
         if (i == 99) {
             this.goalSelector.a((PathfinderGoal) this.bm);
             this.goalSelector.a(4, new EntityRabbit.PathfinderGoalKillerRabbitMeleeAttack(this));
@@ -465,11 +467,11 @@ public class EntityRabbit extends EntityAnimal {
 
     static class PathfinderGoalRabbitAvoidTarget<T extends Entity> extends PathfinderGoalAvoidTarget<T> {
 
-        private EntityRabbit c;
+        //private EntityRabbit c; // CloudSpigot
 
         public PathfinderGoalRabbitAvoidTarget(EntityRabbit entityrabbit, Class<T> oclass, float f, double d0, double d1) {
             super(entityrabbit, oclass, f, d0, d1);
-            this.c = entityrabbit;
+            //this.c = entityrabbit; // CloudSpigot
         }
 
         public void e() {

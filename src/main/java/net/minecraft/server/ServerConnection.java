@@ -30,30 +30,30 @@ import org.apache.logging.log4j.Logger;
 public class ServerConnection {
 
     private static final Logger e = LogManager.getLogger();
-    public static final LazyInitVar<NioEventLoopGroup> a = new LazyInitVar() {
+    public static final LazyInitVar<NioEventLoopGroup> a = new LazyInitVar<NioEventLoopGroup>() {
         protected NioEventLoopGroup a() {
             return new NioEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Server IO #%d").setDaemon(true).build());
         }
 
-        protected Object init() {
+        protected NioEventLoopGroup init() {
             return this.a();
         }
     };
-    public static final LazyInitVar<EpollEventLoopGroup> b = new LazyInitVar() {
+    public static final LazyInitVar<EpollEventLoopGroup> b = new LazyInitVar<EpollEventLoopGroup>() {
         protected EpollEventLoopGroup a() {
             return new EpollEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Epoll Server IO #%d").setDaemon(true).build());
         }
 
-        protected Object init() {
+        protected EpollEventLoopGroup init() {
             return this.a();
         }
     };
-    public static final LazyInitVar<LocalEventLoopGroup> c = new LazyInitVar() {
+    public static final LazyInitVar<LocalEventLoopGroup> c = new LazyInitVar<LocalEventLoopGroup>() {
         protected LocalEventLoopGroup a() {
             return new LocalEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Local Server IO #%d").setDaemon(true).build());
         }
 
-        protected Object init() {
+        protected LocalEventLoopGroup init() {
             return this.a();
         }
     };
@@ -67,8 +67,9 @@ public class ServerConnection {
         this.d = true;
     }
 
-    public void a(InetAddress inetaddress, int i) throws IOException {
-        List list = this.g;
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public void a(InetAddress inetaddress, int i) throws IOException {
+        //List<ChannelFuture> list = this.g; // CloudSpigot
 
         synchronized (this.g) {
             Class oclass;
@@ -105,7 +106,7 @@ public class ServerConnection {
 
     public void b() {
         this.d = false;
-        Iterator iterator = this.g.iterator();
+        Iterator<ChannelFuture> iterator = this.g.iterator();
 
         while (iterator.hasNext()) {
             ChannelFuture channelfuture = (ChannelFuture) iterator.next();
@@ -119,8 +120,9 @@ public class ServerConnection {
 
     }
 
-    public void c() {
-        List list = this.h;
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public void c() {
+        //List<NetworkManager> list = this.h; // CloudSpigot
 
         synchronized (this.h) {
             // Spigot Start
@@ -130,7 +132,7 @@ public class ServerConnection {
                 Collections.shuffle( this.h );
             }
             // Spigot End
-            Iterator iterator = this.h.iterator();
+            Iterator<NetworkManager> iterator = this.h.iterator();
 
             while (iterator.hasNext()) {
                 final NetworkManager networkmanager = (NetworkManager) iterator.next();
@@ -151,12 +153,12 @@ public class ServerConnection {
                                 CrashReport crashreport = CrashReport.a(exception, "Ticking memory connection");
                                 CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Ticking connection");
 
-                                crashreportsystemdetails.a("Connection", new Callable() {
+                                crashreportsystemdetails.a("Connection", new Callable<String>() {
                                     public String a() throws Exception {
                                         return networkmanager.toString();
                                     }
 
-                                    public Object call() throws Exception {
+                                    public String call() throws Exception {
                                         return this.a();
                                     }
                                 });

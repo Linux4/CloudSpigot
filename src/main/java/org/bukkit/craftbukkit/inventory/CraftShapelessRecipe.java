@@ -22,7 +22,8 @@ public class CraftShapelessRecipe extends ShapelessRecipe implements CraftRecipe
         //this.recipe = recipe; // CloudSpigot
     }
 
-    public static CraftShapelessRecipe fromBukkitRecipe(ShapelessRecipe recipe) {
+    @SuppressWarnings("deprecation")
+	public static CraftShapelessRecipe fromBukkitRecipe(ShapelessRecipe recipe) {
         if (recipe instanceof CraftShapelessRecipe) {
             return (CraftShapelessRecipe) recipe;
         }
@@ -33,7 +34,8 @@ public class CraftShapelessRecipe extends ShapelessRecipe implements CraftRecipe
         return ret;
     }
 
-    public void addToCraftingManager() {
+    @SuppressWarnings("deprecation")
+	public void addToCraftingManager() {
         List<ItemStack> ingred = this.getIngredientList();
         Object[] data = new Object[ingred.size()];
         int i = 0;

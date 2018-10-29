@@ -20,7 +20,8 @@ public class CraftMapRenderer extends MapRenderer {
         this.worldMap = worldMap;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void render(MapView map, MapCanvas canvas, Player player) {
         // Map
         for (int x = 0; x < 128; ++x) {

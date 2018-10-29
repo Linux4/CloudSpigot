@@ -8,6 +8,7 @@ import static com.google.common.base.Preconditions.*;
 /**
  * Thrown when an incoming plugin message channel throws an exception
  */
+@SuppressWarnings("serial")
 public class ServerPluginMessageException extends ServerPluginException {
 
     private final Player player;

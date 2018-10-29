@@ -42,7 +42,7 @@ public class EnchantmentManager {
     }
 
     public static Map<Integer, Integer> a(ItemStack itemstack) {
-        LinkedHashMap linkedhashmap = Maps.newLinkedHashMap();
+        LinkedHashMap<Integer, Integer> linkedhashmap = Maps.newLinkedHashMap();
         NBTTagList nbttaglist = itemstack.getItem() == Items.ENCHANTED_BOOK ? Items.ENCHANTED_BOOK.h(itemstack) : itemstack.getEnchantments();
 
         if (nbttaglist != null) {
@@ -59,7 +59,7 @@ public class EnchantmentManager {
 
     public static void a(Map<Integer, Integer> map, ItemStack itemstack) {
         NBTTagList nbttaglist = new NBTTagList();
-        Iterator iterator = map.keySet().iterator();
+        Iterator<Integer> iterator = map.keySet().iterator();
 
         while (iterator.hasNext()) {
             int i = ((Integer) iterator.next()).intValue();
@@ -261,7 +261,7 @@ public class EnchantmentManager {
     }
 
     public static ItemStack a(Random random, ItemStack itemstack, int i) {
-        List list = b(random, itemstack, i);
+        List<WeightedRandomEnchant> list = b(random, itemstack, i);
         boolean flag = itemstack.getItem() == Items.BOOK;
 
         if (flag) {
@@ -269,7 +269,7 @@ public class EnchantmentManager {
         }
 
         if (list != null) {
-            Iterator iterator = list.iterator();
+            Iterator<WeightedRandomEnchant> iterator = list.iterator();
 
             while (iterator.hasNext()) {
                 WeightedRandomEnchant weightedrandomenchant = (WeightedRandomEnchant) iterator.next();
@@ -302,8 +302,8 @@ public class EnchantmentManager {
                 l = 1;
             }
 
-            ArrayList arraylist = null;
-            Map map = b(l, itemstack);
+            ArrayList<WeightedRandomEnchant> arraylist = null;
+            Map<Integer, WeightedRandomEnchant> map = b(l, itemstack);
 
             if (map != null && !map.isEmpty()) {
                 WeightedRandomEnchant weightedrandomenchant = (WeightedRandomEnchant) WeightedRandom.a(random, map.values());
@@ -313,12 +313,12 @@ public class EnchantmentManager {
                     arraylist.add(weightedrandomenchant);
 
                     for (int i1 = l; random.nextInt(50) <= i1; i1 >>= 1) {
-                        Iterator iterator = map.keySet().iterator();
+                        Iterator<Integer> iterator = map.keySet().iterator();
 
                         while (iterator.hasNext()) {
                             Integer integer = (Integer) iterator.next();
                             boolean flag = true;
-                            Iterator iterator1 = arraylist.iterator();
+                            Iterator<WeightedRandomEnchant> iterator1 = arraylist.iterator();
 
                             while (true) {
                                 if (iterator1.hasNext()) {
@@ -353,7 +353,7 @@ public class EnchantmentManager {
 
     public static Map<Integer, WeightedRandomEnchant> b(int i, ItemStack itemstack) {
         Item item = itemstack.getItem();
-        HashMap hashmap = null;
+        HashMap<Integer, WeightedRandomEnchant> hashmap = null;
         boolean flag = itemstack.getItem() == Items.BOOK;
         Enchantment[] aenchantment = Enchantment.b;
         int j = aenchantment.length;

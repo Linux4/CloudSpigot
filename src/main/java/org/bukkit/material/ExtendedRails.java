@@ -56,7 +56,8 @@ public class ExtendedRails extends Rails {
         return (byte) (getData() & 0x7);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void setDirection(BlockFace face, boolean isOnSlope) {
         boolean extraBitSet = (getData() & 0x8) == 0x8;
 

@@ -54,7 +54,8 @@ public class LongGrass extends MaterialData {
      *
      * @return GrassSpecies of this grass
      */
-    public GrassSpecies getSpecies() {
+    @SuppressWarnings("deprecation")
+	public GrassSpecies getSpecies() {
         return GrassSpecies.getByData(getData());
     }
 
@@ -63,7 +64,8 @@ public class LongGrass extends MaterialData {
      *
      * @param species New species of this grass
      */
-    public void setSpecies(GrassSpecies species) {
+    @SuppressWarnings("deprecation")
+	public void setSpecies(GrassSpecies species) {
         setData(species.getData());
     }
 

@@ -21,8 +21,8 @@ public class ShapelessRecipes implements IRecipe {
     }
 
     // CraftBukkit start
-    @SuppressWarnings("unchecked")
-    public org.bukkit.inventory.ShapelessRecipe toBukkitRecipe() {
+    @SuppressWarnings("deprecation")
+	public org.bukkit.inventory.ShapelessRecipe toBukkitRecipe() {
         CraftItemStack result = CraftItemStack.asCraftMirror(this.result);
         CraftShapelessRecipe recipe = new CraftShapelessRecipe(result, this);
         for (ItemStack stack : (List<ItemStack>) this.ingredients) {
@@ -53,7 +53,7 @@ public class ShapelessRecipes implements IRecipe {
     }
 
     public boolean a(InventoryCrafting inventorycrafting, World world) {
-        ArrayList arraylist = Lists.newArrayList(this.ingredients);
+        ArrayList<ItemStack> arraylist = Lists.newArrayList(this.ingredients);
 
         for (int i = 0; i < inventorycrafting.h(); ++i) {
             for (int j = 0; j < inventorycrafting.i(); ++j) {
@@ -61,7 +61,7 @@ public class ShapelessRecipes implements IRecipe {
 
                 if (itemstack != null) {
                     boolean flag = false;
-                    Iterator iterator = arraylist.iterator();
+                    Iterator<ItemStack> iterator = arraylist.iterator();
 
                     while (iterator.hasNext()) {
                         ItemStack itemstack1 = (ItemStack) iterator.next();

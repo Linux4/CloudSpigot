@@ -61,7 +61,8 @@ public class CraftMapCanvas implements MapCanvas {
         return buffer;
     }
 
-    public void drawImage(int x, int y, Image image) {
+    @SuppressWarnings("deprecation")
+	public void drawImage(int x, int y, Image image) {
         byte[] bytes = MapPalette.imageToBytes(image);
         for (int x2 = 0; x2 < image.getWidth(null); ++x2) {
             for (int y2 = 0; y2 < image.getHeight(null); ++y2) {
@@ -70,7 +71,8 @@ public class CraftMapCanvas implements MapCanvas {
         }
     }
 
-    public void drawText(int x, int y, MapFont font, String text) {
+    @SuppressWarnings("deprecation")
+	public void drawText(int x, int y, MapFont font, String text) {
         int xStart = x;
         byte color = MapPalette.DARK_GRAY;
         if (!font.isValid(text)) {

@@ -64,7 +64,8 @@ public class CraftContainer extends Container {
         return view.getTopInventory().getSize();
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public boolean c(EntityHuman entityhuman) {
         if (cachedType == view.getType() && cachedSize == getSize() && cachedTitle.equals(view.getTitle())) {
             return true;
@@ -115,7 +116,8 @@ public class CraftContainer extends Container {
         }
     }
 
-    private void setupSlots(IInventory top, IInventory bottom) {
+    @SuppressWarnings("incomplete-switch")
+	private void setupSlots(IInventory top, IInventory bottom) {
         switch(cachedType) {
         case CREATIVE:
             break; // TODO: This should be an error?

@@ -32,7 +32,8 @@ public class CraftChest extends CraftBlockState implements Chest {
         return new CraftInventory(chest);
     }
 
-    public Inventory getInventory() {
+    @SuppressWarnings("deprecation")
+	public Inventory getInventory() {
         int x = getX();
         int y = getY();
         int z = getZ();

@@ -135,7 +135,8 @@ public class Rails extends MaterialData {
      * @param face the direction the track should be facing
      * @param isOnSlope whether or not the track should be on a slope
      */
-    public void setDirection(BlockFace face, boolean isOnSlope) {
+    @SuppressWarnings({ "deprecation", "incomplete-switch" })
+	public void setDirection(BlockFace face, boolean isOnSlope) {
         switch (face) {
         case EAST:
             setData((byte) (isOnSlope ? 0x2 : 0x1));

@@ -28,11 +28,13 @@ public class CraftVillager extends CraftAgeable implements Villager, InventoryHo
         return EntityType.VILLAGER;
     }
 
-    public Profession getProfession() {
+    @SuppressWarnings("deprecation")
+	public Profession getProfession() {
         return Profession.getProfession(getHandle().getProfession());
     }
 
-    public void setProfession(Profession profession) {
+    @SuppressWarnings("deprecation")
+	public void setProfession(Profession profession) {
         Validate.notNull(profession);
         getHandle().setProfession(profession.getId());
     }

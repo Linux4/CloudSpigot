@@ -214,7 +214,8 @@ public abstract class BlockButtonAbstract extends Block {
         }
     }
 
-    private void f(World world, BlockPosition blockposition, IBlockData iblockdata) {
+    @SuppressWarnings("rawtypes")
+	private void f(World world, BlockPosition blockposition, IBlockData iblockdata) {
         this.d(iblockdata);
         List list = world.a(EntityArrow.class, new AxisAlignedBB((double) blockposition.getX() + this.minX, (double) blockposition.getY() + this.minY, (double) blockposition.getZ() + this.minZ, (double) blockposition.getX() + this.maxX, (double) blockposition.getY() + this.maxY, (double) blockposition.getZ() + this.maxZ));
         boolean flag = !list.isEmpty();

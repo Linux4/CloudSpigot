@@ -43,7 +43,8 @@ public class Vine extends MaterialData {
         this(EnumSet.copyOf(Arrays.asList(faces)));
     }
 
-    public Vine(EnumSet<BlockFace> faces) {
+    @SuppressWarnings("deprecation")
+	public Vine(EnumSet<BlockFace> faces) {
         this((byte) 0);
         faces.retainAll(possibleFaces);
 
@@ -76,7 +77,8 @@ public class Vine extends MaterialData {
      * @param face The face to check.
      * @return Whether it is attached to that face.
      */
-    public boolean isOnFace(BlockFace face) {
+    @SuppressWarnings("deprecation")
+	public boolean isOnFace(BlockFace face) {
         switch (face) {
             case WEST:
                 return (getData() & VINE_WEST) == VINE_WEST;
@@ -106,7 +108,8 @@ public class Vine extends MaterialData {
      *
      * @param face The face to attach.
      */
-    public void putOnFace(BlockFace face) {
+    @SuppressWarnings("deprecation")
+	public void putOnFace(BlockFace face) {
         switch(face) {
             case WEST:
                 setData((byte) (getData() | VINE_WEST));
@@ -148,7 +151,8 @@ public class Vine extends MaterialData {
      *
      * @param face The face to detach.
      */
-    public void removeFromFace(BlockFace face) {
+    @SuppressWarnings("deprecation")
+	public void removeFromFace(BlockFace face) {
         switch(face) {
             case WEST:
                 setData((byte) (getData() & ~VINE_WEST));

@@ -7,7 +7,8 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.potion.Potion;
 
 public class CraftEffect {
-    public static <T> int getDataValue(Effect effect, T data) {
+    @SuppressWarnings("deprecation")
+	public static <T> int getDataValue(Effect effect, T data) {
         int datavalue;
         switch(effect) {
         case POTION_BREAK:

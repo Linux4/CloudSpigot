@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 /**
  * Represents a creature spawner.
  */
+@SuppressWarnings("deprecation")
 public interface CreatureSpawner extends BlockState {
 
     /**

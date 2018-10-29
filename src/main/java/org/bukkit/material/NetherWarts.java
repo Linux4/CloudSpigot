@@ -54,7 +54,8 @@ public class NetherWarts extends MaterialData {
      *
      * @return NetherWartsState of this nether wart
      */
-    public NetherWartsState getState() {
+    @SuppressWarnings("deprecation")
+	public NetherWartsState getState() {
         switch (getData()) {
             case 0:
                 return NetherWartsState.SEEDED;
@@ -72,7 +73,8 @@ public class NetherWarts extends MaterialData {
      *
      * @param state New growth state of this nether wart
      */
-    public void setState(NetherWartsState state) {
+    @SuppressWarnings("deprecation")
+	public void setState(NetherWartsState state) {
         switch (state) {
             case SEEDED:
                 setData((byte) 0x0);

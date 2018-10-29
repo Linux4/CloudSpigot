@@ -48,7 +48,7 @@ public abstract class PlayerList {
     private static final Logger f = LogManager.getLogger();
     private static final SimpleDateFormat g = new SimpleDateFormat("yyyy-MM-dd \'at\' HH:mm:ss z");
     private final MinecraftServer server;
-    public final List<EntityPlayer> players = new java.util.concurrent.CopyOnWriteArrayList(); // CraftBukkit - ArrayList -> CopyOnWriteArrayList: Iterator safety
+    public final List<EntityPlayer> players = new java.util.concurrent.CopyOnWriteArrayList<EntityPlayer>(); // CraftBukkit - ArrayList -> CopyOnWriteArrayList: Iterator safety
     private final Map<UUID, EntityPlayer> j = Maps.newHashMap();
     private final GameProfileBanList k;
     private final IpBanList l;
@@ -178,7 +178,7 @@ public abstract class PlayerList {
             entityplayer.setResourcePack(this.server.getResourcePack(), this.server.getResourcePackHash());
         }
 
-        Iterator iterator = entityplayer.getEffects().iterator();
+        Iterator<MobEffect> iterator = entityplayer.getEffects().iterator();
 
         while (iterator.hasNext()) {
             MobEffect mobeffect = (MobEffect) iterator.next();
@@ -202,9 +202,10 @@ public abstract class PlayerList {
         PlayerList.f.info(entityplayer.getName() + "[" + s1 + "] logged in with entity id " + entityplayer.getId() + " at ([" + entityplayer.world.worldData.getName() + "]" + entityplayer.locX + ", " + entityplayer.locY + ", " + entityplayer.locZ + ")");
     }
 
-    public void sendScoreboard(ScoreboardServer scoreboardserver, EntityPlayer entityplayer) {
-        HashSet hashset = Sets.newHashSet();
-        Iterator iterator = scoreboardserver.getTeams().iterator();
+    @SuppressWarnings("rawtypes")
+	public void sendScoreboard(ScoreboardServer scoreboardserver, EntityPlayer entityplayer) {
+        HashSet<ScoreboardObjective> hashset = Sets.newHashSet();
+        Iterator<ScoreboardTeam> iterator = scoreboardserver.getTeams().iterator();
 
         while (iterator.hasNext()) {
             ScoreboardTeam scoreboardteam = (ScoreboardTeam) iterator.next();
@@ -216,8 +217,8 @@ public abstract class PlayerList {
             ScoreboardObjective scoreboardobjective = scoreboardserver.getObjectiveForSlot(i);
 
             if (scoreboardobjective != null && !hashset.contains(scoreboardobjective)) {
-                List list = scoreboardserver.getScoreboardScorePacketsForObjective(scoreboardobjective);
-                Iterator iterator1 = list.iterator();
+                List<Packet> list = scoreboardserver.getScoreboardScorePacketsForObjective(scoreboardobjective);
+                Iterator<Packet> iterator1 = list.iterator();
 
                 while (iterator1.hasNext()) {
                     Packet packet = (Packet) iterator1.next();
@@ -409,7 +410,7 @@ public abstract class PlayerList {
     public EntityPlayer attemptLogin(LoginListener loginlistener, GameProfile gameprofile, String hostname) {
         // Moved from processLogin
         UUID uuid = EntityHuman.a(gameprofile);
-        ArrayList arraylist = Lists.newArrayList();
+        ArrayList<EntityPlayer> arraylist = Lists.newArrayList();
 
         EntityPlayer entityplayer;
 
@@ -420,7 +421,7 @@ public abstract class PlayerList {
             }
         }
 
-        Iterator iterator = arraylist.iterator();
+        Iterator<EntityPlayer> iterator = arraylist.iterator();
 
         while (iterator.hasNext()) {
             entityplayer = (EntityPlayer) iterator.next();
@@ -521,7 +522,8 @@ public abstract class PlayerList {
     public EntityPlayer moveToWorld(EntityPlayer entityplayer, int i, boolean flag) {
         return this.moveToWorld(entityplayer, i, flag, null, true);
     }
-    public EntityPlayer moveToWorld(EntityPlayer entityplayer, int i, boolean flag, Location location, boolean avoidSuffocation) {
+    @SuppressWarnings("deprecation")
+	public EntityPlayer moveToWorld(EntityPlayer entityplayer, int i, boolean flag, Location location, boolean avoidSuffocation) {
         entityplayer.u().getTracker().untrackPlayer(entityplayer);
         // entityplayer.u().getTracker().untrackEntity(entityplayer); // CraftBukkit
         entityplayer.u().getPlayerChunkMap().removePlayer(entityplayer);
@@ -893,7 +895,8 @@ public abstract class PlayerList {
 
     }
 
-    public void sendAll(Packet packet) {
+    @SuppressWarnings("rawtypes")
+	public void sendAll(Packet packet) {
         for (int i = 0; i < this.players.size(); ++i) {
             ((EntityPlayer) this.players.get(i)).playerConnection.sendPacket(packet);
         }
@@ -901,7 +904,8 @@ public abstract class PlayerList {
     }
 
     // CraftBukkit start - add a world/entity limited version
-    public void sendAll(Packet packet, EntityHuman entityhuman) {
+    @SuppressWarnings("rawtypes")
+	public void sendAll(Packet packet, EntityHuman entityhuman) {
         for (int i = 0; i < this.players.size(); ++i) {
             EntityPlayer entityplayer =  this.players.get(i);
             if (entityhuman != null && entityhuman instanceof EntityPlayer && !entityplayer.getBukkitEntity().canSee(((EntityPlayer) entityhuman).getBukkitEntity())) {
@@ -911,7 +915,8 @@ public abstract class PlayerList {
         }
     }
 
-    public void sendAll(Packet packet, World world) {
+    @SuppressWarnings("rawtypes")
+	public void sendAll(Packet packet, World world) {
         for (int i = 0; i < world.players.size(); ++i) {
             ((EntityPlayer) world.players.get(i)).playerConnection.sendPacket(packet);
         }
@@ -919,7 +924,8 @@ public abstract class PlayerList {
     }
     // CraftBukkit end
 
-    public void a(Packet packet, int i) {
+    @SuppressWarnings("rawtypes")
+	public void a(Packet packet, int i) {
         for (int j = 0; j < this.players.size(); ++j) {
             EntityPlayer entityplayer = (EntityPlayer) this.players.get(j);
 
@@ -934,8 +940,8 @@ public abstract class PlayerList {
         ScoreboardTeamBase scoreboardteambase = entityhuman.getScoreboardTeam();
 
         if (scoreboardteambase != null) {
-            Collection collection = scoreboardteambase.getPlayerNameSet();
-            Iterator iterator = collection.iterator();
+            Collection<String> collection = scoreboardteambase.getPlayerNameSet();
+            Iterator<String> iterator = collection.iterator();
 
             while (iterator.hasNext()) {
                 String s = (String) iterator.next();
@@ -968,7 +974,7 @@ public abstract class PlayerList {
 
     public String b(boolean flag) {
         String s = "";
-        ArrayList arraylist = Lists.newArrayList(this.players);
+        ArrayList<EntityPlayer> arraylist = Lists.newArrayList(this.players);
 
         for (int i = 0; i < arraylist.size(); ++i) {
             if (i > 0) {
@@ -1046,11 +1052,13 @@ public abstract class PlayerList {
         return this.playersByName.get(s); // Spigot
     }
 
-    public void sendPacketNearby(double d0, double d1, double d2, double d3, int i, Packet packet) {
+    @SuppressWarnings("rawtypes")
+	public void sendPacketNearby(double d0, double d1, double d2, double d3, int i, Packet packet) {
         this.sendPacketNearby((EntityHuman) null, d0, d1, d2, d3, i, packet);
     }
 
-    public void sendPacketNearby(EntityHuman entityhuman, double d0, double d1, double d2, double d3, int i, Packet packet) {
+    @SuppressWarnings("rawtypes")
+	public void sendPacketNearby(EntityHuman entityhuman, double d0, double d1, double d2, double d3, int i, Packet packet) {
         for (int j = 0; j < this.players.size(); ++j) {
             EntityPlayer entityplayer = (EntityPlayer) this.players.get(j);
 
@@ -1151,8 +1159,8 @@ public abstract class PlayerList {
     }
 
     public List<EntityPlayer> b(String s) {
-        ArrayList arraylist = Lists.newArrayList();
-        Iterator iterator = this.players.iterator();
+        ArrayList<EntityPlayer> arraylist = Lists.newArrayList();
+        Iterator<EntityPlayer> iterator = this.players.iterator();
 
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
@@ -1242,8 +1250,8 @@ public abstract class PlayerList {
     public void a(int i) {
         this.r = i;
         if (this.server.worldServer != null) {
-            WorldServer[] aworldserver = this.server.worldServer;
-            int j = aworldserver.length;
+            //WorldServer[] aworldserver = this.server.worldServer; // CloudSpigot
+            //int j = aworldserver.length; // CloudSpigot
 
             // CraftBukkit start
             for (int k = 0; k < server.worlds.size(); ++k) {

@@ -5,6 +5,7 @@ import org.bukkit.inventory.Inventory;
 /**
  * Represents a chest.
  */
+@SuppressWarnings("deprecation")
 public interface Chest extends BlockState, ContainerBlock {
 
     /**

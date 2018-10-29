@@ -50,7 +50,8 @@ public class JsonList<K, V extends JsonListEntry<K>> {
         }
     };
 
-    public JsonList(File file) {
+    @SuppressWarnings("rawtypes")
+	public JsonList(File file) {
         this.c = file;
         GsonBuilder gsonbuilder = (new GsonBuilder()).setPrettyPrinting();
 
@@ -119,7 +120,8 @@ public class JsonList<K, V extends JsonListEntry<K>> {
         return this.d.containsKey(this.a(k0));
     }
 
-    private void h() {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	private void h() {
         ArrayList arraylist = Lists.newArrayList();
         Iterator iterator = this.d.values().iterator();
 
@@ -141,7 +143,8 @@ public class JsonList<K, V extends JsonListEntry<K>> {
 
     }
 
-    protected JsonListEntry<K> a(JsonObject jsonobject) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	protected JsonListEntry<K> a(JsonObject jsonobject) {
         return new JsonListEntry((Object) null, jsonobject);
     }
 
@@ -149,7 +152,8 @@ public class JsonList<K, V extends JsonListEntry<K>> {
         return this.d;
     }
 
-    public void save() throws IOException {
+    @SuppressWarnings("rawtypes")
+	public void save() throws IOException {
         Collection collection = this.d.values();
         String s = this.b.toJson(collection);
         BufferedWriter bufferedwriter = null;
@@ -163,7 +167,8 @@ public class JsonList<K, V extends JsonListEntry<K>> {
 
     }
 
-    public void load() throws FileNotFoundException {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public void load() throws FileNotFoundException {
         Collection collection = null;
         BufferedReader bufferedreader = null;
 
@@ -211,7 +216,8 @@ public class JsonList<K, V extends JsonListEntry<K>> {
             return jsonobject;
         }
 
-        public JsonListEntry<K> a(JsonElement jsonelement, Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException {
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+		public JsonListEntry<K> a(JsonElement jsonelement, Type type, JsonDeserializationContext jsondeserializationcontext) throws JsonParseException {
             if (jsonelement.isJsonObject()) {
                 JsonObject jsonobject = jsonelement.getAsJsonObject();
                 JsonListEntry jsonlistentry = JsonList.this.a(jsonobject);
@@ -222,7 +228,8 @@ public class JsonList<K, V extends JsonListEntry<K>> {
             }
         }
 
-        public JsonElement serialize(JsonListEntry<K> object, Type type, JsonSerializationContext jsonserializationcontext) { // CraftBukkit - fix decompile error
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+		public JsonElement serialize(JsonListEntry<K> object, Type type, JsonSerializationContext jsonserializationcontext) { // CraftBukkit - fix decompile error
             return this.a((JsonListEntry) object, type, jsonserializationcontext);
         }
 

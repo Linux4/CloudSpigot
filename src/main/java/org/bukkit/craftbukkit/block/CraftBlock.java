@@ -43,7 +43,8 @@ public class CraftBlock implements Block {
         return CraftMagicNumbers.getBlock(this); // TODO: UPDATE THIS
     }
 
-    private static net.minecraft.server.Block getNMSBlock(int type) {
+    @SuppressWarnings("deprecation")
+	private static net.minecraft.server.Block getNMSBlock(int type) {
         return CraftMagicNumbers.getBlock(type);
     }
 
@@ -116,7 +117,8 @@ public class CraftBlock implements Block {
         setType(type, true);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void setType(Material type, boolean applyPhysics) {
         setTypeId(type.getId(), applyPhysics);
     }
@@ -144,7 +146,8 @@ public class CraftBlock implements Block {
         }
     }
 
-    public Material getType() {
+    @SuppressWarnings("deprecation")
+	public Material getType() {
         return Material.getMaterial(getTypeId());
     }
 
@@ -346,7 +349,8 @@ public class CraftBlock implements Block {
         return chunk.getHandle().getWorld().isBlockFacePowered(new BlockPosition(x, y, z), blockFaceToNotch(face));
     }
 
-    public boolean isBlockFaceIndirectlyPowered(BlockFace face) {
+    @SuppressWarnings("deprecation")
+	public boolean isBlockFaceIndirectlyPowered(BlockFace face) {
         int power = chunk.getHandle().getWorld().getBlockFacePower(new BlockPosition(x, y, z), blockFaceToNotch(face));
 
         Block relative = getRelative(face);
@@ -382,17 +386,20 @@ public class CraftBlock implements Block {
         return (getType() == Material.WATER) || (getType() == Material.STATIONARY_WATER) || (getType() == Material.LAVA) || (getType() == Material.STATIONARY_LAVA);
     }
 
-    public PistonMoveReaction getPistonMoveReaction() {
+    @SuppressWarnings("deprecation")
+	public PistonMoveReaction getPistonMoveReaction() {
         return PistonMoveReaction.getById(getNMSBlock().getMaterial().getPushReaction());
     }
 
-    private boolean itemCausesDrops(ItemStack item) {
+    @SuppressWarnings("deprecation")
+	private boolean itemCausesDrops(ItemStack item) {
         net.minecraft.server.Block block = this.getNMSBlock();
         net.minecraft.server.Item itemType = item != null ? net.minecraft.server.Item.getById(item.getTypeId()) : null;
         return block != null && (block.getMaterial().isAlwaysDestroyable() || (itemType != null && itemType.canDestroySpecialBlock(block)));
     }
 
-    public boolean breakNaturally() {
+    @SuppressWarnings("deprecation")
+	public boolean breakNaturally() {
         // Order matters here, need to drop before setting to air so skulls can get their data
         net.minecraft.server.Block block = this.getNMSBlock();
         byte data = getData();
@@ -407,7 +414,8 @@ public class CraftBlock implements Block {
         return result;
     }
 
-    public boolean breakNaturally(ItemStack item) {
+    @SuppressWarnings("deprecation")
+	public boolean breakNaturally(ItemStack item) {
         if (itemCausesDrops(item)) {
             return breakNaturally();
         } else {

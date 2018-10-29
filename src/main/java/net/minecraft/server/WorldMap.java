@@ -230,7 +230,8 @@ public class WorldMap extends PersistentBase {
         this.decorations.put(s, new MapIcon((byte) i, b0, b1, b3));
     }
 
-    public Packet a(ItemStack itemstack, World world, EntityHuman entityhuman) {
+    @SuppressWarnings("rawtypes")
+	public Packet a(ItemStack itemstack, World world, EntityHuman entityhuman) {
         WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker = (WorldMap.WorldMapHumanTracker) this.i.get(entityhuman);
 
         return worldmap_worldmaphumantracker == null ? null : worldmap_worldmaphumantracker.a(itemstack);
@@ -238,7 +239,7 @@ public class WorldMap extends PersistentBase {
 
     public void flagDirty(int i, int j) {
         super.c();
-        Iterator iterator = this.g.iterator();
+        Iterator<WorldMapHumanTracker> iterator = this.g.iterator();
 
         while (iterator.hasNext()) {
             WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker = (WorldMap.WorldMapHumanTracker) iterator.next();
@@ -275,7 +276,8 @@ public class WorldMap extends PersistentBase {
             this.trackee = entityhuman;
         }
 
-        public Packet a(ItemStack itemstack) {
+        @SuppressWarnings({ "rawtypes", "deprecation" })
+		public Packet a(ItemStack itemstack) {
             // CraftBukkit start
             org.bukkit.craftbukkit.map.RenderData render = WorldMap.this.mapView.render((org.bukkit.craftbukkit.entity.CraftPlayer) this.trackee.getBukkitEntity()); // CraftBukkit
 

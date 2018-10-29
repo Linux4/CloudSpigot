@@ -275,7 +275,7 @@ public class PlayerInteractManager {
             if (nmsBlock != null && !event.isCancelled() && !this.isCreative() && this.player.b(nmsBlock)) {
                 // Copied from block.a(World world, EntityHuman entityhuman, BlockPosition blockposition, IBlockData iblockdata, TileEntity tileentity)
                 if (!(nmsBlock.I() && EnchantmentManager.hasSilkTouchEnchantment(this.player))) {
-                    int data = block.getData();
+                    //int data = block.getData(); // CloudSpigot
                     int bonusLevel = EnchantmentManager.getBonusBlockLootEnchantmentLevel(this.player);
 
                     event.setExpToDrop(nmsBlock.getExpDrop(this.world, nmsData, bonusLevel));
@@ -298,9 +298,9 @@ public class PlayerInteractManager {
                 return false;
             }
         }
-        if (false && this.gamemode.d() && this.player.bA() != null && this.player.bA().getItem() instanceof ItemSword) {
+        /*if (false && this.gamemode.d() && this.player.bA() != null && this.player.bA().getItem() instanceof ItemSword) {
             return false;
-        } else {
+        } else {*/ // CloudSpigot
             IBlockData iblockdata = this.world.getType(blockposition);
             if (iblockdata.getBlock() == Blocks.AIR) return false; // CraftBukkit - A plugin set block to air without cancelling
             TileEntity tileentity = this.world.getTileEntity(blockposition);
@@ -358,7 +358,7 @@ public class PlayerInteractManager {
             // CraftBukkit end
 
             return flag;
-        }
+        //} // CloudSpigot
     }
 
     public boolean useItem(EntityHuman entityhuman, World world, ItemStack itemstack) {

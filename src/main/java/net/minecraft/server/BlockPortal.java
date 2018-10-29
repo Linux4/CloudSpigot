@@ -135,7 +135,7 @@ public class BlockPortal extends BlockHalfTransparent {
     public ShapeDetector.ShapeDetectorCollection f(World world, BlockPosition blockposition) {
         EnumDirection.EnumAxis enumdirection_enumaxis = EnumDirection.EnumAxis.Z;
         BlockPortal.Shape blockportal_shape = new BlockPortal.Shape(world, blockposition, EnumDirection.EnumAxis.X);
-        LoadingCache loadingcache = ShapeDetector.a(world, true);
+        LoadingCache<BlockPosition, ShapeDetectorBlock> loadingcache = ShapeDetector.a(world, true);
 
         if (!blockportal_shape.d()) {
             enumdirection_enumaxis = EnumDirection.EnumAxis.X;

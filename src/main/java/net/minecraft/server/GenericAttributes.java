@@ -19,7 +19,7 @@ public class GenericAttributes {
 
     public static NBTTagList a(AttributeMapBase attributemapbase) {
         NBTTagList nbttaglist = new NBTTagList();
-        Iterator iterator = attributemapbase.a().iterator();
+        Iterator<AttributeInstance> iterator = attributemapbase.a().iterator();
 
         while (iterator.hasNext()) {
             AttributeInstance attributeinstance = (AttributeInstance) iterator.next();
@@ -36,11 +36,11 @@ public class GenericAttributes {
 
         nbttagcompound.setString("Name", iattribute.getName());
         nbttagcompound.setDouble("Base", attributeinstance.b());
-        Collection collection = attributeinstance.c();
+        Collection<AttributeModifier> collection = attributeinstance.c();
 
         if (collection != null && !collection.isEmpty()) {
             NBTTagList nbttaglist = new NBTTagList();
-            Iterator iterator = collection.iterator();
+            Iterator<AttributeModifier> iterator = collection.iterator();
 
             while (iterator.hasNext()) {
                 AttributeModifier attributemodifier = (AttributeModifier) iterator.next();

@@ -3,6 +3,8 @@ package net.minecraft.server;
 import java.util.EnumSet;
 import java.util.List;
 
+import net.minecraft.server.PacketPlayOutPosition.EnumPlayerTeleportFlags;
+
 public class CommandTp extends CommandAbstract {
 
     public CommandTp() {}
@@ -46,7 +48,7 @@ public class CommandTp extends CommandAbstract {
                     float f;
 
                     if (object instanceof EntityPlayer) {
-                        EnumSet enumset = EnumSet.noneOf(PacketPlayOutPosition.EnumPlayerTeleportFlags.class);
+                        EnumSet<EnumPlayerTeleportFlags> enumset = EnumSet.noneOf(PacketPlayOutPosition.EnumPlayerTeleportFlags.class);
 
                         if (commandabstract_commandnumber.c()) {
                             enumset.add(PacketPlayOutPosition.EnumPlayerTeleportFlags.X);

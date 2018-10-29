@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 //import com.google.common.collect.Maps; // CloudSpigot
 import java.util.List;
 import java.util.Map;
@@ -8,9 +7,11 @@ import java.util.Random;
 
 import org.bukkit.event.block.BlockRedstoneEvent; // CraftBukkit
 
+import com.google.common.collect.Lists;
+
 public class BlockRedstoneTorch extends BlockTorch {
 
-    private static Map<World, List<BlockRedstoneTorch.RedstoneUpdateInfo>> b = new java.util.WeakHashMap(); // Spigot
+    private static Map<World, List<BlockRedstoneTorch.RedstoneUpdateInfo>> b = new java.util.WeakHashMap<World, List<BlockRedstoneTorch.RedstoneUpdateInfo>>(); // Spigot
     private final boolean isOn;
 
     private boolean a(World world, BlockPosition blockposition, boolean flag) {
@@ -18,7 +19,7 @@ public class BlockRedstoneTorch extends BlockTorch {
             BlockRedstoneTorch.b.put(world, Lists.<BlockRedstoneTorch.RedstoneUpdateInfo>newArrayList()); // CraftBukkit - fix decompile error
         }
 
-        List list = (List) BlockRedstoneTorch.b.get(world);
+        List<RedstoneUpdateInfo> list = BlockRedstoneTorch.b.get(world);
 
         if (flag) {
             list.add(new BlockRedstoneTorch.RedstoneUpdateInfo(blockposition, world.getTime()));
@@ -27,7 +28,7 @@ public class BlockRedstoneTorch extends BlockTorch {
         int i = 0;
 
         for (int j = 0; j < list.size(); ++j) {
-            BlockRedstoneTorch.RedstoneUpdateInfo blockredstonetorch_redstoneupdateinfo = (BlockRedstoneTorch.RedstoneUpdateInfo) list.get(j);
+            BlockRedstoneTorch.RedstoneUpdateInfo blockredstonetorch_redstoneupdateinfo = list.get(j);
 
             if (blockredstonetorch_redstoneupdateinfo.a.equals(blockposition)) {
                 ++i;
@@ -114,7 +115,7 @@ public class BlockRedstoneTorch extends BlockTorch {
 
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
         boolean flag = this.g(world, blockposition, iblockdata);
-        List list = (List) BlockRedstoneTorch.b.get(world);
+        List<RedstoneUpdateInfo> list = BlockRedstoneTorch.b.get(world);
 
         // CloudSpigot start
         if (list != null) {

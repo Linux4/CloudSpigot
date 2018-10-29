@@ -1,13 +1,13 @@
 package org.bukkit.craftbukkit.inventory;
 
-import net.minecraft.server.RecipesFurnace;
-
-import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 
+import net.minecraft.server.RecipesFurnace;
+
 public class CraftFurnaceRecipe extends FurnaceRecipe implements CraftRecipe {
-    public CraftFurnaceRecipe(ItemStack result, ItemStack source) {
+    @SuppressWarnings("deprecation")
+	public CraftFurnaceRecipe(ItemStack result, ItemStack source) {
         super(result, source.getType(), source.getDurability());
     }
 

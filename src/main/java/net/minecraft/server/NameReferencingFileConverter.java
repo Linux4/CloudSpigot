@@ -1,17 +1,6 @@
 package net.minecraft.server;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.io.Files;
-import com.mojang.authlib.Agent;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.ProfileLookupCallback;
-import com.mojang.authlib.yggdrasil.ProfileNotFoundException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -23,10 +12,21 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bukkit.Bukkit;
-import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
+
+import com.google.common.base.Charsets;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.io.Files;
+import com.mojang.authlib.Agent;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.ProfileLookupCallback;
+import com.mojang.authlib.yggdrasil.ProfileNotFoundException;
+
 import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 public class NameReferencingFileConverter {
@@ -38,8 +38,8 @@ public class NameReferencingFileConverter {
     public static final File d = new File("white-list.txt");
 
     static List<String> a(File file, Map<String, String[]> map) throws IOException {
-        List list = Files.readLines(file, Charsets.UTF_8);
-        Iterator iterator = list.iterator();
+        List<String> list = Files.readLines(file, Charsets.UTF_8);
+        Iterator<String> iterator = list.iterator();
 
         while (iterator.hasNext()) {
             String s = (String) iterator.next();
@@ -56,12 +56,12 @@ public class NameReferencingFileConverter {
     }
 
     private static void a(MinecraftServer minecraftserver, Collection<String> collection, ProfileLookupCallback profilelookupcallback) {
-        String[] astring = (String[]) Iterators.toArray(Iterators.filter(collection.iterator(), new Predicate() {
+        String[] astring = (String[]) Iterators.toArray(Iterators.filter(collection.iterator(), new Predicate<String>() {
             public boolean a(String s) {
                 return !UtilColor.b(s);
             }
 
-            public boolean apply(Object object) {
+            public boolean apply(String object) {
                 return this.a((String) object);
             }
         }), String.class);
@@ -97,9 +97,9 @@ public class NameReferencingFileConverter {
             }
 
             try {
-                final HashMap hashmap = Maps.newHashMap();
+                final HashMap<String, String[]> hashmap = Maps.newHashMap();
 
-                a(NameReferencingFileConverter.b, (Map) hashmap);
+                a(NameReferencingFileConverter.b, hashmap);
                 ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback() {
                     public void onProfileLookupSucceeded(GameProfile gameprofile) {
                         minecraftserver.getUserCache().a(gameprofile);
@@ -156,10 +156,10 @@ public class NameReferencingFileConverter {
             }
 
             try {
-                HashMap hashmap = Maps.newHashMap();
+                HashMap<String, String[]> hashmap = Maps.newHashMap();
 
-                a(NameReferencingFileConverter.a, (Map) hashmap);
-                Iterator iterator = hashmap.keySet().iterator();
+                a(NameReferencingFileConverter.a, hashmap);
+                Iterator<String> iterator = hashmap.keySet().iterator();
 
                 while (iterator.hasNext()) {
                     String s = (String) iterator.next();
@@ -198,7 +198,7 @@ public class NameReferencingFileConverter {
             }
 
             try {
-                List list = Files.readLines(NameReferencingFileConverter.c, Charsets.UTF_8);
+                List<String> list = Files.readLines(NameReferencingFileConverter.c, Charsets.UTF_8);
                 ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback() {
                     public void onProfileLookupSucceeded(GameProfile gameprofile) {
                         minecraftserver.getUserCache().a(gameprofile);
@@ -243,7 +243,7 @@ public class NameReferencingFileConverter {
             }
 
             try {
-                List list = Files.readLines(NameReferencingFileConverter.d, Charsets.UTF_8);
+                List<String> list = Files.readLines(NameReferencingFileConverter.d, Charsets.UTF_8);
                 ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback() {
                     public void onProfileLookupSucceeded(GameProfile gameprofile) {
                         minecraftserver.getUserCache().a(gameprofile);
@@ -282,7 +282,7 @@ public class NameReferencingFileConverter {
             if (gameprofile != null && gameprofile.getId() != null) {
                 return gameprofile.getId().toString();
             } else if (!minecraftserver.T() && minecraftserver.getOnlineMode()) {
-                final ArrayList arraylist = Lists.newArrayList();
+                final ArrayList<GameProfile> arraylist = Lists.newArrayList();
                 ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback() {
                     public void onProfileLookupSucceeded(GameProfile gameprofile) {
                         minecraftserver.getUserCache().a(gameprofile);
@@ -311,7 +311,7 @@ public class NameReferencingFileConverter {
 
         if (file.exists() && file.isDirectory()) {
             File[] afile = file.listFiles();
-            ArrayList arraylist = Lists.newArrayList();
+            ArrayList<String> arraylist = Lists.newArrayList();
             File[] afile1 = afile;
             int i = afile.length;
 
@@ -523,7 +523,8 @@ public class NameReferencingFileConverter {
         return date1;
     }
 
-    static class FileConversionException extends RuntimeException {
+    @SuppressWarnings("serial")
+	static class FileConversionException extends RuntimeException {
 
         private FileConversionException(String s, Throwable throwable) {
             super(s, throwable);

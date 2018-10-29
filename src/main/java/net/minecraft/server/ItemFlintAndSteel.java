@@ -13,7 +13,8 @@ public class ItemFlintAndSteel extends Item {
         this.a(CreativeModeTab.i);
     }
 
-    public boolean interactWith(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2) {
+    @SuppressWarnings("deprecation")
+	public boolean interactWith(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2) {
         BlockPosition clicked = blockposition; // CraftBukkit
         blockposition = blockposition.shift(enumdirection);
         if (!entityhuman.a(blockposition, enumdirection, itemstack)) {

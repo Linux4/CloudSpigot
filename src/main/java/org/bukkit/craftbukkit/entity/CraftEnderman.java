@@ -14,12 +14,14 @@ public class CraftEnderman extends CraftMonster implements Enderman {
         super(server, entity);
     }
 
-    public MaterialData getCarriedMaterial() {
+    @SuppressWarnings("deprecation")
+	public MaterialData getCarriedMaterial() {
         IBlockData blockData = getHandle().getCarried();
         return CraftMagicNumbers.getMaterial(blockData.getBlock()).getNewData((byte) blockData.getBlock().toLegacyData(blockData));
     }
 
-    public void setCarriedMaterial(MaterialData data) {
+    @SuppressWarnings("deprecation")
+	public void setCarriedMaterial(MaterialData data) {
         getHandle().setCarried(CraftMagicNumbers.getBlock(data.getItemTypeId()).fromLegacyData(data.getData()));
     }
 

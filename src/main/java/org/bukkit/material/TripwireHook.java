@@ -41,7 +41,8 @@ public class TripwireHook extends SimpleAttachableMaterialData implements Redsto
      *
      * @return true if connected, false if not
      */
-    public boolean isConnected() {
+    @SuppressWarnings("deprecation")
+	public boolean isConnected() {
         return (getData() & 0x4) != 0;
     }
 
@@ -50,7 +51,8 @@ public class TripwireHook extends SimpleAttachableMaterialData implements Redsto
      *
      * @param connected - true if connected, false if not
      */
-    public void setConnected(boolean connected) {
+    @SuppressWarnings("deprecation")
+	public void setConnected(boolean connected) {
         int dat = getData() & (0x8 | 0x3);
         if (connected) {
             dat |= 0x4;
@@ -63,7 +65,8 @@ public class TripwireHook extends SimpleAttachableMaterialData implements Redsto
      *
      * @return true if activated, false if not
      */
-    public boolean isActivated() {
+    @SuppressWarnings("deprecation")
+	public boolean isActivated() {
         return (getData() & 0x8) != 0;
     }
 
@@ -72,7 +75,8 @@ public class TripwireHook extends SimpleAttachableMaterialData implements Redsto
      *
      * @param act - true if activated, false if not
      */
-    public void setActivated(boolean act) {
+    @SuppressWarnings("deprecation")
+	public void setActivated(boolean act) {
         int dat = getData() & (0x4 | 0x3);
         if (act) {
             dat |= 0x8;
@@ -80,7 +84,8 @@ public class TripwireHook extends SimpleAttachableMaterialData implements Redsto
         setData((byte) dat);
     }
 
-    public void setFacingDirection(BlockFace face) {
+    @SuppressWarnings("deprecation")
+	public void setFacingDirection(BlockFace face) {
         int dat = getData() & 0xC;
         switch (face) {
         case WEST:
@@ -99,7 +104,8 @@ public class TripwireHook extends SimpleAttachableMaterialData implements Redsto
         setData((byte) dat);
     }
 
-    public BlockFace getAttachedFace() {
+    @SuppressWarnings("deprecation")
+	public BlockFace getAttachedFace() {
         switch (getData() & 0x3) {
         case 0:
             return BlockFace.NORTH;

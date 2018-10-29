@@ -127,7 +127,8 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
         return ret;
     }
 
-    public void setArmorContents(ItemStack[] items) {
+    @SuppressWarnings("deprecation")
+	public void setArmorContents(ItemStack[] items) {
         int cnt = getSize();
 
         if (items == null) {
@@ -142,7 +143,8 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
         }
     }
 
-    public int clear(int id, int data) {
+    @SuppressWarnings("deprecation")
+	public int clear(int id, int data) {
         int count = 0;
         ItemStack[] items = getContents();
         ItemStack[] armor = getArmorContents();

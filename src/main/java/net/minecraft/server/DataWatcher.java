@@ -1,7 +1,5 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,15 +7,19 @@ import java.util.List;
 //import java.util.Map; // CloudSpigot
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import org.apache.commons.lang3.ObjectUtils;
+
+import com.google.common.collect.Lists;
 
 public class DataWatcher {
 
     private final Entity a;
     private boolean b = true;
     // Spigot Start
-    private static final gnu.trove.map.TObjectIntMap classToId = new gnu.trove.map.hash.TObjectIntHashMap( 10, 0.5f, -1 );
-    private final gnu.trove.map.TIntObjectMap dataValues = new gnu.trove.map.hash.TIntObjectHashMap( 10, 0.5f, -1 );
+    @SuppressWarnings("rawtypes")
+	private static final gnu.trove.map.TObjectIntMap<Class> classToId = new gnu.trove.map.hash.TObjectIntHashMap<Class>( 10, 0.5f, -1 );
+    private final gnu.trove.map.TIntObjectMap<WatchableObject> dataValues = new gnu.trove.map.hash.TIntObjectHashMap<WatchableObject>( 10, 0.5f, -1 );
     // These exist as an attempt at backwards compatability for (broken) NMS plugins
     //private static final Map<Class<?>, Integer> c = gnu.trove.TDecorators.wrap( classToId ); // CloudSpigot
     //private final Map<Integer, DataWatcher.WatchableObject> d = gnu.trove.TDecorators.wrap( dataValues ); // CloudSpigot
@@ -87,7 +89,7 @@ public class DataWatcher {
         DataWatcher.WatchableObject datawatcher_watchableobject;
 
         try {
-            datawatcher_watchableobject = (DataWatcher.WatchableObject) this.dataValues.get(i); // Spigot
+            datawatcher_watchableobject = this.dataValues.get(i); // Spigot
         } catch (Throwable throwable) {
             CrashReport crashreport = CrashReport.a(throwable, "Getting synched entity data");
             CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Synched entity data");
@@ -127,10 +129,10 @@ public class DataWatcher {
 
     public static void a(List<DataWatcher.WatchableObject> list, PacketDataSerializer packetdataserializer) throws IOException {
         if (list != null) {
-            Iterator iterator = list.iterator();
+            Iterator<WatchableObject> iterator = list.iterator();
 
             while (iterator.hasNext()) {
-                DataWatcher.WatchableObject datawatcher_watchableobject = (DataWatcher.WatchableObject) iterator.next();
+                DataWatcher.WatchableObject datawatcher_watchableobject = iterator.next();
 
                 a(packetdataserializer, datawatcher_watchableobject);
             }
@@ -140,14 +142,14 @@ public class DataWatcher {
     }
 
     public List<DataWatcher.WatchableObject> b() {
-        ArrayList arraylist = null;
+        ArrayList<WatchableObject> arraylist = null;
 
         if (this.e) {
             this.f.readLock().lock();
-            Iterator iterator = this.dataValues.valueCollection().iterator(); // Spigot
+            Iterator<WatchableObject> iterator = this.dataValues.valueCollection().iterator(); // Spigot
 
             while (iterator.hasNext()) {
-                DataWatcher.WatchableObject datawatcher_watchableobject = (DataWatcher.WatchableObject) iterator.next();
+                DataWatcher.WatchableObject datawatcher_watchableobject = iterator.next();
 
                 if (datawatcher_watchableobject.d()) {
                     datawatcher_watchableobject.a(false);
@@ -179,10 +181,10 @@ public class DataWatcher {
 
     public void a(PacketDataSerializer packetdataserializer) throws IOException {
         this.f.readLock().lock();
-        Iterator iterator = this.dataValues.valueCollection().iterator(); // Spigot
+        Iterator<WatchableObject> iterator = this.dataValues.valueCollection().iterator(); // Spigot
 
         while (iterator.hasNext()) {
-            DataWatcher.WatchableObject datawatcher_watchableobject = (DataWatcher.WatchableObject) iterator.next();
+            DataWatcher.WatchableObject datawatcher_watchableobject = iterator.next();
 
             a(packetdataserializer, datawatcher_watchableobject);
         }
@@ -192,7 +194,7 @@ public class DataWatcher {
     }
 
     public List<DataWatcher.WatchableObject> c() {
-        ArrayList arraylist = Lists.newArrayList(); // Spigot
+        ArrayList<WatchableObject> arraylist = Lists.newArrayList(); // Spigot
 
         this.f.readLock().lock();
 
@@ -200,7 +202,7 @@ public class DataWatcher {
         // Spigot start - copy ItemStacks to prevent ConcurrentModificationExceptions
         for ( int i = 0; i < arraylist.size(); i++ )
         {
-            WatchableObject watchableobject = (WatchableObject) arraylist.get( i );
+            WatchableObject watchableobject = arraylist.get( i );
             if ( watchableobject.b() instanceof ItemStack )
             {
                 watchableobject = new WatchableObject(
@@ -267,7 +269,7 @@ public class DataWatcher {
     }
 
     public static List<DataWatcher.WatchableObject> b(PacketDataSerializer packetdataserializer) throws IOException {
-        ArrayList arraylist = null;
+        ArrayList<WatchableObject> arraylist = null;
 
         for (byte b0 = packetdataserializer.readByte(); b0 != 127; b0 = packetdataserializer.readByte()) {
             if (arraylist == null) {

@@ -13,11 +13,13 @@ public class CraftSheep extends CraftAnimals implements Sheep {
         super(server, entity);
     }
 
-    public DyeColor getColor() {
+    @SuppressWarnings("deprecation")
+	public DyeColor getColor() {
         return DyeColor.getByWoolData((byte) getHandle().getColor().getColorIndex());
     }
 
-    public void setColor(DyeColor color) {
+    @SuppressWarnings("deprecation")
+	public void setColor(DyeColor color) {
         getHandle().setColor(EnumColor.fromColorIndex(color.getWoolData()));
     }
 

@@ -56,7 +56,8 @@ public class CraftBlockProjectileSource implements BlockProjectileSource {
         return launchProjectile(projectile, null);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity) {
         Validate.isTrue(getBlock().getType() == Material.DISPENSER, "Block is no longer dispenser");
         // Copied from BlockDispenser.dispense()

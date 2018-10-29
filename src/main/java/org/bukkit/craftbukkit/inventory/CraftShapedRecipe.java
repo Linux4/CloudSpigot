@@ -22,7 +22,8 @@ public class CraftShapedRecipe extends ShapedRecipe implements CraftRecipe {
         //this.recipe = recipe; // CloudSpigot
     }
 
-    public static CraftShapedRecipe fromBukkitRecipe(ShapedRecipe recipe) {
+    @SuppressWarnings("deprecation")
+	public static CraftShapedRecipe fromBukkitRecipe(ShapedRecipe recipe) {
         if (recipe instanceof CraftShapedRecipe) {
             return (CraftShapedRecipe) recipe;
         }
@@ -39,7 +40,8 @@ public class CraftShapedRecipe extends ShapedRecipe implements CraftRecipe {
         return ret;
     }
 
-    public void addToCraftingManager() {
+    @SuppressWarnings("deprecation")
+	public void addToCraftingManager() {
         Object[] data;
         String[] shape = this.getShape();
         Map<Character, ItemStack> ingred = this.getIngredientMap();

@@ -61,7 +61,8 @@ public class Tree extends MaterialData {
      *
      * @return TreeSpecies of this tree
      */
-    public TreeSpecies getSpecies() {
+    @SuppressWarnings("deprecation")
+	public TreeSpecies getSpecies() {
         return TreeSpecies.getByData((byte) (getData() & 0x3));
     }
 
@@ -70,7 +71,8 @@ public class Tree extends MaterialData {
      *
      * @param species New species of this tree
      */
-    public void setSpecies(TreeSpecies species) {
+    @SuppressWarnings("deprecation")
+	public void setSpecies(TreeSpecies species) {
         setData((byte) ((getData() & 0xC) | species.getData()));
     }
 
@@ -85,7 +87,8 @@ public class Tree extends MaterialData {
      *     <li>BlockFace.SELF (directionless)
      *     </ul>
      */
-    public BlockFace getDirection() {
+    @SuppressWarnings("deprecation")
+	public BlockFace getDirection() {
         switch ((getData() >> 2) & 0x3) {
             case 0: // Up-down
             default:
@@ -103,7 +106,8 @@ public class Tree extends MaterialData {
      *
      * @param dir - direction of end of log (BlockFace.SELF for no direction)
      */
-    public void setDirection(BlockFace dir) {
+    @SuppressWarnings("deprecation")
+	public void setDirection(BlockFace dir) {
         int dat;
         switch (dir) {
             case UP:

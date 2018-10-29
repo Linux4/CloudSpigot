@@ -1,16 +1,15 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.Blocks;
-import net.minecraft.server.EntityMinecartAbstract;
-
-import net.minecraft.server.IBlockData;
-import org.bukkit.Material;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.entity.Minecart;
 import org.bukkit.material.MaterialData;
 import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
+
+import net.minecraft.server.Blocks;
+import net.minecraft.server.EntityMinecartAbstract;
+import net.minecraft.server.IBlockData;
 
 public abstract class CraftMinecart extends CraftVehicle implements Minecart {
     public CraftMinecart(CraftServer server, EntityMinecartAbstract entity) {
@@ -74,7 +73,8 @@ public abstract class CraftMinecart extends CraftVehicle implements Minecart {
         return NumberConversions.ceil(getDamage());
     }
 
-    public void setDisplayBlock(MaterialData material) {
+    @SuppressWarnings("deprecation")
+	public void setDisplayBlock(MaterialData material) {
         if(material != null) {
             IBlockData block = CraftMagicNumbers.getBlock(material.getItemTypeId()).fromLegacyData(material.getData());
             this.getHandle().setDisplayBlock(block);
@@ -85,7 +85,8 @@ public abstract class CraftMinecart extends CraftVehicle implements Minecart {
         }
     }
 
-    public MaterialData getDisplayBlock() {
+    @SuppressWarnings("deprecation")
+	public MaterialData getDisplayBlock() {
         IBlockData blockData = getHandle().getDisplayBlock();
         return CraftMagicNumbers.getMaterial(blockData.getBlock()).getNewData((byte) blockData.getBlock().toLegacyData(blockData));
     }

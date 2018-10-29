@@ -1,10 +1,7 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Proxy;
 import java.util.Collections;
@@ -12,18 +9,16 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-// CraftBukkit start
-import java.io.PrintStream;
-import org.apache.logging.log4j.Level;
-
-import org.bukkit.craftbukkit.LoggerOutputStream;
-import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.craftbukkit.util.Waitable;
 import org.bukkit.event.server.RemoteServerCommandEvent;
 // CraftBukkit end
+import org.bukkit.event.server.ServerCommandEvent;
+
+import com.google.common.collect.Lists;
 
 //CloudSpigot start
 import eu.server24_7.cloudspigot.CloudSpigotEULA;
@@ -315,13 +310,13 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
             }
         }
 
-                if (false && this.aS() > 0L) {  // Spigot - disable
+                /*if (false && this.aS() > 0L) {  // Spigot - disable
                     Thread thread1 = new Thread(new ThreadWatchdog(this));
 
                     thread1.setName("Server Watchdog");
                     thread1.setDaemon(true);
                     thread1.start();
-                }
+                }*/ // CloudSpigot
 
                 return true;
             }
@@ -359,23 +354,23 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
 
     public CrashReport b(CrashReport crashreport) {
         crashreport = super.b(crashreport);
-        crashreport.g().a("Is Modded", new Callable() {
+        crashreport.g().a("Is Modded", new Callable<String>() {
             public String a() throws Exception {
                 String s = DedicatedServer.this.getServerModName();
 
                 return !s.equals("vanilla") ? "Definitely; Server brand changed to \'" + s + "\'" : "Unknown (can\'t tell)";
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
-        crashreport.g().a("Type", new Callable() {
+        crashreport.g().a("Type", new Callable<String>() {
             public String a() throws Exception {
                 return "Dedicated Server (map_server.txt)";
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });

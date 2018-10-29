@@ -30,11 +30,13 @@ public class CraftWolf extends CraftTameableAnimal implements Wolf {
         return EntityType.WOLF;
     }
 
-    public DyeColor getCollarColor() {
+    @SuppressWarnings("deprecation")
+	public DyeColor getCollarColor() {
         return DyeColor.getByWoolData((byte) getHandle().getCollarColor().getColorIndex());
     }
 
-    public void setCollarColor(DyeColor color) {
+    @SuppressWarnings("deprecation")
+	public void setCollarColor(DyeColor color) {
         getHandle().setCollarColor(EnumColor.fromColorIndex(color.getWoolData()));
     }
 }

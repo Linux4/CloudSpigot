@@ -65,8 +65,8 @@ public class VillageSiege {
     }
 
     private boolean b() {
-        List list = this.a.players;
-        Iterator iterator = list.iterator();
+        List<EntityHuman> list = this.a.players;
+        Iterator<EntityHuman> iterator = list.iterator();
 
         while (iterator.hasNext()) {
             EntityHuman entityhuman = (EntityHuman) iterator.next();
@@ -87,7 +87,7 @@ public class VillageSiege {
                             this.h = blockposition.getY();
                             this.i = blockposition.getZ() + (int) ((double) (MathHelper.sin(f1) * f) * 0.9D);
                             flag = false;
-                            Iterator iterator1 = this.a.ae().getVillages().iterator();
+                            Iterator<Village> iterator1 = this.a.ae().getVillages().iterator();
 
                             while (iterator1.hasNext()) {
                                 Village village = (Village) iterator1.next();

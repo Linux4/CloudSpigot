@@ -155,7 +155,6 @@ public interface ItemMeta extends Cloneable, ConfigurationSerializable {
      */
     boolean hasItemFlag(ItemFlag flag);
 
-    @SuppressWarnings("javadoc")
     ItemMeta clone();
 
     // Spigot start

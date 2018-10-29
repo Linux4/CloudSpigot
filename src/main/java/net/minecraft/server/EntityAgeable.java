@@ -45,7 +45,7 @@ public abstract class EntityAgeable extends EntityCreature {
 
         if (itemstack != null && itemstack.getItem() == Items.SPAWN_EGG) {
             if (!this.world.isClientSide) {
-                Class oclass = EntityTypes.a(itemstack.getData());
+                Class<? extends Entity> oclass = EntityTypes.a(itemstack.getData());
 
                 if (oclass != null && this.getClass() == oclass) {
                     EntityAgeable entityageable = this.createChild(this);

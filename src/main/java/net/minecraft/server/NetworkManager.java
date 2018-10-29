@@ -27,36 +27,38 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
+@SuppressWarnings("rawtypes")
 public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 
     private static final Logger g = LogManager.getLogger();
     public static final Marker a = MarkerManager.getMarker("NETWORK");
-    public static final Marker b = MarkerManager.getMarker("NETWORK_PACKETS", NetworkManager.a);
+    @SuppressWarnings("deprecation")
+	public static final Marker b = MarkerManager.getMarker("NETWORK_PACKETS", NetworkManager.a);
     public static final AttributeKey<EnumProtocol> c = AttributeKey.valueOf("protocol");
-    public static final LazyInitVar<NioEventLoopGroup> d = new LazyInitVar() {
+    public static final LazyInitVar<NioEventLoopGroup> d = new LazyInitVar<NioEventLoopGroup>() {
         protected NioEventLoopGroup a() {
             return new NioEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Client IO #%d").setDaemon(true).build());
         }
 
-        protected Object init() {
+        protected NioEventLoopGroup init() {
             return this.a();
         }
     };
-    public static final LazyInitVar<EpollEventLoopGroup> e = new LazyInitVar() {
+    public static final LazyInitVar<EpollEventLoopGroup> e = new LazyInitVar<EpollEventLoopGroup>() {
         protected EpollEventLoopGroup a() {
             return new EpollEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Epoll Client IO #%d").setDaemon(true).build());
         }
 
-        protected Object init() {
+        protected EpollEventLoopGroup init() {
             return this.a();
         }
     };
-    public static final LazyInitVar<LocalEventLoopGroup> f = new LazyInitVar() {
+    public static final LazyInitVar<LocalEventLoopGroup> f = new LazyInitVar<LocalEventLoopGroup>() {
         protected LocalEventLoopGroup a() {
             return new LocalEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Local Client IO #%d").setDaemon(true).build());
         }
 
-        protected Object init() {
+        protected LocalEventLoopGroup init() {
             return this.a();
         }
     };
@@ -118,7 +120,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
         if (MinecraftServer.getServer().isDebugging()) throwable.printStackTrace(); // Spigot
     }
 
-    protected void a(ChannelHandlerContext channelhandlercontext, Packet packet) throws Exception {
+    protected void a(ChannelHandlerContext channelhandlercontext, Packet<PacketListener> packet) throws Exception {
         if (this.channel.isOpen()) {
             try {
                 packet.a(this.m);
@@ -135,7 +137,8 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
         this.m = packetlistener;
     }
 
-    public void handle(Packet packet) {
+    @SuppressWarnings("unchecked")
+	public void handle(Packet packet) {
         if (this.g()) {
             this.m();
             this.a(packet, (GenericFutureListener[]) null);
@@ -151,15 +154,16 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 
     }
 
-    public void a(Packet packet, GenericFutureListener<? extends Future<? super Void>> genericfuturelistener, GenericFutureListener<? extends Future<? super Void>>... agenericfuturelistener) {
+    @SuppressWarnings("unchecked")
+	public void a(Packet packet, GenericFutureListener<? extends Future<? super Void>> genericfuturelistener, GenericFutureListener<? extends Future<? super Void>>... agenericfuturelistener) {
         if (this.g()) {
             this.m();
-            this.a(packet, (GenericFutureListener[]) ArrayUtils.add(agenericfuturelistener, 0, genericfuturelistener));
+            this.a(packet, ArrayUtils.add(agenericfuturelistener, 0, genericfuturelistener));
         } else {
             this.j.writeLock().lock();
 
             try {
-                this.i.add(new NetworkManager.QueuedPacket(packet, (GenericFutureListener[]) ArrayUtils.add(agenericfuturelistener, 0, genericfuturelistener)));
+                this.i.add(new NetworkManager.QueuedPacket(packet, ArrayUtils.add(agenericfuturelistener, 0, genericfuturelistener)));
             } finally {
                 this.j.writeLock().unlock();
             }
@@ -169,7 +173,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 
     private void a(final Packet packet, final GenericFutureListener<? extends Future<? super Void>>[] agenericfuturelistener) {
         final EnumProtocol enumprotocol = EnumProtocol.a(packet);
-        final EnumProtocol enumprotocol1 = (EnumProtocol) this.channel.attr(NetworkManager.c).get();
+        final EnumProtocol enumprotocol1 = this.channel.attr(NetworkManager.c).get();
 
         if (enumprotocol1 != enumprotocol) {
             NetworkManager.g.debug("Disabled auto read");
@@ -214,7 +218,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 
             try {
                 while (!this.i.isEmpty()) {
-                    NetworkManager.QueuedPacket networkmanager_queuedpacket = (NetworkManager.QueuedPacket) this.i.poll();
+                    NetworkManager.QueuedPacket networkmanager_queuedpacket = this.i.poll();
 
                     this.a(networkmanager_queuedpacket.a, networkmanager_queuedpacket.b);
                 }
@@ -321,8 +325,9 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
         }
     }
 
-    protected void channelRead0(ChannelHandlerContext channelhandlercontext, Packet object) throws Exception { // CraftBukkit - fix decompile error
-        this.a(channelhandlercontext, (Packet) object);
+    @SuppressWarnings("unchecked")
+	protected void channelRead0(ChannelHandlerContext channelhandlercontext, Packet object) throws Exception { // CraftBukkit - fix decompile error
+        this.a(channelhandlercontext, (Packet<PacketListener>) object);
     }
 
     static class QueuedPacket {
@@ -330,7 +335,8 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
         private final Packet a;
         private final GenericFutureListener<? extends Future<? super Void>>[] b;
 
-        public QueuedPacket(Packet packet, GenericFutureListener<? extends Future<? super Void>>... agenericfuturelistener) {
+        @SuppressWarnings("unchecked")
+		public QueuedPacket(Packet packet, GenericFutureListener<? extends Future<? super Void>>... agenericfuturelistener) {
             this.a = packet;
             this.b = agenericfuturelistener;
         }

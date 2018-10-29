@@ -64,7 +64,8 @@ public class ItemStack implements Cloneable, ConfigurationSerializable {
      * @param type item material
      * @param amount stack size
      */
-    public ItemStack(final Material type, final int amount) {
+    @SuppressWarnings("deprecation")
+	public ItemStack(final Material type, final int amount) {
         this(type.getId(), amount);
     }
 
@@ -90,7 +91,8 @@ public class ItemStack implements Cloneable, ConfigurationSerializable {
      * @param amount stack size
      * @param damage durability / damage
      */
-    public ItemStack(final Material type, final int amount, final short damage) {
+    @SuppressWarnings("deprecation")
+	public ItemStack(final Material type, final int amount, final short damage) {
         this(type.getId(), amount, damage);
     }
 
@@ -156,7 +158,8 @@ public class ItemStack implements Cloneable, ConfigurationSerializable {
         return getType0(this.type);
     }
 
-    private static Material getType0(int id) {
+    @SuppressWarnings("deprecation")
+	private static Material getType0(int id) {
         Material material = Material.getMaterial(id);
         return material == null ? Material.AIR : material;
     }
@@ -168,7 +171,8 @@ public class ItemStack implements Cloneable, ConfigurationSerializable {
      *
      * @param type New type to set the items in this stack to
      */
-    @Utility
+    @SuppressWarnings("deprecation")
+	@Utility
     public void setType(Material type) {
         Validate.notNull(type, "Material cannot be null");
         setTypeId(type.getId());
@@ -225,7 +229,8 @@ public class ItemStack implements Cloneable, ConfigurationSerializable {
      *
      * @return MaterialData for this item
      */
-    public MaterialData getData() {
+    @SuppressWarnings("deprecation")
+	public MaterialData getData() {
         Material mat = getType();
         if (data == null && mat != null && mat.getData() != null) {
             data = mat.getNewData((byte) this.getDurability());
@@ -286,7 +291,8 @@ public class ItemStack implements Cloneable, ConfigurationSerializable {
         return -1;
     }
 
-    private void createData(final byte data) {
+    @SuppressWarnings("deprecation")
+	private void createData(final byte data) {
         Material mat = Material.getMaterial(type);
 
         if (mat == null) {

@@ -10,6 +10,7 @@ import org.bukkit.entity.LivingEntity;
  * <p>
  * If a Creature Spawn event is cancelled, the creature will not spawn.
  */
+@SuppressWarnings("deprecation")
 public class CreatureSpawnEvent extends EntitySpawnEvent {
     private final SpawnReason spawnReason;
 

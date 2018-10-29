@@ -52,7 +52,8 @@ public class Chunk {
     private long u;
     private int v;
     private ConcurrentLinkedQueue<BlockPosition> w;
-    protected gnu.trove.map.hash.TObjectIntHashMap<Class> entityCount = new gnu.trove.map.hash.TObjectIntHashMap<Class>(); // Spigot
+    @SuppressWarnings("rawtypes")
+	protected gnu.trove.map.hash.TObjectIntHashMap<Class> entityCount = new gnu.trove.map.hash.TObjectIntHashMap<Class>(); // Spigot
     // CloudSpigot start - Asynchronous light updates
     public AtomicInteger pendingLightUpdates = new AtomicInteger();
     public long lightUpdateTime;
@@ -129,7 +130,8 @@ public class Chunk {
     }
     // CraftBukkit end
 
-    public Chunk(World world, int i, int j) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public Chunk(World world, int i, int j) {
         this.sections = new ChunkSection[16];
         this.e = new byte[256];
         this.f = new int[256];
@@ -288,7 +290,7 @@ public class Chunk {
                         int i1 = this.locZ * 16 + j;
                         int j1 = Integer.MAX_VALUE;
 
-                        Iterator iterator;
+                        Iterator<EnumDirection> iterator;
                         EnumDirection enumdirection;
 
                         for (iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator(); iterator.hasNext(); j1 = Math.min(j1, this.world.b(l + enumdirection.getAdjacentX(), i1 + enumdirection.getAdjacentZ()))) {
@@ -416,7 +418,7 @@ public class Chunk {
             }
 
             if (!this.world.worldProvider.o()) {
-                Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+                Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
                 while (iterator.hasNext()) {
                     EnumDirection enumdirection = (EnumDirection) iterator.next();
@@ -465,12 +467,12 @@ public class Chunk {
         } catch (ReportedException reportedexception) {
             CrashReportSystemDetails crashreportsystemdetails = reportedexception.a().a("Block being got");
 
-            crashreportsystemdetails.a("Location", new Callable() {
+            crashreportsystemdetails.a("Location", new Callable<String>() {
                 public String a() throws Exception {
                     return CrashReportSystemDetails.a(new BlockPosition(Chunk.this.locX * 16 + i, j, Chunk.this.locZ * 16 + k));
                 }
 
-                public Object call() throws Exception {
+                public String call() throws Exception {
                     return this.a();
                 }
             });
@@ -484,12 +486,12 @@ public class Chunk {
         } catch (ReportedException reportedexception) {
             CrashReportSystemDetails crashreportsystemdetails = reportedexception.a().a("Block being got");
 
-            crashreportsystemdetails.a("Location", new Callable() {
+            crashreportsystemdetails.a("Location", new Callable<String>() {
                 public String a() throws Exception {
                     return CrashReportSystemDetails.a(blockposition);
                 }
 
-                public Object call() throws Exception {
+                public String call() throws Exception {
                     return this.a();
                 }
             });
@@ -540,12 +542,12 @@ public class Chunk {
                 CrashReport crashreport = CrashReport.a(throwable, "Getting block state");
                 CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Block being got");
 
-                crashreportsystemdetails.a("Location", new Callable() {
+                crashreportsystemdetails.a("Location", new Callable<String>() {
                     public String a() throws Exception {
                         return CrashReportSystemDetails.a(blockposition);
                     }
 
-                    public Object call() throws Exception {
+                    public String call() throws Exception {
                         return this.a();
                     }
                 });
@@ -828,7 +830,7 @@ public class Chunk {
             tileentity = world.capturedTileEntities.get(blockposition);
         }
         if (tileentity == null) {
-            tileentity = (TileEntity) this.tileEntities.get(blockposition);
+            tileentity = this.tileEntities.get(blockposition);
         }
         // CraftBukkit end
 
@@ -860,7 +862,7 @@ public class Chunk {
         tileentity.a(blockposition);
         if (this.getType(blockposition) instanceof IContainer) {
             if (this.tileEntities.containsKey(blockposition)) {
-                ((TileEntity) this.tileEntities.get(blockposition)).y();
+                this.tileEntities.get(blockposition).y();
             }
 
             tileentity.D();
@@ -887,7 +889,7 @@ public class Chunk {
 
     public void e(BlockPosition blockposition) {
         if (this.h) {
-            TileEntity tileentity = (TileEntity) this.tileEntities.remove(blockposition);
+            TileEntity tileentity = this.tileEntities.remove(blockposition);
 
             if (tileentity != null) {
                 tileentity.y();
@@ -901,7 +903,7 @@ public class Chunk {
         this.world.a(this.tileEntities.values());
 
         for (int i = 0; i < this.entitySlices.length; ++i) {
-            Iterator iterator = this.entitySlices[i].iterator();
+            Iterator<Entity> iterator = this.entitySlices[i].iterator();
 
             while (iterator.hasNext()) {
                 Entity entity = (Entity) iterator.next();
@@ -909,17 +911,17 @@ public class Chunk {
                 entity.ah();
             }
 
-            this.world.b((Collection) this.entitySlices[i]);
+            this.world.b((Collection<Entity>) this.entitySlices[i]);
         }
 
     }
 
     public void removeEntities() {
         this.h = false;
-        Iterator iterator = this.tileEntities.values().iterator();
+        Iterator<TileEntity> iterator = this.tileEntities.values().iterator();
 
         while (iterator.hasNext()) {
-            TileEntity tileentity = (TileEntity) iterator.next();
+            TileEntity tileentity = iterator.next();
             // Spigot Start
             if ( tileentity instanceof IInventory )
             {
@@ -962,7 +964,7 @@ public class Chunk {
                 }
             }
 
-            this.world.c((Collection) newList);
+            this.world.c((Collection<Entity>) newList);
             // CraftBukkit end
         }
 
@@ -981,7 +983,7 @@ public class Chunk {
 
         for (int k = i; k <= j; ++k) {
             if (!this.entitySlices[k].isEmpty()) {
-                Iterator iterator = this.entitySlices[k].iterator();
+                Iterator<Entity> iterator = this.entitySlices[k].iterator();
                 // CloudSpigot start - Don't search for inventories if we have none, and that is all we want
                 /*
                  * We check if they want inventories by seeing if it is the static `IEntitySelector.c`
@@ -1016,7 +1018,8 @@ public class Chunk {
 
     }
 
-    public <T extends Entity> void a(Class<? extends T> oclass, AxisAlignedBB axisalignedbb, List<T> list, Predicate<? super T> predicate) {
+    @SuppressWarnings("unchecked")
+	public <T extends Entity> void a(Class<? extends T> oclass, AxisAlignedBB axisalignedbb, List<T> list, Predicate<? super T> predicate) {
         int i = MathHelper.floor((axisalignedbb.b - 2.0D) / 16.0D);
         int j = MathHelper.floor((axisalignedbb.e + 2.0D) / 16.0D);
 
@@ -1035,7 +1038,7 @@ public class Chunk {
         // CloudSpigot end
         for (int k = i; k <= j; ++k) {
             if (counts != null && counts[k] <= 0) continue; // CloudSpigot - Don't check a chunk if it doesn't have the type we are looking for
-            Iterator iterator = this.entitySlices[k].iterator(); // Spigot
+            Iterator<Entity> iterator = this.entitySlices[k].iterator(); // Spigot
 
             while (iterator.hasNext()) {
                 Entity entity = (Entity) iterator.next();
@@ -1157,7 +1160,7 @@ public class Chunk {
         }
 
         while (!this.w.isEmpty()) {
-            BlockPosition blockposition = (BlockPosition) this.w.poll();
+            BlockPosition blockposition = this.w.poll();
 
             if (this.a(blockposition, Chunk.EnumTileEntityState.CHECK) == null && this.getType(blockposition).isTileEntity()) {
                 TileEntity tileentity = this.i(blockposition);
@@ -1324,7 +1327,7 @@ public class Chunk {
                 }
 
                 if (this.lit) {
-                    Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+                    Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
                     while (iterator.hasNext()) {
                         EnumDirection enumdirection = (EnumDirection) iterator.next();

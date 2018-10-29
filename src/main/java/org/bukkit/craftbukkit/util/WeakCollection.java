@@ -143,7 +143,8 @@ public final class WeakCollection<T> implements Collection<T> {
         return ret;
     }
 
-    public int size() {
+    @SuppressWarnings("unused")
+	public int size() {
         int s = 0;
         for (T value : this) {
             s++;
@@ -155,7 +156,8 @@ public final class WeakCollection<T> implements Collection<T> {
         return this.toArray(new Object[0]);
     }
 
-    public <T> T[] toArray(T[] array) {
+    @SuppressWarnings("hiding")
+	public <T> T[] toArray(T[] array) {
         return toCollection().toArray(array);
     }
 

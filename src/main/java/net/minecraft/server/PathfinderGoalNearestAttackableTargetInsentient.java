@@ -22,7 +22,7 @@ public class PathfinderGoalNearestAttackableTargetInsentient extends PathfinderG
             PathfinderGoalNearestAttackableTargetInsentient.a.warn("Use NearestAttackableTargetGoal.class for PathfinerMob mobs!");
         }
 
-        this.c = new Predicate() {
+        this.c = new Predicate<EntityLiving>() {
             public boolean a(EntityLiving entityliving) {
                 double d0 = PathfinderGoalNearestAttackableTargetInsentient.this.f();
 
@@ -33,7 +33,7 @@ public class PathfinderGoalNearestAttackableTargetInsentient extends PathfinderG
                 return entityliving.isInvisible() ? false : ((double) entityliving.g(PathfinderGoalNearestAttackableTargetInsentient.this.b) > d0 ? false : PathfinderGoalTarget.a(PathfinderGoalNearestAttackableTargetInsentient.this.b, entityliving, false, true));
             }
 
-            public boolean apply(Object object) {
+            public boolean apply(EntityLiving object) {
                 return this.a((EntityLiving) object);
             }
         };
@@ -42,7 +42,7 @@ public class PathfinderGoalNearestAttackableTargetInsentient extends PathfinderG
 
     public boolean a() {
         double d0 = this.f();
-        List list = this.b.world.a(this.f, this.b.getBoundingBox().grow(d0, 4.0D, d0), this.c);
+        List<EntityLiving> list = this.b.world.a(this.f, this.b.getBoundingBox().grow(d0, 4.0D, d0), this.c);
 
         Collections.sort(list, this.d);
         if (list.isEmpty()) {

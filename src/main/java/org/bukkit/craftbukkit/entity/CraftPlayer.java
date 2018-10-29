@@ -366,7 +366,8 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
         getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect("note."+instrumentName, loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), 3.0f, f));
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void playNote(Location loc, Instrument instrument, Note note) {
         if (getHandle().playerConnection == null) return;
 
@@ -431,12 +432,14 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
         playEffect(loc, effect, datavalue);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void sendBlockChange(Location loc, Material material, byte data) {
         sendBlockChange(loc, material.getId(), data);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void sendBlockChange(Location loc, int material, byte data) {
         if (getHandle().playerConnection == null) return;
 
@@ -500,7 +503,8 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
         throw new NotImplementedException("Chunk changes do not yet work"); // TODO: Chunk changes.
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void sendMap(MapView map) {
         if (getHandle().playerConnection == null) return;
 
@@ -837,7 +841,8 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
         }
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void setGameMode(GameMode mode) {
         if (getHandle().playerConnection == null) return;
 
@@ -859,7 +864,8 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
         }
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public GameMode getGameMode() {
         return GameMode.getByValue(getHandle().playerInteractManager.getGameMode().getId());
     }
@@ -1217,7 +1223,8 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
         server.getPlayerMetadata().removeMetadata(this, metadataKey, owningPlugin);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public boolean setWindowProperty(Property prop, int value) {
         Container container = getHandle().activeContainer;
         if (container.getBukkitView().getType() != prop.getType()) {
@@ -1383,7 +1390,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 
     public void updateScaledHealth() {
         AttributeMapServer attributemapserver = (AttributeMapServer) getHandle().getAttributeMap();
-        Set set = attributemapserver.getAttributes();
+        Set<AttributeInstance> set = attributemapserver.getAttributes();
 
         injectScaledMaxHealth(set, true);
 
@@ -1395,7 +1402,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
         getHandle().maxHealthCache = getMaxHealth();
     }
 
-    public void injectScaledMaxHealth(Collection collection, boolean force) {
+	public void injectScaledMaxHealth(Collection<AttributeInstance> collection, boolean force) {
         if (!scaledHealth && !force) {
             return;
         }
@@ -1480,7 +1487,8 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
             }
         }
 
-        @Override
+        @SuppressWarnings({ "rawtypes", "deprecation" })
+		@Override
         public void playEffect( Location location, Effect effect, int id, int data, float offsetX, float offsetY, float offsetZ, float speed, int particleCount, int radius )
         {
             Validate.notNull( location, "Location cannot be null" );

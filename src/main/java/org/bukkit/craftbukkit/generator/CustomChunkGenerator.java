@@ -39,7 +39,8 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
         return true;
     }
 
-    public Chunk getOrCreateChunk(int x, int z) {
+    @SuppressWarnings("deprecation")
+	public Chunk getOrCreateChunk(int x, int z) {
         random.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 
         Chunk chunk;
@@ -125,8 +126,7 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
                     }
                 }
                 else { // Else, fall back to pre 1.2 method
-                    @SuppressWarnings("deprecation")
-                            byte[] types = generator.generate(this.world.getWorld(), this.random, x, z);
+                    byte[] types = generator.generate(this.world.getWorld(), this.random, x, z);
                     int ydim = types.length / 256;
                     int scnt = ydim / 16;
                     
@@ -211,11 +211,13 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
         return generator.generate(world, random, x, z);
     }
 
-    public byte[][] generateBlockSections(org.bukkit.World world, Random random, int x, int z, BiomeGrid biomes) {
+    @SuppressWarnings("deprecation")
+	public byte[][] generateBlockSections(org.bukkit.World world, Random random, int x, int z, BiomeGrid biomes) {
         return generator.generateBlockSections(world, random, x, z, biomes);
     }
 
-    public short[][] generateExtBlockSections(org.bukkit.World world, Random random, int x, int z, BiomeGrid biomes) {
+    @SuppressWarnings("deprecation")
+	public short[][] generateExtBlockSections(org.bukkit.World world, Random random, int x, int z, BiomeGrid biomes) {
         return generator.generateExtBlockSections(world, random, x, z, biomes);
     }
 

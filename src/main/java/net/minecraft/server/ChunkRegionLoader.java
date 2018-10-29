@@ -17,8 +17,8 @@ import org.apache.logging.log4j.Logger;
 public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
 
     private static final Logger a = LogManager.getLogger();
-    private Map<ChunkCoordIntPair, NBTTagCompound> b = new ConcurrentHashMap();
-    private Set<ChunkCoordIntPair> c = Collections.newSetFromMap(new ConcurrentHashMap());
+    private Map<ChunkCoordIntPair, NBTTagCompound> b = new ConcurrentHashMap<ChunkCoordIntPair, NBTTagCompound>();
+    private Set<ChunkCoordIntPair> c = Collections.newSetFromMap(new ConcurrentHashMap<ChunkCoordIntPair, Boolean>());
     private final File d;
     private boolean e = false;
 
@@ -57,7 +57,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
     public Object[] loadChunk(World world, int i, int j) throws IOException {
         // CraftBukkit end
         ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(i, j);
-        NBTTagCompound nbttagcompound = (NBTTagCompound) this.b.get(chunkcoordintpair);
+        NBTTagCompound nbttagcompound = this.b.get(chunkcoordintpair);
 
         if (nbttagcompound == null) {
             DataInputStream datainputstream = RegionFileCache.c(this.d, i, j);
@@ -147,13 +147,13 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
 
             return false;
         } else {
-            ChunkCoordIntPair chunkcoordintpair = (ChunkCoordIntPair) this.b.keySet().iterator().next();
+            ChunkCoordIntPair chunkcoordintpair = this.b.keySet().iterator().next();
 
             boolean flag;
 
             try {
                 this.c.add(chunkcoordintpair);
-                NBTTagCompound nbttagcompound = (NBTTagCompound) this.b.remove(chunkcoordintpair);
+                NBTTagCompound nbttagcompound = this.b.remove(chunkcoordintpair);
 
                 if (nbttagcompound != null) {
                     try {
@@ -198,7 +198,8 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
 
     }
 
-    private void a(Chunk chunk, World world, NBTTagCompound nbttagcompound) {
+    @SuppressWarnings("rawtypes")
+	private void a(Chunk chunk, World world, NBTTagCompound nbttagcompound) {
         nbttagcompound.setByte("V", (byte) 1);
         nbttagcompound.setInt("xPos", chunk.locX);
         nbttagcompound.setInt("zPos", chunk.locZ);

@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 /**
  * Called when a tab-complete request throws an exception
  */
+@SuppressWarnings("serial")
 public class ServerTabCompleteException extends ServerCommandException {
 
     public ServerTabCompleteException(String message, Throwable cause, Command command, CommandSender commandSender, String[] arguments) {

@@ -46,7 +46,8 @@ public class StatisticManager {
         return statisticwrapper == null ? 0 : statisticwrapper.a();
     }
 
-    public <T extends IJsonStatistic> T b(Statistic statistic) {
+    @SuppressWarnings("unchecked")
+	public <T extends IJsonStatistic> T b(Statistic statistic) {
         StatisticWrapper statisticwrapper = (StatisticWrapper) this.a.get(statistic);
 
         return statisticwrapper != null ? (T) statisticwrapper.b() : null; // CraftBukkit - fix decompile error

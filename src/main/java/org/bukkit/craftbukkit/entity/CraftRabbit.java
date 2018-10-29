@@ -1,12 +1,11 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.World;
-import net.minecraft.server.EntityRabbit;
-import net.minecraft.server.PathfinderGoalSelector;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Rabbit;
-import org.bukkit.craftbukkit.CraftWorld;
+
+import net.minecraft.server.EntityRabbit;
+import net.minecraft.server.PathfinderGoalSelector;
 
 public class CraftRabbit extends CraftAnimals implements Rabbit {
 
@@ -40,7 +39,7 @@ public class CraftRabbit extends CraftAnimals implements Rabbit {
         EntityRabbit entity = getHandle();
         if (getRabbitType() == Type.THE_KILLER_BUNNY) {
             // Reset goals and target finders.
-            World world = ((CraftWorld) this.getWorld()).getHandle();
+            //World world = ((CraftWorld) this.getWorld()).getHandle(); // CloudSpigot
             entity.goalSelector = new PathfinderGoalSelector(null); // CloudSpigot
             entity.targetSelector = new PathfinderGoalSelector(null); // CloudSpigot
             entity.initializePathFinderGoals();

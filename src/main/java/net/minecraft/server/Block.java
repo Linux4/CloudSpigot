@@ -7,8 +7,10 @@ import java.util.Random;
 public class Block {
 
     private static final MinecraftKey a = new MinecraftKey("air");
-    public static final RegistryBlocks<MinecraftKey, Block> REGISTRY = new RegistryBlocks(Block.a);
-    public static final RegistryID<IBlockData> d = new RegistryID();
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public static final RegistryBlocks<MinecraftKey, Block> REGISTRY = new RegistryBlocks(Block.a);
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public static final RegistryID<IBlockData> d = new RegistryID();
     //private CreativeModeTab creativeTab; // CloudSpigot
     public static final Block.StepSound e = new Block.StepSound("stone", 1.0F, 1.0F);
     public static final Block.StepSound f = new Block.StepSound("wood", 1.0F, 1.0F);
@@ -702,7 +704,8 @@ public class Block {
         return "Block{" + Block.REGISTRY.c(this) + "}";
     }
 
-    public static void S() {
+    @SuppressWarnings("rawtypes")
+	public static void S() {
         a(0, Block.a, (new BlockAir()).c("air"));
         a(1, "stone", (new BlockStone()).c(1.5F).b(10.0F).a(Block.i).c("stone"));
         a(2, "grass", (new BlockGrass()).c(0.6F).a(Block.h).c("grass"));

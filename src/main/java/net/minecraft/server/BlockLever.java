@@ -56,7 +56,7 @@ public class BlockLever extends Block {
         if (a(world, blockposition, enumdirection.opposite())) {
             return iblockdata.set(BlockLever.FACING, BlockLever.EnumLeverPosition.a(enumdirection, entityliving.getDirection()));
         } else {
-            Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+            Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
             EnumDirection enumdirection1;
 

@@ -13,12 +13,12 @@ public class BlockSkull extends BlockContainer {
 
     public static final BlockStateDirection FACING = BlockStateDirection.of("facing");
     public static final BlockStateBoolean NODROP = BlockStateBoolean.of("nodrop");
-    private static final Predicate<ShapeDetectorBlock> N = new Predicate() {
+    private static final Predicate<ShapeDetectorBlock> N = new Predicate<ShapeDetectorBlock>() {
         public boolean a(ShapeDetectorBlock shapedetectorblock) {
             return shapedetectorblock.a() != null && shapedetectorblock.a().getBlock() == Blocks.SKULL && shapedetectorblock.b() instanceof TileEntitySkull && ((TileEntitySkull) shapedetectorblock.b()).getSkullType() == 1;
         }
 
-        public boolean apply(Object object) {
+        public boolean apply(ShapeDetectorBlock object) {
             return this.a((ShapeDetectorBlock) object);
         }
     };
@@ -195,7 +195,7 @@ public class BlockSkull extends BlockContainer {
                 entitywither.setPositionRotation((double) blockposition2.getX() + 0.5D, (double) blockposition2.getY() + 0.55D, (double) blockposition2.getZ() + 0.5D, shapedetector_shapedetectorcollection.b().k() == EnumDirection.EnumAxis.X ? 0.0F : 90.0F, 0.0F);
                 entitywither.aI = shapedetector_shapedetectorcollection.b().k() == EnumDirection.EnumAxis.X ? 0.0F : 90.0F;
                 entitywither.n();
-                Iterator iterator = world.a(EntityHuman.class, entitywither.getBoundingBox().grow(50.0D, 50.0D, 50.0D)).iterator();
+                Iterator<EntityHuman> iterator = world.a(EntityHuman.class, entitywither.getBoundingBox().grow(50.0D, 50.0D, 50.0D)).iterator();
 
                 // CraftBukkit start
                 if (world.addEntity(entitywither, SpawnReason.BUILD_WITHER)) {

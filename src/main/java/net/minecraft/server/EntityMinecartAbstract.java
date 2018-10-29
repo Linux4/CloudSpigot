@@ -208,11 +208,11 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
 
         if (!this.world.isClientSide && this.world instanceof WorldServer) {
             //this.world.methodProfiler.a("portal"); // CloudSpigot
-            MinecraftServer minecraftserver = ((WorldServer) this.world).getMinecraftServer();
+            //MinecraftServer minecraftserver = ((WorldServer) this.world).getMinecraftServer(); // CloudSpigot
 
             i = this.L();
             if (this.ak) {
-                if (true || minecraftserver.getAllowNether()) { // CraftBukkit - multi-world should still allow teleport even if default vanilla nether disabled
+                if (true) { // CraftBukkit - multi-world should still allow teleport even if default vanilla nether disabled // CloudSpigot
                     if (this.vehicle == null && this.al++ >= i) {
                         this.al = i;
                         this.portalCooldown = this.aq();
@@ -323,7 +323,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
             }
             // CraftBukkit end
 
-            Iterator iterator = this.world.getEntities(this, this.getBoundingBox().grow(0.20000000298023224D, 0.0D, 0.20000000298023224D)).iterator();
+            Iterator<Entity> iterator = this.world.getEntities(this, this.getBoundingBox().grow(0.20000000298023224D, 0.0D, 0.20000000298023224D)).iterator();
 
             while (iterator.hasNext()) {
                 Entity entity = (Entity) iterator.next();
@@ -389,7 +389,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
             flag1 = !flag;
         }
 
-        double d0 = 0.0078125D;
+        //double d0 = 0.0078125D; // CloudSpigot
         BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = (BlockMinecartTrackAbstract.EnumTrackPosition) iblockdata.get(blockminecarttrackabstract.n());
 
         switch (EntityMinecartAbstract.SyntheticClass_1.b[blockminecarttrackabstract_enumtrackposition.ordinal()]) {

@@ -48,7 +48,8 @@ public class CraftItemFrame extends CraftHanging implements ItemFrame {
     }
 
 
-    public void setItem(org.bukkit.inventory.ItemStack item) {
+    @SuppressWarnings("deprecation")
+	public void setItem(org.bukkit.inventory.ItemStack item) {
         if (item == null || item.getTypeId() == 0) {
             getHandle().setItem(null);
         } else {

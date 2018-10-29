@@ -6,7 +6,7 @@ public class BlockDispenser extends BlockContainer {
 
     public static final BlockStateDirection FACING = BlockStateDirection.of("facing");
     public static final BlockStateBoolean TRIGGERED = BlockStateBoolean.of("triggered");
-    public static final RegistryDefault<Item, IDispenseBehavior> REGISTRY = new RegistryDefault(new DispenseBehaviorItem());
+    public static final RegistryDefault<Item, IDispenseBehavior> REGISTRY = new RegistryDefault<Item, IDispenseBehavior>(new DispenseBehaviorItem());
     protected Random O = new Random();
     public static boolean eventFired = false; // CraftBukkit
 

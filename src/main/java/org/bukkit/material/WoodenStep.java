@@ -57,7 +57,8 @@ public class WoodenStep extends MaterialData {
      *
      * @return TreeSpecies of this tree
      */
-    public TreeSpecies getSpecies() {
+    @SuppressWarnings("deprecation")
+	public TreeSpecies getSpecies() {
         return TreeSpecies.getByData((byte) (getData() & 0x3));
     }
 
@@ -66,7 +67,8 @@ public class WoodenStep extends MaterialData {
      *
      * @param species New species of this tree
      */
-    public void setSpecies(TreeSpecies species) {
+    @SuppressWarnings("deprecation")
+	public void setSpecies(TreeSpecies species) {
         setData((byte) ((getData() & 0xC) | species.getData()));
     }
 
@@ -75,7 +77,8 @@ public class WoodenStep extends MaterialData {
      *
      * @return true if inverted (top half), false if normal (bottom half)
      */
-    public boolean isInverted() {
+    @SuppressWarnings("deprecation")
+	public boolean isInverted() {
         return ((getData() & 0x8) != 0);
     }
     
@@ -85,7 +88,8 @@ public class WoodenStep extends MaterialData {
      * @param inv - true if step is inverted (top half), false if step is
      *     normal (bottom half)
      */
-    public void setInverted(boolean inv) {
+    @SuppressWarnings("deprecation")
+	public void setInverted(boolean inv) {
         int dat = getData() & 0x7;
         if (inv) {
             dat |= 0x8;

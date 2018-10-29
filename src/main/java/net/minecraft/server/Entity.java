@@ -12,29 +12,29 @@ import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.TravelAgent;
 import org.bukkit.block.BlockFace;
+import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.entity.CraftEntity;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.event.entity.EntityCombustByEntityEvent;
+import org.bukkit.event.entity.EntityCombustEvent;
+import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.painting.PaintingBreakByEntityEvent;
 import org.bukkit.event.vehicle.VehicleBlockCollisionEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
-import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.craftbukkit.entity.CraftEntity;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
-import org.bukkit.craftbukkit.event.CraftEventFactory;
-import org.bukkit.event.entity.EntityCombustEvent;
-import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.plugin.PluginManager;
 // CraftBukkit end
-
 // CloudSpigot start
 import org.spigotmc.event.entity.EntityDismountEvent;
 // CloudSpigot end
 
+@SuppressWarnings("deprecation")
 public abstract class Entity implements ICommandListener {
 
     private static final AxisAlignedBB a = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
@@ -286,11 +286,11 @@ public abstract class Entity implements ICommandListener {
         this.lastYaw = this.yaw;
         if (!this.world.isClientSide && this.world instanceof WorldServer) {
             //this.world.methodProfiler.a("portal"); // CloudSpigot
-            MinecraftServer minecraftserver = ((WorldServer) this.world).getMinecraftServer();
+            //MinecraftServer minecraftserver = ((WorldServer) this.world).getMinecraftServer(); // CloudSpigot
             int i = this.L();
 
             if (this.ak) {
-                if (true || minecraftserver.getAllowNether()) { // CraftBukkit
+                if (true) { // CraftBukkit // CloudSpigot
                     if (this.vehicle == null && this.al++ >= i) {
                         this.al = i;
                         this.portalCooldown = this.aq();
@@ -517,12 +517,12 @@ public abstract class Entity implements ICommandListener {
                 }
             }
 
-            List list = this.world.getCubes(this, this.getBoundingBox().a(d0, d1, d2));
+            List<AxisAlignedBB> list = this.world.getCubes(this, this.getBoundingBox().a(d0, d1, d2));
             AxisAlignedBB axisalignedbb = this.getBoundingBox();
 
             AxisAlignedBB axisalignedbb1;
 
-            for (Iterator iterator = list.iterator(); iterator.hasNext(); d1 = axisalignedbb1.b(this.getBoundingBox(), d1)) {
+            for (Iterator<AxisAlignedBB> iterator = list.iterator(); iterator.hasNext(); d1 = axisalignedbb1.b(this.getBoundingBox(), d1)) {
                 axisalignedbb1 = (AxisAlignedBB) iterator.next();
             }
 
@@ -530,7 +530,7 @@ public abstract class Entity implements ICommandListener {
             boolean flag1 = this.onGround || d7 != d1 && d7 < 0.0D;
 
             AxisAlignedBB axisalignedbb2;
-            Iterator iterator1;
+            Iterator<AxisAlignedBB> iterator1;
 
             for (iterator1 = list.iterator(); iterator1.hasNext(); d0 = axisalignedbb2.a(this.getBoundingBox(), d0)) {
                 axisalignedbb2 = (AxisAlignedBB) iterator1.next();
@@ -551,14 +551,14 @@ public abstract class Entity implements ICommandListener {
 
                 this.a(axisalignedbb);
                 d1 = (double) this.S;
-                List list1 = this.world.getCubes(this, this.getBoundingBox().a(d6, d1, d8));
+                List<AxisAlignedBB> list1 = this.world.getCubes(this, this.getBoundingBox().a(d6, d1, d8));
                 AxisAlignedBB axisalignedbb4 = this.getBoundingBox();
                 AxisAlignedBB axisalignedbb5 = axisalignedbb4.a(d6, 0.0D, d8);
                 double d13 = d1;
 
                 AxisAlignedBB axisalignedbb6;
 
-                for (Iterator iterator2 = list1.iterator(); iterator2.hasNext(); d13 = axisalignedbb6.b(axisalignedbb5, d13)) {
+                for (Iterator<AxisAlignedBB> iterator2 = list1.iterator(); iterator2.hasNext(); d13 = axisalignedbb6.b(axisalignedbb5, d13)) {
                     axisalignedbb6 = (AxisAlignedBB) iterator2.next();
                 }
 
@@ -567,7 +567,7 @@ public abstract class Entity implements ICommandListener {
 
                 AxisAlignedBB axisalignedbb7;
 
-                for (Iterator iterator3 = list1.iterator(); iterator3.hasNext(); d14 = axisalignedbb7.a(axisalignedbb4, d14)) {
+                for (Iterator<AxisAlignedBB> iterator3 = list1.iterator(); iterator3.hasNext(); d14 = axisalignedbb7.a(axisalignedbb4, d14)) {
                     axisalignedbb7 = (AxisAlignedBB) iterator3.next();
                 }
 
@@ -576,7 +576,7 @@ public abstract class Entity implements ICommandListener {
 
                 AxisAlignedBB axisalignedbb8;
 
-                for (Iterator iterator4 = list1.iterator(); iterator4.hasNext(); d15 = axisalignedbb8.c(axisalignedbb4, d15)) {
+                for (Iterator<AxisAlignedBB> iterator4 = list1.iterator(); iterator4.hasNext(); d15 = axisalignedbb8.c(axisalignedbb4, d15)) {
                     axisalignedbb8 = (AxisAlignedBB) iterator4.next();
                 }
 
@@ -586,7 +586,7 @@ public abstract class Entity implements ICommandListener {
 
                 AxisAlignedBB axisalignedbb10;
 
-                for (Iterator iterator5 = list1.iterator(); iterator5.hasNext(); d16 = axisalignedbb10.b(axisalignedbb9, d16)) {
+                for (Iterator<AxisAlignedBB> iterator5 = list1.iterator(); iterator5.hasNext(); d16 = axisalignedbb10.b(axisalignedbb9, d16)) {
                     axisalignedbb10 = (AxisAlignedBB) iterator5.next();
                 }
 
@@ -595,7 +595,7 @@ public abstract class Entity implements ICommandListener {
 
                 AxisAlignedBB axisalignedbb11;
 
-                for (Iterator iterator6 = list1.iterator(); iterator6.hasNext(); d17 = axisalignedbb11.a(axisalignedbb9, d17)) {
+                for (Iterator<AxisAlignedBB> iterator6 = list1.iterator(); iterator6.hasNext(); d17 = axisalignedbb11.a(axisalignedbb9, d17)) {
                     axisalignedbb11 = (AxisAlignedBB) iterator6.next();
                 }
 
@@ -604,7 +604,7 @@ public abstract class Entity implements ICommandListener {
 
                 AxisAlignedBB axisalignedbb12;
 
-                for (Iterator iterator7 = list1.iterator(); iterator7.hasNext(); d18 = axisalignedbb12.c(axisalignedbb9, d18)) {
+                for (Iterator<AxisAlignedBB> iterator7 = list1.iterator(); iterator7.hasNext(); d18 = axisalignedbb12.c(axisalignedbb9, d18)) {
                     axisalignedbb12 = (AxisAlignedBB) iterator7.next();
                 }
 
@@ -626,7 +626,7 @@ public abstract class Entity implements ICommandListener {
 
                 AxisAlignedBB axisalignedbb13;
 
-                for (Iterator iterator8 = list1.iterator(); iterator8.hasNext(); d1 = axisalignedbb13.b(this.getBoundingBox(), d1)) {
+                for (Iterator<AxisAlignedBB> iterator8 = list1.iterator(); iterator8.hasNext(); d1 = axisalignedbb13.b(this.getBoundingBox(), d1)) {
                     axisalignedbb13 = (AxisAlignedBB) iterator8.next();
                 }
 
@@ -1805,7 +1805,7 @@ public abstract class Entity implements ICommandListener {
         double d3 = d0 - (double) blockposition.getX();
         double d4 = d1 - (double) blockposition.getY();
         double d5 = d2 - (double) blockposition.getZ();
-        List list = this.world.a(this.getBoundingBox());
+        List<AxisAlignedBB> list = this.world.a(this.getBoundingBox());
 
         if (list.isEmpty() && !this.world.u(blockposition)) {
             return false;
@@ -2046,43 +2046,43 @@ public abstract class Entity implements ICommandListener {
     }
 
     public void appendEntityCrashDetails(CrashReportSystemDetails crashreportsystemdetails) {
-        crashreportsystemdetails.a("Entity Type", new Callable() {
+        crashreportsystemdetails.a("Entity Type", new Callable<String>() {
             public String a() throws Exception {
                 return EntityTypes.b(Entity.this) + " (" + Entity.this.getClass().getCanonicalName() + ")";
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
         crashreportsystemdetails.a("Entity ID", (Object) Integer.valueOf(this.id));
-        crashreportsystemdetails.a("Entity Name", new Callable() {
+        crashreportsystemdetails.a("Entity Name", new Callable<String>() {
             public String a() throws Exception {
                 return Entity.this.getName();
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
         crashreportsystemdetails.a("Entity\'s Exact location", (Object) String.format("%.2f, %.2f, %.2f", new Object[] { Double.valueOf(this.locX), Double.valueOf(this.locY), Double.valueOf(this.locZ)}));
         crashreportsystemdetails.a("Entity\'s Block location", (Object) CrashReportSystemDetails.a((double) MathHelper.floor(this.locX), (double) MathHelper.floor(this.locY), (double) MathHelper.floor(this.locZ)));
         crashreportsystemdetails.a("Entity\'s Momentum", (Object) String.format("%.2f, %.2f, %.2f", new Object[] { Double.valueOf(this.motX), Double.valueOf(this.motY), Double.valueOf(this.motZ)}));
-        crashreportsystemdetails.a("Entity\'s Rider", new Callable() {
+        crashreportsystemdetails.a("Entity\'s Rider", new Callable<String>() {
             public String a() throws Exception {
                 return Entity.this.passenger.toString();
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });
-        crashreportsystemdetails.a("Entity\'s Vehicle", new Callable() {
+        crashreportsystemdetails.a("Entity\'s Vehicle", new Callable<String>() {
             public String a() throws Exception {
                 return Entity.this.vehicle.toString();
             }
 
-            public Object call() throws Exception {
+            public String call() throws Exception {
                 return this.a();
             }
         });

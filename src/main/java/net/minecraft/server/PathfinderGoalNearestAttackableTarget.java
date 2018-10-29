@@ -11,14 +11,15 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
     protected final Class<T> a;
     private final int g;
     protected final PathfinderGoalNearestAttackableTarget.DistanceComparator b;
-    protected Predicate c;
+    protected Predicate<T> c;
     protected EntityLiving d;
 
     public PathfinderGoalNearestAttackableTarget(EntityCreature entitycreature, Class<T> oclass, boolean flag) {
         this(entitycreature, oclass, flag, false);
     }
 
-    public PathfinderGoalNearestAttackableTarget(EntityCreature entitycreature, Class<T> oclass, boolean flag, boolean flag1) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public PathfinderGoalNearestAttackableTarget(EntityCreature entitycreature, Class<T> oclass, boolean flag, boolean flag1) {
         this(entitycreature, oclass, 10, flag, flag1, (Predicate) null);
     }
 
@@ -28,7 +29,7 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
         this.g = i;
         this.b = new PathfinderGoalNearestAttackableTarget.DistanceComparator(entitycreature);
         this.a(1);
-        this.c = new Predicate() {
+        this.c = new Predicate<T>() {
             public boolean a(T t0) {
                 if (predicate != null && !predicate.apply(t0)) {
                     return false;
@@ -59,7 +60,7 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
                 }
             }
 
-            public boolean apply(Object object) {
+            public boolean apply(T object) {
                 return this.a((T) object); // CraftBukkit - fix decompile error
             }
         };
@@ -70,7 +71,7 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
             return false;
         } else {
             double d0 = this.f();
-            List list = this.e.world.a(this.a, this.e.getBoundingBox().grow(d0, 4.0D, d0), Predicates.and(this.c, IEntitySelector.d));
+            List<T> list = this.e.world.a(this.a, this.e.getBoundingBox().grow(d0, 4.0D, d0), Predicates.and(this.c, IEntitySelector.d));
 
             Collections.sort(list, this.b);
             if (list.isEmpty()) {

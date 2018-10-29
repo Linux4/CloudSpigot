@@ -27,7 +27,8 @@ public class CraftBlockState implements BlockState {
     protected int flag;
     protected final byte light;
 
-    public CraftBlockState(final Block block) {
+    @SuppressWarnings("deprecation")
+	public CraftBlockState(final Block block) {
         this.world = (CraftWorld) block.getWorld();
         this.x = block.getX();
         this.y = block.getY();
@@ -45,7 +46,8 @@ public class CraftBlockState implements BlockState {
         this.flag = flag;
     }
 
-    public CraftBlockState(Material material) {
+    @SuppressWarnings("deprecation")
+	public CraftBlockState(Material material) {
         world = null;
         type = material.getId();
         light = 0;
@@ -102,7 +104,8 @@ public class CraftBlockState implements BlockState {
         return data;
     }
 
-    public void setType(final Material type) {
+    @SuppressWarnings("deprecation")
+	public void setType(final Material type) {
         setTypeId(type.getId());
     }
 
@@ -115,7 +118,8 @@ public class CraftBlockState implements BlockState {
         return true;
     }
 
-    public Material getType() {
+    @SuppressWarnings("deprecation")
+	public Material getType() {
         return Material.getMaterial(getTypeId());
     }
 
@@ -148,7 +152,8 @@ public class CraftBlockState implements BlockState {
         return update(force, true);
     }
 
-    public boolean update(boolean force, boolean applyPhysics) {
+    @SuppressWarnings("deprecation")
+	public boolean update(boolean force, boolean applyPhysics) {
         requirePlaced();
         Block block = getBlock();
 
@@ -164,7 +169,8 @@ public class CraftBlockState implements BlockState {
         return true;
     }
 
-    private void createData(final byte data) {
+    @SuppressWarnings("deprecation")
+	private void createData(final byte data) {
         Material mat = getType();
         if (mat == null || mat.getData() == null) {
             this.data = new MaterialData(type, data);
@@ -173,7 +179,8 @@ public class CraftBlockState implements BlockState {
         }
     }
 
-    public byte getRawData() {
+    @SuppressWarnings("deprecation")
+	public byte getRawData() {
         return data.getData();
     }
 
@@ -194,7 +201,8 @@ public class CraftBlockState implements BlockState {
         return loc;
     }
 
-    public void setRawData(byte data) {
+    @SuppressWarnings("deprecation")
+	public void setRawData(byte data) {
         this.data.setData(data);
     }
 

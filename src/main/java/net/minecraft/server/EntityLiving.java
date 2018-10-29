@@ -400,7 +400,7 @@ public abstract class EntityLiving extends Entity {
 
         if (!this.effects.isEmpty()) {
             NBTTagList nbttaglist = new NBTTagList();
-            Iterator iterator = this.effects.values().iterator();
+            Iterator<MobEffect> iterator = this.effects.values().iterator();
 
             while (iterator.hasNext()) {
                 MobEffect mobeffect = (MobEffect) iterator.next();
@@ -468,7 +468,7 @@ public abstract class EntityLiving extends Entity {
     // CraftBukkit end
 
     protected void bi() {
-        Iterator iterator = this.effects.keySet().iterator();
+        Iterator<Integer> iterator = this.effects.keySet().iterator();
 
         isTickingEffects = true; // CraftBukkit
         while (iterator.hasNext()) {
@@ -550,7 +550,7 @@ public abstract class EntityLiving extends Entity {
     }
 
     public void removeAllEffects() {
-        Iterator iterator = this.effects.keySet().iterator();
+        Iterator<Integer> iterator = this.effects.keySet().iterator();
 
         while (iterator.hasNext()) {
             Integer integer = (Integer) iterator.next();
@@ -719,10 +719,10 @@ public abstract class EntityLiving extends Entity {
                 return false;
             } else {
                 // CraftBukkit - Moved into d(DamageSource, float)
-                if (false && (damagesource == DamageSource.ANVIL || damagesource == DamageSource.FALLING_BLOCK) && this.getEquipment(4) != null) {
+                /*if (false && (damagesource == DamageSource.ANVIL || damagesource == DamageSource.FALLING_BLOCK) && this.getEquipment(4) != null) {
                     this.getEquipment(4).damage((int) (f * 4.0F + this.random.nextFloat() * f * 2.0F), this);
                     f *= 0.75F;
-                }
+                }*/ // CloudSpigot
 
                 this.aB = 1.5F;
                 boolean flag = true;
@@ -742,7 +742,7 @@ public abstract class EntityLiving extends Entity {
                     flag = false;
                 } else {
                     // CraftBukkit start
-                    float previousHealth = this.getHealth();
+                    //float previousHealth = this.getHealth(); // CloudSpigot
                     if (!this.d(damagesource, f)) {
                         return false;
                     }
@@ -1009,12 +1009,12 @@ public abstract class EntityLiving extends Entity {
             float f1;
             
             // CraftBukkit - Moved to d(DamageSource, float)
-            if (false && this.hasEffect(MobEffectList.RESISTANCE) && damagesource != DamageSource.OUT_OF_WORLD) {
+            /*if (false && this.hasEffect(MobEffectList.RESISTANCE) && damagesource != DamageSource.OUT_OF_WORLD) {
                 i = (this.getEffect(MobEffectList.RESISTANCE).getAmplifier() + 1) * 5;
                 j = 25 - i;
                 f1 = f * (float) j;
                 f = f1 / 25.0F;
-            }
+            }*/ // CloudSpigot
 
             if (f <= 0.0F) {
                 return 0.0F;
@@ -1176,7 +1176,8 @@ public abstract class EntityLiving extends Entity {
         return this.hasEffect(MobEffectList.FASTER_DIG) ? 6 - (1 + this.getEffect(MobEffectList.FASTER_DIG).getAmplifier()) * 1 : (this.hasEffect(MobEffectList.SLOWER_DIG) ? 6 + (1 + this.getEffect(MobEffectList.SLOWER_DIG).getAmplifier()) * 2 : 6);
     }
 
-    public void bw() {
+    @SuppressWarnings("rawtypes")
+	public void bw() {
         if (!this.ar || this.as >= this.n() / 2 || this.as < 0) {
             this.as = -1;
             this.ar = true;
@@ -1451,7 +1452,8 @@ public abstract class EntityLiving extends Entity {
         return false;
     }
 
-    public void t_() {
+    @SuppressWarnings("rawtypes")
+	public void t_() {
         super.t_();
         if (!this.world.isClientSide) {
             int i = this.bv();
@@ -1663,12 +1665,12 @@ public abstract class EntityLiving extends Entity {
     protected void doTick() {}
 
     protected void bL() {
-        List list = this.world.a((Entity) this, this.getBoundingBox().grow(0.20000000298023224D, 0.0D, 0.20000000298023224D), Predicates.and(IEntitySelector.d, new Predicate() {
+        List<Entity> list = this.world.a((Entity) this, this.getBoundingBox().grow(0.20000000298023224D, 0.0D, 0.20000000298023224D), Predicates.and(IEntitySelector.d, new Predicate<Entity>() {
             public boolean a(Entity entity) {
                 return entity.ae();
             }
 
-            public boolean apply(Object object) {
+            public boolean apply(Entity object) {
                 return this.a((Entity) object);
             }
         }));
@@ -1743,7 +1745,8 @@ public abstract class EntityLiving extends Entity {
         this.aY = flag;
     }
 
-    public void receive(Entity entity, int i) {
+    @SuppressWarnings("rawtypes")
+	public void receive(Entity entity, int i) {
         if (!entity.dead && !this.world.isClientSide) {
             EntityTracker entitytracker = ((WorldServer) this.world).getTracker();
 

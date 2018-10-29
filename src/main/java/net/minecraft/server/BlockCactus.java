@@ -69,7 +69,8 @@ public class BlockCactus extends Block {
 
     }
 
-    public boolean e(World world, BlockPosition blockposition) {
+    @SuppressWarnings("rawtypes")
+	public boolean e(World world, BlockPosition blockposition) {
         Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
         while (iterator.hasNext()) {

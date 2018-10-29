@@ -19,12 +19,10 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
-import net.minecraft.server.*;
-
+import org.apache.commons.lang.Validate;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -75,14 +73,13 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerChatTabCompleteEvent;
 import org.bukkit.event.world.WorldInitEvent;
 import org.bukkit.event.world.WorldLoadEvent;
-import org.bukkit.event.world.WorldSaveEvent;
 import org.bukkit.event.world.WorldUnloadEvent;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.help.HelpMap;
 import org.bukkit.inventory.FurnaceRecipe;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
@@ -96,16 +93,15 @@ import org.bukkit.plugin.SimplePluginManager;
 import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scheduler.BukkitWorker;
 import org.bukkit.util.StringUtil;
 import org.bukkit.util.permissions.DefaultPermissions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 import org.yaml.snakeyaml.error.MarkedYAMLException;
-import org.apache.commons.lang.Validate;
 
 import com.avaje.ebean.config.DataSourceConfig;
 import com.avaje.ebean.config.ServerConfig;
@@ -122,9 +118,45 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.base64.Base64;
-import org.apache.commons.lang.StringUtils;
 import net.md_5.bungee.api.chat.BaseComponent;
+import net.minecraft.server.BlockPosition;
+import net.minecraft.server.CommandAbstract;
+import net.minecraft.server.CommandDispatcher;
+import net.minecraft.server.Convertable;
+import net.minecraft.server.CraftingManager;
+import net.minecraft.server.DedicatedPlayerList;
+import net.minecraft.server.DedicatedServer;
+import net.minecraft.server.Enchantment;
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.EntityTracker;
+import net.minecraft.server.EnumDifficulty;
+import net.minecraft.server.ExceptionWorldConflict;
+import net.minecraft.server.ICommand;
+import net.minecraft.server.IDataManager;
+import net.minecraft.server.IProgressUpdate;
+import net.minecraft.server.Items;
+import net.minecraft.server.JsonListEntry;
+import net.minecraft.server.LocaleI18n;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.MobEffectList;
+import net.minecraft.server.PersistentCollection;
+import net.minecraft.server.PlayerList;
+import net.minecraft.server.PropertyManager;
+import net.minecraft.server.RecipesFurnace;
+import net.minecraft.server.RegionFile;
+import net.minecraft.server.RegionFileCache;
+import net.minecraft.server.ServerCommand;
+import net.minecraft.server.ServerNBTManager;
+import net.minecraft.server.WorldData;
+import net.minecraft.server.WorldLoaderServer;
+import net.minecraft.server.WorldManager;
+import net.minecraft.server.WorldMap;
+import net.minecraft.server.WorldNBTStorage;
+import net.minecraft.server.WorldServer;
+import net.minecraft.server.WorldSettings;
+import net.minecraft.server.WorldType;
 
+@SuppressWarnings("deprecation")
 public final class CraftServer implements Server {
     private static final Player[] EMPTY_PLAYER_ARRAY = new Player[0];
     private final String serverName = "CloudSpigot"; // CloudSpigot
@@ -161,8 +193,8 @@ public final class CraftServer implements Server {
     private boolean printSaveWarning;
     private CraftIconCache icon;
     private boolean overrideAllCommandBlockCommands = false;
-    private final Pattern validUserPattern = Pattern.compile("^[a-zA-Z0-9_]{2,16}$");
-    private final UUID invalidUserUUID = UUID.nameUUIDFromBytes("InvalidUsername".getBytes(Charsets.UTF_8));
+    //private final Pattern validUserPattern = Pattern.compile("^[a-zA-Z0-9_]{2,16}$"); // CloudSpigot
+    //private final UUID invalidUserUUID = UUID.nameUUIDFromBytes("InvalidUsername".getBytes(Charsets.UTF_8)); // CloudSpigot
     private final List<CraftPlayer> playerView;
     public int reloadCount;
 
@@ -387,7 +419,6 @@ public final class CraftServer implements Server {
 
     @Override
     @Deprecated
-    @SuppressWarnings("unchecked")
     public Player[] _INVALID_getOnlinePlayers() {
         return getOnlinePlayers().toArray(EMPTY_PLAYER_ARRAY);
     }
@@ -1386,7 +1417,6 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Set<String> getIPBans() {
         return new HashSet<String>(Arrays.asList(playerList.getIPBans().getEntries()));
     }
@@ -1405,7 +1435,8 @@ public final class CraftServer implements Server {
         this.getBanList(org.bukkit.BanList.Type.IP).pardon(address);
     }
 
-    @Override
+    @SuppressWarnings("rawtypes")
+	@Override
     public Set<OfflinePlayer> getBannedPlayers() {
         Set<OfflinePlayer> result = new HashSet<OfflinePlayer>();
 
@@ -1435,7 +1466,8 @@ public final class CraftServer implements Server {
         console.getPropertyManager().setProperty("white-list", value);
     }
 
-    @Override
+    @SuppressWarnings("rawtypes")
+	@Override
     public Set<OfflinePlayer> getWhitelistedPlayers() {
         Set<OfflinePlayer> result = new LinkedHashSet<OfflinePlayer>();
 
@@ -1446,7 +1478,8 @@ public final class CraftServer implements Server {
         return result;
     }
 
-    @Override
+    @SuppressWarnings("rawtypes")
+	@Override
     public Set<OfflinePlayer> getOperators() {
         Set<OfflinePlayer> result = new HashSet<OfflinePlayer>();
 

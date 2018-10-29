@@ -53,7 +53,8 @@ public class PropertyManager {
         this.options = options;
     }
 
-    private <T> T getOverride(String name, T value) {
+    @SuppressWarnings("unchecked")
+	private <T> T getOverride(String name, T value) {
         if ((this.options != null) && (this.options.has(name)) && !name.equals( "online-mode")) { // Spigot
             return (T) this.options.valueOf(name);
         }

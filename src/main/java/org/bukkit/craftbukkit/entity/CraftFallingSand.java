@@ -1,13 +1,14 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityFallingBlock;
-
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingSand;
 
+import net.minecraft.server.EntityFallingBlock;
+
+@SuppressWarnings("deprecation")
 public class CraftFallingSand extends CraftEntity implements FallingSand {
 
     public CraftFallingSand(CraftServer server, EntityFallingBlock entity) {

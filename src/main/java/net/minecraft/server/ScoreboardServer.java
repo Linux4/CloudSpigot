@@ -132,8 +132,9 @@ public class ScoreboardServer extends Scoreboard {
 
     }
 
-    public List<Packet> getScoreboardScorePacketsForObjective(ScoreboardObjective scoreboardobjective) {
-        ArrayList arraylist = Lists.newArrayList();
+    @SuppressWarnings("rawtypes")
+	public List<Packet> getScoreboardScorePacketsForObjective(ScoreboardObjective scoreboardobjective) {
+        ArrayList<Packet> arraylist = Lists.newArrayList();
 
         arraylist.add(new PacketPlayOutScoreboardObjective(scoreboardobjective, 0));
 
@@ -143,7 +144,7 @@ public class ScoreboardServer extends Scoreboard {
             }
         }
 
-        Iterator iterator = this.getScoresForObjective(scoreboardobjective).iterator();
+        Iterator<ScoreboardScore> iterator = this.getScoresForObjective(scoreboardobjective).iterator();
 
         while (iterator.hasNext()) {
             ScoreboardScore scoreboardscore = (ScoreboardScore) iterator.next();
@@ -154,14 +155,15 @@ public class ScoreboardServer extends Scoreboard {
         return arraylist;
     }
 
-    public void e(ScoreboardObjective scoreboardobjective) {
-        List list = this.getScoreboardScorePacketsForObjective(scoreboardobjective);
-        Iterator iterator = this.a.getPlayerList().v().iterator();
+    @SuppressWarnings("rawtypes")
+	public void e(ScoreboardObjective scoreboardobjective) {
+        List<Packet> list = this.getScoreboardScorePacketsForObjective(scoreboardobjective);
+        Iterator<EntityPlayer> iterator = this.a.getPlayerList().v().iterator();
 
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
             if (entityplayer.getBukkitEntity().getScoreboard().getHandle() != this) continue; // CraftBukkit - Only players on this board
-            Iterator iterator1 = list.iterator();
+            Iterator<Packet> iterator1 = list.iterator();
 
             while (iterator1.hasNext()) {
                 Packet packet = (Packet) iterator1.next();
@@ -173,8 +175,9 @@ public class ScoreboardServer extends Scoreboard {
         this.b.add(scoreboardobjective);
     }
 
-    public List<Packet> f(ScoreboardObjective scoreboardobjective) {
-        ArrayList arraylist = Lists.newArrayList();
+    @SuppressWarnings("rawtypes")
+	public List<Packet> f(ScoreboardObjective scoreboardobjective) {
+        ArrayList<Packet> arraylist = Lists.newArrayList();
 
         arraylist.add(new PacketPlayOutScoreboardObjective(scoreboardobjective, 1));
 
@@ -187,14 +190,15 @@ public class ScoreboardServer extends Scoreboard {
         return arraylist;
     }
 
-    public void g(ScoreboardObjective scoreboardobjective) {
-        List list = this.f(scoreboardobjective);
-        Iterator iterator = this.a.getPlayerList().v().iterator();
+    @SuppressWarnings("rawtypes")
+	public void g(ScoreboardObjective scoreboardobjective) {
+        List<Packet> list = this.f(scoreboardobjective);
+        Iterator<EntityPlayer> iterator = this.a.getPlayerList().v().iterator();
 
         while (iterator.hasNext()) {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
             if (entityplayer.getBukkitEntity().getScoreboard().getHandle() != this) continue; // CraftBukkit - Only players on this board
-            Iterator iterator1 = list.iterator();
+            Iterator<Packet> iterator1 = list.iterator();
 
             while (iterator1.hasNext()) {
                 Packet packet = (Packet) iterator1.next();
@@ -219,7 +223,8 @@ public class ScoreboardServer extends Scoreboard {
     }
 
     // CraftBukkit start - Send to players
-    private void sendAll(Packet packet) {
+    @SuppressWarnings("rawtypes")
+	private void sendAll(Packet packet) {
         for (EntityPlayer entityplayer : (List<EntityPlayer>) this.a.getPlayerList().players) {
             if (entityplayer.getBukkitEntity().getScoreboard().getHandle() == this) {
                 entityplayer.playerConnection.sendPacket(packet);

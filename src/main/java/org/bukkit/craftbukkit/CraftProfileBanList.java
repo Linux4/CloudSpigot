@@ -65,7 +65,8 @@ public class CraftProfileBanList implements org.bukkit.BanList {
         return new CraftProfileBanEntry(profile, entry, list);
     }
 
-    @Override
+    @SuppressWarnings("rawtypes")
+	@Override
     public Set<org.bukkit.BanEntry> getBanEntries() {
         ImmutableSet.Builder<org.bukkit.BanEntry> builder = ImmutableSet.builder();
         

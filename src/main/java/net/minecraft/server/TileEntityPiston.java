@@ -57,11 +57,11 @@ public class TileEntityPiston extends TileEntity implements IUpdatePlayerListBox
         AxisAlignedBB axisalignedbb = Blocks.PISTON_EXTENSION.a(this.world, this.position, this.a, f, this.f);
 
         if (axisalignedbb != null) {
-            List list = this.world.getEntities((Entity) null, axisalignedbb);
+            List<Entity> list = this.world.getEntities((Entity) null, axisalignedbb);
 
             if (!list.isEmpty()) {
                 this.k.addAll(list);
-                Iterator iterator = this.k.iterator();
+                Iterator<Entity> iterator = this.k.iterator();
 
                 while (iterator.hasNext()) {
                     Entity entity = (Entity) iterator.next();

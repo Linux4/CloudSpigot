@@ -101,7 +101,8 @@ public final class ItemStack {
         return this.item;
     }
 
-    public boolean placeItem(EntityHuman entityhuman, World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2) {
+    @SuppressWarnings("unchecked")
+	public boolean placeItem(EntityHuman entityhuman, World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2) {
         // CraftBukkit start - handle all block place event logic here
         int data = this.getData();
         int count = this.count;
@@ -314,7 +315,8 @@ public final class ItemStack {
         return this.damage;
     }
 
-    public void setData(int i) {
+    @SuppressWarnings("deprecation")
+	public void setData(int i) {
         // CraftBukkit start - Filter out data for items that shouldn't have it
         // The crafting system uses this value for a special purpose so we have to allow it
         if (i == 32767) {
@@ -668,7 +670,8 @@ public final class ItemStack {
         this.tag.setInt("RepairCost", i);
     }
 
-    public Multimap<String, AttributeModifier> B() {
+    @SuppressWarnings({ "unchecked", "rawtypes"})
+	public Multimap<String, AttributeModifier> B() {
         Object object;
 
         if (this.hasTag() && this.tag.hasKeyOfType("AttributeModifiers", 9)) {
@@ -680,7 +683,7 @@ public final class ItemStack {
                 AttributeModifier attributemodifier = GenericAttributes.a(nbttagcompound);
 
                 if (attributemodifier != null && attributemodifier.a().getLeastSignificantBits() != 0L && attributemodifier.a().getMostSignificantBits() != 0L) {
-                    ((Multimap) object).put(nbttagcompound.getString("AttributeName"), attributemodifier);
+                    ((Map) object).put(nbttagcompound.getString("AttributeName"), attributemodifier);
                 }
             }
         } else {

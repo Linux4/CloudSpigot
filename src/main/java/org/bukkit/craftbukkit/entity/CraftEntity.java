@@ -1,20 +1,14 @@
 package org.bukkit.craftbukkit.entity;
 
-import com.google.common.base.Preconditions;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
-import net.minecraft.server.*;
 
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
@@ -25,7 +19,90 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.permissions.ServerOperator;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+
+import com.google.common.base.Preconditions;
+
 import eu.server24_7.cloudspigot.CloudSpigotConfig;
+import net.minecraft.server.Entity;
+import net.minecraft.server.EntityAmbient;
+import net.minecraft.server.EntityAnimal;
+import net.minecraft.server.EntityArmorStand;
+import net.minecraft.server.EntityArrow;
+import net.minecraft.server.EntityBat;
+import net.minecraft.server.EntityBlaze;
+import net.minecraft.server.EntityBoat;
+import net.minecraft.server.EntityCaveSpider;
+import net.minecraft.server.EntityChicken;
+import net.minecraft.server.EntityComplexPart;
+import net.minecraft.server.EntityCow;
+import net.minecraft.server.EntityCreature;
+import net.minecraft.server.EntityCreeper;
+import net.minecraft.server.EntityEgg;
+import net.minecraft.server.EntityEnderCrystal;
+import net.minecraft.server.EntityEnderDragon;
+import net.minecraft.server.EntityEnderPearl;
+import net.minecraft.server.EntityEnderSignal;
+import net.minecraft.server.EntityEnderman;
+import net.minecraft.server.EntityEndermite;
+import net.minecraft.server.EntityExperienceOrb;
+import net.minecraft.server.EntityFallingBlock;
+import net.minecraft.server.EntityFireball;
+import net.minecraft.server.EntityFireworks;
+import net.minecraft.server.EntityFishingHook;
+import net.minecraft.server.EntityFlying;
+import net.minecraft.server.EntityGhast;
+import net.minecraft.server.EntityGiantZombie;
+import net.minecraft.server.EntityGolem;
+import net.minecraft.server.EntityGuardian;
+import net.minecraft.server.EntityHanging;
+import net.minecraft.server.EntityHorse;
+import net.minecraft.server.EntityHuman;
+import net.minecraft.server.EntityIronGolem;
+import net.minecraft.server.EntityItem;
+import net.minecraft.server.EntityItemFrame;
+import net.minecraft.server.EntityLargeFireball;
+import net.minecraft.server.EntityLeash;
+import net.minecraft.server.EntityLightning;
+import net.minecraft.server.EntityLiving;
+import net.minecraft.server.EntityMagmaCube;
+import net.minecraft.server.EntityMinecartAbstract;
+import net.minecraft.server.EntityMinecartChest;
+import net.minecraft.server.EntityMinecartCommandBlock;
+import net.minecraft.server.EntityMinecartFurnace;
+import net.minecraft.server.EntityMinecartHopper;
+import net.minecraft.server.EntityMinecartMobSpawner;
+import net.minecraft.server.EntityMinecartRideable;
+import net.minecraft.server.EntityMinecartTNT;
+import net.minecraft.server.EntityMonster;
+import net.minecraft.server.EntityMushroomCow;
+import net.minecraft.server.EntityOcelot;
+import net.minecraft.server.EntityPainting;
+import net.minecraft.server.EntityPig;
+import net.minecraft.server.EntityPigZombie;
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.EntityPotion;
+import net.minecraft.server.EntityProjectile;
+import net.minecraft.server.EntityRabbit;
+import net.minecraft.server.EntitySheep;
+import net.minecraft.server.EntitySilverfish;
+import net.minecraft.server.EntitySkeleton;
+import net.minecraft.server.EntitySlime;
+import net.minecraft.server.EntitySmallFireball;
+import net.minecraft.server.EntitySnowball;
+import net.minecraft.server.EntitySnowman;
+import net.minecraft.server.EntitySpider;
+import net.minecraft.server.EntitySquid;
+import net.minecraft.server.EntityTNTPrimed;
+import net.minecraft.server.EntityTameableAnimal;
+import net.minecraft.server.EntityThrownExpBottle;
+import net.minecraft.server.EntityVillager;
+import net.minecraft.server.EntityWaterAnimal;
+import net.minecraft.server.EntityWeather;
+import net.minecraft.server.EntityWitch;
+import net.minecraft.server.EntityWither;
+import net.minecraft.server.EntityWitherSkull;
+import net.minecraft.server.EntityWolf;
+import net.minecraft.server.EntityZombie;
 
 public abstract class CraftEntity implements org.bukkit.entity.Entity {
     private static final PermissibleBase perm = new PermissibleBase(new ServerOperator() {
@@ -378,7 +455,8 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
         return entity;
     }
 
-    public void playEffect(EntityEffect type) {
+    @SuppressWarnings("deprecation")
+	public void playEffect(EntityEffect type) {
         this.getHandle().world.broadcastEntityEffect(getHandle(), type.getData());
     }
 
@@ -507,7 +585,8 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
         return perm.hasPermission(name);
     }
 
-    @Override
+    @SuppressWarnings("static-access")
+	@Override
     public boolean hasPermission(Permission perm) {
         return this.perm.hasPermission(perm);
     }

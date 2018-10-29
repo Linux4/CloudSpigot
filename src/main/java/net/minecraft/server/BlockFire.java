@@ -112,7 +112,8 @@ public class BlockFire extends Block {
         return 30;
     }
 
-    public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
+    @SuppressWarnings("deprecation")
+	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
         if (world.getGameRules().getBoolean("doFireTick")) {
             if (!this.canPlace(world, blockposition)) {
                 fireExtinguished(world, blockposition); // CraftBukkit - invalid place location

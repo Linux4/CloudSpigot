@@ -1,20 +1,17 @@
 package co.aikar.util;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 /**
  * Provides Utility methods that assist with generating JSON Objects
  */
-@SuppressWarnings({"rawtypes", "SuppressionAnnotation"})
+@SuppressWarnings({"rawtypes"})
 public final class JSONUtil {
     private JSONUtil() {}
 
@@ -47,7 +44,8 @@ public final class JSONUtil {
      * @param data
      * @return
      */
-    public static Map appendObjectData(Map parent, JSONPair... data) {
+    @SuppressWarnings("unchecked")
+	public static Map appendObjectData(Map parent, JSONPair... data) {
         for (JSONPair JSONPair : data) {
             parent.put(JSONPair.key, JSONPair.val);
         }
@@ -74,7 +72,8 @@ public final class JSONUtil {
         return toArrayMapper(Lists.newArrayList(collection), mapper);
     }
 
-    public static <E> List toArrayMapper(Iterable<E> collection, Function<E, Object> mapper) {
+    @SuppressWarnings("unchecked")
+	public static <E> List toArrayMapper(Iterable<E> collection, Function<E, Object> mapper) {
         List array = Lists.newArrayList();
         for (E e : collection) {
             Object object = mapper.apply(e);
@@ -96,7 +95,8 @@ public final class JSONUtil {
         return toObjectMapper(Lists.newArrayList(collection), mapper);
     }
 
-    public static <E> Map toObjectMapper(Iterable<E> collection, Function<E, JSONPair> mapper) {
+    @SuppressWarnings("unchecked")
+	public static <E> Map toObjectMapper(Iterable<E> collection, Function<E, JSONPair> mapper) {
         Map object = Maps.newLinkedHashMap();
         for (E e : collection) {
             JSONPair JSONPair = mapper.apply(e);
@@ -110,7 +110,6 @@ public final class JSONUtil {
     /**
      * Simply stores a key and a value, used internally by many methods below.
      */
-    @SuppressWarnings("PublicInnerClass")
     public static class JSONPair {
         final String key;
         final Object val;

@@ -419,7 +419,8 @@ public interface World extends PluginMessageRecipient, Metadatable {
      * @return A List of all Entities currently residing in this world that
      *     match the given class/interface
      */
-    @Deprecated
+    @SuppressWarnings("unchecked")
+	@Deprecated
     public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes);
 
     /**

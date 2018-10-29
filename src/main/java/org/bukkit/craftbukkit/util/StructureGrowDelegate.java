@@ -24,7 +24,8 @@ public class StructureGrowDelegate implements BlockChangeDelegate {
         return setRawTypeIdAndData(x, y, z, type, 0);
     }
 
-    public boolean setRawTypeIdAndData(int x, int y, int z, int type, int data) {
+    @SuppressWarnings("deprecation")
+	public boolean setRawTypeIdAndData(int x, int y, int z, int type, int data) {
         BlockState state = world.getBlockAt(x, y, z).getState();
         state.setTypeId(type);
         state.setData(new MaterialData(type, (byte) data));
@@ -40,7 +41,8 @@ public class StructureGrowDelegate implements BlockChangeDelegate {
         return setRawTypeIdAndData(x, y, z, typeId, data);
     }
 
-    public int getTypeId(int x, int y, int z) {
+    @SuppressWarnings("deprecation")
+	public int getTypeId(int x, int y, int z) {
         for (BlockState state : blocks) {
             if (state.getX() == x && state.getY() == y && state.getZ() == z) {
                 return state.getTypeId();
@@ -58,7 +60,8 @@ public class StructureGrowDelegate implements BlockChangeDelegate {
         return blocks;
     }
 
-    public boolean isEmpty(int x, int y, int z) {
+    @SuppressWarnings("deprecation")
+	public boolean isEmpty(int x, int y, int z) {
         for (BlockState state : blocks) {
             if (state.getX() == x && state.getY() == y && state.getZ() == z) {
                 return Block.getById(state.getTypeId()) == Blocks.AIR;

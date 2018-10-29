@@ -8,6 +8,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Thrown when a command throws an exception
  */
+@SuppressWarnings("serial")
 public class ServerCommandException extends ServerException {
 
     private final Command command;

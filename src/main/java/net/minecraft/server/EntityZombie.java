@@ -4,8 +4,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-//CraftBukkit start
-import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityCombustByEntityEvent;
 import org.bukkit.event.entity.EntityCombustEvent;
@@ -37,14 +35,15 @@ public class EntityZombie extends EntityMonster {
         this.setSize(0.6F, 1.95F);
     }
 
-    protected void n() {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	protected void n() {
         if ( world.spigotConfig.zombieAggressiveTowardsVillager ) this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityVillager.class, 1.0D, true)); // Spigot
         this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityIronGolem.class, 1.0D, true));
         this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D, false));
         this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true, new Class[] { EntityPigZombie.class}));
-        this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityHuman.class, true));
+        this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget<EntityHuman>(this, EntityHuman.class, true));
         if ( world.spigotConfig.zombieAggressiveTowardsVillager ) this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityVillager.class, false)); // Spigot
-        this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityIronGolem.class, true));
+        this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget<EntityIronGolem>(this, EntityIronGolem.class, true));
     }
 
     protected void initAttributes() {
@@ -390,7 +389,7 @@ public class EntityZombie extends EntityMonster {
             if (entityzombie_groupdatazombie.a) {
                 this.setBaby(true);
                 if ((double) this.world.random.nextFloat() < 0.05D) {
-                    List list = this.world.a(EntityChicken.class, this.getBoundingBox().grow(5.0D, 3.0D, 5.0D), IEntitySelector.b);
+                    List<EntityChicken> list = this.world.a(EntityChicken.class, this.getBoundingBox().grow(5.0D, 3.0D, 5.0D), IEntitySelector.b);
 
                     if (!list.isEmpty()) {
                         EntityChicken entitychicken = (EntityChicken) list.get(0);

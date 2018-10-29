@@ -8,7 +8,8 @@ public class EntityOcelot extends EntityTameableAnimal {
     private PathfinderGoalTempt bp;
     public boolean spawnBonus = true; // Spigot
 
-    public EntityOcelot(World world) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public EntityOcelot(World world) {
         super(world);
         this.setSize(0.6F, 0.7F);
         ((Navigation) this.getNavigation()).a(true);
@@ -219,7 +220,7 @@ public class EntityOcelot extends EntityTameableAnimal {
 
     protected void cm() {
         if (this.bo == null) {
-            this.bo = new PathfinderGoalAvoidTarget(this, EntityHuman.class, 16.0F, 0.8D, 1.33D);
+            this.bo = new PathfinderGoalAvoidTarget<EntityHuman>(this, EntityHuman.class, 16.0F, 0.8D, 1.33D);
         }
 
         this.goalSelector.a((PathfinderGoal) this.bo);

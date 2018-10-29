@@ -58,7 +58,7 @@ public abstract class EntityHuman extends EntityLiving {
     protected float bF = 0.02F;
     private int i;
     private final GameProfile bH;
-    private boolean bI = false;
+    //private boolean bI = false; // CloudSpigot
     public EntityFishingHook hookedFish;
     public boolean affectsSpawning = true; // CloudSpigot
 
@@ -228,7 +228,7 @@ public abstract class EntityHuman extends EntityLiving {
             }
         }
 
-        int i = 29999999;
+        //int i = 29999999; // CloudSpigot
         double d4 = MathHelper.a(this.locX, -2.9999999E7D, 2.9999999E7D);
         double d5 = MathHelper.a(this.locZ, -2.9999999E7D, 2.9999999E7D);
 
@@ -287,7 +287,8 @@ public abstract class EntityHuman extends EntityLiving {
 
     }
 
-    protected void s() {
+    @SuppressWarnings("deprecation")
+	protected void s() {
         if (this.g != null) {
             this.b(this.g, 16);
             int i = this.g.count;
@@ -430,7 +431,7 @@ public abstract class EntityHuman extends EntityLiving {
                 axisalignedbb = this.getBoundingBox().grow(1.0D, 0.5D, 1.0D);
             }
 
-            List list = this.world.getEntities(this, axisalignedbb);
+            List<Entity> list = this.world.getEntities(this, axisalignedbb);
 
             if (this.ae()) { // Spigot: Add this.ae() condition (second !this.isDead near bottom of EntityLiving)
             for (int i = 0; i < list.size(); ++i) {
@@ -495,7 +496,8 @@ public abstract class EntityHuman extends EntityLiving {
         return "game.player.die";
     }
 
-    public void b(Entity entity, int i) {
+    @SuppressWarnings("unchecked")
+	public void b(Entity entity, int i) {
         this.addScore(i);
         // CraftBukkit - Get our scores instead
         Collection<ScoreboardScore> collection = this.world.getServer().getScoreboardManager().getScoreboardScores(IScoreboardCriteria.f, this.getName(), new java.util.ArrayList<ScoreboardScore>());
@@ -509,7 +511,7 @@ public abstract class EntityHuman extends EntityLiving {
             this.b(StatisticList.z);
         }
 
-        Iterator iterator = collection.iterator();
+        Iterator<ScoreboardScore> iterator = collection.iterator();
 
         while (iterator.hasNext()) {
             ScoreboardScore scoreboardscore = (ScoreboardScore) iterator.next(); // CraftBukkit - Use our scores instead
@@ -519,14 +521,15 @@ public abstract class EntityHuman extends EntityLiving {
 
     }
 
-    private Collection e(Entity entity) { // CraftBukkit - TODO: Check me?
+    @SuppressWarnings("rawtypes")
+	private Collection e(Entity entity) { // CraftBukkit - TODO: Check me?
         ScoreboardTeam scoreboardteam = this.getScoreboard().getPlayerTeam(this.getName());
 
         if (scoreboardteam != null) {
             int i = scoreboardteam.l().b();
 
             if (i >= 0 && i < IScoreboardCriteria.i.length) {
-                Iterator iterator = this.getScoreboard().getObjectivesForCriteria(IScoreboardCriteria.i[i]).iterator();
+                Iterator<ScoreboardObjective> iterator = this.getScoreboard().getObjectivesForCriteria(IScoreboardCriteria.i[i]).iterator();
 
                 while (iterator.hasNext()) {
                     ScoreboardObjective scoreboardobjective = (ScoreboardObjective) iterator.next();
@@ -789,9 +792,9 @@ public abstract class EntityHuman extends EntityLiving {
                     }
                 }
 
-                if (false && f == 0.0F) { // CraftBukkit - Don't filter out 0 damage
+                /*if (false && f == 0.0F) { // CraftBukkit - Don't filter out 0 damage
                     return false;
-                } else {
+                } else {*/ // CloudSpigot
                     Entity entity = damagesource.getEntity();
 
                     if (entity instanceof EntityArrow && ((EntityArrow) entity).shooter != null) {
@@ -799,12 +802,13 @@ public abstract class EntityHuman extends EntityLiving {
                     }
 
                     return super.damageEntity(damagesource, f);
-                }
+                //} // CloudSpigot
             }
         }
     }
 
-    public boolean a(EntityHuman entityhuman) {
+    @SuppressWarnings("deprecation")
+	public boolean a(EntityHuman entityhuman) {
         // CraftBukkit start - Change to check OTHER player's scoreboard team according to API
         // To summarize this method's logic, it's "Can parameter hurt this"
         org.bukkit.scoreboard.Team team;
@@ -1136,7 +1140,7 @@ public abstract class EntityHuman extends EntityLiving {
 
             double d0 = 8.0D;
             double d1 = 5.0D;
-            List list = this.world.a(EntityMonster.class, new AxisAlignedBB((double) blockposition.getX() - d0, (double) blockposition.getY() - d1, (double) blockposition.getZ() - d0, (double) blockposition.getX() + d0, (double) blockposition.getY() + d1, (double) blockposition.getZ() + d0));
+            List<EntityMonster> list = this.world.a(EntityMonster.class, new AxisAlignedBB((double) blockposition.getX() - d0, (double) blockposition.getY() - d1, (double) blockposition.getZ() - d0, (double) blockposition.getX() + d0, (double) blockposition.getY() + d1, (double) blockposition.getZ() + d0));
 
             if (!list.isEmpty()) {
                 return EntityHuman.EnumBedResult.NOT_SAFE;

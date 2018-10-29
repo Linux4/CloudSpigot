@@ -86,7 +86,7 @@ public class RecipeFireworks extends ShapelessRecipes implements IRecipe { // Cr
                 nbttagcompound = new NBTTagCompound();
                 nbttagcompound1 = new NBTTagCompound();
                 byte b0 = 0;
-                ArrayList arraylist = Lists.newArrayList();
+                ArrayList<Integer> arraylist = Lists.newArrayList();
 
                 for (int i2 = 0; i2 < inventorycrafting.getSize(); ++i2) {
                     ItemStack itemstack2 = inventorycrafting.getItem(i2);
@@ -122,7 +122,7 @@ public class RecipeFireworks extends ShapelessRecipes implements IRecipe { // Cr
                 this.a.setTag(nbttagcompound);
                 return true;
             } else if (j == 0 && i == 0 && l == 1 && k > 0 && k == i1) {
-                ArrayList arraylist1 = Lists.newArrayList();
+                ArrayList<Integer> arraylist1 = Lists.newArrayList();
 
                 for (int k2 = 0; k2 < inventorycrafting.getSize(); ++k2) {
                     ItemStack itemstack3 = inventorycrafting.getItem(k2);

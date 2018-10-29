@@ -9,6 +9,8 @@ import org.bukkit.block.BlockState;
 import org.bukkit.event.block.BlockSpreadEvent;
 // CraftBukkit end
 
+import net.minecraft.server.BlockPosition.MutableBlockPosition;
+
 public class BlockMushroom extends BlockPlant implements IBlockFragilePlantElement {
 
     protected BlockMushroom() {
@@ -23,7 +25,7 @@ public class BlockMushroom extends BlockPlant implements IBlockFragilePlantEleme
         if (random.nextInt(Math.max(1, (int) world.growthOdds / world.spigotConfig.mushroomModifier * 25)) == 0) { // Spigot            int i = 5;
             int i = 5;
             //boolean flag = true; // CloudSpigot
-            Iterator iterator = BlockPosition.b(blockposition.a(-4, -1, -4), blockposition.a(4, 1, 4)).iterator();
+            Iterator<MutableBlockPosition> iterator = BlockPosition.b(blockposition.a(-4, -1, -4), blockposition.a(4, 1, 4)).iterator();
 
             while (iterator.hasNext()) {
                 BlockPosition blockposition1 = (BlockPosition) iterator.next();

@@ -55,7 +55,8 @@ public class FlowerPot extends MaterialData {
      * @return material MaterialData for the block currently in the flower pot
      *     or null if empty
      */
-    public MaterialData getContents() {
+    @SuppressWarnings("deprecation")
+	public MaterialData getContents() {
         switch (getData()) {
             case 1:
                 return new MaterialData(Material.RED_ROSE);
@@ -89,7 +90,8 @@ public class FlowerPot extends MaterialData {
      *
      * @param materialData MaterialData of the block to put in the flower pot.
      */
-    public void setContents(MaterialData materialData) {
+    @SuppressWarnings("deprecation")
+	public void setContents(MaterialData materialData) {
         Material mat = materialData.getItemType();
 
         if (mat == Material.RED_ROSE) {

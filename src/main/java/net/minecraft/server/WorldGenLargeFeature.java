@@ -24,10 +24,10 @@ public class WorldGenLargeFeature extends StructureGenerator {
 
     public WorldGenLargeFeature(Map<String, String> map) {
         this();
-        Iterator iterator = map.entrySet().iterator();
+        Iterator<Entry<String, String>> iterator = map.entrySet().iterator();
 
         while (iterator.hasNext()) {
-            Entry entry = (Entry) iterator.next();
+            Entry<String, String> entry = iterator.next();
 
             if (((String) entry.getKey()).equals("distance")) {
                 this.g = MathHelper.a((String) entry.getValue(), this.g, this.h + 1);
@@ -67,7 +67,7 @@ public class WorldGenLargeFeature extends StructureGenerator {
                 return false;
             }
 
-            Iterator iterator = WorldGenLargeFeature.d.iterator();
+            Iterator<BiomeBase> iterator = WorldGenLargeFeature.d.iterator();
 
             while (iterator.hasNext()) {
                 BiomeBase biomebase1 = (BiomeBase) iterator.next();

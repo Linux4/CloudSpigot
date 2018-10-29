@@ -142,7 +142,8 @@ public final class CraftScoreboard implements org.bukkit.scoreboard.Scoreboard {
         return new CraftTeam(this, board.createTeam(name));
     }
 
-    public ImmutableSet<OfflinePlayer> getPlayers() {
+    @SuppressWarnings("deprecation")
+	public ImmutableSet<OfflinePlayer> getPlayers() {
         ImmutableSet.Builder<OfflinePlayer> players = ImmutableSet.builder();
         for (Object playerName : board.getPlayers()) {
             players.add(Bukkit.getOfflinePlayer(playerName.toString()));

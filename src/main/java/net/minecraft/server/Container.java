@@ -62,7 +62,7 @@ public abstract class Container {
     }
 
     public List<ItemStack> a() {
-        ArrayList arraylist = Lists.newArrayList();
+        ArrayList<ItemStack> arraylist = Lists.newArrayList();
 
         for (int i = 0; i < this.c.size(); ++i) {
             arraylist.add(((Slot) this.c.get(i)).getItem());
@@ -147,7 +147,7 @@ public abstract class Container {
                 if (!this.h.isEmpty()) {
                     itemstack1 = playerinventory.getCarried().cloneItemStack();
                     l = playerinventory.getCarried().count;
-                    Iterator iterator = this.h.iterator();
+                    Iterator<Slot> iterator = this.h.iterator();
 
                     Map<Integer, ItemStack> draggedSlots = new HashMap<Integer, ItemStack>(); // CraftBukkit - Store slots from drag in map (raw slot id -> new stack)
                     while (iterator.hasNext()) {

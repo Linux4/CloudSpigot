@@ -2,6 +2,7 @@ package org.spigotmc;
 
 import gnu.trove.strategy.HashingStrategy;
 
+@SuppressWarnings({ "serial", "rawtypes" })
 class CaseInsensitiveHashingStrategy implements HashingStrategy {
 
     static final CaseInsensitiveHashingStrategy INSTANCE = new CaseInsensitiveHashingStrategy();

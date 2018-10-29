@@ -74,7 +74,8 @@ public class ShapedRecipe implements Recipe {
      * @param ingredient The ingredient.
      * @return The changed recipe, so you can chain calls.
      */
-    public ShapedRecipe setIngredient(char key, MaterialData ingredient) {
+    @SuppressWarnings("deprecation")
+	public ShapedRecipe setIngredient(char key, MaterialData ingredient) {
         return setIngredient(key, ingredient.getItemType(), ingredient.getData());
     }
 

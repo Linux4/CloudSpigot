@@ -5,12 +5,12 @@ import java.util.List;
 
 public class BlockHopper extends BlockContainer {
 
-    public static final BlockStateDirection FACING = BlockStateDirection.of("facing", new Predicate() {
+    public static final BlockStateDirection FACING = BlockStateDirection.of("facing", new Predicate<EnumDirection>() {
         public boolean a(EnumDirection enumdirection) {
             return enumdirection != EnumDirection.UP;
         }
 
-        public boolean apply(Object object) {
+        public boolean apply(EnumDirection object) {
             return this.a((EnumDirection) object);
         }
     });

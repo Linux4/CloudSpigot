@@ -171,7 +171,7 @@ public class ContainerEnchantTable extends Container {
 
                     for (j = 0; j < 3; ++j) {
                         if (this.costs[j] > 0) {
-                            List list = this.a(itemstack, j, this.costs[j]);
+                            List<WeightedRandomEnchant> list = this.a(itemstack, j, this.costs[j]);
 
                             if (list != null && !list.isEmpty()) {
                                 WeightedRandomEnchant weightedrandomenchant = (WeightedRandomEnchant) list.get(this.k.nextInt(list.size()));
@@ -193,7 +193,8 @@ public class ContainerEnchantTable extends Container {
 
     }
 
-    public boolean a(EntityHuman entityhuman, int i) {
+    @SuppressWarnings("deprecation")
+	public boolean a(EntityHuman entityhuman, int i) {
         ItemStack itemstack = this.enchantSlots.getItem(0);
         ItemStack itemstack1 = this.enchantSlots.getItem(1);
         int j = i + 1;
@@ -202,7 +203,7 @@ public class ContainerEnchantTable extends Container {
             return false;
         } else if (this.costs[i] > 0 && itemstack != null && (entityhuman.expLevel >= j && entityhuman.expLevel >= this.costs[i] || entityhuman.abilities.canInstantlyBuild)) {
             if (!this.world.isClientSide) {
-                List list = this.a(itemstack, i, this.costs[i]);
+                List<WeightedRandomEnchant> list = this.a(itemstack, i, this.costs[i]);
                 // CraftBukkit start - Provide an empty enchantment list
                 if (list == null) {
                     list = new java.util.ArrayList<WeightedRandomEnchant>();
@@ -274,7 +275,7 @@ public class ContainerEnchantTable extends Container {
 
     private List<WeightedRandomEnchant> a(ItemStack itemstack, int i, int j) {
         this.k.setSeed((long) (this.f + i));
-        List list = EnchantmentManager.b(this.k, itemstack, j);
+        List<WeightedRandomEnchant> list = EnchantmentManager.b(this.k, itemstack, j);
 
         if (itemstack.getItem() == Items.BOOK && list != null && list.size() > 1) {
             list.remove(this.k.nextInt(list.size()));

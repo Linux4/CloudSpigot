@@ -9,12 +9,12 @@ import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
 public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
 
     public static final BlockStateInteger AGE = BlockStateInteger.of("age", 0, 7);
-    public static final BlockStateDirection FACING = BlockStateDirection.of("facing", new Predicate() {
+    public static final BlockStateDirection FACING = BlockStateDirection.of("facing", new Predicate<EnumDirection>() {
         public boolean a(EnumDirection enumdirection) {
             return enumdirection != EnumDirection.DOWN;
         }
 
-        public boolean apply(Object object) {
+        public boolean apply(EnumDirection object) {
             return this.a((EnumDirection) object);
         }
     });
@@ -32,7 +32,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
 
     public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         iblockdata = iblockdata.set(BlockStem.FACING, EnumDirection.UP);
-        Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+        Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
         while (iterator.hasNext()) {
             EnumDirection enumdirection = (EnumDirection) iterator.next();
@@ -63,7 +63,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
                     // world.setTypeAndData(blockposition, iblockdata, 2); // CraftBukkit
                     CraftEventFactory.handleBlockGrowEvent(world, blockposition.getX(), blockposition.getY(), blockposition.getZ(), this, toLegacyData(iblockdata)); // CraftBukkit
                 } else {
-                    Iterator iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
+                    Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
                     while (iterator.hasNext()) {
                         EnumDirection enumdirection = (EnumDirection) iterator.next();

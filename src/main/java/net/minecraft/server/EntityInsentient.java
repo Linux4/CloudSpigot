@@ -339,8 +339,8 @@ public abstract class EntityInsentient extends EntityLiving {
         super.m();
         //this.world.methodProfiler.a("looting"); // CloudSpigot
         if (!this.world.isClientSide && this.bY() && !this.aP && this.world.getGameRules().getBoolean("mobGriefing")) {
-            List list = this.world.a(EntityItem.class, this.getBoundingBox().grow(1.0D, 0.0D, 1.0D));
-            Iterator iterator = list.iterator();
+            List<EntityItem> list = this.world.a(EntityItem.class, this.getBoundingBox().grow(1.0D, 0.0D, 1.0D));
+            Iterator<EntityItem> iterator = list.iterator();
 
             while (iterator.hasNext()) {
                 EntityItem entityitem = (EntityItem) iterator.next();
@@ -841,7 +841,8 @@ public abstract class EntityInsentient extends EntityLiving {
         }
     }
 
-    public void unleash(boolean flag, boolean flag1) {
+    @SuppressWarnings("rawtypes")
+	public void unleash(boolean flag, boolean flag1) {
         if (this.bo) {
             this.bo = false;
             this.bp = null;
@@ -868,7 +869,8 @@ public abstract class EntityInsentient extends EntityLiving {
         return this.bp;
     }
 
-    public void setLeashHolder(Entity entity, boolean flag) {
+    @SuppressWarnings("rawtypes")
+	public void setLeashHolder(Entity entity, boolean flag) {
         this.bo = true;
         this.bp = entity;
         if (!this.world.isClientSide && flag && this.world instanceof WorldServer) {
@@ -881,8 +883,8 @@ public abstract class EntityInsentient extends EntityLiving {
         if (this.bo && this.bq != null) {
             if (this.bq.hasKeyOfType("UUIDMost", 4) && this.bq.hasKeyOfType("UUIDLeast", 4)) {
                 UUID uuid = new UUID(this.bq.getLong("UUIDMost"), this.bq.getLong("UUIDLeast"));
-                List list = this.world.a(EntityLiving.class, this.getBoundingBox().grow(10.0D, 10.0D, 10.0D));
-                Iterator iterator = list.iterator();
+                List<EntityLiving> list = this.world.a(EntityLiving.class, this.getBoundingBox().grow(10.0D, 10.0D, 10.0D));
+                Iterator<EntityLiving> iterator = list.iterator();
 
                 while (iterator.hasNext()) {
                     EntityLiving entityliving = (EntityLiving) iterator.next();

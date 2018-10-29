@@ -54,7 +54,8 @@ public class Sandstone extends MaterialData {
      *
      * @return SandstoneType of this sandstone
      */
-    public SandstoneType getType() {
+    @SuppressWarnings("deprecation")
+	public SandstoneType getType() {
         return SandstoneType.getByData(getData());
     }
 
@@ -63,7 +64,8 @@ public class Sandstone extends MaterialData {
      *
      * @param type New type of this sandstone
      */
-    public void setType(SandstoneType type) {
+    @SuppressWarnings("deprecation")
+	public void setType(SandstoneType type) {
         setData(type.getData());
     }
 

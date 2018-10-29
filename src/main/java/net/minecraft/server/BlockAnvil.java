@@ -4,7 +4,8 @@ import com.google.common.base.Predicate;
 
 public class BlockAnvil extends BlockFalling {
 
-    public static final BlockStateDirection FACING = BlockStateDirection.of("facing", (Predicate) EnumDirection.EnumDirectionLimit.HORIZONTAL);
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public static final BlockStateDirection FACING = BlockStateDirection.of("facing", (Predicate) EnumDirection.EnumDirectionLimit.HORIZONTAL);
     public static final BlockStateInteger DAMAGE = BlockStateInteger.of("damage", 0, 2);
 
     protected BlockAnvil() {

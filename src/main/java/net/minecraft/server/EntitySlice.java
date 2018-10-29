@@ -19,11 +19,12 @@ public class EntitySlice<T> extends AbstractSet<T> {
     private final Class<T> d;
     private final List<T> e = Lists.newArrayList();
 
-    public EntitySlice(Class<T> oclass) {
+    @SuppressWarnings("rawtypes")
+	public EntitySlice(Class<T> oclass) {
         this.d = oclass;
         this.c.add(oclass);
         this.b.put(oclass, this.e);
-        Iterator iterator = EntitySlice.a.iterator();
+        Iterator<Class<?>> iterator = EntitySlice.a.iterator();
 
         while (iterator.hasNext()) {
             Class oclass1 = (Class) iterator.next();
@@ -33,9 +34,10 @@ public class EntitySlice<T> extends AbstractSet<T> {
 
     }
 
-    protected void a(Class<?> oclass) {
+    @SuppressWarnings("unchecked")
+	protected void a(Class<?> oclass) {
         EntitySlice.a.add(oclass);
-        Iterator iterator = this.e.iterator();
+        Iterator<T> iterator = this.e.iterator();
 
         while (iterator.hasNext()) {
             Object object = iterator.next();
@@ -60,8 +62,9 @@ public class EntitySlice<T> extends AbstractSet<T> {
         }
     }
 
-    public boolean add(T t0) {
-        Iterator iterator = this.c.iterator();
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public boolean add(T t0) {
+        Iterator<Class<?>> iterator = this.c.iterator();
 
         while (iterator.hasNext()) {
             Class oclass = (Class) iterator.next();
@@ -74,8 +77,9 @@ public class EntitySlice<T> extends AbstractSet<T> {
         return true;
     }
 
-    private void a(T t0, Class<?> oclass) {
-        List list = (List) this.b.get(oclass);
+    @SuppressWarnings("unchecked")
+	private void a(T t0, Class<?> oclass) {
+        List<T> list = (List<T>) this.b.get(oclass);
 
         if (list == null) {
             this.b.put(oclass, Lists.newArrayList(t0));
@@ -85,10 +89,11 @@ public class EntitySlice<T> extends AbstractSet<T> {
 
     }
 
-    public boolean remove(Object object) {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public boolean remove(Object object) {
         Object object1 = object;
         boolean flag = false;
-        Iterator iterator = this.c.iterator();
+        Iterator<Class<?>> iterator = this.c.iterator();
 
         while (iterator.hasNext()) {
             Class oclass = (Class) iterator.next();
@@ -110,8 +115,9 @@ public class EntitySlice<T> extends AbstractSet<T> {
     }
 
     public <S> Iterable<S> c(final Class<S> oclass) {
-        return new Iterable() {
-            public Iterator<S> iterator() {
+        return new Iterable<S>() {
+            @SuppressWarnings("rawtypes")
+			public Iterator<S> iterator() {
                 List list = (List) EntitySlice.this.b.get(EntitySlice.this.b(oclass));
 
                 if (list == null) {

@@ -44,11 +44,13 @@ public class TrapDoor extends SimpleAttachableMaterialData implements Openable {
         super(type, data);
     }
 
-    public boolean isOpen() {
+    @SuppressWarnings("deprecation")
+	public boolean isOpen() {
         return ((getData() & 0x4) == 0x4);
     }
 
-    public void setOpen(boolean isOpen) {
+    @SuppressWarnings("deprecation")
+	public void setOpen(boolean isOpen) {
         byte data = getData();
 
         if (isOpen) {
@@ -65,7 +67,8 @@ public class TrapDoor extends SimpleAttachableMaterialData implements Openable {
      *
      * @return true if inverted (top half), false if normal (bottom half)
      */
-    public boolean isInverted() {
+    @SuppressWarnings("deprecation")
+	public boolean isInverted() {
         return ((getData() & 0x8) != 0);
     }
 
@@ -74,7 +77,8 @@ public class TrapDoor extends SimpleAttachableMaterialData implements Openable {
      *
      * @param inv - true if inverted (top half), false if normal (bottom half)
      */
-    public void setInverted(boolean inv) {
+    @SuppressWarnings("deprecation")
+	public void setInverted(boolean inv) {
         int dat = getData() & 0x7;
         if (inv) {
             dat |= 0x8;
@@ -82,7 +86,8 @@ public class TrapDoor extends SimpleAttachableMaterialData implements Openable {
         setData((byte) dat);
     }
 
-    public BlockFace getAttachedFace() {
+    @SuppressWarnings("deprecation")
+	public BlockFace getAttachedFace() {
         byte data = (byte) (getData() & 0x3);
 
         switch (data) {
@@ -103,7 +108,8 @@ public class TrapDoor extends SimpleAttachableMaterialData implements Openable {
 
     }
 
-    public void setFacingDirection(BlockFace face) {
+    @SuppressWarnings({ "deprecation", "incomplete-switch" })
+	public void setFacingDirection(BlockFace face) {
         byte data = (byte) (getData() & 0xC);
 
         switch (face) {

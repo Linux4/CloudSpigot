@@ -14,9 +14,9 @@ public class EntityLeash extends EntityHanging {
     public EntityLeash(World world, BlockPosition blockposition) {
         super(world, blockposition);
         this.setPosition((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D);
-        float f = 0.125F;
+        /*float f = 0.125F;
         float f1 = 0.1875F;
-        float f2 = 0.25F;
+        float f2 = 0.25F;*/ // CloudSpigot
 
         this.a(new AxisAlignedBB(this.locX - 0.1875D, this.locY - 0.25D + 0.125D, this.locZ - 0.1875D, this.locX + 0.1875D, this.locY + 0.25D + 0.125D, this.locZ + 0.1875D));
     }
@@ -53,8 +53,8 @@ public class EntityLeash extends EntityHanging {
         ItemStack itemstack = entityhuman.bA();
         boolean flag = false;
         double d0;
-        List list;
-        Iterator iterator;
+        List<EntityInsentient> list;
+        Iterator<EntityInsentient> iterator;
         EntityInsentient entityinsentient;
 
         if (itemstack != null && itemstack.getItem() == Items.LEAD && !this.world.isClientSide) {
@@ -82,7 +82,7 @@ public class EntityLeash extends EntityHanging {
             // this.die();
             boolean die = true;
             // CraftBukkit end
-            if (true || entityhuman.abilities.canInstantlyBuild) { // CraftBukkit - Process for non-creative as well
+            if (true) { // CraftBukkit - Process for non-creative as well // CloudSpigot
                 d0 = 7.0D;
                 list = this.world.a(EntityInsentient.class, new AxisAlignedBB(this.locX - d0, this.locY - d0, this.locZ - d0, this.locX + d0, this.locY + d0, this.locZ + d0));
                 iterator = list.iterator();
@@ -126,8 +126,8 @@ public class EntityLeash extends EntityHanging {
         int i = blockposition.getX();
         int j = blockposition.getY();
         int k = blockposition.getZ();
-        List list = world.a(EntityLeash.class, new AxisAlignedBB((double) i - 1.0D, (double) j - 1.0D, (double) k - 1.0D, (double) i + 1.0D, (double) j + 1.0D, (double) k + 1.0D));
-        Iterator iterator = list.iterator();
+        List<EntityLeash> list = world.a(EntityLeash.class, new AxisAlignedBB((double) i - 1.0D, (double) j - 1.0D, (double) k - 1.0D, (double) i + 1.0D, (double) j + 1.0D, (double) k + 1.0D));
+        Iterator<EntityLeash> iterator = list.iterator();
 
         EntityLeash entityleash;
 

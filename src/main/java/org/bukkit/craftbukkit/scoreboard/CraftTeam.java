@@ -22,13 +22,13 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     public String getName() throws IllegalStateException {
-        CraftScoreboard scoreboard = checkState(); // CloudSpigot
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         return team.getName();
     }
 
     public String getDisplayName() throws IllegalStateException {
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         return team.getDisplayName();
     }
@@ -36,13 +36,13 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     public void setDisplayName(String displayName) throws IllegalStateException {
         Validate.notNull(displayName, "Display name cannot be null");
         Validate.isTrue(displayName.length() <= 32, "Display name '" + displayName + "' is longer than the limit of 32 characters");
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         team.setDisplayName(displayName);
     }
 
     public String getPrefix() throws IllegalStateException {
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         return team.getPrefix();
     }
@@ -50,13 +50,13 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     public void setPrefix(String prefix) throws IllegalStateException, IllegalArgumentException {
         Validate.notNull(prefix, "Prefix cannot be null");
         Validate.isTrue(prefix.length() <= 32, "Prefix '" + prefix + "' is longer than the limit of 32 characters");
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         team.setPrefix(prefix);
     }
 
     public String getSuffix() throws IllegalStateException {
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         return team.getSuffix();
     }
@@ -64,49 +64,50 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     public void setSuffix(String suffix) throws IllegalStateException, IllegalArgumentException {
         Validate.notNull(suffix, "Suffix cannot be null");
         Validate.isTrue(suffix.length() <= 32, "Suffix '" + suffix + "' is longer than the limit of 32 characters");
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         team.setSuffix(suffix);
     }
 
     public boolean allowFriendlyFire() throws IllegalStateException {
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         return team.allowFriendlyFire();
     }
 
     public void setAllowFriendlyFire(boolean enabled) throws IllegalStateException {
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         team.setAllowFriendlyFire(enabled);
     }
 
     public boolean canSeeFriendlyInvisibles() throws IllegalStateException {
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         return team.canSeeFriendlyInvisibles();
     }
 
     public void setCanSeeFriendlyInvisibles(boolean enabled) throws IllegalStateException {
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         team.setCanSeeFriendlyInvisibles(enabled);
     }
 
     public NameTagVisibility getNameTagVisibility() throws IllegalArgumentException {
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot;
 
         return notchToBukkit(team.getNameTagVisibility());
     }
 
     public void setNameTagVisibility(NameTagVisibility visibility) throws IllegalArgumentException {
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         team.setNameTagVisibility(bukkitToNotch(visibility));
     }
 
-    public Set<OfflinePlayer> getPlayers() throws IllegalStateException {
-        CraftScoreboard scoreboard = checkState();
+    @SuppressWarnings("deprecation")
+	public Set<OfflinePlayer> getPlayers() throws IllegalStateException {
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         ImmutableSet.Builder<OfflinePlayer> players = ImmutableSet.builder();
         for (String playerName : team.getPlayerNameSet()) {
@@ -117,7 +118,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
 
     @Override
     public Set<String> getEntries() throws IllegalStateException {
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         ImmutableSet.Builder<String> entries = ImmutableSet.builder();
         for (String playerName: team.getPlayerNameSet()){
@@ -127,7 +128,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     public int getSize() throws IllegalStateException {
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         return team.getPlayerNameSet().size();
     }
@@ -169,7 +170,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     public boolean hasEntry(String entry) throws IllegalArgumentException, IllegalStateException {
         Validate.notNull("Entry cannot be null");
 
-        CraftScoreboard scoreboard = checkState();
+        /*CraftScoreboard scoreboard =*/ checkState(); // CloudSpigot
 
         return team.getPlayerNameSet().contains(entry);
     }

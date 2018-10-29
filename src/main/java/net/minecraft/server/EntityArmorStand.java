@@ -245,7 +245,7 @@ public class EntityArmorStand extends EntityLiving {
     protected void s(Entity entity) {}
 
     protected void bL() {
-        List list = this.world.getEntities(this, this.getBoundingBox());
+        List<Entity> list = this.world.getEntities(this, this.getBoundingBox());
 
         if (list != null && !list.isEmpty()) {
             for (int i = 0; i < list.size(); ++i) {
@@ -285,10 +285,10 @@ public class EntityArmorStand extends EntityLiving {
                 b0 = 4;
             }
 
-            double d0 = 0.1D;
+            /*double d0 = 0.1D;
             double d1 = 0.9D;
             double d2 = 0.4D;
-            double d3 = 1.6D;
+            double d3 = 1.6D;*/ // CloudSpigot
             byte b1 = 0;
             boolean flag1 = this.isSmall();
             double d4 = flag1 ? vec3d.b * 2.0D : vec3d.b;

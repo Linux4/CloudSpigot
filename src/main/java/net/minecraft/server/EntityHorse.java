@@ -8,12 +8,12 @@ import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason; // CraftBuk
 
 public class EntityHorse extends EntityAnimal implements IInventoryListener {
 
-    private static final Predicate<Entity> bs = new Predicate() {
+    private static final Predicate<Entity> bs = new Predicate<Entity>() {
         public boolean a(Entity entity) {
             return entity instanceof EntityHorse && ((EntityHorse) entity).cA();
         }
 
-        public boolean apply(Object object) {
+        public boolean apply(Entity object) {
             return this.a((Entity) object);
         }
     };
@@ -326,7 +326,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener {
     }
 
     private int cZ() {
-        int i = this.getType();
+        //int i = this.getType(); // CloudSpigot
 
         return this.hasChest() /* && (i == 1 || i == 2) */ ? 17 : 2; // CraftBukkit - Remove type check
     }
@@ -390,8 +390,8 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener {
     protected EntityHorse a(Entity entity, double d0) {
         double d1 = Double.MAX_VALUE;
         Entity entity1 = null;
-        List list = this.world.a(entity, entity.getBoundingBox().a(d0, d0, d0), EntityHorse.bs);
-        Iterator iterator = list.iterator();
+        List<Entity> list = this.world.a(entity, entity.getBoundingBox().a(d0, d0, d0), EntityHorse.bs);
+        Iterator<Entity> iterator = list.iterator();
 
         while (iterator.hasNext()) {
             Entity entity2 = (Entity) iterator.next();
@@ -1160,7 +1160,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener {
 
     public GroupDataEntity prepare(DifficultyDamageScaler difficultydamagescaler, GroupDataEntity groupdataentity) {
         Object object = super.prepare(difficultydamagescaler, groupdataentity);
-        boolean flag = false;
+        //boolean flag = false; // CloudSpigot
         int i = 0;
         int j;
 

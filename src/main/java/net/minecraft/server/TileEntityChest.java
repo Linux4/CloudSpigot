@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
 import java.util.List;
 
 // CraftBukkit start
@@ -19,7 +18,7 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
     public float j; // CloudSpigot - lidAngle
     public float k;
     public int l; // CloudSpigot - numPlayersUsing
-    private int n;
+    //private int n; // CloudSpigot
     private int o = -1;
     private String p;
 

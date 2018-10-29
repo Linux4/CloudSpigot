@@ -55,7 +55,7 @@ public class CommandGamerule extends CommandAbstract {
     public static void a(GameRules gamerules, String s) {
         if ("reducedDebugInfo".equals(s)) {
             int i = gamerules.getBoolean(s) ? 22 : 23;
-            Iterator iterator = MinecraftServer.getServer().getPlayerList().v().iterator();
+            Iterator<EntityPlayer> iterator = MinecraftServer.getServer().getPlayerList().v().iterator();
 
             while (iterator.hasNext()) {
                 EntityPlayer entityplayer = (EntityPlayer) iterator.next();

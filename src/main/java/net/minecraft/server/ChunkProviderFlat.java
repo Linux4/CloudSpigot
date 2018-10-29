@@ -18,7 +18,8 @@ public class ChunkProviderFlat implements IChunkProvider {
     private WorldGenLakes h;
     private WorldGenLakes i;
 
-    public ChunkProviderFlat(World world, long i, boolean flag, String s) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public ChunkProviderFlat(World world, long i, boolean flag, String s) {
         this.a = world;
         this.b = new Random(i);
         WorldGenFlatInfo d = WorldGenFlatInfo.a(s); // CloudSpigot
@@ -107,7 +108,7 @@ public class ChunkProviderFlat implements IChunkProvider {
             }
         }
 
-        Iterator iterator = this.e.iterator();
+        Iterator<StructureGenerator> iterator = this.e.iterator();
 
         while (iterator.hasNext()) {
             WorldGenBase worldgenbase = (WorldGenBase) iterator.next();
@@ -144,7 +145,7 @@ public class ChunkProviderFlat implements IChunkProvider {
 
         this.b.setSeed((long) i * i1 + (long) j * j1 ^ this.a.getSeed());
         ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(i, j);
-        Iterator iterator = this.e.iterator();
+        Iterator<StructureGenerator> iterator = this.e.iterator();
 
         while (iterator.hasNext()) {
             StructureGenerator structuregenerator = (StructureGenerator) iterator.next();
@@ -209,7 +210,7 @@ public class ChunkProviderFlat implements IChunkProvider {
 
     public BlockPosition findNearestMapFeature(World world, String s, BlockPosition blockposition) {
         if ("Stronghold".equals(s)) {
-            Iterator iterator = this.e.iterator();
+            Iterator<StructureGenerator> iterator = this.e.iterator();
 
             while (iterator.hasNext()) {
                 StructureGenerator structuregenerator = (StructureGenerator) iterator.next();
@@ -228,7 +229,7 @@ public class ChunkProviderFlat implements IChunkProvider {
     }
 
     public void recreateStructures(Chunk chunk, int i, int j) {
-        Iterator iterator = this.e.iterator();
+        Iterator<StructureGenerator> iterator = this.e.iterator();
 
         while (iterator.hasNext()) {
             StructureGenerator structuregenerator = (StructureGenerator) iterator.next();

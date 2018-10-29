@@ -217,7 +217,7 @@ public final class CraftChatMessage {
             }
         }
 
-        List extras = component.a();
+        List<IChatBaseComponent> extras = component.a();
         for (int i = 0; i < extras.size(); i++) {
             IChatBaseComponent comp = (IChatBaseComponent) extras.get(i);
             if (comp.getChatModifier() != null && comp.getChatModifier().h() == null) {
