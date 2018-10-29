@@ -8,6 +8,11 @@ import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * 
+ * EULA class which automatically accepts the EULA
+ *
+ */
 public class CloudSpigotEULA {
 
     private static final Logger a = LogManager.getLogger();

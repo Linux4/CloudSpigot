@@ -7,8 +7,17 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.util.Vector;
 
+/**
+ * 
+ * Class for generating an {@link AnimatedExplosion}
+ *
+ */
 public class AnimatedExplosion {
 
+	/**
+	 * Create a new {@link AnimatedExplosion}
+	 * @param blockList The {@link Block}s which will be used in the {@link AnimatedExplosion}
+	 */
 	@SuppressWarnings({ "deprecation" })
 	public AnimatedExplosion(List<Block> blockList) {
 		for (Block b : blockList) {

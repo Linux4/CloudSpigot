@@ -10,6 +10,11 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
+/**
+ * 
+ * Called before a {@link Player} autorespawns
+ *
+ */
 public class PlayerPreAutoRespawnEvent extends Event implements Cancellable {
 
 	private Player p;
@@ -17,23 +22,44 @@ public class PlayerPreAutoRespawnEvent extends Event implements Cancellable {
 	private boolean cancelled = false;
 	private static final HandlerList handlers = new HandlerList();
 
+	/**
+	 * 
+	 * @param p The {@link Player} autorespawning
+	 * @param deathLoc The {@link Location} where the {@link Player} died
+	 */
 	public PlayerPreAutoRespawnEvent(Player p, Location deathLoc) {
 		this.p = p;
 		this.deathLoc = deathLoc;
 	}
 
+	/**
+	 * 
+	 * @return The {@link Player} autorespawning
+	 */
 	public Player getPlayer() {
 		return p;
 	}
 
+	/**
+	 * 
+	 * @return The {@link Location} where the {@link Player} died
+	 */
 	public Location getDeathLocation() {
 		return deathLoc;
 	}
 
+	/**
+	 * 
+	 * @return The DeathCause of the {@link Player}
+	 */
 	public DamageCause getDeathCause() {
 		return p.getLastDamageCause().getCause();
 	}
 
+	/**
+	 * 
+	 * @return True if the {@link Player} was killed by another {@link Player}
+	 */
 	public boolean killedByPlayer() {
 		if (p.getLastDamageCause().getEntity() instanceof Player)
 			return true;
@@ -46,6 +72,11 @@ public class PlayerPreAutoRespawnEvent extends Event implements Cancellable {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return The killer of the {@link Player}. Returns null if not killed by a {@link Player}
+	 * 
+	 */
 	public Player getKiller() {
 		return p.getKiller();
 	}
