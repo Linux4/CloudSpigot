@@ -10,37 +10,37 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
 public class CraftVillager extends CraftAgeable implements Villager, InventoryHolder {
-    public CraftVillager(CraftServer server, EntityVillager entity) {
-        super(server, entity);
-    }
+	public CraftVillager(CraftServer server, EntityVillager entity) {
+		super(server, entity);
+	}
 
-    @Override
-    public EntityVillager getHandle() {
-        return (EntityVillager) entity;
-    }
+	@Override
+	public EntityVillager getHandle() {
+		return (EntityVillager) entity;
+	}
 
-    @Override
-    public String toString() {
-        return "CraftVillager";
-    }
+	@Override
+	public String toString() {
+		return "CraftVillager";
+	}
 
-    public EntityType getType() {
-        return EntityType.VILLAGER;
-    }
+	public EntityType getType() {
+		return EntityType.VILLAGER;
+	}
 
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public Profession getProfession() {
-        return Profession.getProfession(getHandle().getProfession());
-    }
+		return Profession.getProfession(getHandle().getProfession());
+	}
 
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public void setProfession(Profession profession) {
-        Validate.notNull(profession);
-        getHandle().setProfession(profession.getId());
-    }
+		Validate.notNull(profession);
+		getHandle().setProfession(profession.getId());
+	}
 
-    @Override
-    public Inventory getInventory() {
-        return new CraftInventory(getHandle().inventory);
-    }
+	@Override
+	public Inventory getInventory() {
+		return new CraftInventory(getHandle().inventory);
+	}
 }

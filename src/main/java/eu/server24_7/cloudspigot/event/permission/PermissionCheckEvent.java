@@ -19,10 +19,13 @@ public class PermissionCheckEvent extends Event {
 
 	/**
 	 * 
-	 * @param permissible The {@link PermissibleBase} of which the permission is checked
-	 * @param opable The {@link ServerOperator} of the {@link PermissibleBase}
-	 * @param permission The permission which is checked
-	 * @param hasPermission True if the {@link PermissibleBase} has the checked permission
+	 * @param permissible   The {@link PermissibleBase} of which the permission is
+	 *                      checked
+	 * @param opable        The {@link ServerOperator} of the
+	 *                      {@link PermissibleBase}
+	 * @param permission    The permission which is checked
+	 * @param hasPermission True if the {@link PermissibleBase} has the checked
+	 *                      permission
 	 */
 	public PermissionCheckEvent(PermissibleBase permissible, ServerOperator opable, String permission,
 			boolean hasPermission) {
@@ -66,7 +69,8 @@ public class PermissionCheckEvent extends Event {
 
 	/**
 	 * 
-	 * @param hasPermission Sets if the {@link PermissibleBase} has the checked permission
+	 * @param hasPermission Sets if the {@link PermissibleBase} has the checked
+	 *                      permission
 	 */
 	public void setHasPermission(boolean hasPermission) {
 		this.hasPermission = hasPermission;

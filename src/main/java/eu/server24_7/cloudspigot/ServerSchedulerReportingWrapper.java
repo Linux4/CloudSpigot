@@ -11,29 +11,33 @@ import eu.server24_7.cloudspigot.exception.ServerSchedulerException;
  */
 public class ServerSchedulerReportingWrapper implements Runnable {
 
-    private final CraftTask internalTask;
+	private final CraftTask internalTask;
 
-    public ServerSchedulerReportingWrapper(CraftTask internalTask) {
-        this.internalTask = Preconditions.checkNotNull(internalTask, "internalTask");
-    }
+	public ServerSchedulerReportingWrapper(CraftTask internalTask) {
+		this.internalTask = Preconditions.checkNotNull(internalTask, "internalTask");
+	}
 
-    @Override
-    public void run() {
-        try {
-            internalTask.run();
-        } catch (RuntimeException e) {
-            internalTask.getOwner().getServer().getPluginManager().callEvent(
-                    new ServerExceptionEvent(new ServerSchedulerException(e, internalTask))
-            );
-            throw e;
-        } catch (Throwable t) {
-            internalTask.getOwner().getServer().getPluginManager().callEvent(
-                    new ServerExceptionEvent(new ServerSchedulerException(t, internalTask))
-            ); //Do not rethrow, since it is not permitted with Runnable#run
-        }
-    }
+	@Override
+	public void run() {
+		try {
+			internalTask.run();
+		} catch (RuntimeException e) {
+			internalTask.getOwner().getServer().getPluginManager()
+					.callEvent(new ServerExceptionEvent(new ServerSchedulerException(e, internalTask)));
+			throw e;
+		} catch (Throwable t) {
+			internalTask.getOwner().getServer().getPluginManager()
+					.callEvent(new ServerExceptionEvent(new ServerSchedulerException(t, internalTask))); // Do not
+																											// rethrow,
+																											// since it
+																											// is not
+																											// permitted
+																											// with
+																											// Runnable#run
+		}
+	}
 
-    public CraftTask getInternalTask() {
-        return internalTask;
-    }
+	public CraftTask getInternalTask() {
+		return internalTask;
+	}
 }

@@ -15,7 +15,7 @@ import net.minecraft.server.BiomeBase.BiomeMeta;
 
 public final class SpawnerCreature {
 
-	//private static final int a = (int) Math.pow(17.0D, 2.0D); // CloudSpigot
+	// private static final int a = (int) Math.pow(17.0D, 2.0D); // CloudSpigot
 	private final LongHashSet b = new LongHashSet(); // CraftBukkit
 
 	public SpawnerCreature() {

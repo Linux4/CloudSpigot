@@ -6,21 +6,21 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Weather;
 
 public class CraftWeather extends CraftEntity implements Weather {
-    public CraftWeather(final CraftServer server, final EntityWeather entity) {
-        super(server, entity);
-    }
+	public CraftWeather(final CraftServer server, final EntityWeather entity) {
+		super(server, entity);
+	}
 
-    @Override
-    public EntityWeather getHandle() {
-        return (EntityWeather) entity;
-    }
+	@Override
+	public EntityWeather getHandle() {
+		return (EntityWeather) entity;
+	}
 
-    @Override
-    public String toString() {
-        return "CraftWeather";
-    }
+	@Override
+	public String toString() {
+		return "CraftWeather";
+	}
 
-    public EntityType getType() {
-        return EntityType.WEATHER;
-    }
+	public EntityType getType() {
+		return EntityType.WEATHER;
+	}
 }

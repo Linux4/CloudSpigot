@@ -16,7 +16,9 @@ public class AnimatedExplosion {
 
 	/**
 	 * Create a new {@link AnimatedExplosion}
-	 * @param blockList The {@link Block}s which will be used in the {@link AnimatedExplosion}
+	 * 
+	 * @param blockList The {@link Block}s which will be used in the
+	 *                  {@link AnimatedExplosion}
 	 */
 	@SuppressWarnings({ "deprecation" })
 	public AnimatedExplosion(List<Block> blockList) {

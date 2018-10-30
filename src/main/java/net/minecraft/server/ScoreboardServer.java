@@ -10,226 +10,228 @@ import java.util.Set;
 
 public class ScoreboardServer extends Scoreboard {
 
-    private final MinecraftServer a;
-    private final Set<ScoreboardObjective> b = Sets.newHashSet();
-    private PersistentScoreboard c;
+	private final MinecraftServer a;
+	private final Set<ScoreboardObjective> b = Sets.newHashSet();
+	private PersistentScoreboard c;
 
-    public ScoreboardServer(MinecraftServer minecraftserver) {
-        this.a = minecraftserver;
-    }
+	public ScoreboardServer(MinecraftServer minecraftserver) {
+		this.a = minecraftserver;
+	}
 
-    public void handleScoreChanged(ScoreboardScore scoreboardscore) {
-        super.handleScoreChanged(scoreboardscore);
-        if (this.b.contains(scoreboardscore.getObjective())) {
-            this.sendAll(new PacketPlayOutScoreboardScore(scoreboardscore));
-        }
+	public void handleScoreChanged(ScoreboardScore scoreboardscore) {
+		super.handleScoreChanged(scoreboardscore);
+		if (this.b.contains(scoreboardscore.getObjective())) {
+			this.sendAll(new PacketPlayOutScoreboardScore(scoreboardscore));
+		}
 
-        this.b();
-    }
+		this.b();
+	}
 
-    public void handlePlayerRemoved(String s) {
-        super.handlePlayerRemoved(s);
-        this.sendAll(new PacketPlayOutScoreboardScore(s));
-        this.b();
-    }
+	public void handlePlayerRemoved(String s) {
+		super.handlePlayerRemoved(s);
+		this.sendAll(new PacketPlayOutScoreboardScore(s));
+		this.b();
+	}
 
-    public void a(String s, ScoreboardObjective scoreboardobjective) {
-        super.a(s, scoreboardobjective);
-        this.sendAll(new PacketPlayOutScoreboardScore(s, scoreboardobjective));
-        this.b();
-    }
+	public void a(String s, ScoreboardObjective scoreboardobjective) {
+		super.a(s, scoreboardobjective);
+		this.sendAll(new PacketPlayOutScoreboardScore(s, scoreboardobjective));
+		this.b();
+	}
 
-    public void setDisplaySlot(int i, ScoreboardObjective scoreboardobjective) {
-        ScoreboardObjective scoreboardobjective1 = this.getObjectiveForSlot(i);
+	public void setDisplaySlot(int i, ScoreboardObjective scoreboardobjective) {
+		ScoreboardObjective scoreboardobjective1 = this.getObjectiveForSlot(i);
 
-        super.setDisplaySlot(i, scoreboardobjective);
-        if (scoreboardobjective1 != scoreboardobjective && scoreboardobjective1 != null) {
-            if (this.h(scoreboardobjective1) > 0) {
-                this.sendAll(new PacketPlayOutScoreboardDisplayObjective(i, scoreboardobjective));
-            } else {
-                this.g(scoreboardobjective1);
-            }
-        }
+		super.setDisplaySlot(i, scoreboardobjective);
+		if (scoreboardobjective1 != scoreboardobjective && scoreboardobjective1 != null) {
+			if (this.h(scoreboardobjective1) > 0) {
+				this.sendAll(new PacketPlayOutScoreboardDisplayObjective(i, scoreboardobjective));
+			} else {
+				this.g(scoreboardobjective1);
+			}
+		}
 
-        if (scoreboardobjective != null) {
-            if (this.b.contains(scoreboardobjective)) {
-                this.sendAll(new PacketPlayOutScoreboardDisplayObjective(i, scoreboardobjective));
-            } else {
-                this.e(scoreboardobjective);
-            }
-        }
+		if (scoreboardobjective != null) {
+			if (this.b.contains(scoreboardobjective)) {
+				this.sendAll(new PacketPlayOutScoreboardDisplayObjective(i, scoreboardobjective));
+			} else {
+				this.e(scoreboardobjective);
+			}
+		}
 
-        this.b();
-    }
+		this.b();
+	}
 
-    public boolean addPlayerToTeam(String s, String s1) {
-        if (super.addPlayerToTeam(s, s1)) {
-            ScoreboardTeam scoreboardteam = this.getTeam(s1);
+	public boolean addPlayerToTeam(String s, String s1) {
+		if (super.addPlayerToTeam(s, s1)) {
+			ScoreboardTeam scoreboardteam = this.getTeam(s1);
 
-            this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, Arrays.asList(new String[] { s}), 3));
-            this.b();
-            return true;
-        } else {
-            return false;
-        }
-    }
+			this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, Arrays.asList(new String[] { s }), 3));
+			this.b();
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-    public void removePlayerFromTeam(String s, ScoreboardTeam scoreboardteam) {
-        super.removePlayerFromTeam(s, scoreboardteam);
-        this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, Arrays.asList(new String[] { s}), 4));
-        this.b();
-    }
+	public void removePlayerFromTeam(String s, ScoreboardTeam scoreboardteam) {
+		super.removePlayerFromTeam(s, scoreboardteam);
+		this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, Arrays.asList(new String[] { s }), 4));
+		this.b();
+	}
 
-    public void handleObjectiveAdded(ScoreboardObjective scoreboardobjective) {
-        super.handleObjectiveAdded(scoreboardobjective);
-        this.b();
-    }
+	public void handleObjectiveAdded(ScoreboardObjective scoreboardobjective) {
+		super.handleObjectiveAdded(scoreboardobjective);
+		this.b();
+	}
 
-    public void handleObjectiveChanged(ScoreboardObjective scoreboardobjective) {
-        super.handleObjectiveChanged(scoreboardobjective);
-        if (this.b.contains(scoreboardobjective)) {
-            this.sendAll(new PacketPlayOutScoreboardObjective(scoreboardobjective, 2));
-        }
+	public void handleObjectiveChanged(ScoreboardObjective scoreboardobjective) {
+		super.handleObjectiveChanged(scoreboardobjective);
+		if (this.b.contains(scoreboardobjective)) {
+			this.sendAll(new PacketPlayOutScoreboardObjective(scoreboardobjective, 2));
+		}
 
-        this.b();
-    }
+		this.b();
+	}
 
-    public void handleObjectiveRemoved(ScoreboardObjective scoreboardobjective) {
-        super.handleObjectiveRemoved(scoreboardobjective);
-        if (this.b.contains(scoreboardobjective)) {
-            this.g(scoreboardobjective);
-        }
+	public void handleObjectiveRemoved(ScoreboardObjective scoreboardobjective) {
+		super.handleObjectiveRemoved(scoreboardobjective);
+		if (this.b.contains(scoreboardobjective)) {
+			this.g(scoreboardobjective);
+		}
 
-        this.b();
-    }
+		this.b();
+	}
 
-    public void handleTeamAdded(ScoreboardTeam scoreboardteam) {
-        super.handleTeamAdded(scoreboardteam);
-        this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, 0));
-        this.b();
-    }
+	public void handleTeamAdded(ScoreboardTeam scoreboardteam) {
+		super.handleTeamAdded(scoreboardteam);
+		this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, 0));
+		this.b();
+	}
 
-    public void handleTeamChanged(ScoreboardTeam scoreboardteam) {
-        super.handleTeamChanged(scoreboardteam);
-        this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, 2));
-        this.b();
-    }
+	public void handleTeamChanged(ScoreboardTeam scoreboardteam) {
+		super.handleTeamChanged(scoreboardteam);
+		this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, 2));
+		this.b();
+	}
 
-    public void handleTeamRemoved(ScoreboardTeam scoreboardteam) {
-        super.handleTeamRemoved(scoreboardteam);
-        this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, 1));
-        this.b();
-    }
+	public void handleTeamRemoved(ScoreboardTeam scoreboardteam) {
+		super.handleTeamRemoved(scoreboardteam);
+		this.sendAll(new PacketPlayOutScoreboardTeam(scoreboardteam, 1));
+		this.b();
+	}
 
-    public void a(PersistentScoreboard persistentscoreboard) {
-        this.c = persistentscoreboard;
-    }
+	public void a(PersistentScoreboard persistentscoreboard) {
+		this.c = persistentscoreboard;
+	}
 
-    protected void b() {
-        if (this.c != null) {
-            this.c.c();
-        }
+	protected void b() {
+		if (this.c != null) {
+			this.c.c();
+		}
 
-    }
+	}
 
-    @SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")
 	public List<Packet> getScoreboardScorePacketsForObjective(ScoreboardObjective scoreboardobjective) {
-        ArrayList<Packet> arraylist = Lists.newArrayList();
+		ArrayList<Packet> arraylist = Lists.newArrayList();
 
-        arraylist.add(new PacketPlayOutScoreboardObjective(scoreboardobjective, 0));
+		arraylist.add(new PacketPlayOutScoreboardObjective(scoreboardobjective, 0));
 
-        for (int i = 0; i < 19; ++i) {
-            if (this.getObjectiveForSlot(i) == scoreboardobjective) {
-                arraylist.add(new PacketPlayOutScoreboardDisplayObjective(i, scoreboardobjective));
-            }
-        }
+		for (int i = 0; i < 19; ++i) {
+			if (this.getObjectiveForSlot(i) == scoreboardobjective) {
+				arraylist.add(new PacketPlayOutScoreboardDisplayObjective(i, scoreboardobjective));
+			}
+		}
 
-        Iterator<ScoreboardScore> iterator = this.getScoresForObjective(scoreboardobjective).iterator();
+		Iterator<ScoreboardScore> iterator = this.getScoresForObjective(scoreboardobjective).iterator();
 
-        while (iterator.hasNext()) {
-            ScoreboardScore scoreboardscore = (ScoreboardScore) iterator.next();
+		while (iterator.hasNext()) {
+			ScoreboardScore scoreboardscore = (ScoreboardScore) iterator.next();
 
-            arraylist.add(new PacketPlayOutScoreboardScore(scoreboardscore));
-        }
+			arraylist.add(new PacketPlayOutScoreboardScore(scoreboardscore));
+		}
 
-        return arraylist;
-    }
+		return arraylist;
+	}
 
-    @SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")
 	public void e(ScoreboardObjective scoreboardobjective) {
-        List<Packet> list = this.getScoreboardScorePacketsForObjective(scoreboardobjective);
-        Iterator<EntityPlayer> iterator = this.a.getPlayerList().v().iterator();
+		List<Packet> list = this.getScoreboardScorePacketsForObjective(scoreboardobjective);
+		Iterator<EntityPlayer> iterator = this.a.getPlayerList().v().iterator();
 
-        while (iterator.hasNext()) {
-            EntityPlayer entityplayer = (EntityPlayer) iterator.next();
-            if (entityplayer.getBukkitEntity().getScoreboard().getHandle() != this) continue; // CraftBukkit - Only players on this board
-            Iterator<Packet> iterator1 = list.iterator();
+		while (iterator.hasNext()) {
+			EntityPlayer entityplayer = (EntityPlayer) iterator.next();
+			if (entityplayer.getBukkitEntity().getScoreboard().getHandle() != this)
+				continue; // CraftBukkit - Only players on this board
+			Iterator<Packet> iterator1 = list.iterator();
 
-            while (iterator1.hasNext()) {
-                Packet packet = (Packet) iterator1.next();
+			while (iterator1.hasNext()) {
+				Packet packet = (Packet) iterator1.next();
 
-                entityplayer.playerConnection.sendPacket(packet);
-            }
-        }
+				entityplayer.playerConnection.sendPacket(packet);
+			}
+		}
 
-        this.b.add(scoreboardobjective);
-    }
+		this.b.add(scoreboardobjective);
+	}
 
-    @SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")
 	public List<Packet> f(ScoreboardObjective scoreboardobjective) {
-        ArrayList<Packet> arraylist = Lists.newArrayList();
+		ArrayList<Packet> arraylist = Lists.newArrayList();
 
-        arraylist.add(new PacketPlayOutScoreboardObjective(scoreboardobjective, 1));
+		arraylist.add(new PacketPlayOutScoreboardObjective(scoreboardobjective, 1));
 
-        for (int i = 0; i < 19; ++i) {
-            if (this.getObjectiveForSlot(i) == scoreboardobjective) {
-                arraylist.add(new PacketPlayOutScoreboardDisplayObjective(i, scoreboardobjective));
-            }
-        }
+		for (int i = 0; i < 19; ++i) {
+			if (this.getObjectiveForSlot(i) == scoreboardobjective) {
+				arraylist.add(new PacketPlayOutScoreboardDisplayObjective(i, scoreboardobjective));
+			}
+		}
 
-        return arraylist;
-    }
+		return arraylist;
+	}
 
-    @SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")
 	public void g(ScoreboardObjective scoreboardobjective) {
-        List<Packet> list = this.f(scoreboardobjective);
-        Iterator<EntityPlayer> iterator = this.a.getPlayerList().v().iterator();
+		List<Packet> list = this.f(scoreboardobjective);
+		Iterator<EntityPlayer> iterator = this.a.getPlayerList().v().iterator();
 
-        while (iterator.hasNext()) {
-            EntityPlayer entityplayer = (EntityPlayer) iterator.next();
-            if (entityplayer.getBukkitEntity().getScoreboard().getHandle() != this) continue; // CraftBukkit - Only players on this board
-            Iterator<Packet> iterator1 = list.iterator();
+		while (iterator.hasNext()) {
+			EntityPlayer entityplayer = (EntityPlayer) iterator.next();
+			if (entityplayer.getBukkitEntity().getScoreboard().getHandle() != this)
+				continue; // CraftBukkit - Only players on this board
+			Iterator<Packet> iterator1 = list.iterator();
 
-            while (iterator1.hasNext()) {
-                Packet packet = (Packet) iterator1.next();
+			while (iterator1.hasNext()) {
+				Packet packet = (Packet) iterator1.next();
 
-                entityplayer.playerConnection.sendPacket(packet);
-            }
-        }
+				entityplayer.playerConnection.sendPacket(packet);
+			}
+		}
 
-        this.b.remove(scoreboardobjective);
-    }
+		this.b.remove(scoreboardobjective);
+	}
 
-    public int h(ScoreboardObjective scoreboardobjective) {
-        int i = 0;
+	public int h(ScoreboardObjective scoreboardobjective) {
+		int i = 0;
 
-        for (int j = 0; j < 19; ++j) {
-            if (this.getObjectiveForSlot(j) == scoreboardobjective) {
-                ++i;
-            }
-        }
+		for (int j = 0; j < 19; ++j) {
+			if (this.getObjectiveForSlot(j) == scoreboardobjective) {
+				++i;
+			}
+		}
 
-        return i;
-    }
+		return i;
+	}
 
-    // CraftBukkit start - Send to players
-    @SuppressWarnings("rawtypes")
+	// CraftBukkit start - Send to players
+	@SuppressWarnings("rawtypes")
 	private void sendAll(Packet packet) {
-        for (EntityPlayer entityplayer : (List<EntityPlayer>) this.a.getPlayerList().players) {
-            if (entityplayer.getBukkitEntity().getScoreboard().getHandle() == this) {
-                entityplayer.playerConnection.sendPacket(packet);
-            }
-        }
-    }
-    // CraftBukkit end
+		for (EntityPlayer entityplayer : (List<EntityPlayer>) this.a.getPlayerList().players) {
+			if (entityplayer.getBukkitEntity().getScoreboard().getHandle() == this) {
+				entityplayer.playerConnection.sendPacket(packet);
+			}
+		}
+	}
+	// CraftBukkit end
 }

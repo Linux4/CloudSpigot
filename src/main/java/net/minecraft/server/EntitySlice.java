@@ -13,129 +13,129 @@ import java.util.Collections;
 
 public class EntitySlice<T> extends AbstractSet<T> {
 
-    private static final Set<Class<?>> a = Sets.newConcurrentHashSet(); // CraftBukkit
-    private final Map<Class<?>, List<T>> b = Maps.newHashMap();
-    private final Set<Class<?>> c = Sets.newIdentityHashSet();
-    private final Class<T> d;
-    private final List<T> e = Lists.newArrayList();
+	private static final Set<Class<?>> a = Sets.newConcurrentHashSet(); // CraftBukkit
+	private final Map<Class<?>, List<T>> b = Maps.newHashMap();
+	private final Set<Class<?>> c = Sets.newIdentityHashSet();
+	private final Class<T> d;
+	private final List<T> e = Lists.newArrayList();
 
-    @SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")
 	public EntitySlice(Class<T> oclass) {
-        this.d = oclass;
-        this.c.add(oclass);
-        this.b.put(oclass, this.e);
-        Iterator<Class<?>> iterator = EntitySlice.a.iterator();
+		this.d = oclass;
+		this.c.add(oclass);
+		this.b.put(oclass, this.e);
+		Iterator<Class<?>> iterator = EntitySlice.a.iterator();
 
-        while (iterator.hasNext()) {
-            Class oclass1 = (Class) iterator.next();
+		while (iterator.hasNext()) {
+			Class oclass1 = (Class) iterator.next();
 
-            this.a(oclass1);
-        }
+			this.a(oclass1);
+		}
 
-    }
+	}
 
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	protected void a(Class<?> oclass) {
-        EntitySlice.a.add(oclass);
-        Iterator<T> iterator = this.e.iterator();
+		EntitySlice.a.add(oclass);
+		Iterator<T> iterator = this.e.iterator();
 
-        while (iterator.hasNext()) {
-            Object object = iterator.next();
+		while (iterator.hasNext()) {
+			Object object = iterator.next();
 
-            if (oclass.isAssignableFrom(object.getClass())) {
-                this.a((T) object, oclass);
-            }
-        }
+			if (oclass.isAssignableFrom(object.getClass())) {
+				this.a((T) object, oclass);
+			}
+		}
 
-        this.c.add(oclass);
-    }
+		this.c.add(oclass);
+	}
 
-    protected Class<?> b(Class<?> oclass) {
-        if (this.d.isAssignableFrom(oclass)) {
-            if (!this.c.contains(oclass)) {
-                this.a(oclass);
-            }
+	protected Class<?> b(Class<?> oclass) {
+		if (this.d.isAssignableFrom(oclass)) {
+			if (!this.c.contains(oclass)) {
+				this.a(oclass);
+			}
 
-            return oclass;
-        } else {
-            throw new IllegalArgumentException("Don\'t know how to search for " + oclass);
-        }
-    }
+			return oclass;
+		} else {
+			throw new IllegalArgumentException("Don\'t know how to search for " + oclass);
+		}
+	}
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public boolean add(T t0) {
-        Iterator<Class<?>> iterator = this.c.iterator();
+		Iterator<Class<?>> iterator = this.c.iterator();
 
-        while (iterator.hasNext()) {
-            Class oclass = (Class) iterator.next();
+		while (iterator.hasNext()) {
+			Class oclass = (Class) iterator.next();
 
-            if (oclass.isAssignableFrom(t0.getClass())) {
-                this.a(t0, oclass);
-            }
-        }
+			if (oclass.isAssignableFrom(t0.getClass())) {
+				this.a(t0, oclass);
+			}
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	private void a(T t0, Class<?> oclass) {
-        List<T> list = (List<T>) this.b.get(oclass);
+		List<T> list = (List<T>) this.b.get(oclass);
 
-        if (list == null) {
-            this.b.put(oclass, Lists.newArrayList(t0));
-        } else {
-            list.add(t0);
-        }
+		if (list == null) {
+			this.b.put(oclass, Lists.newArrayList(t0));
+		} else {
+			list.add(t0);
+		}
 
-    }
+	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public boolean remove(Object object) {
-        Object object1 = object;
-        boolean flag = false;
-        Iterator<Class<?>> iterator = this.c.iterator();
+		Object object1 = object;
+		boolean flag = false;
+		Iterator<Class<?>> iterator = this.c.iterator();
 
-        while (iterator.hasNext()) {
-            Class oclass = (Class) iterator.next();
+		while (iterator.hasNext()) {
+			Class oclass = (Class) iterator.next();
 
-            if (oclass.isAssignableFrom(object1.getClass())) {
-                List list = (List) this.b.get(oclass);
+			if (oclass.isAssignableFrom(object1.getClass())) {
+				List list = (List) this.b.get(oclass);
 
-                if (list != null && list.remove(object1)) {
-                    flag = true;
-                }
-            }
-        }
+				if (list != null && list.remove(object1)) {
+					flag = true;
+				}
+			}
+		}
 
-        return flag;
-    }
+		return flag;
+	}
 
-    public boolean contains(Object object) {
-        return Iterators.contains(this.c(object.getClass()).iterator(), object);
-    }
+	public boolean contains(Object object) {
+		return Iterators.contains(this.c(object.getClass()).iterator(), object);
+	}
 
-    public <S> Iterable<S> c(final Class<S> oclass) {
-        return new Iterable<S>() {
-            @SuppressWarnings("rawtypes")
+	public <S> Iterable<S> c(final Class<S> oclass) {
+		return new Iterable<S>() {
+			@SuppressWarnings("rawtypes")
 			public Iterator<S> iterator() {
-                List list = (List) EntitySlice.this.b.get(EntitySlice.this.b(oclass));
+				List list = (List) EntitySlice.this.b.get(EntitySlice.this.b(oclass));
 
-                if (list == null) {
-                    return Collections.emptyIterator(); // CloudSpigot
-                } else {
-                    Iterator iterator = list.iterator();
+				if (list == null) {
+					return Collections.emptyIterator(); // CloudSpigot
+				} else {
+					Iterator iterator = list.iterator();
 
-                    return Iterators.filter(iterator, oclass);
-                }
-            }
-        };
-    }
+					return Iterators.filter(iterator, oclass);
+				}
+			}
+		};
+	}
 
-    public Iterator<T> iterator() {
-        return this.e.isEmpty() ? Collections.emptyIterator() : Iterators.unmodifiableIterator(this.e.iterator()); // CloudSpigot
-    }
+	public Iterator<T> iterator() {
+		return this.e.isEmpty() ? Collections.emptyIterator() : Iterators.unmodifiableIterator(this.e.iterator()); // CloudSpigot
+	}
 
-    public int size() {
-        return this.e.size();
-    }
+	public int size() {
+		return this.e.size();
+	}
 }

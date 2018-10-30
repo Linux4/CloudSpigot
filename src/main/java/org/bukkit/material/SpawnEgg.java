@@ -8,61 +8,61 @@ import org.bukkit.entity.EntityType;
  */
 public class SpawnEgg extends MaterialData {
 
-    public SpawnEgg() {
-        super(Material.MONSTER_EGG);
-    }
+	public SpawnEgg() {
+		super(Material.MONSTER_EGG);
+	}
 
-    /**
-     * @param type the raw type id
-     * @param data the raw data value
-     * @deprecated Magic value
-     */
-    @Deprecated
-    public SpawnEgg(int type, byte data){
-        super(type, data);
-    }
+	/**
+	 * @param type the raw type id
+	 * @param data the raw data value
+	 * @deprecated Magic value
+	 */
+	@Deprecated
+	public SpawnEgg(int type, byte data) {
+		super(type, data);
+	}
 
-    /**
-     * @param data the raw data value
-     * @deprecated Magic value
-     */
-    @Deprecated
-    public SpawnEgg(byte data) {
-        super(Material.MONSTER_EGG, data);
-    }
+	/**
+	 * @param data the raw data value
+	 * @deprecated Magic value
+	 */
+	@Deprecated
+	public SpawnEgg(byte data) {
+		super(Material.MONSTER_EGG, data);
+	}
 
-    public SpawnEgg(EntityType type) {
-        this();
-        setSpawnedType(type);
-    }
+	public SpawnEgg(EntityType type) {
+		this();
+		setSpawnedType(type);
+	}
 
-    /**
-     * Get the type of entity this egg will spawn.
-     *
-     * @return The entity type.
-     */
-    @SuppressWarnings("deprecation")
+	/**
+	 * Get the type of entity this egg will spawn.
+	 *
+	 * @return The entity type.
+	 */
+	@SuppressWarnings("deprecation")
 	public EntityType getSpawnedType() {
-        return EntityType.fromId(getData());
-    }
+		return EntityType.fromId(getData());
+	}
 
-    /**
-     * Set the type of entity this egg will spawn.
-     *
-     * @param type The entity type.
-     */
-    @SuppressWarnings("deprecation")
+	/**
+	 * Set the type of entity this egg will spawn.
+	 *
+	 * @param type The entity type.
+	 */
+	@SuppressWarnings("deprecation")
 	public void setSpawnedType(EntityType type) {
-        setData((byte) type.getTypeId());
-    }
+		setData((byte) type.getTypeId());
+	}
 
-    @Override
-    public String toString() {
-        return "SPAWN EGG{" + getSpawnedType() + "}";
-    }
+	@Override
+	public String toString() {
+		return "SPAWN EGG{" + getSpawnedType() + "}";
+	}
 
-    @Override
-    public SpawnEgg clone() {
-        return (SpawnEgg) super.clone();
-    }
+	@Override
+	public SpawnEgg clone() {
+		return (SpawnEgg) super.clone();
+	}
 }

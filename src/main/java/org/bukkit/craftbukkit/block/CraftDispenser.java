@@ -15,62 +15,62 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.projectiles.BlockProjectileSource;
 
 public class CraftDispenser extends CraftBlockState implements Dispenser {
-    private final CraftWorld world;
-    private final TileEntityDispenser dispenser;
+	private final CraftWorld world;
+	private final TileEntityDispenser dispenser;
 
-    public CraftDispenser(final Block block) {
-        super(block);
+	public CraftDispenser(final Block block) {
+		super(block);
 
-        world = (CraftWorld) block.getWorld();
-        dispenser = (TileEntityDispenser) world.getTileEntityAt(getX(), getY(), getZ());
-    }
+		world = (CraftWorld) block.getWorld();
+		dispenser = (TileEntityDispenser) world.getTileEntityAt(getX(), getY(), getZ());
+	}
 
-    public CraftDispenser(final Material material, final TileEntityDispenser te) {
-        super(material);
-        world = null;
-        dispenser = te;
-    }
+	public CraftDispenser(final Material material, final TileEntityDispenser te) {
+		super(material);
+		world = null;
+		dispenser = te;
+	}
 
-    public Inventory getInventory() {
-        return new CraftInventory(dispenser);
-    }
+	public Inventory getInventory() {
+		return new CraftInventory(dispenser);
+	}
 
-    public BlockProjectileSource getBlockProjectileSource() {
-        Block block = getBlock();
+	public BlockProjectileSource getBlockProjectileSource() {
+		Block block = getBlock();
 
-        if (block.getType() != Material.DISPENSER) {
-            return null;
-        }
+		if (block.getType() != Material.DISPENSER) {
+			return null;
+		}
 
-        return new CraftBlockProjectileSource(dispenser);
-    }
+		return new CraftBlockProjectileSource(dispenser);
+	}
 
-    public boolean dispense() {
-        Block block = getBlock();
+	public boolean dispense() {
+		Block block = getBlock();
 
-        if (block.getType() == Material.DISPENSER) {
-            BlockDispenser dispense = (BlockDispenser) Blocks.DISPENSER;
+		if (block.getType() == Material.DISPENSER) {
+			BlockDispenser dispense = (BlockDispenser) Blocks.DISPENSER;
 
-            dispense.dispense(world.getHandle(), new BlockPosition(getX(), getY(), getZ()));
-            return true;
-        } else {
-            return false;
-        }
-    }
+			dispense.dispense(world.getHandle(), new BlockPosition(getX(), getY(), getZ()));
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-    @Override
-    public boolean update(boolean force, boolean applyPhysics) {
-        boolean result = super.update(force, applyPhysics);
+	@Override
+	public boolean update(boolean force, boolean applyPhysics) {
+		boolean result = super.update(force, applyPhysics);
 
-        if (result) {
-            dispenser.update();
-        }
+		if (result) {
+			dispenser.update();
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    @Override
-    public TileEntityDispenser getTileEntity() {
-        return dispenser;
-    }
+	@Override
+	public TileEntityDispenser getTileEntity() {
+		return dispenser;
+	}
 }

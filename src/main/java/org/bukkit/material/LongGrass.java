@@ -7,75 +7,75 @@ import org.bukkit.Material;
  * Represents the different types of long grasses.
  */
 public class LongGrass extends MaterialData {
-    public LongGrass() {
-        super(Material.LONG_GRASS);
-    }
+	public LongGrass() {
+		super(Material.LONG_GRASS);
+	}
 
-    public LongGrass(GrassSpecies species) {
-        this();
-        setSpecies(species);
-    }
+	public LongGrass(GrassSpecies species) {
+		this();
+		setSpecies(species);
+	}
 
-    /**
-     * @param type the raw type id
-     * @deprecated Magic value
-     */
-    @Deprecated
-    public LongGrass(final int type) {
-        super(type);
-    }
+	/**
+	 * @param type the raw type id
+	 * @deprecated Magic value
+	 */
+	@Deprecated
+	public LongGrass(final int type) {
+		super(type);
+	}
 
-    public LongGrass(final Material type) {
-        super(type);
-    }
+	public LongGrass(final Material type) {
+		super(type);
+	}
 
-    /**
-     * @param type the raw type id
-     * @param data the raw data value
-     * @deprecated Magic value
-     */
-    @Deprecated
-    public LongGrass(final int type, final byte data) {
-        super(type, data);
-    }
+	/**
+	 * @param type the raw type id
+	 * @param data the raw data value
+	 * @deprecated Magic value
+	 */
+	@Deprecated
+	public LongGrass(final int type, final byte data) {
+		super(type, data);
+	}
 
-    /**
-     * @param type the type
-     * @param data the raw data value
-     * @deprecated Magic value
-     */
-    @Deprecated
-    public LongGrass(final Material type, final byte data) {
-        super(type, data);
-    }
+	/**
+	 * @param type the type
+	 * @param data the raw data value
+	 * @deprecated Magic value
+	 */
+	@Deprecated
+	public LongGrass(final Material type, final byte data) {
+		super(type, data);
+	}
 
-    /**
-     * Gets the current species of this grass
-     *
-     * @return GrassSpecies of this grass
-     */
-    @SuppressWarnings("deprecation")
+	/**
+	 * Gets the current species of this grass
+	 *
+	 * @return GrassSpecies of this grass
+	 */
+	@SuppressWarnings("deprecation")
 	public GrassSpecies getSpecies() {
-        return GrassSpecies.getByData(getData());
-    }
+		return GrassSpecies.getByData(getData());
+	}
 
-    /**
-     * Sets the species of this grass
-     *
-     * @param species New species of this grass
-     */
-    @SuppressWarnings("deprecation")
+	/**
+	 * Sets the species of this grass
+	 *
+	 * @param species New species of this grass
+	 */
+	@SuppressWarnings("deprecation")
 	public void setSpecies(GrassSpecies species) {
-        setData(species.getData());
-    }
+		setData(species.getData());
+	}
 
-    @Override
-    public String toString() {
-        return getSpecies() + " " + super.toString();
-    }
+	@Override
+	public String toString() {
+		return getSpecies() + " " + super.toString();
+	}
 
-    @Override
-    public LongGrass clone() {
-        return (LongGrass) super.clone();
-    }
+	@Override
+	public LongGrass clone() {
+		return (LongGrass) super.clone();
+	}
 }

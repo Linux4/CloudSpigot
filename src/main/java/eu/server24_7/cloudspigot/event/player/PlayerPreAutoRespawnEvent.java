@@ -24,7 +24,7 @@ public class PlayerPreAutoRespawnEvent extends Event implements Cancellable {
 
 	/**
 	 * 
-	 * @param p The {@link Player} autorespawning
+	 * @param p        The {@link Player} autorespawning
 	 * @param deathLoc The {@link Location} where the {@link Player} died
 	 */
 	public PlayerPreAutoRespawnEvent(Player p, Location deathLoc) {
@@ -74,7 +74,8 @@ public class PlayerPreAutoRespawnEvent extends Event implements Cancellable {
 
 	/**
 	 * 
-	 * @return The killer of the {@link Player}. Returns null if not killed by a {@link Player}
+	 * @return The killer of the {@link Player}. Returns null if not killed by a
+	 *         {@link Player}
 	 * 
 	 */
 	public Player getKiller() {
@@ -99,4 +100,3 @@ public class PlayerPreAutoRespawnEvent extends Event implements Cancellable {
 		this.cancelled = arg0;
 	}
 }
-

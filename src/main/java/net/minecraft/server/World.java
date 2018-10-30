@@ -66,7 +66,7 @@ public abstract class World implements IBlockAccess {
 	public volatile List<EntityHuman> players = Lists.newArrayList();
 	public final List<Entity> k = Lists.newArrayList();
 	protected final IntHashMap<Entity> entitiesById = new IntHashMap<Entity>();
-	//private long d = 16777215L; // CloudSpigot
+	// private long d = 16777215L; // CloudSpigot
 	private int I;
 	protected int m = (new Random()).nextInt();
 	protected final int n = 1013904223;
@@ -1416,7 +1416,7 @@ public abstract class World implements IBlockAccess {
 		int i;
 		Entity entity;
 		CrashReport crashreport;
-		//CrashReportSystemDetails crashreportsystemdetails; // CloudSpigot
+		// CrashReportSystemDetails crashreportsystemdetails; // CloudSpigot
 
 		for (i = 0; i < this.k.size(); ++i) {
 			entity = (Entity) this.k.get(i);
@@ -1431,12 +1431,12 @@ public abstract class World implements IBlockAccess {
 				entity.t_();
 			} catch (Throwable throwable) {
 				crashreport = CrashReport.a(throwable, "Ticking entity");
-				/*crashreportsystemdetails =*/ crashreport.a("Entity being ticked"); // CloudSpigot
-				/*if (entity == null) {
-					crashreportsystemdetails.a("Entity", (Object) "~~NULL~~");
-				} else {
-					entity.appendEntityCrashDetails(crashreportsystemdetails);
-				}*/ // CloudSpigot
+				/* crashreportsystemdetails = */ crashreport.a("Entity being ticked"); // CloudSpigot
+				/*
+				 * if (entity == null) { crashreportsystemdetails.a("Entity", (Object)
+				 * "~~NULL~~"); } else {
+				 * entity.appendEntityCrashDetails(crashreportsystemdetails); }
+				 */ // CloudSpigot
 
 				throw new ReportedException(crashreport);
 			}

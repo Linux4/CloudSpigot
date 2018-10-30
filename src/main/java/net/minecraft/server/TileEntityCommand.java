@@ -2,65 +2,69 @@ package net.minecraft.server;
 
 public class TileEntityCommand extends TileEntity {
 
-    private final CommandBlockListenerAbstract a = new CommandBlockListenerAbstract() {
-        {
-            sender = new org.bukkit.craftbukkit.command.CraftBlockCommandSender(this); // CraftBukkit - add sender
-        }
-        public BlockPosition getChunkCoordinates() {
-            return TileEntityCommand.this.position;
-        }
+	private final CommandBlockListenerAbstract a = new CommandBlockListenerAbstract() {
+		{
+			sender = new org.bukkit.craftbukkit.command.CraftBlockCommandSender(this); // CraftBukkit - add sender
+		}
 
-        public Vec3D d() {
-            return new Vec3D((double) TileEntityCommand.this.position.getX() + 0.5D, (double) TileEntityCommand.this.position.getY() + 0.5D, (double) TileEntityCommand.this.position.getZ() + 0.5D);
-        }
+		public BlockPosition getChunkCoordinates() {
+			return TileEntityCommand.this.position;
+		}
 
-        public World getWorld() {
-            return TileEntityCommand.this.getWorld();
-        }
+		public Vec3D d() {
+			return new Vec3D((double) TileEntityCommand.this.position.getX() + 0.5D,
+					(double) TileEntityCommand.this.position.getY() + 0.5D,
+					(double) TileEntityCommand.this.position.getZ() + 0.5D);
+		}
 
-        public void setCommand(String s) {
-            super.setCommand(s);
-            TileEntityCommand.this.update();
-        }
+		public World getWorld() {
+			return TileEntityCommand.this.getWorld();
+		}
 
-        public void h() {
-            TileEntityCommand.this.getWorld().notify(TileEntityCommand.this.position);
-        }
+		public void setCommand(String s) {
+			super.setCommand(s);
+			TileEntityCommand.this.update();
+		}
 
-        public Entity f() {
-            return null;
-        }
-    };
+		public void h() {
+			TileEntityCommand.this.getWorld().notify(TileEntityCommand.this.position);
+		}
 
-    public TileEntityCommand() {}
+		public Entity f() {
+			return null;
+		}
+	};
 
-    public void b(NBTTagCompound nbttagcompound) {
-        super.b(nbttagcompound);
-        this.a.a(nbttagcompound);
-    }
+	public TileEntityCommand() {
+	}
 
-    public void a(NBTTagCompound nbttagcompound) {
-        super.a(nbttagcompound);
-        this.a.b(nbttagcompound);
-    }
+	public void b(NBTTagCompound nbttagcompound) {
+		super.b(nbttagcompound);
+		this.a.a(nbttagcompound);
+	}
 
-    @SuppressWarnings("rawtypes")
+	public void a(NBTTagCompound nbttagcompound) {
+		super.a(nbttagcompound);
+		this.a.b(nbttagcompound);
+	}
+
+	@SuppressWarnings("rawtypes")
 	public Packet getUpdatePacket() {
-        NBTTagCompound nbttagcompound = new NBTTagCompound();
+		NBTTagCompound nbttagcompound = new NBTTagCompound();
 
-        this.b(nbttagcompound);
-        return new PacketPlayOutTileEntityData(this.position, 2, nbttagcompound);
-    }
+		this.b(nbttagcompound);
+		return new PacketPlayOutTileEntityData(this.position, 2, nbttagcompound);
+	}
 
-    public boolean F() {
-        return true;
-    }
+	public boolean F() {
+		return true;
+	}
 
-    public CommandBlockListenerAbstract getCommandBlock() {
-        return this.a;
-    }
+	public CommandBlockListenerAbstract getCommandBlock() {
+		return this.a;
+	}
 
-    public CommandObjectiveExecutor c() {
-        return this.a.n();
-    }
+	public CommandObjectiveExecutor c() {
+		return this.a.n();
+	}
 }

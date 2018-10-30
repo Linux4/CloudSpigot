@@ -7,28 +7,28 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ocelot;
 
 public class CraftOcelot extends CraftTameableAnimal implements Ocelot {
-    public CraftOcelot(CraftServer server, EntityOcelot wolf) {
-        super(server, wolf);
-    }
+	public CraftOcelot(CraftServer server, EntityOcelot wolf) {
+		super(server, wolf);
+	}
 
-    @Override
-    public EntityOcelot getHandle() {
-        return (EntityOcelot) entity;
-    }
+	@Override
+	public EntityOcelot getHandle() {
+		return (EntityOcelot) entity;
+	}
 
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public Type getCatType() {
-        return Type.getType(getHandle().getCatType());
-    }
+		return Type.getType(getHandle().getCatType());
+	}
 
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public void setCatType(Type type) {
-        Validate.notNull(type, "Cat type cannot be null");
-        getHandle().setCatType(type.getId());
-    }
+		Validate.notNull(type, "Cat type cannot be null");
+		getHandle().setCatType(type.getId());
+	}
 
-    @Override
-    public EntityType getType() {
-        return EntityType.OCELOT;
-    }
+	@Override
+	public EntityType getType() {
+		return EntityType.OCELOT;
+	}
 }

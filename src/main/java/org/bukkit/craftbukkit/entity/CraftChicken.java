@@ -8,21 +8,21 @@ import org.bukkit.entity.EntityType;
 
 public class CraftChicken extends CraftAnimals implements Chicken {
 
-    public CraftChicken(CraftServer server, EntityChicken entity) {
-        super(server, entity);
-    }
+	public CraftChicken(CraftServer server, EntityChicken entity) {
+		super(server, entity);
+	}
 
-    @Override
-    public EntityChicken getHandle() {
-        return (EntityChicken) entity;
-    }
+	@Override
+	public EntityChicken getHandle() {
+		return (EntityChicken) entity;
+	}
 
-    @Override
-    public String toString() {
-        return "CraftChicken";
-    }
+	@Override
+	public String toString() {
+		return "CraftChicken";
+	}
 
-    public EntityType getType() {
-        return EntityType.CHICKEN;
-    }
+	public EntityType getType() {
+		return EntityType.CHICKEN;
+	}
 }

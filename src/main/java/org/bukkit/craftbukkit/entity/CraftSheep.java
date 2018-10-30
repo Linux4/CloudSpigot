@@ -9,39 +9,39 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Sheep;
 
 public class CraftSheep extends CraftAnimals implements Sheep {
-    public CraftSheep(CraftServer server, EntitySheep entity) {
-        super(server, entity);
-    }
+	public CraftSheep(CraftServer server, EntitySheep entity) {
+		super(server, entity);
+	}
 
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public DyeColor getColor() {
-        return DyeColor.getByWoolData((byte) getHandle().getColor().getColorIndex());
-    }
+		return DyeColor.getByWoolData((byte) getHandle().getColor().getColorIndex());
+	}
 
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public void setColor(DyeColor color) {
-        getHandle().setColor(EnumColor.fromColorIndex(color.getWoolData()));
-    }
+		getHandle().setColor(EnumColor.fromColorIndex(color.getWoolData()));
+	}
 
-    public boolean isSheared() {
-        return getHandle().isSheared();
-    }
+	public boolean isSheared() {
+		return getHandle().isSheared();
+	}
 
-    public void setSheared(boolean flag) {
-        getHandle().setSheared(flag);
-    }
+	public void setSheared(boolean flag) {
+		getHandle().setSheared(flag);
+	}
 
-    @Override
-    public EntitySheep getHandle() {
-        return (EntitySheep) entity;
-    }
+	@Override
+	public EntitySheep getHandle() {
+		return (EntitySheep) entity;
+	}
 
-    @Override
-    public String toString() {
-        return "CraftSheep";
-    }
+	@Override
+	public String toString() {
+		return "CraftSheep";
+	}
 
-    public EntityType getType() {
-        return EntityType.SHEEP;
-    }
+	public EntityType getType() {
+		return EntityType.SHEEP;
+	}
 }

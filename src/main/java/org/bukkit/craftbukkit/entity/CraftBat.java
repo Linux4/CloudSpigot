@@ -6,31 +6,31 @@ import org.bukkit.entity.Bat;
 import org.bukkit.entity.EntityType;
 
 public class CraftBat extends CraftAmbient implements Bat {
-    public CraftBat(CraftServer server, EntityBat entity) {
-        super(server, entity);
-    }
+	public CraftBat(CraftServer server, EntityBat entity) {
+		super(server, entity);
+	}
 
-    @Override
-    public EntityBat getHandle() {
-        return (EntityBat) entity;
-    }
+	@Override
+	public EntityBat getHandle() {
+		return (EntityBat) entity;
+	}
 
-    @Override
-    public String toString() {
-        return "CraftBat";
-    }
+	@Override
+	public String toString() {
+		return "CraftBat";
+	}
 
-    public EntityType getType() {
-        return EntityType.BAT;
-    }
+	public EntityType getType() {
+		return EntityType.BAT;
+	}
 
-    @Override
-    public boolean isAwake() {
-        return !getHandle().isAsleep();
-    }
+	@Override
+	public boolean isAwake() {
+		return !getHandle().isAsleep();
+	}
 
-    @Override
-    public void setAwake(boolean state) {
-        getHandle().setAsleep(!state);
-    }
+	@Override
+	public void setAwake(boolean state) {
+		getHandle().setAsleep(!state);
+	}
 }

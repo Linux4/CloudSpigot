@@ -28,119 +28,120 @@ import org.bukkit.util.StringUtil;
 
 @SuppressWarnings("deprecation")
 public final class CraftMagicNumbers implements UnsafeValues {
-    public static final UnsafeValues INSTANCE = new CraftMagicNumbers();
+	public static final UnsafeValues INSTANCE = new CraftMagicNumbers();
 
-    private CraftMagicNumbers() {}
+	private CraftMagicNumbers() {
+	}
 
-    public static Block getBlock(org.bukkit.block.Block block) {
-        return getBlock(block.getType());
-    }
+	public static Block getBlock(org.bukkit.block.Block block) {
+		return getBlock(block.getType());
+	}
 
-    @Deprecated
-    // A bad method for bad magic.
-    public static Block getBlock(int id) {
-        return getBlock(Material.getMaterial(id));
-    }
+	@Deprecated
+	// A bad method for bad magic.
+	public static Block getBlock(int id) {
+		return getBlock(Material.getMaterial(id));
+	}
 
-    @Deprecated
-    // A bad method for bad magic.
-    public static int getId(Block block) {
-        return Block.getId(block);
-    }
+	@Deprecated
+	// A bad method for bad magic.
+	public static int getId(Block block) {
+		return Block.getId(block);
+	}
 
-    public static Material getMaterial(Block block) {
-        return Material.getMaterial(Block.getId(block));
-    }
+	public static Material getMaterial(Block block) {
+		return Material.getMaterial(Block.getId(block));
+	}
 
-    public static Item getItem(Material material) {
-        // TODO: Don't use ID
-        Item item = Item.getById(material.getId());
-        return item;
-    }
+	public static Item getItem(Material material) {
+		// TODO: Don't use ID
+		Item item = Item.getById(material.getId());
+		return item;
+	}
 
-    @Deprecated
-    // A bad method for bad magic.
-    public static Item getItem(int id) {
-        return Item.getById(id);
-    }
+	@Deprecated
+	// A bad method for bad magic.
+	public static Item getItem(int id) {
+		return Item.getById(id);
+	}
 
-    @Deprecated
-    // A bad method for bad magic.
-    public static int getId(Item item) {
-        return Item.getId(item);
-    }
+	@Deprecated
+	// A bad method for bad magic.
+	public static int getId(Item item) {
+		return Item.getId(item);
+	}
 
-    public static Material getMaterial(Item item) {
-        // TODO: Don't use ID
-        Material material = Material.getMaterial(Item.getId(item));
+	public static Material getMaterial(Item item) {
+		// TODO: Don't use ID
+		Material material = Material.getMaterial(Item.getId(item));
 
-        if (material == null) {
-            return Material.AIR;
-        }
+		if (material == null) {
+			return Material.AIR;
+		}
 
-        return material;
-    }
+		return material;
+	}
 
-    public static Block getBlock(Material material) {
-        // TODO: Don't use ID
-        Block block = Block.getById(material.getId());
+	public static Block getBlock(Material material) {
+		// TODO: Don't use ID
+		Block block = Block.getById(material.getId());
 
-        if (block == null) {
-            return Blocks.AIR;
-        }
+		if (block == null) {
+			return Blocks.AIR;
+		}
 
-        return block;
-    }
+		return block;
+	}
 
-    @Override
-    public Material getMaterialFromInternalName(String name) {
-        return getMaterial((Item) Item.REGISTRY.get(new MinecraftKey(name)));
-    }
+	@Override
+	public Material getMaterialFromInternalName(String name) {
+		return getMaterial((Item) Item.REGISTRY.get(new MinecraftKey(name)));
+	}
 
-    @Override
-    public List<String> tabCompleteInternalMaterialName(String token, List<String> completions) {
-        ArrayList<String> results = Lists.newArrayList();
-        for (MinecraftKey key : (Set<MinecraftKey>)Item.REGISTRY.keySet()) {
-            results.add(key.toString());
-        }
-        return StringUtil.copyPartialMatches(token, results, completions);
-    }
+	@Override
+	public List<String> tabCompleteInternalMaterialName(String token, List<String> completions) {
+		ArrayList<String> results = Lists.newArrayList();
+		for (MinecraftKey key : (Set<MinecraftKey>) Item.REGISTRY.keySet()) {
+			results.add(key.toString());
+		}
+		return StringUtil.copyPartialMatches(token, results, completions);
+	}
 
-    @Override
-    public ItemStack modifyItemStack(ItemStack stack, String arguments) {
-        net.minecraft.server.ItemStack nmsStack = CraftItemStack.asNMSCopy(stack);
+	@Override
+	public ItemStack modifyItemStack(ItemStack stack, String arguments) {
+		net.minecraft.server.ItemStack nmsStack = CraftItemStack.asNMSCopy(stack);
 
-        try {
-            nmsStack.setTag((NBTTagCompound) MojangsonParser.parse(arguments));
-        } catch (MojangsonParseException ex) {
-            Logger.getLogger(CraftMagicNumbers.class.getName()).log(Level.SEVERE, null, ex);
-        }
+		try {
+			nmsStack.setTag((NBTTagCompound) MojangsonParser.parse(arguments));
+		} catch (MojangsonParseException ex) {
+			Logger.getLogger(CraftMagicNumbers.class.getName()).log(Level.SEVERE, null, ex);
+		}
 
-        stack.setItemMeta(CraftItemStack.getItemMeta(nmsStack));
+		stack.setItemMeta(CraftItemStack.getItemMeta(nmsStack));
 
-        return stack;
-    }
+		return stack;
+	}
 
-    @Override
-    public Statistic getStatisticFromInternalName(String name) {
-        return CraftStatistic.getBukkitStatisticByName(name);
-    }
+	@Override
+	public Statistic getStatisticFromInternalName(String name) {
+		return CraftStatistic.getBukkitStatisticByName(name);
+	}
 
-    @Override
-    public Achievement getAchievementFromInternalName(String name) {
-        return CraftStatistic.getBukkitAchievementByName(name);
-    }
+	@Override
+	public Achievement getAchievementFromInternalName(String name) {
+		return CraftStatistic.getBukkitAchievementByName(name);
+	}
 
-    @Override
-    public List<String> tabCompleteInternalStatisticOrAchievementName(String token, List<String> completions) {
-        List<String> matches = new ArrayList<String>();
-        Iterator<net.minecraft.server.Statistic> iterator = StatisticList.stats.iterator();
-        while (iterator.hasNext()) {
-            String statistic = ((net.minecraft.server.Statistic) iterator.next()).name;
-            if (statistic.startsWith(token)) {
-                matches.add(statistic);
-            }
-        }
-        return matches;
-    }
+	@Override
+	public List<String> tabCompleteInternalStatisticOrAchievementName(String token, List<String> completions) {
+		List<String> matches = new ArrayList<String>();
+		Iterator<net.minecraft.server.Statistic> iterator = StatisticList.stats.iterator();
+		while (iterator.hasNext()) {
+			String statistic = ((net.minecraft.server.Statistic) iterator.next()).name;
+			if (statistic.startsWith(token)) {
+				matches.add(statistic);
+			}
+		}
+		return matches;
+	}
 }

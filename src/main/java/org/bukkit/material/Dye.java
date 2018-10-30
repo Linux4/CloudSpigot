@@ -7,79 +7,79 @@ import org.bukkit.Material;
  * Represents dye
  */
 public class Dye extends MaterialData implements Colorable {
-    public Dye() {
-        super(Material.INK_SACK);
-    }
+	public Dye() {
+		super(Material.INK_SACK);
+	}
 
-    /**
-     * @param type the raw type id
-     * @deprecated Magic value
-     */
-    @Deprecated
-    public Dye(final int type) {
-        super(type);
-    }
+	/**
+	 * @param type the raw type id
+	 * @deprecated Magic value
+	 */
+	@Deprecated
+	public Dye(final int type) {
+		super(type);
+	}
 
-    public Dye(final Material type) {
-        super(type);
-    }
+	public Dye(final Material type) {
+		super(type);
+	}
 
-    /**
-     * @param type the raw type id
-     * @param data the raw data value
-     * @deprecated Magic value
-     */
-    @Deprecated
-    public Dye(final int type, final byte data) {
-        super(type, data);
-    }
+	/**
+	 * @param type the raw type id
+	 * @param data the raw data value
+	 * @deprecated Magic value
+	 */
+	@Deprecated
+	public Dye(final int type, final byte data) {
+		super(type, data);
+	}
 
-    /**
-     * @param type the type
-     * @param data the raw data value
-     * @deprecated Magic value
-     */
-    @Deprecated
-    public Dye(final Material type, final byte data) {
-        super(type, data);
-    }
+	/**
+	 * @param type the type
+	 * @param data the raw data value
+	 * @deprecated Magic value
+	 */
+	@Deprecated
+	public Dye(final Material type, final byte data) {
+		super(type, data);
+	}
 
-    /**
-     * @param color color of the dye
-     */
-    @SuppressWarnings("deprecation")
+	/**
+	 * @param color color of the dye
+	 */
+	@SuppressWarnings("deprecation")
 	public Dye(final DyeColor color) {
-        super(Material.INK_SACK, color.getDyeData());
-    }
+		super(Material.INK_SACK, color.getDyeData());
+	}
 
-    /**
-     * Gets the current color of this dye
-     *
-     * @return DyeColor of this dye
-     */
-    @SuppressWarnings("deprecation")
+	/**
+	 * Gets the current color of this dye
+	 *
+	 * @return DyeColor of this dye
+	 */
+	@SuppressWarnings("deprecation")
 	public DyeColor getColor() {
-        return DyeColor.getByDyeData(getData());
-    }
+		return DyeColor.getByDyeData(getData());
+	}
 
-    /**
-     * Sets the color of this dye
-     *
-     * @param color New color of this dye
-     */
-    @SuppressWarnings("deprecation")
+	/**
+	 * Sets the color of this dye
+	 *
+	 * @param color New color of this dye
+	 */
+	@SuppressWarnings("deprecation")
 	public void setColor(DyeColor color) {
-        setData(color.getDyeData());
-    }
+		setData(color.getDyeData());
+	}
 
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	@Override
-    public String toString() {
-        return getColor() + " DYE(" + getData() + ")";
-    }
+	public String toString() {
+		return getColor() + " DYE(" + getData() + ")";
+	}
 
-    @Override
-    public Dye clone() {
-        return (Dye) super.clone();
-    }
+	@Override
+	public Dye clone() {
+		return (Dye) super.clone();
+	}
 }

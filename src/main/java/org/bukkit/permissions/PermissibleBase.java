@@ -16,250 +16,263 @@ import eu.server24_7.cloudspigot.event.permission.PermissionCheckEvent; // Cloud
  * Base Permissible for use in any Permissible object via proxy or extension
  */
 public class PermissibleBase implements Permissible {
-    private ServerOperator opable = null;
-    private Permissible parent = this;
-    private final List<PermissionAttachment> attachments = new LinkedList<PermissionAttachment>();
-    private final Map<String, PermissionAttachmentInfo> permissions = new HashMap<String, PermissionAttachmentInfo>();
+	private ServerOperator opable = null;
+	private Permissible parent = this;
+	private final List<PermissionAttachment> attachments = new LinkedList<PermissionAttachment>();
+	private final Map<String, PermissionAttachmentInfo> permissions = new HashMap<String, PermissionAttachmentInfo>();
 
-    public PermissibleBase(ServerOperator opable) {
-        this.opable = opable;
+	public PermissibleBase(ServerOperator opable) {
+		this.opable = opable;
 
-        if (opable instanceof Permissible) {
-            this.parent = (Permissible) opable;
-        }
+		if (opable instanceof Permissible) {
+			this.parent = (Permissible) opable;
+		}
 
-        recalculatePermissions();
-    }
+		recalculatePermissions();
+	}
 
-    public boolean isOp() {
-        if (opable == null) {
-            return false;
-        } else {
-            return opable.isOp();
-        }
-    }
+	public boolean isOp() {
+		if (opable == null) {
+			return false;
+		} else {
+			return opable.isOp();
+		}
+	}
 
-    public void setOp(boolean value) {
-        if (opable == null) {
-            throw new UnsupportedOperationException("Cannot change op value as no ServerOperator is set");
-        } else {
-            opable.setOp(value);
-        }
-    }
+	public void setOp(boolean value) {
+		if (opable == null) {
+			throw new UnsupportedOperationException("Cannot change op value as no ServerOperator is set");
+		} else {
+			opable.setOp(value);
+		}
+	}
 
-    public boolean isPermissionSet(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Permission name cannot be null");
-        }
+	public boolean isPermissionSet(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Permission name cannot be null");
+		}
 
-        return permissions.containsKey(name.toLowerCase());
-    }
+		return permissions.containsKey(name.toLowerCase());
+	}
 
-    public boolean isPermissionSet(Permission perm) {
-        if (perm == null) {
-            throw new IllegalArgumentException("Permission cannot be null");
-        }
+	public boolean isPermissionSet(Permission perm) {
+		if (perm == null) {
+			throw new IllegalArgumentException("Permission cannot be null");
+		}
 
-        return isPermissionSet(perm.getName());
-    }
+		return isPermissionSet(perm.getName());
+	}
 
-    public boolean hasPermission(String inName) {
-        if (inName == null) {
-            throw new IllegalArgumentException("Permission name cannot be null");
-        }
+	public boolean hasPermission(String inName) {
+		if (inName == null) {
+			throw new IllegalArgumentException("Permission name cannot be null");
+		}
 
-        String name = inName.toLowerCase();
-	PermissionCheckEvent event = new PermissionCheckEvent(this, opable, name, false); // CloudSpigot - add PermissionCheckEvent
+		String name = inName.toLowerCase();
+		PermissionCheckEvent event = new PermissionCheckEvent(this, opable, name, false); // CloudSpigot - add
+																							// PermissionCheckEvent
 
-        if (isPermissionSet(name)) {
-            //return permissions.get(name).getValue(); // CloudSpigot
-	    event = new PermissionCheckEvent(this, opable, name, permissions.get(name).getValue()); // CloudSpigot - add PermissionCheckEvent
-        } else {
-            Permission perm = Bukkit.getServer().getPluginManager().getPermission(name);
+		if (isPermissionSet(name)) {
+			// return permissions.get(name).getValue(); // CloudSpigot
+			event = new PermissionCheckEvent(this, opable, name, permissions.get(name).getValue()); // CloudSpigot - add
+																									// PermissionCheckEvent
+		} else {
+			Permission perm = Bukkit.getServer().getPluginManager().getPermission(name);
 
-            if (perm != null) {
-                //return perm.getDefault().getValue(isOp()); // CloudSpigot
-		event = new PermissionCheckEvent(this, opable, name, perm.getDefault().getValue(isOp())); // CloudSpigot- add PermissionCheckEvent
-            } else {
-                //return Permission.DEFAULT_PERMISSION.getValue(isOp()); // CloudSpigot
-		event = new PermissionCheckEvent(this, opable, name, Permission.DEFAULT_PERMISSION.getValue(isOp())); // CloudSpigot - add PermissionCheckEvent
-            }
-        }
-	
-	// CloudSpigot start - add PermissionCheckEvent
-	Bukkit.getPluginManager().callEvent(event);
-	return event.getHasPermission();
-	// CloudSpigot end
-    }
+			if (perm != null) {
+				// return perm.getDefault().getValue(isOp()); // CloudSpigot
+				event = new PermissionCheckEvent(this, opable, name, perm.getDefault().getValue(isOp())); // CloudSpigot-
+																											// add
+																											// PermissionCheckEvent
+			} else {
+				// return Permission.DEFAULT_PERMISSION.getValue(isOp()); // CloudSpigot
+				event = new PermissionCheckEvent(this, opable, name, Permission.DEFAULT_PERMISSION.getValue(isOp())); // CloudSpigot
+																														// -
+																														// add
+																														// PermissionCheckEvent
+			}
+		}
 
-    public boolean hasPermission(Permission perm) {
-        if (perm == null) {
-            throw new IllegalArgumentException("Permission cannot be null");
-        }
+		// CloudSpigot start - add PermissionCheckEvent
+		Bukkit.getPluginManager().callEvent(event);
+		return event.getHasPermission();
+		// CloudSpigot end
+	}
 
-        String name = perm.getName().toLowerCase();
-	PermissionCheckEvent event = new PermissionCheckEvent(this, opable, name, false); // CloudSpigot - add PermissionCheckEvent
+	public boolean hasPermission(Permission perm) {
+		if (perm == null) {
+			throw new IllegalArgumentException("Permission cannot be null");
+		}
 
-        if (isPermissionSet(name)) {
-            //return permissions.get(name).getValue(); // CloudSpigot
-	    event = new PermissionCheckEvent(this, opable, name, permissions.get(name).getValue()); // CloudSpigot - add PermissionCheckEvent
-        }
-        //return perm.getDefault().getValue(isOp()); // CloudSpigot
-	event = new PermissionCheckEvent(this, opable, name, perm.getDefault().getValue(isOp())); // CloudSpigot - add PermissionCheckEvent
-	
-	// CloudSpigot start - add PermissionCheckEvent
-	Bukkit.getPluginManager().callEvent(event);
-	return event.getHasPermission();
-	// CloudSpigot end
-    }
+		String name = perm.getName().toLowerCase();
+		PermissionCheckEvent event = new PermissionCheckEvent(this, opable, name, false); // CloudSpigot - add
+																							// PermissionCheckEvent
 
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
-        if (name == null) {
-            throw new IllegalArgumentException("Permission name cannot be null");
-        } else if (plugin == null) {
-            throw new IllegalArgumentException("Plugin cannot be null");
-        } else if (!plugin.isEnabled()) {
-            throw new IllegalArgumentException("Plugin " + plugin.getDescription().getFullName() + " is disabled");
-        }
+		if (isPermissionSet(name)) {
+			// return permissions.get(name).getValue(); // CloudSpigot
+			event = new PermissionCheckEvent(this, opable, name, permissions.get(name).getValue()); // CloudSpigot - add
+																									// PermissionCheckEvent
+		}
+		// return perm.getDefault().getValue(isOp()); // CloudSpigot
+		event = new PermissionCheckEvent(this, opable, name, perm.getDefault().getValue(isOp())); // CloudSpigot - add
+																									// PermissionCheckEvent
 
-        PermissionAttachment result = addAttachment(plugin);
-        result.setPermission(name, value);
+		// CloudSpigot start - add PermissionCheckEvent
+		Bukkit.getPluginManager().callEvent(event);
+		return event.getHasPermission();
+		// CloudSpigot end
+	}
 
-        recalculatePermissions();
+	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
+		if (name == null) {
+			throw new IllegalArgumentException("Permission name cannot be null");
+		} else if (plugin == null) {
+			throw new IllegalArgumentException("Plugin cannot be null");
+		} else if (!plugin.isEnabled()) {
+			throw new IllegalArgumentException("Plugin " + plugin.getDescription().getFullName() + " is disabled");
+		}
 
-        return result;
-    }
+		PermissionAttachment result = addAttachment(plugin);
+		result.setPermission(name, value);
 
-    public PermissionAttachment addAttachment(Plugin plugin) {
-        if (plugin == null) {
-            throw new IllegalArgumentException("Plugin cannot be null");
-        } else if (!plugin.isEnabled()) {
-            throw new IllegalArgumentException("Plugin " + plugin.getDescription().getFullName() + " is disabled");
-        }
+		recalculatePermissions();
 
-        PermissionAttachment result = new PermissionAttachment(plugin, parent);
+		return result;
+	}
 
-        attachments.add(result);
-        recalculatePermissions();
+	public PermissionAttachment addAttachment(Plugin plugin) {
+		if (plugin == null) {
+			throw new IllegalArgumentException("Plugin cannot be null");
+		} else if (!plugin.isEnabled()) {
+			throw new IllegalArgumentException("Plugin " + plugin.getDescription().getFullName() + " is disabled");
+		}
 
-        return result;
-    }
+		PermissionAttachment result = new PermissionAttachment(plugin, parent);
 
-    public void removeAttachment(PermissionAttachment attachment) {
-        if (attachment == null) {
-            throw new IllegalArgumentException("Attachment cannot be null");
-        }
+		attachments.add(result);
+		recalculatePermissions();
 
-        if (attachments.contains(attachment)) {
-            attachments.remove(attachment);
-            PermissionRemovedExecutor ex = attachment.getRemovalCallback();
+		return result;
+	}
 
-            if (ex != null) {
-                ex.attachmentRemoved(attachment);
-            }
+	public void removeAttachment(PermissionAttachment attachment) {
+		if (attachment == null) {
+			throw new IllegalArgumentException("Attachment cannot be null");
+		}
 
-            recalculatePermissions();
-        } else {
-            throw new IllegalArgumentException("Given attachment is not part of Permissible object " + parent);
-        }
-    }
+		if (attachments.contains(attachment)) {
+			attachments.remove(attachment);
+			PermissionRemovedExecutor ex = attachment.getRemovalCallback();
 
-    public void recalculatePermissions() {
-        clearPermissions();
-        Set<Permission> defaults = Bukkit.getServer().getPluginManager().getDefaultPermissions(isOp());
-        Bukkit.getServer().getPluginManager().subscribeToDefaultPerms(isOp(), parent);
+			if (ex != null) {
+				ex.attachmentRemoved(attachment);
+			}
 
-        for (Permission perm : defaults) {
-            String name = perm.getName().toLowerCase();
-            permissions.put(name, new PermissionAttachmentInfo(parent, name, null, true));
-            Bukkit.getServer().getPluginManager().subscribeToPermission(name, parent);
-            calculateChildPermissions(perm.getChildren(), false, null);
-        }
+			recalculatePermissions();
+		} else {
+			throw new IllegalArgumentException("Given attachment is not part of Permissible object " + parent);
+		}
+	}
 
-        for (PermissionAttachment attachment : attachments) {
-            calculateChildPermissions(attachment.getPermissions(), false, attachment);
-        }
-    }
+	public void recalculatePermissions() {
+		clearPermissions();
+		Set<Permission> defaults = Bukkit.getServer().getPluginManager().getDefaultPermissions(isOp());
+		Bukkit.getServer().getPluginManager().subscribeToDefaultPerms(isOp(), parent);
 
-    public synchronized void clearPermissions() {
-        Set<String> perms = permissions.keySet();
+		for (Permission perm : defaults) {
+			String name = perm.getName().toLowerCase();
+			permissions.put(name, new PermissionAttachmentInfo(parent, name, null, true));
+			Bukkit.getServer().getPluginManager().subscribeToPermission(name, parent);
+			calculateChildPermissions(perm.getChildren(), false, null);
+		}
 
-        for (String name : perms) {
-            Bukkit.getServer().getPluginManager().unsubscribeFromPermission(name, parent);
-        }
+		for (PermissionAttachment attachment : attachments) {
+			calculateChildPermissions(attachment.getPermissions(), false, attachment);
+		}
+	}
 
-        Bukkit.getServer().getPluginManager().unsubscribeFromDefaultPerms(false, parent);
-        Bukkit.getServer().getPluginManager().unsubscribeFromDefaultPerms(true, parent);
+	public synchronized void clearPermissions() {
+		Set<String> perms = permissions.keySet();
 
-        permissions.clear();
-    }
+		for (String name : perms) {
+			Bukkit.getServer().getPluginManager().unsubscribeFromPermission(name, parent);
+		}
 
-    private void calculateChildPermissions(Map<String, Boolean> children, boolean invert, PermissionAttachment attachment) {
-        Set<String> keys = children.keySet();
+		Bukkit.getServer().getPluginManager().unsubscribeFromDefaultPerms(false, parent);
+		Bukkit.getServer().getPluginManager().unsubscribeFromDefaultPerms(true, parent);
 
-        for (String name : keys) {
-            Permission perm = Bukkit.getServer().getPluginManager().getPermission(name);
-            boolean value = children.get(name) ^ invert;
-            String lname = name.toLowerCase();
+		permissions.clear();
+	}
 
-            permissions.put(lname, new PermissionAttachmentInfo(parent, lname, attachment, value));
-            Bukkit.getServer().getPluginManager().subscribeToPermission(name, parent);
+	private void calculateChildPermissions(Map<String, Boolean> children, boolean invert,
+			PermissionAttachment attachment) {
+		Set<String> keys = children.keySet();
 
-            if (perm != null) {
-                calculateChildPermissions(perm.getChildren(), !value, attachment);
-            }
-        }
-    }
+		for (String name : keys) {
+			Permission perm = Bukkit.getServer().getPluginManager().getPermission(name);
+			boolean value = children.get(name) ^ invert;
+			String lname = name.toLowerCase();
 
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
-        if (name == null) {
-            throw new IllegalArgumentException("Permission name cannot be null");
-        } else if (plugin == null) {
-            throw new IllegalArgumentException("Plugin cannot be null");
-        } else if (!plugin.isEnabled()) {
-            throw new IllegalArgumentException("Plugin " + plugin.getDescription().getFullName() + " is disabled");
-        }
+			permissions.put(lname, new PermissionAttachmentInfo(parent, lname, attachment, value));
+			Bukkit.getServer().getPluginManager().subscribeToPermission(name, parent);
 
-        PermissionAttachment result = addAttachment(plugin, ticks);
+			if (perm != null) {
+				calculateChildPermissions(perm.getChildren(), !value, attachment);
+			}
+		}
+	}
 
-        if (result != null) {
-            result.setPermission(name, value);
-        }
+	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
+		if (name == null) {
+			throw new IllegalArgumentException("Permission name cannot be null");
+		} else if (plugin == null) {
+			throw new IllegalArgumentException("Plugin cannot be null");
+		} else if (!plugin.isEnabled()) {
+			throw new IllegalArgumentException("Plugin " + plugin.getDescription().getFullName() + " is disabled");
+		}
 
-        return result;
-    }
+		PermissionAttachment result = addAttachment(plugin, ticks);
 
-    public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
-        if (plugin == null) {
-            throw new IllegalArgumentException("Plugin cannot be null");
-        } else if (!plugin.isEnabled()) {
-            throw new IllegalArgumentException("Plugin " + plugin.getDescription().getFullName() + " is disabled");
-        }
+		if (result != null) {
+			result.setPermission(name, value);
+		}
 
-        PermissionAttachment result = addAttachment(plugin);
+		return result;
+	}
 
-        if (Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RemoveAttachmentRunnable(result), ticks) == -1) {
-            Bukkit.getServer().getLogger().log(Level.WARNING, "Could not add PermissionAttachment to " + parent + " for plugin " + plugin.getDescription().getFullName() + ": Scheduler returned -1");
-            result.remove();
-            return null;
-        } else {
-            return result;
-        }
-    }
+	public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
+		if (plugin == null) {
+			throw new IllegalArgumentException("Plugin cannot be null");
+		} else if (!plugin.isEnabled()) {
+			throw new IllegalArgumentException("Plugin " + plugin.getDescription().getFullName() + " is disabled");
+		}
 
-    public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-        return new HashSet<PermissionAttachmentInfo>(permissions.values());
-    }
+		PermissionAttachment result = addAttachment(plugin);
 
-    private class RemoveAttachmentRunnable implements Runnable {
-        private PermissionAttachment attachment;
+		if (Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RemoveAttachmentRunnable(result),
+				ticks) == -1) {
+			Bukkit.getServer().getLogger().log(Level.WARNING, "Could not add PermissionAttachment to " + parent
+					+ " for plugin " + plugin.getDescription().getFullName() + ": Scheduler returned -1");
+			result.remove();
+			return null;
+		} else {
+			return result;
+		}
+	}
 
-        public RemoveAttachmentRunnable(PermissionAttachment attachment) {
-            this.attachment = attachment;
-        }
+	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
+		return new HashSet<PermissionAttachmentInfo>(permissions.values());
+	}
 
-        public void run() {
-            attachment.remove();
-        }
-    }
+	private class RemoveAttachmentRunnable implements Runnable {
+		private PermissionAttachment attachment;
+
+		public RemoveAttachmentRunnable(PermissionAttachment attachment) {
+			this.attachment = attachment;
+		}
+
+		public void run() {
+			attachment.remove();
+		}
+	}
 }

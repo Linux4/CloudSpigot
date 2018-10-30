@@ -8,115 +8,115 @@ import java.util.TreeSet;
 
 public class HashTreeSet<V> implements Set<V> {
 
-    private HashSet<V> hash = new HashSet<V>();
-    private TreeSet<V> tree = new TreeSet<V>();
+	private HashSet<V> hash = new HashSet<V>();
+	private TreeSet<V> tree = new TreeSet<V>();
 
-    public HashTreeSet() {
+	public HashTreeSet() {
 
-    }
+	}
 
-    @Override
-    public int size() {
-        return hash.size();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return hash.isEmpty();
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return hash.contains(o);
-    }
-
-    @Override
-    public Iterator<V> iterator() {
-        return new Iterator<V>() {
-
-            private Iterator<V> it = tree.iterator();
-            private V last;
-
-            @Override
-            public boolean hasNext() {
-                return it.hasNext();
-            }
-
-            @Override
-            public V next() {
-                return last = it.next();
-            }
-
-            @Override
-            public void remove() {
-                if (last == null) {
-                    throw new IllegalStateException();
-                }
-                it.remove();
-                hash.remove(last);
-                last = null;
-            }
-        };
-    }
-
-    @Override
-    public Object[] toArray() {
-        return hash.toArray();
-    }
-
-    @SuppressWarnings("unchecked")
 	@Override
-    public Object[] toArray(Object[] a) {
-        return hash.toArray(a);
-    }
+	public int size() {
+		return hash.size();
+	}
 
-    @Override
-    public boolean add(V e) {
-        hash.add(e);
-        return tree.add(e);
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        hash.remove(o);
-        return tree.remove(o);
-    }
-
-    @SuppressWarnings("rawtypes")
 	@Override
-    public boolean containsAll(Collection c) {
-        return hash.containsAll(c);
-    }
+	public boolean isEmpty() {
+		return hash.isEmpty();
+	}
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-    public boolean addAll(Collection c) {
-        tree.addAll(c);
-        return hash.addAll(c);
-    }
+	public boolean contains(Object o) {
+		return hash.contains(o);
+	}
 
-    @SuppressWarnings("rawtypes")
 	@Override
-    public boolean retainAll(Collection c) {
-        tree.retainAll(c);
-        return hash.retainAll(c);
-    }
+	public Iterator<V> iterator() {
+		return new Iterator<V>() {
 
-    @SuppressWarnings("rawtypes")
+			private Iterator<V> it = tree.iterator();
+			private V last;
+
+			@Override
+			public boolean hasNext() {
+				return it.hasNext();
+			}
+
+			@Override
+			public V next() {
+				return last = it.next();
+			}
+
+			@Override
+			public void remove() {
+				if (last == null) {
+					throw new IllegalStateException();
+				}
+				it.remove();
+				hash.remove(last);
+				last = null;
+			}
+		};
+	}
+
 	@Override
-    public boolean removeAll(Collection c) {
-        tree.removeAll(c);
-        return hash.removeAll(c);
-    }
+	public Object[] toArray() {
+		return hash.toArray();
+	}
 
-    @Override
-    public void clear() {
-        hash.clear();
-        tree.clear();
-    }
+	@SuppressWarnings("unchecked")
+	@Override
+	public Object[] toArray(Object[] a) {
+		return hash.toArray(a);
+	}
 
-    public V first() {
-        return tree.first();
-    }
+	@Override
+	public boolean add(V e) {
+		hash.add(e);
+		return tree.add(e);
+	}
+
+	@Override
+	public boolean remove(Object o) {
+		hash.remove(o);
+		return tree.remove(o);
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public boolean containsAll(Collection c) {
+		return hash.containsAll(c);
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public boolean addAll(Collection c) {
+		tree.addAll(c);
+		return hash.addAll(c);
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public boolean retainAll(Collection c) {
+		tree.retainAll(c);
+		return hash.retainAll(c);
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public boolean removeAll(Collection c) {
+		tree.removeAll(c);
+		return hash.removeAll(c);
+	}
+
+	@Override
+	public void clear() {
+		hash.clear();
+		tree.clear();
+	}
+
+	public V first() {
+		return tree.first();
+	}
 
 }

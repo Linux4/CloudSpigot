@@ -19,171 +19,172 @@ import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 public class PersistentCollection {
 
-    private IDataManager b;
-    protected Map<String, PersistentBase> a = Maps.newHashMap();
-    public List<PersistentBase> c = Lists.newArrayList(); // Spigot
-    private Map<String, Short> d = Maps.newHashMap();
+	private IDataManager b;
+	protected Map<String, PersistentBase> a = Maps.newHashMap();
+	public List<PersistentBase> c = Lists.newArrayList(); // Spigot
+	private Map<String, Short> d = Maps.newHashMap();
 
-    public PersistentCollection(IDataManager idatamanager) {
-        this.b = idatamanager;
-        this.b();
-    }
+	public PersistentCollection(IDataManager idatamanager) {
+		this.b = idatamanager;
+		this.b();
+	}
 
-    public PersistentBase get(Class<? extends PersistentBase> oclass, String s) {
-        PersistentBase persistentbase = (PersistentBase) this.a.get(s);
+	public PersistentBase get(Class<? extends PersistentBase> oclass, String s) {
+		PersistentBase persistentbase = (PersistentBase) this.a.get(s);
 
-        if (persistentbase != null) {
-            return persistentbase;
-        } else {
-            if (this.b != null) {
-                try {
-                    File file = this.b.getDataFile(s);
+		if (persistentbase != null) {
+			return persistentbase;
+		} else {
+			if (this.b != null) {
+				try {
+					File file = this.b.getDataFile(s);
 
-                    if (file != null && file.exists()) {
-                        try {
-                            persistentbase = (PersistentBase) oclass.getConstructor(new Class[] { String.class}).newInstance(new Object[] { s});
-                        } catch (Exception exception) {
-                            throw new RuntimeException("Failed to instantiate " + oclass.toString(), exception);
-                        }
+					if (file != null && file.exists()) {
+						try {
+							persistentbase = (PersistentBase) oclass.getConstructor(new Class[] { String.class })
+									.newInstance(new Object[] { s });
+						} catch (Exception exception) {
+							throw new RuntimeException("Failed to instantiate " + oclass.toString(), exception);
+						}
 
-                        FileInputStream fileinputstream = new FileInputStream(file);
-                        NBTTagCompound nbttagcompound = NBTCompressedStreamTools.a((InputStream) fileinputstream);
+						FileInputStream fileinputstream = new FileInputStream(file);
+						NBTTagCompound nbttagcompound = NBTCompressedStreamTools.a((InputStream) fileinputstream);
 
-                        fileinputstream.close();
-                        persistentbase.a(nbttagcompound.getCompound("data"));
-                    }
-                } catch (Exception exception1) {
-                    exception1.printStackTrace();
-                }
-            }
+						fileinputstream.close();
+						persistentbase.a(nbttagcompound.getCompound("data"));
+					}
+				} catch (Exception exception1) {
+					exception1.printStackTrace();
+				}
+			}
 
-            if (persistentbase != null) {
-                this.a.put(s, persistentbase);
-                this.c.add(persistentbase);
-            }
+			if (persistentbase != null) {
+				this.a.put(s, persistentbase);
+				this.c.add(persistentbase);
+			}
 
-            return persistentbase;
-        }
-    }
+			return persistentbase;
+		}
+	}
 
-    public void a(String s, PersistentBase persistentbase) {
-        if (this.a.containsKey(s)) {
-            this.c.remove(this.a.remove(s));
-        }
+	public void a(String s, PersistentBase persistentbase) {
+		if (this.a.containsKey(s)) {
+			this.c.remove(this.a.remove(s));
+		}
 
-        this.a.put(s, persistentbase);
-        this.c.add(persistentbase);
-    }
+		this.a.put(s, persistentbase);
+		this.c.add(persistentbase);
+	}
 
-    public void a() {
-        for (int i = 0; i < this.c.size(); ++i) {
-            PersistentBase persistentbase = (PersistentBase) this.c.get(i);
+	public void a() {
+		for (int i = 0; i < this.c.size(); ++i) {
+			PersistentBase persistentbase = (PersistentBase) this.c.get(i);
 
-            if (persistentbase.d()) {
-                this.a(persistentbase);
-                persistentbase.a(false);
-            }
-        }
+			if (persistentbase.d()) {
+				this.a(persistentbase);
+				persistentbase.a(false);
+			}
+		}
 
-    }
+	}
 
-    private void a(PersistentBase persistentbase) {
-        if (this.b != null) {
-            try {
-                File file = this.b.getDataFile(persistentbase.id);
+	private void a(PersistentBase persistentbase) {
+		if (this.b != null) {
+			try {
+				File file = this.b.getDataFile(persistentbase.id);
 
-                if (file != null) {
-                    NBTTagCompound nbttagcompound = new NBTTagCompound();
+				if (file != null) {
+					NBTTagCompound nbttagcompound = new NBTTagCompound();
 
-                    persistentbase.b(nbttagcompound);
-                    NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+					persistentbase.b(nbttagcompound);
+					NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 
-                    nbttagcompound1.set("data", nbttagcompound);
-                    FileOutputStream fileoutputstream = new FileOutputStream(file);
+					nbttagcompound1.set("data", nbttagcompound);
+					FileOutputStream fileoutputstream = new FileOutputStream(file);
 
-                    NBTCompressedStreamTools.a(nbttagcompound1, (OutputStream) fileoutputstream);
-                    fileoutputstream.close();
-                }
-            } catch (Exception exception) {
-                exception.printStackTrace();
-                ServerInternalException.reportInternalException(exception);
-            }
+					NBTCompressedStreamTools.a(nbttagcompound1, (OutputStream) fileoutputstream);
+					fileoutputstream.close();
+				}
+			} catch (Exception exception) {
+				exception.printStackTrace();
+				ServerInternalException.reportInternalException(exception);
+			}
 
-        }
-    }
+		}
+	}
 
-    private void b() {
-        try {
-            this.d.clear();
-            if (this.b == null) {
-                return;
-            }
+	private void b() {
+		try {
+			this.d.clear();
+			if (this.b == null) {
+				return;
+			}
 
-            File file = this.b.getDataFile("idcounts");
+			File file = this.b.getDataFile("idcounts");
 
-            if (file != null && file.exists()) {
-                DataInputStream datainputstream = new DataInputStream(new FileInputStream(file));
-                NBTTagCompound nbttagcompound = NBTCompressedStreamTools.a(datainputstream);
+			if (file != null && file.exists()) {
+				DataInputStream datainputstream = new DataInputStream(new FileInputStream(file));
+				NBTTagCompound nbttagcompound = NBTCompressedStreamTools.a(datainputstream);
 
-                datainputstream.close();
-                Iterator<String> iterator = nbttagcompound.c().iterator();
+				datainputstream.close();
+				Iterator<String> iterator = nbttagcompound.c().iterator();
 
-                while (iterator.hasNext()) {
-                    String s = (String) iterator.next();
-                    NBTBase nbtbase = nbttagcompound.get(s);
+				while (iterator.hasNext()) {
+					String s = (String) iterator.next();
+					NBTBase nbtbase = nbttagcompound.get(s);
 
-                    if (nbtbase instanceof NBTTagShort) {
-                        NBTTagShort nbttagshort = (NBTTagShort) nbtbase;
-                        short short0 = nbttagshort.e();
+					if (nbtbase instanceof NBTTagShort) {
+						NBTTagShort nbttagshort = (NBTTagShort) nbtbase;
+						short short0 = nbttagshort.e();
 
-                        this.d.put(s, Short.valueOf(short0));
-                    }
-                }
-            }
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
+						this.d.put(s, Short.valueOf(short0));
+					}
+				}
+			}
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
 
-    }
+	}
 
-    public int a(String s) {
-        Short oshort = (Short) this.d.get(s);
+	public int a(String s) {
+		Short oshort = (Short) this.d.get(s);
 
-        if (oshort == null) {
-            oshort = Short.valueOf((short) 0);
-        } else {
-            oshort = Short.valueOf((short) (oshort.shortValue() + 1));
-        }
+		if (oshort == null) {
+			oshort = Short.valueOf((short) 0);
+		} else {
+			oshort = Short.valueOf((short) (oshort.shortValue() + 1));
+		}
 
-        this.d.put(s, oshort);
-        if (this.b == null) {
-            return oshort.shortValue();
-        } else {
-            try {
-                File file = this.b.getDataFile("idcounts");
+		this.d.put(s, oshort);
+		if (this.b == null) {
+			return oshort.shortValue();
+		} else {
+			try {
+				File file = this.b.getDataFile("idcounts");
 
-                if (file != null) {
-                    NBTTagCompound nbttagcompound = new NBTTagCompound();
-                    Iterator<String> iterator = this.d.keySet().iterator();
+				if (file != null) {
+					NBTTagCompound nbttagcompound = new NBTTagCompound();
+					Iterator<String> iterator = this.d.keySet().iterator();
 
-                    while (iterator.hasNext()) {
-                        String s1 = (String) iterator.next();
-                        short short0 = ((Short) this.d.get(s1)).shortValue();
+					while (iterator.hasNext()) {
+						String s1 = (String) iterator.next();
+						short short0 = ((Short) this.d.get(s1)).shortValue();
 
-                        nbttagcompound.setShort(s1, short0);
-                    }
+						nbttagcompound.setShort(s1, short0);
+					}
 
-                    DataOutputStream dataoutputstream = new DataOutputStream(new FileOutputStream(file));
+					DataOutputStream dataoutputstream = new DataOutputStream(new FileOutputStream(file));
 
-                    NBTCompressedStreamTools.a(nbttagcompound, (DataOutput) dataoutputstream);
-                    dataoutputstream.close();
-                }
-            } catch (Exception exception) {
-                exception.printStackTrace();
-                ServerInternalException.reportInternalException(exception); // Paper
-            }
+					NBTCompressedStreamTools.a(nbttagcompound, (DataOutput) dataoutputstream);
+					dataoutputstream.close();
+				}
+			} catch (Exception exception) {
+				exception.printStackTrace();
+				ServerInternalException.reportInternalException(exception); // Paper
+			}
 
-            return oshort.shortValue();
-        }
-    }
+			return oshort.shortValue();
+		}
+	}
 }

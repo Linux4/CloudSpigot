@@ -15,109 +15,111 @@ import org.bukkit.craftbukkit.CraftWorld;
 
 public class CraftBanner extends CraftBlockState implements Banner {
 
-    private final TileEntityBanner banner;
-    private DyeColor base;
-    private List<Pattern> patterns = new ArrayList<Pattern>();
+	private final TileEntityBanner banner;
+	private DyeColor base;
+	private List<Pattern> patterns = new ArrayList<Pattern>();
 
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public CraftBanner(final Block block) {
-        super(block);
+		super(block);
 
-        CraftWorld world = (CraftWorld) block.getWorld();
-        banner = (TileEntityBanner) world.getTileEntityAt(getX(), getY(), getZ());
+		CraftWorld world = (CraftWorld) block.getWorld();
+		banner = (TileEntityBanner) world.getTileEntityAt(getX(), getY(), getZ());
 
-        base = DyeColor.getByDyeData((byte) banner.color);
+		base = DyeColor.getByDyeData((byte) banner.color);
 
-        if (banner.patterns != null) {
-            for (int i = 0; i < banner.patterns.size(); i++) {
-                NBTTagCompound p = (NBTTagCompound) banner.patterns.get(i);
-                patterns.add(new Pattern(DyeColor.getByDyeData((byte) p.getInt("Color")), PatternType.getByIdentifier(p.getString("Pattern"))));
-            }
-        }
-    }
+		if (banner.patterns != null) {
+			for (int i = 0; i < banner.patterns.size(); i++) {
+				NBTTagCompound p = (NBTTagCompound) banner.patterns.get(i);
+				patterns.add(new Pattern(DyeColor.getByDyeData((byte) p.getInt("Color")),
+						PatternType.getByIdentifier(p.getString("Pattern"))));
+			}
+		}
+	}
 
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public CraftBanner(final Material material, final TileEntityBanner te) {
-        super(material);
-        banner = te;
+		super(material);
+		banner = te;
 
-        base = DyeColor.getByDyeData((byte) banner.color);
+		base = DyeColor.getByDyeData((byte) banner.color);
 
-        if (banner.patterns != null) {
-            for (int i = 0; i < banner.patterns.size(); i++) {
-                NBTTagCompound p = (NBTTagCompound) banner.patterns.get(i);
-                patterns.add(new Pattern(DyeColor.getByDyeData((byte) p.getInt("Color")), PatternType.getByIdentifier(p.getString("Pattern"))));
-            }
-        }
-    }
+		if (banner.patterns != null) {
+			for (int i = 0; i < banner.patterns.size(); i++) {
+				NBTTagCompound p = (NBTTagCompound) banner.patterns.get(i);
+				patterns.add(new Pattern(DyeColor.getByDyeData((byte) p.getInt("Color")),
+						PatternType.getByIdentifier(p.getString("Pattern"))));
+			}
+		}
+	}
 
-    @Override
-    public DyeColor getBaseColor() {
-        return this.base;
-    }
-
-    @Override
-    public void setBaseColor(DyeColor color) {
-        this.base = color;
-    }
-
-    @Override
-    public List<Pattern> getPatterns() {
-        return new ArrayList<Pattern>(patterns);
-    }
-
-    @Override
-    public void setPatterns(List<Pattern> patterns) {
-        this.patterns = new ArrayList<Pattern>(patterns);
-    }
-
-    @Override
-    public void addPattern(Pattern pattern) {
-        this.patterns.add(pattern);
-    }
-
-    @Override
-    public Pattern getPattern(int i) {
-        return this.patterns.get(i);
-    }
-
-    @Override
-    public Pattern removePattern(int i) {
-        return this.patterns.remove(i);
-    }
-
-    @Override
-    public void setPattern(int i, Pattern pattern) {
-        this.patterns.set(i, pattern);
-    }
-
-    @Override
-    public int numberOfPatterns() {
-        return patterns.size();
-    }
-
-    @SuppressWarnings("deprecation")
 	@Override
-    public boolean update(boolean force, boolean applyPhysics) {
-        boolean result = super.update(force, applyPhysics);
+	public DyeColor getBaseColor() {
+		return this.base;
+	}
 
-        if (result) {
-            banner.color = base.getDyeData();
+	@Override
+	public void setBaseColor(DyeColor color) {
+		this.base = color;
+	}
 
-            NBTTagList newPatterns = new NBTTagList();
+	@Override
+	public List<Pattern> getPatterns() {
+		return new ArrayList<Pattern>(patterns);
+	}
 
-            for (Pattern p : patterns) {
-                NBTTagCompound compound = new NBTTagCompound();
-                compound.setInt("Color", p.getColor().getDyeData());
-                compound.setString("Pattern", p.getPattern().getIdentifier());
-                newPatterns.add(compound);
-            }
+	@Override
+	public void setPatterns(List<Pattern> patterns) {
+		this.patterns = new ArrayList<Pattern>(patterns);
+	}
 
-            banner.patterns = newPatterns;
+	@Override
+	public void addPattern(Pattern pattern) {
+		this.patterns.add(pattern);
+	}
 
-            banner.update();
-        }
+	@Override
+	public Pattern getPattern(int i) {
+		return this.patterns.get(i);
+	}
 
-        return result;
-    }
+	@Override
+	public Pattern removePattern(int i) {
+		return this.patterns.remove(i);
+	}
+
+	@Override
+	public void setPattern(int i, Pattern pattern) {
+		this.patterns.set(i, pattern);
+	}
+
+	@Override
+	public int numberOfPatterns() {
+		return patterns.size();
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public boolean update(boolean force, boolean applyPhysics) {
+		boolean result = super.update(force, applyPhysics);
+
+		if (result) {
+			banner.color = base.getDyeData();
+
+			NBTTagList newPatterns = new NBTTagList();
+
+			for (Pattern p : patterns) {
+				NBTTagCompound compound = new NBTTagCompound();
+				compound.setInt("Color", p.getColor().getDyeData());
+				compound.setString("Pattern", p.getPattern().getIdentifier());
+				newPatterns.add(compound);
+			}
+
+			banner.patterns = newPatterns;
+
+			banner.update();
+		}
+
+		return result;
+	}
 }

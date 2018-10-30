@@ -10,27 +10,28 @@ import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
 @SuppressWarnings("serial")
 public class ServerInternalException extends ServerException {
 
-    public ServerInternalException(String message) {
-        super(message);
-    }
+	public ServerInternalException(String message) {
+		super(message);
+	}
 
-    public ServerInternalException(String message, Throwable cause) {
-        super(message, cause);
-    }
+	public ServerInternalException(String message, Throwable cause) {
+		super(message, cause);
+	}
 
-    public ServerInternalException(Throwable cause) {
-        super(cause);
-    }
+	public ServerInternalException(Throwable cause) {
+		super(cause);
+	}
 
-    protected ServerInternalException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
+	protected ServerInternalException(String message, Throwable cause, boolean enableSuppression,
+			boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
 
-    public static void reportInternalException(Throwable cause) {
-        try {
-            Bukkit.getPluginManager().callEvent(new ServerExceptionEvent(new ServerInternalException(cause)));
-        } catch (Throwable t) {
-            t.printStackTrace(); // Don't want to rethrow!
-        }
-    }
+	public static void reportInternalException(Throwable cause) {
+		try {
+			Bukkit.getPluginManager().callEvent(new ServerExceptionEvent(new ServerInternalException(cause)));
+		} catch (Throwable t) {
+			t.printStackTrace(); // Don't want to rethrow!
+		}
+	}
 }

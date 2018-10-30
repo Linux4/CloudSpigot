@@ -10,32 +10,33 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
 
 public class CraftEnderman extends CraftMonster implements Enderman {
-    public CraftEnderman(CraftServer server, EntityEnderman entity) {
-        super(server, entity);
-    }
+	public CraftEnderman(CraftServer server, EntityEnderman entity) {
+		super(server, entity);
+	}
 
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public MaterialData getCarriedMaterial() {
-        IBlockData blockData = getHandle().getCarried();
-        return CraftMagicNumbers.getMaterial(blockData.getBlock()).getNewData((byte) blockData.getBlock().toLegacyData(blockData));
-    }
+		IBlockData blockData = getHandle().getCarried();
+		return CraftMagicNumbers.getMaterial(blockData.getBlock())
+				.getNewData((byte) blockData.getBlock().toLegacyData(blockData));
+	}
 
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public void setCarriedMaterial(MaterialData data) {
-        getHandle().setCarried(CraftMagicNumbers.getBlock(data.getItemTypeId()).fromLegacyData(data.getData()));
-    }
+		getHandle().setCarried(CraftMagicNumbers.getBlock(data.getItemTypeId()).fromLegacyData(data.getData()));
+	}
 
-    @Override
-    public EntityEnderman getHandle() {
-        return (EntityEnderman) entity;
-    }
+	@Override
+	public EntityEnderman getHandle() {
+		return (EntityEnderman) entity;
+	}
 
-    @Override
-    public String toString() {
-        return "CraftEnderman";
-    }
+	@Override
+	public String toString() {
+		return "CraftEnderman";
+	}
 
-    public EntityType getType() {
-        return EntityType.ENDERMAN;
-    }
+	public EntityType getType() {
+		return EntityType.ENDERMAN;
+	}
 }

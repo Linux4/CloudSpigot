@@ -8,33 +8,30 @@ import org.jline.reader.LineReaderBuilder;
 
 public final class CloudSpigotConsole extends SimpleTerminalConsole {
 
-    private final DedicatedServer server;
+	private final DedicatedServer server;
 
-    public CloudSpigotConsole(DedicatedServer server) {
-        this.server = server;
-    }
+	public CloudSpigotConsole(DedicatedServer server) {
+		this.server = server;
+	}
 
-    @Override
-    protected LineReader buildReader(LineReaderBuilder builder) {
-        return super.buildReader(builder
-                .appName("CloudSpigot")
-                .completer(new ConsoleCommandCompleter(this.server))
-        );
-    }
+	@Override
+	protected LineReader buildReader(LineReaderBuilder builder) {
+		return super.buildReader(builder.appName("CloudSpigot").completer(new ConsoleCommandCompleter(this.server)));
+	}
 
-    @Override
-    protected boolean isRunning() {
-        return !this.server.isStopped() && this.server.isRunning();
-    }
+	@Override
+	protected boolean isRunning() {
+		return !this.server.isStopped() && this.server.isRunning();
+	}
 
-    @Override
-    protected void runCommand(String command) {
-        this.server.issueCommand(command, this.server);
-    }
+	@Override
+	protected void runCommand(String command) {
+		this.server.issueCommand(command, this.server);
+	}
 
-    @Override
-    protected void shutdown() {
-        this.server.safeShutdown();
-    }
+	@Override
+	protected void shutdown() {
+		this.server.safeShutdown();
+	}
 
 }

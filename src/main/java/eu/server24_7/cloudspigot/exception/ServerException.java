@@ -6,19 +6,19 @@ package eu.server24_7.cloudspigot.exception;
 @SuppressWarnings("serial")
 public class ServerException extends Exception {
 
-    public ServerException(String message) {
-        super(message);
-    }
+	public ServerException(String message) {
+		super(message);
+	}
 
-    public ServerException(String message, Throwable cause) {
-        super(message, cause);
-    }
+	public ServerException(String message, Throwable cause) {
+		super(message, cause);
+	}
 
-    public ServerException(Throwable cause) {
-        super(cause);
-    }
+	public ServerException(Throwable cause) {
+		super(cause);
+	}
 
-    protected ServerException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
+	protected ServerException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
 }

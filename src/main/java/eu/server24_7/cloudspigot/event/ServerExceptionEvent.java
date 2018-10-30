@@ -8,30 +8,32 @@ import com.google.common.base.Preconditions;
 import eu.server24_7.cloudspigot.exception.ServerException;
 
 /**
- * Called whenever an exception is thrown in a recoverable section of the server.
+ * Called whenever an exception is thrown in a recoverable section of the
+ * server.
  */
 public class ServerExceptionEvent extends Event {
-    private static final HandlerList handlers = new HandlerList();
-    private ServerException exception;
+	private static final HandlerList handlers = new HandlerList();
+	private ServerException exception;
 
-    public ServerExceptionEvent (ServerException exception) {
-        this.exception = Preconditions.checkNotNull(exception, "exception");
-    }
+	public ServerExceptionEvent(ServerException exception) {
+		this.exception = Preconditions.checkNotNull(exception, "exception");
+	}
 
-    /**
-     * Gets the wrapped exception that was thrown.
-     * @return Exception thrown
-     */
-    public ServerException getException() {
-        return exception;
-    }
+	/**
+	 * Gets the wrapped exception that was thrown.
+	 * 
+	 * @return Exception thrown
+	 */
+	public ServerException getException() {
+		return exception;
+	}
 
-    @Override
-    public HandlerList getHandlers() {
-        return handlers;
-    }
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
+	}
 
-    public static HandlerList getHandlerList() {
-        return handlers;
-    }
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
 }

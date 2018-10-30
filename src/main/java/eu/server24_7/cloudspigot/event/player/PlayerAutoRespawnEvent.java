@@ -20,8 +20,8 @@ public class PlayerAutoRespawnEvent extends Event {
 
 	/**
 	 * 
-	 * @param p The {@link Player} which was autorespawned
-	 * @param deathLoc The {@link Location} where the {@link Player} died
+	 * @param p          The {@link Player} which was autorespawned
+	 * @param deathLoc   The {@link Location} where the {@link Player} died
 	 * @param respawnLoc The {@link Location} where the {@link Player} autorespawned
 	 */
 	public PlayerAutoRespawnEvent(Player p, Location deathLoc, Location respawnLoc) {
@@ -80,7 +80,8 @@ public class PlayerAutoRespawnEvent extends Event {
 
 	/**
 	 * 
-	 * @return The killer of the {@link Player}. Returns null if not killed by a {@link Player}
+	 * @return The killer of the {@link Player}. Returns null if not killed by a
+	 *         {@link Player}
 	 */
 	public Player getKiller() {
 		return p.getKiller();
@@ -96,4 +97,3 @@ public class PlayerAutoRespawnEvent extends Event {
 		return handlers;
 	}
 }
-

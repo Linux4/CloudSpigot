@@ -6,12 +6,12 @@ import org.bukkit.craftbukkit.command.CraftConsoleCommandSender;
 
 public class TerminalConsoleCommandSender extends CraftConsoleCommandSender {
 
-    private static final Logger LOGGER = LogManager.getRootLogger();
+	private static final Logger LOGGER = LogManager.getRootLogger();
 
-    @Override
-    public void sendRawMessage(String message) {
-        // TerminalConsoleAppender supports color codes directly in log messages
-        LOGGER.info(message);
-    }
+	@Override
+	public void sendRawMessage(String message) {
+		// TerminalConsoleAppender supports color codes directly in log messages
+		LOGGER.info(message);
+	}
 
 }

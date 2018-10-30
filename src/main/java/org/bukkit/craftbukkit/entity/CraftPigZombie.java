@@ -8,37 +8,37 @@ import org.bukkit.entity.PigZombie;
 
 public class CraftPigZombie extends CraftZombie implements PigZombie {
 
-    public CraftPigZombie(CraftServer server, EntityPigZombie entity) {
-        super(server, entity);
-    }
+	public CraftPigZombie(CraftServer server, EntityPigZombie entity) {
+		super(server, entity);
+	}
 
-    public int getAnger() {
-        return getHandle().angerLevel;
-    }
+	public int getAnger() {
+		return getHandle().angerLevel;
+	}
 
-    public void setAnger(int level) {
-        getHandle().angerLevel = level;
-    }
+	public void setAnger(int level) {
+		getHandle().angerLevel = level;
+	}
 
-    public void setAngry(boolean angry) {
-        setAnger(angry ? 400 : 0);
-    }
+	public void setAngry(boolean angry) {
+		setAnger(angry ? 400 : 0);
+	}
 
-    public boolean isAngry() {
-        return getAnger() > 0;
-    }
+	public boolean isAngry() {
+		return getAnger() > 0;
+	}
 
-    @Override
-    public EntityPigZombie getHandle() {
-        return (EntityPigZombie) entity;
-    }
+	@Override
+	public EntityPigZombie getHandle() {
+		return (EntityPigZombie) entity;
+	}
 
-    @Override
-    public String toString() {
-        return "CraftPigZombie";
-    }
+	@Override
+	public String toString() {
+		return "CraftPigZombie";
+	}
 
-    public EntityType getType() {
-        return EntityType.PIG_ZOMBIE;
-    }
+	public EntityType getType() {
+		return EntityType.PIG_ZOMBIE;
+	}
 }

@@ -15,45 +15,46 @@ import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 
 public class CraftThrownPotion extends CraftProjectile implements ThrownPotion {
-    public CraftThrownPotion(CraftServer server, EntityPotion entity) {
-        super(server, entity);
-    }
+	public CraftThrownPotion(CraftServer server, EntityPotion entity) {
+		super(server, entity);
+	}
 
-    // TODO: This one does not handle custom NBT potion effects does it?
-    // In that case this method could be said to be misleading or incorrect
-    @SuppressWarnings("deprecation")
+	// TODO: This one does not handle custom NBT potion effects does it?
+	// In that case this method could be said to be misleading or incorrect
+	@SuppressWarnings("deprecation")
 	public Collection<PotionEffect> getEffects() {
-        return Potion.getBrewer().getEffectsFromDamage(getHandle().getPotionValue());
-    }
+		return Potion.getBrewer().getEffectsFromDamage(getHandle().getPotionValue());
+	}
 
-    public ItemStack getItem() {
-        // We run this method once since it will set the item stack if there is none.
-        getHandle().getPotionValue();
+	public ItemStack getItem() {
+		// We run this method once since it will set the item stack if there is none.
+		getHandle().getPotionValue();
 
-        return CraftItemStack.asBukkitCopy(getHandle().item);
-    }
+		return CraftItemStack.asBukkitCopy(getHandle().item);
+	}
 
-    public void setItem(ItemStack item) {
-        // The ItemStack must not be null.
-        Validate.notNull(item, "ItemStack cannot be null.");
+	public void setItem(ItemStack item) {
+		// The ItemStack must not be null.
+		Validate.notNull(item, "ItemStack cannot be null.");
 
-        // The ItemStack must be a potion.
-        Validate.isTrue(item.getType() == Material.POTION, "ItemStack must be a potion. This item stack was " + item.getType() + ".");
+		// The ItemStack must be a potion.
+		Validate.isTrue(item.getType() == Material.POTION,
+				"ItemStack must be a potion. This item stack was " + item.getType() + ".");
 
-        getHandle().item = CraftItemStack.asNMSCopy(item);
-    }
+		getHandle().item = CraftItemStack.asNMSCopy(item);
+	}
 
-    @Override
-    public EntityPotion getHandle() {
-        return (EntityPotion) entity;
-    }
+	@Override
+	public EntityPotion getHandle() {
+		return (EntityPotion) entity;
+	}
 
-    @Override
-    public String toString() {
-        return "CraftThrownPotion";
-    }
+	@Override
+	public String toString() {
+		return "CraftThrownPotion";
+	}
 
-    public EntityType getType() {
-        return EntityType.SPLASH_POTION;
-    }
+	public EntityType getType() {
+		return EntityType.SPLASH_POTION;
+	}
 }

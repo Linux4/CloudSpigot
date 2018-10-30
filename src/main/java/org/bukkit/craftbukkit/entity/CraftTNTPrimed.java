@@ -10,66 +10,66 @@ import org.bukkit.entity.TNTPrimed;
 
 public class CraftTNTPrimed extends CraftEntity implements TNTPrimed {
 
-    public CraftTNTPrimed(CraftServer server, EntityTNTPrimed entity) {
-        super(server, entity);
-    }
+	public CraftTNTPrimed(CraftServer server, EntityTNTPrimed entity) {
+		super(server, entity);
+	}
 
-    public float getYield() {
-        return getHandle().yield;
-    }
+	public float getYield() {
+		return getHandle().yield;
+	}
 
-    public boolean isIncendiary() {
-        return getHandle().isIncendiary;
-    }
+	public boolean isIncendiary() {
+		return getHandle().isIncendiary;
+	}
 
-    public void setIsIncendiary(boolean isIncendiary) {
-        getHandle().isIncendiary = isIncendiary;
-    }
+	public void setIsIncendiary(boolean isIncendiary) {
+		getHandle().isIncendiary = isIncendiary;
+	}
 
-    public void setYield(float yield) {
-        getHandle().yield = yield;
-    }
+	public void setYield(float yield) {
+		getHandle().yield = yield;
+	}
 
-    public int getFuseTicks() {
-        return getHandle().fuseTicks;
-    }
+	public int getFuseTicks() {
+		return getHandle().fuseTicks;
+	}
 
-    public void setFuseTicks(int fuseTicks) {
-        getHandle().fuseTicks = fuseTicks;
-    }
+	public void setFuseTicks(int fuseTicks) {
+		getHandle().fuseTicks = fuseTicks;
+	}
 
-    @Override
-    public EntityTNTPrimed getHandle() {
-        return (EntityTNTPrimed) entity;
-    }
+	@Override
+	public EntityTNTPrimed getHandle() {
+		return (EntityTNTPrimed) entity;
+	}
 
-    @Override
-    public String toString() {
-        return "CraftTNTPrimed";
-    }
+	@Override
+	public String toString() {
+		return "CraftTNTPrimed";
+	}
 
-    public EntityType getType() {
-        return EntityType.PRIMED_TNT;
-    }
+	public EntityType getType() {
+		return EntityType.PRIMED_TNT;
+	}
 
-    public Entity getSource() {
-        EntityLiving source = getHandle().getSource();
+	public Entity getSource() {
+		EntityLiving source = getHandle().getSource();
 
-        if (source != null) {
-            Entity bukkitEntity = source.getBukkitEntity();
+		if (source != null) {
+			Entity bukkitEntity = source.getBukkitEntity();
 
-            if (bukkitEntity.isValid()) {
-                return bukkitEntity;
-            }
-        }
+			if (bukkitEntity.isValid()) {
+				return bukkitEntity;
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    // CloudSpigot start
-    @Override
-    public org.bukkit.Location getSourceLoc() {
-        return getHandle().sourceLoc;
-    }
-    // CloudSpigot end
+	// CloudSpigot start
+	@Override
+	public org.bukkit.Location getSourceLoc() {
+		return getHandle().sourceLoc;
+	}
+	// CloudSpigot end
 }

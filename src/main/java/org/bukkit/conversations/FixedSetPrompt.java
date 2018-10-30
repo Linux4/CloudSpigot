@@ -10,35 +10,34 @@ import java.util.List;
  * response from the user.
  */
 public abstract class FixedSetPrompt extends ValidatingPrompt {
-    
-    protected List<String> fixedSet;
 
-    /**
-     * Creates a FixedSetPrompt from a set of strings.
-     * <p>
-     * foo = new FixedSetPrompt("bar", "cheese", "panda");
-     *
-     * @param fixedSet A fixed set of strings, one of which the user must
-     *     type.
-     */
-    public FixedSetPrompt(String... fixedSet) {
-        super();
-        this.fixedSet = Arrays.asList(fixedSet);
-    }
+	protected List<String> fixedSet;
 
-    @Override
-    protected boolean isInputValid(ConversationContext context, String input) {
-        return fixedSet.contains(input);
-    }
+	/**
+	 * Creates a FixedSetPrompt from a set of strings.
+	 * <p>
+	 * foo = new FixedSetPrompt("bar", "cheese", "panda");
+	 *
+	 * @param fixedSet A fixed set of strings, one of which the user must type.
+	 */
+	public FixedSetPrompt(String... fixedSet) {
+		super();
+		this.fixedSet = Arrays.asList(fixedSet);
+	}
 
-    /**
-     * Utility function to create a formatted string containing all the
-     * options declared in the constructor.
-     *
-     * @return the options formatted like "[bar, cheese, panda]" if bar,
-     *     cheese, and panda were the options used
-     */
-    protected String formatFixedSet() {
-        return "[" + StringUtils.join(fixedSet, ", ") + "]";
-    }
+	@Override
+	protected boolean isInputValid(ConversationContext context, String input) {
+		return fixedSet.contains(input);
+	}
+
+	/**
+	 * Utility function to create a formatted string containing all the options
+	 * declared in the constructor.
+	 *
+	 * @return the options formatted like "[bar, cheese, panda]" if bar, cheese, and
+	 *         panda were the options used
+	 */
+	protected String formatFixedSet() {
+		return "[" + StringUtils.join(fixedSet, ", ") + "]";
+	}
 }

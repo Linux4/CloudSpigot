@@ -16,8 +16,8 @@ public class BlockTrapdoor extends Block {
 		super(material);
 		this.j(this.blockStateList.getBlockData().set(BlockTrapdoor.FACING, EnumDirection.NORTH)
 				.set(BlockTrapdoor.OPEN, false).set(BlockTrapdoor.HALF, BlockTrapdoor.EnumTrapdoorHalf.BOTTOM));
-		//float f = 0.5F; // CloudSpigot
-		//float f1 = 1.0F; // CloudSpigot
+		// float f = 0.5F; // CloudSpigot
+		// float f1 = 1.0F; // CloudSpigot
 
 		this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		this.a(CreativeModeTab.d);
@@ -45,7 +45,7 @@ public class BlockTrapdoor extends Block {
 	}
 
 	public void j() {
-		//float f = 0.1875F; // CloudSpigot
+		// float f = 0.1875F; // CloudSpigot
 
 		this.a(0.0F, 0.40625F, 0.0F, 1.0F, 0.59375F, 1.0F);
 	}
@@ -55,7 +55,7 @@ public class BlockTrapdoor extends Block {
 			boolean flag = iblockdata.get(BlockTrapdoor.HALF) == BlockTrapdoor.EnumTrapdoorHalf.TOP;
 			Boolean obool = (Boolean) iblockdata.get(BlockTrapdoor.OPEN);
 			EnumDirection enumdirection = (EnumDirection) iblockdata.get(BlockTrapdoor.FACING);
-			//float f = 0.1875F; // CloudSpigot
+			// float f = 0.1875F; // CloudSpigot
 
 			if (flag) {
 				this.a(0.0F, 0.8125F, 0.0F, 1.0F, 1.0F, 1.0F);
