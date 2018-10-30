@@ -164,6 +164,7 @@ public class PermissibleBase implements Permissible {
 		return result;
 	}
 	
+	@Override
 	public PermissionAttachment addAttachment(PermissionAttachment attachment) {
 		if(attachment == null) {
 			throw new IllegalArgumentException("Attachment cannot be null");
