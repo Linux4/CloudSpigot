@@ -163,6 +163,17 @@ public class PermissibleBase implements Permissible {
 
 		return result;
 	}
+	
+	public PermissionAttachment addAttachment(PermissionAttachment attachment) {
+		if(attachment == null) {
+			throw new IllegalArgumentException("Attachment cannot be null");
+		}
+		
+		attachments.add(attachment);
+		recalculatePermissions();
+		
+		return attachment;
+	}
 
 	@Override
 	public void removeAttachment(PermissionAttachment attachment) {
