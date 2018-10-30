@@ -1,7 +1,5 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,6 +8,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 public class CraftingManager {
 
@@ -366,8 +367,9 @@ public class CraftingManager {
 								: (irecipe1.a() < irecipe.a() ? -1 : (irecipe1.a() > irecipe.a() ? 1 : 0)));
 			}
 
+			@Override
 			public int compare(IRecipe object, IRecipe object1) {
-				return this.a((IRecipe) object, (IRecipe) object1);
+				return this.a(object, object1);
 			}
 		});
 	}
@@ -379,7 +381,7 @@ public class CraftingManager {
 		int k = 0;
 
 		if (aobject[i] instanceof String[]) {
-			String[] astring = (String[]) ((String[]) aobject[i++]);
+			String[] astring = ((String[]) aobject[i++]);
 
 			for (int l = 0; l < astring.length; ++l) {
 				String s1 = astring[l];
@@ -421,7 +423,7 @@ public class CraftingManager {
 			char c0 = s.charAt(i1);
 
 			if (hashmap.containsKey(Character.valueOf(c0))) {
-				aitemstack[i1] = ((ItemStack) hashmap.get(Character.valueOf(c0))).cloneItemStack();
+				aitemstack[i1] = hashmap.get(Character.valueOf(c0)).cloneItemStack();
 			} else {
 				aitemstack[i1] = null;
 			}
@@ -473,7 +475,7 @@ public class CraftingManager {
 				return null;
 			}
 
-			irecipe = (IRecipe) iterator.next();
+			irecipe = iterator.next();
 		} while (!irecipe.a(inventorycrafting, world));
 
 		// CraftBukkit start - INVENTORY_PRE_CRAFT event
@@ -487,7 +489,7 @@ public class CraftingManager {
 		Iterator<IRecipe> iterator = this.recipes.iterator();
 
 		while (iterator.hasNext()) {
-			IRecipe irecipe = (IRecipe) iterator.next();
+			IRecipe irecipe = iterator.next();
 
 			if (irecipe.a(inventorycrafting, world)) {
 				return irecipe.b(inventorycrafting);

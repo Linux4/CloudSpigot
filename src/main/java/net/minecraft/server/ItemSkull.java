@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import com.mojang.authlib.GameProfile;
 import java.util.UUID;
+
+import com.mojang.authlib.GameProfile;
 
 public class ItemSkull extends Item {
 
@@ -13,6 +14,7 @@ public class ItemSkull extends Item {
 		this.a(true);
 	}
 
+	@Override
 	public boolean interactWith(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		if (enumdirection == EnumDirection.DOWN) {
@@ -46,7 +48,7 @@ public class ItemSkull extends Item {
 					int i = 0;
 
 					if (enumdirection == EnumDirection.UP) {
-						i = MathHelper.floor((double) (entityhuman.yaw * 16.0F / 360.0F) + 0.5D) & 15;
+						i = MathHelper.floor(entityhuman.yaw * 16.0F / 360.0F + 0.5D) & 15;
 					}
 
 					TileEntity tileentity = world.getTileEntity(blockposition);
@@ -86,10 +88,12 @@ public class ItemSkull extends Item {
 		}
 	}
 
+	@Override
 	public int filterData(int i) {
 		return i;
 	}
 
+	@Override
 	public String e_(ItemStack itemstack) {
 		int i = itemstack.getData();
 
@@ -100,6 +104,7 @@ public class ItemSkull extends Item {
 		return super.getName() + "." + ItemSkull.a[i];
 	}
 
+	@Override
 	public String a(ItemStack itemstack) {
 		if (itemstack.getData() == 3 && itemstack.hasTag()) {
 			if (itemstack.getTag().hasKeyOfType("SkullOwner", 8)) {
@@ -119,6 +124,7 @@ public class ItemSkull extends Item {
 		return super.a(itemstack);
 	}
 
+	@Override
 	public boolean a(final NBTTagCompound nbttagcompound) { // Spigot - make final
 		super.a(nbttagcompound);
 		if (nbttagcompound.hasKeyOfType("SkullOwner", 8) && nbttagcompound.getString("SkullOwner").length() > 0) {

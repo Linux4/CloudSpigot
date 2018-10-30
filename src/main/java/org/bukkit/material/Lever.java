@@ -1,7 +1,7 @@
 package org.bukkit.material;
 
-import org.bukkit.block.BlockFace;
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 
 /**
  * Represents a lever
@@ -50,6 +50,7 @@ public class Lever extends SimpleAttachableMaterialData implements Redstone {
 	 *
 	 * @return true if powered, otherwise false
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public boolean isPowered() {
 		return (getData() & 0x8) == 0x8;
@@ -70,6 +71,7 @@ public class Lever extends SimpleAttachableMaterialData implements Redstone {
 	 *
 	 * @return BlockFace attached to
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public BlockFace getAttachedFace() {
 		byte data = (byte) (getData() & 0x7);
@@ -103,6 +105,7 @@ public class Lever extends SimpleAttachableMaterialData implements Redstone {
 	/**
 	 * Sets the direction this lever is pointing in
 	 */
+	@Override
 	@SuppressWarnings({ "deprecation", "incomplete-switch" })
 	public void setFacingDirection(BlockFace face) {
 		byte data = (byte) (getData() & 0x8);

@@ -51,7 +51,7 @@ public final class SpawnerCreature {
 			int k;
 
 			while (iterator.hasNext()) {
-				EntityHuman entityhuman = (EntityHuman) iterator.next();
+				EntityHuman entityhuman = iterator.next();
 
 				if (!entityhuman.isSpectator() || !entityhuman.affectsSpawning) { // CloudSpigot
 					int l = MathHelper.floor(entityhuman.locX / 16.0D);
@@ -127,7 +127,7 @@ public final class SpawnerCreature {
 						int moblimit = (limit * i / 256) - mobcnt + 1; // Spigot - up to 1 more than limit
 						label115: while (iterator1.hasNext() && (moblimit > 0)) { // Spigot - while more allowed
 							// CraftBukkit start = use LongHash and LongObjectHashMap
-							long key = ((Long) iterator1.next()).longValue();
+							long key = iterator1.next().longValue();
 							BlockPosition blockposition1 = getRandomPosition(worldserver, LongHash.msw(key),
 									LongHash.lsw(key));
 							// CraftBukkit
@@ -156,13 +156,13 @@ public final class SpawnerCreature {
 												k3 += worldserver.random.nextInt(1) - worldserver.random.nextInt(1);
 												l3 += worldserver.random.nextInt(b1) - worldserver.random.nextInt(b1);
 												BlockPosition blockposition2 = new BlockPosition(j3, k3, l3);
-												float f = (float) j3 + 0.5F;
-												float f1 = (float) l3 + 0.5F;
+												float f = j3 + 0.5F;
+												float f1 = l3 + 0.5F;
 
-												if (!worldserver.isPlayerNearbyWhoAffectsSpawning((double) f,
-														(double) k3, (double) f1, 24.0D)
-														&& blockposition.c((double) f, (double) k3,
-																(double) f1) >= 576.0D) { // CloudSpigot - Affects
+												if (!worldserver.isPlayerNearbyWhoAffectsSpawning(f,
+														k3, f1, 24.0D)
+														&& blockposition.c(f, k3,
+																f1) >= 576.0D) { // CloudSpigot - Affects
 																							// Spawning API
 													if (biomebase_biomemeta == null) {
 														biomebase_biomemeta = worldserver.a(enumcreaturetype,
@@ -179,7 +179,7 @@ public final class SpawnerCreature {
 														EntityInsentient entityinsentient;
 
 														try {
-															entityinsentient = (EntityInsentient) biomebase_biomemeta.b
+															entityinsentient = biomebase_biomemeta.b
 																	.getConstructor(new Class[] { World.class })
 																	.newInstance(new Object[] { worldserver });
 														} catch (Exception exception) {
@@ -188,8 +188,8 @@ public final class SpawnerCreature {
 															return j1;
 														}
 
-														entityinsentient.setPositionRotation((double) f, (double) k3,
-																(double) f1, worldserver.random.nextFloat() * 360.0F,
+														entityinsentient.setPositionRotation(f, k3,
+																f1, worldserver.random.nextFloat() * 360.0F,
 																0.0F);
 														if (entityinsentient.bR() && entityinsentient.canSpawn()) {
 															groupdataentity = entityinsentient.prepare(
@@ -261,7 +261,7 @@ public final class SpawnerCreature {
 			} else {
 				BlockPosition blockposition1 = blockposition.down();
 
-				if (!World.a((IBlockAccess) world, blockposition1)) {
+				if (!World.a(world, blockposition1)) {
 					return false;
 				} else {
 					Block block1 = world.getType(blockposition1).getBlock();
@@ -279,7 +279,7 @@ public final class SpawnerCreature {
 
 		if (!list.isEmpty()) {
 			while (random.nextFloat() < biomebase.g()) {
-				BiomeBase.BiomeMeta biomebase_biomemeta = (BiomeBase.BiomeMeta) WeightedRandom.a(world.random, list);
+				BiomeBase.BiomeMeta biomebase_biomemeta = WeightedRandom.a(world.random, list);
 				int i1 = biomebase_biomemeta.c + random.nextInt(1 + biomebase_biomemeta.d - biomebase_biomemeta.c);
 				GroupDataEntity groupdataentity = null;
 				int j1 = i + random.nextInt(k);
@@ -297,7 +297,7 @@ public final class SpawnerCreature {
 							EntityInsentient entityinsentient;
 
 							try {
-								entityinsentient = (EntityInsentient) biomebase_biomemeta.b
+								entityinsentient = biomebase_biomemeta.b
 										.getConstructor(new Class[] { World.class })
 										.newInstance(new Object[] { world });
 							} catch (Exception exception) {
@@ -306,8 +306,8 @@ public final class SpawnerCreature {
 								continue;
 							}
 
-							entityinsentient.setPositionRotation((double) ((float) j1 + 0.5F),
-									(double) blockposition.getY(), (double) ((float) k1 + 0.5F),
+							entityinsentient.setPositionRotation(j1 + 0.5F,
+									blockposition.getY(), k1 + 0.5F,
 									random.nextFloat() * 360.0F, 0.0F);
 							// CraftBukkit start - Added a reason for spawning this creature, moved
 							// entityinsentient.prepare(groupdataentity) up

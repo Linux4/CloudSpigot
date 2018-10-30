@@ -1,7 +1,7 @@
 package org.bukkit.material;
 
-import org.bukkit.block.BlockFace;
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 
 /**
  * MaterialData for torches
@@ -49,6 +49,7 @@ public class Torch extends SimpleAttachableMaterialData {
 	 *
 	 * @return BlockFace attached to
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public BlockFace getAttachedFace() {
 		byte data = getData();
@@ -72,6 +73,7 @@ public class Torch extends SimpleAttachableMaterialData {
 		}
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setFacingDirection(BlockFace face) {
 		byte data;

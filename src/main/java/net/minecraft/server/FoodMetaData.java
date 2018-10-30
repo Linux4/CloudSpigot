@@ -22,7 +22,7 @@ public class FoodMetaData {
 
 	public void eat(int i, float f) {
 		this.foodLevel = Math.min(i + this.foodLevel, 20);
-		this.saturationLevel = Math.min(this.saturationLevel + (float) i * f * 2.0F, (float) this.foodLevel);
+		this.saturationLevel = Math.min(this.saturationLevel + i * f * 2.0F, this.foodLevel);
 	}
 
 	public void a(ItemFood itemfood, ItemStack itemstack) {

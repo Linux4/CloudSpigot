@@ -20,12 +20,14 @@ public class BlockMycel extends Block {
 		this.a(CreativeModeTab.b);
 	}
 
+	@Override
 	public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
 		Block block = iblockaccess.getType(blockposition.up()).getBlock();
 
 		return iblockdata.set(BlockMycel.SNOWY, Boolean.valueOf(block == Blocks.SNOW || block == Blocks.SNOW_LAYER));
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		if (!world.isClientSide) {
 			if (world.getLightLevel(blockposition.up()) < 4 && world.getType(blockposition.up()).getBlock().p() > 2) {
@@ -80,15 +82,18 @@ public class BlockMycel extends Block {
 		}
 	}
 
+	@Override
 	public Item getDropType(IBlockData iblockdata, Random random, int i) {
 		return Blocks.DIRT.getDropType(
 				Blocks.DIRT.getBlockData().set(BlockDirt.VARIANT, BlockDirt.EnumDirtVariant.DIRT), random, i);
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
 		return 0;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockMycel.SNOWY });
 	}

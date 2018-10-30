@@ -17,14 +17,17 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
 		this.b = blockpressureplatebinary_enummobtype;
 	}
 
+	@Override
 	protected int e(IBlockData iblockdata) {
-		return ((Boolean) iblockdata.get(BlockPressurePlateBinary.POWERED)).booleanValue() ? 15 : 0;
+		return iblockdata.get(BlockPressurePlateBinary.POWERED).booleanValue() ? 15 : 0;
 	}
 
+	@Override
 	protected IBlockData a(IBlockData iblockdata, int i) {
 		return iblockdata.set(BlockPressurePlateBinary.POWERED, Boolean.valueOf(i > 0));
 	}
 
+	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected int f(World world, BlockPosition blockposition) {
 		AxisAlignedBB axisalignedbb = this.getBoundingBox(blockposition);
@@ -81,14 +84,17 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
 		return 0;
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockPressurePlateBinary.POWERED, Boolean.valueOf(i == 1));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
-		return ((Boolean) iblockdata.get(BlockPressurePlateBinary.POWERED)).booleanValue() ? 1 : 0;
+		return iblockdata.get(BlockPressurePlateBinary.POWERED).booleanValue() ? 1 : 0;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockPressurePlateBinary.POWERED });
 	}

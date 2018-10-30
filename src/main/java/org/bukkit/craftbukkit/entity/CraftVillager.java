@@ -1,6 +1,5 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityVillager;
 import org.apache.commons.lang.Validate;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.inventory.CraftInventory;
@@ -8,6 +7,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+
+import net.minecraft.server.EntityVillager;
 
 public class CraftVillager extends CraftAgeable implements Villager, InventoryHolder {
 	public CraftVillager(CraftServer server, EntityVillager entity) {
@@ -24,15 +25,18 @@ public class CraftVillager extends CraftAgeable implements Villager, InventoryHo
 		return "CraftVillager";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.VILLAGER;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public Profession getProfession() {
 		return Profession.getProfession(getHandle().getProfession());
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setProfession(Profession profession) {
 		Validate.notNull(profession);

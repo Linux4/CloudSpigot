@@ -1,9 +1,10 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityThrownExpBottle;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ThrownExpBottle;
+
+import net.minecraft.server.EntityThrownExpBottle;
 
 public class CraftThrownExpBottle extends CraftProjectile implements ThrownExpBottle {
 	public CraftThrownExpBottle(CraftServer server, EntityThrownExpBottle entity) {
@@ -20,6 +21,7 @@ public class CraftThrownExpBottle extends CraftProjectile implements ThrownExpBo
 		return "EntityThrownExpBottle";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.THROWN_EXP_BOTTLE;
 	}

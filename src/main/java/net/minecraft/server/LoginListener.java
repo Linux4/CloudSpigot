@@ -51,6 +51,7 @@ public class LoginListener implements PacketLoginInListener, IUpdatePlayerListBo
 		LoginListener.random.nextBytes(this.e);
 	}
 
+	@Override
 	public void c() {
 		if (this.g == LoginListener.EnumProtocolState.READY_TO_ACCEPT) {
 			this.b();
@@ -124,9 +125,10 @@ public class LoginListener implements PacketLoginInListener, IUpdatePlayerListBo
 						LoginListener.this.networkManager.a(LoginListener.this.server.aK());
 					}
 
+					@Override
 					public void operationComplete(ChannelFuture future) throws Exception { // CraftBukkit - fix
 																							// decompile error
-						this.a((ChannelFuture) future);
+						this.a(future);
 					}
 				}, new GenericFutureListener[0]);
 			}
@@ -148,6 +150,7 @@ public class LoginListener implements PacketLoginInListener, IUpdatePlayerListBo
 
 	}
 
+	@Override
 	public void a(IChatBaseComponent ichatbasecomponent) {
 		LoginListener.c.info(this.d() + " lost connection: " + ichatbasecomponent.c());
 	}
@@ -157,6 +160,7 @@ public class LoginListener implements PacketLoginInListener, IUpdatePlayerListBo
 				: String.valueOf(this.networkManager.getSocketAddress());
 	}
 
+	@Override
 	public void a(PacketLoginInStart packetlogininstart) {
 		Validate.validState(this.g == LoginListener.EnumProtocolState.HELLO, "Unexpected hello packet", new Object[0]);
 		this.i = packetlogininstart.a();
@@ -184,6 +188,7 @@ public class LoginListener implements PacketLoginInListener, IUpdatePlayerListBo
 
 	}
 
+	@Override
 	public void a(PacketLoginInEncryptionBegin packetlogininencryptionbegin) {
 		Validate.validState(this.g == LoginListener.EnumProtocolState.KEY, "Unexpected key packet", new Object[0]);
 		PrivateKey privatekey = this.server.Q().getPrivate();
@@ -195,6 +200,7 @@ public class LoginListener implements PacketLoginInListener, IUpdatePlayerListBo
 			this.g = LoginListener.EnumProtocolState.AUTHENTICATING;
 			this.networkManager.a(this.loginKey);
 			(new Thread("User Authenticator #" + LoginListener.b.incrementAndGet()) {
+				@Override
 				public void run() {
 					GameProfile gameprofile = LoginListener.this.i;
 

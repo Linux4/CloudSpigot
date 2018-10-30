@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import java.util.Iterator;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bukkit.event.player.PlayerPickupItemEvent; // CraftBukkit
@@ -23,9 +24,9 @@ public class EntityItem extends Entity {
 		this.setSize(0.25F, 0.25F);
 		this.setPosition(d0, d1, d2);
 		this.yaw = (float) (Math.random() * 360.0D);
-		this.motX = (double) ((float) (Math.random() * 0.20000000298023224D - 0.10000000149011612D));
+		this.motX = ((float) (Math.random() * 0.20000000298023224D - 0.10000000149011612D));
 		this.motY = 0.20000000298023224D;
-		this.motZ = (double) ((float) (Math.random() * 0.20000000298023224D - 0.10000000149011612D));
+		this.motZ = ((float) (Math.random() * 0.20000000298023224D - 0.10000000149011612D));
 	}
 
 	public EntityItem(World world, double d0, double d1, double d2, ItemStack itemstack) {
@@ -38,6 +39,7 @@ public class EntityItem extends Entity {
 		this.setItemStack(itemstack);
 	}
 
+	@Override
 	protected boolean s_() {
 		return false;
 	}
@@ -50,10 +52,12 @@ public class EntityItem extends Entity {
 		this.setItemStack(new ItemStack(Blocks.AIR, 0));
 	}
 
+	@Override
 	protected void h() {
 		this.getDataWatcher().add(10, 5);
 	}
 
+	@Override
 	public void t_() {
 		if (this.getItemStack() == null) {
 			this.die();
@@ -80,8 +84,8 @@ public class EntityItem extends Entity {
 			if (flag || this.ticksLived % 25 == 0) {
 				if (this.world.getType(new BlockPosition(this)).getBlock().getMaterial() == Material.LAVA) {
 					this.motY = 0.20000000298023224D;
-					this.motX = (double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
-					this.motZ = (double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+					this.motX = (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+					this.motZ = (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
 					this.makeSound("random.fizz", 0.4F, 2.0F + this.random.nextFloat() * 0.4F);
 				}
 
@@ -99,9 +103,9 @@ public class EntityItem extends Entity {
 						.getBlock().frictionFactor * 0.98F;
 			}
 
-			this.motX *= (double) f;
+			this.motX *= f;
 			this.motY *= 0.9800000190734863D;
-			this.motZ *= (double) f;
+			this.motZ *= f;
 			if (this.onGround) {
 				this.motY *= -0.5D;
 			}
@@ -157,7 +161,7 @@ public class EntityItem extends Entity {
 		// Spigot end
 
 		while (iterator.hasNext()) {
-			EntityItem entityitem = (EntityItem) iterator.next();
+			EntityItem entityitem = iterator.next();
 
 			this.a(entityitem);
 		}
@@ -215,8 +219,9 @@ public class EntityItem extends Entity {
 		this.age = 4800;
 	}
 
+	@Override
 	public boolean W() {
-		if (this.world.a(this.getBoundingBox(), Material.WATER, (Entity) this)) {
+		if (this.world.a(this.getBoundingBox(), Material.WATER, this)) {
 			if (!this.inWater && !this.justCreated) {
 				this.X();
 			}
@@ -230,9 +235,10 @@ public class EntityItem extends Entity {
 	}
 
 	protected void burn(int i) {
-		this.damageEntity(DamageSource.FIRE, (float) i);
+		this.damageEntity(DamageSource.FIRE, i);
 	}
 
+	@Override
 	public boolean damageEntity(DamageSource damagesource, float f) {
 		if (this.isInvulnerable(damagesource)) {
 			return false;
@@ -247,7 +253,7 @@ public class EntityItem extends Entity {
 			}
 			// CraftBukkit end
 			this.ac();
-			this.e = (int) ((float) this.e - f);
+			this.e = (int) (this.e - f);
 			if (this.e <= 0) {
 				this.die();
 			}
@@ -256,8 +262,9 @@ public class EntityItem extends Entity {
 		}
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
-		nbttagcompound.setShort("Health", (short) ((byte) this.e));
+		nbttagcompound.setShort("Health", ((byte) this.e));
 		nbttagcompound.setShort("Age", (short) this.age);
 		nbttagcompound.setShort("PickupDelay", (short) this.pickupDelay);
 		if (this.n() != null) {
@@ -274,6 +281,7 @@ public class EntityItem extends Entity {
 
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		this.e = nbttagcompound.getShort("Health") & 255;
 		this.age = nbttagcompound.getShort("Age");
@@ -309,6 +317,7 @@ public class EntityItem extends Entity {
 
 	}
 
+	@Override
 	public void d(EntityHuman entityhuman) {
 		if (!this.world.isClientSide) {
 			ItemStack itemstack = this.getItemStack();
@@ -340,30 +349,30 @@ public class EntityItem extends Entity {
 					&& (this.g == null || 6000 - this.age <= 200 || this.g.equals(entityhuman.getName()))
 					&& entityhuman.inventory.pickup(itemstack)) {
 				if (itemstack.getItem() == Item.getItemOf(Blocks.LOG)) {
-					entityhuman.b((Statistic) AchievementList.g);
+					entityhuman.b(AchievementList.g);
 				}
 
 				if (itemstack.getItem() == Item.getItemOf(Blocks.LOG2)) {
-					entityhuman.b((Statistic) AchievementList.g);
+					entityhuman.b(AchievementList.g);
 				}
 
 				if (itemstack.getItem() == Items.LEATHER) {
-					entityhuman.b((Statistic) AchievementList.t);
+					entityhuman.b(AchievementList.t);
 				}
 
 				if (itemstack.getItem() == Items.DIAMOND) {
-					entityhuman.b((Statistic) AchievementList.w);
+					entityhuman.b(AchievementList.w);
 				}
 
 				if (itemstack.getItem() == Items.BLAZE_ROD) {
-					entityhuman.b((Statistic) AchievementList.A);
+					entityhuman.b(AchievementList.A);
 				}
 
 				if (itemstack.getItem() == Items.DIAMOND && this.n() != null) {
 					EntityHuman entityhuman1 = this.world.a(this.n());
 
 					if (entityhuman1 != null && entityhuman1 != entityhuman) {
-						entityhuman1.b((Statistic) AchievementList.x);
+						entityhuman1.b(AchievementList.x);
 					}
 				}
 
@@ -381,14 +390,17 @@ public class EntityItem extends Entity {
 		}
 	}
 
+	@Override
 	public String getName() {
 		return this.hasCustomName() ? this.getCustomName() : LocaleI18n.get("item." + this.getItemStack().a());
 	}
 
+	@Override
 	public boolean aD() {
 		return false;
 	}
 
+	@Override
 	public void c(int i) {
 		super.c(i);
 		if (!this.world.isClientSide) {

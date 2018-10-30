@@ -22,15 +22,17 @@ public class BlockPiston extends Block {
 		this.j(this.blockStateList.getBlockData().set(BlockPiston.FACING, EnumDirection.NORTH).set(BlockPiston.EXTENDED,
 				false));
 		this.sticky = flag;
-		this.a(BlockPiston.i);
+		this.a(Block.i);
 		this.c(0.5F);
 		this.a(CreativeModeTab.d);
 	}
 
+	@Override
 	public boolean c() {
 		return false;
 	}
 
+	@Override
 	public void postPlace(World world, BlockPosition blockposition, IBlockData iblockdata, EntityLiving entityliving,
 			ItemStack itemstack) {
 		world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.FACING, a(world, blockposition, entityliving)),
@@ -41,6 +43,7 @@ public class BlockPiston extends Block {
 
 	}
 
+	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
 		if (!world.isClientSide) {
 			this.e(world, blockposition, iblockdata);
@@ -48,6 +51,7 @@ public class BlockPiston extends Block {
 
 	}
 
+	@Override
 	public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		if (!world.isClientSide && world.getTileEntity(blockposition) == null) {
 			this.e(world, blockposition, iblockdata);
@@ -55,6 +59,7 @@ public class BlockPiston extends Block {
 
 	}
 
+	@Override
 	public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f,
 			float f1, float f2, int i, EntityLiving entityliving) {
 		return this.getBlockData().set(BlockPiston.FACING, a(world, blockposition, entityliving))
@@ -62,14 +67,14 @@ public class BlockPiston extends Block {
 	}
 
 	private void e(World world, BlockPosition blockposition, IBlockData iblockdata) {
-		EnumDirection enumdirection = (EnumDirection) iblockdata.get(BlockPiston.FACING);
+		EnumDirection enumdirection = iblockdata.get(BlockPiston.FACING);
 		boolean flag = this.a(world, blockposition, enumdirection);
 
-		if (flag && !((Boolean) iblockdata.get(BlockPiston.EXTENDED)).booleanValue()) {
+		if (flag && !iblockdata.get(BlockPiston.EXTENDED).booleanValue()) {
 			if ((new PistonExtendsChecker(world, blockposition, enumdirection, true)).a()) {
 				world.playBlockAction(blockposition, this, 0, enumdirection.a());
 			}
-		} else if (!flag && ((Boolean) iblockdata.get(BlockPiston.EXTENDED)).booleanValue()) {
+		} else if (!flag && iblockdata.get(BlockPiston.EXTENDED).booleanValue()) {
 			// CraftBukkit start
 			if (!this.sticky) {
 				org.bukkit.block.Block block = world.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(),
@@ -125,8 +130,9 @@ public class BlockPiston extends Block {
 		}
 	}
 
+	@Override
 	public boolean a(World world, BlockPosition blockposition, IBlockData iblockdata, int i, int j) {
-		EnumDirection enumdirection = (EnumDirection) iblockdata.get(BlockPiston.FACING);
+		EnumDirection enumdirection = iblockdata.get(BlockPiston.FACING);
 
 		if (!world.isClientSide) {
 			boolean flag = this.a(world, blockposition, enumdirection);
@@ -147,8 +153,8 @@ public class BlockPiston extends Block {
 			}
 
 			world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, true), 2);
-			world.makeSound((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D,
-					(double) blockposition.getZ() + 0.5D, "tile.piston.out", 0.5F,
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
+					blockposition.getZ() + 0.5D, "tile.piston.out", 0.5F,
 					world.random.nextFloat() * 0.25F + 0.6F);
 		} else if (i == 1) {
 			TileEntity tileentity = world.getTileEntity(blockposition.shift(enumdirection));
@@ -195,20 +201,21 @@ public class BlockPiston extends Block {
 				world.setAir(blockposition.shift(enumdirection));
 			}
 
-			world.makeSound((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D,
-					(double) blockposition.getZ() + 0.5D, "tile.piston.in", 0.5F,
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
+					blockposition.getZ() + 0.5D, "tile.piston.in", 0.5F,
 					world.random.nextFloat() * 0.15F + 0.6F);
 		}
 
 		return true;
 	}
 
+	@Override
 	public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
 		IBlockData iblockdata = iblockaccess.getType(blockposition);
 
-		if (iblockdata.getBlock() == this && ((Boolean) iblockdata.get(BlockPiston.EXTENDED)).booleanValue()) {
+		if (iblockdata.getBlock() == this && iblockdata.get(BlockPiston.EXTENDED).booleanValue()) {
 			// float f = 0.25F; // CloudSpigot
-			EnumDirection enumdirection = (EnumDirection) iblockdata.get(BlockPiston.FACING);
+			EnumDirection enumdirection = iblockdata.get(BlockPiston.FACING);
 
 			if (enumdirection != null) {
 				switch (BlockPiston.SyntheticClass_1.a[enumdirection.ordinal()]) {
@@ -242,21 +249,25 @@ public class BlockPiston extends Block {
 
 	}
 
+	@Override
 	public void j() {
 		this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 
+	@Override
 	public void a(World world, BlockPosition blockposition, IBlockData iblockdata, AxisAlignedBB axisalignedbb,
 			List<AxisAlignedBB> list, Entity entity) {
 		this.a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		super.a(world, blockposition, iblockdata, axisalignedbb, list, entity);
 	}
 
+	@Override
 	public AxisAlignedBB a(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		this.updateShape(world, blockposition);
 		return super.a(world, blockposition, iblockdata);
 	}
 
+	@Override
 	public boolean d() {
 		return false;
 	}
@@ -268,15 +279,15 @@ public class BlockPiston extends Block {
 	}
 
 	public static EnumDirection a(World world, BlockPosition blockposition, EntityLiving entityliving) {
-		if (MathHelper.e((float) entityliving.locX - (float) blockposition.getX()) < 2.0F
-				&& MathHelper.e((float) entityliving.locZ - (float) blockposition.getZ()) < 2.0F) {
-			double d0 = entityliving.locY + (double) entityliving.getHeadHeight();
+		if (MathHelper.e((float) entityliving.locX - blockposition.getX()) < 2.0F
+				&& MathHelper.e((float) entityliving.locZ - blockposition.getZ()) < 2.0F) {
+			double d0 = entityliving.locY + entityliving.getHeadHeight();
 
-			if (d0 - (double) blockposition.getY() > 2.0D) {
+			if (d0 - blockposition.getY() > 2.0D) {
 				return EnumDirection.UP;
 			}
 
-			if ((double) blockposition.getY() - d0 > 0.0D) {
+			if (blockposition.getY() - d0 > 0.0D) {
 				return EnumDirection.DOWN;
 			}
 		}
@@ -305,7 +316,7 @@ public class BlockPiston extends Block {
 					if (block.k() == 1) {
 						return flag; // CloudSpigot
 					}
-				} else if (((Boolean) world.getType(blockposition).get(BlockPiston.EXTENDED)).booleanValue()) {
+				} else if (world.getType(blockposition).get(BlockPiston.EXTENDED).booleanValue()) {
 					return false;
 				}
 
@@ -349,8 +360,8 @@ public class BlockPiston extends Block {
 					if (index >= size() || index < 0) {
 						throw new ArrayIndexOutOfBoundsException(index);
 					}
-					BlockPosition pos = (BlockPosition) (index < moved.size() ? moved.get(index)
-							: broken.get(index - moved.size()));
+					BlockPosition pos = index < moved.size() ? moved.get(index)
+							: broken.get(index - moved.size());
 					return bblock.getWorld().getBlockAt(pos.getX(), pos.getY(), pos.getZ());
 				}
 			};
@@ -383,7 +394,7 @@ public class BlockPiston extends Block {
 			BlockPosition blockposition1;
 
 			for (j = list1.size() - 1; j >= 0; --j) {
-				blockposition1 = (BlockPosition) list1.get(j);
+				blockposition1 = list1.get(j);
 				Block block = world.getType(blockposition1).getBlock();
 
 				block.b(world, blockposition1, world.getType(blockposition1), 0);
@@ -395,7 +406,7 @@ public class BlockPiston extends Block {
 			IBlockData iblockdata;
 
 			for (j = list.size() - 1; j >= 0; --j) {
-				blockposition1 = (BlockPosition) list.get(j);
+				blockposition1 = list.get(j);
 				iblockdata = world.getType(blockposition1);
 				Block block1 = iblockdata.getBlock();
 
@@ -430,11 +441,11 @@ public class BlockPiston extends Block {
 			int k;
 
 			for (k = list1.size() - 1; k >= 0; --k) {
-				world.applyPhysics((BlockPosition) list1.get(k), ablock[i++]);
+				world.applyPhysics(list1.get(k), ablock[i++]);
 			}
 
 			for (k = list.size() - 1; k >= 0; --k) {
-				world.applyPhysics((BlockPosition) list.get(k), ablock[i++]);
+				world.applyPhysics(list.get(k), ablock[i++]);
 			}
 
 			if (flag) {
@@ -446,22 +457,25 @@ public class BlockPiston extends Block {
 		}
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockPiston.FACING, b(i)).set(BlockPiston.EXTENDED,
 				Boolean.valueOf((i & 8) > 0));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
 		byte b0 = 0;
-		int i = b0 | ((EnumDirection) iblockdata.get(BlockPiston.FACING)).a();
+		int i = b0 | iblockdata.get(BlockPiston.FACING).a();
 
-		if (((Boolean) iblockdata.get(BlockPiston.EXTENDED)).booleanValue()) {
+		if (iblockdata.get(BlockPiston.EXTENDED).booleanValue()) {
 			i |= 8;
 		}
 
 		return i;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockPiston.FACING, BlockPiston.EXTENDED });
 	}

@@ -1,9 +1,10 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityBat;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.EntityType;
+
+import net.minecraft.server.EntityBat;
 
 public class CraftBat extends CraftAmbient implements Bat {
 	public CraftBat(CraftServer server, EntityBat entity) {
@@ -20,6 +21,7 @@ public class CraftBat extends CraftAmbient implements Bat {
 		return "CraftBat";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.BAT;
 	}

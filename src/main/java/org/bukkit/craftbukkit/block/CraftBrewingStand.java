@@ -1,12 +1,13 @@
 package org.bukkit.craftbukkit.block;
 
-import net.minecraft.server.TileEntityBrewingStand;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.inventory.CraftInventoryBrewer;
 import org.bukkit.inventory.BrewerInventory;
+
+import net.minecraft.server.TileEntityBrewingStand;
 
 public class CraftBrewingStand extends CraftBlockState implements BrewingStand {
 	private final TileEntityBrewingStand brewingStand;
@@ -22,6 +23,7 @@ public class CraftBrewingStand extends CraftBlockState implements BrewingStand {
 		brewingStand = te;
 	}
 
+	@Override
 	public BrewerInventory getInventory() {
 		return new CraftInventoryBrewer(brewingStand);
 	}
@@ -37,10 +39,12 @@ public class CraftBrewingStand extends CraftBlockState implements BrewingStand {
 		return result;
 	}
 
+	@Override
 	public int getBrewingTime() {
 		return brewingStand.brewTime;
 	}
 
+	@Override
 	public void setBrewingTime(int brewTime) {
 		brewingStand.brewTime = brewTime;
 	}

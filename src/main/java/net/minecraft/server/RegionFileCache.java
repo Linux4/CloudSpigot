@@ -1,14 +1,15 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Maps;
-import eu.server24_7.cloudspigot.exception.ServerInternalException;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
+
+import com.google.common.collect.Maps;
+
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 public class RegionFileCache {
 
@@ -23,7 +24,7 @@ public class RegionFileCache {
 		// CloudSpigot end
 		File file1 = new File(file, "region");
 		File file2 = new File(file1, "r." + (i >> 5) + "." + (j >> 5) + ".mca");
-		RegionFile regionfile = (RegionFile) RegionFileCache.a.get(file2);
+		RegionFile regionfile = RegionFileCache.a.get(file2);
 
 		if (regionfile != null) {
 			return regionfile;
@@ -50,7 +51,7 @@ public class RegionFileCache {
 		Iterator<RegionFile> iterator = RegionFileCache.a.values().iterator();
 
 		while (iterator.hasNext()) {
-			RegionFile regionfile = (RegionFile) iterator.next();
+			RegionFile regionfile = iterator.next();
 
 			try {
 				if (regionfile != null) {

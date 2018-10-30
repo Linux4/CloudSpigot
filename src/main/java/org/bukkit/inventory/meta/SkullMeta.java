@@ -31,5 +31,6 @@ public interface SkullMeta extends ItemMeta {
 	 */
 	boolean setOwner(String owner);
 
+	@Override
 	SkullMeta clone();
 }

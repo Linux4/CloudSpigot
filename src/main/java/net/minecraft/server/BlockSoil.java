@@ -3,13 +3,12 @@ package net.minecraft.server;
 import java.util.Iterator;
 import java.util.Random;
 
+import org.bukkit.craftbukkit.event.CraftEventFactory;
+// CraftBukkit end
 // CraftBukkit start
 import org.bukkit.event.entity.EntityInteractEvent;
 
 import net.minecraft.server.BlockPosition.MutableBlockPosition;
-
-import org.bukkit.craftbukkit.event.CraftEventFactory;
-// CraftBukkit end
 
 public class BlockSoil extends Block {
 
@@ -23,22 +22,26 @@ public class BlockSoil extends Block {
 		this.e(255);
 	}
 
+	@Override
 	public AxisAlignedBB a(World world, BlockPosition blockposition, IBlockData iblockdata) {
-		return new AxisAlignedBB((double) blockposition.getX(), (double) blockposition.getY(),
-				(double) blockposition.getZ(), (double) (blockposition.getX() + 1), (double) (blockposition.getY() + 1),
-				(double) (blockposition.getZ() + 1));
+		return new AxisAlignedBB(blockposition.getX(), blockposition.getY(),
+				blockposition.getZ(), blockposition.getX() + 1, blockposition.getY() + 1,
+				blockposition.getZ() + 1);
 	}
 
+	@Override
 	public boolean c() {
 		return false;
 	}
 
+	@Override
 	public boolean d() {
 		return false;
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
-		int i = ((Integer) iblockdata.get(BlockSoil.MOISTURE)).intValue();
+		int i = iblockdata.get(BlockSoil.MOISTURE).intValue();
 
 		if (!this.f(world, blockposition) && !world.isRainingAt(blockposition.up())) {
 			if (i > 0) {
@@ -59,6 +62,7 @@ public class BlockSoil extends Block {
 
 	}
 
+	@Override
 	public void fallOn(World world, BlockPosition blockposition, Entity entity, float f) {
 		super.fallOn(world, blockposition, entity, f); // CraftBukkit - moved here as game rules / events shouldn't
 														// affect fall damage.
@@ -113,12 +117,13 @@ public class BlockSoil extends Block {
 				return false;
 			}
 
-			blockposition_mutableblockposition = (BlockPosition.MutableBlockPosition) iterator.next();
+			blockposition_mutableblockposition = iterator.next();
 		} while (world.getType(blockposition_mutableblockposition).getBlock().getMaterial() != Material.WATER);
 
 		return true;
 	}
 
+	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
 		super.doPhysics(world, blockposition, iblockdata, block);
 		if (world.getType(blockposition.up()).getBlock().getMaterial().isBuildable()) {
@@ -127,19 +132,23 @@ public class BlockSoil extends Block {
 
 	}
 
+	@Override
 	public Item getDropType(IBlockData iblockdata, Random random, int i) {
 		return Blocks.DIRT.getDropType(
 				Blocks.DIRT.getBlockData().set(BlockDirt.VARIANT, BlockDirt.EnumDirtVariant.DIRT), random, i);
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockSoil.MOISTURE, Integer.valueOf(i & 7));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
-		return ((Integer) iblockdata.get(BlockSoil.MOISTURE)).intValue();
+		return iblockdata.get(BlockSoil.MOISTURE).intValue();
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockSoil.MOISTURE });
 	}

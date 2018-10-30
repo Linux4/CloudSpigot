@@ -5,6 +5,7 @@ public class TileEntityLightDetector extends TileEntity implements IUpdatePlayer
 	public TileEntityLightDetector() {
 	}
 
+	@Override
 	public void c() {
 		if (this.world != null && !this.world.isClientSide && this.world.getTime() % 20L == 0L) {
 			this.e = this.w();

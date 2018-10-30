@@ -1,11 +1,11 @@
 package org.bukkit.craftbukkit;
 
+import org.bukkit.Location;
+import org.bukkit.TravelAgent;
+
 import net.minecraft.server.BlockPosition;
 import net.minecraft.server.PortalTravelAgent;
 import net.minecraft.server.WorldServer;
-
-import org.bukkit.Location;
-import org.bukkit.TravelAgent;
 
 public class CraftTravelAgent extends PortalTravelAgent implements TravelAgent {
 

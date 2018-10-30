@@ -21,36 +21,44 @@ public class EntityCow extends EntityAnimal {
 		this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
 	}
 
+	@Override
 	protected void initAttributes() {
 		super.initAttributes();
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(10.0D);
 		this.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED).setValue(0.20000000298023224D);
 	}
 
+	@Override
 	protected String z() {
 		return "mob.cow.say";
 	}
 
+	@Override
 	protected String bo() {
 		return "mob.cow.hurt";
 	}
 
+	@Override
 	protected String bp() {
 		return "mob.cow.hurt";
 	}
 
+	@Override
 	protected void a(BlockPosition blockposition, Block block) {
 		this.makeSound("mob.cow.step", 0.15F, 1.0F);
 	}
 
+	@Override
 	protected float bB() {
 		return 0.4F;
 	}
 
+	@Override
 	protected Item getLoot() {
 		return Items.LEATHER;
 	}
 
+	@Override
 	protected void dropDeathLoot(boolean flag, int i) {
 		int j = this.random.nextInt(3) + this.random.nextInt(1 + i);
 
@@ -72,6 +80,7 @@ public class EntityCow extends EntityAnimal {
 
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		ItemStack itemstack = entityhuman.inventory.getItemInHand();
 
@@ -104,10 +113,12 @@ public class EntityCow extends EntityAnimal {
 		return new EntityCow(this.world);
 	}
 
+	@Override
 	public float getHeadHeight() {
 		return this.length;
 	}
 
+	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) {
 		return this.b(entityageable);
 	}

@@ -7,6 +7,7 @@ public class ItemMonsterEgg extends Item {
 		this.a(CreativeModeTab.f);
 	}
 
+	@Override
 	public String a(ItemStack itemstack) {
 		String s = ("" + LocaleI18n.get(this.getName() + ".name")).trim();
 		String s1 = EntityTypes.b(itemstack.getData());
@@ -18,6 +19,7 @@ public class ItemMonsterEgg extends Item {
 		return s;
 	}
 
+	@Override
 	public boolean interactWith(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		if (world.isClientSide) {
@@ -51,8 +53,8 @@ public class ItemMonsterEgg extends Item {
 				d0 = 0.5D;
 			}
 
-			Entity entity = a(world, itemstack.getData(), (double) blockposition.getX() + 0.5D,
-					(double) blockposition.getY() + d0, (double) blockposition.getZ() + 0.5D);
+			Entity entity = a(world, itemstack.getData(), blockposition.getX() + 0.5D,
+					blockposition.getY() + d0, blockposition.getZ() + 0.5D);
 
 			if (entity != null) {
 				if (entity instanceof EntityLiving && itemstack.hasName()) {
@@ -68,6 +70,7 @@ public class ItemMonsterEgg extends Item {
 		}
 	}
 
+	@Override
 	public ItemStack a(ItemStack itemstack, World world, EntityHuman entityhuman) {
 		if (world.isClientSide) {
 			return itemstack;
@@ -89,8 +92,8 @@ public class ItemMonsterEgg extends Item {
 					}
 
 					if (world.getType(blockposition).getBlock() instanceof BlockFluids) {
-						Entity entity = a(world, itemstack.getData(), (double) blockposition.getX() + 0.5D,
-								(double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D);
+						Entity entity = a(world, itemstack.getData(), blockposition.getX() + 0.5D,
+								blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D);
 
 						if (entity != null) {
 							if (entity instanceof EntityLiving && itemstack.hasName()) {

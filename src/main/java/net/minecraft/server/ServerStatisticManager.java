@@ -1,11 +1,5 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonParser;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -13,11 +7,19 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 
 public class ServerStatisticManager extends StatisticManager {
 
@@ -65,6 +67,7 @@ public class ServerStatisticManager extends StatisticManager {
 
 	}
 
+	@Override
 	public void setStatistic(EntityHuman entityhuman, Statistic statistic, int i) {
 		if (org.spigotmc.SpigotConfig.disableStatSaving)
 			return; // Spigot
@@ -110,16 +113,16 @@ public class ServerStatisticManager extends StatisticManager {
 
 			while (iterator.hasNext()) {
 				Entry<String, JsonElement> entry = iterator.next();
-				Statistic statistic = StatisticList.getStatistic((String) entry.getKey());
+				Statistic statistic = StatisticList.getStatistic(entry.getKey());
 
 				if (statistic != null) {
 					StatisticWrapper statisticwrapper = new StatisticWrapper();
 
-					if (((JsonElement) entry.getValue()).isJsonPrimitive()
-							&& ((JsonElement) entry.getValue()).getAsJsonPrimitive().isNumber()) {
-						statisticwrapper.a(((JsonElement) entry.getValue()).getAsInt());
-					} else if (((JsonElement) entry.getValue()).isJsonObject()) {
-						JsonObject jsonobject1 = ((JsonElement) entry.getValue()).getAsJsonObject();
+					if (entry.getValue().isJsonPrimitive()
+							&& entry.getValue().getAsJsonPrimitive().isNumber()) {
+						statisticwrapper.a(entry.getValue().getAsInt());
+					} else if (entry.getValue().isJsonObject()) {
+						JsonObject jsonobject1 = entry.getValue().getAsJsonObject();
 
 						if (jsonobject1.has("value") && jsonobject1.get("value").isJsonPrimitive()
 								&& jsonobject1.get("value").getAsJsonPrimitive().isNumber()) {
@@ -130,7 +133,7 @@ public class ServerStatisticManager extends StatisticManager {
 							try {
 								Constructor<? extends IJsonStatistic> constructor = statistic.l()
 										.getConstructor(new Class[0]);
-								IJsonStatistic ijsonstatistic = (IJsonStatistic) constructor.newInstance(new Object[0]);
+								IJsonStatistic ijsonstatistic = constructor.newInstance(new Object[0]);
 
 								ijsonstatistic.a(jsonobject1.get("progress"));
 								statisticwrapper.a(ijsonstatistic);
@@ -143,7 +146,7 @@ public class ServerStatisticManager extends StatisticManager {
 					hashmap.put(statistic, statisticwrapper);
 				} else {
 					ServerStatisticManager.b.warn(
-							"Invalid statistic in " + this.d + ": Don\'t know what " + (String) entry.getKey() + " is");
+							"Invalid statistic in " + this.d + ": Don\'t know what " + entry.getKey() + " is");
 				}
 			}
 
@@ -158,22 +161,22 @@ public class ServerStatisticManager extends StatisticManager {
 		while (iterator.hasNext()) {
 			Entry<Statistic, StatisticWrapper> entry = iterator.next();
 
-			if (((StatisticWrapper) entry.getValue()).b() != null) {
+			if (entry.getValue().b() != null) {
 				JsonObject jsonobject1 = new JsonObject();
 
-				jsonobject1.addProperty("value", Integer.valueOf(((StatisticWrapper) entry.getValue()).a()));
+				jsonobject1.addProperty("value", Integer.valueOf(entry.getValue().a()));
 
 				try {
-					jsonobject1.add("progress", ((StatisticWrapper) entry.getValue()).b().a());
+					jsonobject1.add("progress", entry.getValue().b().a());
 				} catch (Throwable throwable) {
-					ServerStatisticManager.b.warn("Couldn\'t save statistic " + ((Statistic) entry.getKey()).e()
+					ServerStatisticManager.b.warn("Couldn\'t save statistic " + entry.getKey().e()
 							+ ": error serializing progress", throwable);
 				}
 
-				jsonobject.add(((Statistic) entry.getKey()).name, jsonobject1);
+				jsonobject.add(entry.getKey().name, jsonobject1);
 			} else {
-				jsonobject.addProperty(((Statistic) entry.getKey()).name,
-						Integer.valueOf(((StatisticWrapper) entry.getValue()).a()));
+				jsonobject.addProperty(entry.getKey().name,
+						Integer.valueOf(entry.getValue().a()));
 			}
 		}
 
@@ -184,7 +187,7 @@ public class ServerStatisticManager extends StatisticManager {
 		Iterator<Statistic> iterator = this.a.keySet().iterator();
 
 		while (iterator.hasNext()) {
-			Statistic statistic = (Statistic) iterator.next();
+			Statistic statistic = iterator.next();
 
 			this.e.add(statistic);
 		}
@@ -200,7 +203,7 @@ public class ServerStatisticManager extends StatisticManager {
 			Iterator<Statistic> iterator = this.c().iterator();
 
 			while (iterator.hasNext()) {
-				Statistic statistic = (Statistic) iterator.next();
+				Statistic statistic = iterator.next();
 
 				hashmap.put(statistic, Integer.valueOf(this.getStatisticValue(statistic)));
 			}
@@ -214,7 +217,7 @@ public class ServerStatisticManager extends StatisticManager {
 		Iterator<Achievement> iterator = AchievementList.e.iterator();
 
 		while (iterator.hasNext()) {
-			Achievement achievement = (Achievement) iterator.next();
+			Achievement achievement = iterator.next();
 
 			if (this.hasAchievement(achievement)) {
 				hashmap.put(achievement, Integer.valueOf(this.getStatisticValue(achievement)));

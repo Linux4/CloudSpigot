@@ -84,6 +84,7 @@ public class TripwireHook extends SimpleAttachableMaterialData implements Redsto
 		setData((byte) dat);
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setFacingDirection(BlockFace face) {
 		int dat = getData() & 0xC;
@@ -104,6 +105,7 @@ public class TripwireHook extends SimpleAttachableMaterialData implements Redsto
 		setData((byte) dat);
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public BlockFace getAttachedFace() {
 		switch (getData() & 0x3) {
@@ -119,6 +121,7 @@ public class TripwireHook extends SimpleAttachableMaterialData implements Redsto
 		return null;
 	}
 
+	@Override
 	public boolean isPowered() {
 		return isActivated();
 	}

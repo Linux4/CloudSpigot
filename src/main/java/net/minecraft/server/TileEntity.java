@@ -1,12 +1,14 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Maps;
 import java.util.Map;
 import java.util.concurrent.Callable;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.bukkit.inventory.InventoryHolder; // CraftBukkit
+
+import com.google.common.collect.Maps;
+
 import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 public abstract class TileEntity {
@@ -52,7 +54,7 @@ public abstract class TileEntity {
 	}
 
 	public void b(NBTTagCompound nbttagcompound) {
-		String s = (String) TileEntity.g.get(this.getClass());
+		String s = TileEntity.g.get(this.getClass());
 
 		if (s == null) {
 			throw new RuntimeException(this.getClass() + " is missing a mapping! This is a bug!");
@@ -69,7 +71,7 @@ public abstract class TileEntity {
 		TileEntity tileentity = null;
 
 		try {
-			Class oclass = (Class) TileEntity.f.get(nbttagcompound.getString("id"));
+			Class oclass = TileEntity.f.get(nbttagcompound.getString("id"));
 
 			if (oclass != null) {
 				tileentity = (TileEntity) oclass.newInstance();
@@ -152,10 +154,11 @@ public abstract class TileEntity {
 	public void a(CrashReportSystemDetails crashreportsystemdetails) {
 		crashreportsystemdetails.a("Name", new Callable<String>() {
 			public String a() throws Exception {
-				return (String) TileEntity.g.get(TileEntity.this.getClass()) + " // "
+				return TileEntity.g.get(TileEntity.this.getClass()) + " // "
 						+ TileEntity.this.getClass().getCanonicalName();
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -179,6 +182,7 @@ public abstract class TileEntity {
 					}
 				}
 
+				@Override
 				public String call() throws Exception {
 					return this.a();
 				}
@@ -197,6 +201,7 @@ public abstract class TileEntity {
 					}
 				}
 
+				@Override
 				public String call() throws Exception {
 					return this.a();
 				}

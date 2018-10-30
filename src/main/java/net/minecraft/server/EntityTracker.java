@@ -1,13 +1,15 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Callable;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 public class EntityTracker {
 
@@ -29,7 +31,7 @@ public class EntityTracker {
 			Iterator<EntityTrackerEntry> iterator = this.c.iterator();
 
 			while (iterator.hasNext()) {
-				EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
+				EntityTrackerEntry entitytrackerentry = iterator.next();
 
 				if (entitytrackerentry.tracker != entityplayer) {
 					entitytrackerentry.updatePlayer(entityplayer);
@@ -114,7 +116,7 @@ public class EntityTracker {
 			CrashReport crashreport = CrashReport.a(throwable, "Adding entity to track");
 			CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Entity To Track");
 
-			crashreportsystemdetails.a("Tracking range", (Object) (i + " blocks"));
+			crashreportsystemdetails.a("Tracking range", i + " blocks");
 			final int finalI = i; // CraftBukkit - fix decompile error
 			crashreportsystemdetails.a("Update interval", new Callable<String>() {
 				public String a() throws Exception {
@@ -127,6 +129,7 @@ public class EntityTracker {
 					return s;
 				}
 
+				@Override
 				public String call() throws Exception {
 					return this.a();
 				}
@@ -134,7 +137,7 @@ public class EntityTracker {
 			entity.appendEntityCrashDetails(crashreportsystemdetails);
 			CrashReportSystemDetails crashreportsystemdetails1 = crashreport.a("Entity That Is Already Tracked");
 
-			((EntityTrackerEntry) this.trackedEntities.get(entity.getId())).tracker
+			this.trackedEntities.get(entity.getId()).tracker
 					.appendEntityCrashDetails(crashreportsystemdetails1);
 
 			try {
@@ -154,13 +157,13 @@ public class EntityTracker {
 			Iterator<EntityTrackerEntry> iterator = this.c.iterator();
 
 			while (iterator.hasNext()) {
-				EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
+				EntityTrackerEntry entitytrackerentry = iterator.next();
 
 				entitytrackerentry.a(entityplayer);
 			}
 		}
 
-		EntityTrackerEntry entitytrackerentry1 = (EntityTrackerEntry) this.trackedEntities.d(entity.getId());
+		EntityTrackerEntry entitytrackerentry1 = this.trackedEntities.d(entity.getId());
 
 		if (entitytrackerentry1 != null) {
 			this.c.remove(entitytrackerentry1);
@@ -174,7 +177,7 @@ public class EntityTracker {
 		Iterator<EntityTrackerEntry> iterator = this.c.iterator();
 
 		while (iterator.hasNext()) {
-			EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
+			EntityTrackerEntry entitytrackerentry = iterator.next();
 
 			entitytrackerentry.track(this.world.players);
 			if (entitytrackerentry.n && entitytrackerentry.tracker instanceof EntityPlayer) {
@@ -183,11 +186,11 @@ public class EntityTracker {
 		}
 
 		for (int i = 0; i < arraylist.size(); ++i) {
-			EntityPlayer entityplayer = (EntityPlayer) arraylist.get(i);
+			EntityPlayer entityplayer = arraylist.get(i);
 			Iterator<EntityTrackerEntry> iterator1 = this.c.iterator();
 
 			while (iterator1.hasNext()) {
-				EntityTrackerEntry entitytrackerentry1 = (EntityTrackerEntry) iterator1.next();
+				EntityTrackerEntry entitytrackerentry1 = iterator1.next();
 
 				if (entitytrackerentry1.tracker != entityplayer) {
 					entitytrackerentry1.updatePlayer(entityplayer);
@@ -201,7 +204,7 @@ public class EntityTracker {
 		Iterator<EntityTrackerEntry> iterator = this.c.iterator();
 
 		while (iterator.hasNext()) {
-			EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
+			EntityTrackerEntry entitytrackerentry = iterator.next();
 
 			if (entitytrackerentry.tracker == entityplayer) {
 				entitytrackerentry.scanPlayers(this.world.players);
@@ -214,7 +217,7 @@ public class EntityTracker {
 
 	@SuppressWarnings("rawtypes")
 	public void a(Entity entity, Packet packet) {
-		EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) this.trackedEntities.get(entity.getId());
+		EntityTrackerEntry entitytrackerentry = this.trackedEntities.get(entity.getId());
 
 		if (entitytrackerentry != null) {
 			entitytrackerentry.broadcast(packet);
@@ -224,7 +227,7 @@ public class EntityTracker {
 
 	@SuppressWarnings("rawtypes")
 	public void sendPacketToEntity(Entity entity, Packet packet) {
-		EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) this.trackedEntities.get(entity.getId());
+		EntityTrackerEntry entitytrackerentry = this.trackedEntities.get(entity.getId());
 
 		if (entitytrackerentry != null) {
 			entitytrackerentry.broadcastIncludingSelf(packet);
@@ -236,7 +239,7 @@ public class EntityTracker {
 		Iterator<EntityTrackerEntry> iterator = this.c.iterator();
 
 		while (iterator.hasNext()) {
-			EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
+			EntityTrackerEntry entitytrackerentry = iterator.next();
 
 			entitytrackerentry.clear(entityplayer);
 		}
@@ -247,7 +250,7 @@ public class EntityTracker {
 		Iterator<EntityTrackerEntry> iterator = this.c.iterator();
 
 		while (iterator.hasNext()) {
-			EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
+			EntityTrackerEntry entitytrackerentry = iterator.next();
 
 			if (entitytrackerentry.tracker != entityplayer && entitytrackerentry.tracker.ae == chunk.locX
 					&& entitytrackerentry.tracker.ag == chunk.locZ) {

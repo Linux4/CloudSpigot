@@ -1,11 +1,12 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Maps;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Callable;
+
+import com.google.common.collect.Maps;
 
 public abstract class StructureGenerator extends WorldGenBase {
 
@@ -17,6 +18,7 @@ public abstract class StructureGenerator extends WorldGenBase {
 
 	public abstract String a();
 
+	@Override
 	protected final void a(World world, final int i, final int j, int k, int l, ChunkSnapshot chunksnapshot) {
 		this.a(world);
 		if (!this.e.containsKey(Long.valueOf(ChunkCoordIntPair.a(i, j)))) {
@@ -39,17 +41,19 @@ public abstract class StructureGenerator extends WorldGenBase {
 						return StructureGenerator.this.a(i, j) ? "True" : "False";
 					}
 
+					@Override
 					public String call() throws Exception {
 						return this.a();
 					}
 				});
 				crashreportsystemdetails.a("Chunk location",
-						(Object) String.format("%d,%d", new Object[] { Integer.valueOf(i), Integer.valueOf(j) }));
+						String.format("%d,%d", new Object[] { Integer.valueOf(i), Integer.valueOf(j) }));
 				crashreportsystemdetails.a("Chunk pos hash", new Callable<String>() {
 					public String a() throws Exception {
 						return String.valueOf(ChunkCoordIntPair.a(i, j));
 					}
 
+					@Override
 					public String call() throws Exception {
 						return this.a();
 					}
@@ -59,6 +63,7 @@ public abstract class StructureGenerator extends WorldGenBase {
 						return StructureGenerator.this.getClass().getCanonicalName();
 					}
 
+					@Override
 					public String call() throws Exception {
 						return this.a();
 					}
@@ -76,7 +81,7 @@ public abstract class StructureGenerator extends WorldGenBase {
 		Iterator<StructureStart> iterator = this.e.values().iterator();
 
 		while (iterator.hasNext()) {
-			StructureStart structurestart = (StructureStart) iterator.next();
+			StructureStart structurestart = iterator.next();
 
 			if (structurestart.d() && structurestart.a(chunkcoordintpair)
 					&& structurestart.a().a(i, j, i + 15, j + 15)) {
@@ -101,15 +106,15 @@ public abstract class StructureGenerator extends WorldGenBase {
 		Iterator<StructureStart> iterator = this.e.values().iterator();
 
 		while (iterator.hasNext()) {
-			StructureStart structurestart = (StructureStart) iterator.next();
+			StructureStart structurestart = iterator.next();
 
-			if (structurestart.d() && structurestart.a().b((BaseBlockPosition) blockposition)) {
+			if (structurestart.d() && structurestart.a().b(blockposition)) {
 				Iterator<StructurePiece> iterator1 = structurestart.b().iterator();
 
 				while (iterator1.hasNext()) {
-					StructurePiece structurepiece = (StructurePiece) iterator1.next();
+					StructurePiece structurepiece = iterator1.next();
 
-					if (structurepiece.c().b((BaseBlockPosition) blockposition)) {
+					if (structurepiece.c().b(blockposition)) {
 						return structurestart;
 					}
 				}
@@ -132,8 +137,8 @@ public abstract class StructureGenerator extends WorldGenBase {
 				return false;
 			}
 
-			structurestart = (StructureStart) iterator.next();
-		} while (!structurestart.d() || !structurestart.a().b((BaseBlockPosition) blockposition));
+			structurestart = iterator.next();
+		} while (!structurestart.d() || !structurestart.a().b(blockposition));
 
 		return true;
 	}
@@ -144,8 +149,8 @@ public abstract class StructureGenerator extends WorldGenBase {
 		this.b.setSeed(world.getSeed());
 		long i = this.b.nextLong();
 		long j = this.b.nextLong();
-		long k = (long) (blockposition.getX() >> 4) * i;
-		long l = (long) (blockposition.getZ() >> 4) * j;
+		long k = (blockposition.getX() >> 4) * i;
+		long l = (blockposition.getZ() >> 4) * j;
 
 		this.b.setSeed(k ^ l ^ world.getSeed());
 		this.a(world, blockposition.getX() >> 4, blockposition.getZ() >> 4, 0, 0, (ChunkSnapshot) null);
@@ -157,10 +162,10 @@ public abstract class StructureGenerator extends WorldGenBase {
 		double d1;
 
 		while (iterator.hasNext()) {
-			StructureStart structurestart = (StructureStart) iterator.next();
+			StructureStart structurestart = iterator.next();
 
 			if (structurestart.d()) {
-				StructurePiece structurepiece = (StructurePiece) structurestart.b().get(0);
+				StructurePiece structurepiece = structurestart.b().get(0);
 
 				blockposition2 = structurepiece.a();
 				d1 = blockposition2.i(blockposition);
@@ -181,7 +186,7 @@ public abstract class StructureGenerator extends WorldGenBase {
 				Iterator<BlockPosition> iterator1 = list.iterator();
 
 				while (iterator1.hasNext()) {
-					blockposition2 = (BlockPosition) iterator1.next();
+					blockposition2 = iterator1.next();
 					d1 = blockposition2.i(blockposition);
 					if (d1 < d0) {
 						d0 = d1;
@@ -211,13 +216,13 @@ public abstract class StructureGenerator extends WorldGenBase {
 			// Spigot End
 			if (this.d == null) {
 				this.d = new PersistentStructure(this.a());
-				world.a(this.a(), (PersistentBase) this.d);
+				world.a(this.a(), this.d);
 			} else {
 				NBTTagCompound nbttagcompound = this.d.a();
 				Iterator<String> iterator = nbttagcompound.c().iterator();
 
 				while (iterator.hasNext()) {
-					String s = (String) iterator.next();
+					String s = iterator.next();
 					NBTBase nbtbase = nbttagcompound.get(s);
 
 					if (nbtbase.getTypeId() == 10) {

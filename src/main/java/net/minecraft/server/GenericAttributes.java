@@ -3,6 +3,7 @@ package net.minecraft.server;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.UUID;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +28,7 @@ public class GenericAttributes {
 		Iterator<AttributeInstance> iterator = attributemapbase.a().iterator();
 
 		while (iterator.hasNext()) {
-			AttributeInstance attributeinstance = (AttributeInstance) iterator.next();
+			AttributeInstance attributeinstance = iterator.next();
 
 			nbttaglist.add(a(attributeinstance));
 		}
@@ -48,7 +49,7 @@ public class GenericAttributes {
 			Iterator<AttributeModifier> iterator = collection.iterator();
 
 			while (iterator.hasNext()) {
-				AttributeModifier attributemodifier = (AttributeModifier) iterator.next();
+				AttributeModifier attributemodifier = iterator.next();
 
 				if (attributemodifier.e()) {
 					nbttaglist.add(a(attributemodifier));

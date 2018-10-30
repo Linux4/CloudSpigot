@@ -9,14 +9,17 @@ public class EntityDamageSourceIndirect extends EntityDamageSource {
 		this.owner = entity1;
 	}
 
+	@Override
 	public Entity i() {
 		return this.q;
 	}
 
+	@Override
 	public Entity getEntity() {
 		return this.owner;
 	}
 
+	@Override
 	public IChatBaseComponent getLocalizedDeathMessage(EntityLiving entityliving) {
 		IChatBaseComponent ichatbasecomponent = this.owner == null ? this.q.getScoreboardDisplayName()
 				: this.owner.getScoreboardDisplayName();

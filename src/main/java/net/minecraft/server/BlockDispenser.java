@@ -18,10 +18,12 @@ public class BlockDispenser extends BlockContainer {
 		this.a(CreativeModeTab.d);
 	}
 
+	@Override
 	public int a(World world) {
 		return 4;
 	}
 
+	@Override
 	public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		super.onPlace(world, blockposition, iblockdata);
 		this.e(world, blockposition, iblockdata);
@@ -29,7 +31,7 @@ public class BlockDispenser extends BlockContainer {
 
 	private void e(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		if (!world.isClientSide) {
-			EnumDirection enumdirection = (EnumDirection) iblockdata.get(BlockDispenser.FACING);
+			EnumDirection enumdirection = iblockdata.get(BlockDispenser.FACING);
 			boolean flag = world.getType(blockposition.north()).getBlock().o();
 			boolean flag1 = world.getType(blockposition.south()).getBlock().o();
 
@@ -53,6 +55,7 @@ public class BlockDispenser extends BlockContainer {
 		}
 	}
 
+	@Override
 	public boolean interact(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		if (world.isClientSide) {
@@ -98,16 +101,17 @@ public class BlockDispenser extends BlockContainer {
 	}
 
 	protected IDispenseBehavior a(ItemStack itemstack) {
-		return (IDispenseBehavior) BlockDispenser.REGISTRY.get(itemstack == null ? null : itemstack.getItem());
+		return BlockDispenser.REGISTRY.get(itemstack == null ? null : itemstack.getItem());
 	}
 
+	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
 		boolean flag = world.isBlockIndirectlyPowered(blockposition)
 				|| world.isBlockIndirectlyPowered(blockposition.up());
-		boolean flag1 = ((Boolean) iblockdata.get(BlockDispenser.TRIGGERED)).booleanValue();
+		boolean flag1 = iblockdata.get(BlockDispenser.TRIGGERED).booleanValue();
 
 		if (flag && !flag1) {
-			world.a(blockposition, (Block) this, this.a(world));
+			world.a(blockposition, this, this.a(world));
 			world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.TRIGGERED, true), 4);
 		} else if (!flag && flag1) {
 			world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.TRIGGERED, false), 4);
@@ -115,6 +119,7 @@ public class BlockDispenser extends BlockContainer {
 
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		if (!world.isClientSide) {
 			this.dispense(world, blockposition);
@@ -122,16 +127,19 @@ public class BlockDispenser extends BlockContainer {
 
 	}
 
+	@Override
 	public TileEntity a(World world, int i) {
 		return new TileEntityDispenser();
 	}
 
+	@Override
 	public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f,
 			float f1, float f2, int i, EntityLiving entityliving) {
 		return this.getBlockData().set(BlockDispenser.FACING, BlockPiston.a(world, blockposition, entityliving))
 				.set(BlockDispenser.TRIGGERED, false);
 	}
 
+	@Override
 	public void postPlace(World world, BlockPosition blockposition, IBlockData iblockdata, EntityLiving entityliving,
 			ItemStack itemstack) {
 		world.setTypeAndData(blockposition,
@@ -146,6 +154,7 @@ public class BlockDispenser extends BlockContainer {
 
 	}
 
+	@Override
 	public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		TileEntity tileentity = world.getTileEntity(blockposition);
 
@@ -159,9 +168,9 @@ public class BlockDispenser extends BlockContainer {
 
 	public static IPosition a(ISourceBlock isourceblock) {
 		EnumDirection enumdirection = b(isourceblock.f());
-		double d0 = isourceblock.getX() + 0.7D * (double) enumdirection.getAdjacentX();
-		double d1 = isourceblock.getY() + 0.7D * (double) enumdirection.getAdjacentY();
-		double d2 = isourceblock.getZ() + 0.7D * (double) enumdirection.getAdjacentZ();
+		double d0 = isourceblock.getX() + 0.7D * enumdirection.getAdjacentX();
+		double d1 = isourceblock.getY() + 0.7D * enumdirection.getAdjacentY();
+		double d2 = isourceblock.getZ() + 0.7D * enumdirection.getAdjacentZ();
 
 		return new Position(d0, d1, d2);
 	}
@@ -170,34 +179,40 @@ public class BlockDispenser extends BlockContainer {
 		return EnumDirection.fromType1(i & 7);
 	}
 
+	@Override
 	public boolean isComplexRedstone() {
 		return true;
 	}
 
+	@Override
 	public int l(World world, BlockPosition blockposition) {
 		return Container.a(world.getTileEntity(blockposition));
 	}
 
+	@Override
 	public int b() {
 		return 3;
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockDispenser.FACING, b(i)).set(BlockDispenser.TRIGGERED,
 				Boolean.valueOf((i & 8) > 0));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
 		byte b0 = 0;
-		int i = b0 | ((EnumDirection) iblockdata.get(BlockDispenser.FACING)).a();
+		int i = b0 | iblockdata.get(BlockDispenser.FACING).a();
 
-		if (((Boolean) iblockdata.get(BlockDispenser.TRIGGERED)).booleanValue()) {
+		if (iblockdata.get(BlockDispenser.TRIGGERED).booleanValue()) {
 			i |= 8;
 		}
 
 		return i;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockDispenser.FACING, BlockDispenser.TRIGGERED });
 	}

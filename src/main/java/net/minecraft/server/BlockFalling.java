@@ -15,14 +15,17 @@ public class BlockFalling extends Block {
 		super(material);
 	}
 
+	@Override
 	public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
-		world.a(blockposition, (Block) this, this.a(world));
+		world.a(blockposition, this, this.a(world));
 	}
 
+	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
-		world.a(blockposition, (Block) this, this.a(world));
+		world.a(blockposition, this, this.a(world));
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		if (!world.isClientSide) {
 			this.f(world, blockposition);
@@ -39,11 +42,11 @@ public class BlockFalling extends Block {
 				if (!world.isClientSide) {
 					// CloudSpigot start - Add FallingBlock source location API
 					org.bukkit.Location loc = new org.bukkit.Location(world.getWorld(),
-							(double) ((float) blockposition.getX() + 0.5F), (double) blockposition.getY(),
-							(double) ((float) blockposition.getZ() + 0.5F));
+							blockposition.getX() + 0.5F, blockposition.getY(),
+							blockposition.getZ() + 0.5F);
 					EntityFallingBlock entityfallingblock = new EntityFallingBlock(loc, world,
-							(double) blockposition.getX() + 0.5D, (double) blockposition.getY(),
-							(double) blockposition.getZ() + 0.5D, world.getType(blockposition));
+							blockposition.getX() + 0.5D, blockposition.getY(),
+							blockposition.getZ() + 0.5D, world.getType(blockposition));
 					// CloudSpigot end
 
 					this.a(entityfallingblock);
@@ -70,6 +73,7 @@ public class BlockFalling extends Block {
 	protected void a(EntityFallingBlock entityfallingblock) {
 	}
 
+	@Override
 	public int a(World world) {
 		return 2;
 	}

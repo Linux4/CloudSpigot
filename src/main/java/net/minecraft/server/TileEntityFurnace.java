@@ -3,12 +3,12 @@ package net.minecraft.server;
 // CraftBukkit start
 import java.util.List;
 
+import org.bukkit.craftbukkit.entity.CraftHumanEntity;
+// CraftBukkit end
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
-import org.bukkit.craftbukkit.entity.CraftHumanEntity;
-// CraftBukkit end
 
 public class TileEntityFurnace extends TileEntityContainer implements IUpdatePlayerListBox, IWorldInventory {
 
@@ -27,22 +27,27 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 	private int maxStack = MAX_STACK;
 	public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
 
+	@Override
 	public ItemStack[] getContents() {
 		return this.items;
 	}
 
+	@Override
 	public void onOpen(CraftHumanEntity who) {
 		transaction.add(who);
 	}
 
+	@Override
 	public void onClose(CraftHumanEntity who) {
 		transaction.remove(who);
 	}
 
+	@Override
 	public List<HumanEntity> getViewers() {
 		return transaction;
 	}
 
+	@Override
 	public void setMaxStackSize(int size) {
 		maxStack = size;
 	}
@@ -51,14 +56,17 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 	public TileEntityFurnace() {
 	}
 
+	@Override
 	public int getSize() {
 		return this.items.length;
 	}
 
+	@Override
 	public ItemStack getItem(int i) {
 		return this.items[i];
 	}
 
+	@Override
 	public ItemStack splitStack(int i, int j) {
 		if (this.items[i] != null) {
 			ItemStack itemstack;
@@ -80,6 +88,7 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 		}
 	}
 
+	@Override
 	public ItemStack splitWithoutUpdate(int i) {
 		if (this.items[i] != null) {
 			ItemStack itemstack = this.items[i];
@@ -91,6 +100,7 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 		}
 	}
 
+	@Override
 	public void setItem(int i, ItemStack itemstack) {
 		boolean flag = itemstack != null && itemstack.doMaterialsMatch(this.items[i])
 				&& ItemStack.equals(itemstack, this.items[i]);
@@ -108,10 +118,12 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 
 	}
 
+	@Override
 	public String getName() {
 		return this.hasCustomName() ? this.m : "container.furnace";
 	}
 
+	@Override
 	public boolean hasCustomName() {
 		return this.m != null && this.m.length() > 0;
 	}
@@ -120,6 +132,7 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 		this.m = s;
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		NBTTagList nbttaglist = nbttagcompound.getList("Items", 10);
@@ -145,6 +158,7 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		nbttagcompound.setShort("BurnTime", (short) this.burnTime);
@@ -169,6 +183,7 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 
 	}
 
+	@Override
 	public int getMaxStackSize() {
 		return maxStack; // CraftBukkit
 	}
@@ -177,6 +192,7 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 		return this.burnTime > 0;
 	}
 
+	@Override
 	public void c() {
 		boolean flag = (this.w() == Blocks.LIT_FURNACE); // CraftBukkit - SPIGOT-844 - Check if furnace block is lit
 															// using the block instead of burn time // PAIL: Rename
@@ -368,31 +384,38 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 		return fuelTime(itemstack) > 0;
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		return this.world.getTileEntity(this.position) != this ? false
-				: entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D,
-						(double) this.position.getZ() + 0.5D) <= 64.0D;
+				: entityhuman.e(this.position.getX() + 0.5D, this.position.getY() + 0.5D,
+						this.position.getZ() + 0.5D) <= 64.0D;
 	}
 
+	@Override
 	public void startOpen(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public void closeContainer(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public boolean b(int i, ItemStack itemstack) {
 		return i == 2 ? false : (i != 1 ? true : isFuel(itemstack) || SlotFurnaceFuel.c_(itemstack));
 	}
 
+	@Override
 	public int[] getSlotsForFace(EnumDirection enumdirection) {
 		return enumdirection == EnumDirection.DOWN ? TileEntityFurnace.f
 				: (enumdirection == EnumDirection.UP ? TileEntityFurnace.a : TileEntityFurnace.g);
 	}
 
+	@Override
 	public boolean canPlaceItemThroughFace(int i, ItemStack itemstack, EnumDirection enumdirection) {
 		return this.b(i, itemstack);
 	}
 
+	@Override
 	public boolean canTakeItemThroughFace(int i, ItemStack itemstack, EnumDirection enumdirection) {
 		if (enumdirection == EnumDirection.DOWN && i == 1) {
 			Item item = itemstack.getItem();
@@ -405,14 +428,17 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 		return true;
 	}
 
+	@Override
 	public String getContainerName() {
 		return "minecraft:furnace";
 	}
 
+	@Override
 	public Container createContainer(PlayerInventory playerinventory, EntityHuman entityhuman) {
 		return new ContainerFurnace(playerinventory, this);
 	}
 
+	@Override
 	public int getProperty(int i) {
 		switch (i) {
 		case 0:
@@ -432,6 +458,7 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 		}
 	}
 
+	@Override
 	public void b(int i, int j) {
 		switch (i) {
 		case 0:
@@ -452,10 +479,12 @@ public class TileEntityFurnace extends TileEntityContainer implements IUpdatePla
 
 	}
 
+	@Override
 	public int g() {
 		return 4;
 	}
 
+	@Override
 	public void l() {
 		for (int i = 0; i < this.items.length; ++i) {
 			this.items[i] = null;

@@ -1,9 +1,10 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityEnderPearl;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EntityType;
+
+import net.minecraft.server.EntityEnderPearl;
 
 public class CraftEnderPearl extends CraftProjectile implements EnderPearl {
 	public CraftEnderPearl(CraftServer server, EntityEnderPearl entity) {
@@ -20,6 +21,7 @@ public class CraftEnderPearl extends CraftProjectile implements EnderPearl {
 		return "CraftEnderPearl";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.ENDER_PEARL;
 	}

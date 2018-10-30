@@ -1,15 +1,17 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 public abstract class BiomeBase {
 
@@ -187,7 +189,7 @@ public abstract class BiomeBase {
 	}
 
 	public WorldGenTreeAbstract a(Random random) {
-		return (WorldGenTreeAbstract) (random.nextInt(10) == 0 ? this.aB : this.aA);
+		return random.nextInt(10) == 0 ? this.aB : this.aA;
 	}
 
 	public WorldGenerator b(Random random) {
@@ -275,10 +277,10 @@ public abstract class BiomeBase {
 
 	public final float a(BlockPosition blockposition) {
 		if (blockposition.getY() > 64) {
-			float f = (float) (BiomeBase.ae.a((double) blockposition.getX() * 1.0D / 8.0D,
-					(double) blockposition.getZ() * 1.0D / 8.0D) * 4.0D);
+			float f = (float) (BiomeBase.ae.a(blockposition.getX() * 1.0D / 8.0D,
+					blockposition.getZ() * 1.0D / 8.0D) * 4.0D);
 
-			return this.temperature - (f + (float) blockposition.getY() - 64.0F) * 0.05F / 30.0F;
+			return this.temperature - (f + blockposition.getY() - 64.0F) * 0.05F / 30.0F;
 		} else {
 			return this.temperature;
 		}
@@ -327,7 +329,7 @@ public abstract class BiomeBase {
 						}
 
 						if (l1 < k && (iblockdata == null || iblockdata.getBlock().getMaterial() == Material.AIR)) {
-							if (this.a((BlockPosition) blockposition_mutableblockposition.c(i, l1, j)) < 0.15F) {
+							if (this.a(blockposition_mutableblockposition.c(i, l1, j)) < 0.15F) {
 								iblockdata = Blocks.ICE.getBlockData();
 							} else {
 								iblockdata = Blocks.WATER.getBlockData();
@@ -377,8 +379,8 @@ public abstract class BiomeBase {
 	}
 
 	public EnumTemperature m() {
-		return (double) this.temperature < 0.2D ? EnumTemperature.COLD
-				: ((double) this.temperature < 1.0D ? EnumTemperature.MEDIUM : EnumTemperature.WARM);
+		return this.temperature < 0.2D ? EnumTemperature.COLD
+				: (this.temperature < 1.0D ? EnumTemperature.MEDIUM : EnumTemperature.WARM);
 	}
 
 	public static BiomeBase[] getBiomes() {
@@ -431,7 +433,7 @@ public abstract class BiomeBase {
 			if (biomebase != null) {
 				if (BiomeBase.o.containsKey(biomebase.ah)) {
 					throw new Error("Biome \"" + biomebase.ah + "\" is defined as both ID "
-							+ ((BiomeBase) BiomeBase.o.get(biomebase.ah)).id + " and " + biomebase.id);
+							+ BiomeBase.o.get(biomebase.ah).id + " and " + biomebase.id);
 				}
 
 				BiomeBase.o.put(biomebase.ah, biomebase);
@@ -495,6 +497,7 @@ public abstract class BiomeBase {
 			this.d = k;
 		}
 
+		@Override
 		public String toString() {
 			return this.b.getSimpleName() + "*(" + this.c + "-" + this.d + "):" + this.a;
 		}

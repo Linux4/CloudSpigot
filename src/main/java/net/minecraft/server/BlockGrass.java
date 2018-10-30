@@ -6,9 +6,9 @@ import java.util.Random;
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
-import org.bukkit.event.block.BlockSpreadEvent;
 import org.bukkit.event.block.BlockFadeEvent;
 // CraftBukkit end
+import org.bukkit.event.block.BlockSpreadEvent;
 
 public class BlockGrass extends Block implements IBlockFragilePlantElement {
 
@@ -21,12 +21,14 @@ public class BlockGrass extends Block implements IBlockFragilePlantElement {
 		this.a(CreativeModeTab.b);
 	}
 
+	@Override
 	public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
 		Block block = iblockaccess.getType(blockposition.up()).getBlock();
 
 		return iblockdata.set(BlockGrass.SNOWY, Boolean.valueOf(block == Blocks.SNOW || block == Blocks.SNOW_LAYER));
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		if (!world.isClientSide) {
 			if (world.getLightLevel(blockposition.up()) < 4 && world.getType(blockposition.up()).getBlock().p() > 2) {
@@ -80,19 +82,23 @@ public class BlockGrass extends Block implements IBlockFragilePlantElement {
 		}
 	}
 
+	@Override
 	public Item getDropType(IBlockData iblockdata, Random random, int i) {
 		return Blocks.DIRT.getDropType(
 				Blocks.DIRT.getBlockData().set(BlockDirt.VARIANT, BlockDirt.EnumDirtVariant.DIRT), random, i);
 	}
 
+	@Override
 	public boolean a(World world, BlockPosition blockposition, IBlockData iblockdata, boolean flag) {
 		return true;
 	}
 
+	@Override
 	public boolean a(World world, Random random, BlockPosition blockposition, IBlockData iblockdata) {
 		return true;
 	}
 
+	@Override
 	public void b(World world, Random random, BlockPosition blockposition, IBlockData iblockdata) {
 		BlockPosition blockposition1 = blockposition.up();
 		int i = 0;
@@ -144,10 +150,12 @@ public class BlockGrass extends Block implements IBlockFragilePlantElement {
 
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
 		return 0;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockGrass.SNOWY });
 	}

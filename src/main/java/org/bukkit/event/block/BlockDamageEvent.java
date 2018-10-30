@@ -64,10 +64,12 @@ public class BlockDamageEvent extends BlockEvent implements Cancellable {
 		return itemstack;
 	}
 
+	@Override
 	public boolean isCancelled() {
 		return cancel;
 	}
 
+	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancel = cancel;
 	}

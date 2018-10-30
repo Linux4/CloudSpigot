@@ -561,6 +561,7 @@ public class Location implements Cloneable, ConfigurationSerializable {
 		return NumberConversions.floor(loc);
 	}
 
+	@Override
 	@Utility
 	public Map<String, Object> serialize() {
 		Map<String, Object> data = new HashMap<String, Object>();

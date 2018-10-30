@@ -14,13 +14,19 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Server;
-import org.bukkit.command.defaults.*;
+import org.bukkit.command.defaults.HelpCommand;
+import org.bukkit.command.defaults.PluginsCommand;
+import org.bukkit.command.defaults.ReloadCommand;
+import org.bukkit.command.defaults.VanillaCommand;
+import org.bukkit.command.defaults.VersionCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
+
 import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
 import eu.server24_7.cloudspigot.exception.ServerCommandException;
 import eu.server24_7.cloudspigot.exception.ServerTabCompleteException;
 
+@SuppressWarnings("deprecation")
 public class SimpleCommandMap implements CommandMap {
 	private static final Pattern PATTERN_ON_SPACE = Pattern.compile(" ", Pattern.LITERAL);
 	protected final Map<String, Command> knownCommands = new HashMap<String, Command>();
@@ -44,6 +50,7 @@ public class SimpleCommandMap implements CommandMap {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void registerAll(String fallbackPrefix, List<Command> commands) {
 		if (commands != null) {
 			for (Command c : commands) {
@@ -55,6 +62,7 @@ public class SimpleCommandMap implements CommandMap {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean register(String fallbackPrefix, Command command) {
 		return register(command.getName(), fallbackPrefix, command);
 	}
@@ -62,6 +70,7 @@ public class SimpleCommandMap implements CommandMap {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean register(String label, String fallbackPrefix, Command command) {
 		label = label.toLowerCase().trim();
 		fallbackPrefix = fallbackPrefix.toLowerCase().trim();
@@ -98,7 +107,6 @@ public class SimpleCommandMap implements CommandMap {
 	 *                       address
 	 * @return true if command was registered, false otherwise.
 	 */
-	@SuppressWarnings("deprecation")
 	private synchronized boolean register(String label, Command command, boolean isAlias, String fallbackPrefix) {
 		knownCommands.put(fallbackPrefix + ":" + label, command);
 		if ((command instanceof VanillaCommand || isAlias) && knownCommands.containsKey(label)) {
@@ -127,6 +135,7 @@ public class SimpleCommandMap implements CommandMap {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean dispatch(CommandSender sender, String commandLine) throws CommandException {
 		String[] args = PATTERN_ON_SPACE.split(commandLine);
 
@@ -158,6 +167,7 @@ public class SimpleCommandMap implements CommandMap {
 		return true;
 	}
 
+	@Override
 	public synchronized void clearCommands() {
 		for (Map.Entry<String, Command> entry : knownCommands.entrySet()) {
 			entry.getValue().unregister(this);
@@ -166,11 +176,13 @@ public class SimpleCommandMap implements CommandMap {
 		setDefaultCommands();
 	}
 
+	@Override
 	public Command getCommand(String name) {
 		Command target = knownCommands.get(name.toLowerCase());
 		return target;
 	}
 
+	@Override
 	public List<String> tabComplete(CommandSender sender, String cmdLine) {
 		return tabComplete(sender, cmdLine, null); // CloudSpigot - location tab-completes, code moved below
 	}

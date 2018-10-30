@@ -1,10 +1,11 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityGuardian;
-import net.minecraft.server.GenericAttributes;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Guardian;
+
+import net.minecraft.server.EntityGuardian;
+import net.minecraft.server.GenericAttributes;
 
 public class CraftGuardian extends CraftMonster implements Guardian {
 

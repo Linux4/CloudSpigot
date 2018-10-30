@@ -58,7 +58,7 @@ public class FormattedCommandAlias extends Command {
 			// Move index past the $
 			index++;
 			int argStart = index;
-			while (index < formatString.length() && inRange(((int) formatString.charAt(index)) - 48, 0, 9)) {
+			while (index < formatString.length() && inRange((formatString.charAt(index)) - 48, 0, 9)) {
 				// Move index past current digit
 				index++;
 			}

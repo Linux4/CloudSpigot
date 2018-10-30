@@ -16,6 +16,7 @@ public class NBTTagIntArray extends NBTBase {
 		this.data = aint;
 	}
 
+	@Override
 	void write(DataOutput dataoutput) throws IOException {
 		dataoutput.writeInt(this.data.length);
 
@@ -25,12 +26,13 @@ public class NBTTagIntArray extends NBTBase {
 
 	}
 
+	@Override
 	void load(DataInput datainput, int i, NBTReadLimiter nbtreadlimiter) throws IOException {
 		nbtreadlimiter.a(192L);
 		int j = datainput.readInt();
 		com.google.common.base.Preconditions.checkArgument(j < 1 << 24);
 
-		nbtreadlimiter.a((long) (32 * j));
+		nbtreadlimiter.a(32 * j);
 		this.data = new int[j];
 
 		for (int k = 0; k < j; ++k) {
@@ -39,10 +41,12 @@ public class NBTTagIntArray extends NBTBase {
 
 	}
 
+	@Override
 	public byte getTypeId() {
 		return (byte) 11;
 	}
 
+	@Override
 	public String toString() {
 		String s = "[";
 		int[] aint = this.data;
@@ -57,6 +61,7 @@ public class NBTTagIntArray extends NBTBase {
 		return s + "]";
 	}
 
+	@Override
 	public NBTTagIntArray clone() { // CloudSpigot - decompile fix
 		int[] aint = new int[this.data.length];
 
@@ -64,10 +69,12 @@ public class NBTTagIntArray extends NBTBase {
 		return new NBTTagIntArray(aint);
 	}
 
+	@Override
 	public boolean equals(Object object) {
 		return super.equals(object) ? Arrays.equals(this.data, ((NBTTagIntArray) object).data) : false;
 	}
 
+	@Override
 	public int hashCode() {
 		return super.hashCode() ^ Arrays.hashCode(this.data);
 	}

@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
 import java.util.Collections;
 import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.google.common.base.Predicate;
 
 public class PathfinderGoalTargetNearestPlayer extends PathfinderGoal {
 
@@ -40,22 +42,24 @@ public class PathfinderGoalTargetNearestPlayer extends PathfinderGoal {
 							f = 0.1F;
 						}
 
-						d0 *= (double) (0.7F * f);
+						d0 *= 0.7F * f;
 					}
 
-					return (double) entity.g(PathfinderGoalTargetNearestPlayer.this.b) > d0 ? false
+					return entity.g(PathfinderGoalTargetNearestPlayer.this.b) > d0 ? false
 							: PathfinderGoalTarget.a(PathfinderGoalTargetNearestPlayer.this.b, (EntityLiving) entity,
 									false, true);
 				}
 			}
 
+			@Override
 			public boolean apply(Entity object) {
-				return this.a((Entity) object);
+				return this.a(object);
 			}
 		};
 		this.d = new PathfinderGoalNearestAttackableTarget.DistanceComparator(entityinsentient);
 	}
 
+	@Override
 	public boolean a() {
 		double d0 = this.f();
 		List<EntityHuman> list = this.b.world.a(EntityHuman.class, this.b.getBoundingBox().grow(d0, 4.0D, d0), this.c);
@@ -64,11 +68,12 @@ public class PathfinderGoalTargetNearestPlayer extends PathfinderGoal {
 		if (list.isEmpty()) {
 			return false;
 		} else {
-			this.e = (EntityLiving) list.get(0);
+			this.e = list.get(0);
 			return true;
 		}
 	}
 
+	@Override
 	public boolean b() {
 		EntityLiving entityliving = this.b.getGoalTarget();
 
@@ -94,6 +99,7 @@ public class PathfinderGoalTargetNearestPlayer extends PathfinderGoal {
 		}
 	}
 
+	@Override
 	public void c() {
 		this.b.setGoalTarget(this.e, org.bukkit.event.entity.EntityTargetEvent.TargetReason.CLOSEST_PLAYER, true); // CraftBukkit
 																													// -
@@ -102,6 +108,7 @@ public class PathfinderGoalTargetNearestPlayer extends PathfinderGoal {
 		super.c();
 	}
 
+	@Override
 	public void d() {
 		this.b.setGoalTarget((EntityLiving) null);
 		super.c();

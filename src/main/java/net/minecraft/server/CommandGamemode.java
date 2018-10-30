@@ -7,18 +7,22 @@ public class CommandGamemode extends CommandAbstract {
 	public CommandGamemode() {
 	}
 
+	@Override
 	public String getCommand() {
 		return "gamemode";
 	}
 
+	@Override
 	public int a() {
 		return 2;
 	}
 
+	@Override
 	public String getUsage(ICommandListener icommandlistener) {
 		return "commands.gamemode.usage";
 	}
 
+	@Override
 	public void execute(ICommandListener icommandlistener, String[] astring) throws CommandException {
 		if (astring.length <= 0) {
 			throw new ExceptionUsage("commands.gamemode.usage", new Object[0]);
@@ -66,6 +70,7 @@ public class CommandGamemode extends CommandAbstract {
 				: WorldSettings.EnumGamemode.SURVIVAL;
 	}
 
+	@Override
 	public List<String> tabComplete(ICommandListener icommandlistener, String[] astring, BlockPosition blockposition) {
 		return astring.length == 1 ? a(astring, new String[] { "survival", "creative", "adventure", "spectator" })
 				: (astring.length == 2 ? a(astring, this.d()) : null);
@@ -75,6 +80,7 @@ public class CommandGamemode extends CommandAbstract {
 		return MinecraftServer.getServer().getPlayers();
 	}
 
+	@Override
 	public boolean isListStart(String[] astring, int i) {
 		return i == 1;
 	}
@@ -82,7 +88,7 @@ public class CommandGamemode extends CommandAbstract {
 	// CraftBukkit start - fix decompiler error
 	@Override
 	public int compareTo(ICommand o) {
-		return a((ICommand) o);
+		return a(o);
 	}
 	// CraftBukkit end
 }

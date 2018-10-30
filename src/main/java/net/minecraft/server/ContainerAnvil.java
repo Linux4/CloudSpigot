@@ -11,9 +11,10 @@ public class ContainerAnvil extends Container {
 	// private static final Logger f = LogManager.getLogger(); // CloudSpigot
 	private IInventory g = new InventoryCraftResult();
 	private IInventory h = new InventorySubcontainer("Repair", true, 2) {
+		@Override
 		public void update() {
 			super.update();
-			ContainerAnvil.this.a((IInventory) this);
+			ContainerAnvil.this.a(this);
 		}
 	};
 	private World i;
@@ -36,15 +37,18 @@ public class ContainerAnvil extends Container {
 		this.a(new Slot(this.h, 0, 27, 47));
 		this.a(new Slot(this.h, 1, 76, 47));
 		this.a(new Slot(this.g, 2, 134, 47) {
+			@Override
 			public boolean isAllowed(ItemStack itemstack) {
 				return false;
 			}
 
+			@Override
 			public boolean isAllowed(EntityHuman entityhuman) {
 				return (entityhuman.abilities.canInstantlyBuild || entityhuman.expLevel >= ContainerAnvil.this.a)
 						&& ContainerAnvil.this.a > 0 && this.hasItem();
 			}
 
+			@Override
 			public void a(EntityHuman entityhuman, ItemStack itemstack) {
 				if (!entityhuman.abilities.canInstantlyBuild) {
 					entityhuman.levelDown(-ContainerAnvil.this.a);
@@ -69,7 +73,7 @@ public class ContainerAnvil extends Container {
 
 				if (!entityhuman.abilities.canInstantlyBuild && !world.isClientSide
 						&& iblockdata.getBlock() == Blocks.ANVIL && entityhuman.bc().nextFloat() < 0.12F) {
-					int i = ((Integer) iblockdata.get(BlockAnvil.DAMAGE)).intValue();
+					int i = iblockdata.get(BlockAnvil.DAMAGE).intValue();
 
 					++i;
 					if (i > 2) {
@@ -100,6 +104,7 @@ public class ContainerAnvil extends Container {
 
 	}
 
+	@Override
 	public void a(IInventory iinventory) {
 		super.a(iinventory);
 		if (iinventory == this.h) {
@@ -185,14 +190,14 @@ public class ContainerAnvil extends Container {
 					Iterator<Integer> iterator = map1.keySet().iterator();
 
 					while (iterator.hasNext()) {
-						i1 = ((Integer) iterator.next()).intValue();
+						i1 = iterator.next().intValue();
 						Enchantment enchantment = Enchantment.getById(i1);
 
 						if (enchantment != null) {
 							j1 = map.containsKey(Integer.valueOf(i1))
-									? ((Integer) map.get(Integer.valueOf(i1))).intValue()
+									? map.get(Integer.valueOf(i1)).intValue()
 									: 0;
-							int l1 = ((Integer) map1.get(Integer.valueOf(i1))).intValue();
+							int l1 = map1.get(Integer.valueOf(i1)).intValue();
 							int i2;
 
 							if (j1 == l1) {
@@ -212,7 +217,7 @@ public class ContainerAnvil extends Container {
 							Iterator<Integer> iterator1 = map.keySet().iterator();
 
 							while (iterator1.hasNext()) {
-								int j2 = ((Integer) iterator1.next()).intValue();
+								int j2 = iterator1.next().intValue();
 
 								if (j2 != i1 && !enchantment.a(Enchantment.getById(j2))) {
 									flag8 = false;
@@ -305,11 +310,13 @@ public class ContainerAnvil extends Container {
 		}
 	}
 
+	@Override
 	public void addSlotListener(ICrafting icrafting) {
 		super.addSlotListener(icrafting);
 		icrafting.setContainerData(this, 0, this.a);
 	}
 
+	@Override
 	public void b(EntityHuman entityhuman) {
 		super.b(entityhuman);
 		if (!this.i.isClientSide) {
@@ -324,17 +331,19 @@ public class ContainerAnvil extends Container {
 		}
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		if (!this.checkReachable)
 			return true; // CraftBukkit
 		return this.i.getType(this.j).getBlock() != Blocks.ANVIL ? false
-				: entityhuman.e((double) this.j.getX() + 0.5D, (double) this.j.getY() + 0.5D,
-						(double) this.j.getZ() + 0.5D) <= 64.0D;
+				: entityhuman.e(this.j.getX() + 0.5D, this.j.getY() + 0.5D,
+						this.j.getZ() + 0.5D) <= 64.0D;
 	}
 
+	@Override
 	public ItemStack b(EntityHuman entityhuman, int i) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) this.c.get(i);
+		Slot slot = this.c.get(i);
 
 		if (slot != null && slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();

@@ -1,7 +1,21 @@
 package net.minecraft.server;
 
+import java.net.SocketAddress;
+import java.util.Queue;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import javax.crypto.SecretKey;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.Validate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
+
 import com.google.common.collect.Queues;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -16,16 +30,6 @@ import io.netty.handler.timeout.TimeoutException;
 import io.netty.util.AttributeKey;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
-import java.net.SocketAddress;
-import java.util.Queue;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-import javax.crypto.SecretKey;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.Validate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
 
 @SuppressWarnings("rawtypes")
 public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
@@ -41,6 +45,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 					(new ThreadFactoryBuilder()).setNameFormat("Netty Client IO #%d").setDaemon(true).build());
 		}
 
+		@Override
 		protected NioEventLoopGroup init() {
 			return this.a();
 		}
@@ -51,6 +56,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 					(new ThreadFactoryBuilder()).setNameFormat("Netty Epoll Client IO #%d").setDaemon(true).build());
 		}
 
+		@Override
 		protected EpollEventLoopGroup init() {
 			return this.a();
 		}
@@ -61,6 +67,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 					(new ThreadFactoryBuilder()).setNameFormat("Netty Local Client IO #%d").setDaemon(true).build());
 		}
 
+		@Override
 		protected LocalEventLoopGroup init() {
 			return this.a();
 		}
@@ -84,6 +91,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 		// this.h = enumprotocoldirection; // CloudSpigot
 	}
 
+	@Override
 	public void channelActive(ChannelHandlerContext channelhandlercontext) throws Exception {
 		super.channelActive(channelhandlercontext);
 		this.channel = channelhandlercontext.channel();
@@ -106,10 +114,12 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 		NetworkManager.g.debug("Enabled auto read");
 	}
 
+	@Override
 	public void channelInactive(ChannelHandlerContext channelhandlercontext) throws Exception {
 		this.close(new ChatMessage("disconnect.endOfStream", new Object[0]));
 	}
 
+	@Override
 	public void exceptionCaught(ChannelHandlerContext channelhandlercontext, Throwable throwable) throws Exception {
 		ChatMessage chatmessage;
 
@@ -202,6 +212,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 			channelfuture.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
 		} else {
 			this.channel.eventLoop().execute(new Runnable() {
+				@Override
 				public void run() {
 					if (enumprotocol != enumprotocol1) {
 						NetworkManager.this.a(enumprotocol);
@@ -335,12 +346,13 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 		}
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	protected void channelRead0(ChannelHandlerContext channelhandlercontext, Packet object) throws Exception { // CraftBukkit
 																												// - fix
 																												// decompile
 																												// error
-		this.a(channelhandlercontext, (Packet<PacketListener>) object);
+		this.a(channelhandlercontext, object);
 	}
 
 	static class QueuedPacket {

@@ -1,15 +1,16 @@
 package org.bukkit.util;
 
-import static org.bukkit.util.NumberConversions.*;
-
-import org.bukkit.World;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.entity.LivingEntity;
+import static org.bukkit.util.NumberConversions.floor;
+import static org.bukkit.util.NumberConversions.round;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.entity.LivingEntity;
 
 /**
  * This class performs ray tracing and iterates along blocks on a line
@@ -287,6 +288,7 @@ public class BlockIterator implements Iterator<Block> {
 	 * Returns true if the iteration has more elements
 	 */
 
+	@Override
 	public boolean hasNext() {
 		scan();
 		return currentBlock != -1;
@@ -298,6 +300,7 @@ public class BlockIterator implements Iterator<Block> {
 	 * @return the next Block in the trace
 	 */
 
+	@Override
 	public Block next() {
 		scan();
 		if (currentBlock <= -1) {
@@ -307,6 +310,7 @@ public class BlockIterator implements Iterator<Block> {
 		}
 	}
 
+	@Override
 	public void remove() {
 		throw new UnsupportedOperationException("[BlockIterator] doesn't support block removal");
 	}

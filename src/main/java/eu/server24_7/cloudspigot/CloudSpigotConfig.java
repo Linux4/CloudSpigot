@@ -1,24 +1,30 @@
 package eu.server24_7.cloudspigot;
 
-import com.google.common.base.Throwables;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 
-import net.minecraft.server.Item;
-import net.minecraft.server.Items;
-import net.minecraft.server.MinecraftServer;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import com.google.common.base.Throwables;
+
+import net.minecraft.server.Items;
+import net.minecraft.server.MinecraftServer;
 
 @SuppressWarnings("unused")
 public class CloudSpigotConfig {
@@ -101,7 +107,7 @@ public class CloudSpigotConfig {
 
 	private static float getFloat(String path, float def) {
 		// TODO: Figure out why getFloat() always returns the default value.
-		return (float) getDouble(path, (double) def);
+		return (float) getDouble(path, def);
 	}
 
 	private static int getInt(String path, int def) {
@@ -109,10 +115,10 @@ public class CloudSpigotConfig {
 		return config.getInt(path, config.getInt(path));
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	private static <T> List getList(String path, T def) {
 		config.addDefault(path, def);
-		return (List<T>) config.getList(path, config.getList(path));
+		return config.getList(path, config.getList(path));
 	}
 
 	private static String getString(String path, String def) {

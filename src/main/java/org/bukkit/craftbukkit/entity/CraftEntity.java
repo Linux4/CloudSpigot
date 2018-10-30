@@ -343,10 +343,12 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		throw new AssertionError("Unknown entity " + (entity == null ? null : entity.getClass()));
 	}
 
+	@Override
 	public Location getLocation() {
 		return new Location(getWorld(), entity.locX, entity.locY, entity.locZ, entity.yaw, entity.pitch);
 	}
 
+	@Override
 	public Location getLocation(Location loc) {
 		if (loc != null) {
 			loc.setWorld(getWorld());
@@ -360,10 +362,12 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		return loc;
 	}
 
+	@Override
 	public Vector getVelocity() {
 		return new Vector(entity.motX, entity.motY, entity.motZ);
 	}
 
+	@Override
 	public void setVelocity(Vector vel) {
 		// Paper start - warn server owners when plugins try to set super high
 		// velocities
@@ -383,6 +387,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		entity.velocityChanged = true;
 	}
 
+	@Override
 	public boolean isOnGround() {
 		if (entity instanceof EntityArrow) {
 			return ((EntityArrow) entity).isInGround();
@@ -390,14 +395,17 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		return entity.onGround;
 	}
 
+	@Override
 	public World getWorld() {
 		return entity.world.getWorld();
 	}
 
+	@Override
 	public boolean teleport(Location location) {
 		return teleport(location, TeleportCause.PLUGIN);
 	}
 
+	@Override
 	public boolean teleport(Location location, TeleportCause cause) {
 		if (entity.passenger != null || entity.dead) {
 			return false;
@@ -421,14 +429,17 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		return true;
 	}
 
+	@Override
 	public boolean teleport(org.bukkit.entity.Entity destination) {
 		return teleport(destination.getLocation());
 	}
 
+	@Override
 	public boolean teleport(org.bukkit.entity.Entity destination, TeleportCause cause) {
 		return teleport(destination.getLocation(), cause);
 	}
 
+	@Override
 	public List<org.bukkit.entity.Entity> getNearbyEntities(double x, double y, double z) {
 		List<Entity> notchEntityList = entity.world.a(entity, entity.getBoundingBox().grow(x, y, z), null);
 		List<org.bukkit.entity.Entity> bukkitEntityList = new java.util.ArrayList<org.bukkit.entity.Entity>(
@@ -440,34 +451,42 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		return bukkitEntityList;
 	}
 
+	@Override
 	public int getEntityId() {
 		return entity.getId();
 	}
 
+	@Override
 	public int getFireTicks() {
 		return entity.fireTicks;
 	}
 
+	@Override
 	public int getMaxFireTicks() {
 		return entity.maxFireTicks;
 	}
 
+	@Override
 	public void setFireTicks(int ticks) {
 		entity.fireTicks = ticks;
 	}
 
+	@Override
 	public void remove() {
 		entity.dead = true;
 	}
 
+	@Override
 	public boolean isDead() {
 		return !entity.isAlive();
 	}
 
+	@Override
 	public boolean isValid() {
 		return entity.isAlive() && entity.valid;
 	}
 
+	@Override
 	public Server getServer() {
 		return server;
 	}
@@ -480,10 +499,12 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		setVelocity(value);
 	}
 
+	@Override
 	public org.bukkit.entity.Entity getPassenger() {
 		return isEmpty() ? null : getHandle().passenger.getBukkitEntity();
 	}
 
+	@Override
 	public boolean setPassenger(org.bukkit.entity.Entity passenger) {
 		Preconditions.checkArgument(!this.equals(passenger), "Entity cannot ride itself.");
 		if (passenger instanceof CraftEntity) {
@@ -494,10 +515,12 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		}
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return getHandle().passenger == null;
 	}
 
+	@Override
 	public boolean eject() {
 		if (getHandle().passenger == null) {
 			return false;
@@ -507,30 +530,37 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		return true;
 	}
 
+	@Override
 	public float getFallDistance() {
 		return getHandle().fallDistance;
 	}
 
+	@Override
 	public void setFallDistance(float distance) {
 		getHandle().fallDistance = distance;
 	}
 
+	@Override
 	public void setLastDamageCause(EntityDamageEvent event) {
 		lastDamageEvent = event;
 	}
 
+	@Override
 	public EntityDamageEvent getLastDamageCause() {
 		return lastDamageEvent;
 	}
 
+	@Override
 	public UUID getUniqueId() {
 		return getHandle().getUniqueID();
 	}
 
+	@Override
 	public int getTicksLived() {
 		return getHandle().ticksLived;
 	}
 
+	@Override
 	public void setTicksLived(int value) {
 		if (value <= 0) {
 			throw new IllegalArgumentException("Age must be at least 1 tick");
@@ -542,6 +572,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		return entity;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void playEffect(EntityEffect type) {
 		this.getHandle().world.broadcastEntityEffect(getHandle(), type.getData());
@@ -575,26 +606,32 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		return hash;
 	}
 
+	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
 		server.getEntityMetadata().setMetadata(this, metadataKey, newMetadataValue);
 	}
 
+	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
 		return server.getEntityMetadata().getMetadata(this, metadataKey);
 	}
 
+	@Override
 	public boolean hasMetadata(String metadataKey) {
 		return server.getEntityMetadata().hasMetadata(this, metadataKey);
 	}
 
+	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
 		server.getEntityMetadata().removeMetadata(this, metadataKey, owningPlugin);
 	}
 
+	@Override
 	public boolean isInsideVehicle() {
 		return getHandle().vehicle != null;
 	}
 
+	@Override
 	public boolean leaveVehicle() {
 		if (getHandle().vehicle == null) {
 			return false;
@@ -604,6 +641,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		return true;
 	}
 
+	@Override
 	public org.bukkit.entity.Entity getVehicle() {
 		if (getHandle().vehicle == null) {
 			return null;
@@ -672,10 +710,9 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		return perm.hasPermission(name);
 	}
 
-	@SuppressWarnings("static-access")
 	@Override
 	public boolean hasPermission(Permission perm) {
-		return this.perm.hasPermission(perm);
+		return CraftEntity.perm.hasPermission(perm);
 	}
 
 	@Override
@@ -731,6 +768,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 		}
 	};
 
+	@Override
 	public Spigot spigot() {
 		return spigot;
 	}

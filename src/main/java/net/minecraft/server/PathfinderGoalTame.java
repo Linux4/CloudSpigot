@@ -14,6 +14,7 @@ public class PathfinderGoalTame extends PathfinderGoal {
 		this.a(1);
 	}
 
+	@Override
 	public boolean a() {
 		if (!this.entity.isTame() && this.entity.passenger != null) {
 			Vec3D vec3d = RandomPositionGenerator.a(this.entity, 5, 4);
@@ -31,14 +32,17 @@ public class PathfinderGoalTame extends PathfinderGoal {
 		}
 	}
 
+	@Override
 	public void c() {
 		this.entity.getNavigation().a(this.c, this.d, this.e, this.b);
 	}
 
+	@Override
 	public boolean b() {
 		return !this.entity.getNavigation().m() && this.entity.passenger != null;
 	}
 
+	@Override
 	public void e() {
 		if (this.entity.bc().nextInt(50) == 0) {
 			if (this.entity.passenger instanceof EntityHuman) {

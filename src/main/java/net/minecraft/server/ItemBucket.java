@@ -19,6 +19,7 @@ public class ItemBucket extends Item {
 		this.a(CreativeModeTab.f);
 	}
 
+	@Override
 	public ItemStack a(ItemStack itemstack, World world, EntityHuman entityhuman) {
 		boolean flag = this.a == Blocks.AIR;
 		MovingObjectPosition movingobjectposition = this.a(world, entityhuman, flag);
@@ -42,7 +43,7 @@ public class ItemBucket extends Item {
 					IBlockData iblockdata = world.getType(blockposition);
 					Material material = iblockdata.getBlock().getMaterial();
 
-					if (material == Material.WATER && ((Integer) iblockdata.get(BlockFluids.LEVEL)).intValue() == 0) {
+					if (material == Material.WATER && iblockdata.get(BlockFluids.LEVEL).intValue() == 0) {
 						// CraftBukkit start
 						PlayerBucketFillEvent event = CraftEventFactory.callPlayerBucketFillEvent(entityhuman,
 								blockposition.getX(), blockposition.getY(), blockposition.getZ(), null, itemstack,
@@ -60,7 +61,7 @@ public class ItemBucket extends Item {
 																											// stack
 					}
 
-					if (material == Material.LAVA && ((Integer) iblockdata.get(BlockFluids.LEVEL)).intValue() == 0) {
+					if (material == Material.LAVA && iblockdata.get(BlockFluids.LEVEL).intValue() == 0) {
 						// CraftBukkit start
 						PlayerBucketFillEvent event = CraftEventFactory.callPlayerBucketFillEvent(entityhuman,
 								blockposition.getX(), blockposition.getY(), blockposition.getZ(), null, itemstack,
@@ -162,13 +163,13 @@ public class ItemBucket extends Item {
 					int j = blockposition.getY();
 					int k = blockposition.getZ();
 
-					world.makeSound((double) ((float) i + 0.5F), (double) ((float) j + 0.5F),
-							(double) ((float) k + 0.5F), "random.fizz", 0.5F,
+					world.makeSound(i + 0.5F, j + 0.5F,
+							k + 0.5F, "random.fizz", 0.5F,
 							2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F);
 
 					for (int l = 0; l < 8; ++l) {
-						world.addParticle(EnumParticle.SMOKE_LARGE, (double) i + Math.random(),
-								(double) j + Math.random(), (double) k + Math.random(), 0.0D, 0.0D, 0.0D, new int[0]);
+						world.addParticle(EnumParticle.SMOKE_LARGE, i + Math.random(),
+								j + Math.random(), k + Math.random(), 0.0D, 0.0D, 0.0D, new int[0]);
 					}
 				} else {
 					if (!world.isClientSide && flag && !material.isLiquid()) {

@@ -1,21 +1,21 @@
 package org.bukkit.craftbukkit;
 
-import net.minecraft.server.EntityTypes;
-import net.minecraft.server.EntityTypes.MonsterEggInfo;
-import net.minecraft.server.StatisticList;
-
 import org.bukkit.Achievement;
-import org.bukkit.Statistic;
 import org.bukkit.Material;
+import org.bukkit.Statistic;
 import org.bukkit.entity.EntityType;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableMap;
+
 import net.minecraft.server.Block;
+import net.minecraft.server.EntityTypes;
+import net.minecraft.server.EntityTypes.MonsterEggInfo;
 import net.minecraft.server.Item;
 import net.minecraft.server.MinecraftKey;
+import net.minecraft.server.StatisticList;
 
 public class CraftStatistic {
 	private static final BiMap<String, org.bukkit.Statistic> statistics;
@@ -122,7 +122,7 @@ public class CraftStatistic {
 
 	@SuppressWarnings("deprecation")
 	public static net.minecraft.server.Statistic getEntityStatistic(org.bukkit.Statistic stat, EntityType entity) {
-		MonsterEggInfo monsteregginfo = (MonsterEggInfo) EntityTypes.eggInfo.get(Integer.valueOf(entity.getTypeId()));
+		MonsterEggInfo monsteregginfo = EntityTypes.eggInfo.get(Integer.valueOf(entity.getTypeId()));
 
 		if (monsteregginfo != null) {
 			return monsteregginfo.killEntityStatistic;
@@ -140,11 +140,11 @@ public class CraftStatistic {
 	public static Material getMaterialFromStatistic(net.minecraft.server.Statistic statistic) {
 		String statisticString = statistic.name;
 		String val = statisticString.substring(statisticString.lastIndexOf(".") + 1);
-		Item item = (Item) Item.REGISTRY.get(new MinecraftKey(val));
+		Item item = Item.REGISTRY.get(new MinecraftKey(val));
 		if (item != null) {
 			return Material.getMaterial(Item.getId(item));
 		}
-		Block block = (Block) Block.REGISTRY.get(new MinecraftKey(val));
+		Block block = Block.REGISTRY.get(new MinecraftKey(val));
 		if (block != null) {
 			return Material.getMaterial(Block.getId(block));
 		}

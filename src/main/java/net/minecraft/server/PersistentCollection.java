@@ -6,8 +6,6 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +28,7 @@ public class PersistentCollection {
 	}
 
 	public PersistentBase get(Class<? extends PersistentBase> oclass, String s) {
-		PersistentBase persistentbase = (PersistentBase) this.a.get(s);
+		PersistentBase persistentbase = this.a.get(s);
 
 		if (persistentbase != null) {
 			return persistentbase;
@@ -41,14 +39,14 @@ public class PersistentCollection {
 
 					if (file != null && file.exists()) {
 						try {
-							persistentbase = (PersistentBase) oclass.getConstructor(new Class[] { String.class })
+							persistentbase = oclass.getConstructor(new Class[] { String.class })
 									.newInstance(new Object[] { s });
 						} catch (Exception exception) {
 							throw new RuntimeException("Failed to instantiate " + oclass.toString(), exception);
 						}
 
 						FileInputStream fileinputstream = new FileInputStream(file);
-						NBTTagCompound nbttagcompound = NBTCompressedStreamTools.a((InputStream) fileinputstream);
+						NBTTagCompound nbttagcompound = NBTCompressedStreamTools.a(fileinputstream);
 
 						fileinputstream.close();
 						persistentbase.a(nbttagcompound.getCompound("data"));
@@ -78,7 +76,7 @@ public class PersistentCollection {
 
 	public void a() {
 		for (int i = 0; i < this.c.size(); ++i) {
-			PersistentBase persistentbase = (PersistentBase) this.c.get(i);
+			PersistentBase persistentbase = this.c.get(i);
 
 			if (persistentbase.d()) {
 				this.a(persistentbase);
@@ -102,7 +100,7 @@ public class PersistentCollection {
 					nbttagcompound1.set("data", nbttagcompound);
 					FileOutputStream fileoutputstream = new FileOutputStream(file);
 
-					NBTCompressedStreamTools.a(nbttagcompound1, (OutputStream) fileoutputstream);
+					NBTCompressedStreamTools.a(nbttagcompound1, fileoutputstream);
 					fileoutputstream.close();
 				}
 			} catch (Exception exception) {
@@ -130,7 +128,7 @@ public class PersistentCollection {
 				Iterator<String> iterator = nbttagcompound.c().iterator();
 
 				while (iterator.hasNext()) {
-					String s = (String) iterator.next();
+					String s = iterator.next();
 					NBTBase nbtbase = nbttagcompound.get(s);
 
 					if (nbtbase instanceof NBTTagShort) {
@@ -148,7 +146,7 @@ public class PersistentCollection {
 	}
 
 	public int a(String s) {
-		Short oshort = (Short) this.d.get(s);
+		Short oshort = this.d.get(s);
 
 		if (oshort == null) {
 			oshort = Short.valueOf((short) 0);
@@ -168,8 +166,8 @@ public class PersistentCollection {
 					Iterator<String> iterator = this.d.keySet().iterator();
 
 					while (iterator.hasNext()) {
-						String s1 = (String) iterator.next();
-						short short0 = ((Short) this.d.get(s1)).shortValue();
+						String s1 = iterator.next();
+						short short0 = this.d.get(s1).shortValue();
 
 						nbttagcompound.setShort(s1, short0);
 					}

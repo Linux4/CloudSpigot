@@ -21,6 +21,7 @@ public class ShapedRecipes implements IRecipe {
 	}
 
 	// CraftBukkit start
+	@Override
 	@SuppressWarnings("deprecation")
 	public org.bukkit.inventory.ShapedRecipe toBukkitRecipe() {
 		CraftItemStack result = CraftItemStack.asCraftMirror(this.result);
@@ -78,10 +79,12 @@ public class ShapedRecipes implements IRecipe {
 	}
 	// CraftBukkit end
 
+	@Override
 	public ItemStack b() {
 		return this.result;
 	}
 
+	@Override
 	public ItemStack[] b(InventoryCrafting inventorycrafting) {
 		ItemStack[] aitemstack = new ItemStack[inventorycrafting.getSize()];
 
@@ -96,6 +99,7 @@ public class ShapedRecipes implements IRecipe {
 		return aitemstack;
 	}
 
+	@Override
 	public boolean a(InventoryCrafting inventorycrafting, World world) {
 		for (int i = 0; i <= 3 - this.width; ++i) {
 			for (int j = 0; j <= 3 - this.height; ++j) {
@@ -148,6 +152,7 @@ public class ShapedRecipes implements IRecipe {
 		return true;
 	}
 
+	@Override
 	public ItemStack craftItem(InventoryCrafting inventorycrafting) {
 		ItemStack itemstack = this.b().cloneItemStack();
 
@@ -164,11 +169,13 @@ public class ShapedRecipes implements IRecipe {
 		return itemstack;
 	}
 
+	@Override
 	public int a() {
 		return this.width * this.height;
 	}
 
 	// Spigot start
+	@Override
 	public java.util.List<ItemStack> getIngredients() {
 		return java.util.Arrays.asList(items);
 	}

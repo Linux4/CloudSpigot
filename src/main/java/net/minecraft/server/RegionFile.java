@@ -1,8 +1,5 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import eu.server24_7.cloudspigot.exception.ServerInternalException;
-
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,6 +15,10 @@ import java.util.List;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.InflaterInputStream;
+
+import com.google.common.collect.Lists;
+
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 public class RegionFile {
 
@@ -53,7 +54,7 @@ public class RegionFile {
 			}
 
 			if ((this.c.length() & 4095L) != 0L) {
-				for (i = 0; (long) i < (this.c.length() & 4095L); ++i) {
+				for (i = 0; i < (this.c.length() & 4095L); ++i) {
 					this.c.write(0);
 				}
 			}
@@ -123,7 +124,7 @@ public class RegionFile {
 						return false;
 					}
 
-					this.c.seek((long) (l * 4096));
+					this.c.seek(l * 4096);
 					int j1 = this.c.readInt();
 
 					if (j1 > 4096 * i1 || j1 <= 0) {
@@ -160,7 +161,7 @@ public class RegionFile {
 					if (l + i1 > this.f.size()) {
 						return null;
 					} else {
-						this.c.seek((long) (l * 4096));
+						this.c.seek(l * 4096);
 						int j1 = this.c.readInt();
 
 						if (j1 > 4096 * i1) {
@@ -237,12 +238,12 @@ public class RegionFile {
 				if (l1 != -1) {
 					for (j2 = l1; j2 < this.f.size(); ++j2) {
 						if (i2 != 0) {
-							if (((Boolean) this.f.get(j2)).booleanValue()) {
+							if (this.f.get(j2).booleanValue()) {
 								++i2;
 							} else {
 								i2 = 0;
 							}
-						} else if (((Boolean) this.f.get(j2)).booleanValue()) {
+						} else if (this.f.get(j2).booleanValue()) {
 							l1 = j2;
 							i2 = 1;
 						}
@@ -286,7 +287,7 @@ public class RegionFile {
 	}
 
 	private void a(int i, byte[] abyte, int j) throws IOException {
-		this.c.seek((long) (i * 4096));
+		this.c.seek(i * 4096);
 		this.c.writeInt(j + 1);
 		this.c.writeByte(2);
 		this.c.write(abyte, 0, j);
@@ -306,13 +307,13 @@ public class RegionFile {
 
 	private void a(int i, int j, int k) throws IOException {
 		this.d[i + j * 32] = k;
-		this.c.seek((long) ((i + j * 32) * 4));
+		this.c.seek((i + j * 32) * 4);
 		this.c.writeInt(k);
 	}
 
 	private void b(int i, int j, int k) throws IOException {
 		this.e[i + j * 32] = k;
-		this.c.seek((long) (4096 + (i + j * 32) * 4));
+		this.c.seek(4096 + (i + j * 32) * 4);
 		this.c.writeInt(k);
 	}
 
@@ -334,6 +335,7 @@ public class RegionFile {
 			this.c = j;
 		}
 
+		@Override
 		public void close() {
 			RegionFile.this.a(this.b, this.c, this.buf, this.count);
 		}

@@ -1,12 +1,12 @@
 package org.bukkit.craftbukkit.inventory;
 
-import net.minecraft.server.ChatComponentText;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 
+import net.minecraft.server.ChatComponentText;
 import net.minecraft.server.Container;
 import net.minecraft.server.EntityHuman;
 import net.minecraft.server.IInventory;
@@ -302,6 +302,7 @@ public class CraftContainer extends Container {
 		// End copy from ContainerHopper
 	}
 
+	@Override
 	public boolean a(EntityHuman entity) {
 		return true;
 	}

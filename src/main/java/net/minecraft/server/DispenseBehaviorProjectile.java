@@ -10,6 +10,7 @@ public abstract class DispenseBehaviorProjectile extends DispenseBehaviorItem {
 	public DispenseBehaviorProjectile() {
 	}
 
+	@Override
 	public ItemStack b(ISourceBlock isourceblock, ItemStack itemstack) {
 		World world = isourceblock.getWorld();
 		IPosition iposition = BlockDispenser.a(isourceblock);
@@ -27,7 +28,7 @@ public abstract class DispenseBehaviorProjectile extends DispenseBehaviorItem {
 
 		BlockDispenseEvent event = new BlockDispenseEvent(block, craftItem.clone(),
 				new org.bukkit.util.Vector((double) enumdirection.getAdjacentX(),
-						(double) ((float) enumdirection.getAdjacentY() + 0.1F), (double) enumdirection.getAdjacentZ()));
+						(double) (enumdirection.getAdjacentY() + 0.1F), (double) enumdirection.getAdjacentZ()));
 		if (!BlockDispenser.eventFired) {
 			world.getServer().getPluginManager().callEvent(event);
 		}
@@ -41,7 +42,7 @@ public abstract class DispenseBehaviorProjectile extends DispenseBehaviorItem {
 			itemstack.count++;
 			// Chain to handler for new item
 			ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-			IDispenseBehavior idispensebehavior = (IDispenseBehavior) BlockDispenser.REGISTRY.get(eventStack.getItem());
+			IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 			if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 				idispensebehavior.a(isourceblock, eventStack);
 				return itemstack;
@@ -58,6 +59,7 @@ public abstract class DispenseBehaviorProjectile extends DispenseBehaviorItem {
 		return itemstack;
 	}
 
+	@Override
 	protected void a(ISourceBlock isourceblock) {
 		isourceblock.getWorld().triggerEffect(1002, isourceblock.getBlockPosition(), 0);
 	}

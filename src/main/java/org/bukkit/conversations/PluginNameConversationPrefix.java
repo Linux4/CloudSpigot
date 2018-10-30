@@ -33,6 +33,7 @@ public class PluginNameConversationPrefix implements ConversationPrefix {
 	 * @param context Context information about the conversation.
 	 * @return An empty string.
 	 */
+	@Override
 	public String getPrefix(ConversationContext context) {
 		return cachedPrefix;
 	}

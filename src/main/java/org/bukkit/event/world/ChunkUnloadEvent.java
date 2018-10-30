@@ -15,10 +15,12 @@ public class ChunkUnloadEvent extends ChunkEvent implements Cancellable {
 		super(chunk);
 	}
 
+	@Override
 	public boolean isCancelled() {
 		return cancel;
 	}
 
+	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancel = cancel;
 	}

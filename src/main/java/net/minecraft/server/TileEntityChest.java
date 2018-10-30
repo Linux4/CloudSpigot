@@ -30,35 +30,43 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 	public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
 	private int maxStack = MAX_STACK;
 
+	@Override
 	public ItemStack[] getContents() {
 		return this.items;
 	}
 
+	@Override
 	public void onOpen(CraftHumanEntity who) {
 		transaction.add(who);
 	}
 
+	@Override
 	public void onClose(CraftHumanEntity who) {
 		transaction.remove(who);
 	}
 
+	@Override
 	public List<HumanEntity> getViewers() {
 		return transaction;
 	}
 
+	@Override
 	public void setMaxStackSize(int size) {
 		maxStack = size;
 	}
 	// CraftBukkit end
 
+	@Override
 	public int getSize() {
 		return 27;
 	}
 
+	@Override
 	public ItemStack getItem(int i) {
 		return this.items[i];
 	}
 
+	@Override
 	public ItemStack splitStack(int i, int j) {
 		if (this.items[i] != null) {
 			ItemStack itemstack;
@@ -82,6 +90,7 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 		}
 	}
 
+	@Override
 	public ItemStack splitWithoutUpdate(int i) {
 		if (this.items[i] != null) {
 			ItemStack itemstack = this.items[i];
@@ -93,6 +102,7 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 		}
 	}
 
+	@Override
 	public void setItem(int i, ItemStack itemstack) {
 		this.items[i] = itemstack;
 		if (itemstack != null && itemstack.count > this.getMaxStackSize()) {
@@ -102,10 +112,12 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 		this.update();
 	}
 
+	@Override
 	public String getName() {
 		return this.hasCustomName() ? this.p : "container.chest";
 	}
 
+	@Override
 	public boolean hasCustomName() {
 		return this.p != null && this.p.length() > 0;
 	}
@@ -114,6 +126,7 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 		this.p = s;
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		NBTTagList nbttaglist = nbttagcompound.getList("Items", 10);
@@ -134,6 +147,7 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		NBTTagList nbttaglist = new NBTTagList();
@@ -155,18 +169,21 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 
 	}
 
+	@Override
 	public int getMaxStackSize() {
 		return maxStack; // CraftBukkit
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		if (this.world == null)
 			return true; // CraftBukkit
 		return this.world.getTileEntity(this.position) != this ? false
-				: entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D,
-						(double) this.position.getZ() + 0.5D) <= 64.0D;
+				: entityhuman.e(this.position.getX() + 0.5D, this.position.getY() + 0.5D,
+						this.position.getZ() + 0.5D) <= 64.0D;
 	}
 
+	@Override
 	public void E() {
 		super.E();
 		this.a = false;
@@ -300,6 +317,7 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 		// CloudSpigot end
 	}
 
+	@Override
 	public boolean c(int i, int j) {
 		if (i == 1) {
 			this.l = j;
@@ -309,6 +327,7 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 		}
 	}
 
+	@Override
 	public void startOpen(EntityHuman entityhuman) {
 		if (!entityhuman.isSpectator()) {
 			if (this.l < 0) {
@@ -326,8 +345,8 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 			if (this.l > 0 && this.j == 0.0F && this.f == null && this.h == null) {
 				this.j = 0.7F;
 
-				double d0 = (double) this.position.getZ() + 0.5D;
-				double d1 = (double) this.position.getX() + 0.5D;
+				double d0 = this.position.getZ() + 0.5D;
+				double d1 = this.position.getX() + 0.5D;
 
 				if (this.i != null) {
 					d0 += 0.5D;
@@ -337,7 +356,7 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 					d1 += 0.5D;
 				}
 
-				this.world.makeSound(d1, (double) this.position.getY() + 0.5D, d0, "random.chestopen", 0.5F,
+				this.world.makeSound(d1, this.position.getY() + 0.5D, d0, "random.chestopen", 0.5F,
 						this.world.random.nextFloat() * 0.1F + 0.9F);
 			}
 			// CloudSpigot end
@@ -360,6 +379,7 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 
 	}
 
+	@Override
 	public void closeContainer(EntityHuman entityhuman) {
 		if (!entityhuman.isSpectator() && this.w() instanceof BlockChest) {
 			int oldPower = Math.max(0, Math.min(15, this.l)); // CraftBukkit - Get power before new viewer is added
@@ -377,8 +397,8 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 					this.j -= f;
 				}
 
-				double d0 = (double) this.getPosition().getX() + 0.5D;
-				double d2 = (double) this.getPosition().getZ() + 0.5D;
+				double d0 = this.getPosition().getX() + 0.5D;
+				double d2 = this.getPosition().getZ() + 0.5D;
 
 				if (this.i != null) {
 					d2 += 0.5D;
@@ -388,7 +408,7 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 					d0 += 0.5D;
 				}
 
-				this.world.makeSound(d0, (double) this.getPosition().getY() + 0.5D, d2, "random.chestclosed", 0.5F,
+				this.world.makeSound(d0, this.getPosition().getY() + 0.5D, d2, "random.chestclosed", 0.5F,
 						this.world.random.nextFloat() * 0.1F + 0.9F);
 				this.j = 0.0F;
 			}
@@ -412,10 +432,12 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 
 	}
 
+	@Override
 	public boolean b(int i, ItemStack itemstack) {
 		return true;
 	}
 
+	@Override
 	public void y() {
 		super.y();
 		this.E();
@@ -434,25 +456,31 @@ public class TileEntityChest extends TileEntityContainer implements IInventory {
 		return this.o;
 	}
 
+	@Override
 	public String getContainerName() {
 		return "minecraft:chest";
 	}
 
+	@Override
 	public Container createContainer(PlayerInventory playerinventory, EntityHuman entityhuman) {
 		return new ContainerChest(playerinventory, this, entityhuman);
 	}
 
+	@Override
 	public int getProperty(int i) {
 		return 0;
 	}
 
+	@Override
 	public void b(int i, int j) {
 	}
 
+	@Override
 	public int g() {
 		return 0;
 	}
 
+	@Override
 	public void l() {
 		for (int i = 0; i < this.items.length; ++i) {
 			this.items[i] = null;

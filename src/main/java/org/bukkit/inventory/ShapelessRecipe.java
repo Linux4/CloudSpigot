@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.Validate;
-
 import org.bukkit.Material;
 import org.bukkit.material.MaterialData;
 
@@ -210,6 +209,7 @@ public class ShapelessRecipe implements Recipe {
 	 *
 	 * @return The result stack.
 	 */
+	@Override
 	public ItemStack getResult() {
 		return output.clone();
 	}

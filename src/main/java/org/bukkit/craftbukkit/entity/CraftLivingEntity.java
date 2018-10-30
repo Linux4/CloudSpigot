@@ -74,10 +74,12 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		}
 	}
 
+	@Override
 	public double getHealth() {
 		return Math.min(Math.max(0, getHandle().getHealth()), getMaxHealth());
 	}
 
+	@Override
 	public void setHealth(double health) {
 		if ((health < 0) || (health > getMaxHealth())) {
 			throw new IllegalArgumentException("Health must be between 0 and " + getMaxHealth() + ", but was " + health
@@ -93,10 +95,12 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		getHandle().setHealth((float) health);
 	}
 
+	@Override
 	public double getMaxHealth() {
 		return getHandle().getMaxHealth();
 	}
 
+	@Override
 	public void setMaxHealth(double amount) {
 		Validate.isTrue(amount > 0, "Max health must be greater than 0");
 
@@ -107,24 +111,29 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		}
 	}
 
+	@Override
 	public void resetMaxHealth() {
 		setMaxHealth(getHandle().getMaxHealth());
 	}
 
+	@Override
 	@Deprecated
 	public Egg throwEgg() {
 		return launchProjectile(Egg.class);
 	}
 
+	@Override
 	@Deprecated
 	public Snowball throwSnowball() {
 		return launchProjectile(Snowball.class);
 	}
 
+	@Override
 	public double getEyeHeight() {
 		return getHandle().getHeadHeight();
 	}
 
+	@Override
 	public double getEyeHeight(boolean ignoreSneaking) {
 		return getEyeHeight();
 	}
@@ -181,57 +190,70 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		return blocks;
 	}
 
+	@Override
 	public List<Block> getLineOfSight(HashSet<Byte> transparent, int maxDistance) {
 		return getLineOfSight(transparent, maxDistance, 0);
 	}
 
+	@Override
 	public List<Block> getLineOfSight(Set<Material> transparent, int maxDistance) {
 		return getLineOfSight(transparent, maxDistance, 0);
 	}
 
+	@Override
 	public Block getTargetBlock(HashSet<Byte> transparent, int maxDistance) {
 		List<Block> blocks = getLineOfSight(transparent, maxDistance, 1);
 		return blocks.get(0);
 	}
 
+	@Override
 	public Block getTargetBlock(Set<Material> transparent, int maxDistance) {
 		List<Block> blocks = getLineOfSight(transparent, maxDistance, 1);
 		return blocks.get(0);
 	}
 
+	@Override
 	public List<Block> getLastTwoTargetBlocks(HashSet<Byte> transparent, int maxDistance) {
 		return getLineOfSight(transparent, maxDistance, 2);
 	}
 
+	@Override
 	public List<Block> getLastTwoTargetBlocks(Set<Material> transparent, int maxDistance) {
 		return getLineOfSight(transparent, maxDistance, 2);
 	}
 
+	@Override
 	@Deprecated
 	public Arrow shootArrow() {
 		return launchProjectile(Arrow.class);
 	}
 
+	@Override
 	public int getRemainingAir() {
 		return getHandle().getAirTicks();
 	}
 
+	@Override
 	public void setRemainingAir(int ticks) {
 		getHandle().setAirTicks(ticks);
 	}
 
+	@Override
 	public int getMaximumAir() {
 		return getHandle().maxAirTicks;
 	}
 
+	@Override
 	public void setMaximumAir(int ticks) {
 		getHandle().maxAirTicks = ticks;
 	}
 
+	@Override
 	public void damage(double amount) {
 		damage(amount, null);
 	}
 
+	@Override
 	public void damage(double amount, org.bukkit.entity.Entity source) {
 		DamageSource reason = DamageSource.GENERIC;
 
@@ -244,32 +266,39 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		entity.damageEntity(reason, (float) amount);
 	}
 
+	@Override
 	public Location getEyeLocation() {
 		Location loc = getLocation();
 		loc.setY(loc.getY() + getEyeHeight());
 		return loc;
 	}
 
+	@Override
 	public int getMaximumNoDamageTicks() {
 		return getHandle().maxNoDamageTicks;
 	}
 
+	@Override
 	public void setMaximumNoDamageTicks(int ticks) {
 		getHandle().maxNoDamageTicks = ticks;
 	}
 
+	@Override
 	public double getLastDamage() {
 		return getHandle().lastDamage;
 	}
 
+	@Override
 	public void setLastDamage(double damage) {
 		getHandle().lastDamage = (float) damage;
 	}
 
+	@Override
 	public int getNoDamageTicks() {
 		return getHandle().noDamageTicks;
 	}
 
+	@Override
 	public void setNoDamageTicks(int ticks) {
 		getHandle().noDamageTicks = ticks;
 	}
@@ -288,14 +317,17 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		return "CraftLivingEntity{" + "id=" + getEntityId() + '}';
 	}
 
+	@Override
 	public Player getKiller() {
 		return getHandle().killer == null ? null : (Player) getHandle().killer.getBukkitEntity();
 	}
 
+	@Override
 	public boolean addPotionEffect(PotionEffect effect) {
 		return addPotionEffect(effect, false);
 	}
 
+	@Override
 	public boolean addPotionEffect(PotionEffect effect, boolean force) {
 		if (hasPotionEffect(effect.getType())) {
 			if (!force) {
@@ -308,6 +340,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		return true;
 	}
 
+	@Override
 	public boolean addPotionEffects(Collection<PotionEffect> effects) {
 		boolean success = true;
 		for (PotionEffect effect : effects) {
@@ -316,14 +349,17 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		return success;
 	}
 
+	@Override
 	public boolean hasPotionEffect(PotionEffectType type) {
 		return getHandle().hasEffect(MobEffectList.byId[type.getId()]);
 	}
 
+	@Override
 	public void removePotionEffect(PotionEffectType type) {
 		getHandle().removeEffect(type.getId());
 	}
 
+	@Override
 	public Collection<PotionEffect> getActivePotionEffects() {
 		List<PotionEffect> effects = new ArrayList<PotionEffect>();
 		for (Object raw : getHandle().effects.values()) {
@@ -336,10 +372,12 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		return effects;
 	}
 
+	@Override
 	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile) {
 		return launchProjectile(projectile, null);
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity) {
 		net.minecraft.server.World world = ((CraftWorld) getWorld()).getHandle();
@@ -389,34 +427,41 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		return (T) launch.getBukkitEntity();
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.UNKNOWN;
 	}
 
+	@Override
 	public boolean hasLineOfSight(Entity other) {
 		return getHandle().hasLineOfSight(((CraftEntity) other).getHandle());
 	}
 
+	@Override
 	public boolean getRemoveWhenFarAway() {
 		return getHandle() instanceof EntityInsentient && !((EntityInsentient) getHandle()).persistent;
 	}
 
+	@Override
 	public void setRemoveWhenFarAway(boolean remove) {
 		if (getHandle() instanceof EntityInsentient) {
 			((EntityInsentient) getHandle()).persistent = !remove;
 		}
 	}
 
+	@Override
 	public EntityEquipment getEquipment() {
 		return equipment;
 	}
 
+	@Override
 	public void setCanPickupItems(boolean pickup) {
 		if (getHandle() instanceof EntityInsentient) {
 			((EntityInsentient) getHandle()).canPickUpLoot = pickup;
 		}
 	}
 
+	@Override
 	public boolean getCanPickupItems() {
 		return getHandle() instanceof EntityInsentient && ((EntityInsentient) getHandle()).canPickUpLoot;
 	}
@@ -430,6 +475,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		return super.teleport(location, cause);
 	}
 
+	@Override
 	public boolean isLeashed() {
 		if (!(getHandle() instanceof EntityInsentient)) {
 			return false;
@@ -437,6 +483,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		return ((EntityInsentient) getHandle()).getLeashHolder() != null;
 	}
 
+	@Override
 	public Entity getLeashHolder() throws IllegalStateException {
 		if (!isLeashed()) {
 			throw new IllegalStateException("Entity not leashed");
@@ -452,6 +499,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		return true;
 	}
 
+	@Override
 	public boolean setLeashHolder(Entity holder) {
 		if ((getHandle() instanceof EntityWither) || !(getHandle() instanceof EntityInsentient)) {
 			return false;
@@ -470,41 +518,49 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 		return true;
 	}
 
+	@Override
 	@Deprecated
 	public int _INVALID_getLastDamage() {
 		return NumberConversions.ceil(getLastDamage());
 	}
 
+	@Override
 	@Deprecated
 	public void _INVALID_setLastDamage(int damage) {
 		setLastDamage(damage);
 	}
 
+	@Override
 	@Deprecated
 	public void _INVALID_damage(int amount) {
 		damage(amount);
 	}
 
+	@Override
 	@Deprecated
 	public void _INVALID_damage(int amount, Entity source) {
 		damage(amount, source);
 	}
 
+	@Override
 	@Deprecated
 	public int _INVALID_getHealth() {
 		return NumberConversions.ceil(getHealth());
 	}
 
+	@Override
 	@Deprecated
 	public void _INVALID_setHealth(int health) {
 		setHealth(health);
 	}
 
+	@Override
 	@Deprecated
 	public int _INVALID_getMaxHealth() {
 		return NumberConversions.ceil(getMaxHealth());
 	}
 
+	@Override
 	@Deprecated
 	public void _INVALID_setMaxHealth(int health) {
 		setMaxHealth(health);

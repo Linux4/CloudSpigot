@@ -14,6 +14,7 @@ public class TileEntitySign extends TileEntity {
 	public TileEntitySign() {
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 
@@ -32,47 +33,58 @@ public class TileEntitySign extends TileEntity {
 		this.i.b(nbttagcompound);
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		this.isEditable = false;
 		super.a(nbttagcompound);
 		ICommandListener icommandlistener = new ICommandListener() {
+			@Override
 			public String getName() {
 				return "Sign";
 			}
 
+			@Override
 			public IChatBaseComponent getScoreboardDisplayName() {
 				return new ChatComponentText(this.getName());
 			}
 
+			@Override
 			public void sendMessage(IChatBaseComponent ichatbasecomponent) {
 			}
 
+			@Override
 			public boolean a(int i, String s) {
 				return true;
 			}
 
+			@Override
 			public BlockPosition getChunkCoordinates() {
 				return TileEntitySign.this.position;
 			}
 
+			@Override
 			public Vec3D d() {
-				return new Vec3D((double) TileEntitySign.this.position.getX() + 0.5D,
-						(double) TileEntitySign.this.position.getY() + 0.5D,
-						(double) TileEntitySign.this.position.getZ() + 0.5D);
+				return new Vec3D(TileEntitySign.this.position.getX() + 0.5D,
+						TileEntitySign.this.position.getY() + 0.5D,
+						TileEntitySign.this.position.getZ() + 0.5D);
 			}
 
+			@Override
 			public World getWorld() {
 				return TileEntitySign.this.world;
 			}
 
+			@Override
 			public Entity f() {
 				return null;
 			}
 
+			@Override
 			public boolean getSendCommandFeedback() {
 				return false;
 			}
 
+			@Override
 			public void a(CommandObjectiveExecutor.EnumCommandResult commandobjectiveexecutor_enumcommandresult,
 					int i) {
 			}
@@ -113,6 +125,7 @@ public class TileEntitySign extends TileEntity {
 		this.i.a(nbttagcompound);
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Packet getUpdatePacket() {
 		IChatBaseComponent[] aichatbasecomponent = new IChatBaseComponent[4];
@@ -121,6 +134,7 @@ public class TileEntitySign extends TileEntity {
 		return new PacketPlayOutUpdateSign(this.world, this.position, aichatbasecomponent);
 	}
 
+	@Override
 	public boolean F() {
 		return true;
 	}
@@ -181,7 +195,7 @@ public class TileEntitySign extends TileEntity {
 					// MinecraftServer.getServer().getCommandHandler().a(tileentitysignplayerwrapper,
 					// chatclickable.b());
 					CommandBlockListenerAbstract.executeCommand(entityhuman,
-							(org.bukkit.entity.Player) entityhuman.getBukkitEntity(), chatclickable.b());
+							entityhuman.getBukkitEntity(), chatclickable.b());
 					// CraftBukkit end
 				}
 			}

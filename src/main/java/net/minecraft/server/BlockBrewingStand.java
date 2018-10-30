@@ -14,26 +14,32 @@ public class BlockBrewingStand extends BlockContainer {
 				.set(BlockBrewingStand.HAS_BOTTLE[1], false).set(BlockBrewingStand.HAS_BOTTLE[2], false));
 	}
 
+	@Override
 	public String getName() {
 		return LocaleI18n.get("item.brewingStand.name");
 	}
 
+	@Override
 	public boolean c() {
 		return false;
 	}
 
+	@Override
 	public int b() {
 		return 3;
 	}
 
+	@Override
 	public TileEntity a(World world, int i) {
 		return new TileEntityBrewingStand();
 	}
 
+	@Override
 	public boolean d() {
 		return false;
 	}
 
+	@Override
 	public void a(World world, BlockPosition blockposition, IBlockData iblockdata, AxisAlignedBB axisalignedbb,
 			List<AxisAlignedBB> list, Entity entity) {
 		this.a(0.4375F, 0.0F, 0.4375F, 0.5625F, 0.875F, 0.5625F);
@@ -42,10 +48,12 @@ public class BlockBrewingStand extends BlockContainer {
 		super.a(world, blockposition, iblockdata, axisalignedbb, list, entity);
 	}
 
+	@Override
 	public void j() {
 		this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
 	}
 
+	@Override
 	public boolean interact(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		if (world.isClientSide) {
@@ -62,6 +70,7 @@ public class BlockBrewingStand extends BlockContainer {
 		}
 	}
 
+	@Override
 	public void postPlace(World world, BlockPosition blockposition, IBlockData iblockdata, EntityLiving entityliving,
 			ItemStack itemstack) {
 		if (itemstack.hasName()) {
@@ -74,6 +83,7 @@ public class BlockBrewingStand extends BlockContainer {
 
 	}
 
+	@Override
 	public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		TileEntity tileentity = world.getTileEntity(blockposition);
 
@@ -84,18 +94,22 @@ public class BlockBrewingStand extends BlockContainer {
 		super.remove(world, blockposition, iblockdata);
 	}
 
+	@Override
 	public Item getDropType(IBlockData iblockdata, Random random, int i) {
 		return Items.BREWING_STAND;
 	}
 
+	@Override
 	public boolean isComplexRedstone() {
 		return true;
 	}
 
+	@Override
 	public int l(World world, BlockPosition blockposition) {
 		return Container.a(world.getTileEntity(blockposition));
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		IBlockData iblockdata = this.getBlockData();
 
@@ -106,11 +120,12 @@ public class BlockBrewingStand extends BlockContainer {
 		return iblockdata;
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
 		int i = 0;
 
 		for (int j = 0; j < 3; ++j) {
-			if (((Boolean) iblockdata.get(BlockBrewingStand.HAS_BOTTLE[j])).booleanValue()) {
+			if (iblockdata.get(BlockBrewingStand.HAS_BOTTLE[j]).booleanValue()) {
 				i |= 1 << j;
 			}
 		}
@@ -118,6 +133,7 @@ public class BlockBrewingStand extends BlockContainer {
 		return i;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockBrewingStand.HAS_BOTTLE[0],
 				BlockBrewingStand.HAS_BOTTLE[1], BlockBrewingStand.HAS_BOTTLE[2] });

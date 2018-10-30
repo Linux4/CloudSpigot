@@ -20,7 +20,7 @@ public class OldChunkLoader {
 		try {
 			oldchunkloader_oldchunk.a = nbttagcompound.getLong("LastUpdate");
 		} catch (ClassCastException classcastexception) {
-			oldchunkloader_oldchunk.a = (long) nbttagcompound.getInt("LastUpdate");
+			oldchunkloader_oldchunk.a = nbttagcompound.getInt("LastUpdate");
 		}
 
 		return oldchunkloader_oldchunk;

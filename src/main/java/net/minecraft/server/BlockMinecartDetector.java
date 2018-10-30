@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
 import java.util.List;
 import java.util.Random;
 
 import org.bukkit.event.block.BlockRedstoneEvent; // CraftBukkit
+
+import com.google.common.base.Predicate;
 
 public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
 
@@ -19,8 +20,9 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
 							&& blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_WEST;
 				}
 
+				@Override
 				public boolean apply(BlockMinecartTrackAbstract.EnumTrackPosition object) {
-					return this.a((BlockMinecartTrackAbstract.EnumTrackPosition) object);
+					return this.a(object);
 				}
 			});
 	public static final BlockStateBoolean POWERED = BlockStateBoolean.of("powered");
@@ -32,45 +34,52 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
 		this.a(true);
 	}
 
+	@Override
 	public int a(World world) {
 		return 20;
 	}
 
+	@Override
 	public boolean isPowerSource() {
 		return true;
 	}
 
+	@Override
 	public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Entity entity) {
 		if (!world.isClientSide) {
-			if (!((Boolean) iblockdata.get(BlockMinecartDetector.POWERED)).booleanValue()) {
+			if (!iblockdata.get(BlockMinecartDetector.POWERED).booleanValue()) {
 				this.e(world, blockposition, iblockdata);
 			}
 		}
 	}
 
+	@Override
 	public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
-		if (!world.isClientSide && ((Boolean) iblockdata.get(BlockMinecartDetector.POWERED)).booleanValue()) {
+		if (!world.isClientSide && iblockdata.get(BlockMinecartDetector.POWERED).booleanValue()) {
 			this.e(world, blockposition, iblockdata);
 		}
 	}
 
+	@Override
 	public int a(IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata,
 			EnumDirection enumdirection) {
-		return ((Boolean) iblockdata.get(BlockMinecartDetector.POWERED)).booleanValue() ? 15 : 0;
+		return iblockdata.get(BlockMinecartDetector.POWERED).booleanValue() ? 15 : 0;
 	}
 
+	@Override
 	public int b(IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata,
 			EnumDirection enumdirection) {
-		return !((Boolean) iblockdata.get(BlockMinecartDetector.POWERED)).booleanValue() ? 0
+		return !iblockdata.get(BlockMinecartDetector.POWERED).booleanValue() ? 0
 				: (enumdirection == EnumDirection.UP ? 15 : 0);
 	}
 
 	@SuppressWarnings("unchecked")
 	private void e(World world, BlockPosition blockposition, IBlockData iblockdata) {
-		boolean flag = ((Boolean) iblockdata.get(BlockMinecartDetector.POWERED)).booleanValue();
+		boolean flag = iblockdata.get(BlockMinecartDetector.POWERED).booleanValue();
 		boolean flag1 = false;
 		List<EntityMinecartAbstract> list = this.a(world, blockposition, EntityMinecartAbstract.class,
 				new Predicate[0]);
@@ -106,28 +115,32 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
 		}
 
 		if (flag1) {
-			world.a(blockposition, (Block) this, this.a(world));
+			world.a(blockposition, this, this.a(world));
 		}
 
 		world.updateAdjacentComparators(blockposition, this);
 	}
 
+	@Override
 	public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		super.onPlace(world, blockposition, iblockdata);
 		this.e(world, blockposition, iblockdata);
 	}
 
+	@Override
 	public IBlockState<BlockMinecartTrackAbstract.EnumTrackPosition> n() {
 		return BlockMinecartDetector.SHAPE;
 	}
 
+	@Override
 	public boolean isComplexRedstone() {
 		return true;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public int l(World world, BlockPosition blockposition) {
-		if (((Boolean) world.getType(blockposition).get(BlockMinecartDetector.POWERED)).booleanValue()) {
+		if (world.getType(blockposition).get(BlockMinecartDetector.POWERED).booleanValue()) {
 			List<EntityMinecartCommandBlock> list = this.a(world, blockposition, EntityMinecartCommandBlock.class,
 					new Predicate[0]);
 
@@ -157,29 +170,32 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
 	private AxisAlignedBB a(BlockPosition blockposition) {
 		// float f = 0.2F; // CloudSpigot
 
-		return new AxisAlignedBB((double) ((float) blockposition.getX() + 0.2F), (double) blockposition.getY(),
-				(double) ((float) blockposition.getZ() + 0.2F), (double) ((float) (blockposition.getX() + 1) - 0.2F),
-				(double) ((float) (blockposition.getY() + 1) - 0.2F),
-				(double) ((float) (blockposition.getZ() + 1) - 0.2F));
+		return new AxisAlignedBB(blockposition.getX() + 0.2F, blockposition.getY(),
+				blockposition.getZ() + 0.2F, blockposition.getX() + 1 - 0.2F,
+				blockposition.getY() + 1 - 0.2F,
+				blockposition.getZ() + 1 - 0.2F);
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData()
 				.set(BlockMinecartDetector.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.a(i & 7))
 				.set(BlockMinecartDetector.POWERED, Boolean.valueOf((i & 8) > 0));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
 		byte b0 = 0;
 		int i = b0 | iblockdata.get(BlockMinecartDetector.SHAPE).a();
 
-		if (((Boolean) iblockdata.get(BlockMinecartDetector.POWERED)).booleanValue()) {
+		if (iblockdata.get(BlockMinecartDetector.POWERED).booleanValue()) {
 			i |= 8;
 		}
 
 		return i;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this,
 				new IBlockState[] { BlockMinecartDetector.SHAPE, BlockMinecartDetector.POWERED });

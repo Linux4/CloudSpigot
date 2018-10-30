@@ -44,22 +44,27 @@ public class MRUMapCache<K, V> extends AbstractMap<K, V> {
 		this.backingMap = backingMap;
 	}
 
+	@Override
 	public int size() {
 		return backingMap.size();
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return backingMap.isEmpty();
 	}
 
+	@Override
 	public boolean containsKey(Object key) {
 		return key != null && key.equals(cacheKey) || backingMap.containsKey(key);
 	}
 
+	@Override
 	public boolean containsValue(Object value) {
 		return value != null && value == cacheValue || backingMap.containsValue(value);
 	}
 
+	@Override
 	public V get(Object key) {
 		if (cacheKey != null && cacheKey.equals(key)) {
 			return cacheValue;
@@ -68,11 +73,13 @@ public class MRUMapCache<K, V> extends AbstractMap<K, V> {
 		return cacheValue = backingMap.get(key);
 	}
 
+	@Override
 	public V put(K key, V value) {
 		cacheKey = key;
 		return cacheValue = backingMap.put(key, value);
 	}
 
+	@Override
 	public V remove(Object key) {
 		if (key != null && key.equals(cacheKey)) {
 			cacheKey = null;
@@ -80,24 +87,29 @@ public class MRUMapCache<K, V> extends AbstractMap<K, V> {
 		return backingMap.remove(key);
 	}
 
+	@Override
 	public void putAll(Map<? extends K, ? extends V> m) {
 		backingMap.putAll(m);
 	}
 
+	@Override
 	public void clear() {
 		cacheKey = null;
 		cacheValue = null;
 		backingMap.clear();
 	}
 
+	@Override
 	public Set<K> keySet() {
 		return backingMap.keySet();
 	}
 
+	@Override
 	public Collection<V> values() {
 		return backingMap.values();
 	}
 
+	@Override
 	public Set<Map.Entry<K, V>> entrySet() {
 		return backingMap.entrySet();
 	}

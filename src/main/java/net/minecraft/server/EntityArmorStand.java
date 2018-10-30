@@ -2,14 +2,14 @@ package net.minecraft.server;
 
 import java.util.List;
 
-// CraftBukkit start
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.craftbukkit.CraftEquipmentSlot;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 // CraftBukkit end
+// CraftBukkit start
+import org.bukkit.inventory.EquipmentSlot;
 
 public class EntityArmorStand extends EntityLiving {
 
@@ -50,10 +50,12 @@ public class EntityArmorStand extends EntityLiving {
 		this.setPosition(d0, d1, d2);
 	}
 
+	@Override
 	public boolean bM() {
 		return super.bM() && !this.hasGravity();
 	}
 
+	@Override
 	protected void h() {
 		super.h();
 		this.datawatcher.a(10, Byte.valueOf((byte) 0));
@@ -65,22 +67,27 @@ public class EntityArmorStand extends EntityLiving {
 		this.datawatcher.a(16, EntityArmorStand.f);
 	}
 
+	@Override
 	public ItemStack bA() {
 		return this.items[0];
 	}
 
+	@Override
 	public ItemStack getEquipment(int i) {
 		return this.items[i];
 	}
 
+	@Override
 	public void setEquipment(int i, ItemStack itemstack) {
 		this.items[i] = itemstack;
 	}
 
+	@Override
 	public ItemStack[] getEquipment() {
 		return this.items;
 	}
 
+	@Override
 	public boolean d(int i, ItemStack itemstack) {
 		int j;
 
@@ -102,6 +109,7 @@ public class EntityArmorStand extends EntityLiving {
 		}
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		NBTTagList nbttaglist = new NBTTagList();
@@ -134,6 +142,7 @@ public class EntityArmorStand extends EntityLiving {
 		nbttagcompound.set("Pose", this.z());
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		if (nbttagcompound.hasKeyOfType("Equipment", 9)) {
@@ -239,19 +248,22 @@ public class EntityArmorStand extends EntityLiving {
 		return nbttagcompound;
 	}
 
+	@Override
 	public boolean ae() {
 		return false;
 	}
 
+	@Override
 	protected void s(Entity entity) {
 	}
 
+	@Override
 	protected void bL() {
 		List<Entity> list = this.world.getEntities(this, this.getBoundingBox());
 
 		if (list != null && !list.isEmpty()) {
 			for (int i = 0; i < list.size(); ++i) {
-				Entity entity = (Entity) list.get(i);
+				Entity entity = list.get(i);
 
 				if (entity instanceof EntityMinecartAbstract
 						&& ((EntityMinecartAbstract) entity).s() == EntityMinecartAbstract.EnumMinecartType.RIDEABLE
@@ -263,6 +275,7 @@ public class EntityArmorStand extends EntityLiving {
 
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman, Vec3D vec3d) {
 		if (this.s()) {
 			return false;
@@ -380,6 +393,7 @@ public class EntityArmorStand extends EntityLiving {
 		}
 	}
 
+	@Override
 	public boolean damageEntity(DamageSource damagesource, float f) {
 		// CraftBukkit start
 		if (org.bukkit.craftbukkit.event.CraftEventFactory.handleNonLivingEntityDamageEvent(this, damagesource, f)) {
@@ -447,9 +461,9 @@ public class EntityArmorStand extends EntityLiving {
 
 	private void A() {
 		if (this.world instanceof WorldServer) {
-			((WorldServer) this.world).a(EnumParticle.BLOCK_DUST, this.locX, this.locY + (double) this.length / 1.5D,
-					this.locZ, 10, (double) (this.width / 4.0F), (double) (this.length / 4.0F),
-					(double) (this.width / 4.0F), 0.05D,
+			((WorldServer) this.world).a(EnumParticle.BLOCK_DUST, this.locX, this.locY + this.length / 1.5D,
+					this.locZ, 10, this.width / 4.0F, this.length / 4.0F,
+					this.width / 4.0F, 0.05D,
 					new int[] { Block.getCombinedId(Blocks.PLANKS.getBlockData()) });
 		}
 
@@ -486,22 +500,26 @@ public class EntityArmorStand extends EntityLiving {
 
 	}
 
+	@Override
 	protected float h(float f, float f1) {
 		this.aJ = this.lastYaw;
 		this.aI = this.yaw;
 		return 0.0F;
 	}
 
+	@Override
 	public float getHeadHeight() {
 		return this.isBaby() ? this.length * 0.5F : this.length * 0.9F;
 	}
 
+	@Override
 	public void g(float f, float f1) {
 		if (!this.hasGravity()) {
 			super.g(f, f1);
 		}
 	}
 
+	@Override
 	public void t_() {
 		super.t_();
 		Vector3f vector3f = this.datawatcher.h(11);
@@ -569,23 +587,28 @@ public class EntityArmorStand extends EntityLiving {
 		this.setPosition(d0, d1, d2);
 	}
 
+	@Override
 	protected void B() {
 		this.setInvisible(this.h);
 	}
 
+	@Override
 	public void setInvisible(boolean flag) {
 		this.h = flag;
 		super.setInvisible(flag);
 	}
 
+	@Override
 	public boolean isBaby() {
 		return this.isSmall();
 	}
 
+	@Override
 	public void G() {
 		this.die();
 	}
 
+	@Override
 	public boolean aW() {
 		return this.isInvisible();
 	}
@@ -710,6 +733,7 @@ public class EntityArmorStand extends EntityLiving {
 		return this.bodyPose;
 	}
 
+	@Override
 	public boolean ad() {
 		return super.ad() && !this.s();
 	}

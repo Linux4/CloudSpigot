@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,6 +43,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
 	// CraftBukkit end
 
 	// CraftBukkit start - Add async variant, provide compatibility
+	@Override
 	public Chunk a(World world, int i, int j) throws IOException {
 		Object[] data = loadChunk(world, i, j);
 		if (data != null) {
@@ -98,7 +100,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
 					NBTTagList tileEntities = nbttagcompound.getCompound("Level").getList("TileEntities", 10);
 					if (tileEntities != null) {
 						for (int te = 0; te < tileEntities.size(); te++) {
-							NBTTagCompound tileEntity = (NBTTagCompound) tileEntities.get(te);
+							NBTTagCompound tileEntity = tileEntities.get(te);
 							int x = tileEntity.getInt("x") - chunk.locX * 16;
 							int z = tileEntity.getInt("z") - chunk.locZ * 16;
 							tileEntity.setInt("x", i * 16 + x);
@@ -119,6 +121,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
 		}
 	}
 
+	@Override
 	public void a(World world, Chunk chunk) throws IOException, ExceptionWorldConflict {
 		world.checkSession();
 
@@ -143,6 +146,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
 		FileIOThread.a().a(this);
 	}
 
+	@Override
 	public boolean c() {
 		if (this.b.isEmpty()) {
 			if (this.e) {
@@ -184,12 +188,15 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
 		dataoutputstream.close();
 	}
 
+	@Override
 	public void b(World world, Chunk chunk) throws IOException {
 	}
 
+	@Override
 	public void a() {
 	}
 
+	@Override
 	public void b() {
 		try {
 			this.e = true;
@@ -313,7 +320,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
 			while (iterator1.hasNext()) {
 				NextTickListEntry nextticklistentry = (NextTickListEntry) iterator1.next();
 				NBTTagCompound nbttagcompound2 = new NBTTagCompound();
-				MinecraftKey minecraftkey = (MinecraftKey) Block.REGISTRY.c(nextticklistentry.a());
+				MinecraftKey minecraftkey = Block.REGISTRY.c(nextticklistentry.a());
 
 				nbttagcompound2.setString("i", minecraftkey == null ? "" : minecraftkey.toString());
 				nbttagcompound2.setInt("x", nextticklistentry.a.getX());

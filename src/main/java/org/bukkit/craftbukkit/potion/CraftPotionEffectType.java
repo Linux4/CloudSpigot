@@ -1,8 +1,8 @@
 package org.bukkit.craftbukkit.potion;
 
-import net.minecraft.server.MobEffectList;
-
 import org.bukkit.potion.PotionEffectType;
+
+import net.minecraft.server.MobEffectList;
 
 public class CraftPotionEffectType extends PotionEffectType {
 	private final MobEffectList handle;

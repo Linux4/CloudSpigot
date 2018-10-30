@@ -1,13 +1,13 @@
 package org.bukkit.craftbukkit.inventory;
 
-import net.minecraft.server.IRecipe;
-import net.minecraft.server.IInventory;
-import net.minecraft.server.InventoryCrafting;
-
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.util.Java15Compat;
+
+import net.minecraft.server.IInventory;
+import net.minecraft.server.IRecipe;
+import net.minecraft.server.InventoryCrafting;
 
 public class CraftInventoryCrafting extends CraftInventory implements CraftingInventory {
 	private final IInventory resultInventory;
@@ -85,6 +85,7 @@ public class CraftInventoryCrafting extends CraftInventory implements CraftingIn
 		}
 	}
 
+	@Override
 	public ItemStack[] getMatrix() {
 		ItemStack[] items = new ItemStack[getSize()];
 		net.minecraft.server.ItemStack[] matrix = getMatrixInventory().getContents();
@@ -96,6 +97,7 @@ public class CraftInventoryCrafting extends CraftInventory implements CraftingIn
 		return items;
 	}
 
+	@Override
 	public ItemStack getResult() {
 		net.minecraft.server.ItemStack item = getResultInventory().getItem(0);
 		if (item != null)
@@ -103,6 +105,7 @@ public class CraftInventoryCrafting extends CraftInventory implements CraftingIn
 		return null;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setMatrix(ItemStack[] contents) {
 		if (getMatrixInventory().getContents().length > contents.length) {
@@ -126,6 +129,7 @@ public class CraftInventoryCrafting extends CraftInventory implements CraftingIn
 		}
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setResult(ItemStack item) {
 		net.minecraft.server.ItemStack[] contents = getResultInventory().getContents();
@@ -136,6 +140,7 @@ public class CraftInventoryCrafting extends CraftInventory implements CraftingIn
 		}
 	}
 
+	@Override
 	public Recipe getRecipe() {
 		IRecipe recipe = ((InventoryCrafting) getInventory()).currentRecipe;
 		return recipe == null ? null : recipe.toBukkitRecipe();

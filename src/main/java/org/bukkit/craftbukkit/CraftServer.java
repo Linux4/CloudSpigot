@@ -926,9 +926,11 @@ public final class CraftServer implements Server {
 			converter.convert(name, new IProgressUpdate() {
 				private long b = System.currentTimeMillis();
 
+				@Override
 				public void a(String s) {
 				}
 
+				@Override
 				public void a(int i) {
 					if (System.currentTimeMillis() - this.b >= 1000L) {
 						this.b = System.currentTimeMillis();
@@ -937,6 +939,7 @@ public final class CraftServer implements Server {
 
 				}
 
+				@Override
 				public void c(String s) {
 				}
 			});
@@ -1898,6 +1901,7 @@ public final class CraftServer implements Server {
 		}
 	};
 
+	@Override
 	public Spigot spigot() {
 		return spigot;
 	}

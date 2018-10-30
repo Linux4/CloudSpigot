@@ -21,5 +21,6 @@ public interface BrewerInventory extends Inventory {
 	 */
 	void setIngredient(ItemStack ingredient);
 
+	@Override
 	BrewingStand getHolder();
 }

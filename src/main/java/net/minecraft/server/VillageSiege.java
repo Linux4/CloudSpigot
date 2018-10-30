@@ -1,9 +1,9 @@
 package net.minecraft.server;
 
-import eu.server24_7.cloudspigot.exception.ServerInternalException;
-
 import java.util.Iterator;
 import java.util.List;
+
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 public class VillageSiege {
 
@@ -28,7 +28,7 @@ public class VillageSiege {
 			if (this.c == 0) {
 				float f = this.a.c(0.0F);
 
-				if ((double) f < 0.5D || (double) f > 0.501D) {
+				if (f < 0.5D || f > 0.501D) {
 					return;
 				}
 
@@ -69,13 +69,13 @@ public class VillageSiege {
 		Iterator<EntityHuman> iterator = list.iterator();
 
 		while (iterator.hasNext()) {
-			EntityHuman entityhuman = (EntityHuman) iterator.next();
+			EntityHuman entityhuman = iterator.next();
 
 			if (!entityhuman.isSpectator()) {
 				this.f = this.a.ae().getClosestVillage(new BlockPosition(entityhuman), 1);
 				if (this.f != null && this.f.c() >= 10 && this.f.d() >= 20 && this.f.e() >= 20) {
 					BlockPosition blockposition = this.f.a();
-					float f = (float) this.f.b();
+					float f = this.f.b();
 					boolean flag = false;
 					int i = 0;
 
@@ -83,14 +83,14 @@ public class VillageSiege {
 						if (i < 10) {
 							float f1 = this.a.random.nextFloat() * 3.1415927F * 2.0F;
 
-							this.g = blockposition.getX() + (int) ((double) (MathHelper.cos(f1) * f) * 0.9D);
+							this.g = blockposition.getX() + (int) (MathHelper.cos(f1) * f * 0.9D);
 							this.h = blockposition.getY();
-							this.i = blockposition.getZ() + (int) ((double) (MathHelper.sin(f1) * f) * 0.9D);
+							this.i = blockposition.getZ() + (int) (MathHelper.sin(f1) * f * 0.9D);
 							flag = false;
 							Iterator<Village> iterator1 = this.a.ae().getVillages().iterator();
 
 							while (iterator1.hasNext()) {
-								Village village = (Village) iterator1.next();
+								Village village = iterator1.next();
 
 								if (village != this.f && village.a(new BlockPosition(this.g, this.h, this.i))) {
 									flag = true;
@@ -158,8 +158,8 @@ public class VillageSiege {
 
 			if (this.f.a(blockposition1)
 					&& SpawnerCreature.a(EntityInsentient.EnumEntityPositionType.ON_GROUND, this.a, blockposition1)) {
-				return new Vec3D((double) blockposition1.getX(), (double) blockposition1.getY(),
-						(double) blockposition1.getZ());
+				return new Vec3D(blockposition1.getX(), blockposition1.getY(),
+						blockposition1.getZ());
 			}
 		}
 

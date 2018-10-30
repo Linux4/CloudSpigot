@@ -18,14 +18,17 @@ public class EntityEnderCrystal extends Entity {
 		this.a = this.random.nextInt(100000);
 	}
 
+	@Override
 	protected boolean s_() {
 		return false;
 	}
 
+	@Override
 	protected void h() {
 		this.datawatcher.a(8, Integer.valueOf(this.b));
 	}
 
+	@Override
 	public void t_() {
 		this.lastX = this.locX;
 		this.lastY = this.locY;
@@ -46,16 +49,20 @@ public class EntityEnderCrystal extends Entity {
 
 	}
 
+	@Override
 	protected void b(NBTTagCompound nbttagcompound) {
 	}
 
+	@Override
 	protected void a(NBTTagCompound nbttagcompound) {
 	}
 
+	@Override
 	public boolean ad() {
 		return true;
 	}
 
+	@Override
 	public boolean damageEntity(DamageSource damagesource, float f) {
 		if (this.isInvulnerable(damagesource)) {
 			return false;

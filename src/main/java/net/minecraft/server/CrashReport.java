@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -12,10 +11,13 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.google.common.collect.Lists;
 
 public class CrashReport {
 
@@ -41,6 +43,7 @@ public class CrashReport {
 				return "1.8.10";
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -51,6 +54,7 @@ public class CrashReport {
 						+ System.getProperty("os.version");
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -60,6 +64,7 @@ public class CrashReport {
 				return System.getProperty("java.version") + ", " + System.getProperty("java.vendor");
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -70,6 +75,7 @@ public class CrashReport {
 						+ System.getProperty("java.vm.vendor");
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -88,6 +94,7 @@ public class CrashReport {
 						+ " MB)";
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -101,7 +108,7 @@ public class CrashReport {
 				Iterator<String> iterator = list.iterator();
 
 				while (iterator.hasNext()) {
-					String s = (String) iterator.next();
+					String s = iterator.next();
 
 					if (s.startsWith("-X")) {
 						if (i++ > 0) {
@@ -115,6 +122,7 @@ public class CrashReport {
 				return String.format("%d total; %s", new Object[] { Integer.valueOf(i), stringbuilder.toString() });
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -124,6 +132,7 @@ public class CrashReport {
 				return IntCache.b();
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -141,7 +150,7 @@ public class CrashReport {
 
 	public void a(StringBuilder stringbuilder) {
 		if ((this.h == null || this.h.length <= 0) && this.e.size() > 0) {
-			this.h = (StackTraceElement[]) ArrayUtils.subarray(((CrashReportSystemDetails) this.e.get(0)).a(), 0, 1);
+			this.h = ArrayUtils.subarray(this.e.get(0).a(), 0, 1);
 		}
 
 		if (this.h != null && this.h.length > 0) {
@@ -163,7 +172,7 @@ public class CrashReport {
 		Iterator<CrashReportSystemDetails> iterator = this.e.iterator();
 
 		while (iterator.hasNext()) {
-			CrashReportSystemDetails crashreportsystemdetails = (CrashReportSystemDetails) iterator.next();
+			CrashReportSystemDetails crashreportsystemdetails = iterator.next();
 
 			crashreportsystemdetails.a(stringbuilder);
 			stringbuilder.append("\n\n");
@@ -284,7 +293,7 @@ public class CrashReport {
 
 			this.g = crashreportsystemdetails.a(stacktraceelement, stacktraceelement1);
 			if (j > 0 && !this.e.isEmpty()) {
-				CrashReportSystemDetails crashreportsystemdetails1 = (CrashReportSystemDetails) this.e
+				CrashReportSystemDetails crashreportsystemdetails1 = this.e
 						.get(this.e.size() - 1);
 
 				crashreportsystemdetails1.b(j);
@@ -317,7 +326,7 @@ public class CrashReport {
 				"But it works on my machine." };
 
 		try {
-			return astring[(int) (System.nanoTime() % (long) astring.length)];
+			return astring[(int) (System.nanoTime() % astring.length)];
 		} catch (Throwable throwable) {
 			return "Witty comment unavailable :(";
 		}

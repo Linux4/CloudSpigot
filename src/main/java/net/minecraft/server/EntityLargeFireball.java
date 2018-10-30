@@ -14,6 +14,7 @@ public class EntityLargeFireball extends EntityFireball {
 		super(world, entityliving, d0, d1, d2);
 	}
 
+	@Override
 	protected void a(MovingObjectPosition movingobjectposition) {
 		if (!this.world.isClientSide) {
 			if (movingobjectposition.entity != null) {
@@ -40,11 +41,13 @@ public class EntityLargeFireball extends EntityFireball {
 
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		nbttagcompound.setInt("ExplosionPower", this.yield);
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		if (nbttagcompound.hasKeyOfType("ExplosionPower", 99)) {

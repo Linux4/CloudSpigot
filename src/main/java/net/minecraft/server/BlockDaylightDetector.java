@@ -14,17 +14,19 @@ public class BlockDaylightDetector extends BlockContainer {
 		this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.375F, 1.0F);
 		this.a(CreativeModeTab.d);
 		this.c(0.2F);
-		this.a(BlockDaylightDetector.f);
+		this.a(Block.f);
 		this.c("daylightDetector");
 	}
 
+	@Override
 	public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
 		this.a(0.0F, 0.0F, 0.0F, 1.0F, 0.375F, 1.0F);
 	}
 
+	@Override
 	public int a(IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata,
 			EnumDirection enumdirection) {
-		return ((Integer) iblockdata.get(BlockDaylightDetector.POWER)).intValue();
+		return iblockdata.get(BlockDaylightDetector.POWER).intValue();
 	}
 
 	public void f(World world, BlockPosition blockposition) {
@@ -35,15 +37,15 @@ public class BlockDaylightDetector extends BlockContainer {
 			float f1 = f < 3.1415927F ? 0.0F : 6.2831855F;
 
 			f += (f1 - f) * 0.2F;
-			i = Math.round((float) i * MathHelper.cos(f));
+			i = Math.round(i * MathHelper.cos(f));
 			i = MathHelper.clamp(i, 0, 15);
 			if (this.b) {
 				i = 15 - i;
 			}
 
-			if (((Integer) iblockdata.get(BlockDaylightDetector.POWER)).intValue() != i) {
+			if (iblockdata.get(BlockDaylightDetector.POWER).intValue() != i) {
 				i = org.bukkit.craftbukkit.event.CraftEventFactory.callRedstoneChange(world, blockposition.getX(),
-						blockposition.getY(), blockposition.getZ(), ((Integer) iblockdata.get(POWER)), i)
+						blockposition.getY(), blockposition.getZ(), (iblockdata.get(POWER)), i)
 						.getNewCurrent(); // CraftBukkit - Call BlockRedstoneEvent
 				world.setTypeAndData(blockposition, iblockdata.set(BlockDaylightDetector.POWER, Integer.valueOf(i)), 3);
 			}
@@ -51,6 +53,7 @@ public class BlockDaylightDetector extends BlockContainer {
 		}
 	}
 
+	@Override
 	public boolean interact(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		if (entityhuman.cn()) {
@@ -74,38 +77,47 @@ public class BlockDaylightDetector extends BlockContainer {
 		}
 	}
 
+	@Override
 	public Item getDropType(IBlockData iblockdata, Random random, int i) {
 		return Item.getItemOf(Blocks.DAYLIGHT_DETECTOR);
 	}
 
+	@Override
 	public boolean d() {
 		return false;
 	}
 
+	@Override
 	public boolean c() {
 		return false;
 	}
 
+	@Override
 	public int b() {
 		return 3;
 	}
 
+	@Override
 	public boolean isPowerSource() {
 		return true;
 	}
 
+	@Override
 	public TileEntity a(World world, int i) {
 		return new TileEntityLightDetector();
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockDaylightDetector.POWER, Integer.valueOf(i));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
-		return ((Integer) iblockdata.get(BlockDaylightDetector.POWER)).intValue();
+		return iblockdata.get(BlockDaylightDetector.POWER).intValue();
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockDaylightDetector.POWER });
 	}

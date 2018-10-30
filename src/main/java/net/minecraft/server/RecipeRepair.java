@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
+
+import com.google.common.collect.Lists;
 
 public class RecipeRepair extends ShapelessRecipes implements IRecipe { // CraftBukkit - added extends
 
@@ -11,6 +12,7 @@ public class RecipeRepair extends ShapelessRecipes implements IRecipe { // Craft
 	}
 	// CraftBukkit end
 
+	@Override
 	public boolean a(InventoryCrafting inventorycrafting, World world) {
 		ArrayList<ItemStack> arraylist = Lists.newArrayList();
 
@@ -20,7 +22,7 @@ public class RecipeRepair extends ShapelessRecipes implements IRecipe { // Craft
 			if (itemstack != null) {
 				arraylist.add(itemstack);
 				if (arraylist.size() > 1) {
-					ItemStack itemstack1 = (ItemStack) arraylist.get(0);
+					ItemStack itemstack1 = arraylist.get(0);
 
 					if (itemstack.getItem() != itemstack1.getItem() || itemstack1.count != 1 || itemstack.count != 1
 							|| !itemstack1.getItem().usesDurability()) {
@@ -33,6 +35,7 @@ public class RecipeRepair extends ShapelessRecipes implements IRecipe { // Craft
 		return arraylist.size() == 2;
 	}
 
+	@Override
 	public ItemStack craftItem(InventoryCrafting inventorycrafting) {
 		ArrayList<ItemStack> arraylist = Lists.newArrayList();
 
@@ -43,7 +46,7 @@ public class RecipeRepair extends ShapelessRecipes implements IRecipe { // Craft
 			if (itemstack != null) {
 				arraylist.add(itemstack);
 				if (arraylist.size() > 1) {
-					ItemStack itemstack1 = (ItemStack) arraylist.get(0);
+					ItemStack itemstack1 = arraylist.get(0);
 
 					if (itemstack.getItem() != itemstack1.getItem() || itemstack1.count != 1 || itemstack.count != 1
 							|| !itemstack1.getItem().usesDurability()) {
@@ -54,9 +57,9 @@ public class RecipeRepair extends ShapelessRecipes implements IRecipe { // Craft
 		}
 
 		if (arraylist.size() == 2) {
-			ItemStack itemstack2 = (ItemStack) arraylist.get(0);
+			ItemStack itemstack2 = arraylist.get(0);
 
-			itemstack = (ItemStack) arraylist.get(1);
+			itemstack = arraylist.get(1);
 			if (itemstack2.getItem() == itemstack.getItem() && itemstack2.count == 1 && itemstack.count == 1
 					&& itemstack2.getItem().usesDurability()) {
 				Item item = itemstack2.getItem();
@@ -87,14 +90,17 @@ public class RecipeRepair extends ShapelessRecipes implements IRecipe { // Craft
 		return null;
 	}
 
+	@Override
 	public int a() {
 		return 4;
 	}
 
+	@Override
 	public ItemStack b() {
 		return null;
 	}
 
+	@Override
 	public ItemStack[] b(InventoryCrafting inventorycrafting) {
 		ItemStack[] aitemstack = new ItemStack[inventorycrafting.getSize()];
 

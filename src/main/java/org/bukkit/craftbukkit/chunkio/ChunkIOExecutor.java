@@ -1,10 +1,11 @@
 package org.bukkit.craftbukkit.chunkio;
 
+import org.bukkit.craftbukkit.util.AsynchronousExecutor;
+
 import net.minecraft.server.Chunk;
 import net.minecraft.server.ChunkProviderServer;
 import net.minecraft.server.ChunkRegionLoader;
 import net.minecraft.server.World;
-import org.bukkit.craftbukkit.util.AsynchronousExecutor;
 
 public class ChunkIOExecutor {
 	static final int BASE_THREADS = 2; // CloudSpigot - Bumped value

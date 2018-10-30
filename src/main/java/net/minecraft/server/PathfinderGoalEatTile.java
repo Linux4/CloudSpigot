@@ -1,16 +1,16 @@
 package net.minecraft.server;
 
+import org.bukkit.Material;
+// CraftBukkit end
+// CraftBukkit start
+import org.bukkit.craftbukkit.event.CraftEventFactory;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-// CraftBukkit start
-import org.bukkit.craftbukkit.event.CraftEventFactory;
-import org.bukkit.Material;
-// CraftBukkit end
-
 public class PathfinderGoalEatTile extends PathfinderGoal {
 
-	private static final Predicate<IBlockData> b = BlockStatePredicate.a((Block) Blocks.TALLGRASS)
+	private static final Predicate<IBlockData> b = BlockStatePredicate.a(Blocks.TALLGRASS)
 			.a(BlockLongGrass.TYPE, Predicates.equalTo(BlockLongGrass.EnumTallGrassType.GRASS));
 	private EntityInsentient c;
 	private World d;
@@ -22,6 +22,7 @@ public class PathfinderGoalEatTile extends PathfinderGoal {
 		this.a(7);
 	}
 
+	@Override
 	public boolean a() {
 		if (this.c.bc().nextInt(this.c.isBaby() ? 50 : 1000) != 0) {
 			return false;
@@ -33,16 +34,19 @@ public class PathfinderGoalEatTile extends PathfinderGoal {
 		}
 	}
 
+	@Override
 	public void c() {
 		this.a = 40;
 		this.d.broadcastEntityEffect(this.c, (byte) 10);
 		this.c.getNavigation().n();
 	}
 
+	@Override
 	public void d() {
 		this.a = 0;
 	}
 
+	@Override
 	public boolean b() {
 		return this.a > 0;
 	}
@@ -51,6 +55,7 @@ public class PathfinderGoalEatTile extends PathfinderGoal {
 		return this.a;
 	}
 
+	@Override
 	public void e() {
 		this.a = Math.max(0, this.a - 1);
 		if (this.a == 4) {

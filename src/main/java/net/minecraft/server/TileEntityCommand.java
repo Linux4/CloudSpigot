@@ -7,29 +7,35 @@ public class TileEntityCommand extends TileEntity {
 			sender = new org.bukkit.craftbukkit.command.CraftBlockCommandSender(this); // CraftBukkit - add sender
 		}
 
+		@Override
 		public BlockPosition getChunkCoordinates() {
 			return TileEntityCommand.this.position;
 		}
 
+		@Override
 		public Vec3D d() {
-			return new Vec3D((double) TileEntityCommand.this.position.getX() + 0.5D,
-					(double) TileEntityCommand.this.position.getY() + 0.5D,
-					(double) TileEntityCommand.this.position.getZ() + 0.5D);
+			return new Vec3D(TileEntityCommand.this.position.getX() + 0.5D,
+					TileEntityCommand.this.position.getY() + 0.5D,
+					TileEntityCommand.this.position.getZ() + 0.5D);
 		}
 
+		@Override
 		public World getWorld() {
 			return TileEntityCommand.this.getWorld();
 		}
 
+		@Override
 		public void setCommand(String s) {
 			super.setCommand(s);
 			TileEntityCommand.this.update();
 		}
 
+		@Override
 		public void h() {
 			TileEntityCommand.this.getWorld().notify(TileEntityCommand.this.position);
 		}
 
+		@Override
 		public Entity f() {
 			return null;
 		}
@@ -38,16 +44,19 @@ public class TileEntityCommand extends TileEntity {
 	public TileEntityCommand() {
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		this.a.a(nbttagcompound);
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		this.a.b(nbttagcompound);
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Packet getUpdatePacket() {
 		NBTTagCompound nbttagcompound = new NBTTagCompound();
@@ -56,6 +65,7 @@ public class TileEntityCommand extends TileEntity {
 		return new PacketPlayOutTileEntityData(this.position, 2, nbttagcompound);
 	}
 
+	@Override
 	public boolean F() {
 		return true;
 	}

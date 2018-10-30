@@ -26,7 +26,7 @@ public class ContainerWorkbench extends Container {
 		// CraftBukkit end
 		this.g = world;
 		this.h = blockposition;
-		this.a((Slot) (new SlotResult(playerinventory.player, this.craftInventory, this.resultInventory, 0, 124, 35)));
+		this.a((new SlotResult(playerinventory.player, this.craftInventory, this.resultInventory, 0, 124, 35)));
 
 		int i;
 		int j;
@@ -47,9 +47,10 @@ public class ContainerWorkbench extends Container {
 			this.a(new Slot(playerinventory, i, 8 + i * 18, 142));
 		}
 
-		this.a((IInventory) this.craftInventory);
+		this.a(this.craftInventory);
 	}
 
+	@Override
 	public void a(IInventory iinventory) {
 		// this.resultInventory.setItem(0,
 		// CraftingManager.getInstance().craft(this.craftInventory, this.g));
@@ -69,6 +70,7 @@ public class ContainerWorkbench extends Container {
 		// CraftBukkit end
 	}
 
+	@Override
 	public void b(EntityHuman entityhuman) {
 		super.b(entityhuman);
 		if (!this.g.isClientSide) {
@@ -83,17 +85,19 @@ public class ContainerWorkbench extends Container {
 		}
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		if (!this.checkReachable)
 			return true; // CraftBukkit
 		return this.g.getType(this.h).getBlock() != Blocks.CRAFTING_TABLE ? false
-				: entityhuman.e((double) this.h.getX() + 0.5D, (double) this.h.getY() + 0.5D,
-						(double) this.h.getZ() + 0.5D) <= 64.0D;
+				: entityhuman.e(this.h.getX() + 0.5D, this.h.getY() + 0.5D,
+						this.h.getZ() + 0.5D) <= 64.0D;
 	}
 
+	@Override
 	public ItemStack b(EntityHuman entityhuman, int i) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) this.c.get(i);
+		Slot slot = this.c.get(i);
 
 		if (slot != null && slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
@@ -133,6 +137,7 @@ public class ContainerWorkbench extends Container {
 		return itemstack;
 	}
 
+	@Override
 	public boolean a(ItemStack itemstack, Slot slot) {
 		return slot.inventory != this.resultInventory && super.a(itemstack, slot);
 	}

@@ -1,12 +1,13 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicates;
 import java.util.List;
 
 // CraftBukkit start
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.event.block.BlockDispenseEvent;
 // CraftBukkit end
+
+import com.google.common.base.Predicates;
 
 public class ItemArmor extends Item {
 
@@ -15,18 +16,19 @@ public class ItemArmor extends Item {
 			"minecraft:items/empty_armor_slot_chestplate", "minecraft:items/empty_armor_slot_leggings",
 			"minecraft:items/empty_armor_slot_boots" };
 	private static final IDispenseBehavior l = new DispenseBehaviorItem() {
+		@Override
 		protected ItemStack b(ISourceBlock isourceblock, ItemStack itemstack) {
 			BlockPosition blockposition = isourceblock.getBlockPosition().shift(BlockDispenser.b(isourceblock.f()));
 			int i = blockposition.getX();
 			int j = blockposition.getY();
 			int k = blockposition.getZ();
-			AxisAlignedBB axisalignedbb = new AxisAlignedBB((double) i, (double) j, (double) k, (double) (i + 1),
-					(double) (j + 1), (double) (k + 1));
+			AxisAlignedBB axisalignedbb = new AxisAlignedBB(i, j, k, i + 1,
+					j + 1, k + 1);
 			List<EntityLiving> list = isourceblock.getWorld().a(EntityLiving.class, axisalignedbb,
 					Predicates.and(IEntitySelector.d, new IEntitySelector.EntitySelectorEquipable(itemstack)));
 
 			if (list.size() > 0) {
-				EntityLiving entityliving = (EntityLiving) list.get(0);
+				EntityLiving entityliving = list.get(0);
 				int l = entityliving instanceof EntityHuman ? 1 : 0;
 				int i1 = EntityInsentient.c(itemstack);
 
@@ -52,7 +54,7 @@ public class ItemArmor extends Item {
 					itemstack.count++;
 					// Chain to handler for new item
 					ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-					IDispenseBehavior idispensebehavior = (IDispenseBehavior) BlockDispenser.REGISTRY
+					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
 							.get(eventStack.getItem());
 					if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 						idispensebehavior.a(isourceblock, eventStack);
@@ -90,6 +92,7 @@ public class ItemArmor extends Item {
 		BlockDispenser.REGISTRY.a(this, ItemArmor.l);
 	}
 
+	@Override
 	public int b() {
 		return this.m.a();
 	}
@@ -159,10 +162,12 @@ public class ItemArmor extends Item {
 		}
 	}
 
+	@Override
 	public boolean a(ItemStack itemstack, ItemStack itemstack1) {
 		return this.m.b() == itemstack1.getItem() ? true : super.a(itemstack, itemstack1);
 	}
 
+	@Override
 	public ItemStack a(ItemStack itemstack, World world, EntityHuman entityhuman) {
 		int i = EntityInsentient.c(itemstack) - 1;
 		ItemStack itemstack1 = entityhuman.q(i);

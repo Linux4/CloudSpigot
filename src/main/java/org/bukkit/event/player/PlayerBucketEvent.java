@@ -71,10 +71,12 @@ public abstract class PlayerBucketEvent extends PlayerEvent implements Cancellab
 		return blockFace;
 	}
 
+	@Override
 	public boolean isCancelled() {
 		return cancelled;
 	}
 
+	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
 	}

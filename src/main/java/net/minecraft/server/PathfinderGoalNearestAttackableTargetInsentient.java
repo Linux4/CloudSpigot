@@ -1,10 +1,12 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
 import java.util.Collections;
 import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.google.common.base.Predicate;
 
 public class PathfinderGoalNearestAttackableTargetInsentient extends PathfinderGoal {
 
@@ -33,18 +35,20 @@ public class PathfinderGoalNearestAttackableTargetInsentient extends PathfinderG
 				}
 
 				return entityliving.isInvisible() ? false
-						: ((double) entityliving.g(PathfinderGoalNearestAttackableTargetInsentient.this.b) > d0 ? false
+						: (entityliving.g(PathfinderGoalNearestAttackableTargetInsentient.this.b) > d0 ? false
 								: PathfinderGoalTarget.a(PathfinderGoalNearestAttackableTargetInsentient.this.b,
 										entityliving, false, true));
 			}
 
+			@Override
 			public boolean apply(EntityLiving object) {
-				return this.a((EntityLiving) object);
+				return this.a(object);
 			}
 		};
 		this.d = new PathfinderGoalNearestAttackableTarget.DistanceComparator(entityinsentient);
 	}
 
+	@Override
 	public boolean a() {
 		double d0 = this.f();
 		List<EntityLiving> list = this.b.world.a(this.f, this.b.getBoundingBox().grow(d0, 4.0D, d0), this.c);
@@ -53,11 +57,12 @@ public class PathfinderGoalNearestAttackableTargetInsentient extends PathfinderG
 		if (list.isEmpty()) {
 			return false;
 		} else {
-			this.e = (EntityLiving) list.get(0);
+			this.e = list.get(0);
 			return true;
 		}
 	}
 
+	@Override
 	public boolean b() {
 		EntityLiving entityliving = this.b.getGoalTarget();
 
@@ -74,6 +79,7 @@ public class PathfinderGoalNearestAttackableTargetInsentient extends PathfinderG
 		}
 	}
 
+	@Override
 	public void c() {
 		this.b.setGoalTarget(this.e, org.bukkit.event.entity.EntityTargetEvent.TargetReason.CLOSEST_ENTITY, true); // CraftBukkit
 																													// -
@@ -81,6 +87,7 @@ public class PathfinderGoalNearestAttackableTargetInsentient extends PathfinderG
 		super.c();
 	}
 
+	@Override
 	public void d() {
 		this.b.setGoalTarget((EntityLiving) null);
 		super.c();

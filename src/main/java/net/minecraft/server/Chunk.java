@@ -1,10 +1,6 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Queues;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +11,14 @@ import java.util.concurrent.atomic.AtomicInteger; // CloudSpigot
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.google.common.collect.Lists; // CraftBukkit
 import org.bukkit.Bukkit; // CraftBukkit
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Lists; // CraftBukkit
+import com.google.common.collect.Maps;
+import com.google.common.collect.Queues;
+
 //import eu.server24_7.cloudspigot.event.ServerExceptionEvent; // CloudSpigot
 import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
@@ -141,7 +141,7 @@ public class Chunk {
 		this.tileEntities = Maps.newHashMap();
 		this.v = 4096;
 		this.w = Queues.newConcurrentLinkedQueue();
-		this.entitySlices = (List[]) (new List[16]); // Spigot
+		this.entitySlices = (new List[16]); // Spigot
 		this.world = world;
 		this.locX = i;
 		this.locZ = j;
@@ -298,14 +298,14 @@ public class Chunk {
 						for (iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator(); iterator
 								.hasNext(); j1 = Math.min(j1, this.world.b(l + enumdirection.getAdjacentX(),
 										i1 + enumdirection.getAdjacentZ()))) {
-							enumdirection = (EnumDirection) iterator.next();
+							enumdirection = iterator.next();
 						}
 
 						this.c(l, i1, j1);
 						iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
 						while (iterator.hasNext()) {
-							enumdirection = (EnumDirection) iterator.next();
+							enumdirection = iterator.next();
 							this.c(l + enumdirection.getAdjacentX(), i1 + enumdirection.getAdjacentZ(), k);
 						}
 
@@ -426,7 +426,7 @@ public class Chunk {
 				Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
 				while (iterator.hasNext()) {
-					EnumDirection enumdirection = (EnumDirection) iterator.next();
+					EnumDirection enumdirection = iterator.next();
 
 					this.a(j1 + enumdirection.getAdjacentX(), k1 + enumdirection.getAdjacentZ(), i2, j2);
 				}
@@ -478,6 +478,7 @@ public class Chunk {
 							.a(new BlockPosition(Chunk.this.locX * 16 + i, j, Chunk.this.locZ * 16 + k));
 				}
 
+				@Override
 				public String call() throws Exception {
 					return this.a();
 				}
@@ -497,6 +498,7 @@ public class Chunk {
 					return CrashReportSystemDetails.a(blockposition);
 				}
 
+				@Override
 				public String call() throws Exception {
 					return this.a();
 				}
@@ -555,6 +557,7 @@ public class Chunk {
 						return CrashReportSystemDetails.a(blockposition);
 					}
 
+					@Override
 					public String call() throws Exception {
 						return this.a();
 					}
@@ -919,12 +922,12 @@ public class Chunk {
 			Iterator<Entity> iterator = this.entitySlices[i].iterator();
 
 			while (iterator.hasNext()) {
-				Entity entity = (Entity) iterator.next();
+				Entity entity = iterator.next();
 
 				entity.ah();
 			}
 
-			this.world.b((Collection<Entity>) this.entitySlices[i]);
+			this.world.b(this.entitySlices[i]);
 		}
 
 	}
@@ -938,7 +941,7 @@ public class Chunk {
 			// Spigot Start
 			if (tileentity instanceof IInventory) {
 				for (org.bukkit.entity.HumanEntity h : Lists.<org.bukkit.entity.HumanEntity>newArrayList(
-						(List<org.bukkit.entity.HumanEntity>) ((IInventory) tileentity).getViewers())) {
+						((IInventory) tileentity).getViewers())) {
 					if (h instanceof org.bukkit.craftbukkit.entity.CraftHumanEntity) {
 						((org.bukkit.craftbukkit.entity.CraftHumanEntity) h).getHandle().closeInventory();
 					}
@@ -958,7 +961,7 @@ public class Chunk {
 				// Spigot Start
 				if (entity instanceof IInventory) {
 					for (org.bukkit.entity.HumanEntity h : Lists.<org.bukkit.entity.HumanEntity>newArrayList(
-							(List<org.bukkit.entity.HumanEntity>) ((IInventory) entity).getViewers())) {
+							((IInventory) entity).getViewers())) {
 						if (h instanceof org.bukkit.craftbukkit.entity.CraftHumanEntity) {
 							((org.bukkit.craftbukkit.entity.CraftHumanEntity) h).getHandle().closeInventory();
 						}
@@ -974,7 +977,7 @@ public class Chunk {
 				}
 			}
 
-			this.world.c((Collection<Entity>) newList);
+			this.world.c(newList);
 			// CraftBukkit end
 		}
 
@@ -1007,7 +1010,7 @@ public class Chunk {
 					continue;
 				// CloudSpigot end
 				while (iterator.hasNext()) {
-					Entity entity1 = (Entity) iterator.next();
+					Entity entity1 = iterator.next();
 
 					if (entity1.getBoundingBox().b(axisalignedbb) && entity1 != entity) {
 						if (predicate == null || predicate.apply(entity1)) {
@@ -1058,7 +1061,7 @@ public class Chunk {
 			Iterator<Entity> iterator = this.entitySlices[k].iterator(); // Spigot
 
 			while (iterator.hasNext()) {
-				Entity entity = (Entity) iterator.next();
+				Entity entity = iterator.next();
 
 				if (oclass.isInstance(entity) && entity.getBoundingBox().b(axisalignedbb)
 						&& (predicate == null || predicate.apply((T) entity))) { // CraftBukkit - fix decompile error //
@@ -1095,8 +1098,8 @@ public class Chunk {
 	}
 
 	public Random a(long i) {
-		return new Random(this.world.getSeed() + (long) (this.locX * this.locX * 4987142) + (long) (this.locX * 5947611)
-				+ (long) (this.locZ * this.locZ) * 4392871L + (long) (this.locZ * 389711) ^ i);
+		return new Random(this.world.getSeed() + this.locX * this.locX * 4987142 + this.locX * 5947611
+				+ this.locZ * this.locZ * 4392871L + this.locZ * 389711 ^ i);
 	}
 
 	public boolean isEmpty() {
@@ -1371,7 +1374,7 @@ public class Chunk {
 					Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
 					while (iterator.hasNext()) {
-						EnumDirection enumdirection = (EnumDirection) iterator.next();
+						EnumDirection enumdirection = iterator.next();
 						int k = enumdirection.c() == EnumDirection.EnumAxisDirection.POSITIVE ? 16 : 1;
 
 						this.world.getChunkAtWorldCoords(blockposition.shift(enumdirection, k))
@@ -1432,7 +1435,7 @@ public class Chunk {
 		for (l = k + 16 - 1; l > this.world.F() || l > 0 && !flag1; --l) {
 			blockposition_mutableblockposition.c(blockposition_mutableblockposition.getX(), l,
 					blockposition_mutableblockposition.getZ());
-			int i1 = this.b((BlockPosition) blockposition_mutableblockposition);
+			int i1 = this.b(blockposition_mutableblockposition);
 
 			if (i1 == 255 && blockposition_mutableblockposition.getY() < this.world.F()) {
 				flag1 = true;

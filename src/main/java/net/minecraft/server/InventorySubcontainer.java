@@ -21,26 +21,32 @@ public class InventorySubcontainer implements IInventory {
 	// private int maxStack = MAX_STACK; // CloudSpigot
 	protected org.bukkit.inventory.InventoryHolder bukkitOwner;
 
+	@Override
 	public ItemStack[] getContents() {
 		return this.items;
 	}
 
+	@Override
 	public void onOpen(CraftHumanEntity who) {
 		transaction.add(who);
 	}
 
+	@Override
 	public void onClose(CraftHumanEntity who) {
 		transaction.remove(who);
 	}
 
+	@Override
 	public List<HumanEntity> getViewers() {
 		return transaction;
 	}
 
+	@Override
 	public void setMaxStackSize(int i) {
 		// maxStack = i; // CloudSpigot
 	}
 
+	@Override
 	public org.bukkit.inventory.InventoryHolder getOwner() {
 		return bukkitOwner;
 	}
@@ -71,10 +77,12 @@ public class InventorySubcontainer implements IInventory {
 		this.d.remove(iinventorylistener);
 	}
 
+	@Override
 	public ItemStack getItem(int i) {
 		return i >= 0 && i < this.items.length ? this.items[i] : null;
 	}
 
+	@Override
 	public ItemStack splitStack(int i, int j) {
 		if (this.items[i] != null) {
 			ItemStack itemstack;
@@ -132,6 +140,7 @@ public class InventorySubcontainer implements IInventory {
 		return itemstack1;
 	}
 
+	@Override
 	public ItemStack splitWithoutUpdate(int i) {
 		if (this.items[i] != null) {
 			ItemStack itemstack = this.items[i];
@@ -143,6 +152,7 @@ public class InventorySubcontainer implements IInventory {
 		}
 	}
 
+	@Override
 	public void setItem(int i, ItemStack itemstack) {
 		this.items[i] = itemstack;
 		if (itemstack != null && itemstack.count > this.getMaxStackSize()) {
@@ -152,14 +162,17 @@ public class InventorySubcontainer implements IInventory {
 		this.update();
 	}
 
+	@Override
 	public int getSize() {
 		return this.b;
 	}
 
+	@Override
 	public String getName() {
 		return this.a;
 	}
 
+	@Override
 	public boolean hasCustomName() {
 		return this.e;
 	}
@@ -169,49 +182,60 @@ public class InventorySubcontainer implements IInventory {
 		this.a = s;
 	}
 
+	@Override
 	public IChatBaseComponent getScoreboardDisplayName() {
-		return (IChatBaseComponent) (this.hasCustomName() ? new ChatComponentText(this.getName())
-				: new ChatMessage(this.getName(), new Object[0]));
+		return this.hasCustomName() ? new ChatComponentText(this.getName())
+				: new ChatMessage(this.getName(), new Object[0]);
 	}
 
+	@Override
 	public int getMaxStackSize() {
 		return 64;
 	}
 
+	@Override
 	public void update() {
 		if (this.d != null) {
 			for (int i = 0; i < this.d.size(); ++i) {
-				((IInventoryListener) this.d.get(i)).a(this);
+				this.d.get(i).a(this);
 			}
 		}
 
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		return true;
 	}
 
+	@Override
 	public void startOpen(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public void closeContainer(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public boolean b(int i, ItemStack itemstack) {
 		return true;
 	}
 
+	@Override
 	public int getProperty(int i) {
 		return 0;
 	}
 
+	@Override
 	public void b(int i, int j) {
 	}
 
+	@Override
 	public int g() {
 		return 0;
 	}
 
+	@Override
 	public void l() {
 		for (int i = 0; i < this.items.length; ++i) {
 			this.items[i] = null;

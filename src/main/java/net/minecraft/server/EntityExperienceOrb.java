@@ -2,9 +2,9 @@ package net.minecraft.server;
 
 // CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
-import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 // CraftBukkit end
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 
 public class EntityExperienceOrb extends Entity {
 
@@ -21,12 +21,13 @@ public class EntityExperienceOrb extends Entity {
 		this.setSize(0.5F, 0.5F);
 		this.setPosition(d0, d1, d2);
 		this.yaw = (float) (Math.random() * 360.0D);
-		this.motX = (double) ((float) (Math.random() * 0.20000000298023224D - 0.10000000149011612D) * 2.0F);
-		this.motY = (double) ((float) (Math.random() * 0.2D) * 2.0F);
-		this.motZ = (double) ((float) (Math.random() * 0.20000000298023224D - 0.10000000149011612D) * 2.0F);
+		this.motX = (float) (Math.random() * 0.20000000298023224D - 0.10000000149011612D) * 2.0F;
+		this.motY = (float) (Math.random() * 0.2D) * 2.0F;
+		this.motZ = (float) (Math.random() * 0.20000000298023224D - 0.10000000149011612D) * 2.0F;
 		this.value = i;
 	}
 
+	@Override
 	protected boolean s_() {
 		return false;
 	}
@@ -36,9 +37,11 @@ public class EntityExperienceOrb extends Entity {
 		this.setSize(0.25F, 0.25F);
 	}
 
+	@Override
 	protected void h() {
 	}
 
+	@Override
 	public void t_() {
 		super.t_();
 		EntityHuman prevTarget = this.targetPlayer;// CraftBukkit - store old target
@@ -52,8 +55,8 @@ public class EntityExperienceOrb extends Entity {
 		this.motY -= 0.029999999329447746D;
 		if (this.world.getType(new BlockPosition(this)).getBlock().getMaterial() == Material.LAVA) {
 			this.motY = 0.20000000298023224D;
-			this.motX = (double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
-			this.motZ = (double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+			this.motX = (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+			this.motZ = (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
 			this.makeSound("random.fizz", 0.4F, 2.0F + this.random.nextFloat() * 0.4F);
 		}
 
@@ -86,7 +89,7 @@ public class EntityExperienceOrb extends Entity {
 
 			if (!cancelled && targetPlayer != null) {
 				double d1 = (this.targetPlayer.locX - this.locX) / d0;
-				double d2 = (this.targetPlayer.locY + (double) this.targetPlayer.getHeadHeight() - this.locY) / d0;
+				double d2 = (this.targetPlayer.locY + this.targetPlayer.getHeadHeight() - this.locY) / d0;
 				double d3 = (this.targetPlayer.locZ - this.locZ) / d0;
 				double d4 = Math.sqrt(d1 * d1 + d2 * d2 + d3 * d3);
 				double d5 = 1.0D - d4;
@@ -111,9 +114,9 @@ public class EntityExperienceOrb extends Entity {
 					.getBlock().frictionFactor * 0.98F;
 		}
 
-		this.motX *= (double) f;
+		this.motX *= f;
 		this.motY *= 0.9800000190734863D;
-		this.motZ *= (double) f;
+		this.motZ *= f;
 		if (this.onGround) {
 			this.motY *= -0.8999999761581421D;
 		}
@@ -126,20 +129,22 @@ public class EntityExperienceOrb extends Entity {
 
 	}
 
+	@Override
 	public boolean W() {
-		return this.world.a(this.getBoundingBox(), Material.WATER, (Entity) this);
+		return this.world.a(this.getBoundingBox(), Material.WATER, this);
 	}
 
 	protected void burn(int i) {
-		this.damageEntity(DamageSource.FIRE, (float) i);
+		this.damageEntity(DamageSource.FIRE, i);
 	}
 
+	@Override
 	public boolean damageEntity(DamageSource damagesource, float f) {
 		if (this.isInvulnerable(damagesource)) {
 			return false;
 		} else {
 			this.ac();
-			this.d = (int) ((float) this.d - f);
+			this.d = (int) (this.d - f);
 			if (this.d <= 0) {
 				this.die();
 			}
@@ -148,18 +153,21 @@ public class EntityExperienceOrb extends Entity {
 		}
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
-		nbttagcompound.setShort("Health", (short) ((byte) this.d));
+		nbttagcompound.setShort("Health", ((byte) this.d));
 		nbttagcompound.setShort("Age", (short) this.b);
 		nbttagcompound.setShort("Value", (short) this.value);
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		this.d = nbttagcompound.getShort("Health") & 255;
 		this.b = nbttagcompound.getShort("Age");
 		this.value = nbttagcompound.getShort("Value");
 	}
 
+	@Override
 	public void d(EntityHuman entityhuman) {
 		if (!this.world.isClientSide) {
 			if (this.c == 0 && entityhuman.bp == 0) {
@@ -228,6 +236,7 @@ public class EntityExperienceOrb extends Entity {
 																		: (i >= 7 ? 7 : (i >= 3 ? 3 : 1)))))))));
 	}
 
+	@Override
 	public boolean aD() {
 		return false;
 	}

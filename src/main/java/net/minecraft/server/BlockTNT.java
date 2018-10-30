@@ -10,6 +10,7 @@ public class BlockTNT extends Block {
 		this.a(CreativeModeTab.d);
 	}
 
+	@Override
 	public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		super.onPlace(world, blockposition, iblockdata);
 		if (world.isBlockIndirectlyPowered(blockposition)) {
@@ -19,6 +20,7 @@ public class BlockTNT extends Block {
 
 	}
 
+	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
 		if (world.isBlockIndirectlyPowered(blockposition)) {
 			this.postBreak(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, true));
@@ -27,6 +29,7 @@ public class BlockTNT extends Block {
 
 	}
 
+	@Override
 	public void wasExploded(World world, BlockPosition blockposition, Explosion explosion) {
 		if (!world.isClientSide) {
 			org.bukkit.Location loc = explosion.source instanceof EntityTNTPrimed
@@ -38,7 +41,7 @@ public class BlockTNT extends Block {
 			if (!world.cloudSpigotConfig.fixCannons)
 				y += 0.5;
 			EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(loc, world,
-					(double) ((float) blockposition.getX() + 0.5F), y, (double) ((float) blockposition.getZ() + 0.5F),
+					blockposition.getX() + 0.5F, y, blockposition.getZ() + 0.5F,
 					explosion.getSource()); // CloudSpigot - add loc
 			// CloudSpigot end
 
@@ -48,13 +51,14 @@ public class BlockTNT extends Block {
 		}
 	}
 
+	@Override
 	public void postBreak(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		this.a(world, blockposition, iblockdata, (EntityLiving) null);
 	}
 
 	public void a(World world, BlockPosition blockposition, IBlockData iblockdata, EntityLiving entityliving) {
 		if (!world.isClientSide) {
-			if (((Boolean) iblockdata.get(BlockTNT.EXPLODE)).booleanValue()) {
+			if (iblockdata.get(BlockTNT.EXPLODE).booleanValue()) {
 				org.bukkit.Location loc = new org.bukkit.Location(world.getWorld(), blockposition.getX(),
 						blockposition.getY(), blockposition.getZ()); // CloudSpigot
 				// CloudSpigot start - Fix cannons
@@ -62,8 +66,8 @@ public class BlockTNT extends Block {
 				if (!world.cloudSpigotConfig.fixCannons)
 					y += 0.5;
 				EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(loc, world,
-						(double) ((float) blockposition.getX() + 0.5F), y,
-						(double) ((float) blockposition.getZ() + 0.5F), entityliving); // CloudSpigot - add loc
+						blockposition.getX() + 0.5F, y,
+						blockposition.getZ() + 0.5F, entityliving); // CloudSpigot - add loc
 				// CloudSpigot end
 
 				world.addEntity(entitytntprimed);
@@ -73,6 +77,7 @@ public class BlockTNT extends Block {
 		}
 	}
 
+	@Override
 	public boolean interact(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		if (entityhuman.bZ() != null) {
@@ -94,6 +99,7 @@ public class BlockTNT extends Block {
 		return super.interact(world, blockposition, iblockdata, entityhuman, enumdirection, f, f1, f2);
 	}
 
+	@Override
 	public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Entity entity) {
 		if (!world.isClientSide && entity instanceof EntityArrow) {
 			EntityArrow entityarrow = (EntityArrow) entity;
@@ -114,18 +120,22 @@ public class BlockTNT extends Block {
 
 	}
 
+	@Override
 	public boolean a(Explosion explosion) {
 		return false;
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockTNT.EXPLODE, Boolean.valueOf((i & 1) > 0));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
-		return ((Boolean) iblockdata.get(BlockTNT.EXPLODE)).booleanValue() ? 1 : 0;
+		return iblockdata.get(BlockTNT.EXPLODE).booleanValue() ? 1 : 0;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockTNT.EXPLODE });
 	}

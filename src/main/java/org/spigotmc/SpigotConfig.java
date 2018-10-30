@@ -1,6 +1,5 @@
 package org.spigotmc;
 
-import com.google.common.base.Throwables;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -14,11 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
-import gnu.trove.map.hash.TObjectIntHashMap;
-//import com.google.common.collect.Lists; // CloudSpigot
-import net.minecraft.server.AttributeRanged;
-import net.minecraft.server.GenericAttributes;
-import net.minecraft.server.MinecraftServer;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.Configuration;
@@ -28,6 +23,14 @@ import org.bukkit.command.Command;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import com.google.common.base.Throwables;
+
+import gnu.trove.map.hash.TObjectIntHashMap;
+//import com.google.common.collect.Lists; // CloudSpigot
+import net.minecraft.server.AttributeRanged;
+import net.minecraft.server.GenericAttributes;
+import net.minecraft.server.MinecraftServer;
 
 @SuppressWarnings("unused")
 public class SpigotConfig {
@@ -111,10 +114,10 @@ public class SpigotConfig {
 		return config.getInt(path, config.getInt(path));
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes" })
 	private static <T> List getList(String path, T def) {
 		config.addDefault(path, def);
-		return (List<T>) config.getList(path, config.getList(path));
+		return config.getList(path, config.getList(path));
 	}
 
 	private static String getString(String path, String def) {
@@ -289,7 +292,7 @@ public class SpigotConfig {
 			set("commands.replace-commands", config.getStringList("replace-commands"));
 			config.set("replace-commands", null);
 		}
-		replaceCommands = new HashSet<String>((List<String>) getList("commands.replace-commands",
+		replaceCommands = new HashSet<String>(getList("commands.replace-commands",
 				Arrays.asList("setblock", "summon", "testforblock", "tellraw")));
 	}
 

@@ -4,11 +4,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import net.minecraft.server.WorldGenVillagePieces.WorldGenVillagePieceWeight;
-
-import java.util.Map.Entry;
 
 public class WorldGenVillage extends StructureGenerator {
 
@@ -30,19 +29,21 @@ public class WorldGenVillage extends StructureGenerator {
 		while (iterator.hasNext()) {
 			Entry<String, String> entry = iterator.next();
 
-			if (((String) entry.getKey()).equals("size")) {
-				this.f = MathHelper.a((String) entry.getValue(), this.f, 0);
-			} else if (((String) entry.getKey()).equals("distance")) {
-				this.g = MathHelper.a((String) entry.getValue(), this.g, this.h + 1);
+			if (entry.getKey().equals("size")) {
+				this.f = MathHelper.a(entry.getValue(), this.f, 0);
+			} else if (entry.getKey().equals("distance")) {
+				this.g = MathHelper.a(entry.getValue(), this.g, this.h + 1);
 			}
 		}
 
 	}
 
+	@Override
 	public String a() {
 		return "Village";
 	}
 
+	@Override
 	protected boolean a(int i, int j) {
 		int k = i;
 		int l = j;
@@ -74,6 +75,7 @@ public class WorldGenVillage extends StructureGenerator {
 		return false;
 	}
 
+	@Override
 	protected StructureStart b(int i, int j) {
 		return new WorldGenVillage.WorldGenVillageStart(this.c, this.b, i, j, this.f);
 	}
@@ -93,7 +95,7 @@ public class WorldGenVillage extends StructureGenerator {
 
 			this.a.add(worldgenvillagepieces_worldgenvillagestartpiece);
 			worldgenvillagepieces_worldgenvillagestartpiece
-					.a((StructurePiece) worldgenvillagepieces_worldgenvillagestartpiece, this.a, random);
+					.a(worldgenvillagepieces_worldgenvillagestartpiece, this.a, random);
 			List<StructurePiece> list1 = worldgenvillagepieces_worldgenvillagestartpiece.g;
 			List<StructurePiece> list2 = worldgenvillagepieces_worldgenvillagestartpiece.f;
 
@@ -104,12 +106,12 @@ public class WorldGenVillage extends StructureGenerator {
 
 				if (list1.isEmpty()) {
 					l = random.nextInt(list2.size());
-					structurepiece = (StructurePiece) list2.remove(l);
-					structurepiece.a((StructurePiece) worldgenvillagepieces_worldgenvillagestartpiece, this.a, random);
+					structurepiece = list2.remove(l);
+					structurepiece.a(worldgenvillagepieces_worldgenvillagestartpiece, this.a, random);
 				} else {
 					l = random.nextInt(list1.size());
-					structurepiece = (StructurePiece) list1.remove(l);
-					structurepiece.a((StructurePiece) worldgenvillagepieces_worldgenvillagestartpiece, this.a, random);
+					structurepiece = list1.remove(l);
+					structurepiece.a(worldgenvillagepieces_worldgenvillagestartpiece, this.a, random);
 				}
 			}
 
@@ -118,7 +120,7 @@ public class WorldGenVillage extends StructureGenerator {
 			Iterator<StructurePiece> iterator = this.a.iterator();
 
 			while (iterator.hasNext()) {
-				StructurePiece structurepiece1 = (StructurePiece) iterator.next();
+				StructurePiece structurepiece1 = iterator.next();
 
 				if (!(structurepiece1 instanceof WorldGenVillagePieces.WorldGenVillageRoadPiece)) {
 					++l;
@@ -128,15 +130,18 @@ public class WorldGenVillage extends StructureGenerator {
 			this.c = l > 2;
 		}
 
+		@Override
 		public boolean d() {
 			return this.c;
 		}
 
+		@Override
 		public void a(NBTTagCompound nbttagcompound) {
 			super.a(nbttagcompound);
 			nbttagcompound.setBoolean("Valid", this.c);
 		}
 
+		@Override
 		public void b(NBTTagCompound nbttagcompound) {
 			super.b(nbttagcompound);
 			this.c = nbttagcompound.getBoolean("Valid");

@@ -30,5 +30,6 @@ public interface FireworkEffectMeta extends ItemMeta {
 	 */
 	FireworkEffect getEffect();
 
+	@Override
 	FireworkEffectMeta clone();
 }

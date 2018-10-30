@@ -1,30 +1,30 @@
 package org.bukkit.craftbukkit.inventory;
 
+// Spigot start
+// Spigot end
+import static org.spigotmc.ValidateUtils.limit;
+
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import net.minecraft.server.NBTTagCompound;
-import net.minecraft.server.NBTTagList;
 
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta;
+import org.bukkit.craftbukkit.util.CraftChatMessage;
 import org.bukkit.inventory.meta.BookMeta;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap.Builder;
-import java.util.AbstractList;
-import net.minecraft.server.IChatBaseComponent.ChatSerializer;
-import net.minecraft.server.IChatBaseComponent;
-import net.minecraft.server.NBTTagString;
-import org.bukkit.craftbukkit.util.CraftChatMessage;
 
-// Spigot start
-import static org.spigotmc.ValidateUtils.*;
-// Spigot end
+import net.minecraft.server.IChatBaseComponent;
+import net.minecraft.server.IChatBaseComponent.ChatSerializer;
+import net.minecraft.server.NBTTagCompound;
+import net.minecraft.server.NBTTagList;
+import net.minecraft.server.NBTTagString;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaBook extends CraftMetaItem implements BookMeta {
@@ -167,22 +167,27 @@ public class CraftMetaBook extends CraftMetaItem implements BookMeta {
 		}
 	}
 
+	@Override
 	public boolean hasAuthor() {
 		return !Strings.isNullOrEmpty(author);
 	}
 
+	@Override
 	public boolean hasTitle() {
 		return !Strings.isNullOrEmpty(title);
 	}
 
+	@Override
 	public boolean hasPages() {
 		return !pages.isEmpty();
 	}
 
+	@Override
 	public String getTitle() {
 		return this.title;
 	}
 
+	@Override
 	public boolean setTitle(final String title) {
 		if (title == null) {
 			this.title = null;
@@ -195,19 +200,23 @@ public class CraftMetaBook extends CraftMetaItem implements BookMeta {
 		return true;
 	}
 
+	@Override
 	public String getAuthor() {
 		return this.author;
 	}
 
+	@Override
 	public void setAuthor(final String author) {
 		this.author = author;
 	}
 
+	@Override
 	public String getPage(final int page) {
 		Validate.isTrue(isValidPage(page), "Invalid page number");
 		return CraftChatMessage.fromComponent(pages.get(page - 1));
 	}
 
+	@Override
 	public void setPage(final int page, final String text) {
 		if (!isValidPage(page)) {
 			throw new IllegalArgumentException("Invalid page number " + page + "/" + pages.size());
@@ -218,12 +227,14 @@ public class CraftMetaBook extends CraftMetaItem implements BookMeta {
 		pages.set(page - 1, CraftChatMessage.fromString(newText, true)[0]);
 	}
 
+	@Override
 	public void setPages(final String... pages) {
 		this.pages.clear();
 
 		addPage(pages);
 	}
 
+	@Override
 	public void addPage(final String... pages) {
 		for (String page : pages) {
 			if (page == null) {
@@ -236,10 +247,12 @@ public class CraftMetaBook extends CraftMetaItem implements BookMeta {
 		}
 	}
 
+	@Override
 	public int getPageCount() {
 		return pages.size();
 	}
 
+	@Override
 	public List<String> getPages() {
 		final List<IChatBaseComponent> copy = ImmutableList.copyOf(pages);
 		return new AbstractList<String>() {
@@ -256,6 +269,7 @@ public class CraftMetaBook extends CraftMetaItem implements BookMeta {
 		};
 	}
 
+	@Override
 	public void setPages(List<String> pages) {
 		this.pages.clear();
 		for (String page : pages) {

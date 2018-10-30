@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,6 +8,8 @@ import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.SpawnerSpawnEvent;
 // CraftBukkit end
+
+import com.google.common.collect.Lists;
 
 public abstract class MobSpawnerAbstract {
 
@@ -54,9 +55,9 @@ public abstract class MobSpawnerAbstract {
 	private boolean g() {
 		BlockPosition blockposition = this.b();
 
-		return this.a().isPlayerNearbyWhoAffectsSpawning((double) blockposition.getX() + 0.5D,
-				(double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D,
-				(double) this.requiredPlayerRange); // CloudSpigot - Affects Spawning API
+		return this.a().isPlayerNearbyWhoAffectsSpawning(blockposition.getX() + 0.5D,
+				blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D,
+				this.requiredPlayerRange); // CloudSpigot - Affects Spawning API
 	}
 
 	public void c() {
@@ -70,10 +71,10 @@ public abstract class MobSpawnerAbstract {
 			double d0;
 
 			if (this.a().isClientSide) {
-				double d1 = (double) ((float) blockposition.getX() + this.a().random.nextFloat());
-				double d2 = (double) ((float) blockposition.getY() + this.a().random.nextFloat());
+				double d1 = blockposition.getX() + this.a().random.nextFloat();
+				double d2 = blockposition.getY() + this.a().random.nextFloat();
 
-				d0 = (double) ((float) blockposition.getZ() + this.a().random.nextFloat());
+				d0 = blockposition.getZ() + this.a().random.nextFloat();
 				this.a().addParticle(EnumParticle.SMOKE_NORMAL, d1, d2, d0, 0.0D, 0.0D, 0.0D, new int[0]);
 				this.a().addParticle(EnumParticle.FLAME, d1, d2, d0, 0.0D, 0.0D, 0.0D, new int[0]);
 				if (this.spawnDelay > 0) {
@@ -81,7 +82,7 @@ public abstract class MobSpawnerAbstract {
 				}
 
 				// this.f = this.e; // CloudSpigot
-				this.e = (this.e + (double) (1000.0F / ((float) this.spawnDelay + 200.0F))) % 360.0D;
+				this.e = (this.e + 1000.0F / (this.spawnDelay + 200.0F)) % 360.0D;
 			} else {
 				if (this.spawnDelay < -tickDelay) { // CloudSpigot
 					this.h();
@@ -103,11 +104,11 @@ public abstract class MobSpawnerAbstract {
 
 					int j = this.a()
 							.a(entity.getClass(),
-									(new AxisAlignedBB((double) blockposition.getX(), (double) blockposition.getY(),
-											(double) blockposition.getZ(), (double) (blockposition.getX() + 1),
-											(double) (blockposition.getY() + 1), (double) (blockposition.getZ() + 1)))
-													.grow((double) this.spawnRange, (double) this.spawnRange,
-															(double) this.spawnRange))
+									(new AxisAlignedBB(blockposition.getX(), blockposition.getY(),
+											blockposition.getZ(), blockposition.getX() + 1,
+											blockposition.getY() + 1, blockposition.getZ() + 1))
+													.grow(this.spawnRange, this.spawnRange,
+															this.spawnRange))
 							.size();
 
 					if (j >= this.maxNearbyEntities) {
@@ -115,12 +116,12 @@ public abstract class MobSpawnerAbstract {
 						return;
 					}
 
-					d0 = (double) blockposition.getX()
-							+ (this.a().random.nextDouble() - this.a().random.nextDouble()) * (double) this.spawnRange
+					d0 = blockposition.getX()
+							+ (this.a().random.nextDouble() - this.a().random.nextDouble()) * this.spawnRange
 							+ 0.5D;
-					double d3 = (double) (blockposition.getY() + this.a().random.nextInt(3) - 1);
-					double d4 = (double) blockposition.getZ()
-							+ (this.a().random.nextDouble() - this.a().random.nextDouble()) * (double) this.spawnRange
+					double d3 = blockposition.getY() + this.a().random.nextInt(3) - 1;
+					double d4 = blockposition.getZ()
+							+ (this.a().random.nextDouble() - this.a().random.nextDouble()) * this.spawnRange
 							+ 0.5D;
 					EntityInsentient entityinsentient = entity instanceof EntityInsentient ? (EntityInsentient) entity
 							: null;
@@ -153,7 +154,7 @@ public abstract class MobSpawnerAbstract {
 			Iterator<String> iterator = this.i().c.c().iterator();
 
 			while (iterator.hasNext()) {
-				String s = (String) iterator.next();
+				String s = iterator.next();
 				NBTBase nbtbase = this.i().c.get(s);
 
 				nbttagcompound.set(s, nbtbase.clone());
@@ -188,7 +189,7 @@ public abstract class MobSpawnerAbstract {
 					Iterator<String> iterator1 = nbttagcompound1.c().iterator();
 
 					while (iterator1.hasNext()) {
-						String s1 = (String) iterator1.next();
+						String s1 = iterator1.next();
 						NBTBase nbtbase1 = nbttagcompound1.get(s1);
 
 						nbttagcompound2.set(s1, nbtbase1.clone());
@@ -242,7 +243,7 @@ public abstract class MobSpawnerAbstract {
 		}
 
 		if (this.mobs.size() > 0) {
-			this.a((MobSpawnerAbstract.a) WeightedRandom.a(this.a().random, this.mobs));
+			this.a(WeightedRandom.a(this.a().random, this.mobs));
 		}
 
 		this.a(1);
@@ -310,7 +311,7 @@ public abstract class MobSpawnerAbstract {
 					Iterator<net.minecraft.server.MobSpawnerAbstract.a> iterator = this.mobs.iterator();
 
 					while (iterator.hasNext()) {
-						MobSpawnerAbstract.a mobspawnerabstract_a = (MobSpawnerAbstract.a) iterator.next();
+						MobSpawnerAbstract.a mobspawnerabstract_a = iterator.next();
 
 						nbttaglist.add(mobspawnerabstract_a.a());
 					}

@@ -5,17 +5,18 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.server.MobEffect;
-
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionBrewer;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import com.google.common.collect.Maps;
+
+import net.minecraft.server.MobEffect;
 
 public class CraftPotionBrewer implements PotionBrewer {
 	private static final Map<Integer, Collection<PotionEffect>> cache = Maps.newHashMap();
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public Collection<PotionEffect> getEffectsFromDamage(int damage) {
 		if (cache.containsKey(damage))
@@ -41,6 +42,7 @@ public class CraftPotionBrewer implements PotionBrewer {
 		return effects;
 	}
 
+	@Override
 	public PotionEffect createEffect(PotionEffectType potion, int duration, int amplifier) {
 		return new PotionEffect(potion, potion.isInstant() ? 1 : (int) (duration * potion.getDurationModifier()),
 				amplifier);

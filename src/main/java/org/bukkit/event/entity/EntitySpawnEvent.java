@@ -17,10 +17,12 @@ public class EntitySpawnEvent extends EntityEvent implements org.bukkit.event.Ca
 		super(spawnee);
 	}
 
+	@Override
 	public boolean isCancelled() {
 		return canceled;
 	}
 
+	@Override
 	public void setCancelled(boolean cancel) {
 		canceled = cancel;
 	}

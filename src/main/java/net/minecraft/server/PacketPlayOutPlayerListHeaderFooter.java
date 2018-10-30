@@ -16,11 +16,13 @@ public class PacketPlayOutPlayerListHeaderFooter implements Packet<PacketListene
 		this.a = ichatbasecomponent;
 	}
 
+	@Override
 	public void a(PacketDataSerializer packetdataserializer) throws IOException {
 		this.a = packetdataserializer.d();
 		this.b = packetdataserializer.d();
 	}
 
+	@Override
 	public void b(PacketDataSerializer packetdataserializer) throws IOException {
 		// Paper start
 		if (this.header != null) {
@@ -37,6 +39,7 @@ public class PacketPlayOutPlayerListHeaderFooter implements Packet<PacketListene
 		// Paper end
 	}
 
+	@Override
 	public void a(PacketListenerPlayOut packetlistenerplayout) {
 		packetlistenerplayout.a(this);
 	}

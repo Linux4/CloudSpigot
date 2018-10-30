@@ -13,8 +13,8 @@ public class EntityLeash extends EntityHanging {
 
 	public EntityLeash(World world, BlockPosition blockposition) {
 		super(world, blockposition);
-		this.setPosition((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D,
-				(double) blockposition.getZ() + 0.5D);
+		this.setPosition(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
+				blockposition.getZ() + 0.5D);
 		/*
 		 * float f = 0.125F; float f1 = 0.1875F; float f2 = 0.25F;
 		 */ // CloudSpigot
@@ -23,38 +23,48 @@ public class EntityLeash extends EntityHanging {
 				this.locX + 0.1875D, this.locY + 0.25D + 0.125D, this.locZ + 0.1875D));
 	}
 
+	@Override
 	protected void h() {
 		super.h();
 	}
 
+	@Override
 	public void setDirection(EnumDirection enumdirection) {
 	}
 
+	@Override
 	public int l() {
 		return 9;
 	}
 
+	@Override
 	public int m() {
 		return 9;
 	}
 
+	@Override
 	public float getHeadHeight() {
 		return -0.0625F;
 	}
 
+	@Override
 	public void b(Entity entity) {
 	}
 
+	@Override
 	public boolean d(NBTTagCompound nbttagcompound) {
 		return false;
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 	}
 
+	@Override
 	public boolean e(EntityHuman entityhuman) {
 		ItemStack itemstack = entityhuman.bA();
 		boolean flag = false;
@@ -70,7 +80,7 @@ public class EntityLeash extends EntityHanging {
 			iterator = list.iterator();
 
 			while (iterator.hasNext()) {
-				entityinsentient = (EntityInsentient) iterator.next();
+				entityinsentient = iterator.next();
 				if (entityinsentient.cc() && entityinsentient.getLeashHolder() == entityhuman) {
 					// CraftBukkit start
 					if (CraftEventFactory.callPlayerLeashEntityEvent(entityinsentient, this, entityhuman)
@@ -98,7 +108,7 @@ public class EntityLeash extends EntityHanging {
 				iterator = list.iterator();
 
 				while (iterator.hasNext()) {
-					entityinsentient = (EntityInsentient) iterator.next();
+					entityinsentient = iterator.next();
 					if (entityinsentient.cc() && entityinsentient.getLeashHolder() == this) {
 						// CraftBukkit start
 						if (CraftEventFactory.callPlayerUnleashEntityEvent(entityinsentient, entityhuman)
@@ -122,6 +132,7 @@ public class EntityLeash extends EntityHanging {
 		return true;
 	}
 
+	@Override
 	public boolean survives() {
 		return this.world.getType(this.blockPosition).getBlock() instanceof BlockFence;
 	}
@@ -138,8 +149,8 @@ public class EntityLeash extends EntityHanging {
 		int i = blockposition.getX();
 		int j = blockposition.getY();
 		int k = blockposition.getZ();
-		List<EntityLeash> list = world.a(EntityLeash.class, new AxisAlignedBB((double) i - 1.0D, (double) j - 1.0D,
-				(double) k - 1.0D, (double) i + 1.0D, (double) j + 1.0D, (double) k + 1.0D));
+		List<EntityLeash> list = world.a(EntityLeash.class, new AxisAlignedBB(i - 1.0D, j - 1.0D,
+				k - 1.0D, i + 1.0D, j + 1.0D, k + 1.0D));
 		Iterator<EntityLeash> iterator = list.iterator();
 
 		EntityLeash entityleash;
@@ -149,7 +160,7 @@ public class EntityLeash extends EntityHanging {
 				return null;
 			}
 
-			entityleash = (EntityLeash) iterator.next();
+			entityleash = iterator.next();
 		} while (!entityleash.getBlockPosition().equals(blockposition));
 
 		return entityleash;

@@ -98,7 +98,7 @@ public class DataWatcher {
 			CrashReport crashreport = CrashReport.a(throwable, "Getting synched entity data");
 			CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Synched entity data");
 
-			crashreportsystemdetails.a("Data ID", (Object) Integer.valueOf(i));
+			crashreportsystemdetails.a("Data ID", Integer.valueOf(i));
 			throw new ReportedException(crashreport);
 		}
 

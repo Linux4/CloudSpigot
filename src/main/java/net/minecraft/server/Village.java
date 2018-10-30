@@ -1,11 +1,12 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.mojang.authlib.GameProfile;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.UUID;
+
+import com.google.common.collect.Lists;
+import com.mojang.authlib.GameProfile;
 
 public class Village {
 
@@ -76,8 +77,8 @@ public class Village {
 					this.a.random.nextInt(16) - 8);
 
 			if (this.a(blockposition1) && this.a(new BlockPosition(i, j, k), blockposition1)) {
-				return new Vec3D((double) blockposition1.getX(), (double) blockposition1.getY(),
-						(double) blockposition1.getZ());
+				return new Vec3D(blockposition1.getX(), blockposition1.getY(),
+						blockposition1.getZ());
 			}
 		}
 
@@ -85,7 +86,7 @@ public class Village {
 	}
 
 	private boolean a(BlockPosition blockposition, BlockPosition blockposition1) {
-		if (!World.a((IBlockAccess) this.a, blockposition1.down())) {
+		if (!World.a(this.a, blockposition1.down())) {
 			return false;
 		} else {
 			int i = blockposition1.getX() - blockposition.getX() / 2;
@@ -107,18 +108,18 @@ public class Village {
 
 	private void j() {
 		List<EntityIronGolem> list = this.a.a(EntityIronGolem.class,
-				new AxisAlignedBB((double) (this.d.getX() - this.e), (double) (this.d.getY() - 4),
-						(double) (this.d.getZ() - this.e), (double) (this.d.getX() + this.e),
-						(double) (this.d.getY() + 4), (double) (this.d.getZ() + this.e)));
+				new AxisAlignedBB(this.d.getX() - this.e, this.d.getY() - 4,
+						this.d.getZ() - this.e, this.d.getX() + this.e,
+						this.d.getY() + 4, this.d.getZ() + this.e));
 
 		this.l = list.size();
 	}
 
 	private void k() {
 		List<EntityVillager> list = this.a.a(EntityVillager.class,
-				new AxisAlignedBB((double) (this.d.getX() - this.e), (double) (this.d.getY() - 4),
-						(double) (this.d.getZ() - this.e), (double) (this.d.getX() + this.e),
-						(double) (this.d.getY() + 4), (double) (this.d.getZ() + this.e)));
+				new AxisAlignedBB(this.d.getX() - this.e, this.d.getY() - 4,
+						this.d.getZ() - this.e, this.d.getX() + this.e,
+						this.d.getY() + 4, this.d.getZ() + this.e));
 
 		this.h = list.size();
 		if (this.h == 0) {
@@ -148,7 +149,7 @@ public class Village {
 	}
 
 	public boolean a(BlockPosition blockposition) {
-		return this.d.i(blockposition) < (double) (this.e * this.e);
+		return this.d.i(blockposition) < this.e * this.e;
 	}
 
 	public List<VillageDoor> f() {
@@ -161,7 +162,7 @@ public class Village {
 		Iterator<VillageDoor> iterator = this.b.iterator();
 
 		while (iterator.hasNext()) {
-			VillageDoor villagedoor1 = (VillageDoor) iterator.next();
+			VillageDoor villagedoor1 = iterator.next();
 			int j = villagedoor1.a(blockposition);
 
 			if (j < i) {
@@ -179,7 +180,7 @@ public class Village {
 		Iterator<VillageDoor> iterator = this.b.iterator();
 
 		while (iterator.hasNext()) {
-			VillageDoor villagedoor1 = (VillageDoor) iterator.next();
+			VillageDoor villagedoor1 = iterator.next();
 			int j = villagedoor1.a(blockposition);
 
 			if (j > 256) {
@@ -198,7 +199,7 @@ public class Village {
 	}
 
 	public VillageDoor e(BlockPosition blockposition) {
-		if (this.d.i(blockposition) > (double) (this.e * this.e)) {
+		if (this.d.i(blockposition) > this.e * this.e) {
 			return null;
 		} else {
 			Iterator<VillageDoor> iterator = this.b.iterator();
@@ -210,7 +211,7 @@ public class Village {
 					return null;
 				}
 
-				villagedoor = (VillageDoor) iterator.next();
+				villagedoor = iterator.next();
 			} while (villagedoor.d().getX() != blockposition.getX() || villagedoor.d().getZ() != blockposition.getZ()
 					|| Math.abs(villagedoor.d().getY() - blockposition.getY()) > 1);
 
@@ -240,7 +241,7 @@ public class Village {
 				return;
 			}
 
-			village_aggressor = (Village.Aggressor) iterator.next();
+			village_aggressor = iterator.next();
 		} while (village_aggressor.a != entityliving);
 
 		village_aggressor.b = this.g;
@@ -251,7 +252,7 @@ public class Village {
 		Village.Aggressor village_aggressor = null;
 
 		for (int i = 0; i < this.k.size(); ++i) {
-			Village.Aggressor village_aggressor1 = (Village.Aggressor) this.k.get(i);
+			Village.Aggressor village_aggressor1 = this.k.get(i);
 			double d1 = village_aggressor1.a.h(entityliving);
 
 			if (d1 <= d0) {
@@ -269,7 +270,7 @@ public class Village {
 		Iterator<String> iterator = this.j.keySet().iterator();
 
 		while (iterator.hasNext()) {
-			String s = (String) iterator.next();
+			String s = iterator.next();
 
 			if (this.d(s)) {
 				EntityHuman entityhuman1 = this.a.a(s);
@@ -292,7 +293,7 @@ public class Village {
 		Iterator<Aggressor> iterator = this.k.iterator();
 
 		while (iterator.hasNext()) {
-			Village.Aggressor village_aggressor = (Village.Aggressor) iterator.next();
+			Village.Aggressor village_aggressor = iterator.next();
 
 			if (!village_aggressor.a.isAlive() || Math.abs(this.g - village_aggressor.b) > 300) {
 				iterator.remove();
@@ -307,7 +308,7 @@ public class Village {
 		Iterator<VillageDoor> iterator = this.b.iterator();
 
 		while (iterator.hasNext()) {
-			VillageDoor villagedoor = (VillageDoor) iterator.next();
+			VillageDoor villagedoor = iterator.next();
 
 			if (flag1) {
 				villagedoor.a();
@@ -347,15 +348,15 @@ public class Village {
 
 			for (Iterator<VillageDoor> iterator = this.b.iterator(); iterator
 					.hasNext(); j = Math.max(villagedoor.a(this.d), j)) {
-				villagedoor = (VillageDoor) iterator.next();
+				villagedoor = iterator.next();
 			}
 
-			this.e = Math.max(32, (int) Math.sqrt((double) j) + 1);
+			this.e = Math.max(32, (int) Math.sqrt(j) + 1);
 		}
 	}
 
 	public int a(String s) {
-		Integer integer = (Integer) this.j.get(s);
+		Integer integer = this.j.get(s);
 
 		return integer != null ? integer.intValue() : 0;
 	}
@@ -431,7 +432,7 @@ public class Village {
 		Iterator<VillageDoor> iterator = this.b.iterator();
 
 		while (iterator.hasNext()) {
-			VillageDoor villagedoor = (VillageDoor) iterator.next();
+			VillageDoor villagedoor = iterator.next();
 			NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 
 			nbttagcompound1.setInt("X", villagedoor.d().getX());
@@ -448,14 +449,14 @@ public class Village {
 		Iterator<String> iterator1 = this.j.keySet().iterator();
 
 		while (iterator1.hasNext()) {
-			String s = (String) iterator1.next();
+			String s = iterator1.next();
 			NBTTagCompound nbttagcompound2 = new NBTTagCompound();
 			UserCache usercache = MinecraftServer.getServer().getUserCache();
 			GameProfile gameprofile = usercache.getProfile(s);
 
 			if (gameprofile != null) {
 				nbttagcompound2.setString("UUID", gameprofile.getId().toString());
-				nbttagcompound2.setInt("S", ((Integer) this.j.get(s)).intValue());
+				nbttagcompound2.setInt("S", this.j.get(s).intValue());
 				nbttaglist1.add(nbttagcompound2);
 			}
 		}
@@ -475,7 +476,7 @@ public class Village {
 		Iterator<String> iterator = this.j.keySet().iterator();
 
 		while (iterator.hasNext()) {
-			String s = (String) iterator.next();
+			String s = iterator.next();
 
 			this.a(s, i);
 		}

@@ -59,12 +59,14 @@ public class EntityTrackerEntry {
 		this.y = entity.onGround;
 	}
 
+	@Override
 	public boolean equals(Object object) {
 		return object instanceof EntityTrackerEntry
 				? ((EntityTrackerEntry) object).tracker.getId() == this.tracker.getId()
 				: false;
 	}
 
+	@Override
 	public int hashCode() {
 		return this.tracker.getId();
 	}
@@ -102,7 +104,7 @@ public class EntityTrackerEntry {
 				Iterator<EntityPlayer> iterator = this.trackedPlayers.iterator(); // CraftBukkit
 
 				while (iterator.hasNext()) {
-					EntityHuman entityhuman = (EntityHuman) iterator.next();
+					EntityHuman entityhuman = iterator.next();
 					EntityPlayer entityplayer = (EntityPlayer) entityhuman;
 
 					worldmap.a(entityplayer, itemstack);
@@ -314,7 +316,7 @@ public class EntityTrackerEntry {
 		Iterator<EntityPlayer> iterator = this.trackedPlayers.iterator();
 
 		while (iterator.hasNext()) {
-			EntityPlayer entityplayer = (EntityPlayer) iterator.next();
+			EntityPlayer entityplayer = iterator.next();
 
 			entityplayer.playerConnection.sendPacket(packet);
 		}
@@ -334,7 +336,7 @@ public class EntityTrackerEntry {
 		Iterator<EntityPlayer> iterator = this.trackedPlayers.iterator();
 
 		while (iterator.hasNext()) {
-			EntityPlayer entityplayer = (EntityPlayer) iterator.next();
+			EntityPlayer entityplayer = iterator.next();
 
 			entityplayer.d(this.tracker);
 		}
@@ -471,7 +473,7 @@ public class EntityTrackerEntry {
 		double d1 = entityplayer.locZ - this.tracker.locZ;
 		// CraftBukkit end
 
-		return d0 >= (double) (-this.b) && d0 <= (double) this.b && d1 >= (double) (-this.b) && d1 <= (double) this.b
+		return d0 >= (-this.b) && d0 <= this.b && d1 >= (-this.b) && d1 <= this.b
 				&& this.tracker.a(entityplayer);
 	}
 
@@ -580,18 +582,18 @@ public class EntityTrackerEntry {
 					packetplayoutspawnentity = new PacketPlayOutSpawnEntity(this.tracker, 71,
 							entityitemframe.direction.b());
 					blockposition = entityitemframe.getBlockPosition();
-					packetplayoutspawnentity.a(MathHelper.d((float) (blockposition.getX() * 32)));
-					packetplayoutspawnentity.b(MathHelper.d((float) (blockposition.getY() * 32)));
-					packetplayoutspawnentity.c(MathHelper.d((float) (blockposition.getZ() * 32)));
+					packetplayoutspawnentity.a(MathHelper.d(blockposition.getX() * 32));
+					packetplayoutspawnentity.b(MathHelper.d(blockposition.getY() * 32));
+					packetplayoutspawnentity.c(MathHelper.d(blockposition.getZ() * 32));
 					return packetplayoutspawnentity;
 				} else if (this.tracker instanceof EntityLeash) {
 					EntityLeash entityleash = (EntityLeash) this.tracker;
 
 					packetplayoutspawnentity = new PacketPlayOutSpawnEntity(this.tracker, 77);
 					blockposition = entityleash.getBlockPosition();
-					packetplayoutspawnentity.a(MathHelper.d((float) (blockposition.getX() * 32)));
-					packetplayoutspawnentity.b(MathHelper.d((float) (blockposition.getY() * 32)));
-					packetplayoutspawnentity.c(MathHelper.d((float) (blockposition.getZ() * 32)));
+					packetplayoutspawnentity.a(MathHelper.d(blockposition.getX() * 32));
+					packetplayoutspawnentity.b(MathHelper.d(blockposition.getY() * 32));
+					packetplayoutspawnentity.c(MathHelper.d(blockposition.getZ() * 32));
 					return packetplayoutspawnentity;
 				} else if (this.tracker instanceof EntityExperienceOrb) {
 					return new PacketPlayOutSpawnEntityExperienceOrb((EntityExperienceOrb) this.tracker);

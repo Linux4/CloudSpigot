@@ -6,6 +6,7 @@ public class ItemWaterLily extends ItemWithAuxData {
 		super(block, false);
 	}
 
+	@Override
 	public ItemStack a(ItemStack itemstack, World world, EntityHuman entityhuman) {
 		MovingObjectPosition movingobjectposition = this.a(world, entityhuman, true);
 
@@ -28,7 +29,7 @@ public class ItemWaterLily extends ItemWithAuxData {
 				IBlockData iblockdata = world.getType(blockposition);
 
 				if (iblockdata.getBlock().getMaterial() == Material.WATER
-						&& ((Integer) iblockdata.get(BlockFluids.LEVEL)).intValue() == 0
+						&& iblockdata.get(BlockFluids.LEVEL).intValue() == 0
 						&& world.isEmpty(blockposition1)) {
 					// CraftBukkit start - special case for handling block placement with water
 					// lilies

@@ -2,15 +2,17 @@ package org.bukkit.craftbukkit.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.server.EntityHuman;
-import net.minecraft.server.IChatBaseComponent;
-import net.minecraft.server.IInventory;
-import net.minecraft.server.ItemStack;
+
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+
+import net.minecraft.server.EntityHuman;
+import net.minecraft.server.IChatBaseComponent;
+import net.minecraft.server.IInventory;
+import net.minecraft.server.ItemStack;
 
 public class InventoryWrapper implements IInventory {
 

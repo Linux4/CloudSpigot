@@ -1,13 +1,14 @@
 package net.minecraft.server;
 
-// CraftBukkit start
-import com.mojang.authlib.GameProfile;
 //import io.netty.channel.ChannelFutureListener; // CloudSpigot
 import java.net.InetSocketAddress;
 import java.util.Iterator;
 
 import org.bukkit.craftbukkit.util.CraftIconCache;
 import org.bukkit.entity.Player;
+
+// CraftBukkit start
+import com.mojang.authlib.GameProfile;
 
 // CraftBukkit end
 
@@ -23,9 +24,11 @@ public class PacketStatusListener implements PacketStatusInListener {
 		this.networkManager = networkmanager;
 	}
 
+	@Override
 	public void a(IChatBaseComponent ichatbasecomponent) {
 	}
 
+	@Override
 	public void a(PacketStatusInStart packetstatusinstart) {
 		if (this.d) {
 			this.networkManager.close(PacketStatusListener.a);
@@ -147,6 +150,7 @@ public class PacketStatusListener implements PacketStatusInListener {
 		// CraftBukkit end
 	}
 
+	@Override
 	public void a(PacketStatusInPing packetstatusinping) {
 		this.networkManager.handle(new PacketStatusOutPong(packetstatusinping.a()));
 		this.networkManager.close(PacketStatusListener.a);

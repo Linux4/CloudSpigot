@@ -2,12 +2,12 @@ package org.bukkit.craftbukkit.inventory;
 
 import java.util.Map;
 
-import net.minecraft.server.CraftingManager;
-import net.minecraft.server.ShapedRecipes;
-
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+
+import net.minecraft.server.CraftingManager;
+import net.minecraft.server.ShapedRecipes;
 
 public class CraftShapedRecipe extends ShapedRecipe implements CraftRecipe {
 	// TODO: Could eventually use this to add a matches() method or some such
@@ -40,6 +40,7 @@ public class CraftShapedRecipe extends ShapedRecipe implements CraftRecipe {
 		return ret;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void addToCraftingManager() {
 		Object[] data;

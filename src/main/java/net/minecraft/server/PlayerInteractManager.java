@@ -1,10 +1,10 @@
 package net.minecraft.server;
 
-// CraftBukkit start
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.Action;
+// CraftBukkit start
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 // CraftBukkit end
 
@@ -71,7 +71,7 @@ public class PlayerInteractManager {
 			if (block.getMaterial() == Material.AIR) {
 				this.h = false;
 			} else {
-				f = block.getDamage(this.player, this.player.world, this.i) * (float) (j + 1);
+				f = block.getDamage(this.player, this.player.world, this.i) * (j + 1);
 				i = (int) (f * 10.0F);
 				if (i != this.k) {
 					this.world.c(this.player.getId(), this.i, i);
@@ -93,7 +93,7 @@ public class PlayerInteractManager {
 			} else {
 				int k = this.currentTick - this.lastDigTick;
 
-				f = block1.getDamage(this.player, this.player.world, this.i) * (float) (k + 1);
+				f = block1.getDamage(this.player, this.player.world, this.i) * (k + 1);
 				i = (int) (f * 10.0F);
 				if (i != this.k) {
 					this.world.c(this.player.getId(), this.f, i);
@@ -110,7 +110,7 @@ public class PlayerInteractManager {
 				blockposition, enumdirection, this.player.inventory.getItemInHand());
 		if (event.isCancelled()) {
 			// Let the client know the block still exists
-			((EntityPlayer) this.player).playerConnection
+			this.player.playerConnection
 					.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
 			// Update any tile entity data for this block
 			TileEntity tileentity = this.world.getTileEntity(blockposition);
@@ -159,12 +159,12 @@ public class PlayerInteractManager {
 				if (block == Blocks.WOODEN_DOOR) {
 					// For some reason *BOTH* the bottom/top part have to be marked updated.
 					boolean bottom = data.get(BlockDoor.HALF) == BlockDoor.EnumDoorHalf.LOWER;
-					((EntityPlayer) this.player).playerConnection
+					this.player.playerConnection
 							.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
-					((EntityPlayer) this.player).playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world,
+					this.player.playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world,
 							bottom ? blockposition.up() : blockposition.down()));
 				} else if (block == Blocks.TRAPDOOR) {
-					((EntityPlayer) this.player).playerConnection
+					this.player.playerConnection
 							.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
 				}
 			} else if (block.getMaterial() != Material.AIR) {
@@ -177,7 +177,7 @@ public class PlayerInteractManager {
 			if (event.useItemInHand() == Event.Result.DENY) {
 				// If we 'insta destroyed' then the client needs to be informed.
 				if (f > 1.0f) {
-					((EntityPlayer) this.player).playerConnection
+					this.player.playerConnection
 							.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
 				}
 				return;
@@ -188,7 +188,7 @@ public class PlayerInteractManager {
 
 			if (blockEvent.isCancelled()) {
 				// Let the client know the block still exists
-				((EntityPlayer) this.player).playerConnection
+				this.player.playerConnection
 						.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
 				return;
 			}
@@ -219,7 +219,7 @@ public class PlayerInteractManager {
 			Block block = this.world.getType(blockposition).getBlock();
 
 			if (block.getMaterial() != Material.AIR) {
-				float f = block.getDamage(this.player, this.player.world, blockposition) * (float) (i + 1);
+				float f = block.getDamage(this.player, this.player.world, blockposition) * (i + 1);
 
 				if (f >= 0.7F) {
 					this.d = false;
@@ -248,7 +248,7 @@ public class PlayerInteractManager {
 	private boolean c(BlockPosition blockposition) {
 		IBlockData iblockdata = this.world.getType(blockposition);
 
-		iblockdata.getBlock().a(this.world, blockposition, iblockdata, (EntityHuman) this.player);
+		iblockdata.getBlock().a(this.world, blockposition, iblockdata, this.player);
 		boolean flag = this.world.setAir(blockposition);
 
 		if (flag) {
@@ -275,7 +275,7 @@ public class PlayerInteractManager {
 			if (world.getTileEntity(blockposition) == null && !isSwordNoBreak) {
 				PacketPlayOutBlockChange packet = new PacketPlayOutBlockChange(this.world, blockposition);
 				packet.block = Blocks.AIR.getBlockData();
-				((EntityPlayer) this.player).playerConnection.sendPacket(packet);
+				this.player.playerConnection.sendPacket(packet);
 			}
 
 			event = new BlockBreakEvent(block, this.player.getBukkitEntity());
@@ -305,7 +305,7 @@ public class PlayerInteractManager {
 					return false;
 				}
 				// Let the client know the block still exists
-				((EntityPlayer) this.player).playerConnection
+				this.player.playerConnection
 						.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
 				// Update any tile entity data for this block
 				TileEntity tileentity = this.world.getTileEntity(blockposition);

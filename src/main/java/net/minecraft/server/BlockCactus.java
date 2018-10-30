@@ -16,6 +16,7 @@ public class BlockCactus extends Block {
 		this.a(CreativeModeTab.c);
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		BlockPosition blockposition1 = blockposition.up();
 
@@ -28,7 +29,7 @@ public class BlockCactus extends Block {
 
 			if (i < world.cloudSpigotConfig.cactusMaxHeight) { // CloudSpigot - Configurable max growth height for
 																// cactus blocks) {
-				int j = ((Integer) iblockdata.get(BlockCactus.AGE)).intValue();
+				int j = iblockdata.get(BlockCactus.AGE).intValue();
 
 				if (j >= (byte) range(3, (world.growthOdds / world.spigotConfig.cactusModifier * 15) + 0.5F, 15)) { // Spigot
 					// world.setTypeUpdate(blockposition1, this.getBlockData()); // CraftBukkit
@@ -46,26 +47,31 @@ public class BlockCactus extends Block {
 		}
 	}
 
+	@Override
 	public AxisAlignedBB a(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		float f = 0.0625F;
 
-		return new AxisAlignedBB((double) ((float) blockposition.getX() + f), (double) blockposition.getY(),
-				(double) ((float) blockposition.getZ() + f), (double) ((float) (blockposition.getX() + 1) - f),
-				(double) ((float) (blockposition.getY() + 1) - f), (double) ((float) (blockposition.getZ() + 1) - f));
+		return new AxisAlignedBB(blockposition.getX() + f, blockposition.getY(),
+				blockposition.getZ() + f, blockposition.getX() + 1 - f,
+				blockposition.getY() + 1 - f, blockposition.getZ() + 1 - f);
 	}
 
+	@Override
 	public boolean d() {
 		return false;
 	}
 
+	@Override
 	public boolean c() {
 		return false;
 	}
 
+	@Override
 	public boolean canPlace(World world, BlockPosition blockposition) {
 		return super.canPlace(world, blockposition) ? this.e(world, blockposition) : false;
 	}
 
+	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
 		if (!this.e(world, blockposition)) {
 			world.setAir(blockposition, true);
@@ -90,6 +96,7 @@ public class BlockCactus extends Block {
 		return block == Blocks.CACTUS || block == Blocks.SAND;
 	}
 
+	@Override
 	public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Entity entity) {
 		CraftEventFactory.blockDamage = world.getWorld().getBlockAt(blockposition.getX(), blockposition.getY(),
 				blockposition.getZ()); // CraftBukkit
@@ -97,14 +104,17 @@ public class BlockCactus extends Block {
 		CraftEventFactory.blockDamage = null; // CraftBukkit
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockCactus.AGE, Integer.valueOf(i));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
-		return ((Integer) iblockdata.get(BlockCactus.AGE)).intValue();
+		return iblockdata.get(BlockCactus.AGE).intValue();
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockCactus.AGE });
 	}

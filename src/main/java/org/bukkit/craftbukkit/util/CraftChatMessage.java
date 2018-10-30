@@ -6,16 +6,16 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.minecraft.server.ChatClickable;
-import net.minecraft.server.ChatComponentText;
-import net.minecraft.server.ChatModifier;
-import net.minecraft.server.EnumChatFormat;
-import net.minecraft.server.ChatClickable.EnumClickAction;
-import net.minecraft.server.IChatBaseComponent;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
+
+import net.minecraft.server.ChatClickable;
+import net.minecraft.server.ChatClickable.EnumClickAction;
+import net.minecraft.server.ChatComponentText;
 import net.minecraft.server.ChatMessage;
+import net.minecraft.server.ChatModifier;
+import net.minecraft.server.EnumChatFormat;
+import net.minecraft.server.IChatBaseComponent;
 
 public final class CraftChatMessage {
 
@@ -152,7 +152,7 @@ public final class CraftChatMessage {
 			return "";
 		StringBuilder out = new StringBuilder();
 
-		for (IChatBaseComponent c : (Iterable<IChatBaseComponent>) component) {
+		for (IChatBaseComponent c : component) {
 			ChatModifier modi = c.getChatModifier();
 			out.append(modi.getColor() == null ? defaultColor : modi.getColor());
 			if (modi.isBold()) {
@@ -226,7 +226,7 @@ public final class CraftChatMessage {
 
 		List<IChatBaseComponent> extras = component.a();
 		for (int i = 0; i < extras.size(); i++) {
-			IChatBaseComponent comp = (IChatBaseComponent) extras.get(i);
+			IChatBaseComponent comp = extras.get(i);
 			if (comp.getChatModifier() != null && comp.getChatModifier().h() == null) {
 				extras.set(i, fixComponent(comp, matcher));
 			}

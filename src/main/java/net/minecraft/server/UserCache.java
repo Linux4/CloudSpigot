@@ -48,14 +48,17 @@ public class UserCache {
 	protected final Gson b;
 	private final File g;
 	private static final ParameterizedType h = new ParameterizedType() {
+		@Override
 		public Type[] getActualTypeArguments() {
 			return new Type[] { UserCache.UserCacheEntry.class };
 		}
 
+		@Override
 		public Type getRawType() {
 			return List.class;
 		}
 
+		@Override
 		public Type getOwnerType() {
 			return null;
 		}
@@ -75,10 +78,12 @@ public class UserCache {
 	private static GameProfile a(MinecraftServer minecraftserver, String s) {
 		final GameProfile[] agameprofile = new GameProfile[1];
 		ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback() {
+			@Override
 			public void onProfileLookupSucceeded(GameProfile gameprofile) {
 				agameprofile[0] = gameprofile;
 			}
 
+			@Override
 			public void onProfileLookupFailed(GameProfile gameprofile, Exception exception) {
 				agameprofile[0] = null;
 			}
@@ -117,7 +122,7 @@ public class UserCache {
 		UserCache.UserCacheEntry usercache_usercacheentry = new UserCache.UserCacheEntry(gameprofile, date, null);
 
 		if (this.d.containsKey(uuid)) {
-			UserCache.UserCacheEntry usercache_usercacheentry1 = (UserCache.UserCacheEntry) this.d.get(uuid);
+			UserCache.UserCacheEntry usercache_usercacheentry1 = this.d.get(uuid);
 
 			this.c.remove(usercache_usercacheentry1.a().getName().toLowerCase(Locale.ROOT));
 			this.e.remove(gameprofile);
@@ -132,7 +137,7 @@ public class UserCache {
 
 	public GameProfile getProfile(String s) {
 		String s1 = s.toLowerCase(Locale.ROOT);
-		UserCache.UserCacheEntry usercache_usercacheentry = (UserCache.UserCacheEntry) this.c.get(s1);
+		UserCache.UserCacheEntry usercache_usercacheentry = this.c.get(s1);
 
 		if (usercache_usercacheentry != null && (new Date()).getTime() >= usercache_usercacheentry.c.getTime()) {
 			this.d.remove(usercache_usercacheentry.a().getId());
@@ -151,7 +156,7 @@ public class UserCache {
 			gameprofile = a(this.f, s); // Spigot - use correct case for offline players
 			if (gameprofile != null) {
 				this.a(gameprofile);
-				usercache_usercacheentry = (UserCache.UserCacheEntry) this.c.get(s1);
+				usercache_usercacheentry = this.c.get(s1);
 			}
 		}
 
@@ -163,17 +168,17 @@ public class UserCache {
 	public String[] a() {
 		ArrayList<String> arraylist = Lists.newArrayList(this.c.keySet());
 
-		return (String[]) arraylist.toArray(new String[arraylist.size()]);
+		return arraylist.toArray(new String[arraylist.size()]);
 	}
 
 	public GameProfile a(UUID uuid) {
-		UserCache.UserCacheEntry usercache_usercacheentry = (UserCache.UserCacheEntry) this.d.get(uuid);
+		UserCache.UserCacheEntry usercache_usercacheentry = this.d.get(uuid);
 
 		return usercache_usercacheentry == null ? null : usercache_usercacheentry.a();
 	}
 
 	private UserCache.UserCacheEntry b(UUID uuid) {
-		UserCache.UserCacheEntry usercache_usercacheentry = (UserCache.UserCacheEntry) this.d.get(uuid);
+		UserCache.UserCacheEntry usercache_usercacheentry = this.d.get(uuid);
 
 		if (usercache_usercacheentry != null) {
 			GameProfile gameprofile = usercache_usercacheentry.a();
@@ -244,7 +249,7 @@ public class UserCache {
 		Iterator<GameProfile> iterator = arraylist1.iterator();
 
 		while (iterator.hasNext()) {
-			GameProfile gameprofile = (GameProfile) iterator.next();
+			GameProfile gameprofile = iterator.next();
 			UserCache.UserCacheEntry usercache_usercacheentry = this.b(gameprofile.getId());
 
 			if (usercache_usercacheentry != null) {
@@ -341,11 +346,13 @@ public class UserCache {
 			}
 		}
 
+		@Override
 		public JsonElement serialize(UserCacheEntry object, Type type,
 				JsonSerializationContext jsonserializationcontext) { // CraftBukkit - decompile error
-			return this.a((UserCache.UserCacheEntry) object, type, jsonserializationcontext);
+			return this.a(object, type, jsonserializationcontext);
 		}
 
+		@Override
 		public UserCacheEntry deserialize(JsonElement jsonelement, Type type,
 				JsonDeserializationContext jsondeserializationcontext) throws JsonParseException { // CraftBukkit -
 																									// decompile error

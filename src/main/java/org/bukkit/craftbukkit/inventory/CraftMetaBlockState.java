@@ -1,25 +1,7 @@
 package org.bukkit.craftbukkit.inventory;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableMap;
 import java.util.Map;
-import net.minecraft.server.BlockJukeBox;
-import net.minecraft.server.NBTBase;
-import net.minecraft.server.NBTTagCompound;
-import net.minecraft.server.TileEntity;
-import net.minecraft.server.TileEntityBanner;
-import net.minecraft.server.TileEntityBeacon;
-import net.minecraft.server.TileEntityBrewingStand;
-import net.minecraft.server.TileEntityChest;
-import net.minecraft.server.TileEntityCommand;
-import net.minecraft.server.TileEntityDispenser;
-import net.minecraft.server.TileEntityDropper;
-import net.minecraft.server.TileEntityFurnace;
-import net.minecraft.server.TileEntityHopper;
-import net.minecraft.server.TileEntityMobSpawner;
-import net.minecraft.server.TileEntityNote;
-import net.minecraft.server.TileEntitySign;
-import net.minecraft.server.TileEntitySkull;
+
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
@@ -40,6 +22,27 @@ import org.bukkit.craftbukkit.block.CraftNoteBlock;
 import org.bukkit.craftbukkit.block.CraftSign;
 import org.bukkit.craftbukkit.block.CraftSkull;
 import org.bukkit.inventory.meta.BlockStateMeta;
+
+import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableMap;
+
+import net.minecraft.server.BlockJukeBox;
+import net.minecraft.server.NBTBase;
+import net.minecraft.server.NBTTagCompound;
+import net.minecraft.server.TileEntity;
+import net.minecraft.server.TileEntityBanner;
+import net.minecraft.server.TileEntityBeacon;
+import net.minecraft.server.TileEntityBrewingStand;
+import net.minecraft.server.TileEntityChest;
+import net.minecraft.server.TileEntityCommand;
+import net.minecraft.server.TileEntityDispenser;
+import net.minecraft.server.TileEntityDropper;
+import net.minecraft.server.TileEntityFurnace;
+import net.minecraft.server.TileEntityHopper;
+import net.minecraft.server.TileEntityMobSpawner;
+import net.minecraft.server.TileEntityNote;
+import net.minecraft.server.TileEntitySign;
+import net.minecraft.server.TileEntitySkull;
 
 @DelegateDeserialization(CraftMetaItem.SerializableMeta.class)
 public class CraftMetaBlockState extends CraftMetaItem implements BlockStateMeta {

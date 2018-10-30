@@ -1,13 +1,7 @@
 package org.bukkit.craftbukkit.entity;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableSet;
-import com.mojang.authlib.GameProfile;
-import io.netty.buffer.Unpooled;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.Override;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.ArrayList;
@@ -20,32 +14,35 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.md_5.bungee.api.chat.BaseComponent;
 
-import net.minecraft.server.*;
-import net.minecraft.server.PacketPlayOutTitle.EnumTitleAction;
-
-import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.*;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Achievement;
 import org.bukkit.BanList;
-import org.bukkit.Statistic;
+import org.bukkit.Effect;
+import org.bukkit.GameMode;
+import org.bukkit.Instrument;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Note;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Sound;
+import org.bukkit.Statistic;
 import org.bukkit.Statistic.Type;
+import org.bukkit.WeatherType;
 import org.bukkit.World;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.conversations.ManuallyAbandonedConversationCanceller;
-import org.bukkit.craftbukkit.block.CraftSign;
-import org.bukkit.craftbukkit.conversations.ConversationTracker;
 import org.bukkit.craftbukkit.CraftEffect;
 import org.bukkit.craftbukkit.CraftOfflinePlayer;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.CraftSound;
 import org.bukkit.craftbukkit.CraftStatistic;
 import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.block.CraftSign;
+import org.bukkit.craftbukkit.conversations.ConversationTracker;
 import org.bukkit.craftbukkit.map.CraftMapView;
 import org.bukkit.craftbukkit.map.RenderData;
 import org.bukkit.craftbukkit.scoreboard.CraftScoreboard;
@@ -64,9 +61,52 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scoreboard.Scoreboard;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
+import com.mojang.authlib.GameProfile;
+
 // CloudSpigot start
 import eu.server24_7.cloudspigot.Title;
 // CloudSpigot end
+import io.netty.buffer.Unpooled;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.minecraft.server.AttributeInstance;
+import net.minecraft.server.AttributeMapServer;
+import net.minecraft.server.AttributeModifiable;
+import net.minecraft.server.AttributeRanged;
+import net.minecraft.server.BlockPosition;
+import net.minecraft.server.Container;
+import net.minecraft.server.Entity;
+import net.minecraft.server.EntityHuman;
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.EntityTracker;
+import net.minecraft.server.EntityTrackerEntry;
+import net.minecraft.server.IAttribute;
+import net.minecraft.server.IChatBaseComponent;
+import net.minecraft.server.MapIcon;
+import net.minecraft.server.NBTTagCompound;
+import net.minecraft.server.Packet;
+import net.minecraft.server.PacketDataSerializer;
+import net.minecraft.server.PacketPlayOutBlockChange;
+import net.minecraft.server.PacketPlayOutChat;
+import net.minecraft.server.PacketPlayOutCustomPayload;
+import net.minecraft.server.PacketPlayOutGameStateChange;
+import net.minecraft.server.PacketPlayOutMap;
+import net.minecraft.server.PacketPlayOutNamedSoundEffect;
+import net.minecraft.server.PacketPlayOutPlayerInfo;
+import net.minecraft.server.PacketPlayOutPlayerListHeaderFooter;
+import net.minecraft.server.PacketPlayOutSpawnPosition;
+import net.minecraft.server.PacketPlayOutTitle;
+import net.minecraft.server.PacketPlayOutTitle.EnumTitleAction;
+import net.minecraft.server.PacketPlayOutUpdateAttributes;
+import net.minecraft.server.PacketPlayOutUpdateHealth;
+import net.minecraft.server.PacketPlayOutUpdateSign;
+import net.minecraft.server.PacketPlayOutWorldEvent;
+import net.minecraft.server.PacketPlayOutWorldParticles;
+import net.minecraft.server.PlayerConnection;
+import net.minecraft.server.WorldServer;
+import net.minecraft.server.WorldSettings;
 
 @DelegateDeserialization(CraftOfflinePlayer.class)
 public class CraftPlayer extends CraftHumanEntity implements Player {
@@ -110,10 +150,12 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 		perm.recalculatePermissions();
 	}
 
+	@Override
 	public boolean isOnline() {
 		return server.getPlayer(getUniqueId()) != null;
 	}
 
+	@Override
 	public InetSocketAddress getAddress() {
 		if (getHandle().playerConnection == null)
 			return null;
@@ -288,7 +330,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 			name = getName();
 		}
 		getHandle().listName = name.equals(getName()) ? null : CraftChatMessage.fromString(name)[0];
-		for (EntityPlayer player : (List<EntityPlayer>) server.getHandle().players) {
+		for (EntityPlayer player : server.getHandle().players) {
 			if (player.getBukkitEntity().canSee(this)) {
 				player.playerConnection.sendPacket(new PacketPlayOutPlayerInfo(
 						PacketPlayOutPlayerInfo.EnumPlayerInfoAction.UPDATE_DISPLAY_NAME, getHandle()));
@@ -1009,7 +1051,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 		// remove this player from the hidden player's EntityTrackerEntry
 		EntityTracker tracker = ((WorldServer) entity.world).tracker;
 		EntityPlayer other = ((CraftPlayer) player).getHandle();
-		EntityTrackerEntry entry = (EntityTrackerEntry) tracker.trackedEntities.get(other.getId());
+		EntityTrackerEntry entry = tracker.trackedEntities.get(other.getId());
 		if (entry != null) {
 			entry.clear(getHandle());
 		}
@@ -1036,7 +1078,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 		getHandle().playerConnection.sendPacket(
 				new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, other));
 
-		EntityTrackerEntry entry = (EntityTrackerEntry) tracker.trackedEntities.get(other.getId());
+		EntityTrackerEntry entry = tracker.trackedEntities.get(other.getId());
 		if (entry != null && !entry.trackedPlayers.contains(getHandle())) {
 			entry.updatePlayer(getHandle());
 		}
@@ -1436,7 +1478,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 
 		injectScaledMaxHealth(set, true);
 
-		getHandle().getDataWatcher().watch(6, (float) getScaledHealth());
+		getHandle().getDataWatcher().watch(6, getScaledHealth());
 		getHandle().playerConnection.sendPacket(new PacketPlayOutUpdateHealth(getScaledHealth(),
 				getHandle().getFoodData().getFoodLevel(), getHandle().getFoodData().getSaturationLevel()));
 		getHandle().playerConnection.sendPacket(new PacketPlayOutUpdateAttributes(getHandle().getId(), set));
@@ -1637,6 +1679,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 		}
 	};
 
+	@Override
 	public Player.Spigot spigot() {
 		return spigot;
 	}

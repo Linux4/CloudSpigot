@@ -15,6 +15,7 @@ public class BlockStationary extends BlockFluids {
 
 	}
 
+	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
 		if (!this.e(world, blockposition, iblockdata)) {
 			this.f(world, blockposition, iblockdata);
@@ -26,10 +27,11 @@ public class BlockStationary extends BlockFluids {
 		BlockFlowing blockflowing = a(this.material);
 
 		world.setTypeAndData(blockposition,
-				blockflowing.getBlockData().set(BlockStationary.LEVEL, iblockdata.get(BlockStationary.LEVEL)), 2);
-		world.a(blockposition, (Block) blockflowing, this.a(world));
+				blockflowing.getBlockData().set(BlockFluids.LEVEL, iblockdata.get(BlockFluids.LEVEL)), 2);
+		world.a(blockposition, blockflowing, this.a(world));
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		if (this.material == Material.LAVA) {
 			if (world.getGameRules().getBoolean("doFireTick")) {

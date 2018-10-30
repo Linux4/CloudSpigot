@@ -55,14 +55,14 @@ public class PlayerChunkMap {
 			// CraftBukkit start - Use iterator
 			Iterator<PlayerChunk> iterator = this.f.iterator();
 			while (iterator.hasNext()) {
-				playerchunkmap_playerchunk = (PlayerChunk) iterator.next();
+				playerchunkmap_playerchunk = iterator.next();
 				playerchunkmap_playerchunk.b();
 				playerchunkmap_playerchunk.a();
 			}
 		} else {
 			Iterator<PlayerChunk> iterator = this.e.iterator();
 			while (iterator.hasNext()) {
-				playerchunkmap_playerchunk = (PlayerChunk) iterator.next();
+				playerchunkmap_playerchunk = iterator.next();
 				playerchunkmap_playerchunk.b();
 				iterator.remove();
 				// CraftBukkit end
@@ -88,14 +88,14 @@ public class PlayerChunkMap {
 	}
 
 	public boolean a(int i, int j) {
-		long k = (long) i + 2147483647L | (long) j + 2147483647L << 32;
+		long k = i + 2147483647L | j + 2147483647L << 32;
 
 		return this.d.getEntry(k) != null;
 	}
 
 	private PlayerChunkMap.PlayerChunk a(int i, int j, boolean flag) {
-		long k = (long) i + 2147483647L | (long) j + 2147483647L << 32;
-		PlayerChunkMap.PlayerChunk playerchunkmap_playerchunk = (PlayerChunkMap.PlayerChunk) this.d.getEntry(k);
+		long k = i + 2147483647L | j + 2147483647L << 32;
+		PlayerChunkMap.PlayerChunk playerchunkmap_playerchunk = this.d.getEntry(k);
 
 		if (playerchunkmap_playerchunk == null && flag) {
 			playerchunkmap_playerchunk = new PlayerChunkMap.PlayerChunk(i, j);
@@ -291,7 +291,7 @@ public class PlayerChunkMap {
 			Iterator<EntityPlayer> iterator = arraylist.iterator();
 
 			while (iterator.hasNext()) {
-				EntityPlayer entityplayer = (EntityPlayer) iterator.next();
+				EntityPlayer entityplayer = iterator.next();
 				int k = (int) entityplayer.locX >> 4;
 				int l = (int) entityplayer.locZ >> 4;
 				int i1;
@@ -371,6 +371,7 @@ public class PlayerChunkMap {
 		private final HashMap<EntityPlayer, Runnable> players = new HashMap<EntityPlayer, Runnable>();
 		private boolean loaded = false;
 		private Runnable loadedRunnable = new Runnable() {
+			@Override
 			public void run() {
 				PlayerChunk.this.loaded = true;
 			}
@@ -399,6 +400,7 @@ public class PlayerChunkMap {
 					entityplayer.chunkCoordIntPairQueue.add(this.location);
 				} else {
 					playerRunnable = new Runnable() {
+						@Override
 						public void run() {
 							entityplayer.chunkCoordIntPairQueue.add(PlayerChunk.this.location);
 						}
@@ -425,7 +427,7 @@ public class PlayerChunkMap {
 					if (this.b.isEmpty()) {
 						ChunkIOExecutor.dropQueuedChunkLoad(PlayerChunkMap.this.a(), this.location.x, this.location.z,
 								this.loadedRunnable);
-						long i = (long) this.location.x + 2147483647L | (long) this.location.z + 2147483647L << 32;
+						long i = this.location.x + 2147483647L | this.location.z + 2147483647L << 32;
 						PlayerChunkMap.this.d.remove(i);
 						PlayerChunkMap.this.f.remove(this);
 					}
@@ -443,7 +445,7 @@ public class PlayerChunkMap {
 				this.b.remove(entityplayer);
 				entityplayer.chunkCoordIntPairQueue.remove(this.location);
 				if (this.b.isEmpty()) {
-					long i = (long) this.location.x + 2147483647L | (long) this.location.z + 2147483647L << 32;
+					long i = this.location.x + 2147483647L | this.location.z + 2147483647L << 32;
 
 					this.a(chunk);
 					PlayerChunkMap.this.d.remove(i);
@@ -490,7 +492,7 @@ public class PlayerChunkMap {
 		@SuppressWarnings("rawtypes")
 		public void a(Packet packet) {
 			for (int i = 0; i < this.b.size(); ++i) {
-				EntityPlayer entityplayer = (EntityPlayer) this.b.get(i);
+				EntityPlayer entityplayer = this.b.get(i);
 
 				if (!entityplayer.chunkCoordIntPairQueue.contains(this.location)) {
 					entityplayer.playerConnection.sendPacket(packet);
@@ -512,7 +514,7 @@ public class PlayerChunkMap {
 					k = (this.dirtyBlocks[0] >> 8 & 15) + this.location.z * 16;
 					BlockPosition blockposition = new BlockPosition(i, j, k);
 
-					this.a((Packet) (new PacketPlayOutBlockChange(PlayerChunkMap.this.world, blockposition)));
+					this.a((new PacketPlayOutBlockChange(PlayerChunkMap.this.world, blockposition)));
 					if (PlayerChunkMap.this.world.getType(blockposition).getBlock().isTileEntity()) {
 						this.a(PlayerChunkMap.this.world.getTileEntity(blockposition));
 					}
@@ -522,7 +524,7 @@ public class PlayerChunkMap {
 					if (this.dirtyCount == 64) {
 						i = this.location.x * 16;
 						j = this.location.z * 16;
-						this.a((Packet) (new PacketPlayOutMapChunk(
+						this.a((new PacketPlayOutMapChunk(
 								PlayerChunkMap.this.world.getChunkAt(this.location.x, this.location.z), false,
 								this.f)));
 
@@ -537,7 +539,7 @@ public class PlayerChunkMap {
 							}
 						}
 					} else {
-						this.a((Packet) (new PacketPlayOutMultiBlockChange(this.dirtyCount, this.dirtyBlocks,
+						this.a((new PacketPlayOutMultiBlockChange(this.dirtyCount, this.dirtyBlocks,
 								PlayerChunkMap.this.world.getChunkAt(this.location.x, this.location.z))));
 
 						for (i = 0; i < this.dirtyCount; ++i) {
@@ -581,6 +583,7 @@ public class PlayerChunkMap {
 			z = (int) entityplayer.locZ >> 4;
 		}
 
+		@Override
 		public int compare(ChunkCoordIntPair a, ChunkCoordIntPair b) {
 			if (a.equals(b)) {
 				return 0;

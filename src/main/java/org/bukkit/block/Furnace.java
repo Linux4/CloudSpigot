@@ -36,5 +36,6 @@ public interface Furnace extends BlockState, ContainerBlock {
 	 */
 	public void setCookTime(short cookTime);
 
+	@Override
 	public FurnaceInventory getInventory();
 }

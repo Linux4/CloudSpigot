@@ -1,22 +1,24 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityLiving;
-import net.minecraft.server.EntityProjectile;
-
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.projectiles.ProjectileSource;
+
+import net.minecraft.server.EntityLiving;
+import net.minecraft.server.EntityProjectile;
 
 public abstract class CraftProjectile extends AbstractProjectile implements Projectile {
 	public CraftProjectile(CraftServer server, net.minecraft.server.Entity entity) {
 		super(server, entity);
 	}
 
+	@Override
 	public ProjectileSource getShooter() {
 		return getHandle().projectileSource;
 	}
 
+	@Override
 	public void setShooter(ProjectileSource shooter) {
 		if (shooter instanceof CraftLivingEntity) {
 			getHandle().shooter = (EntityLiving) ((CraftLivingEntity) shooter).entity;
@@ -40,6 +42,7 @@ public abstract class CraftProjectile extends AbstractProjectile implements Proj
 		return "CraftProjectile";
 	}
 
+	@Override
 	@Deprecated
 	public LivingEntity _INVALID_getShooter() {
 		if (getHandle().shooter == null) {
@@ -48,6 +51,7 @@ public abstract class CraftProjectile extends AbstractProjectile implements Proj
 		return (LivingEntity) getHandle().shooter.getBukkitEntity();
 	}
 
+	@Override
 	@Deprecated
 	public void _INVALID_setShooter(LivingEntity shooter) {
 		if (shooter == null) {

@@ -1,20 +1,21 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.bukkit.Location;
 // CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.Location;
 import org.bukkit.event.block.BlockExplodeEvent;
 // CraftBukkit end
+import org.bukkit.event.entity.EntityExplodeEvent;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import eu.server24_7.cloudspigot.AnimatedExplosion; // CloudSpigot
 
@@ -61,9 +62,9 @@ public class Explosion {
 			for (i = 0; i < 16; ++i) {
 				for (j = 0; j < 16; ++j) {
 					if (k == 0 || k == 15 || i == 0 || i == 15 || j == 0 || j == 15) {
-						double d0 = (double) ((double) k / 15.0 * 2.0 - 1.0);
-						double d1 = (double) ((double) i / 15.0 * 2.0 - 1.0);
-						double d2 = (double) ((double) j / 15.0 * 2.0 - 1.0);
+						double d0 = k / 15.0 * 2.0 - 1.0;
+						double d1 = i / 15.0 * 2.0 - 1.0;
+						double d2 = j / 15.0 * 2.0 - 1.0;
 						double d3 = Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
 
 						d0 /= d3;
@@ -106,15 +107,15 @@ public class Explosion {
 		this.blocks.addAll(hashset);
 		float f3 = this.size * 2.0F;
 
-		i = MathHelper.floor(this.posX - (double) f3 - 1.0D);
-		j = MathHelper.floor(this.posX + (double) f3 + 1.0D);
-		int l = MathHelper.floor(this.posY - (double) f3 - 1.0D);
-		int i1 = MathHelper.floor(this.posY + (double) f3 + 1.0D);
-		int j1 = MathHelper.floor(this.posZ - (double) f3 - 1.0D);
-		int k1 = MathHelper.floor(this.posZ + (double) f3 + 1.0D);
+		i = MathHelper.floor(this.posX - f3 - 1.0D);
+		j = MathHelper.floor(this.posX + f3 + 1.0D);
+		int l = MathHelper.floor(this.posY - f3 - 1.0D);
+		int i1 = MathHelper.floor(this.posY + f3 + 1.0D);
+		int j1 = MathHelper.floor(this.posZ - f3 - 1.0D);
+		int k1 = MathHelper.floor(this.posZ + f3 + 1.0D);
 		// CloudSpigot start - Fix lag from explosions processing dead entities
 		List<Entity> list = this.world.a(this.source,
-				new AxisAlignedBB((double) i, (double) l, (double) j1, (double) j, (double) i1, (double) k1),
+				new AxisAlignedBB(i, l, j1, j, i1, k1),
 				new com.google.common.base.Predicate<Entity>() {
 					@Override
 					public boolean apply(Entity entity) {
@@ -125,16 +126,16 @@ public class Explosion {
 		Vec3D vec3d = new Vec3D(this.posX, this.posY, this.posZ);
 
 		for (int l1 = 0; l1 < list.size(); ++l1) {
-			Entity entity = (Entity) list.get(l1);
+			Entity entity = list.get(l1);
 
 			if (!entity.aW()) {
-				double d7 = entity.f(this.posX, this.posY, this.posZ) / (double) f3;
+				double d7 = entity.f(this.posX, this.posY, this.posZ) / f3;
 
 				if (d7 <= 1.0D) {
 					double d8 = entity.locX - this.posX;
-					double d9 = entity.locY + (double) entity.getHeadHeight() - this.posY;
+					double d9 = entity.locY + entity.getHeadHeight() - this.posY;
 					double d10 = entity.locZ - this.posZ;
-					double d11 = (double) MathHelper.sqrt(d8 * d8 + d9 * d9 + d10 * d10);
+					double d11 = MathHelper.sqrt(d8 * d8 + d9 * d9 + d10 * d10);
 
 					if (d11 != 0.0D) {
 						d8 /= d11;
@@ -149,7 +150,7 @@ public class Explosion {
 						CraftEventFactory.entityDamage = source;
 						entity.forceExplosionKnockback = false;
 						boolean wasDamaged = entity.damageEntity(DamageSource.explosion(this),
-								(float) ((int) ((d13 * d13 + d13) / 2.0D * 8.0D * (double) f3 + 1.0D)));
+								((int) ((d13 * d13 + d13) / 2.0D * 8.0D * f3 + 1.0D)));
 						CraftEventFactory.entityDamage = null;
 						if (!wasDamaged && !(entity instanceof EntityTNTPrimed || entity instanceof EntityFallingBlock)
 								&& !entity.forceExplosionKnockback) {
@@ -205,7 +206,7 @@ public class Explosion {
 
 			List<org.bukkit.block.Block> blockList = Lists.newArrayList();
 			for (int i1 = this.blocks.size() - 1; i1 >= 0; i1--) {
-				BlockPosition cpos = (BlockPosition) this.blocks.get(i1);
+				BlockPosition cpos = this.blocks.get(i1);
 				org.bukkit.block.Block bblock = bworld.getBlockAt(cpos.getX(), cpos.getY(), cpos.getZ());
 				if (bblock.getType() != org.bukkit.Material.AIR) {
 					blockList.add(bblock);
@@ -249,24 +250,24 @@ public class Explosion {
 			iterator = this.blocks.iterator();
 
 			while (iterator.hasNext()) {
-				blockposition = (BlockPosition) iterator.next();
+				blockposition = iterator.next();
 				Block block = this.world.getType(blockposition).getBlock();
 
 				if (flag) {
-					double d0 = (double) ((float) blockposition.getX() + this.world.random.nextFloat());
-					double d1 = (double) ((float) blockposition.getY() + this.world.random.nextFloat());
-					double d2 = (double) ((float) blockposition.getZ() + this.world.random.nextFloat());
+					double d0 = blockposition.getX() + this.world.random.nextFloat();
+					double d1 = blockposition.getY() + this.world.random.nextFloat();
+					double d2 = blockposition.getZ() + this.world.random.nextFloat();
 					double d3 = d0 - this.posX;
 					double d4 = d1 - this.posY;
 					double d5 = d2 - this.posZ;
-					double d6 = (double) MathHelper.sqrt(d3 * d3 + d4 * d4 + d5 * d5);
+					double d6 = MathHelper.sqrt(d3 * d3 + d4 * d4 + d5 * d5);
 
 					d3 /= d6;
 					d4 /= d6;
 					d5 /= d6;
-					double d7 = 0.5D / (d6 / (double) this.size + 0.1D);
+					double d7 = 0.5D / (d6 / this.size + 0.1D);
 
-					d7 *= (double) (this.world.random.nextFloat() * this.world.random.nextFloat() + 0.3F);
+					d7 *= this.world.random.nextFloat() * this.world.random.nextFloat() + 0.3F;
 					d3 *= d7;
 					d4 *= d7;
 					d5 *= d7;
@@ -291,7 +292,7 @@ public class Explosion {
 			iterator = this.blocks.iterator();
 
 			while (iterator.hasNext()) {
-				blockposition = (BlockPosition) iterator.next();
+				blockposition = iterator.next();
 				if (this.world.getType(blockposition).getBlock().getMaterial() == Material.AIR
 						&& this.world.getType(blockposition.down()).getBlock().o() && this.c.nextInt(3) == 0) {
 					// CraftBukkit start - Ignition by explosion

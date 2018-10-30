@@ -26,6 +26,7 @@ public abstract class PluginBase implements Plugin {
 		return getName().equals(((Plugin) obj).getName());
 	}
 
+	@Override
 	public final String getName() {
 		return getDescription().getName();
 	}

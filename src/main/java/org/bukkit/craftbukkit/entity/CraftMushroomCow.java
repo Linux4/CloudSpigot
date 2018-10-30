@@ -1,10 +1,10 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityMushroomCow;
-
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.MushroomCow;
+
+import net.minecraft.server.EntityMushroomCow;
 
 public class CraftMushroomCow extends CraftCow implements MushroomCow {
 	public CraftMushroomCow(CraftServer server, EntityMushroomCow entity) {
@@ -21,6 +21,7 @@ public class CraftMushroomCow extends CraftCow implements MushroomCow {
 		return "CraftMushroomCow";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.MUSHROOM_COW;
 	}

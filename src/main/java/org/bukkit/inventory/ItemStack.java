@@ -1,6 +1,5 @@
 package org.bukkit.inventory;
 
-import com.google.common.collect.ImmutableMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -12,6 +11,8 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
+
+import com.google.common.collect.ImmutableMap;
 
 /**
  * Represents a stack of items
@@ -501,6 +502,7 @@ public class ItemStack implements Cloneable, ConfigurationSerializable {
 		return level;
 	}
 
+	@Override
 	@Utility
 	public Map<String, Object> serialize() {
 		Map<String, Object> result = new LinkedHashMap<String, Object>();

@@ -2,14 +2,14 @@ package org.bukkit.craftbukkit.scoreboard;
 
 import java.util.Map;
 
-import net.minecraft.server.Scoreboard;
-import net.minecraft.server.ScoreboardObjective;
-import net.minecraft.server.ScoreboardScore;
-
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
+
+import net.minecraft.server.Scoreboard;
+import net.minecraft.server.ScoreboardObjective;
+import net.minecraft.server.ScoreboardScore;
 
 /**
  * TL;DR: This class is special and lazily grabs a handle... ...because a handle
@@ -27,19 +27,23 @@ final class CraftScore implements Score {
 		this.entry = entry;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public OfflinePlayer getPlayer() {
 		return Bukkit.getOfflinePlayer(entry);
 	}
 
+	@Override
 	public String getEntry() {
 		return entry;
 	}
 
+	@Override
 	public Objective getObjective() {
 		return objective;
 	}
 
+	@Override
 	public int getScore() throws IllegalStateException {
 		Scoreboard board = objective.checkState().board;
 
@@ -54,10 +58,12 @@ final class CraftScore implements Score {
 		return 0; // Lazy
 	}
 
+	@Override
 	public void setScore(int score) throws IllegalStateException {
 		objective.checkState().board.getPlayerScoreForObjective(entry, objective.getHandle()).setScore(score);
 	}
 
+	@Override
 	public CraftScoreboard getScoreboard() {
 		return objective.getScoreboard();
 	}

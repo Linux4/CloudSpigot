@@ -2,9 +2,7 @@ package org.bukkit.craftbukkit.block;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.server.NBTTagCompound;
-import net.minecraft.server.NBTTagList;
-import net.minecraft.server.TileEntityBanner;
+
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Banner;
@@ -12,6 +10,10 @@ import org.bukkit.block.Block;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.craftbukkit.CraftWorld;
+
+import net.minecraft.server.NBTTagCompound;
+import net.minecraft.server.NBTTagList;
+import net.minecraft.server.TileEntityBanner;
 
 public class CraftBanner extends CraftBlockState implements Banner {
 
@@ -30,7 +32,7 @@ public class CraftBanner extends CraftBlockState implements Banner {
 
 		if (banner.patterns != null) {
 			for (int i = 0; i < banner.patterns.size(); i++) {
-				NBTTagCompound p = (NBTTagCompound) banner.patterns.get(i);
+				NBTTagCompound p = banner.patterns.get(i);
 				patterns.add(new Pattern(DyeColor.getByDyeData((byte) p.getInt("Color")),
 						PatternType.getByIdentifier(p.getString("Pattern"))));
 			}
@@ -46,7 +48,7 @@ public class CraftBanner extends CraftBlockState implements Banner {
 
 		if (banner.patterns != null) {
 			for (int i = 0; i < banner.patterns.size(); i++) {
-				NBTTagCompound p = (NBTTagCompound) banner.patterns.get(i);
+				NBTTagCompound p = banner.patterns.get(i);
 				patterns.add(new Pattern(DyeColor.getByDyeData((byte) p.getInt("Color")),
 						PatternType.getByIdentifier(p.getString("Pattern"))));
 			}

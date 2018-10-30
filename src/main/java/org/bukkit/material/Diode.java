@@ -69,6 +69,7 @@ public class Diode extends MaterialData implements Directional {
 		return (getData() >> 2) + 1;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setFacingDirection(BlockFace face) {
 		int delay = getDelay();
@@ -96,6 +97,7 @@ public class Diode extends MaterialData implements Directional {
 		setDelay(delay);
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public BlockFace getFacing() {
 		byte data = (byte) (getData() & 0x3);

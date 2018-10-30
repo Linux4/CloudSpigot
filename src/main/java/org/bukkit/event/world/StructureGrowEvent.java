@@ -1,6 +1,7 @@
 package org.bukkit.event.world;
 
 import java.util.List;
+
 import org.bukkit.Location;
 import org.bukkit.TreeType;
 import org.bukkit.block.BlockState;
@@ -77,10 +78,12 @@ public class StructureGrowEvent extends WorldEvent implements Cancellable {
 		return blocks;
 	}
 
+	@Override
 	public boolean isCancelled() {
 		return cancelled;
 	}
 
+	@Override
 	public void setCancelled(boolean cancel) {
 		cancelled = cancel;
 	}

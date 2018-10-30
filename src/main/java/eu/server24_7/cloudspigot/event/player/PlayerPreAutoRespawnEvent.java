@@ -82,6 +82,7 @@ public class PlayerPreAutoRespawnEvent extends Event implements Cancellable {
 		return p.getKiller();
 	}
 
+	@Override
 	public HandlerList getHandlers() {
 		return handlers;
 	}

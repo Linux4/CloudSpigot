@@ -19,6 +19,7 @@ import org.bukkit.conversations.Conversable;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.messaging.PluginMessageRecipient;
 import org.bukkit.scoreboard.Scoreboard;
+
 // CloudSpigot start
 import eu.server24_7.cloudspigot.Title;
 // CloudSpigot end
@@ -103,6 +104,7 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
 	 *
 	 * @param message Message to be displayed
 	 */
+	@Override
 	public void sendRawMessage(String message);
 
 	/**
@@ -928,6 +930,7 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
 	 *
 	 * @return Bed Spawn Location if bed exists, otherwise null.
 	 */
+	@Override
 	public Location getBedSpawnLocation();
 
 	/**
@@ -992,6 +995,7 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
 	 * @return True if the player standing on a solid block, else false.
 	 * @deprecated Inconsistent with {@link org.bukkit.entity.Entity#isOnGround()}
 	 */
+	@Override
 	@Deprecated
 	public boolean isOnGround();
 
@@ -1326,6 +1330,7 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
 		}
 	}
 
+	@Override
 	Spigot spigot();
 	// Spigot end
 }

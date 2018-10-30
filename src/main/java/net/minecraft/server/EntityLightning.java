@@ -70,6 +70,7 @@ public class EntityLightning extends EntityWeather {
 	}
 	// Spigot end
 
+	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void t_() {
 		super.t_();
@@ -142,12 +143,15 @@ public class EntityLightning extends EntityWeather {
 
 	}
 
+	@Override
 	protected void h() {
 	}
 
+	@Override
 	protected void a(NBTTagCompound nbttagcompound) {
 	}
 
+	@Override
 	protected void b(NBTTagCompound nbttagcompound) {
 	}
 }

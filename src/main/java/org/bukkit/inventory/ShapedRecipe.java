@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.Validate;
-
 import org.bukkit.Material;
 import org.bukkit.material.MaterialData;
 
@@ -144,6 +143,7 @@ public class ShapedRecipe implements Recipe {
 	 *
 	 * @return The result stack.
 	 */
+	@Override
 	public ItemStack getResult() {
 		return output.clone();
 	}

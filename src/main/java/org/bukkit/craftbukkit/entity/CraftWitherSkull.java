@@ -1,9 +1,10 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityWitherSkull;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.WitherSkull;
+
+import net.minecraft.server.EntityWitherSkull;
 
 public class CraftWitherSkull extends CraftFireball implements WitherSkull {
 	public CraftWitherSkull(CraftServer server, EntityWitherSkull entity) {
@@ -30,6 +31,7 @@ public class CraftWitherSkull extends CraftFireball implements WitherSkull {
 		return "CraftWitherSkull";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.WITHER_SKULL;
 	}

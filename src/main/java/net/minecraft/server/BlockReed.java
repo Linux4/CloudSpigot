@@ -16,6 +16,7 @@ public class BlockReed extends Block {
 		this.a(true);
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		if (world.getType(blockposition.down()).getBlock() == Blocks.REEDS
 				|| this.e(world, blockposition, iblockdata)) {
@@ -28,7 +29,7 @@ public class BlockReed extends Block {
 
 				if (i < world.cloudSpigotConfig.reedMaxHeight) { // CloudSpigot - Configurable max growth height for
 																	// reed blocks) {
-					int j = ((Integer) iblockdata.get(BlockReed.AGE)).intValue();
+					int j = iblockdata.get(BlockReed.AGE).intValue();
 
 					if (j >= (byte) range(3, (world.growthOdds / world.spigotConfig.caneModifier * 15) + 0.5F, 15)) { // Spigot
 						// CraftBukkit start
@@ -47,6 +48,7 @@ public class BlockReed extends Block {
 		}
 	}
 
+	@Override
 	public boolean canPlace(World world, BlockPosition blockposition) {
 		Block block = world.getType(blockposition.down()).getBlock();
 
@@ -64,7 +66,7 @@ public class BlockReed extends Block {
 					return false;
 				}
 
-				enumdirection = (EnumDirection) iterator.next();
+				enumdirection = iterator.next();
 			} while (world.getType(blockposition.shift(enumdirection).down()).getBlock()
 					.getMaterial() != Material.WATER);
 
@@ -72,6 +74,7 @@ public class BlockReed extends Block {
 		}
 	}
 
+	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
 		this.e(world, blockposition, iblockdata);
 	}
@@ -90,30 +93,37 @@ public class BlockReed extends Block {
 		return this.canPlace(world, blockposition);
 	}
 
+	@Override
 	public AxisAlignedBB a(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		return null;
 	}
 
+	@Override
 	public Item getDropType(IBlockData iblockdata, Random random, int i) {
 		return Items.REEDS;
 	}
 
+	@Override
 	public boolean c() {
 		return false;
 	}
 
+	@Override
 	public boolean d() {
 		return false;
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockReed.AGE, Integer.valueOf(i));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
-		return ((Integer) iblockdata.get(BlockReed.AGE)).intValue();
+		return iblockdata.get(BlockReed.AGE).intValue();
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockReed.AGE });
 	}

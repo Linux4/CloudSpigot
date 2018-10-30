@@ -14,15 +14,18 @@ public class EntityMinecartFurnace extends EntityMinecartAbstract {
 		super(world, d0, d1, d2);
 	}
 
+	@Override
 	public EnumMinecartType s() {
 		return EnumMinecartType.FURNACE;
 	}
 
+	@Override
 	protected void h() {
 		super.h();
 		this.datawatcher.a(16, new Byte((byte) 0));
 	}
 
+	@Override
 	public void t_() {
 		super.t_();
 		if (this.c > 0) {
@@ -41,10 +44,12 @@ public class EntityMinecartFurnace extends EntityMinecartAbstract {
 
 	}
 
+	@Override
 	protected double m() {
 		return 0.2D;
 	}
 
+	@Override
 	public void a(DamageSource damagesource) {
 		super.a(damagesource);
 		if (!damagesource.isExplosion() && this.world.getGameRules().getBoolean("doEntityDrops")) {
@@ -53,15 +58,16 @@ public class EntityMinecartFurnace extends EntityMinecartAbstract {
 
 	}
 
+	@Override
 	protected void a(BlockPosition blockposition, IBlockData iblockdata) {
 		super.a(blockposition, iblockdata);
 		double d0 = this.a * this.a + this.b * this.b;
 
 		if (d0 > 1.0E-4D && this.motX * this.motX + this.motZ * this.motZ > 0.001D) {
-			d0 = (double) MathHelper.sqrt(d0);
+			d0 = MathHelper.sqrt(d0);
 			// CloudSpigot - Don't lose all your velocity on corners
 			// https://bugs.mojang.com/browse/MC-51053?focusedCommentId=223854
-			double d1 = (double) MathHelper.sqrt(this.motX * this.motX + this.motZ * this.motZ);
+			double d1 = MathHelper.sqrt(this.motX * this.motX + this.motZ * this.motZ);
 			this.a = (motX / d1) * d0;
 			this.b = (motZ / d1) * d0;
 			// CloudSpigot end
@@ -69,11 +75,12 @@ public class EntityMinecartFurnace extends EntityMinecartAbstract {
 
 	}
 
+	@Override
 	protected void o() {
 		double d0 = this.a * this.a + this.b * this.b;
 
 		if (d0 > 1.0E-4D) {
-			d0 = (double) MathHelper.sqrt(d0);
+			d0 = MathHelper.sqrt(d0);
 			this.a /= d0;
 			this.b /= d0;
 			double d1 = 1.0D;
@@ -92,6 +99,7 @@ public class EntityMinecartFurnace extends EntityMinecartAbstract {
 		super.o();
 	}
 
+	@Override
 	public boolean e(EntityHuman entityhuman) {
 		ItemStack itemstack = entityhuman.inventory.getItemInHand();
 
@@ -108,6 +116,7 @@ public class EntityMinecartFurnace extends EntityMinecartAbstract {
 		return true;
 	}
 
+	@Override
 	protected void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		nbttagcompound.setDouble("PushX", this.a);
@@ -115,6 +124,7 @@ public class EntityMinecartFurnace extends EntityMinecartAbstract {
 		nbttagcompound.setShort("Fuel", (short) this.c);
 	}
 
+	@Override
 	protected void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		this.a = nbttagcompound.getDouble("PushX");
@@ -135,6 +145,7 @@ public class EntityMinecartFurnace extends EntityMinecartAbstract {
 
 	}
 
+	@Override
 	public IBlockData u() {
 		return (this.j() ? Blocks.LIT_FURNACE : Blocks.FURNACE).getBlockData().set(BlockFurnace.FACING,
 				EnumDirection.NORTH);

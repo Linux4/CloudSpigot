@@ -18,10 +18,12 @@ public class PlayerBedEnterEvent extends PlayerEvent implements Cancellable {
 		this.bed = bed;
 	}
 
+	@Override
 	public boolean isCancelled() {
 		return cancel;
 	}
 
+	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancel = cancel;
 	}

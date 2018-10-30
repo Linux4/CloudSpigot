@@ -44,8 +44,9 @@ public class PacketPlayOutTitle implements Packet<PacketListenerPlayOut> {
 		this.e = k;
 	}
 
+	@Override
 	public void a(PacketDataSerializer packetdataserializer) throws IOException {
-		this.a = (EnumTitleAction) packetdataserializer.a(EnumTitleAction.class);
+		this.a = packetdataserializer.a(EnumTitleAction.class);
 		if (this.a == EnumTitleAction.TITLE || this.a == EnumTitleAction.SUBTITLE) {
 			this.b = packetdataserializer.d();
 		}
@@ -58,6 +59,7 @@ public class PacketPlayOutTitle implements Packet<PacketListenerPlayOut> {
 
 	}
 
+	@Override
 	public void b(PacketDataSerializer packetdataserializer) throws IOException {
 		packetdataserializer.a(this.a);
 		if (this.a == EnumTitleAction.TITLE || this.a == EnumTitleAction.SUBTITLE) {
@@ -78,6 +80,7 @@ public class PacketPlayOutTitle implements Packet<PacketListenerPlayOut> {
 
 	}
 
+	@Override
 	public void a(PacketListenerPlayOut packetlistenerplayout) {
 		packetlistenerplayout.a(this);
 	}

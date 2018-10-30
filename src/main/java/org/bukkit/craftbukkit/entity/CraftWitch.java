@@ -1,9 +1,10 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityWitch;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.entity.Witch;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Witch;
+
+import net.minecraft.server.EntityWitch;
 
 public class CraftWitch extends CraftMonster implements Witch {
 	public CraftWitch(CraftServer server, EntityWitch entity) {
@@ -20,6 +21,7 @@ public class CraftWitch extends CraftMonster implements Witch {
 		return "CraftWitch";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.WITCH;
 	}

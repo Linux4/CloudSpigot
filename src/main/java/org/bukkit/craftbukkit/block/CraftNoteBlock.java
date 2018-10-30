@@ -1,8 +1,5 @@
 package org.bukkit.craftbukkit.block;
 
-import net.minecraft.server.BlockPosition;
-import net.minecraft.server.TileEntityNote;
-
 import org.bukkit.Instrument;
 import org.bukkit.Material;
 import org.bukkit.Note;
@@ -10,6 +7,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.NoteBlock;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
+
+import net.minecraft.server.BlockPosition;
+import net.minecraft.server.TileEntityNote;
 
 public class CraftNoteBlock extends CraftBlockState implements NoteBlock {
 	private final CraftWorld world;
@@ -28,23 +28,28 @@ public class CraftNoteBlock extends CraftBlockState implements NoteBlock {
 		note = te;
 	}
 
+	@Override
 	public Note getNote() {
 		return new Note(note.note);
 	}
 
+	@Override
 	public byte getRawNote() {
 		return note.note;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setNote(Note n) {
 		note.note = n.getId();
 	}
 
+	@Override
 	public void setRawNote(byte n) {
 		note.note = n;
 	}
 
+	@Override
 	public boolean play() {
 		Block block = getBlock();
 

@@ -9,6 +9,7 @@ public class PathfinderGoalBreakDoor extends PathfinderGoalDoorInteract {
 		super(entityinsentient);
 	}
 
+	@Override
 	public boolean a() {
 		if (!super.a()) {
 			return false;
@@ -21,11 +22,13 @@ public class PathfinderGoalBreakDoor extends PathfinderGoalDoorInteract {
 		}
 	}
 
+	@Override
 	public void c() {
 		super.c();
 		this.g = 0;
 	}
 
+	@Override
 	public boolean b() {
 		double d0 = this.a.b(this.b);
 		boolean flag;
@@ -43,11 +46,13 @@ public class PathfinderGoalBreakDoor extends PathfinderGoalDoorInteract {
 		return flag;
 	}
 
+	@Override
 	public void d() {
 		super.d();
 		this.a.world.c(this.a.getId(), this.b, -1);
 	}
 
+	@Override
 	public void e() {
 		super.e();
 		if (this.a.bc().nextInt(20) == 0) {
@@ -55,7 +60,7 @@ public class PathfinderGoalBreakDoor extends PathfinderGoalDoorInteract {
 		}
 
 		++this.g;
-		int i = (int) ((float) this.g / 240.0F * 10.0F);
+		int i = (int) (this.g / 240.0F * 10.0F);
 
 		if (i != this.h) {
 			this.a.world.c(this.a.getId(), this.b, i);

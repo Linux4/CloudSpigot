@@ -20,10 +20,10 @@ public class PacketPlayOutMapChunkBulk implements Packet<PacketListenerPlayOut> 
 		this.a = new int[i];
 		this.b = new int[i];
 		this.c = new PacketPlayOutMapChunk.ChunkMap[i];
-		this.d = !((Chunk) list.get(0)).getWorld().worldProvider.o();
+		this.d = !list.get(0).getWorld().worldProvider.o();
 
 		for (int j = 0; j < i; ++j) {
-			Chunk chunk = (Chunk) list.get(j);
+			Chunk chunk = list.get(j);
 			PacketPlayOutMapChunk.ChunkMap packetplayoutmapchunk_chunkmap = chunk.getChunkMap(true, '\uffff'); // CloudSpigot
 
 			this.a[j] = chunk.locX;
@@ -34,6 +34,7 @@ public class PacketPlayOutMapChunkBulk implements Packet<PacketListenerPlayOut> 
 		// world = ((Chunk) list.get(0)).getWorld(); // Spigot // CloudSpigot
 	}
 
+	@Override
 	public void a(PacketDataSerializer packetdataserializer) throws IOException {
 		this.d = packetdataserializer.readBoolean();
 		int i = packetdataserializer.e();
@@ -58,6 +59,7 @@ public class PacketPlayOutMapChunkBulk implements Packet<PacketListenerPlayOut> 
 
 	}
 
+	@Override
 	public void b(PacketDataSerializer packetdataserializer) throws IOException {
 		packetdataserializer.writeBoolean(this.d);
 		packetdataserializer.b(this.c.length);
@@ -76,6 +78,7 @@ public class PacketPlayOutMapChunkBulk implements Packet<PacketListenerPlayOut> 
 
 	}
 
+	@Override
 	public void a(PacketListenerPlayOut packetlistenerplayout) {
 		packetlistenerplayout.a(this);
 	}

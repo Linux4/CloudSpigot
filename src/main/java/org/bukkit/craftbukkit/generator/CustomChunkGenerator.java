@@ -3,12 +3,22 @@ package org.bukkit.craftbukkit.generator;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.server.*;
-
 import org.bukkit.block.Biome;
+import org.bukkit.craftbukkit.block.CraftBlock;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
-import org.bukkit.craftbukkit.block.CraftBlock;
+
+import net.minecraft.server.BiomeBase;
+import net.minecraft.server.Block;
+import net.minecraft.server.BlockPosition;
+import net.minecraft.server.Chunk;
+import net.minecraft.server.ChunkSection;
+import net.minecraft.server.EnumCreatureType;
+import net.minecraft.server.IChunkProvider;
+import net.minecraft.server.IProgressUpdate;
+import net.minecraft.server.World;
+import net.minecraft.server.WorldGenStronghold;
+import net.minecraft.server.WorldServer;
 
 public class CustomChunkGenerator extends InternalChunkGenerator {
 	private final ChunkGenerator generator;
@@ -19,10 +29,12 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
 	private static class CustomBiomeGrid implements BiomeGrid {
 		BiomeBase[] biome;
 
+		@Override
 		public Biome getBiome(int x, int z) {
 			return CraftBlock.biomeBaseToBiome(biome[(z << 4) | x]);
 		}
 
+		@Override
 		public void setBiome(int x, int z, Biome bio) {
 			biome[(z << 4) | x] = CraftBlock.biomeToBiomeBase(bio);
 		}
@@ -35,13 +47,15 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
 		this.random = new Random(seed);
 	}
 
+	@Override
 	public boolean isChunkLoaded(int x, int z) {
 		return true;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public Chunk getOrCreateChunk(int x, int z) {
-		random.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
+		random.setSeed(x * 341873128712L + z * 132897987541L);
 
 		Chunk chunk;
 
@@ -183,6 +197,7 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
 		return getChunkAt(blockPosition.getX() >> 4, blockPosition.getZ() >> 4);
 	}
 
+	@Override
 	public void getChunkAt(IChunkProvider icp, int i, int i1) {
 		// Nothing!
 	}
@@ -192,28 +207,34 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
 		return false;
 	}
 
+	@Override
 	public boolean saveChunks(boolean bln, IProgressUpdate ipu) {
 		return true;
 	}
 
+	@Override
 	public boolean unloadChunks() {
 		return false;
 	}
 
+	@Override
 	public boolean canSave() {
 		return true;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public byte[] generate(org.bukkit.World world, Random random, int x, int z) {
 		return generator.generate(world, random, x, z);
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public byte[][] generateBlockSections(org.bukkit.World world, Random random, int x, int z, BiomeGrid biomes) {
 		return generator.generateBlockSections(world, random, x, z, biomes);
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public short[][] generateExtBlockSections(org.bukkit.World world, Random random, int x, int z, BiomeGrid biomes) {
 		return generator.generateExtBlockSections(world, random, x, z, biomes);
@@ -250,6 +271,7 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
 	public void recreateStructures(int i, int j) {
 	}
 
+	@Override
 	public int getLoadedChunks() {
 		return 0;
 	}
@@ -259,10 +281,12 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
 
 	}
 
+	@Override
 	public String getName() {
 		return "CustomChunkGenerator";
 	}
 
+	@Override
 	public void c() {
 	}
 }

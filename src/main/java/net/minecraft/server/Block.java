@@ -19,10 +19,12 @@ public class Block {
 	public static final Block.StepSound i = new Block.StepSound("stone", 1.0F, 1.0F);
 	public static final Block.StepSound j = new Block.StepSound("stone", 1.0F, 1.5F);
 	public static final Block.StepSound k = new Block.StepSound("stone", 1.0F, 1.0F) {
+		@Override
 		public String getBreakSound() {
 			return "dig.glass";
 		}
 
+		@Override
 		public String getPlaceSound() {
 			return "step.stone";
 		}
@@ -31,28 +33,34 @@ public class Block {
 	public static final Block.StepSound m = new Block.StepSound("sand", 1.0F, 1.0F);
 	public static final Block.StepSound n = new Block.StepSound("snow", 1.0F, 1.0F);
 	public static final Block.StepSound o = new Block.StepSound("ladder", 1.0F, 1.0F) {
+		@Override
 		public String getBreakSound() {
 			return "dig.wood";
 		}
 	};
 	public static final Block.StepSound p = new Block.StepSound("anvil", 0.3F, 1.0F) {
+		@Override
 		public String getBreakSound() {
 			return "dig.stone";
 		}
 
+		@Override
 		public String getPlaceSound() {
 			return "random.anvil_land";
 		}
 	};
 	public static final Block.StepSound q = new Block.StepSound("slime", 1.0F, 1.0F) {
+		@Override
 		public String getBreakSound() {
 			return "mob.slime.big";
 		}
 
+		@Override
 		public String getPlaceSound() {
 			return "mob.slime.big";
 		}
 
+		@Override
 		public String getStepSound() {
 			return "mob.slime.small";
 		}
@@ -94,7 +102,7 @@ public class Block {
 	}
 
 	public static Block getById(int i) {
-		return (Block) Block.REGISTRY.a(i);
+		return Block.REGISTRY.a(i);
 	}
 
 	public static IBlockData getByCombinedId(int i) {
@@ -112,10 +120,10 @@ public class Block {
 		MinecraftKey minecraftkey = new MinecraftKey(s);
 
 		if (Block.REGISTRY.d(minecraftkey)) {
-			return (Block) Block.REGISTRY.get(minecraftkey);
+			return Block.REGISTRY.get(minecraftkey);
 		} else {
 			try {
-				return (Block) Block.REGISTRY.a(Integer.parseInt(s));
+				return Block.REGISTRY.a(Integer.parseInt(s));
 			} catch (NumberFormatException numberformatexception) {
 				return null;
 			}
@@ -261,12 +269,12 @@ public class Block {
 	}
 
 	protected final void a(float f, float f1, float f2, float f3, float f4, float f5) {
-		this.minX = (double) f;
-		this.minY = (double) f1;
-		this.minZ = (double) f2;
-		this.maxX = (double) f3;
-		this.maxY = (double) f4;
-		this.maxZ = (double) f5;
+		this.minX = f;
+		this.minY = f1;
+		this.minZ = f2;
+		this.maxX = f3;
+		this.maxY = f4;
+		this.maxZ = f5;
 	}
 
 	public boolean b(IBlockAccess iblockaccess, BlockPosition blockposition, EnumDirection enumdirection) {
@@ -284,9 +292,9 @@ public class Block {
 	}
 
 	public AxisAlignedBB a(World world, BlockPosition blockposition, IBlockData iblockdata) {
-		return new AxisAlignedBB((double) blockposition.getX() + this.minX, (double) blockposition.getY() + this.minY,
-				(double) blockposition.getZ() + this.minZ, (double) blockposition.getX() + this.maxX,
-				(double) blockposition.getY() + this.maxY, (double) blockposition.getZ() + this.maxZ);
+		return new AxisAlignedBB(blockposition.getX() + this.minX, blockposition.getY() + this.minY,
+				blockposition.getZ() + this.minZ, blockposition.getX() + this.maxX,
+				blockposition.getY() + this.maxY, blockposition.getZ() + this.maxZ);
 	}
 
 	public boolean c() {
@@ -367,11 +375,11 @@ public class Block {
 	public static void a(World world, BlockPosition blockposition, ItemStack itemstack) {
 		if (!world.isClientSide && world.getGameRules().getBoolean("doTileDrops")) {
 			float f = 0.5F;
-			double d0 = (double) (world.random.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
-			double d1 = (double) (world.random.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
-			double d2 = (double) (world.random.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
-			EntityItem entityitem = new EntityItem(world, (double) blockposition.getX() + d0,
-					(double) blockposition.getY() + d1, (double) blockposition.getZ() + d2, itemstack);
+			double d0 = world.random.nextFloat() * f + (1.0F - f) * 0.5D;
+			double d1 = world.random.nextFloat() * f + (1.0F - f) * 0.5D;
+			double d2 = world.random.nextFloat() * f + (1.0F - f) * 0.5D;
+			EntityItem entityitem = new EntityItem(world, blockposition.getX() + d0,
+					blockposition.getY() + d1, blockposition.getZ() + d2, itemstack);
 
 			entityitem.p();
 			world.addEntity(entityitem);
@@ -384,8 +392,8 @@ public class Block {
 				int j = EntityExperienceOrb.getOrbValue(i);
 
 				i -= j;
-				world.addEntity(new EntityExperienceOrb(world, (double) blockposition.getX() + 0.5D,
-						(double) blockposition.getY() + 0.5D, (double) blockposition.getZ() + 0.5D, j));
+				world.addEntity(new EntityExperienceOrb(world, blockposition.getX() + 0.5D,
+						blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D, j));
 			}
 		}
 
@@ -401,10 +409,10 @@ public class Block {
 
 	public MovingObjectPosition a(World world, BlockPosition blockposition, Vec3D vec3d, Vec3D vec3d1) {
 		this.updateShape(world, blockposition);
-		vec3d = vec3d.add((double) (-blockposition.getX()), (double) (-blockposition.getY()),
-				(double) (-blockposition.getZ()));
-		vec3d1 = vec3d1.add((double) (-blockposition.getX()), (double) (-blockposition.getY()),
-				(double) (-blockposition.getZ()));
+		vec3d = vec3d.add((-blockposition.getX()), (-blockposition.getY()),
+				(-blockposition.getZ()));
+		vec3d1 = vec3d1.add((-blockposition.getX()), (-blockposition.getY()),
+				(-blockposition.getZ()));
 		Vec3D vec3d2 = vec3d.a(vec3d1, this.minX);
 		Vec3D vec3d3 = vec3d.a(vec3d1, this.maxX);
 		Vec3D vec3d4 = vec3d.b(vec3d1, this.minY);
@@ -491,8 +499,8 @@ public class Block {
 				enumdirection = EnumDirection.SOUTH;
 			}
 
-			return new MovingObjectPosition(vec3d8.add((double) blockposition.getX(), (double) blockposition.getY(),
-					(double) blockposition.getZ()), enumdirection, blockposition);
+			return new MovingObjectPosition(vec3d8.add(blockposition.getX(), blockposition.getY(),
+					blockposition.getZ()), enumdirection, blockposition);
 		}
 	}
 
@@ -733,6 +741,7 @@ public class Block {
 		return this.blockData;
 	}
 
+	@Override
 	public String toString() {
 		return "Block{" + Block.REGISTRY.c(this) + "}";
 	}

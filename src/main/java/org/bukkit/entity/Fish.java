@@ -5,5 +5,6 @@ package org.bukkit.entity;
  * 
  * @deprecated in favor of {@link FishHook}
  */
+@Deprecated
 public interface Fish extends FishHook {
 }

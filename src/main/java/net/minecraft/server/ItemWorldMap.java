@@ -1,13 +1,13 @@
 package net.minecraft.server;
 
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Multisets;
-
 // CraftBukkit start
 import org.bukkit.Bukkit;
 import org.bukkit.event.server.MapInitializeEvent;
 // CraftBukkit end
+
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Multisets;
 
 public class ItemWorldMap extends ItemWorldMapBase {
 
@@ -25,10 +25,10 @@ public class ItemWorldMap extends ItemWorldMapBase {
 			s = "map_" + itemstack.getData();
 			worldmap = new WorldMap(s);
 			worldmap.scale = 3;
-			worldmap.a((double) world.getWorldData().c(), (double) world.getWorldData().e(), worldmap.scale);
+			worldmap.a(world.getWorldData().c(), world.getWorldData().e(), worldmap.scale);
 			worldmap.map = (byte) ((WorldServer) world).dimension; // CraftBukkit - fixes Bukkit multiworld maps
 			worldmap.c();
-			worldMain.a(s, (PersistentBase) worldmap); // CraftBukkit - use primary world for maps
+			worldMain.a(s, worldmap); // CraftBukkit - use primary world for maps
 
 			// CraftBukkit start
 			MapInitializeEvent event = new MapInitializeEvent(worldmap.mapView);
@@ -45,8 +45,8 @@ public class ItemWorldMap extends ItemWorldMapBase {
 			int i = 1 << worldmap.scale;
 			int j = worldmap.centerX;
 			int k = worldmap.centerZ;
-			int l = MathHelper.floor(entity.locX - (double) j) / i + 64;
-			int i1 = MathHelper.floor(entity.locZ - (double) k) / i + 64;
+			int l = MathHelper.floor(entity.locX - j) / i + 64;
+			int i1 = MathHelper.floor(entity.locZ - k) / i + 64;
 			int j1 = 128 / i;
 
 			if (world.worldProvider.o()) {
@@ -127,8 +127,8 @@ public class ItemWorldMap extends ItemWorldMapBase {
 								}
 
 								k3 /= i * i;
-								double d2 = (d1 - d0) * 4.0D / (double) (i + 4)
-										+ ((double) (k1 + l1 & 1) - 0.5D) * 0.4D;
+								double d2 = (d1 - d0) * 4.0D / (i + 4)
+										+ ((k1 + l1 & 1) - 0.5D) * 0.4D;
 								byte b0 = 1;
 
 								if (d2 > 0.6D) {
@@ -139,11 +139,11 @@ public class ItemWorldMap extends ItemWorldMapBase {
 									b0 = 0;
 								}
 
-								MaterialMapColor materialmapcolor = (MaterialMapColor) Iterables
+								MaterialMapColor materialmapcolor = Iterables
 										.getFirst(Multisets.copyHighestCountFirst(hashmultiset), MaterialMapColor.b);
 
 								if (materialmapcolor == MaterialMapColor.n) {
-									d2 = (double) k3 * 0.1D + (double) (k1 + l1 & 1) * 0.2D;
+									d2 = k3 * 0.1D + (k1 + l1 & 1) * 0.2D;
 									b0 = 1;
 									if (d2 < 0.5D) {
 										b0 = 2;
@@ -174,6 +174,7 @@ public class ItemWorldMap extends ItemWorldMapBase {
 		}
 	}
 
+	@Override
 	public void a(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
 		if (!world.isClientSide) {
 			WorldMap worldmap = this.getSavedMap(itemstack, world);
@@ -191,11 +192,13 @@ public class ItemWorldMap extends ItemWorldMapBase {
 		}
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Packet c(ItemStack itemstack, World world, EntityHuman entityhuman) {
 		return this.getSavedMap(itemstack, world).a(itemstack, world, entityhuman);
 	}
 
+	@Override
 	public void d(ItemStack itemstack, World world, EntityHuman entityhuman) {
 		if (itemstack.hasTag() && itemstack.getTag().getBoolean("map_is_scaling")) {
 			WorldMap worldmap = Items.FILLED_MAP.getSavedMap(itemstack, world);
@@ -210,10 +213,10 @@ public class ItemWorldMap extends ItemWorldMapBase {
 				worldmap1.scale = 4;
 			}
 
-			worldmap1.a((double) worldmap.centerX, (double) worldmap.centerZ, worldmap1.scale);
+			worldmap1.a(worldmap.centerX, worldmap.centerZ, worldmap1.scale);
 			worldmap1.map = worldmap.map;
 			worldmap1.c();
-			world.a("map_" + itemstack.getData(), (PersistentBase) worldmap1);
+			world.a("map_" + itemstack.getData(), worldmap1);
 
 			// CraftBukkit start
 			MapInitializeEvent event = new MapInitializeEvent(worldmap1.mapView);

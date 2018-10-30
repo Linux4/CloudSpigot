@@ -17,10 +17,12 @@ public class PacketPlayInChat implements Packet<PacketListenerPlayIn> {
 		this.a = s;
 	}
 
+	@Override
 	public void a(PacketDataSerializer packetdataserializer) throws IOException {
 		this.a = packetdataserializer.c(100);
 	}
 
+	@Override
 	public void b(PacketDataSerializer packetdataserializer) throws IOException {
 		packetdataserializer.a(this.a);
 	}
@@ -30,6 +32,7 @@ public class PacketPlayInChat implements Packet<PacketListenerPlayIn> {
 			.newCachedThreadPool(new com.google.common.util.concurrent.ThreadFactoryBuilder().setDaemon(true)
 					.setNameFormat("Async Chat Thread - #%d").build());
 
+	@Override
 	public void a(final PacketListenerPlayIn packetlistenerplayin) {
 		if (!a.startsWith("/")) {
 			executors.submit(new Runnable() {

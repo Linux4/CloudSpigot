@@ -1,9 +1,9 @@
 package org.bukkit.craftbukkit.inventory;
 
-import net.minecraft.server.IInventory;
-
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.ItemStack;
+
+import net.minecraft.server.IInventory;
 
 public class CraftInventoryAnvil extends CraftInventory implements AnvilInventory {
 	private final IInventory resultInventory;

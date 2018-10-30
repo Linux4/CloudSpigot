@@ -1,11 +1,11 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityCreeper;
-
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.CreeperPowerEvent;
+
+import net.minecraft.server.EntityCreeper;
 
 public class CraftCreeper extends CraftMonster implements Creeper {
 
@@ -13,10 +13,12 @@ public class CraftCreeper extends CraftMonster implements Creeper {
 		super(server, entity);
 	}
 
+	@Override
 	public boolean isPowered() {
 		return getHandle().isPowered();
 	}
 
+	@Override
 	public void setPowered(boolean powered) {
 		CraftServer server = this.server;
 		Creeper entity = (Creeper) this.getHandle().getBukkitEntity();
@@ -48,6 +50,7 @@ public class CraftCreeper extends CraftMonster implements Creeper {
 		return "CraftCreeper";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.CREEPER;
 	}

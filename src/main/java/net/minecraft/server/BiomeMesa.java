@@ -34,14 +34,17 @@ public class BiomeMesa extends BiomeBase {
 
 	}
 
+	@Override
 	public WorldGenTreeAbstract a(Random random) {
 		return this.aA;
 	}
 
+	@Override
 	public void a(World world, Random random, BlockPosition blockposition) {
 		super.a(world, random, blockposition);
 	}
 
+	@Override
 	public void a(World world, Random random, ChunkSnapshot chunksnapshot, int i, int j, double d0) {
 		if (this.aD == null || this.aE != world.getSeed()) {
 			this.a(world.getSeed());
@@ -62,11 +65,11 @@ public class BiomeMesa extends BiomeBase {
 		if (this.aI) {
 			k = (i & -16) + (j & 15);
 			l = (j & -16) + (i & 15);
-			double d2 = Math.min(Math.abs(d0), this.aF.a((double) k * 0.25D, (double) l * 0.25D));
+			double d2 = Math.min(Math.abs(d0), this.aF.a(k * 0.25D, l * 0.25D));
 
 			if (d2 > 0.0D) {
 				double d3 = 0.001953125D;
-				double d4 = Math.abs(this.aG.a((double) k * d3, (double) l * d3));
+				double d4 = Math.abs(this.aG.a(k * d3, l * d3));
 
 				d1 = d2 * d2 * 2.5D;
 				double d5 = Math.ceil(d4 * 50.0D) + 14.0D;
@@ -250,17 +253,18 @@ public class BiomeMesa extends BiomeBase {
 	}
 
 	private IBlockData a(int i, int j, int k) {
-		int l = (int) Math.round(this.aH.a((double) i * 1.0D / 512.0D, (double) i * 1.0D / 512.0D) * 2.0D);
+		int l = (int) Math.round(this.aH.a(i * 1.0D / 512.0D, i * 1.0D / 512.0D) * 2.0D);
 
 		return this.aD[(j + l + 64) % 64];
 	}
 
+	@Override
 	protected BiomeBase d(int i) {
 		boolean flag = this.id == BiomeBase.MESA.id;
 		BiomeMesa biomemesa = new BiomeMesa(i, flag, this.aJ);
 
 		if (!flag) {
-			biomemesa.a(BiomeMesa.g);
+			biomemesa.a(BiomeBase.g);
 			biomemesa.a(this.ah + " M");
 		} else {
 			biomemesa.a(this.ah + " (Bryce)");

@@ -3,15 +3,21 @@ package org.bukkit.craftbukkit;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 
-import net.minecraft.server.*;
-
 import org.bukkit.Chunk;
+import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.block.CraftBlock;
 import org.bukkit.entity.Entity;
-import org.bukkit.ChunkSnapshot;
+
+import net.minecraft.server.BiomeBase;
+import net.minecraft.server.BlockPosition;
+import net.minecraft.server.ChunkSection;
+import net.minecraft.server.EmptyChunk;
+import net.minecraft.server.IBlockData;
+import net.minecraft.server.WorldChunkManager;
+import net.minecraft.server.WorldServer;
 
 public class CraftChunk implements Chunk {
 	private WeakReference<net.minecraft.server.Chunk> weakChunk;
@@ -32,6 +38,7 @@ public class CraftChunk implements Chunk {
 		z = getHandle().locZ;
 	}
 
+	@Override
 	public World getWorld() {
 		return worldServer.getWorld();
 	}
@@ -58,10 +65,12 @@ public class CraftChunk implements Chunk {
 		weakChunk.clear();
 	}
 
+	@Override
 	public int getX() {
 		return x;
 	}
 
+	@Override
 	public int getZ() {
 		return z;
 	}
@@ -71,10 +80,12 @@ public class CraftChunk implements Chunk {
 		return "CraftChunk{" + "x=" + getX() + "z=" + getZ() + '}';
 	}
 
+	@Override
 	public Block getBlock(int x, int y, int z) {
 		return new CraftBlock(this, (getX() << 4) | (x & 0xF), y, (getZ() << 4) | (z & 0xF));
 	}
 
+	@Override
 	public Entity[] getEntities() {
 		int count = 0, index = 0;
 		net.minecraft.server.Chunk chunk = getHandle();
@@ -99,6 +110,7 @@ public class CraftChunk implements Chunk {
 		return entities;
 	}
 
+	@Override
 	public BlockState[] getTileEntities() {
 		int index = 0;
 		net.minecraft.server.Chunk chunk = getHandle();
@@ -118,34 +130,42 @@ public class CraftChunk implements Chunk {
 		return entities;
 	}
 
+	@Override
 	public boolean isLoaded() {
 		return getWorld().isChunkLoaded(this);
 	}
 
+	@Override
 	public boolean load() {
 		return getWorld().loadChunk(getX(), getZ(), true);
 	}
 
+	@Override
 	public boolean load(boolean generate) {
 		return getWorld().loadChunk(getX(), getZ(), generate);
 	}
 
+	@Override
 	public boolean unload() {
 		return getWorld().unloadChunk(getX(), getZ());
 	}
 
+	@Override
 	public boolean unload(boolean save) {
 		return getWorld().unloadChunk(getX(), getZ(), save);
 	}
 
+	@Override
 	public boolean unload(boolean save, boolean safe) {
 		return getWorld().unloadChunk(getX(), getZ(), save, safe);
 	}
 
+	@Override
 	public ChunkSnapshot getChunkSnapshot() {
 		return getChunkSnapshot(true, false, false);
 	}
 
+	@Override
 	public ChunkSnapshot getChunkSnapshot(boolean includeMaxBlockY, boolean includeBiome,
 			boolean includeBiomeTempRain) {
 		net.minecraft.server.Chunk chunk = getHandle();
@@ -173,7 +193,7 @@ public class CraftChunk implements Chunk {
 				for (int j = 0; j < 4096; j++) {
 					if (baseids[j] == 0)
 						continue;
-					IBlockData blockData = (IBlockData) net.minecraft.server.Block.d.a(baseids[j]);
+					IBlockData blockData = net.minecraft.server.Block.d.a(baseids[j]);
 					if (blockData == null)
 						continue;
 					blockids[j] = (short) net.minecraft.server.Block.getId(blockData.getBlock());

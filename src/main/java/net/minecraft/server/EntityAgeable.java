@@ -35,6 +35,7 @@ public abstract class EntityAgeable extends EntityCreature {
 
 	public abstract EntityAgeable createChild(EntityAgeable entityageable);
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		ItemStack itemstack = entityhuman.inventory.getItemInHand();
 
@@ -70,6 +71,7 @@ public abstract class EntityAgeable extends EntityCreature {
 		}
 	}
 
+	@Override
 	protected void h() {
 		super.h();
 		this.datawatcher.a(12, Byte.valueOf((byte) 0));
@@ -117,6 +119,7 @@ public abstract class EntityAgeable extends EntityCreature {
 		this.a(this.isBaby());
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		nbttagcompound.setInt("Age", this.getAge());
@@ -124,6 +127,7 @@ public abstract class EntityAgeable extends EntityCreature {
 		nbttagcompound.setBoolean("AgeLocked", this.ageLocked); // CraftBukkit
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		this.setAgeRaw(nbttagcompound.getInt("Age"));
@@ -131,15 +135,16 @@ public abstract class EntityAgeable extends EntityCreature {
 		this.ageLocked = nbttagcompound.getBoolean("AgeLocked"); // CraftBukkit
 	}
 
+	@Override
 	public void m() {
 		super.m();
 		if (this.world.isClientSide || ageLocked) { // CraftBukkit
 			if (this.c > 0) {
 				if (this.c % 4 == 0) {
 					this.world.addParticle(EnumParticle.VILLAGER_HAPPY,
-							this.locX + (double) (this.random.nextFloat() * this.width * 2.0F) - (double) this.width,
-							this.locY + 0.5D + (double) (this.random.nextFloat() * this.length),
-							this.locZ + (double) (this.random.nextFloat() * this.width * 2.0F) - (double) this.width,
+							this.locX + this.random.nextFloat() * this.width * 2.0F - this.width,
+							this.locY + 0.5D + this.random.nextFloat() * this.length,
+							this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width,
 							0.0D, 0.0D, 0.0D, new int[0]);
 				}
 
@@ -167,6 +172,7 @@ public abstract class EntityAgeable extends EntityCreature {
 	protected void n() {
 	}
 
+	@Override
 	public boolean isBaby() {
 		return this.getAge() < 0;
 	}
@@ -175,6 +181,7 @@ public abstract class EntityAgeable extends EntityCreature {
 		this.a(flag ? 0.5F : 1.0F);
 	}
 
+	@Override
 	public final void setSize(float f, float f1) { // CraftBukkit - protected to public
 		boolean flag = this.bm > 0.0F;
 

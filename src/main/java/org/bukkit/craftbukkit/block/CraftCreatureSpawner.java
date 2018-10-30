@@ -24,20 +24,24 @@ public class CraftCreatureSpawner extends CraftBlockState implements CreatureSpa
 		spawner = te;
 	}
 
+	@Override
 	@Deprecated
 	public CreatureType getCreatureType() {
 		return CreatureType.fromName(spawner.getSpawner().getMobName());
 	}
 
+	@Override
 	public EntityType getSpawnedType() {
 		return EntityType.fromName(spawner.getSpawner().getMobName());
 	}
 
+	@Override
 	@Deprecated
 	public void setCreatureType(CreatureType creatureType) {
 		spawner.getSpawner().setMobName(creatureType.getName());
 	}
 
+	@Override
 	public void setSpawnedType(EntityType entityType) {
 		if (entityType == null || entityType.getName() == null) {
 			throw new IllegalArgumentException("Can't spawn EntityType " + entityType + " from mobspawners!");
@@ -46,20 +50,24 @@ public class CraftCreatureSpawner extends CraftBlockState implements CreatureSpa
 		spawner.getSpawner().setMobName(entityType.getName());
 	}
 
+	@Override
 	@Deprecated
 	public String getCreatureTypeId() {
 		return spawner.getSpawner().getMobName();
 	}
 
+	@Override
 	@Deprecated
 	public void setCreatureTypeId(String creatureName) {
 		setCreatureTypeByName(creatureName);
 	}
 
+	@Override
 	public String getCreatureTypeName() {
 		return spawner.getSpawner().getMobName();
 	}
 
+	@Override
 	public void setCreatureTypeByName(String creatureType) {
 		// Verify input
 		EntityType type = EntityType.fromName(creatureType);
@@ -69,10 +77,12 @@ public class CraftCreatureSpawner extends CraftBlockState implements CreatureSpa
 		setSpawnedType(type);
 	}
 
+	@Override
 	public int getDelay() {
 		return spawner.getSpawner().spawnDelay;
 	}
 
+	@Override
 	public void setDelay(int delay) {
 		spawner.getSpawner().spawnDelay = delay;
 	}

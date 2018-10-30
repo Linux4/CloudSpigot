@@ -26,6 +26,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
 		return this.a;
 	}
 
+	@Override
 	public void t_() {
 		super.t_();
 		if (!this.world.isClientSide && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
@@ -34,45 +35,53 @@ public class EntityGhast extends EntityFlying implements IMonster {
 
 	}
 
+	@Override
 	public boolean damageEntity(DamageSource damagesource, float f) {
 		if (this.isInvulnerable(damagesource)) {
 			return false;
 		} else if ("fireball".equals(damagesource.p()) && damagesource.getEntity() instanceof EntityHuman) {
 			super.damageEntity(damagesource, 1000.0F);
-			((EntityHuman) damagesource.getEntity()).b((Statistic) AchievementList.z);
+			((EntityHuman) damagesource.getEntity()).b(AchievementList.z);
 			return true;
 		} else {
 			return super.damageEntity(damagesource, f);
 		}
 	}
 
+	@Override
 	protected void h() {
 		super.h();
 		this.datawatcher.a(16, Byte.valueOf((byte) 0));
 	}
 
+	@Override
 	protected void initAttributes() {
 		super.initAttributes();
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(10.0D);
 		this.getAttributeInstance(GenericAttributes.FOLLOW_RANGE).setValue(100.0D);
 	}
 
+	@Override
 	protected String z() {
 		return "mob.ghast.moan";
 	}
 
+	@Override
 	protected String bo() {
 		return "mob.ghast.scream";
 	}
 
+	@Override
 	protected String bp() {
 		return "mob.ghast.death";
 	}
 
+	@Override
 	protected Item getLoot() {
 		return Items.GUNPOWDER;
 	}
 
+	@Override
 	protected void dropDeathLoot(boolean flag, int i) {
 		int j = this.random.nextInt(2) + this.random.nextInt(1 + i);
 
@@ -90,23 +99,28 @@ public class EntityGhast extends EntityFlying implements IMonster {
 
 	}
 
+	@Override
 	protected float bB() {
 		return 10.0F;
 	}
 
+	@Override
 	public boolean bR() {
 		return this.random.nextInt(20) == 0 && super.bR() && this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
 	}
 
+	@Override
 	public int bV() {
 		return 1;
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		nbttagcompound.setInt("ExplosionPower", this.a);
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		if (nbttagcompound.hasKeyOfType("ExplosionPower", 99)) {
@@ -115,6 +129,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
 
 	}
 
+	@Override
 	public float getHeadHeight() {
 		return 2.6F;
 	}
@@ -128,18 +143,22 @@ public class EntityGhast extends EntityFlying implements IMonster {
 			this.b = entityghast;
 		}
 
+		@Override
 		public boolean a() {
 			return this.b.getGoalTarget() != null;
 		}
 
+		@Override
 		public void c() {
 			this.a = 0;
 		}
 
+		@Override
 		public void d() {
 			this.b.a(false);
 		}
 
+		@Override
 		public void e() {
 			EntityLiving entityliving = this.b.getGoalTarget();
 			double d0 = 64.0D;
@@ -156,8 +175,8 @@ public class EntityGhast extends EntityFlying implements IMonster {
 					double d1 = 4.0D;
 					Vec3D vec3d = this.b.d(1.0F);
 					double d2 = entityliving.locX - (this.b.locX + vec3d.a * d1);
-					double d3 = entityliving.getBoundingBox().b + (double) (entityliving.length / 2.0F)
-							- (0.5D + this.b.locY + (double) (this.b.length / 2.0F));
+					double d3 = entityliving.getBoundingBox().b + entityliving.length / 2.0F
+							- (0.5D + this.b.locY + this.b.length / 2.0F);
 					double d4 = entityliving.locZ - (this.b.locZ + vec3d.c * d1);
 
 					world.a((EntityHuman) null, 1008, new BlockPosition(this.b), 0);
@@ -166,7 +185,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
 					// CraftBukkit - set bukkitYield when setting explosionpower
 					entitylargefireball.bukkitYield = entitylargefireball.yield = this.b.cf();
 					entitylargefireball.locX = this.b.locX + vec3d.a * d1;
-					entitylargefireball.locY = this.b.locY + (double) (this.b.length / 2.0F) + 0.5D;
+					entitylargefireball.locY = this.b.locY + this.b.length / 2.0F + 0.5D;
 					entitylargefireball.locZ = this.b.locZ + vec3d.c * d1;
 					world.addEntity(entitylargefireball);
 					this.a = -40;
@@ -188,10 +207,12 @@ public class EntityGhast extends EntityFlying implements IMonster {
 			this.a(2);
 		}
 
+		@Override
 		public boolean a() {
 			return true;
 		}
 
+		@Override
 		public void e() {
 			if (this.a.getGoalTarget() == null) {
 				this.a.aI = this.a.yaw = -((float) MathHelper.b(this.a.motX, this.a.motZ)) * 180.0F / 3.1415927F;
@@ -219,6 +240,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
 			this.a(1);
 		}
 
+		@Override
 		public boolean a() {
 			ControllerMove controllermove = this.a.getControllerMove();
 
@@ -234,15 +256,17 @@ public class EntityGhast extends EntityFlying implements IMonster {
 			}
 		}
 
+		@Override
 		public boolean b() {
 			return false;
 		}
 
+		@Override
 		public void c() {
 			Random random = this.a.bc();
-			double d0 = this.a.locX + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-			double d1 = this.a.locY + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-			double d2 = this.a.locZ + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
+			double d0 = this.a.locX + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
+			double d1 = this.a.locY + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
+			double d2 = this.a.locZ + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
 
 			this.a.getControllerMove().a(d0, d1, d2, 1.0D);
 		}
@@ -258,6 +282,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
 			this.g = entityghast;
 		}
 
+		@Override
 		public void c() {
 			if (this.f) {
 				double d0 = this.b - this.g.locX;
@@ -267,7 +292,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
 
 				if (this.h-- <= 0) {
 					this.h += this.g.bc().nextInt(5) + 2;
-					d3 = (double) MathHelper.sqrt(d3);
+					d3 = MathHelper.sqrt(d3);
 					if (this.b(this.b, this.c, this.d, d3)) {
 						this.g.motX += d0 / d3 * 0.1D;
 						this.g.motY += d1 / d3 * 0.1D;
@@ -286,7 +311,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
 			double d6 = (d2 - this.g.locZ) / d3;
 			AxisAlignedBB axisalignedbb = this.g.getBoundingBox();
 
-			for (int i = 1; (double) i < d3; ++i) {
+			for (int i = 1; i < d3; ++i) {
 				axisalignedbb = axisalignedbb.c(d4, d5, d6);
 				if (!this.g.world.getCubes(this.g, axisalignedbb).isEmpty()) {
 					return false;

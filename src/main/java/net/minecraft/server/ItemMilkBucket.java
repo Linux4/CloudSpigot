@@ -9,6 +9,7 @@ public class ItemMilkBucket extends Item {
 		this.a(CreativeModeTab.f);
 	}
 
+	@Override
 	public ItemStack b(ItemStack itemstack, World world, EntityHuman entityhuman) {
 		if (!entityhuman.abilities.canInstantlyBuild) {
 			--itemstack.count;
@@ -31,14 +32,17 @@ public class ItemMilkBucket extends Item {
 		return itemstack.count <= 0 ? new ItemStack(Items.BUCKET) : itemstack;
 	}
 
+	@Override
 	public int d(ItemStack itemstack) {
 		return 32;
 	}
 
+	@Override
 	public EnumAnimation e(ItemStack itemstack) {
 		return EnumAnimation.DRINK;
 	}
 
+	@Override
 	public ItemStack a(ItemStack itemstack, World world, EntityHuman entityhuman) {
 		entityhuman.a(itemstack, this.d(itemstack));
 		return itemstack;

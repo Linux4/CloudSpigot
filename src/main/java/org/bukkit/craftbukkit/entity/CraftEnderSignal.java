@@ -1,9 +1,10 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityEnderSignal;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.EnderSignal;
 import org.bukkit.entity.EntityType;
+
+import net.minecraft.server.EntityEnderSignal;
 
 public class CraftEnderSignal extends CraftEntity implements EnderSignal {
 	public CraftEnderSignal(CraftServer server, EntityEnderSignal entity) {
@@ -20,6 +21,7 @@ public class CraftEnderSignal extends CraftEntity implements EnderSignal {
 		return "CraftEnderSignal";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.ENDER_SIGNAL;
 	}

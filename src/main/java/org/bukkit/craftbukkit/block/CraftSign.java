@@ -1,13 +1,14 @@
 package org.bukkit.craftbukkit.block;
 
-import net.minecraft.server.ChatComponentText;
-import net.minecraft.server.IChatBaseComponent;
-import net.minecraft.server.TileEntitySign;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
+
+import net.minecraft.server.ChatComponentText;
+import net.minecraft.server.IChatBaseComponent;
+import net.minecraft.server.TileEntitySign;
 
 public class CraftSign extends CraftBlockState implements Sign {
 	private final TileEntitySign sign;
@@ -35,14 +36,17 @@ public class CraftSign extends CraftBlockState implements Sign {
 		System.arraycopy(revertComponents(sign.lines), 0, lines, 0, lines.length);
 	}
 
+	@Override
 	public String[] getLines() {
 		return lines;
 	}
 
+	@Override
 	public String getLine(int index) throws IndexOutOfBoundsException {
 		return lines[index];
 	}
 
+	@Override
 	public void setLine(int index, String line) throws IndexOutOfBoundsException {
 		lines[index] = line;
 	}

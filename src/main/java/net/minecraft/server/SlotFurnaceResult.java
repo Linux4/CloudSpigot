@@ -15,10 +15,12 @@ public class SlotFurnaceResult extends Slot {
 		this.a = entityhuman;
 	}
 
+	@Override
 	public boolean isAllowed(ItemStack itemstack) {
 		return false;
 	}
 
+	@Override
 	public ItemStack a(int i) {
 		if (this.hasItem()) {
 			this.b += Math.min(i, this.getItem().count);
@@ -27,16 +29,19 @@ public class SlotFurnaceResult extends Slot {
 		return super.a(i);
 	}
 
+	@Override
 	public void a(EntityHuman entityhuman, ItemStack itemstack) {
 		this.c(itemstack);
 		super.a(entityhuman, itemstack);
 	}
 
+	@Override
 	protected void a(ItemStack itemstack, int i) {
 		this.b += i;
 		this.c(itemstack);
 	}
 
+	@Override
 	protected void c(ItemStack itemstack) {
 		itemstack.a(this.a.world, this.a, this.b);
 		if (!this.a.world.isClientSide) {
@@ -47,8 +52,8 @@ public class SlotFurnaceResult extends Slot {
 			if (f == 0.0F) {
 				i = 0;
 			} else if (f < 1.0F) {
-				j = MathHelper.d((float) i * f);
-				if (j < MathHelper.f((float) i * f) && Math.random() < (double) ((float) i * f - (float) j)) {
+				j = MathHelper.d(i * f);
+				if (j < MathHelper.f(i * f) && Math.random() < i * f - j) {
 					++j;
 				}
 
@@ -79,11 +84,11 @@ public class SlotFurnaceResult extends Slot {
 
 		this.b = 0;
 		if (itemstack.getItem() == Items.IRON_INGOT) {
-			this.a.b((Statistic) AchievementList.k);
+			this.a.b(AchievementList.k);
 		}
 
 		if (itemstack.getItem() == Items.COOKED_FISH) {
-			this.a.b((Statistic) AchievementList.p);
+			this.a.b(AchievementList.p);
 		}
 
 	}

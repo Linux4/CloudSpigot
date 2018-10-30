@@ -8,11 +8,13 @@ public class TileEntityNote extends TileEntity {
 	public TileEntityNote() {
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		nbttagcompound.setByte("note", this.note);
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		this.note = nbttagcompound.getByte("note");

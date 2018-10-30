@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import com.google.common.collect.AbstractIterator;
 import java.util.Iterator;
+
+import com.google.common.collect.AbstractIterator;
 
 public class BlockPosition extends BaseBlockPosition {
 
@@ -37,7 +38,7 @@ public class BlockPosition extends BaseBlockPosition {
 
 	public BlockPosition a(double d0, double d1, double d2) {
 		return d0 == 0.0D && d1 == 0.0D && d2 == 0.0D ? this
-				: new BlockPosition((double) this.getX() + d0, (double) this.getY() + d1, (double) this.getZ() + d2);
+				: new BlockPosition(this.getX() + d0, this.getY() + d1, this.getZ() + d2);
 	}
 
 	public BlockPosition a(int i, int j, int k) {
@@ -164,9 +165,9 @@ public class BlockPosition extends BaseBlockPosition {
 	}
 
 	public long asLong() {
-		return ((long) this.getX() & BlockPosition.h) << BlockPosition.g
-				| ((long) this.getY() & BlockPosition.i) << BlockPosition.f
-				| ((long) this.getZ() & BlockPosition.j) << 0;
+		return (this.getX() & BlockPosition.h) << BlockPosition.g
+				| (this.getY() & BlockPosition.i) << BlockPosition.f
+				| (this.getZ() & BlockPosition.j) << 0;
 	}
 
 	public static BlockPosition fromLong(long i) {
@@ -188,6 +189,7 @@ public class BlockPosition extends BaseBlockPosition {
 		// Math.max(blockposition.getZ(), blockposition1.getZ())); // CloudSpigot
 
 		return new Iterable<BlockPosition>() {
+			@Override
 			public Iterator<BlockPosition> iterator() {
 				return new AbstractIterator<BlockPosition>() {
 					private BlockPosition b = null;
@@ -197,7 +199,7 @@ public class BlockPosition extends BaseBlockPosition {
 							this.b = blockposition;
 							return this.b;
 						} else if (this.b.equals(blockposition1)) {
-							return (BlockPosition) this.endOfData();
+							return this.endOfData();
 						} else {
 							int i = this.b.getX();
 							int j = this.b.getY();
@@ -219,6 +221,7 @@ public class BlockPosition extends BaseBlockPosition {
 						}
 					}
 
+					@Override
 					protected BlockPosition computeNext() { // CloudSpigot - decompile fix
 						return this.a();
 					}
@@ -239,6 +242,7 @@ public class BlockPosition extends BaseBlockPosition {
 		// Math.max(blockposition.getZ(), blockposition1.getZ())); // CloudSpigot
 
 		return new Iterable<BlockPosition.MutableBlockPosition>() {
+			@Override
 			public Iterator<BlockPosition.MutableBlockPosition> iterator() {
 				return new AbstractIterator<BlockPosition.MutableBlockPosition>() {
 					private BlockPosition.MutableBlockPosition b = null;
@@ -249,7 +253,7 @@ public class BlockPosition extends BaseBlockPosition {
 									blockposition.getZ());
 							return this.b;
 						} else if (this.b.equals(blockposition1)) {
-							return (BlockPosition.MutableBlockPosition) this.endOfData();
+							return this.endOfData();
 						} else {
 							int i = this.b.getX();
 							int j = this.b.getY();
@@ -275,6 +279,7 @@ public class BlockPosition extends BaseBlockPosition {
 						}
 					}
 
+					@Override
 					protected BlockPosition.MutableBlockPosition computeNext() { // CloudSpigot - decompile fix
 						return this.a();
 					}
@@ -283,6 +288,7 @@ public class BlockPosition extends BaseBlockPosition {
 		};
 	}
 
+	@Override
 	public BaseBlockPosition d(BaseBlockPosition baseblockposition) {
 		return this.c(baseblockposition);
 	}
@@ -335,6 +341,7 @@ public class BlockPosition extends BaseBlockPosition {
 			return this;
 		}
 
+		@Override
 		public BaseBlockPosition d(BaseBlockPosition baseblockposition) {
 			return super.c(baseblockposition);
 		}

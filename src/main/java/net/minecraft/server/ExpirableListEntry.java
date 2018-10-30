@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import com.google.gson.JsonObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.google.gson.JsonObject;
 
 public abstract class ExpirableListEntry<T> extends JsonListEntry<T> {
 
@@ -57,10 +58,12 @@ public abstract class ExpirableListEntry<T> extends JsonListEntry<T> {
 		return this.e;
 	}
 
+	@Override
 	boolean hasExpired() {
 		return this.d == null ? false : this.d.before(new Date());
 	}
 
+	@Override
 	protected void a(JsonObject jsonobject) {
 		jsonobject.addProperty("created", ExpirableListEntry.a.format(this.b));
 		jsonobject.addProperty("source", this.c);

@@ -7,18 +7,22 @@ public class CommandGamerule extends CommandAbstract {
 
 	// public CommandGamerule() {} // CloudSpigot
 
+	@Override
 	public String getCommand() {
 		return "gamerule";
 	}
 
+	@Override
 	public int a() {
 		return 2;
 	}
 
+	@Override
 	public String getUsage(ICommandListener icommandlistener) {
 		return "commands.gamerule.usage";
 	}
 
+	@Override
 	public void execute(ICommandListener icommandlistener, String[] astring) throws CommandException {
 		GameRules gamerules = icommandlistener.getWorld().getGameRules(); // CraftBukkit - Use current world
 		String s = astring.length > 0 ? astring[0] : "";
@@ -26,7 +30,7 @@ public class CommandGamerule extends CommandAbstract {
 
 		switch (astring.length) {
 		case 0:
-			icommandlistener.sendMessage(new ChatComponentText(a((Object[]) gamerules.getGameRules())));
+			icommandlistener.sendMessage(new ChatComponentText(a(gamerules.getGameRules())));
 			break;
 
 		case 1:
@@ -58,7 +62,7 @@ public class CommandGamerule extends CommandAbstract {
 			Iterator<EntityPlayer> iterator = MinecraftServer.getServer().getPlayerList().v().iterator();
 
 			while (iterator.hasNext()) {
-				EntityPlayer entityplayer = (EntityPlayer) iterator.next();
+				EntityPlayer entityplayer = iterator.next();
 
 				entityplayer.playerConnection.sendPacket(new PacketPlayOutEntityStatus(entityplayer, (byte) i));
 			}
@@ -66,6 +70,7 @@ public class CommandGamerule extends CommandAbstract {
 
 	}
 
+	@Override
 	public List<String> tabComplete(ICommandListener icommandlistener, String[] astring, BlockPosition blockposition) {
 		if (astring.length == 1) {
 			return a(astring, this.d().getGameRules());
@@ -89,7 +94,7 @@ public class CommandGamerule extends CommandAbstract {
 	// CraftBukkit start - fix decompile error
 	@Override
 	public int compareTo(ICommand o) {
-		return a((ICommand) o);
+		return a(o);
 	}
 	// CraftBukkit end
 }

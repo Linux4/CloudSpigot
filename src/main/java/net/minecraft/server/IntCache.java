@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 public class IntCache {
 
@@ -21,7 +22,7 @@ public class IntCache {
 					IntCache.c.add(aint);
 				return aint;
 			} else {
-				aint = (int[]) IntCache.b.remove(IntCache.b.size() - 1);
+				aint = IntCache.b.remove(IntCache.b.size() - 1);
 				if (c.size() < org.spigotmc.SpigotConfig.intCacheLimit)
 					IntCache.c.add(aint);
 				return aint;
@@ -40,7 +41,7 @@ public class IntCache {
 				IntCache.e.add(aint);
 			return aint;
 		} else {
-			aint = (int[]) IntCache.d.remove(IntCache.d.size() - 1);
+			aint = IntCache.d.remove(IntCache.d.size() - 1);
 			if (e.size() < org.spigotmc.SpigotConfig.intCacheLimit)
 				IntCache.e.add(aint);
 			return aint;

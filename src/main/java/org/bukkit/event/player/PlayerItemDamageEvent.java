@@ -35,10 +35,12 @@ public class PlayerItemDamageEvent extends PlayerEvent implements Cancellable {
 		this.damage = damage;
 	}
 
+	@Override
 	public boolean isCancelled() {
 		return cancelled;
 	}
 
+	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
 	}

@@ -34,14 +34,17 @@ class CraftAsyncTask extends CraftTask {
 				return;
 			}
 			workers.add(new BukkitWorker() {
+				@Override
 				public Thread getThread() {
 					return thread;
 				}
 
+				@Override
 				public int getTaskId() {
 					return CraftAsyncTask.this.getTaskId();
 				}
 
+				@Override
 				public Plugin getOwner() {
 					return CraftAsyncTask.this.getOwner();
 				}
@@ -96,6 +99,7 @@ class CraftAsyncTask extends CraftTask {
 		return workers;
 	}
 
+	@Override
 	boolean cancel0() {
 		synchronized (workers) {
 			// Synchronizing here prevents race condition for a completing task

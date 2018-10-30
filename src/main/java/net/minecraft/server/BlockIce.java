@@ -11,6 +11,7 @@ public class BlockIce extends BlockHalfTransparent {
 		this.a(CreativeModeTab.b);
 	}
 
+	@Override
 	public void a(World world, EntityHuman entityhuman, BlockPosition blockposition, IBlockData iblockdata,
 			TileEntity tileentity) {
 		entityhuman.b(StatisticList.MINE_BLOCK_COUNT[Block.getId(this)]);
@@ -39,10 +40,12 @@ public class BlockIce extends BlockHalfTransparent {
 
 	}
 
+	@Override
 	public int a(Random random) {
 		return 0;
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		if (world.b(EnumSkyBlock.BLOCK, blockposition) > 11 - this.p()) {
 			// CraftBukkit start
@@ -62,6 +65,7 @@ public class BlockIce extends BlockHalfTransparent {
 		}
 	}
 
+	@Override
 	public int k() {
 		return 0;
 	}

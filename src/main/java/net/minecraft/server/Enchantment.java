@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 public abstract class Enchantment {
 
@@ -73,7 +74,7 @@ public abstract class Enchantment {
 	}
 
 	public static Enchantment getByName(String s) {
-		return (Enchantment) Enchantment.E.get(new MinecraftKey(s));
+		return Enchantment.E.get(new MinecraftKey(s));
 	}
 
 	public static Set<MinecraftKey> getEffects() {
@@ -150,6 +151,6 @@ public abstract class Enchantment {
 			}
 		}
 
-		b = (Enchantment[]) arraylist.toArray(new Enchantment[arraylist.size()]);
+		b = arraylist.toArray(new Enchantment[arraylist.size()]);
 	}
 }

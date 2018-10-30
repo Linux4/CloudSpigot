@@ -43,57 +43,70 @@ public class CraftChunkSnapshot implements ChunkSnapshot {
 		this.biomeRain = biomeRain;
 	}
 
+	@Override
 	public int getX() {
 		return x;
 	}
 
+	@Override
 	public int getZ() {
 		return z;
 	}
 
+	@Override
 	public String getWorldName() {
 		return worldname;
 	}
 
+	@Override
 	public final int getBlockTypeId(int x, int y, int z) {
 		return blockids[y >> 4][((y & 0xF) << 8) | (z << 4) | x];
 	}
 
+	@Override
 	public final int getBlockData(int x, int y, int z) {
 		int off = ((y & 0xF) << 7) | (z << 3) | (x >> 1);
 		return (blockdata[y >> 4][off] >> ((x & 1) << 2)) & 0xF;
 	}
 
+	@Override
 	public final int getBlockSkyLight(int x, int y, int z) {
 		int off = ((y & 0xF) << 7) | (z << 3) | (x >> 1);
 		return (skylight[y >> 4][off] >> ((x & 1) << 2)) & 0xF;
 	}
 
+	@Override
 	public final int getBlockEmittedLight(int x, int y, int z) {
 		int off = ((y & 0xF) << 7) | (z << 3) | (x >> 1);
 		return (emitlight[y >> 4][off] >> ((x & 1) << 2)) & 0xF;
 	}
 
+	@Override
 	public final int getHighestBlockYAt(int x, int z) {
 		return hmap[z << 4 | x];
 	}
 
+	@Override
 	public final Biome getBiome(int x, int z) {
 		return CraftBlock.biomeBaseToBiome(biome[z << 4 | x]);
 	}
 
+	@Override
 	public final double getRawBiomeTemperature(int x, int z) {
 		return biomeTemp[z << 4 | x];
 	}
 
+	@Override
 	public final double getRawBiomeRainfall(int x, int z) {
 		return biomeRain[z << 4 | x];
 	}
 
+	@Override
 	public final long getCaptureFullTime() {
 		return captureFulltime;
 	}
 
+	@Override
 	public final boolean isSectionEmpty(int sy) {
 		return empty[sy];
 	}

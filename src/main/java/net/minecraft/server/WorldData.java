@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import java.util.concurrent.Callable;
+
 // CraftBukkit start
 import org.bukkit.Bukkit;
 import org.bukkit.event.weather.ThunderChangeEvent;
@@ -316,8 +317,8 @@ public class WorldData {
 		nbttagcompound.setDouble("BorderSafeZone", this.G);
 		nbttagcompound.setDouble("BorderDamagePerBlock", this.H);
 		nbttagcompound.setDouble("BorderSizeLerpTarget", this.F);
-		nbttagcompound.setDouble("BorderWarningBlocks", (double) this.I);
-		nbttagcompound.setDouble("BorderWarningTime", (double) this.J);
+		nbttagcompound.setDouble("BorderWarningBlocks", this.I);
+		nbttagcompound.setDouble("BorderWarningTime", this.J);
 		if (this.z != null) {
 			nbttagcompound.setByte("Difficulty", (byte) this.z.a());
 		}
@@ -610,6 +611,7 @@ public class WorldData {
 				return String.valueOf(WorldData.this.getSeed());
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -621,6 +623,7 @@ public class WorldData {
 								Integer.valueOf(WorldData.this.c.getVersion()), Boolean.valueOf(WorldData.this.v) });
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -630,16 +633,18 @@ public class WorldData {
 				return WorldData.this.d;
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
 		});
 		crashreportsystemdetails.a("Level spawn location", new Callable<String>() {
 			public String a() throws Exception {
-				return CrashReportSystemDetails.a((double) WorldData.this.e, (double) WorldData.this.f,
-						(double) WorldData.this.g);
+				return CrashReportSystemDetails.a(WorldData.this.e, WorldData.this.f,
+						WorldData.this.g);
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -650,6 +655,7 @@ public class WorldData {
 						new Object[] { Long.valueOf(WorldData.this.h), Long.valueOf(WorldData.this.i) });
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -659,6 +665,7 @@ public class WorldData {
 				return String.valueOf(WorldData.this.m);
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -683,6 +690,7 @@ public class WorldData {
 				return String.format("0x%05X - %s", new Object[] { Integer.valueOf(WorldData.this.o), s });
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -694,6 +702,7 @@ public class WorldData {
 								Integer.valueOf(WorldData.this.t), Boolean.valueOf(WorldData.this.s) });
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -705,6 +714,7 @@ public class WorldData {
 								Boolean.valueOf(WorldData.this.w), Boolean.valueOf(WorldData.this.x) });
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}

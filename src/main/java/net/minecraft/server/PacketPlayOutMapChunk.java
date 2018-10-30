@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import com.google.common.collect.Lists;
 
 public class PacketPlayOutMapChunk implements Packet<PacketListenerPlayOut> {
 
@@ -22,6 +23,7 @@ public class PacketPlayOutMapChunk implements Packet<PacketListenerPlayOut> {
 		this.c = chunk.getChunkMap(flag, i); // CloudSpigot
 	}
 
+	@Override
 	public void a(PacketDataSerializer packetdataserializer) throws IOException {
 		this.a = packetdataserializer.readInt();
 		this.b = packetdataserializer.readInt();
@@ -31,6 +33,7 @@ public class PacketPlayOutMapChunk implements Packet<PacketListenerPlayOut> {
 		this.c.a = packetdataserializer.a();
 	}
 
+	@Override
 	public void b(PacketDataSerializer packetdataserializer) throws IOException {
 		packetdataserializer.writeInt(this.a);
 		packetdataserializer.writeInt(this.b);
@@ -39,6 +42,7 @@ public class PacketPlayOutMapChunk implements Packet<PacketListenerPlayOut> {
 		packetdataserializer.a(this.c.a);
 	}
 
+	@Override
 	public void a(PacketListenerPlayOut packetlistenerplayout) {
 		packetlistenerplayout.a(this);
 	}
@@ -75,7 +79,7 @@ public class PacketPlayOutMapChunk implements Packet<PacketListenerPlayOut> {
 		ChunkSection chunksection1;
 
 		while (iterator.hasNext()) {
-			chunksection1 = (ChunkSection) iterator.next();
+			chunksection1 = iterator.next();
 			char[] achar = chunksection1.getIdArray();
 			char[] achar1 = achar;
 			int k = achar.length;
@@ -90,13 +94,13 @@ public class PacketPlayOutMapChunk implements Packet<PacketListenerPlayOut> {
 
 		for (iterator = arraylist.iterator(); iterator
 				.hasNext(); j = a(chunksection1.getEmittedLightArray().a(), packetplayoutmapchunk_chunkmap.a, j)) {
-			chunksection1 = (ChunkSection) iterator.next();
+			chunksection1 = iterator.next();
 		}
 
 		if (flag1) {
 			for (iterator = arraylist.iterator(); iterator
 					.hasNext(); j = a(chunksection1.getSkyLightArray().a(), packetplayoutmapchunk_chunkmap.a, j)) {
-				chunksection1 = (ChunkSection) iterator.next();
+				chunksection1 = iterator.next();
 			}
 		}
 

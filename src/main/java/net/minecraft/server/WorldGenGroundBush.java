@@ -13,6 +13,7 @@ public class WorldGenGroundBush extends WorldGenTrees {
 		this.a = iblockdata1;
 	}
 
+	@Override
 	public boolean generate(World world, Random random, BlockPosition blockposition) {
 		Block block;
 

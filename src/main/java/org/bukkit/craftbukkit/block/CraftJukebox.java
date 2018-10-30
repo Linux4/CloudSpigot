@@ -1,13 +1,17 @@
 package org.bukkit.craftbukkit.block;
 
-import net.minecraft.server.*;
-import net.minecraft.server.BlockJukeBox.TileEntityRecordPlayer;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Jukebox;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
+
+import net.minecraft.server.BlockJukeBox;
+import net.minecraft.server.BlockJukeBox.TileEntityRecordPlayer;
+import net.minecraft.server.BlockPosition;
+import net.minecraft.server.Blocks;
+import net.minecraft.server.ItemStack;
 
 public class CraftJukebox extends CraftBlockState implements Jukebox {
 	private final CraftWorld world;
@@ -58,10 +62,12 @@ public class CraftJukebox extends CraftBlockState implements Jukebox {
 		world.playEffect(getLocation(), Effect.RECORD_PLAY, record.getId());
 	}
 
+	@Override
 	public boolean isPlaying() {
 		return getRawData() == 1;
 	}
 
+	@Override
 	public boolean eject() {
 		requirePlaced();
 		boolean result = isPlaying();

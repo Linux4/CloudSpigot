@@ -11,6 +11,7 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimal {
 		this.bn = Blocks.GRASS;
 	}
 
+	@Override
 	protected void E() {
 		if (this.getAge() != 0) {
 			this.bm = 0;
@@ -19,6 +20,7 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimal {
 		super.E();
 	}
 
+	@Override
 	public void m() {
 		super.m();
 		if (this.getAge() != 0) {
@@ -33,9 +35,9 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimal {
 				double d2 = this.random.nextGaussian() * 0.02D;
 
 				this.world.addParticle(EnumParticle.HEART,
-						this.locX + (double) (this.random.nextFloat() * this.width * 2.0F) - (double) this.width,
-						this.locY + 0.5D + (double) (this.random.nextFloat() * this.length),
-						this.locZ + (double) (this.random.nextFloat() * this.width * 2.0F) - (double) this.width, d0,
+						this.locX + this.random.nextFloat() * this.width * 2.0F - this.width,
+						this.locY + 0.5D + this.random.nextFloat() * this.length,
+						this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width, d0,
 						d1, d2, new int[0]);
 			}
 		}
@@ -50,21 +52,25 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimal {
 	 * // CraftBukkit end
 	 */
 
+	@Override
 	public float a(BlockPosition blockposition) {
 		return this.world.getType(blockposition.down()).getBlock() == Blocks.GRASS ? 10.0F
 				: this.world.o(blockposition) - 0.5F;
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		nbttagcompound.setInt("InLove", this.bm);
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		this.bm = nbttagcompound.getInt("InLove");
 	}
 
+	@Override
 	public boolean bR() {
 		int i = MathHelper.floor(this.locX);
 		int j = MathHelper.floor(this.getBoundingBox().b);
@@ -75,14 +81,17 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimal {
 				&& super.bR();
 	}
 
+	@Override
 	public int w() {
 		return 120;
 	}
 
+	@Override
 	protected boolean isTypeNotPersistent() {
 		return false;
 	}
 
+	@Override
 	protected int getExpValue(EntityHuman entityhuman) {
 		return 1 + this.world.random.nextInt(3);
 	}
@@ -91,6 +100,7 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimal {
 		return itemstack == null ? false : itemstack.getItem() == Items.WHEAT;
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		ItemStack itemstack = entityhuman.inventory.getItemInHand();
 
@@ -103,7 +113,7 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimal {
 
 			if (this.isBaby() && this.d(itemstack)) {
 				this.a(entityhuman, itemstack);
-				this.setAge((int) ((float) (-this.getAge() / 20) * 0.1F), true);
+				this.setAge((int) (-this.getAge() / 20 * 0.1F), true);
 				return true;
 			}
 		}

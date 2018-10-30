@@ -21,19 +21,23 @@ public class EntitySpider extends EntityMonster {
 				new EntitySpider.PathfinderGoalSpiderNearestAttackableTarget(this, EntityIronGolem.class));
 	}
 
+	@Override
 	public double an() {
-		return (double) (this.length * 0.5F);
+		return this.length * 0.5F;
 	}
 
+	@Override
 	protected NavigationAbstract b(World world) {
 		return new NavigationSpider(this, world);
 	}
 
+	@Override
 	protected void h() {
 		super.h();
 		this.datawatcher.a(16, new Byte((byte) 0));
 	}
 
+	@Override
 	public void t_() {
 		super.t_();
 		if (!this.world.isClientSide) {
@@ -42,32 +46,39 @@ public class EntitySpider extends EntityMonster {
 
 	}
 
+	@Override
 	protected void initAttributes() {
 		super.initAttributes();
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(16.0D);
 		this.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED).setValue(0.30000001192092896D);
 	}
 
+	@Override
 	protected String z() {
 		return "mob.spider.say";
 	}
 
+	@Override
 	protected String bo() {
 		return "mob.spider.say";
 	}
 
+	@Override
 	protected String bp() {
 		return "mob.spider.death";
 	}
 
+	@Override
 	protected void a(BlockPosition blockposition, Block block) {
 		this.makeSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
+	@Override
 	protected Item getLoot() {
 		return Items.STRING;
 	}
 
+	@Override
 	protected void dropDeathLoot(boolean flag, int i) {
 		super.dropDeathLoot(flag, i);
 		if (flag && (this.random.nextInt(3) == 0 || this.random.nextInt(1 + i) > 0)) {
@@ -76,17 +87,21 @@ public class EntitySpider extends EntityMonster {
 
 	}
 
+	@Override
 	public boolean k_() {
 		return this.n();
 	}
 
+	@Override
 	public void aA() {
 	}
 
+	@Override
 	public EnumMonsterType getMonsterType() {
 		return EnumMonsterType.ARTHROPOD;
 	}
 
+	@Override
 	public boolean d(MobEffect mobeffect) {
 		return mobeffect.getEffectId() == MobEffectList.POISON.id ? false : super.d(mobeffect);
 	}
@@ -107,6 +122,7 @@ public class EntitySpider extends EntityMonster {
 		this.datawatcher.watch(16, Byte.valueOf(b0));
 	}
 
+	@Override
 	public GroupDataEntity prepare(DifficultyDamageScaler difficultydamagescaler, GroupDataEntity groupdataentity) {
 		Object object = super.prepare(difficultydamagescaler, groupdataentity);
 
@@ -141,6 +157,7 @@ public class EntitySpider extends EntityMonster {
 		return (GroupDataEntity) object;
 	}
 
+	@Override
 	public float getHeadHeight() {
 		return 0.65F;
 	}
@@ -154,6 +171,7 @@ public class EntitySpider extends EntityMonster {
 			super(entityspider, oclass, true);
 		}
 
+		@Override
 		public boolean a() {
 			float f = this.e.c(1.0F);
 
@@ -167,6 +185,7 @@ public class EntitySpider extends EntityMonster {
 			super(entityspider, oclass, 1.0D, true);
 		}
 
+		@Override
 		public boolean b() {
 			float f = this.b.c(1.0F);
 
@@ -178,8 +197,9 @@ public class EntitySpider extends EntityMonster {
 			}
 		}
 
+		@Override
 		protected double a(EntityLiving entityliving) {
-			return (double) (4.0F + entityliving.width);
+			return 4.0F + entityliving.width;
 		}
 	}
 

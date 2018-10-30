@@ -1,10 +1,9 @@
 package net.minecraft.server;
 
-import java.util.Iterator;
-import java.util.List;
-
 // CraftBukkit start
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
@@ -32,14 +31,17 @@ public class EntityPotion extends EntityProjectile {
 		this.item = itemstack;
 	}
 
+	@Override
 	protected float m() {
 		return 0.05F;
 	}
 
+	@Override
 	protected float j() {
 		return 0.5F;
 	}
 
+	@Override
 	protected float l() {
 		return -20.0F;
 	}
@@ -60,6 +62,7 @@ public class EntityPotion extends EntityProjectile {
 		return this.item.getData();
 	}
 
+	@Override
 	protected void a(MovingObjectPosition movingobjectposition) {
 		if (!this.world.isClientSide) {
 			List<MobEffect> list = Items.POTION.h(this.item);
@@ -75,7 +78,7 @@ public class EntityPotion extends EntityProjectile {
 					HashMap<LivingEntity, Double> affected = new HashMap<LivingEntity, Double>();
 
 					while (iterator.hasNext()) {
-						EntityLiving entityliving = (EntityLiving) iterator.next();
+						EntityLiving entityliving = iterator.next();
 						double d0 = this.h(entityliving);
 
 						if (d0 < 16.0D) {
@@ -106,7 +109,7 @@ public class EntityPotion extends EntityProjectile {
 							Iterator<MobEffect> iterator1 = list.iterator();
 
 							while (iterator1.hasNext()) {
-								MobEffect mobeffect = (MobEffect) iterator1.next();
+								MobEffect mobeffect = iterator1.next();
 								int i = mobeffect.getEffectId();
 
 								// CraftBukkit start - Abide by PVP settings - for players only!
@@ -123,7 +126,7 @@ public class EntityPotion extends EntityProjectile {
 									MobEffectList.byId[i].applyInstantEffect(this, this.getShooter(), entityliving,
 											mobeffect.getAmplifier(), d1);
 								} else {
-									int j = (int) (d1 * (double) mobeffect.getDuration() + 0.5D);
+									int j = (int) (d1 * mobeffect.getDuration() + 0.5D);
 
 									if (j > 20) {
 										entityliving.addEffect(new MobEffect(i, j, mobeffect.getAmplifier()));
@@ -141,6 +144,7 @@ public class EntityPotion extends EntityProjectile {
 
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		if (nbttagcompound.hasKeyOfType("Potion", 10)) {
@@ -155,6 +159,7 @@ public class EntityPotion extends EntityProjectile {
 
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		if (this.item != null) {

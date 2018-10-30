@@ -1,8 +1,6 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityFireworks;
-import net.minecraft.server.ItemStack;
-import net.minecraft.server.Items;
+import java.util.Random;
 
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.CraftServer;
@@ -11,7 +9,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-import java.util.Random;
+import net.minecraft.server.EntityFireworks;
+import net.minecraft.server.ItemStack;
+import net.minecraft.server.Items;
 
 public class CraftFirework extends CraftEntity implements Firework {
 	private static final int FIREWORK_ITEM_INDEX = 8;

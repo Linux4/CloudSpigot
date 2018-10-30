@@ -12,6 +12,7 @@ public class PacketHandshakingInSetProtocol implements Packet<PacketHandshakingI
 	public PacketHandshakingInSetProtocol() {
 	}
 
+	@Override
 	public void a(PacketDataSerializer packetdataserializer) throws IOException {
 		this.a = packetdataserializer.e();
 		this.hostname = packetdataserializer.c(Short.MAX_VALUE); // Spigot
@@ -19,6 +20,7 @@ public class PacketHandshakingInSetProtocol implements Packet<PacketHandshakingI
 		this.d = EnumProtocol.a(packetdataserializer.e());
 	}
 
+	@Override
 	public void b(PacketDataSerializer packetdataserializer) throws IOException {
 		packetdataserializer.b(this.a);
 		packetdataserializer.a(this.hostname);
@@ -26,6 +28,7 @@ public class PacketHandshakingInSetProtocol implements Packet<PacketHandshakingI
 		packetdataserializer.b(this.d.a());
 	}
 
+	@Override
 	public void a(PacketHandshakingInListener packethandshakinginlistener) {
 		packethandshakinginlistener.a(this);
 	}

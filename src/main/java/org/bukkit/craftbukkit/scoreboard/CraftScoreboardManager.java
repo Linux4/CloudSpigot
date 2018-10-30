@@ -37,10 +37,12 @@ public final class CraftScoreboardManager implements ScoreboardManager {
 		scoreboards.add(mainScoreboard);
 	}
 
+	@Override
 	public CraftScoreboard getMainScoreboard() {
 		return mainScoreboard;
 	}
 
+	@Override
 	public CraftScoreboard getNewScoreboard() {
 		// org.spigotmc.AsyncCatcher.catchOp( "scoreboard creation"); // Spigot //
 		// CloudSpigot
@@ -52,7 +54,7 @@ public final class CraftScoreboardManager implements ScoreboardManager {
 	// CraftBukkit method
 	public CraftScoreboard getPlayerBoard(CraftPlayer player) {
 		CraftScoreboard board = playerBoards.get(player);
-		return (CraftScoreboard) (board == null ? getMainScoreboard() : board);
+		return board == null ? getMainScoreboard() : board;
 	}
 
 	// CraftBukkit method
@@ -73,7 +75,7 @@ public final class CraftScoreboardManager implements ScoreboardManager {
 		if (scoreboard == mainScoreboard) {
 			playerBoards.remove(player);
 		} else {
-			playerBoards.put(player, (CraftScoreboard) scoreboard);
+			playerBoards.put(player, scoreboard);
 		}
 
 		// Old objective tracking

@@ -38,14 +38,17 @@ public class BlockGrowEvent extends BlockEvent implements Cancellable {
 		return newState;
 	}
 
+	@Override
 	public boolean isCancelled() {
 		return cancelled;
 	}
 
+	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
 	}
 
+	@Override
 	public HandlerList getHandlers() {
 		return handlers;
 	}

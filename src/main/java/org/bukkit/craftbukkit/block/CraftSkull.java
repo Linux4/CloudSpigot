@@ -1,15 +1,16 @@
 package org.bukkit.craftbukkit.block;
 
-import com.mojang.authlib.GameProfile;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.TileEntitySkull;
 import org.bukkit.Material;
-
 import org.bukkit.SkullType;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Skull;
 import org.bukkit.craftbukkit.CraftWorld;
+
+import com.mojang.authlib.GameProfile;
+
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.TileEntitySkull;
 
 public class CraftSkull extends CraftBlockState implements Skull {
 	private static final int MAX_OWNER_LENGTH = 16;
@@ -146,14 +147,17 @@ public class CraftSkull extends CraftBlockState implements Skull {
 		}
 	}
 
+	@Override
 	public boolean hasOwner() {
 		return profile != null;
 	}
 
+	@Override
 	public String getOwner() {
 		return hasOwner() ? profile.getName() : null;
 	}
 
+	@Override
 	public boolean setOwner(String name) {
 		if (name == null || name.length() > MAX_OWNER_LENGTH) {
 			return false;
@@ -172,18 +176,22 @@ public class CraftSkull extends CraftBlockState implements Skull {
 		return true;
 	}
 
+	@Override
 	public BlockFace getRotation() {
 		return getBlockFace(rotation);
 	}
 
+	@Override
 	public void setRotation(BlockFace rotation) {
 		this.rotation = getBlockFace(rotation);
 	}
 
+	@Override
 	public SkullType getSkullType() {
 		return skullType;
 	}
 
+	@Override
 	public void setSkullType(SkullType skullType) {
 		this.skullType = skullType;
 

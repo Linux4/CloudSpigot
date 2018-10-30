@@ -1,10 +1,11 @@
 package eu.server24_7.cloudspigot.console;
 
-import net.minecraft.server.DedicatedServer;
-import net.minecrell.terminalconsole.SimpleTerminalConsole;
 import org.bukkit.craftbukkit.command.ConsoleCommandCompleter;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
+
+import net.minecraft.server.DedicatedServer;
+import net.minecrell.terminalconsole.SimpleTerminalConsole;
 
 public final class CloudSpigotConsole extends SimpleTerminalConsole {
 

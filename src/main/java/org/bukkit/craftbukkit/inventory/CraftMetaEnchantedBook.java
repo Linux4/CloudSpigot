@@ -3,8 +3,6 @@ package org.bukkit.craftbukkit.inventory;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.server.NBTTagCompound;
-
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta;
@@ -13,6 +11,8 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
+
+import net.minecraft.server.NBTTagCompound;
 
 @DelegateDeserialization(SerializableMeta.class)
 class CraftMetaEnchantedBook extends CraftMetaItem implements EnchantmentStorageMeta {
@@ -127,10 +127,12 @@ class CraftMetaEnchantedBook extends CraftMetaItem implements EnchantmentStorage
 		return !hasStoredEnchants();
 	}
 
+	@Override
 	public boolean hasStoredEnchant(Enchantment ench) {
 		return hasStoredEnchants() && enchantments.containsKey(ench);
 	}
 
+	@Override
 	public int getStoredEnchantLevel(Enchantment ench) {
 		Integer level = hasStoredEnchants() ? enchantments.get(ench) : null;
 		if (level == null) {
@@ -139,10 +141,12 @@ class CraftMetaEnchantedBook extends CraftMetaItem implements EnchantmentStorage
 		return level;
 	}
 
+	@Override
 	public Map<Enchantment, Integer> getStoredEnchants() {
 		return hasStoredEnchants() ? ImmutableMap.copyOf(enchantments) : ImmutableMap.<Enchantment, Integer>of();
 	}
 
+	@Override
 	public boolean addStoredEnchant(Enchantment ench, int level, boolean ignoreRestrictions) {
 		if (enchantments == null) {
 			enchantments = new HashMap<Enchantment, Integer>(4);
@@ -155,14 +159,17 @@ class CraftMetaEnchantedBook extends CraftMetaItem implements EnchantmentStorage
 		return false;
 	}
 
+	@Override
 	public boolean removeStoredEnchant(Enchantment ench) {
 		return hasStoredEnchants() && enchantments.remove(ench) != null;
 	}
 
+	@Override
 	public boolean hasStoredEnchants() {
 		return !(enchantments == null || enchantments.isEmpty());
 	}
 
+	@Override
 	public boolean hasConflictingStoredEnchant(Enchantment ench) {
 		return checkConflictingEnchants(enchantments, ench);
 	}

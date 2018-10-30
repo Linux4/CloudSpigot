@@ -1,10 +1,11 @@
 package org.bukkit.craftbukkit.block;
 
-import net.minecraft.server.TileEntityCommand;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.CommandBlock;
 import org.bukkit.craftbukkit.CraftWorld;
+
+import net.minecraft.server.TileEntityCommand;
 
 public class CraftCommandBlock extends CraftBlockState implements CommandBlock {
 	private final TileEntityCommand commandBlock;
@@ -27,22 +28,27 @@ public class CraftCommandBlock extends CraftBlockState implements CommandBlock {
 		name = commandBlock.getCommandBlock().getName();
 	}
 
+	@Override
 	public String getCommand() {
 		return command;
 	}
 
+	@Override
 	public void setCommand(String command) {
 		this.command = command != null ? command : "";
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public void setName(String name) {
 		this.name = name != null ? name : "@";
 	}
 
+	@Override
 	public boolean update(boolean force, boolean applyPhysics) {
 		boolean result = super.update(force, applyPhysics);
 

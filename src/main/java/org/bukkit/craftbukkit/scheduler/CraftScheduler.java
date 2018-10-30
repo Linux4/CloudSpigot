@@ -21,6 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
+
 import eu.server24_7.cloudspigot.ServerSchedulerReportingWrapper;
 import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
 import eu.server24_7.cloudspigot.exception.ServerSchedulerException;
@@ -70,6 +71,7 @@ public class CraftScheduler implements BukkitScheduler {
 	 * Main thread logic only
 	 */
 	private final PriorityQueue<CraftTask> pending = new PriorityQueue<CraftTask>(10, new Comparator<CraftTask>() {
+		@Override
 		public int compare(final CraftTask o1, final CraftTask o2) {
 			return (int) (o1.getNextRun() - o2.getNextRun());
 		}
@@ -100,44 +102,54 @@ public class CraftScheduler implements BukkitScheduler {
 		RECENT_TICKS = 30;
 	}
 
+	@Override
 	public int scheduleSyncDelayedTask(final Plugin plugin, final Runnable task) {
 		return this.scheduleSyncDelayedTask(plugin, task, 0l);
 	}
 
+	@Override
 	public BukkitTask runTask(Plugin plugin, Runnable runnable) {
 		return runTaskLater(plugin, runnable, 0l);
 	}
 
+	@Override
 	@Deprecated
 	public int scheduleAsyncDelayedTask(final Plugin plugin, final Runnable task) {
 		return this.scheduleAsyncDelayedTask(plugin, task, 0l);
 	}
 
+	@Override
 	public BukkitTask runTaskAsynchronously(Plugin plugin, Runnable runnable) {
 		return runTaskLaterAsynchronously(plugin, runnable, 0l);
 	}
 
+	@Override
 	public int scheduleSyncDelayedTask(final Plugin plugin, final Runnable task, final long delay) {
 		return this.scheduleSyncRepeatingTask(plugin, task, delay, -1l);
 	}
 
+	@Override
 	public BukkitTask runTaskLater(Plugin plugin, Runnable runnable, long delay) {
 		return runTaskTimer(plugin, runnable, delay, -1l);
 	}
 
+	@Override
 	@Deprecated
 	public int scheduleAsyncDelayedTask(final Plugin plugin, final Runnable task, final long delay) {
 		return this.scheduleAsyncRepeatingTask(plugin, task, delay, -1l);
 	}
 
+	@Override
 	public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable runnable, long delay) {
 		return runTaskTimerAsynchronously(plugin, runnable, delay, -1l);
 	}
 
+	@Override
 	public int scheduleSyncRepeatingTask(final Plugin plugin, final Runnable runnable, long delay, long period) {
 		return runTaskTimer(plugin, runnable, delay, period).getTaskId();
 	}
 
+	@Override
 	public BukkitTask runTaskTimer(Plugin plugin, Runnable runnable, long delay, long period) {
 		validate(plugin, runnable);
 		if (delay < 0l) {
@@ -151,11 +163,13 @@ public class CraftScheduler implements BukkitScheduler {
 		return handle(new CraftTask(plugin, runnable, nextId(), period), delay);
 	}
 
+	@Override
 	@Deprecated
 	public int scheduleAsyncRepeatingTask(final Plugin plugin, final Runnable runnable, long delay, long period) {
 		return runTaskTimerAsynchronously(plugin, runnable, delay, period).getTaskId();
 	}
 
+	@Override
 	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Runnable runnable, long delay, long period) {
 		validate(plugin, runnable);
 		if (delay < 0l) {
@@ -169,6 +183,7 @@ public class CraftScheduler implements BukkitScheduler {
 		return handle(new CraftAsyncTask(runners, plugin, runnable, nextId(), period), delay);
 	}
 
+	@Override
 	public <T> Future<T> callSyncMethod(final Plugin plugin, final Callable<T> task) {
 		validate(plugin, task);
 		final CraftFuture<T> future = new CraftFuture<T>(task, plugin, nextId());
@@ -176,6 +191,7 @@ public class CraftScheduler implements BukkitScheduler {
 		return future;
 	}
 
+	@Override
 	public void cancelTask(final int taskId) {
 		if (taskId <= 0) {
 			return;
@@ -185,6 +201,7 @@ public class CraftScheduler implements BukkitScheduler {
 			task.cancel0();
 		}
 		task = new CraftTask(new Runnable() {
+			@Override
 			public void run() {
 				if (!check(CraftScheduler.this.temp)) {
 					check(CraftScheduler.this.pending);
@@ -218,9 +235,11 @@ public class CraftScheduler implements BukkitScheduler {
 		}
 	}
 
+	@Override
 	public void cancelTasks(final Plugin plugin) {
 		Validate.notNull(plugin, "Cannot cancel tasks of null plugin");
 		final CraftTask task = new CraftTask(new Runnable() {
+			@Override
 			public void run() {
 				check(CraftScheduler.this.pending);
 				check(CraftScheduler.this.temp);
@@ -256,8 +275,10 @@ public class CraftScheduler implements BukkitScheduler {
 		}
 	}
 
+	@Override
 	public void cancelAllTasks() {
 		final CraftTask task = new CraftTask(new Runnable() {
+			@Override
 			public void run() {
 				Iterator<CraftTask> it = CraftScheduler.this.runners.values().iterator();
 				while (it.hasNext()) {
@@ -283,6 +304,7 @@ public class CraftScheduler implements BukkitScheduler {
 		}
 	}
 
+	@Override
 	public boolean isCurrentlyRunning(final int taskId) {
 		final CraftTask task = runners.get(taskId);
 		if (task == null || task.isSync()) {
@@ -294,6 +316,7 @@ public class CraftScheduler implements BukkitScheduler {
 		}
 	}
 
+	@Override
 	public boolean isQueued(final int taskId) {
 		if (taskId <= 0) {
 			return false;
@@ -307,6 +330,7 @@ public class CraftScheduler implements BukkitScheduler {
 		return task != null && task.getPeriod() >= -1l;
 	}
 
+	@Override
 	public List<BukkitWorker> getActiveWorkers() {
 		final ArrayList<BukkitWorker> workers = new ArrayList<BukkitWorker>();
 		for (final CraftTask taskObj : runners.values()) {
@@ -324,6 +348,7 @@ public class CraftScheduler implements BukkitScheduler {
 		return workers;
 	}
 
+	@Override
 	public List<BukkitTask> getPendingTasks() {
 		final ArrayList<CraftTask> truePending = new ArrayList<CraftTask>();
 		for (CraftTask task = head.getNext(); task != null; task = task.getNext()) {

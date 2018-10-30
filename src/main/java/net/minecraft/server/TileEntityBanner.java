@@ -41,6 +41,7 @@ public class TileEntityBanner extends TileEntity {
 		// this.g = true; // CloudSpigot
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		a(nbttagcompound, this.color, this.patterns);
@@ -54,6 +55,7 @@ public class TileEntityBanner extends TileEntity {
 
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		this.color = nbttagcompound.getInt("Base");
@@ -69,6 +71,7 @@ public class TileEntityBanner extends TileEntity {
 		// this.g = true; // CloudSpigot
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Packet getUpdatePacket() {
 		NBTTagCompound nbttagcompound = new NBTTagCompound();

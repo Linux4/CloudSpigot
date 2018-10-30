@@ -21,6 +21,7 @@ public class BaseBlockPosition implements Comparable<BaseBlockPosition> {
 		this(MathHelper.floor(d0), MathHelper.floor(d1), MathHelper.floor(d2));
 	}
 
+	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
 			return true;
@@ -34,6 +35,7 @@ public class BaseBlockPosition implements Comparable<BaseBlockPosition> {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (this.getY() + this.getZ() * 31) * 31 + this.getX();
 	}
@@ -67,33 +69,35 @@ public class BaseBlockPosition implements Comparable<BaseBlockPosition> {
 	}
 
 	public double c(double d0, double d1, double d2) {
-		double d3 = (double) this.getX() - d0;
-		double d4 = (double) this.getY() - d1;
-		double d5 = (double) this.getZ() - d2;
+		double d3 = this.getX() - d0;
+		double d4 = this.getY() - d1;
+		double d5 = this.getZ() - d2;
 
 		return d3 * d3 + d4 * d4 + d5 * d5;
 	}
 
 	public double d(double d0, double d1, double d2) {
-		double d3 = (double) this.getX() + 0.5D - d0;
-		double d4 = (double) this.getY() + 0.5D - d1;
-		double d5 = (double) this.getZ() + 0.5D - d2;
+		double d3 = this.getX() + 0.5D - d0;
+		double d4 = this.getY() + 0.5D - d1;
+		double d5 = this.getZ() + 0.5D - d2;
 
 		return d3 * d3 + d4 * d4 + d5 * d5;
 	}
 
 	public double i(BaseBlockPosition baseblockposition) {
-		return this.c((double) baseblockposition.getX(), (double) baseblockposition.getY(),
-				(double) baseblockposition.getZ());
+		return this.c(baseblockposition.getX(), baseblockposition.getY(),
+				baseblockposition.getZ());
 	}
 
+	@Override
 	public String toString() {
 		return Objects.toStringHelper(this).add("x", this.getX()).add("y", this.getY()).add("z", this.getZ())
 				.toString(); // CloudSpigot
 	}
 
 	// Paperspigot - Signature change, Object -> BaseBlockPosition
+	@Override
 	public int compareTo(BaseBlockPosition object) {
-		return this.g((BaseBlockPosition) object);
+		return this.g(object);
 	}
 }

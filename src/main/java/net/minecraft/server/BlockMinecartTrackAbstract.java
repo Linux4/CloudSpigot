@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 public abstract class BlockMinecartTrackAbstract extends Block {
 
@@ -26,19 +27,23 @@ public abstract class BlockMinecartTrackAbstract extends Block {
 		this.a(CreativeModeTab.e);
 	}
 
+	@Override
 	public AxisAlignedBB a(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		return null;
 	}
 
+	@Override
 	public boolean c() {
 		return false;
 	}
 
+	@Override
 	public MovingObjectPosition a(World world, BlockPosition blockposition, Vec3D vec3d, Vec3D vec3d1) {
 		this.updateShape(world, blockposition);
 		return super.a(world, blockposition, vec3d, vec3d1);
 	}
 
+	@Override
 	public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
 		IBlockData iblockdata = iblockaccess.getType(blockposition);
 		BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = iblockdata
@@ -52,14 +57,17 @@ public abstract class BlockMinecartTrackAbstract extends Block {
 
 	}
 
+	@Override
 	public boolean d() {
 		return false;
 	}
 
+	@Override
 	public boolean canPlace(World world, BlockPosition blockposition) {
-		return World.a((IBlockAccess) world, blockposition.down());
+		return World.a(world, blockposition.down());
 	}
 
+	@Override
 	public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		if (!world.isClientSide) {
 			iblockdata = this.a(world, blockposition, iblockdata, true);
@@ -70,27 +78,28 @@ public abstract class BlockMinecartTrackAbstract extends Block {
 
 	}
 
+	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
 		if (!world.isClientSide) {
-			BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = (BlockMinecartTrackAbstract.EnumTrackPosition) iblockdata
+			BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = iblockdata
 					.get(this.n());
 			boolean flag = false;
 
-			if (!World.a((IBlockAccess) world, blockposition.down())) {
+			if (!World.a(world, blockposition.down())) {
 				flag = true;
 			}
 
 			if (blockminecarttrackabstract_enumtrackposition == BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_EAST
-					&& !World.a((IBlockAccess) world, blockposition.east())) {
+					&& !World.a(world, blockposition.east())) {
 				flag = true;
 			} else if (blockminecarttrackabstract_enumtrackposition == BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_WEST
-					&& !World.a((IBlockAccess) world, blockposition.west())) {
+					&& !World.a(world, blockposition.west())) {
 				flag = true;
 			} else if (blockminecarttrackabstract_enumtrackposition == BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_NORTH
-					&& !World.a((IBlockAccess) world, blockposition.north())) {
+					&& !World.a(world, blockposition.north())) {
 				flag = true;
 			} else if (blockminecarttrackabstract_enumtrackposition == BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_SOUTH
-					&& !World.a((IBlockAccess) world, blockposition.south())) {
+					&& !World.a(world, blockposition.south())) {
 				flag = true;
 			}
 
@@ -113,13 +122,15 @@ public abstract class BlockMinecartTrackAbstract extends Block {
 						.a(world.isBlockIndirectlyPowered(blockposition), flag).b();
 	}
 
+	@Override
 	public int k() {
 		return 0;
 	}
 
+	@Override
 	public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		super.remove(world, blockposition, iblockdata);
-		if (((BlockMinecartTrackAbstract.EnumTrackPosition) iblockdata.get(this.n())).c()) {
+		if (iblockdata.get(this.n()).c()) {
 			world.applyPhysics(blockposition.up(), this);
 		}
 
@@ -230,6 +241,7 @@ public abstract class BlockMinecartTrackAbstract extends Block {
 			return this.l;
 		}
 
+		@Override
 		public String toString() {
 			return this.m;
 		}
@@ -249,6 +261,7 @@ public abstract class BlockMinecartTrackAbstract extends Block {
 			return BlockMinecartTrackAbstract.EnumTrackPosition.k[i];
 		}
 
+		@Override
 		public String getName() {
 			return this.m;
 		}
@@ -281,7 +294,7 @@ public abstract class BlockMinecartTrackAbstract extends Block {
 			this.c = blockposition;
 			this.e = iblockdata;
 			this.d = (BlockMinecartTrackAbstract) iblockdata.getBlock();
-			BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = (BlockMinecartTrackAbstract.EnumTrackPosition) iblockdata
+			BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = iblockdata
 					.get(BlockMinecartTrackAbstract.this.n());
 
 			this.f = this.d.a;
@@ -347,7 +360,7 @@ public abstract class BlockMinecartTrackAbstract extends Block {
 		private void c() {
 			for (int i = 0; i < this.g.size(); ++i) {
 				BlockMinecartTrackAbstract.MinecartTrackLogic blockminecarttrackabstract_minecarttracklogic = this
-						.b((BlockPosition) this.g.get(i));
+						.b(this.g.get(i));
 
 				if (blockminecarttrackabstract_minecarttracklogic != null
 						&& blockminecarttrackabstract_minecarttracklogic.a(this)) {
@@ -392,7 +405,7 @@ public abstract class BlockMinecartTrackAbstract extends Block {
 
 		private boolean c(BlockPosition blockposition) {
 			for (int i = 0; i < this.g.size(); ++i) {
-				BlockPosition blockposition1 = (BlockPosition) this.g.get(i);
+				BlockPosition blockposition1 = this.g.get(i);
 
 				if (blockposition1.getX() == blockposition.getX() && blockposition1.getZ() == blockposition.getZ()) {
 					return true;
@@ -407,7 +420,7 @@ public abstract class BlockMinecartTrackAbstract extends Block {
 			Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
 			while (iterator.hasNext()) {
-				EnumDirection enumdirection = (EnumDirection) iterator.next();
+				EnumDirection enumdirection = iterator.next();
 
 				if (this.a(this.c.shift(enumdirection))) {
 					++i;
@@ -613,7 +626,7 @@ public abstract class BlockMinecartTrackAbstract extends Block {
 
 				for (int i = 0; i < this.g.size(); ++i) {
 					BlockMinecartTrackAbstract.MinecartTrackLogic blockminecarttrackabstract_minecarttracklogic = this
-							.b((BlockPosition) this.g.get(i));
+							.b(this.g.get(i));
 
 					if (blockminecarttrackabstract_minecarttracklogic != null) {
 						blockminecarttrackabstract_minecarttracklogic.c();

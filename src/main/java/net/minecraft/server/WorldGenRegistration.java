@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import com.google.common.collect.Lists;
 
 public class WorldGenRegistration {
 
@@ -44,16 +45,19 @@ public class WorldGenRegistration {
 			super(random, i, 64, j, 7, 7, 9);
 		}
 
+		@Override
 		protected void a(NBTTagCompound nbttagcompound) {
 			super.a(nbttagcompound);
 			nbttagcompound.setBoolean("Witch", this.e);
 		}
 
+		@Override
 		protected void b(NBTTagCompound nbttagcompound) {
 			super.b(nbttagcompound);
 			this.e = nbttagcompound.getBoolean("Witch");
 		}
 
+		@Override
 		public boolean a(World world, Random random, StructureBoundingBox structureboundingbox) {
 			if (!this.a(world, structureboundingbox, 0)) {
 				return false;
@@ -126,11 +130,11 @@ public class WorldGenRegistration {
 					j1 = this.d(2);
 					int k1 = this.b(2, 5);
 
-					if (structureboundingbox.b((BaseBlockPosition) (new BlockPosition(i1, j1, k1)))) {
+					if (structureboundingbox.b((new BlockPosition(i1, j1, k1)))) {
 						this.e = true;
 						EntityWitch entitywitch = new EntityWitch(world);
 
-						entitywitch.setPositionRotation((double) i1 + 0.5D, (double) j1, (double) k1 + 0.5D, 0.0F,
+						entitywitch.setPositionRotation(i1 + 0.5D, j1, k1 + 0.5D, 0.0F,
 								0.0F);
 						entitywitch.prepare(world.E(new BlockPosition(i1, j1, k1)), (GroupDataEntity) null);
 						world.addEntity(entitywitch, org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.CHUNK_GEN); // CraftBukkit
@@ -174,6 +178,7 @@ public class WorldGenRegistration {
 			super(random, i, 64, j, 12, 10, 15);
 		}
 
+		@Override
 		protected void a(NBTTagCompound nbttagcompound) {
 			super.a(nbttagcompound);
 			nbttagcompound.setBoolean("placedMainChest", this.e);
@@ -182,6 +187,7 @@ public class WorldGenRegistration {
 			nbttagcompound.setBoolean("placedTrap2", this.h);
 		}
 
+		@Override
 		protected void b(NBTTagCompound nbttagcompound) {
 			super.b(nbttagcompound);
 			this.e = nbttagcompound.getBoolean("placedMainChest");
@@ -190,6 +196,7 @@ public class WorldGenRegistration {
 			this.h = nbttagcompound.getBoolean("placedTrap2");
 		}
 
+		@Override
 		public boolean a(World world, Random random, StructureBoundingBox structureboundingbox) {
 			if (!this.a(world, structureboundingbox, 0)) {
 				return false;
@@ -451,6 +458,7 @@ public class WorldGenRegistration {
 			private WorldGenJungleTemple$WorldGenJungleTemplePiece() {
 			}
 
+			@Override
 			public void a(Random random, int i, int j, int k, boolean flag) {
 				if (random.nextFloat() < 0.4F) {
 					this.a = Blocks.COBBLESTONE.getBlockData();
@@ -489,6 +497,7 @@ public class WorldGenRegistration {
 			super(random, i, 64, j, 21, 15, 21);
 		}
 
+		@Override
 		protected void a(NBTTagCompound nbttagcompound) {
 			super.a(nbttagcompound);
 			nbttagcompound.setBoolean("hasPlacedChest0", this.e[0]);
@@ -497,6 +506,7 @@ public class WorldGenRegistration {
 			nbttagcompound.setBoolean("hasPlacedChest3", this.e[3]);
 		}
 
+		@Override
 		protected void b(NBTTagCompound nbttagcompound) {
 			super.b(nbttagcompound);
 			this.e[0] = nbttagcompound.getBoolean("hasPlacedChest0");
@@ -505,6 +515,7 @@ public class WorldGenRegistration {
 			this.e[3] = nbttagcompound.getBoolean("hasPlacedChest3");
 		}
 
+		@Override
 		public boolean a(World world, Random random, StructureBoundingBox structureboundingbox) {
 			this.a(world, structureboundingbox, 0, -4, 0, this.a - 1, 0, this.c - 1, Blocks.SANDSTONE.getBlockData(),
 					Blocks.SANDSTONE.getBlockData(), false);
@@ -791,7 +802,7 @@ public class WorldGenRegistration {
 			Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
 			while (iterator.hasNext()) {
-				EnumDirection enumdirection = (EnumDirection) iterator.next();
+				EnumDirection enumdirection = iterator.next();
 
 				if (!this.e[enumdirection.b()]) {
 					int l1 = enumdirection.getAdjacentX() * 2;
@@ -836,6 +847,7 @@ public class WorldGenRegistration {
 
 		}
 
+		@Override
 		protected void a(NBTTagCompound nbttagcompound) {
 			nbttagcompound.setInt("Width", this.a);
 			nbttagcompound.setInt("Height", this.b);
@@ -843,6 +855,7 @@ public class WorldGenRegistration {
 			nbttagcompound.setInt("HPos", this.d);
 		}
 
+		@Override
 		protected void b(NBTTagCompound nbttagcompound) {
 			this.a = nbttagcompound.getInt("Width");
 			this.b = nbttagcompound.getInt("Height");
@@ -861,7 +874,7 @@ public class WorldGenRegistration {
 				for (int l = this.l.c; l <= this.l.f; ++l) {
 					for (int i1 = this.l.a; i1 <= this.l.d; ++i1) {
 						blockposition_mutableblockposition.c(i1, 64, l);
-						if (structureboundingbox.b((BaseBlockPosition) blockposition_mutableblockposition)) {
+						if (structureboundingbox.b(blockposition_mutableblockposition)) {
 							j += Math.max(world.r(blockposition_mutableblockposition).getY(),
 									world.worldProvider.getSeaLevel());
 							++k;

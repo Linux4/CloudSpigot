@@ -1,13 +1,13 @@
 package org.bukkit.craftbukkit.block;
 
-import net.minecraft.server.TileEntityBeacon;
 import org.bukkit.Material;
-
-import org.bukkit.block.Block;
 import org.bukkit.block.Beacon;
+import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.inventory.CraftInventoryBeacon;
 import org.bukkit.inventory.Inventory;
+
+import net.minecraft.server.TileEntityBeacon;
 
 public class CraftBeacon extends CraftBlockState implements Beacon {
 	private final CraftWorld world;
@@ -26,6 +26,7 @@ public class CraftBeacon extends CraftBlockState implements Beacon {
 		beacon = te;
 	}
 
+	@Override
 	public Inventory getInventory() {
 		return new CraftInventoryBeacon(beacon);
 	}

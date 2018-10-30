@@ -21,6 +21,7 @@ public class EntityEnderPearl extends EntityProjectile {
 		this.loadChunks = world.cloudSpigotConfig.loadUnloadedEnderPearls; // CloudSpigot
 	}
 
+	@Override
 	protected void a(MovingObjectPosition movingobjectposition) {
 		EntityLiving entityliving = this.getShooter();
 
@@ -91,6 +92,7 @@ public class EntityEnderPearl extends EntityProjectile {
 
 	}
 
+	@Override
 	public void t_() {
 		EntityLiving entityliving = this.getShooter();
 

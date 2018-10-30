@@ -16,9 +16,10 @@ public abstract class BlockLeaves extends BlockTransparent {
 		this.a(CreativeModeTab.c);
 		this.c(0.2F);
 		this.e(1);
-		this.a(BlockLeaves.h);
+		this.a(Block.h);
 	}
 
+	@Override
 	public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		byte b0 = 1;
 		int i = b0 + 1;
@@ -35,7 +36,7 @@ public abstract class BlockLeaves extends BlockTransparent {
 						IBlockData iblockdata1 = world.getType(blockposition1);
 
 						if (iblockdata1.getBlock().getMaterial() == Material.LEAVES
-								&& !((Boolean) iblockdata1.get(BlockLeaves.CHECK_DECAY)).booleanValue()) {
+								&& !iblockdata1.get(BlockLeaves.CHECK_DECAY).booleanValue()) {
 							world.setTypeAndData(blockposition1, iblockdata1.set(BlockLeaves.CHECK_DECAY, true), 4);
 						}
 					}
@@ -45,10 +46,11 @@ public abstract class BlockLeaves extends BlockTransparent {
 
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		if (!world.isClientSide) {
-			if (((Boolean) iblockdata.get(BlockLeaves.CHECK_DECAY)).booleanValue()
-					&& ((Boolean) iblockdata.get(BlockLeaves.DECAYABLE)).booleanValue()) {
+			if (iblockdata.get(BlockLeaves.CHECK_DECAY).booleanValue()
+					&& iblockdata.get(BlockLeaves.DECAYABLE).booleanValue()) {
 				byte b0 = 4;
 				int i = b0 + 1;
 				int j = blockposition.getX();
@@ -151,14 +153,17 @@ public abstract class BlockLeaves extends BlockTransparent {
 		world.setAir(blockposition);
 	}
 
+	@Override
 	public int a(Random random) {
 		return random.nextInt(20) == 0 ? 1 : 0;
 	}
 
+	@Override
 	public Item getDropType(IBlockData iblockdata, Random random, int i) {
 		return Item.getItemOf(Blocks.SAPLING);
 	}
 
+	@Override
 	public void dropNaturally(World world, BlockPosition blockposition, IBlockData iblockdata, float f, int i) {
 		if (!world.isClientSide) {
 			int j = this.d(iblockdata);
@@ -196,10 +201,12 @@ public abstract class BlockLeaves extends BlockTransparent {
 		return 20;
 	}
 
+	@Override
 	public boolean c() {
 		return !this.R;
 	}
 
+	@Override
 	public boolean w() {
 		return false;
 	}

@@ -53,24 +53,29 @@ public class EntityBoat extends Entity {
 		this.setSize(1.5F, 0.6F);
 	}
 
+	@Override
 	protected boolean s_() {
 		return false;
 	}
 
+	@Override
 	protected void h() {
 		this.datawatcher.a(17, new Integer(0));
 		this.datawatcher.a(18, new Integer(1));
 		this.datawatcher.a(19, new Float(0.0F));
 	}
 
+	@Override
 	public AxisAlignedBB j(Entity entity) {
 		return entity.getBoundingBox();
 	}
 
+	@Override
 	public AxisAlignedBB S() {
 		return this.getBoundingBox();
 	}
 
+	@Override
 	public boolean ae() {
 		return true;
 	}
@@ -89,10 +94,12 @@ public class EntityBoat extends Entity {
 				.callEvent(new org.bukkit.event.vehicle.VehicleCreateEvent((Vehicle) this.getBukkitEntity())); // CraftBukkit
 	}
 
+	@Override
 	public double an() {
 		return -0.3D;
 	}
 
+	@Override
 	public boolean damageEntity(DamageSource damagesource, float f) {
 		if (this.isInvulnerable(damagesource)) {
 			return false;
@@ -106,7 +113,7 @@ public class EntityBoat extends Entity {
 				org.bukkit.entity.Entity attacker = (damagesource.getEntity() == null) ? null
 						: damagesource.getEntity().getBukkitEntity();
 
-				VehicleDamageEvent event = new VehicleDamageEvent(vehicle, attacker, (double) f);
+				VehicleDamageEvent event = new VehicleDamageEvent(vehicle, attacker, f);
 				this.world.getServer().getPluginManager().callEvent(event);
 
 				if (event.isCancelled()) {
@@ -150,10 +157,12 @@ public class EntityBoat extends Entity {
 		}
 	}
 
+	@Override
 	public boolean ad() {
 		return !this.dead;
 	}
 
+	@Override
 	public void t_() {
 		// CraftBukkit start
 		double prevX = this.locX;
@@ -179,14 +188,14 @@ public class EntityBoat extends Entity {
 
 		for (int i = 0; i < b0; ++i) {
 			double d1 = this.getBoundingBox().b
-					+ (this.getBoundingBox().e - this.getBoundingBox().b) * (double) (i + 0) / (double) b0 - 0.125D;
+					+ (this.getBoundingBox().e - this.getBoundingBox().b) * (i + 0) / b0 - 0.125D;
 			double d2 = this.getBoundingBox().b
-					+ (this.getBoundingBox().e - this.getBoundingBox().b) * (double) (i + 1) / (double) b0 - 0.125D;
+					+ (this.getBoundingBox().e - this.getBoundingBox().b) * (i + 1) / b0 - 0.125D;
 			AxisAlignedBB axisalignedbb = new AxisAlignedBB(this.getBoundingBox().a, d1, this.getBoundingBox().c,
 					this.getBoundingBox().d, d2, this.getBoundingBox().f);
 
 			if (this.world.b(axisalignedbb, Material.WATER)) {
-				d0 += 1.0D / (double) b0;
+				d0 += 1.0D / b0;
 			}
 		}
 
@@ -196,12 +205,12 @@ public class EntityBoat extends Entity {
 		int j;
 
 		if (d3 > 0.2975D) {
-			d4 = Math.cos((double) this.yaw * 3.141592653589793D / 180.0D);
-			d5 = Math.sin((double) this.yaw * 3.141592653589793D / 180.0D);
+			d4 = Math.cos(this.yaw * 3.141592653589793D / 180.0D);
+			d5 = Math.sin(this.yaw * 3.141592653589793D / 180.0D);
 
-			for (j = 0; (double) j < 1.0D + d3 * 60.0D; ++j) {
-				double d6 = (double) (this.random.nextFloat() * 2.0F - 1.0F);
-				double d7 = (double) (this.random.nextInt(2) * 2 - 1) * 0.7D;
+			for (j = 0; j < 1.0D + d3 * 60.0D; ++j) {
+				double d6 = this.random.nextFloat() * 2.0F - 1.0F;
+				double d7 = (this.random.nextInt(2) * 2 - 1) * 0.7D;
 				double d8;
 				double d9;
 
@@ -224,12 +233,12 @@ public class EntityBoat extends Entity {
 
 		if (this.world.isClientSide && this.a) {
 			if (this.c > 0) {
-				d4 = this.locX + (this.d - this.locX) / (double) this.c;
-				d5 = this.locY + (this.e - this.locY) / (double) this.c;
-				d10 = this.locZ + (this.f - this.locZ) / (double) this.c;
-				d11 = MathHelper.g(this.g - (double) this.yaw);
-				this.yaw = (float) ((double) this.yaw + d11 / (double) this.c);
-				this.pitch = (float) ((double) this.pitch + (this.h - (double) this.pitch) / (double) this.c);
+				d4 = this.locX + (this.d - this.locX) / this.c;
+				d5 = this.locY + (this.e - this.locY) / this.c;
+				d10 = this.locZ + (this.f - this.locZ) / this.c;
+				d11 = MathHelper.g(this.g - this.yaw);
+				this.yaw = (float) (this.yaw + d11 / this.c);
+				this.pitch = (float) (this.pitch + (this.h - this.pitch) / this.c);
 				--this.c;
 				this.setPosition(d4, d5, d10);
 				this.setYawPitch(this.yaw, this.pitch);
@@ -265,9 +274,9 @@ public class EntityBoat extends Entity {
 				EntityLiving entityliving = (EntityLiving) this.passenger;
 				float f = this.passenger.yaw + -entityliving.aZ * 90.0F;
 
-				this.motX += -Math.sin((double) (f * 3.1415927F / 180.0F)) * this.b * (double) entityliving.ba
+				this.motX += -Math.sin(f * 3.1415927F / 180.0F) * this.b * entityliving.ba
 						* 0.05000000074505806D;
-				this.motZ += Math.cos((double) (f * 3.1415927F / 180.0F)) * this.b * (double) entityliving.ba
+				this.motZ += Math.cos(f * 3.1415927F / 180.0F) * this.b * entityliving.ba
 						* 0.05000000074505806D;
 			}
 			// CraftBukkit start - Support unoccupied deceleration
@@ -307,9 +316,9 @@ public class EntityBoat extends Entity {
 			int k;
 
 			for (k = 0; k < 4; ++k) {
-				int l = MathHelper.floor(this.locX + ((double) (k % 2) - 0.5D) * 0.8D);
+				int l = MathHelper.floor(this.locX + (k % 2 - 0.5D) * 0.8D);
 
-				j = MathHelper.floor(this.locZ + ((double) (k / 2) - 0.5D) * 0.8D);
+				j = MathHelper.floor(this.locZ + (k / 2 - 0.5D) * 0.8D);
 
 				for (int i1 = 0; i1 < 2; ++i1) {
 					int j1 = MathHelper.floor(this.locY) + i1;
@@ -363,14 +372,14 @@ public class EntityBoat extends Entity {
 			}
 
 			this.pitch = 0.0F;
-			d5 = (double) this.yaw;
+			d5 = this.yaw;
 			d10 = this.lastX - this.locX;
 			d11 = this.lastZ - this.locZ;
 			if (d10 * d10 + d11 * d11 > 0.001D) {
-				d5 = (double) ((float) (MathHelper.b(d11, d10) * 180.0D / 3.141592653589793D));
+				d5 = ((float) (MathHelper.b(d11, d10) * 180.0D / 3.141592653589793D));
 			}
 
-			double d12 = MathHelper.g(d5 - (double) this.yaw);
+			double d12 = MathHelper.g(d5 - this.yaw);
 
 			if (d12 > 20.0D) {
 				d12 = 20.0D;
@@ -380,7 +389,7 @@ public class EntityBoat extends Entity {
 				d12 = -20.0D;
 			}
 
-			this.yaw = (float) ((double) this.yaw + d12);
+			this.yaw = (float) (this.yaw + d12);
 			this.setYawPitch(this.yaw, this.pitch);
 
 			// CraftBukkit start
@@ -404,7 +413,7 @@ public class EntityBoat extends Entity {
 
 				if (list != null && !list.isEmpty()) {
 					for (int k1 = 0; k1 < list.size(); ++k1) {
-						Entity entity = (Entity) list.get(k1);
+						Entity entity = list.get(k1);
 
 						if (entity != this.passenger && entity.ae() && entity instanceof EntityBoat) {
 							entity.collide(this);
@@ -421,21 +430,25 @@ public class EntityBoat extends Entity {
 		}
 	}
 
+	@Override
 	public void al() {
 		if (this.passenger != null) {
-			double d0 = Math.cos((double) this.yaw * 3.141592653589793D / 180.0D) * 0.4D;
-			double d1 = Math.sin((double) this.yaw * 3.141592653589793D / 180.0D) * 0.4D;
+			double d0 = Math.cos(this.yaw * 3.141592653589793D / 180.0D) * 0.4D;
+			double d1 = Math.sin(this.yaw * 3.141592653589793D / 180.0D) * 0.4D;
 
 			this.passenger.setPosition(this.locX + d0, this.locY + this.an() + this.passenger.am(), this.locZ + d1);
 		}
 	}
 
+	@Override
 	protected void b(NBTTagCompound nbttagcompound) {
 	}
 
+	@Override
 	protected void a(NBTTagCompound nbttagcompound) {
 	}
 
+	@Override
 	public boolean e(EntityHuman entityhuman) {
 		if (this.passenger != null && this.passenger instanceof EntityHuman && this.passenger != entityhuman) {
 			return true;
@@ -448,6 +461,7 @@ public class EntityBoat extends Entity {
 		}
 	}
 
+	@Override
 	protected void a(double d0, boolean flag, Block block, BlockPosition blockposition) {
 		if (flag) {
 			if (this.fallDistance > 3.0F) {
@@ -469,7 +483,7 @@ public class EntityBoat extends Entity {
 			}
 		} else if (this.world.getType((new BlockPosition(this)).down()).getBlock().getMaterial() != Material.WATER
 				&& d0 < 0.0D) {
-			this.fallDistance = (float) ((double) this.fallDistance - d0);
+			this.fallDistance = (float) (this.fallDistance - d0);
 		}
 
 	}

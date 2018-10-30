@@ -42,7 +42,7 @@ public class NameReferencingFileConverter {
 		Iterator<String> iterator = list.iterator();
 
 		while (iterator.hasNext()) {
-			String s = (String) iterator.next();
+			String s = iterator.next();
 
 			s = s.trim();
 			if (!s.startsWith("#") && s.length() >= 1) {
@@ -57,14 +57,15 @@ public class NameReferencingFileConverter {
 
 	private static void a(MinecraftServer minecraftserver, Collection<String> collection,
 			ProfileLookupCallback profilelookupcallback) {
-		String[] astring = (String[]) Iterators
+		String[] astring = Iterators
 				.toArray(Iterators.filter(collection.iterator(), new Predicate<String>() {
 					public boolean a(String s) {
 						return !UtilColor.b(s);
 					}
 
+					@Override
 					public boolean apply(String object) {
-						return this.a((String) object);
+						return this.a(object);
 					}
 				}), String.class);
 
@@ -107,9 +108,10 @@ public class NameReferencingFileConverter {
 
 				a(NameReferencingFileConverter.b, hashmap);
 				ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback() {
+					@Override
 					public void onProfileLookupSucceeded(GameProfile gameprofile) {
 						minecraftserver.getUserCache().a(gameprofile);
-						String[] astring = (String[]) hashmap.get(gameprofile.getName().toLowerCase(Locale.ROOT));
+						String[] astring = hashmap.get(gameprofile.getName().toLowerCase(Locale.ROOT));
 
 						if (astring == null) {
 							NameReferencingFileConverter.e
@@ -128,6 +130,7 @@ public class NameReferencingFileConverter {
 						}
 					}
 
+					@Override
 					public void onProfileLookupFailed(GameProfile gameprofile, Exception exception) {
 						NameReferencingFileConverter.e
 								.warn("Could not lookup user banlist entry for " + gameprofile.getName(), exception);
@@ -177,8 +180,8 @@ public class NameReferencingFileConverter {
 				Iterator<String> iterator = hashmap.keySet().iterator();
 
 				while (iterator.hasNext()) {
-					String s = (String) iterator.next();
-					String[] astring = (String[]) hashmap.get(s);
+					String s = iterator.next();
+					String[] astring = hashmap.get(s);
 					Date date = astring.length > 1 ? b(astring[1], (Date) null) : null;
 					String s1 = astring.length > 2 ? astring[2] : null;
 					Date date1 = astring.length > 3 ? b(astring[3], (Date) null) : null;
@@ -216,11 +219,13 @@ public class NameReferencingFileConverter {
 			try {
 				List<String> list = Files.readLines(NameReferencingFileConverter.c, Charsets.UTF_8);
 				ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback() {
+					@Override
 					public void onProfileLookupSucceeded(GameProfile gameprofile) {
 						minecraftserver.getUserCache().a(gameprofile);
 						oplist.add(new OpListEntry(gameprofile, minecraftserver.p(), false));
 					}
 
+					@Override
 					public void onProfileLookupFailed(GameProfile gameprofile, Exception exception) {
 						NameReferencingFileConverter.e
 								.warn("Could not lookup oplist entry for " + gameprofile.getName(), exception);
@@ -266,11 +271,13 @@ public class NameReferencingFileConverter {
 			try {
 				List<String> list = Files.readLines(NameReferencingFileConverter.d, Charsets.UTF_8);
 				ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback() {
+					@Override
 					public void onProfileLookupSucceeded(GameProfile gameprofile) {
 						minecraftserver.getUserCache().a(gameprofile);
 						whitelist.add(new WhiteListEntry(gameprofile));
 					}
 
+					@Override
 					public void onProfileLookupFailed(GameProfile gameprofile, Exception exception) {
 						NameReferencingFileConverter.e
 								.warn("Could not lookup user whitelist entry for " + gameprofile.getName(), exception);
@@ -309,11 +316,13 @@ public class NameReferencingFileConverter {
 			} else if (!minecraftserver.T() && minecraftserver.getOnlineMode()) {
 				final ArrayList<GameProfile> arraylist = Lists.newArrayList();
 				ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback() {
+					@Override
 					public void onProfileLookupSucceeded(GameProfile gameprofile) {
 						minecraftserver.getUserCache().a(gameprofile);
 						arraylist.add(gameprofile);
 					}
 
+					@Override
 					public void onProfileLookupFailed(GameProfile gameprofile, Exception exception) {
 						NameReferencingFileConverter.e
 								.warn("Could not lookup user whitelist entry for " + gameprofile.getName(), exception);
@@ -321,8 +330,8 @@ public class NameReferencingFileConverter {
 				};
 
 				a(minecraftserver, Lists.newArrayList(new String[] { s }), profilelookupcallback);
-				return arraylist.size() > 0 && ((GameProfile) arraylist.get(0)).getId() != null
-						? ((GameProfile) arraylist.get(0)).getId().toString()
+				return arraylist.size() > 0 && arraylist.get(0).getId() != null
+						? arraylist.get(0).getId().toString()
 						: "";
 			} else {
 				return EntityHuman.a(new GameProfile((UUID) null, s)).toString();
@@ -358,8 +367,9 @@ public class NameReferencingFileConverter {
 			}
 
 			try {
-				final String[] astring = (String[]) arraylist.toArray(new String[arraylist.size()]);
+				final String[] astring = arraylist.toArray(new String[arraylist.size()]);
 				ProfileLookupCallback profilelookupcallback = new ProfileLookupCallback() {
+					@Override
 					public void onProfileLookupSucceeded(GameProfile gameprofile) {
 						dedicatedserver.getUserCache().a(gameprofile);
 						UUID uuid = gameprofile.getId();
@@ -372,6 +382,7 @@ public class NameReferencingFileConverter {
 						}
 					}
 
+					@Override
 					public void onProfileLookupFailed(GameProfile gameprofile, Exception exception) {
 						NameReferencingFileConverter.e.warn("Could not lookup user uuid for " + gameprofile.getName(),
 								exception);

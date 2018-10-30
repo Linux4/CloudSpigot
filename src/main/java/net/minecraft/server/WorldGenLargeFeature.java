@@ -1,12 +1,13 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Map.Entry;
+import java.util.Random;
+
+import com.google.common.collect.Lists;
 
 public class WorldGenLargeFeature extends StructureGenerator {
 
@@ -30,17 +31,19 @@ public class WorldGenLargeFeature extends StructureGenerator {
 		while (iterator.hasNext()) {
 			Entry<String, String> entry = iterator.next();
 
-			if (((String) entry.getKey()).equals("distance")) {
-				this.g = MathHelper.a((String) entry.getValue(), this.g, this.h + 1);
+			if (entry.getKey().equals("distance")) {
+				this.g = MathHelper.a(entry.getValue(), this.g, this.h + 1);
 			}
 		}
 
 	}
 
+	@Override
 	public String a() {
 		return "Temple";
 	}
 
+	@Override
 	protected boolean a(int i, int j) {
 		int k = i;
 		int l = j;
@@ -71,7 +74,7 @@ public class WorldGenLargeFeature extends StructureGenerator {
 			Iterator<BiomeBase> iterator = WorldGenLargeFeature.d.iterator();
 
 			while (iterator.hasNext()) {
-				BiomeBase biomebase1 = (BiomeBase) iterator.next();
+				BiomeBase biomebase1 = iterator.next();
 
 				if (biomebase == biomebase1) {
 					return true;
@@ -82,6 +85,7 @@ public class WorldGenLargeFeature extends StructureGenerator {
 		return false;
 	}
 
+	@Override
 	protected StructureStart b(int i, int j) {
 		return new WorldGenLargeFeature.WorldGenLargeFeatureStart(this.c, this.b, i, j);
 	}
@@ -91,7 +95,7 @@ public class WorldGenLargeFeature extends StructureGenerator {
 
 		if (structurestart != null && structurestart instanceof WorldGenLargeFeature.WorldGenLargeFeatureStart
 				&& !structurestart.a.isEmpty()) {
-			StructurePiece structurepiece = (StructurePiece) structurestart.a.getFirst();
+			StructurePiece structurepiece = structurestart.a.getFirst();
 
 			return structurepiece instanceof WorldGenRegistration.WorldGenWitchHut;
 		} else {

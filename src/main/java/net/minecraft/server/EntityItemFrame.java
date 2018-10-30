@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import java.util.UUID;
+
 import org.apache.commons.codec.Charsets;
 
 public class EntityItemFrame extends EntityHanging {
@@ -16,15 +17,18 @@ public class EntityItemFrame extends EntityHanging {
 		this.setDirection(enumdirection);
 	}
 
+	@Override
 	protected void h() {
 		this.getDataWatcher().add(8, 5);
 		this.getDataWatcher().a(9, Byte.valueOf((byte) 0));
 	}
 
+	@Override
 	public float ao() {
 		return 0.0F;
 	}
 
+	@Override
 	public boolean damageEntity(DamageSource damagesource, float f) {
 		if (this.isInvulnerable(damagesource)) {
 			return false;
@@ -46,14 +50,17 @@ public class EntityItemFrame extends EntityHanging {
 		}
 	}
 
+	@Override
 	public int l() {
 		return 12;
 	}
 
+	@Override
 	public int m() {
 		return 12;
 	}
 
+	@Override
 	public void b(Entity entity) {
 		this.a(entity, true);
 	}
@@ -136,6 +143,7 @@ public class EntityItemFrame extends EntityHanging {
 
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		if (this.getItem() != null) {
 			nbttagcompound.set("Item", this.getItem().save(new NBTTagCompound()));
@@ -146,6 +154,7 @@ public class EntityItemFrame extends EntityHanging {
 		super.b(nbttagcompound);
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		NBTTagCompound nbttagcompound1 = nbttagcompound.getCompound("Item");
 
@@ -164,6 +173,7 @@ public class EntityItemFrame extends EntityHanging {
 		super.a(nbttagcompound);
 	}
 
+	@Override
 	public boolean e(EntityHuman entityhuman) {
 		if (this.getItem() == null) {
 			ItemStack itemstack = entityhuman.bA();

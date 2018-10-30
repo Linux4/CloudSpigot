@@ -3,8 +3,6 @@ package org.bukkit.craftbukkit.command;
 import java.util.Iterator;
 import java.util.List;
 
-import net.minecraft.server.*;
-
 import org.apache.commons.lang.Validate;
 import org.apache.logging.log4j.Level;
 import org.bukkit.Location;
@@ -13,12 +11,28 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.ProxiedCommandSender;
 import org.bukkit.command.RemoteConsoleCommandSender;
-import org.bukkit.command.defaults.*;
+import org.bukkit.command.defaults.VanillaCommand;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.entity.CraftMinecartCommand;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.minecart.CommandMinecart;
+
+import net.minecraft.server.BlockPosition;
+import net.minecraft.server.ChatMessage;
+import net.minecraft.server.CommandAbstract;
+import net.minecraft.server.CommandBlockListenerAbstract;
+import net.minecraft.server.CommandException;
+import net.minecraft.server.CommandObjectiveExecutor;
+import net.minecraft.server.Entity;
+import net.minecraft.server.EntityMinecartCommandBlock;
+import net.minecraft.server.EnumChatFormat;
+import net.minecraft.server.ExceptionUsage;
+import net.minecraft.server.ICommandListener;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.PlayerSelector;
+import net.minecraft.server.RemoteControlCommandListener;
+import net.minecraft.server.WorldServer;
 
 @SuppressWarnings("deprecation")
 public final class VanillaCommandWrapper extends VanillaCommand {
@@ -65,9 +79,9 @@ public final class VanillaCommandWrapper extends VanillaCommand {
 		Validate.notNull(args, "Arguments cannot be null");
 		Validate.notNull(alias, "Alias cannot be null");
 		if (location == null) { // CloudSpigot use location information if available
-			return (List<String>) vanillaCommand.tabComplete(getListener(sender), args, new BlockPosition(0, 0, 0));
+			return vanillaCommand.tabComplete(getListener(sender), args, new BlockPosition(0, 0, 0));
 		} else {
-			return (List<String>) vanillaCommand.tabComplete(getListener(sender), args,
+			return vanillaCommand.tabComplete(getListener(sender), args,
 					new BlockPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ()));
 		}
 	}
@@ -99,7 +113,7 @@ public final class VanillaCommandWrapper extends VanillaCommand {
 		try {
 			if (vanillaCommand.canUse(icommandlistener)) {
 				if (i > -1) {
-					List<Entity> list = ((List<Entity>) PlayerSelector.getPlayers(icommandlistener, as[i],
+					List<Entity> list = (PlayerSelector.getPlayers(icommandlistener, as[i],
 							Entity.class));
 					String s2 = as[i];
 

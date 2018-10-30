@@ -51,5 +51,6 @@ public interface Arrow extends Projectile {
 		}
 	}
 
+	@Override
 	Spigot spigot();
 }

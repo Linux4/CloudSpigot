@@ -11,6 +11,7 @@ public abstract class Waitable<T> implements Runnable {
 	T value = null;
 	Status status = Status.WAITING;
 
+	@Override
 	public final void run() {
 		synchronized (this) {
 			if (status != Status.WAITING) {

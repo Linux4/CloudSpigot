@@ -2,14 +2,14 @@ package org.bukkit.craftbukkit.inventory;
 
 import java.util.Map;
 
-import net.minecraft.server.NBTTagCompound;
-
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta;
 import org.bukkit.inventory.meta.MapMeta;
 
 import com.google.common.collect.ImmutableMap;
+
+import net.minecraft.server.NBTTagCompound;
 
 @DelegateDeserialization(SerializableMeta.class)
 class CraftMetaMap extends CraftMetaItem implements MapMeta {
@@ -80,10 +80,12 @@ class CraftMetaMap extends CraftMetaItem implements MapMeta {
 		return scaling != SCALING_EMPTY;
 	}
 
+	@Override
 	public boolean isScaling() {
 		return scaling == SCALING_TRUE;
 	}
 
+	@Override
 	public void setScaling(boolean scaling) {
 		this.scaling = scaling ? SCALING_TRUE : SCALING_FALSE;
 	}
@@ -118,6 +120,7 @@ class CraftMetaMap extends CraftMetaItem implements MapMeta {
 		return original != hash ? CraftMetaMap.class.hashCode() ^ hash : hash;
 	}
 
+	@Override
 	public CraftMetaMap clone() {
 		return (CraftMetaMap) super.clone();
 	}

@@ -1,20 +1,20 @@
 package org.bukkit.plugin;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
 import org.bukkit.Bukkit;
 import org.bukkit.event.server.ServiceRegisterEvent;
 import org.bukkit.event.server.ServiceUnregisterEvent;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Set;
 
 /**
  * A simple services manager.
@@ -35,6 +35,7 @@ public class SimpleServicesManager implements ServicesManager {
 	 * @param plugin   plugin with the provider
 	 * @param priority priority of the provider
 	 */
+	@Override
 	public <T> void register(Class<T> service, T provider, Plugin plugin, ServicePriority priority) {
 		RegisteredServiceProvider<T> registeredProvider = null;
 		synchronized (providers) {
@@ -63,6 +64,7 @@ public class SimpleServicesManager implements ServicesManager {
 	 *
 	 * @param plugin The plugin
 	 */
+	@Override
 	public void unregisterAll(Plugin plugin) {
 		ArrayList<ServiceUnregisterEvent> unregisteredEvents = new ArrayList<ServiceUnregisterEvent>();
 		synchronized (providers) {
@@ -106,6 +108,7 @@ public class SimpleServicesManager implements ServicesManager {
 	 * @param service  The service interface
 	 * @param provider The service provider implementation
 	 */
+	@Override
 	public void unregister(Class<?> service, Object provider) {
 		ArrayList<ServiceUnregisterEvent> unregisteredEvents = new ArrayList<ServiceUnregisterEvent>();
 		synchronized (providers) {
@@ -154,6 +157,7 @@ public class SimpleServicesManager implements ServicesManager {
 	 *
 	 * @param provider The service provider implementation
 	 */
+	@Override
 	public void unregister(Object provider) {
 		ArrayList<ServiceUnregisterEvent> unregisteredEvents = new ArrayList<ServiceUnregisterEvent>();
 		synchronized (providers) {
@@ -199,6 +203,7 @@ public class SimpleServicesManager implements ServicesManager {
 	 * @param service The service interface
 	 * @return provider or null
 	 */
+	@Override
 	public <T> T load(Class<T> service) {
 		synchronized (providers) {
 			List<RegisteredServiceProvider<?>> registered = providers.get(service);
@@ -220,6 +225,7 @@ public class SimpleServicesManager implements ServicesManager {
 	 * @param service The service interface
 	 * @return provider registration or null
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> RegisteredServiceProvider<T> getRegistration(Class<T> service) {
 		synchronized (providers) {
@@ -240,6 +246,7 @@ public class SimpleServicesManager implements ServicesManager {
 	 * @param plugin The plugin
 	 * @return provider registration or null
 	 */
+	@Override
 	public List<RegisteredServiceProvider<?>> getRegistrations(Plugin plugin) {
 		ImmutableList.Builder<RegisteredServiceProvider<?>> ret = ImmutableList.<RegisteredServiceProvider<?>>builder();
 		synchronized (providers) {
@@ -262,6 +269,7 @@ public class SimpleServicesManager implements ServicesManager {
 	 * @param service The service interface
 	 * @return a copy of the list of registrations
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> List<RegisteredServiceProvider<T>> getRegistrations(Class<T> service) {
 		ImmutableList.Builder<RegisteredServiceProvider<T>> ret;
@@ -288,6 +296,7 @@ public class SimpleServicesManager implements ServicesManager {
 	 *
 	 * @return a copy of the set of known services
 	 */
+	@Override
 	public Set<Class<?>> getKnownServices() {
 		synchronized (providers) {
 			return ImmutableSet.<Class<?>>copyOf(providers.keySet());
@@ -301,6 +310,7 @@ public class SimpleServicesManager implements ServicesManager {
 	 * @param service service to check
 	 * @return true if and only if there are registered providers
 	 */
+	@Override
 	public <T> boolean isProvidedFor(Class<T> service) {
 		synchronized (providers) {
 			return providers.containsKey(service);

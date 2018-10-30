@@ -2,15 +2,6 @@ package org.bukkit.craftbukkit.inventory;
 
 import java.util.Map;
 
-import net.minecraft.server.GameProfileSerializer;
-import net.minecraft.server.NBTBase;
-import net.minecraft.server.NBTTagCompound;
-
-// CloudSpigot start
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
-// CloudSpigot end
-
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta;
@@ -18,6 +9,14 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import com.google.common.collect.ImmutableMap.Builder;
 import com.mojang.authlib.GameProfile;
+
+// CloudSpigot start
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.GameProfileSerializer;
+import net.minecraft.server.MinecraftServer;
+// CloudSpigot end
+import net.minecraft.server.NBTBase;
+import net.minecraft.server.NBTTagCompound;
 
 @DelegateDeserialization(SerializableMeta.class)
 class CraftMetaSkull extends CraftMetaItem implements SkullMeta {
@@ -121,14 +120,17 @@ class CraftMetaSkull extends CraftMetaItem implements SkullMeta {
 		return (CraftMetaSkull) super.clone();
 	}
 
+	@Override
 	public boolean hasOwner() {
 		return profile != null && profile.getName() != null;
 	}
 
+	@Override
 	public String getOwner() {
 		return hasOwner() ? profile.getName() : null;
 	}
 
+	@Override
 	public boolean setOwner(String name) {
 		if (name != null && name.length() > MAX_OWNER_LENGTH) {
 			return false;

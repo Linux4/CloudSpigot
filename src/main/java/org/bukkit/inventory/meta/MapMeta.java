@@ -19,5 +19,6 @@ public interface MapMeta extends ItemMeta {
 	 */
 	void setScaling(boolean value);
 
+	@Override
 	MapMeta clone();
 }

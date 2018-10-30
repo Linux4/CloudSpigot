@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 public class WorldBorder {
 
@@ -30,8 +31,8 @@ public class WorldBorder {
 	}
 
 	public boolean a(BlockPosition blockposition) {
-		return (double) (blockposition.getX() + 1) > this.b() && (double) blockposition.getX() < this.d()
-				&& (double) (blockposition.getZ() + 1) > this.c() && (double) blockposition.getZ() < this.e();
+		return blockposition.getX() + 1 > this.b() && blockposition.getX() < this.d()
+				&& blockposition.getZ() + 1 > this.c() && blockposition.getZ() < this.e();
 	}
 
 	// CraftBukkit start - split method
@@ -47,8 +48,8 @@ public class WorldBorder {
 
 	// Inlined the getters from ChunkCoordIntPair
 	public boolean isInBounds(int x, int z) {
-		return (double) ((x << 4) + 15) > this.b() && (double) (x << 4) < this.d()
-				&& (double) ((z << 4) + 15) > this.c() && (double) (x << 4) < this.e();
+		return (x << 4) + 15 > this.b() && x << 4 < this.d()
+				&& (z << 4) + 15 > this.c() && x << 4 < this.e();
 	}
 
 	public boolean a(AxisAlignedBB axisalignedbb) {
@@ -79,8 +80,8 @@ public class WorldBorder {
 	public double b() {
 		double d0 = this.getCenterX() - this.getSize() / 2.0D;
 
-		if (d0 < (double) (-this.h)) {
-			d0 = (double) (-this.h);
+		if (d0 < (-this.h)) {
+			d0 = (-this.h);
 		}
 
 		return d0;
@@ -89,8 +90,8 @@ public class WorldBorder {
 	public double c() {
 		double d0 = this.getCenterZ() - this.getSize() / 2.0D;
 
-		if (d0 < (double) (-this.h)) {
-			d0 = (double) (-this.h);
+		if (d0 < (-this.h)) {
+			d0 = (-this.h);
 		}
 
 		return d0;
@@ -99,8 +100,8 @@ public class WorldBorder {
 	public double d() {
 		double d0 = this.getCenterX() + this.getSize() / 2.0D;
 
-		if (d0 > (double) this.h) {
-			d0 = (double) this.h;
+		if (d0 > this.h) {
+			d0 = this.h;
 		}
 
 		return d0;
@@ -109,8 +110,8 @@ public class WorldBorder {
 	public double e() {
 		double d0 = this.getCenterZ() + this.getSize() / 2.0D;
 
-		if (d0 > (double) this.h) {
-			d0 = (double) this.h;
+		if (d0 > this.h) {
+			d0 = this.h;
 		}
 
 		return d0;
@@ -130,7 +131,7 @@ public class WorldBorder {
 		Iterator<IWorldBorderListener> iterator = this.k().iterator();
 
 		while (iterator.hasNext()) {
-			IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
+			IWorldBorderListener iworldborderlistener = iterator.next();
 
 			iworldborderlistener.a(this, d0, d1);
 		}
@@ -139,7 +140,7 @@ public class WorldBorder {
 
 	public double getSize() {
 		if (this.getState() != EnumWorldBorderState.STATIONARY) {
-			double d0 = (double) ((float) (System.currentTimeMillis() - this.g) / (float) (this.f - this.g));
+			double d0 = (float) (System.currentTimeMillis() - this.g) / (float) (this.f - this.g);
 
 			if (d0 < 1.0D) {
 				return this.d + (this.e - this.d) * d0;
@@ -167,7 +168,7 @@ public class WorldBorder {
 		Iterator<IWorldBorderListener> iterator = this.k().iterator();
 
 		while (iterator.hasNext()) {
-			IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
+			IWorldBorderListener iworldborderlistener = iterator.next();
 
 			iworldborderlistener.a(this, d0);
 		}
@@ -182,7 +183,7 @@ public class WorldBorder {
 		Iterator<IWorldBorderListener> iterator = this.k().iterator();
 
 		while (iterator.hasNext()) {
-			IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
+			IWorldBorderListener iworldborderlistener = iterator.next();
 
 			iworldborderlistener.a(this, d0, d1, i);
 		}
@@ -216,7 +217,7 @@ public class WorldBorder {
 		Iterator<IWorldBorderListener> iterator = this.k().iterator();
 
 		while (iterator.hasNext()) {
-			IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
+			IWorldBorderListener iworldborderlistener = iterator.next();
 
 			iworldborderlistener.c(this, d0);
 		}
@@ -232,7 +233,7 @@ public class WorldBorder {
 		Iterator<IWorldBorderListener> iterator = this.k().iterator();
 
 		while (iterator.hasNext()) {
-			IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
+			IWorldBorderListener iworldborderlistener = iterator.next();
 
 			iworldborderlistener.b(this, d0);
 		}
@@ -248,7 +249,7 @@ public class WorldBorder {
 		Iterator<IWorldBorderListener> iterator = this.k().iterator();
 
 		while (iterator.hasNext()) {
-			IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
+			IWorldBorderListener iworldborderlistener = iterator.next();
 
 			iworldborderlistener.a(this, i);
 		}
@@ -264,7 +265,7 @@ public class WorldBorder {
 		Iterator<IWorldBorderListener> iterator = this.k().iterator();
 
 		while (iterator.hasNext()) {
-			IWorldBorderListener iworldborderlistener = (IWorldBorderListener) iterator.next();
+			IWorldBorderListener iworldborderlistener = iterator.next();
 
 			iworldborderlistener.b(this, i);
 		}

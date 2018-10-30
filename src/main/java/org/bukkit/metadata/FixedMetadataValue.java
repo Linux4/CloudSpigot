@@ -2,8 +2,6 @@ package org.bukkit.metadata;
 
 import org.bukkit.plugin.Plugin;
 
-import java.util.concurrent.Callable;
-
 /**
  * A FixedMetadataValue is a special case metadata item that contains the same
  * value forever after initialization. Invalidating a FixedMetadataValue has no
@@ -13,7 +11,6 @@ import java.util.concurrent.Callable;
  * overrides all the implementation methods. it is possible that in the future
  * that the inheritance hierarchy may change.
  */
-@SuppressWarnings("unused")
 public class FixedMetadataValue extends LazyMetadataValue {
 
 	/**

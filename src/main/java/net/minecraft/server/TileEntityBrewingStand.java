@@ -27,31 +27,38 @@ public class TileEntityBrewingStand extends TileEntityContainer implements IUpda
 	public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
 	private int maxStack = 64;
 
+	@Override
 	public void onOpen(CraftHumanEntity who) {
 		transaction.add(who);
 	}
 
+	@Override
 	public void onClose(CraftHumanEntity who) {
 		transaction.remove(who);
 	}
 
+	@Override
 	public List<HumanEntity> getViewers() {
 		return transaction;
 	}
 
+	@Override
 	public ItemStack[] getContents() {
 		return this.items;
 	}
 
+	@Override
 	public void setMaxStackSize(int size) {
 		maxStack = size;
 	}
 	// CraftBukkit end
 
+	@Override
 	public String getName() {
 		return this.hasCustomName() ? this.k : "container.brewing";
 	}
 
+	@Override
 	public boolean hasCustomName() {
 		return this.k != null && this.k.length() > 0;
 	}
@@ -60,10 +67,12 @@ public class TileEntityBrewingStand extends TileEntityContainer implements IUpda
 		this.k = s;
 	}
 
+	@Override
 	public int getSize() {
 		return this.items.length;
 	}
 
+	@Override
 	public void c() {
 		// CraftBukkit start - Use wall time instead of ticks for brewing
 		int elapsedTicks = MinecraftServer.currentTick - this.lastTick;
@@ -195,6 +204,7 @@ public class TileEntityBrewingStand extends TileEntityContainer implements IUpda
 				: (itemstack.getItem().l(itemstack) ? PotionBrewer.a(i, itemstack.getItem().j(itemstack)) : i);
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		NBTTagList nbttaglist = nbttagcompound.getList("Items", 10);
@@ -217,6 +227,7 @@ public class TileEntityBrewingStand extends TileEntityContainer implements IUpda
 
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		nbttagcompound.setShort("BrewTime", (short) this.brewTime);
@@ -239,10 +250,12 @@ public class TileEntityBrewingStand extends TileEntityContainer implements IUpda
 
 	}
 
+	@Override
 	public ItemStack getItem(int i) {
 		return i >= 0 && i < this.items.length ? this.items[i] : null;
 	}
 
+	@Override
 	public ItemStack splitStack(int i, int j) {
 		if (i >= 0 && i < this.items.length) {
 			ItemStack itemstack = this.items[i];
@@ -254,6 +267,7 @@ public class TileEntityBrewingStand extends TileEntityContainer implements IUpda
 		}
 	}
 
+	@Override
 	public ItemStack splitWithoutUpdate(int i) {
 		if (i >= 0 && i < this.items.length) {
 			ItemStack itemstack = this.items[i];
@@ -265,6 +279,7 @@ public class TileEntityBrewingStand extends TileEntityContainer implements IUpda
 		}
 	}
 
+	@Override
 	public void setItem(int i, ItemStack itemstack) {
 		if (i >= 0 && i < this.items.length) {
 			this.items[i] = itemstack;
@@ -272,22 +287,27 @@ public class TileEntityBrewingStand extends TileEntityContainer implements IUpda
 
 	}
 
+	@Override
 	public int getMaxStackSize() {
 		return this.maxStack; // CraftBukkit
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		return this.world.getTileEntity(this.position) != this ? false
-				: entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D,
-						(double) this.position.getZ() + 0.5D) <= 64.0D;
+				: entityhuman.e(this.position.getX() + 0.5D, this.position.getY() + 0.5D,
+						this.position.getZ() + 0.5D) <= 64.0D;
 	}
 
+	@Override
 	public void startOpen(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public void closeContainer(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public boolean b(int i, ItemStack itemstack) {
 		return i == 3 ? itemstack.getItem().l(itemstack)
 				: itemstack.getItem() == Items.POTION || itemstack.getItem() == Items.GLASS_BOTTLE;
@@ -305,26 +325,32 @@ public class TileEntityBrewingStand extends TileEntityContainer implements IUpda
 		return aboolean;
 	}
 
+	@Override
 	public int[] getSlotsForFace(EnumDirection enumdirection) {
 		return enumdirection == EnumDirection.UP ? TileEntityBrewingStand.a : TileEntityBrewingStand.f;
 	}
 
+	@Override
 	public boolean canPlaceItemThroughFace(int i, ItemStack itemstack, EnumDirection enumdirection) {
 		return this.b(i, itemstack);
 	}
 
+	@Override
 	public boolean canTakeItemThroughFace(int i, ItemStack itemstack, EnumDirection enumdirection) {
 		return true;
 	}
 
+	@Override
 	public String getContainerName() {
 		return "minecraft:brewing_stand";
 	}
 
+	@Override
 	public Container createContainer(PlayerInventory playerinventory, EntityHuman entityhuman) {
 		return new ContainerBrewingStand(playerinventory, this);
 	}
 
+	@Override
 	public int getProperty(int i) {
 		switch (i) {
 		case 0:
@@ -335,6 +361,7 @@ public class TileEntityBrewingStand extends TileEntityContainer implements IUpda
 		}
 	}
 
+	@Override
 	public void b(int i, int j) {
 		switch (i) {
 		case 0:
@@ -344,10 +371,12 @@ public class TileEntityBrewingStand extends TileEntityContainer implements IUpda
 		}
 	}
 
+	@Override
 	public int g() {
 		return 1;
 	}
 
+	@Override
 	public void l() {
 		for (int i = 0; i < this.items.length; ++i) {
 			this.items[i] = null;

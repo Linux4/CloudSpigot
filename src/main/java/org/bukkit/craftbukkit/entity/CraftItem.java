@@ -1,13 +1,13 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.Entity;
-import net.minecraft.server.EntityItem;
-
+import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.craftbukkit.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.CraftServer;
+
+import net.minecraft.server.Entity;
+import net.minecraft.server.EntityItem;
 
 public class CraftItem extends CraftEntity implements Item {
 	private final EntityItem item;
@@ -21,18 +21,22 @@ public class CraftItem extends CraftEntity implements Item {
 		this(server, entity, entity);
 	}
 
+	@Override
 	public ItemStack getItemStack() {
 		return CraftItemStack.asCraftMirror(item.getItemStack());
 	}
 
+	@Override
 	public void setItemStack(ItemStack stack) {
 		item.setItemStack(CraftItemStack.asNMSCopy(stack));
 	}
 
+	@Override
 	public int getPickupDelay() {
 		return item.pickupDelay;
 	}
 
+	@Override
 	public void setPickupDelay(int delay) {
 		item.pickupDelay = Math.min(delay, Short.MAX_VALUE);
 	}
@@ -42,6 +46,7 @@ public class CraftItem extends CraftEntity implements Item {
 		return "CraftItem";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.DROPPED_ITEM;
 	}

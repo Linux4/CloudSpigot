@@ -86,20 +86,20 @@ public class CraftBlockProjectileSource implements BlockProjectileSource {
 			((EntityArrow) launch).fromPlayer = 1;
 			((EntityArrow) launch).projectileSource = this;
 		} else if (Fireball.class.isAssignableFrom(projectile)) {
-			double d0 = iposition.getX() + (double) ((float) enumdirection.getAdjacentX() * 0.3F);
-			double d1 = iposition.getY() + (double) ((float) enumdirection.getAdjacentY() * 0.3F);
-			double d2 = iposition.getZ() + (double) ((float) enumdirection.getAdjacentZ() * 0.3F);
+			double d0 = iposition.getX() + enumdirection.getAdjacentX() * 0.3F;
+			double d1 = iposition.getY() + enumdirection.getAdjacentY() * 0.3F;
+			double d2 = iposition.getZ() + enumdirection.getAdjacentZ() * 0.3F;
 			Random random = world.random;
-			double d3 = random.nextGaussian() * 0.05D + (double) enumdirection.getAdjacentX();
-			double d4 = random.nextGaussian() * 0.05D + (double) enumdirection.getAdjacentY();
-			double d5 = random.nextGaussian() * 0.05D + (double) enumdirection.getAdjacentZ();
+			double d3 = random.nextGaussian() * 0.05D + enumdirection.getAdjacentX();
+			double d4 = random.nextGaussian() * 0.05D + enumdirection.getAdjacentY();
+			double d5 = random.nextGaussian() * 0.05D + enumdirection.getAdjacentZ();
 
 			if (SmallFireball.class.isAssignableFrom(projectile)) {
 				launch = new EntitySmallFireball(world, d0, d1, d2, d3, d4, d5);
 			} else if (WitherSkull.class.isAssignableFrom(projectile)) {
 				launch = new EntityWitherSkull(world);
 				launch.setPosition(d0, d1, d2);
-				double d6 = (double) MathHelper.sqrt(d3 * d3 + d4 * d4 + d5 * d5);
+				double d6 = MathHelper.sqrt(d3 * d3 + d4 * d4 + d5 * d5);
 
 				((EntityFireball) launch).dirX = d3 / d6 * 0.1D;
 				((EntityFireball) launch).dirY = d4 / d6 * 0.1D;
@@ -107,7 +107,7 @@ public class CraftBlockProjectileSource implements BlockProjectileSource {
 			} else {
 				launch = new EntityLargeFireball(world);
 				launch.setPosition(d0, d1, d2);
-				double d6 = (double) MathHelper.sqrt(d3 * d3 + d4 * d4 + d5 * d5);
+				double d6 = MathHelper.sqrt(d3 * d3 + d4 * d4 + d5 * d5);
 
 				((EntityFireball) launch).dirX = d3 / d6 * 0.1D;
 				((EntityFireball) launch).dirY = d4 / d6 * 0.1D;
@@ -132,8 +132,8 @@ public class CraftBlockProjectileSource implements BlockProjectileSource {
 				b *= 1.25F;
 			}
 			// Copied from DispenseBehaviorProjectile
-			((IProjectile) launch).shoot((double) enumdirection.getAdjacentX(),
-					(double) ((float) enumdirection.getAdjacentY() + 0.1F), (double) enumdirection.getAdjacentZ(), b,
+			((IProjectile) launch).shoot(enumdirection.getAdjacentX(),
+					enumdirection.getAdjacentY() + 0.1F, enumdirection.getAdjacentZ(), b,
 					a);
 		}
 

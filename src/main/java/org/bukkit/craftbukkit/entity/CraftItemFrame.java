@@ -1,13 +1,6 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.BlockPosition;
-import net.minecraft.server.EntityItemFrame;
-import net.minecraft.server.EnumDirection;
-import net.minecraft.server.ItemStack;
-import net.minecraft.server.WorldServer;
-
 import org.apache.commons.lang.Validate;
-
 import org.bukkit.Rotation;
 import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.CraftServer;
@@ -16,11 +9,18 @@ import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ItemFrame;
 
+import net.minecraft.server.BlockPosition;
+import net.minecraft.server.EntityItemFrame;
+import net.minecraft.server.EnumDirection;
+import net.minecraft.server.ItemStack;
+import net.minecraft.server.WorldServer;
+
 public class CraftItemFrame extends CraftHanging implements ItemFrame {
 	public CraftItemFrame(CraftServer server, EntityItemFrame entity) {
 		super(server, entity);
 	}
 
+	@Override
 	public boolean setFacingDirection(BlockFace face, boolean force) {
 		if (!super.setFacingDirection(face, force)) {
 			return false;
@@ -47,6 +47,7 @@ public class CraftItemFrame extends CraftHanging implements ItemFrame {
 		this.entity = frame;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setItem(org.bukkit.inventory.ItemStack item) {
 		if (item == null || item.getTypeId() == 0) {
@@ -56,10 +57,12 @@ public class CraftItemFrame extends CraftHanging implements ItemFrame {
 		}
 	}
 
+	@Override
 	public org.bukkit.inventory.ItemStack getItem() {
 		return CraftItemStack.asBukkitCopy(getHandle().getItem());
 	}
 
+	@Override
 	public Rotation getRotation() {
 		return toBukkitRotation(getHandle().getRotation());
 	}
@@ -88,6 +91,7 @@ public class CraftItemFrame extends CraftHanging implements ItemFrame {
 		}
 	}
 
+	@Override
 	public void setRotation(Rotation rotation) {
 		Validate.notNull(rotation, "Rotation cannot be null");
 		getHandle().setRotation(toInteger(rotation));
@@ -127,6 +131,7 @@ public class CraftItemFrame extends CraftHanging implements ItemFrame {
 		return "CraftItemFrame{item=" + getItem() + ", rotation=" + getRotation() + "}";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.ITEM_FRAME;
 	}

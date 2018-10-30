@@ -1,12 +1,12 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
-
 // CraftBukkit start
 import org.bukkit.craftbukkit.util.BlockStateListPopulator;
 //import org.bukkit.event.block.BlockRedstoneEvent; // CloudSpigot
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 // CraftBukkit end
+
+import com.google.common.base.Predicate;
 
 public class BlockPumpkin extends BlockDirectional {
 
@@ -20,18 +20,20 @@ public class BlockPumpkin extends BlockDirectional {
 					&& (iblockdata.getBlock() == Blocks.PUMPKIN || iblockdata.getBlock() == Blocks.LIT_PUMPKIN);
 		}
 
+		@Override
 		public boolean apply(IBlockData object) {
-			return this.a((IBlockData) object);
+			return this.a(object);
 		}
 	};
 
 	protected BlockPumpkin() {
 		super(Material.PUMPKIN, MaterialMapColor.q);
-		this.j(this.blockStateList.getBlockData().set(BlockPumpkin.FACING, EnumDirection.NORTH));
+		this.j(this.blockStateList.getBlockData().set(BlockDirectional.FACING, EnumDirection.NORTH));
 		this.a(true);
 		this.a(CreativeModeTab.b);
 	}
 
+	@Override
 	public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		super.onPlace(world, blockposition, iblockdata);
 		this.f(world, blockposition);
@@ -63,17 +65,17 @@ public class BlockPumpkin extends BlockDirectional {
 			EntitySnowman entitysnowman = new EntitySnowman(world);
 			BlockPosition blockposition1 = shapedetector_shapedetectorcollection.a(0, 2, 0).getPosition();
 
-			entitysnowman.setPositionRotation((double) blockposition1.getX() + 0.5D,
-					(double) blockposition1.getY() + 0.05D, (double) blockposition1.getZ() + 0.5D, 0.0F, 0.0F);
+			entitysnowman.setPositionRotation(blockposition1.getX() + 0.5D,
+					blockposition1.getY() + 0.05D, blockposition1.getZ() + 0.5D, 0.0F, 0.0F);
 			// CraftBukkit start
 			if (world.addEntity(entitysnowman, SpawnReason.BUILD_SNOWMAN)) {
 				blockList.updateList();
 
 				for (j = 0; j < 120; ++j) {
 					world.addParticle(EnumParticle.SNOW_SHOVEL,
-							(double) blockposition1.getX() + world.random.nextDouble(),
-							(double) blockposition1.getY() + world.random.nextDouble() * 2.5D,
-							(double) blockposition1.getZ() + world.random.nextDouble(), 0.0D, 0.0D, 0.0D, new int[0]);
+							blockposition1.getX() + world.random.nextDouble(),
+							blockposition1.getY() + world.random.nextDouble() * 2.5D,
+							blockposition1.getZ() + world.random.nextDouble(), 0.0D, 0.0D, 0.0D, new int[0]);
 				}
 
 				for (j = 0; j < this.getDetectorSnowGolem().b(); ++j) {
@@ -101,17 +103,17 @@ public class BlockPumpkin extends BlockDirectional {
 			EntityIronGolem entityirongolem = new EntityIronGolem(world);
 
 			entityirongolem.setPlayerCreated(true);
-			entityirongolem.setPositionRotation((double) blockposition2.getX() + 0.5D,
-					(double) blockposition2.getY() + 0.05D, (double) blockposition2.getZ() + 0.5D, 0.0F, 0.0F);
+			entityirongolem.setPositionRotation(blockposition2.getX() + 0.5D,
+					blockposition2.getY() + 0.05D, blockposition2.getZ() + 0.5D, 0.0F, 0.0F);
 
 			// CraftBukkit start
 			if (world.addEntity(entityirongolem, SpawnReason.BUILD_IRONGOLEM)) {
 				blockList.updateList();
 
 				for (j = 0; j < 120; ++j) {
-					world.addParticle(EnumParticle.SNOWBALL, (double) blockposition2.getX() + world.random.nextDouble(),
-							(double) blockposition2.getY() + world.random.nextDouble() * 3.9D,
-							(double) blockposition2.getZ() + world.random.nextDouble(), 0.0D, 0.0D, 0.0D, new int[0]);
+					world.addParticle(EnumParticle.SNOWBALL, blockposition2.getX() + world.random.nextDouble(),
+							blockposition2.getY() + world.random.nextDouble() * 3.9D,
+							blockposition2.getZ() + world.random.nextDouble(), 0.0D, 0.0D, 0.0D, new int[0]);
 				}
 
 				for (j = 0; j < this.getDetectorIronGolem().c(); ++j) {
@@ -126,26 +128,31 @@ public class BlockPumpkin extends BlockDirectional {
 
 	}
 
+	@Override
 	public boolean canPlace(World world, BlockPosition blockposition) {
 		return world.getType(blockposition).getBlock().material.isReplaceable()
-				&& World.a((IBlockAccess) world, blockposition.down());
+				&& World.a(world, blockposition.down());
 	}
 
+	@Override
 	public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f,
 			float f1, float f2, int i, EntityLiving entityliving) {
-		return this.getBlockData().set(BlockPumpkin.FACING, entityliving.getDirection().opposite());
+		return this.getBlockData().set(BlockDirectional.FACING, entityliving.getDirection().opposite());
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
-		return this.getBlockData().set(BlockPumpkin.FACING, EnumDirection.fromType2(i));
+		return this.getBlockData().set(BlockDirectional.FACING, EnumDirection.fromType2(i));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
-		return ((EnumDirection) iblockdata.get(BlockPumpkin.FACING)).b();
+		return iblockdata.get(BlockDirectional.FACING).b();
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
-		return new BlockStateList(this, new IBlockState[] { BlockPumpkin.FACING });
+		return new BlockStateList(this, new IBlockState[] { BlockDirectional.FACING });
 	}
 
 	protected ShapeDetector getDetectorSnowGolemPart() {

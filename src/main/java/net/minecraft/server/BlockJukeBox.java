@@ -10,9 +10,10 @@ public class BlockJukeBox extends BlockContainer {
 		this.a(CreativeModeTab.c);
 	}
 
+	@Override
 	public boolean interact(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman,
 			EnumDirection enumdirection, float f, float f1, float f2) {
-		if (((Boolean) iblockdata.get(BlockJukeBox.HAS_RECORD)).booleanValue()) {
+		if (iblockdata.get(BlockJukeBox.HAS_RECORD).booleanValue()) {
 			this.dropRecord(world, blockposition, iblockdata);
 			iblockdata = iblockdata.set(BlockJukeBox.HAS_RECORD, false);
 			world.setTypeAndData(blockposition, iblockdata, 2);
@@ -47,12 +48,12 @@ public class BlockJukeBox extends BlockContainer {
 					world.a(blockposition, (String) null);
 					blockjukebox_tileentityrecordplayer.setRecord((ItemStack) null);
 					float f = 0.7F;
-					double d0 = (double) (world.random.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
-					double d1 = (double) (world.random.nextFloat() * f) + (double) (1.0F - f) * 0.2D + 0.6D;
-					double d2 = (double) (world.random.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+					double d0 = world.random.nextFloat() * f + (1.0F - f) * 0.5D;
+					double d1 = world.random.nextFloat() * f + (1.0F - f) * 0.2D + 0.6D;
+					double d2 = world.random.nextFloat() * f + (1.0F - f) * 0.5D;
 					ItemStack itemstack1 = itemstack.cloneItemStack();
-					EntityItem entityitem = new EntityItem(world, (double) blockposition.getX() + d0,
-							(double) blockposition.getY() + d1, (double) blockposition.getZ() + d2, itemstack1);
+					EntityItem entityitem = new EntityItem(world, blockposition.getX() + d0,
+							blockposition.getY() + d1, blockposition.getZ() + d2, itemstack1);
 
 					entityitem.p();
 					world.addEntity(entityitem);
@@ -61,25 +62,30 @@ public class BlockJukeBox extends BlockContainer {
 		}
 	}
 
+	@Override
 	public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		this.dropRecord(world, blockposition, iblockdata);
 		super.remove(world, blockposition, iblockdata);
 	}
 
+	@Override
 	public void dropNaturally(World world, BlockPosition blockposition, IBlockData iblockdata, float f, int i) {
 		if (!world.isClientSide) {
 			super.dropNaturally(world, blockposition, iblockdata, f, 0);
 		}
 	}
 
+	@Override
 	public TileEntity a(World world, int i) {
 		return new BlockJukeBox.TileEntityRecordPlayer();
 	}
 
+	@Override
 	public boolean isComplexRedstone() {
 		return true;
 	}
 
+	@Override
 	public int l(World world, BlockPosition blockposition) {
 		TileEntity tileentity = world.getTileEntity(blockposition);
 
@@ -94,18 +100,22 @@ public class BlockJukeBox extends BlockContainer {
 		return 0;
 	}
 
+	@Override
 	public int b() {
 		return 3;
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockJukeBox.HAS_RECORD, i > 0);
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
-		return ((Boolean) iblockdata.get(BlockJukeBox.HAS_RECORD)).booleanValue() ? 1 : 0;
+		return iblockdata.get(BlockJukeBox.HAS_RECORD).booleanValue() ? 1 : 0;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockJukeBox.HAS_RECORD });
 	}
@@ -117,6 +127,7 @@ public class BlockJukeBox extends BlockContainer {
 		public TileEntityRecordPlayer() {
 		}
 
+		@Override
 		public void a(NBTTagCompound nbttagcompound) {
 			super.a(nbttagcompound);
 			if (nbttagcompound.hasKeyOfType("RecordItem", 10)) {
@@ -127,6 +138,7 @@ public class BlockJukeBox extends BlockContainer {
 
 		}
 
+		@Override
 		public void b(NBTTagCompound nbttagcompound) {
 			super.b(nbttagcompound);
 			if (this.getRecord() != null) {

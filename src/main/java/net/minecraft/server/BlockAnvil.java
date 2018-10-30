@@ -1,12 +1,9 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
-
 public class BlockAnvil extends BlockFalling {
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static final BlockStateDirection FACING = BlockStateDirection.of("facing",
-			(Predicate) EnumDirection.EnumDirectionLimit.HORIZONTAL);
+			EnumDirection.EnumDirectionLimit.HORIZONTAL);
 	public static final BlockStateInteger DAMAGE = BlockStateInteger.of("damage", 0, 2);
 
 	protected BlockAnvil() {
@@ -17,14 +14,17 @@ public class BlockAnvil extends BlockFalling {
 		this.a(CreativeModeTab.c);
 	}
 
+	@Override
 	public boolean d() {
 		return false;
 	}
 
+	@Override
 	public boolean c() {
 		return false;
 	}
 
+	@Override
 	public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f,
 			float f1, float f2, int i, EntityLiving entityliving) {
 		EnumDirection enumdirection1 = entityliving.getDirection().e();
@@ -33,6 +33,7 @@ public class BlockAnvil extends BlockFalling {
 				.set(BlockAnvil.FACING, enumdirection1).set(BlockAnvil.DAMAGE, Integer.valueOf(i >> 2));
 	}
 
+	@Override
 	public boolean interact(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		if (!world.isClientSide) {
@@ -42,12 +43,14 @@ public class BlockAnvil extends BlockFalling {
 		return true;
 	}
 
+	@Override
 	public int getDropData(IBlockData iblockdata) {
-		return ((Integer) iblockdata.get(BlockAnvil.DAMAGE)).intValue();
+		return iblockdata.get(BlockAnvil.DAMAGE).intValue();
 	}
 
+	@Override
 	public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
-		EnumDirection enumdirection = (EnumDirection) iblockaccess.getType(blockposition).get(BlockAnvil.FACING);
+		EnumDirection enumdirection = iblockaccess.getType(blockposition).get(BlockAnvil.FACING);
 
 		if (enumdirection.k() == EnumDirection.EnumAxis.X) {
 			this.a(0.0F, 0.0F, 0.125F, 1.0F, 1.0F, 0.875F);
@@ -57,27 +60,32 @@ public class BlockAnvil extends BlockFalling {
 
 	}
 
+	@Override
 	protected void a(EntityFallingBlock entityfallingblock) {
 		entityfallingblock.a(true);
 	}
 
+	@Override
 	public void a_(World world, BlockPosition blockposition) {
 		world.triggerEffect(1022, blockposition, 0);
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockAnvil.FACING, EnumDirection.fromType2(i & 3)).set(BlockAnvil.DAMAGE,
 				Integer.valueOf((i & 15) >> 2));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
 		byte b0 = 0;
-		int i = b0 | ((EnumDirection) iblockdata.get(BlockAnvil.FACING)).b();
+		int i = b0 | iblockdata.get(BlockAnvil.FACING).b();
 
-		i |= ((Integer) iblockdata.get(BlockAnvil.DAMAGE)).intValue() << 2;
+		i |= iblockdata.get(BlockAnvil.DAMAGE).intValue() << 2;
 		return i;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockAnvil.FACING, BlockAnvil.DAMAGE });
 	}
@@ -92,22 +100,27 @@ public class BlockAnvil extends BlockFalling {
 			this.b = blockposition;
 		}
 
+		@Override
 		public String getName() {
 			return "anvil";
 		}
 
+		@Override
 		public boolean hasCustomName() {
 			return false;
 		}
 
+		@Override
 		public IChatBaseComponent getScoreboardDisplayName() {
 			return new ChatMessage(Blocks.ANVIL.a() + ".name", new Object[0]);
 		}
 
+		@Override
 		public Container createContainer(PlayerInventory playerinventory, EntityHuman entityhuman) {
 			return new ContainerAnvil(playerinventory, this.a, this.b, entityhuman);
 		}
 
+		@Override
 		public String getContainerName() {
 			return "minecraft:anvil";
 		}

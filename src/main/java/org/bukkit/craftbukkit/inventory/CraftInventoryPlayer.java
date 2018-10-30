@@ -1,15 +1,15 @@
 package org.bukkit.craftbukkit.inventory;
 
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.PacketPlayOutHeldItemSlot;
-import net.minecraft.server.PacketPlayOutSetSlot;
-import net.minecraft.server.PlayerInventory;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.PacketPlayOutHeldItemSlot;
+import net.minecraft.server.PacketPlayOutSetSlot;
+import net.minecraft.server.PlayerInventory;
 
 public class CraftInventoryPlayer extends CraftInventory
 		implements org.bukkit.inventory.PlayerInventory, EntityEquipment {
@@ -27,10 +27,12 @@ public class CraftInventoryPlayer extends CraftInventory
 		return super.getSize() - 4;
 	}
 
+	@Override
 	public ItemStack getItemInHand() {
 		return CraftItemStack.asCraftMirror(getInventory().getItemInHand());
 	}
 
+	@Override
 	public void setItemInHand(ItemStack stack) {
 		setItem(getHeldItemSlot(), stack);
 	}
@@ -97,48 +99,59 @@ public class CraftInventoryPlayer extends CraftInventory
 				new PacketPlayOutSetSlot(player.defaultContainer.windowId, index, CraftItemStack.asNMSCopy(item)));
 	}
 
+	@Override
 	public int getHeldItemSlot() {
 		return getInventory().itemInHandIndex;
 	}
 
+	@Override
 	public void setHeldItemSlot(int slot) {
 		Validate.isTrue(slot >= 0 && slot < PlayerInventory.getHotbarSize(), "Slot is not between 0 and 8 inclusive");
 		this.getInventory().itemInHandIndex = slot;
 		((CraftPlayer) this.getHolder()).getHandle().playerConnection.sendPacket(new PacketPlayOutHeldItemSlot(slot));
 	}
 
+	@Override
 	public ItemStack getHelmet() {
 		return getItem(getSize() + 3);
 	}
 
+	@Override
 	public ItemStack getChestplate() {
 		return getItem(getSize() + 2);
 	}
 
+	@Override
 	public ItemStack getLeggings() {
 		return getItem(getSize() + 1);
 	}
 
+	@Override
 	public ItemStack getBoots() {
 		return getItem(getSize() + 0);
 	}
 
+	@Override
 	public void setHelmet(ItemStack helmet) {
 		setItem(getSize() + 3, helmet);
 	}
 
+	@Override
 	public void setChestplate(ItemStack chestplate) {
 		setItem(getSize() + 2, chestplate);
 	}
 
+	@Override
 	public void setLeggings(ItemStack leggings) {
 		setItem(getSize() + 1, leggings);
 	}
 
+	@Override
 	public void setBoots(ItemStack boots) {
 		setItem(getSize() + 0, boots);
 	}
 
+	@Override
 	public ItemStack[] getArmorContents() {
 		net.minecraft.server.ItemStack[] mcItems = getInventory().getArmorContents();
 		ItemStack[] ret = new ItemStack[mcItems.length];
@@ -149,6 +162,7 @@ public class CraftInventoryPlayer extends CraftInventory
 		return ret;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setArmorContents(ItemStack[] items) {
 		int cnt = getSize();
@@ -165,6 +179,7 @@ public class CraftInventoryPlayer extends CraftInventory
 		}
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public int clear(int id, int data) {
 		int count = 0;
@@ -204,42 +219,52 @@ public class CraftInventoryPlayer extends CraftInventory
 		return (HumanEntity) inventory.getOwner();
 	}
 
+	@Override
 	public float getItemInHandDropChance() {
 		return 1;
 	}
 
+	@Override
 	public void setItemInHandDropChance(float chance) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public float getHelmetDropChance() {
 		return 1;
 	}
 
+	@Override
 	public void setHelmetDropChance(float chance) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public float getChestplateDropChance() {
 		return 1;
 	}
 
+	@Override
 	public void setChestplateDropChance(float chance) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public float getLeggingsDropChance() {
 		return 1;
 	}
 
+	@Override
 	public void setLeggingsDropChance(float chance) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public float getBootsDropChance() {
 		return 1;
 	}
 
+	@Override
 	public void setBootsDropChance(float chance) {
 		throw new UnsupportedOperationException();
 	}

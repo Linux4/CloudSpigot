@@ -22,10 +22,12 @@ public class InventoryCrafting implements IInventory {
 	private EntityHuman owner;
 	// private int maxStack = MAX_STACK; // CloudSpigot
 
+	@Override
 	public ItemStack[] getContents() {
 		return this.items;
 	}
 
+	@Override
 	public void onOpen(CraftHumanEntity who) {
 		transaction.add(who);
 	}
@@ -34,18 +36,22 @@ public class InventoryCrafting implements IInventory {
 		return items.length == 4 ? InventoryType.CRAFTING : InventoryType.WORKBENCH;
 	}
 
+	@Override
 	public void onClose(CraftHumanEntity who) {
 		transaction.remove(who);
 	}
 
+	@Override
 	public List<HumanEntity> getViewers() {
 		return transaction;
 	}
 
+	@Override
 	public org.bukkit.inventory.InventoryHolder getOwner() {
 		return (owner == null) ? null : owner.getBukkitEntity();
 	}
 
+	@Override
 	public void setMaxStackSize(int size) {
 		// maxStack = size; // CloudSpigot
 		resultInventory.setMaxStackSize(size);
@@ -66,10 +72,12 @@ public class InventoryCrafting implements IInventory {
 		this.c = j;
 	}
 
+	@Override
 	public int getSize() {
 		return this.items.length;
 	}
 
+	@Override
 	public ItemStack getItem(int i) {
 		return i >= this.getSize() ? null : this.items[i];
 	}
@@ -78,19 +86,23 @@ public class InventoryCrafting implements IInventory {
 		return i >= 0 && i < this.b && j >= 0 && j <= this.c ? this.getItem(i + j * this.b) : null;
 	}
 
+	@Override
 	public String getName() {
 		return "container.crafting";
 	}
 
+	@Override
 	public boolean hasCustomName() {
 		return false;
 	}
 
+	@Override
 	public IChatBaseComponent getScoreboardDisplayName() {
-		return (IChatBaseComponent) (this.hasCustomName() ? new ChatComponentText(this.getName())
-				: new ChatMessage(this.getName(), new Object[0]));
+		return this.hasCustomName() ? new ChatComponentText(this.getName())
+				: new ChatMessage(this.getName(), new Object[0]);
 	}
 
+	@Override
 	public ItemStack splitWithoutUpdate(int i) {
 		if (this.items[i] != null) {
 			ItemStack itemstack = this.items[i];
@@ -102,6 +114,7 @@ public class InventoryCrafting implements IInventory {
 		}
 	}
 
+	@Override
 	public ItemStack splitStack(int i, int j) {
 		if (this.items[i] != null) {
 			ItemStack itemstack;
@@ -109,7 +122,7 @@ public class InventoryCrafting implements IInventory {
 			if (this.items[i].count <= j) {
 				itemstack = this.items[i];
 				this.items[i] = null;
-				this.d.a((IInventory) this);
+				this.d.a(this);
 				return itemstack;
 			} else {
 				itemstack = this.items[i].cloneAndSubtract(j);
@@ -117,7 +130,7 @@ public class InventoryCrafting implements IInventory {
 					this.items[i] = null;
 				}
 
-				this.d.a((IInventory) this);
+				this.d.a(this);
 				return itemstack;
 			}
 		} else {
@@ -125,43 +138,54 @@ public class InventoryCrafting implements IInventory {
 		}
 	}
 
+	@Override
 	public void setItem(int i, ItemStack itemstack) {
 		this.items[i] = itemstack;
-		this.d.a((IInventory) this);
+		this.d.a(this);
 	}
 
+	@Override
 	public int getMaxStackSize() {
 		return 64;
 	}
 
+	@Override
 	public void update() {
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		return true;
 	}
 
+	@Override
 	public void startOpen(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public void closeContainer(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public boolean b(int i, ItemStack itemstack) {
 		return true;
 	}
 
+	@Override
 	public int getProperty(int i) {
 		return 0;
 	}
 
+	@Override
 	public void b(int i, int j) {
 	}
 
+	@Override
 	public int g() {
 		return 0;
 	}
 
+	@Override
 	public void l() {
 		for (int i = 0; i < this.items.length; ++i) {
 			this.items[i] = null;

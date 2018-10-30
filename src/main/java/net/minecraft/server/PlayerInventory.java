@@ -1,9 +1,8 @@
 package net.minecraft.server;
 
-import java.util.concurrent.Callable;
-
 // CraftBukkit start
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
@@ -22,6 +21,7 @@ public class PlayerInventory implements IInventory {
 	public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
 	private int maxStack = MAX_STACK;
 
+	@Override
 	public ItemStack[] getContents() {
 		return this.items;
 	}
@@ -30,22 +30,27 @@ public class PlayerInventory implements IInventory {
 		return this.armor;
 	}
 
+	@Override
 	public void onOpen(CraftHumanEntity who) {
 		transaction.add(who);
 	}
 
+	@Override
 	public void onClose(CraftHumanEntity who) {
 		transaction.remove(who);
 	}
 
+	@Override
 	public List<HumanEntity> getViewers() {
 		return transaction;
 	}
 
+	@Override
 	public org.bukkit.inventory.InventoryHolder getOwner() {
 		return this.player.getBukkitEntity();
 	}
 
+	@Override
 	public void setMaxStackSize(int size) {
 		maxStack = size;
 	}
@@ -301,13 +306,14 @@ public class PlayerInventory implements IInventory {
 				CrashReport crashreport = CrashReport.a(throwable, "Adding item to inventory");
 				CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Item being added");
 
-				crashreportsystemdetails.a("Item ID", (Object) Integer.valueOf(Item.getId(itemstack.getItem())));
-				crashreportsystemdetails.a("Item data", (Object) Integer.valueOf(itemstack.getData()));
+				crashreportsystemdetails.a("Item ID", Integer.valueOf(Item.getId(itemstack.getItem())));
+				crashreportsystemdetails.a("Item data", Integer.valueOf(itemstack.getData()));
 				crashreportsystemdetails.a("Item name", new Callable<String>() {
 					public String a() throws Exception {
 						return itemstack.getName();
 					}
 
+					@Override
 					public String call() throws Exception {
 						return this.a();
 					}
@@ -319,6 +325,7 @@ public class PlayerInventory implements IInventory {
 		}
 	}
 
+	@Override
 	public ItemStack splitStack(int i, int j) {
 		ItemStack[] aitemstack = this.items;
 
@@ -347,6 +354,7 @@ public class PlayerInventory implements IInventory {
 		}
 	}
 
+	@Override
 	public ItemStack splitWithoutUpdate(int i) {
 		ItemStack[] aitemstack = this.items;
 
@@ -365,6 +373,7 @@ public class PlayerInventory implements IInventory {
 		}
 	}
 
+	@Override
 	public void setItem(int i, ItemStack itemstack) {
 		ItemStack[] aitemstack = this.items;
 
@@ -433,10 +442,12 @@ public class PlayerInventory implements IInventory {
 
 	}
 
+	@Override
 	public int getSize() {
 		return this.items.length + 4;
 	}
 
+	@Override
 	public ItemStack getItem(int i) {
 		ItemStack[] aitemstack = this.items;
 
@@ -448,19 +459,23 @@ public class PlayerInventory implements IInventory {
 		return aitemstack[i];
 	}
 
+	@Override
 	public String getName() {
 		return "container.inventory";
 	}
 
+	@Override
 	public boolean hasCustomName() {
 		return false;
 	}
 
+	@Override
 	public IChatBaseComponent getScoreboardDisplayName() {
-		return (IChatBaseComponent) (this.hasCustomName() ? new ChatComponentText(this.getName())
-				: new ChatMessage(this.getName(), new Object[0]));
+		return this.hasCustomName() ? new ChatComponentText(this.getName())
+				: new ChatMessage(this.getName(), new Object[0]);
 	}
 
+	@Override
 	public int getMaxStackSize() {
 		return maxStack; // CraftBukkit
 	}
@@ -529,6 +544,7 @@ public class PlayerInventory implements IInventory {
 
 	}
 
+	@Override
 	public void update() {
 		this.e = true;
 	}
@@ -546,6 +562,7 @@ public class PlayerInventory implements IInventory {
 		return this.f;
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		return this.player.dead ? false : entityhuman.h(this.player) <= 64.0D;
 	}
@@ -568,12 +585,15 @@ public class PlayerInventory implements IInventory {
 		return false;
 	}
 
+	@Override
 	public void startOpen(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public void closeContainer(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public boolean b(int i, ItemStack itemstack) {
 		return true;
 	}
@@ -592,17 +612,21 @@ public class PlayerInventory implements IInventory {
 		this.itemInHandIndex = playerinventory.itemInHandIndex;
 	}
 
+	@Override
 	public int getProperty(int i) {
 		return 0;
 	}
 
+	@Override
 	public void b(int i, int j) {
 	}
 
+	@Override
 	public int g() {
 		return 0;
 	}
 
+	@Override
 	public void l() {
 		int i;
 

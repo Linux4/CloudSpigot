@@ -26,7 +26,7 @@ public class PathfinderGoalSelector {
 		Iterator<PathfinderGoalSelectorItem> iterator = this.b.iterator();
 
 		while (iterator.hasNext()) {
-			PathfinderGoalSelector.PathfinderGoalSelectorItem pathfindergoalselector_pathfindergoalselectoritem = (PathfinderGoalSelector.PathfinderGoalSelectorItem) iterator
+			PathfinderGoalSelector.PathfinderGoalSelectorItem pathfindergoalselector_pathfindergoalselectoritem = iterator
 					.next();
 			PathfinderGoal pathfindergoal1 = pathfindergoalselector_pathfindergoalselectoritem.a;
 
@@ -51,7 +51,7 @@ public class PathfinderGoalSelector {
 			iterator = this.b.iterator();
 
 			while (iterator.hasNext()) {
-				pathfindergoalselector_pathfindergoalselectoritem = (PathfinderGoalSelector.PathfinderGoalSelectorItem) iterator
+				pathfindergoalselector_pathfindergoalselectoritem = iterator
 						.next();
 				boolean flag = this.c.contains(pathfindergoalselector_pathfindergoalselectoritem);
 
@@ -75,7 +75,7 @@ public class PathfinderGoalSelector {
 			iterator = this.c.iterator();
 
 			while (iterator.hasNext()) {
-				pathfindergoalselector_pathfindergoalselectoritem = (PathfinderGoalSelector.PathfinderGoalSelectorItem) iterator
+				pathfindergoalselector_pathfindergoalselectoritem = iterator
 						.next();
 				if (!this.a(pathfindergoalselector_pathfindergoalselectoritem)) {
 					pathfindergoalselector_pathfindergoalselectoritem.a.d();
@@ -89,7 +89,7 @@ public class PathfinderGoalSelector {
 		iterator = this.c.iterator();
 
 		while (iterator.hasNext()) {
-			pathfindergoalselector_pathfindergoalselectoritem = (PathfinderGoalSelector.PathfinderGoalSelectorItem) iterator
+			pathfindergoalselector_pathfindergoalselectoritem = iterator
 					.next();
 			pathfindergoalselector_pathfindergoalselectoritem.a.e();
 		}
@@ -110,7 +110,7 @@ public class PathfinderGoalSelector {
 		Iterator<PathfinderGoalSelectorItem> iterator = this.b.iterator();
 
 		while (iterator.hasNext()) {
-			PathfinderGoalSelector.PathfinderGoalSelectorItem pathfindergoalselector_pathfindergoalselectoritem1 = (PathfinderGoalSelector.PathfinderGoalSelectorItem) iterator
+			PathfinderGoalSelector.PathfinderGoalSelectorItem pathfindergoalselector_pathfindergoalselectoritem1 = iterator
 					.next();
 
 			if (pathfindergoalselector_pathfindergoalselectoritem1 != pathfindergoalselector_pathfindergoalselectoritem) {

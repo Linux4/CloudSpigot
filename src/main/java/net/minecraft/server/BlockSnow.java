@@ -15,51 +15,59 @@ public class BlockSnow extends Block {
 		this.j();
 	}
 
+	@Override
 	public boolean b(IBlockAccess iblockaccess, BlockPosition blockposition) {
-		return ((Integer) iblockaccess.getType(blockposition).get(BlockSnow.LAYERS)).intValue() < 5;
+		return iblockaccess.getType(blockposition).get(BlockSnow.LAYERS).intValue() < 5;
 	}
 
+	@Override
 	public AxisAlignedBB a(World world, BlockPosition blockposition, IBlockData iblockdata) {
-		int i = ((Integer) iblockdata.get(BlockSnow.LAYERS)).intValue() - 1;
+		int i = iblockdata.get(BlockSnow.LAYERS).intValue() - 1;
 		float f = 0.125F;
 
-		return new AxisAlignedBB((double) blockposition.getX() + this.minX, (double) blockposition.getY() + this.minY,
-				(double) blockposition.getZ() + this.minZ, (double) blockposition.getX() + this.maxX,
-				(double) ((float) blockposition.getY() + (float) i * f), (double) blockposition.getZ() + this.maxZ);
+		return new AxisAlignedBB(blockposition.getX() + this.minX, blockposition.getY() + this.minY,
+				blockposition.getZ() + this.minZ, blockposition.getX() + this.maxX,
+				blockposition.getY() + i * f, blockposition.getZ() + this.maxZ);
 	}
 
+	@Override
 	public boolean c() {
 		return false;
 	}
 
+	@Override
 	public boolean d() {
 		return false;
 	}
 
+	@Override
 	public void j() {
 		this.b(0);
 	}
 
+	@Override
 	public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
 		IBlockData iblockdata = iblockaccess.getType(blockposition);
 
-		this.b(((Integer) iblockdata.get(BlockSnow.LAYERS)).intValue());
+		this.b(iblockdata.get(BlockSnow.LAYERS).intValue());
 	}
 
 	protected void b(int i) {
-		this.a(0.0F, 0.0F, 0.0F, 1.0F, (float) i / 8.0F, 1.0F);
+		this.a(0.0F, 0.0F, 0.0F, 1.0F, i / 8.0F, 1.0F);
 	}
 
+	@Override
 	public boolean canPlace(World world, BlockPosition blockposition) {
 		IBlockData iblockdata = world.getType(blockposition.down());
 		Block block = iblockdata.getBlock();
 
 		return block != Blocks.ICE && block != Blocks.PACKED_ICE ? (block.getMaterial() == Material.LEAVES ? true
-				: (block == this && ((Integer) iblockdata.get(BlockSnow.LAYERS)).intValue() >= 7 ? true
+				: (block == this && iblockdata.get(BlockSnow.LAYERS).intValue() >= 7 ? true
 						: block.c() && block.material.isSolid()))
 				: false;
 	}
 
+	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
 		this.e(world, blockposition, iblockdata);
 	}
@@ -74,22 +82,26 @@ public class BlockSnow extends Block {
 		}
 	}
 
+	@Override
 	public void a(World world, EntityHuman entityhuman, BlockPosition blockposition, IBlockData iblockdata,
 			TileEntity tileentity) {
 		a(world, blockposition,
-				new ItemStack(Items.SNOWBALL, ((Integer) iblockdata.get(BlockSnow.LAYERS)).intValue() + 1, 0));
+				new ItemStack(Items.SNOWBALL, iblockdata.get(BlockSnow.LAYERS).intValue() + 1, 0));
 		world.setAir(blockposition);
 		entityhuman.b(StatisticList.MINE_BLOCK_COUNT[Block.getId(this)]);
 	}
 
+	@Override
 	public Item getDropType(IBlockData iblockdata, Random random, int i) {
 		return Items.SNOWBALL;
 	}
 
+	@Override
 	public int a(Random random) {
 		return 0;
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		if (world.b(EnumSkyBlock.BLOCK, blockposition) > 11) {
 			// CraftBukkit start
@@ -105,18 +117,22 @@ public class BlockSnow extends Block {
 
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockSnow.LAYERS, Integer.valueOf((i & 7) + 1));
 	}
 
+	@Override
 	public boolean a(World world, BlockPosition blockposition) {
-		return ((Integer) world.getType(blockposition).get(BlockSnow.LAYERS)).intValue() == 1;
+		return world.getType(blockposition).get(BlockSnow.LAYERS).intValue() == 1;
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
-		return ((Integer) iblockdata.get(BlockSnow.LAYERS)).intValue() - 1;
+		return iblockdata.get(BlockSnow.LAYERS).intValue() - 1;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockSnow.LAYERS });
 	}

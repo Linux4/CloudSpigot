@@ -27,11 +27,13 @@ public class EntityOcelot extends EntityTameableAnimal {
 				new PathfinderGoalRandomTargetNonTamed(this, EntityChicken.class, false, (Predicate) null));
 	}
 
+	@Override
 	protected void h() {
 		super.h();
 		this.datawatcher.a(18, Byte.valueOf((byte) 0));
 	}
 
+	@Override
 	public void E() {
 		if (this.getControllerMove().a()) {
 			double d0 = this.getControllerMove().b();
@@ -53,50 +55,61 @@ public class EntityOcelot extends EntityTameableAnimal {
 
 	}
 
+	@Override
 	protected boolean isTypeNotPersistent() {
 		return !this.isTamed() /* && this.ticksLived > 2400 */; // CraftBukkit
 	}
 
+	@Override
 	protected void initAttributes() {
 		super.initAttributes();
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(10.0D);
 		this.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED).setValue(0.30000001192092896D);
 	}
 
+	@Override
 	public void e(float f, float f1) {
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		nbttagcompound.setInt("CatType", this.getCatType());
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		this.setCatType(nbttagcompound.getInt("CatType"));
 	}
 
+	@Override
 	protected String z() {
 		return this.isTamed() ? (this.isInLove() ? "mob.cat.purr"
 				: (this.random.nextInt(4) == 0 ? "mob.cat.purreow" : "mob.cat.meow")) : "";
 	}
 
+	@Override
 	protected String bo() {
 		return "mob.cat.hitt";
 	}
 
+	@Override
 	protected String bp() {
 		return "mob.cat.hitt";
 	}
 
+	@Override
 	protected float bB() {
 		return 0.4F;
 	}
 
+	@Override
 	protected Item getLoot() {
 		return Items.LEATHER;
 	}
 
+	@Override
 	public boolean r(Entity entity) {
 		return entity.damageEntity(DamageSource.mobAttack(this), 3.0F);
 	}
@@ -109,9 +122,11 @@ public class EntityOcelot extends EntityTameableAnimal {
 	 * super.damageEntity(damagesource, f); } } // CraftBukkit end
 	 */
 
+	@Override
 	protected void dropDeathLoot(boolean flag, int i) {
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		ItemStack itemstack = entityhuman.inventory.getItemInHand();
 
@@ -163,10 +178,12 @@ public class EntityOcelot extends EntityTameableAnimal {
 		return entityocelot;
 	}
 
+	@Override
 	public boolean d(ItemStack itemstack) {
 		return itemstack != null && itemstack.getItem() == Items.FISH;
 	}
 
+	@Override
 	public boolean mate(EntityAnimal entityanimal) {
 		if (entityanimal == this) {
 			return false;
@@ -189,12 +206,14 @@ public class EntityOcelot extends EntityTameableAnimal {
 		this.datawatcher.watch(18, Byte.valueOf((byte) i));
 	}
 
+	@Override
 	public boolean bR() {
 		return this.world.random.nextInt(3) != 0;
 	}
 
+	@Override
 	public boolean canSpawn() {
-		if (this.world.a(this.getBoundingBox(), (Entity) this)
+		if (this.world.a(this.getBoundingBox(), this)
 				&& this.world.getCubes(this, this.getBoundingBox()).isEmpty()
 				&& !this.world.containsLiquid(this.getBoundingBox())) {
 			BlockPosition blockposition = new BlockPosition(this.locX, this.getBoundingBox().b, this.locZ);
@@ -213,27 +232,31 @@ public class EntityOcelot extends EntityTameableAnimal {
 		return false;
 	}
 
+	@Override
 	public String getName() {
 		return this.hasCustomName() ? this.getCustomName()
 				: (this.isTamed() ? LocaleI18n.get("entity.Cat.name") : super.getName());
 	}
 
+	@Override
 	public void setTamed(boolean flag) {
 		super.setTamed(flag);
 	}
 
+	@Override
 	protected void cm() {
 		if (this.bo == null) {
 			this.bo = new PathfinderGoalAvoidTarget<EntityHuman>(this, EntityHuman.class, 16.0F, 0.8D, 1.33D);
 		}
 
-		this.goalSelector.a((PathfinderGoal) this.bo);
+		this.goalSelector.a(this.bo);
 		if (!this.isTamed()) {
 			this.goalSelector.a(4, this.bo);
 		}
 
 	}
 
+	@Override
 	public GroupDataEntity prepare(DifficultyDamageScaler difficultydamagescaler, GroupDataEntity groupdataentity) {
 		groupdataentity = super.prepare(difficultydamagescaler, groupdataentity);
 		if (spawnBonus && this.world.random.nextInt(7) == 0) { // Spigot
@@ -252,6 +275,7 @@ public class EntityOcelot extends EntityTameableAnimal {
 		return groupdataentity;
 	}
 
+	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) {
 		return this.b(entityageable);
 	}

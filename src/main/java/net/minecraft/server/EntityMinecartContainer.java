@@ -17,22 +17,27 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 	public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
 	private int maxStack = MAX_STACK;
 
+	@Override
 	public ItemStack[] getContents() {
 		return this.items;
 	}
 
+	@Override
 	public void onOpen(CraftHumanEntity who) {
 		transaction.add(who);
 	}
 
+	@Override
 	public void onClose(CraftHumanEntity who) {
 		transaction.remove(who);
 	}
 
+	@Override
 	public List<HumanEntity> getViewers() {
 		return transaction;
 	}
 
+	@Override
 	public InventoryHolder getOwner() {
 		org.bukkit.entity.Entity cart = getBukkitEntity();
 		if (cart instanceof InventoryHolder)
@@ -40,6 +45,7 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 		return null;
 	}
 
+	@Override
 	public void setMaxStackSize(int size) {
 		maxStack = size;
 	}
@@ -53,6 +59,7 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 		super(world, d0, d1, d2);
 	}
 
+	@Override
 	public void a(DamageSource damagesource) {
 		super.a(damagesource);
 		if (this.world.getGameRules().getBoolean("doEntityDrops")) {
@@ -61,10 +68,12 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 
 	}
 
+	@Override
 	public ItemStack getItem(int i) {
 		return this.items[i];
 	}
 
+	@Override
 	public ItemStack splitStack(int i, int j) {
 		if (this.items[i] != null) {
 			ItemStack itemstack;
@@ -86,6 +95,7 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 		}
 	}
 
+	@Override
 	public ItemStack splitWithoutUpdate(int i) {
 		if (this.items[i] != null) {
 			ItemStack itemstack = this.items[i];
@@ -97,6 +107,7 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 		}
 	}
 
+	@Override
 	public void setItem(int i, ItemStack itemstack) {
 		this.items[i] = itemstack;
 		if (itemstack != null && itemstack.count > this.getMaxStackSize()) {
@@ -105,31 +116,39 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 
 	}
 
+	@Override
 	public void update() {
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		return this.dead ? false : entityhuman.h(this) <= 64.0D;
 	}
 
+	@Override
 	public void startOpen(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public void closeContainer(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public boolean b(int i, ItemStack itemstack) {
 		return true;
 	}
 
+	@Override
 	public String getName() {
 		return this.hasCustomName() ? this.getCustomName() : "container.minecart";
 	}
 
+	@Override
 	public int getMaxStackSize() {
 		return maxStack; // CraftBukkit
 	}
 
+	@Override
 	public void c(int i) {
 		// Spigot Start
 		for (HumanEntity human : new java.util.ArrayList<HumanEntity>(transaction)) {
@@ -140,6 +159,7 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 		super.c(i);
 	}
 
+	@Override
 	public void die() {
 		if (this.b) {
 			InventoryUtils.dropEntity(this.world, this, this);
@@ -148,6 +168,7 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 		super.die();
 	}
 
+	@Override
 	protected void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		NBTTagList nbttaglist = new NBTTagList();
@@ -165,6 +186,7 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 		nbttagcompound.set("Items", nbttaglist);
 	}
 
+	@Override
 	protected void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		NBTTagList nbttaglist = nbttagcompound.getList("Items", 10);
@@ -182,6 +204,7 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 
 	}
 
+	@Override
 	public boolean e(EntityHuman entityhuman) {
 		if (!this.world.isClientSide) {
 			entityhuman.openContainer(this);
@@ -190,37 +213,45 @@ public abstract class EntityMinecartContainer extends EntityMinecartAbstract imp
 		return true;
 	}
 
+	@Override
 	protected void o() {
-		int i = 15 - Container.b((IInventory) this);
-		float f = 0.98F + (float) i * 0.001F;
+		int i = 15 - Container.b(this);
+		float f = 0.98F + i * 0.001F;
 
-		this.motX *= (double) f;
+		this.motX *= f;
 		this.motY *= 0.0D;
-		this.motZ *= (double) f;
+		this.motZ *= f;
 	}
 
+	@Override
 	public int getProperty(int i) {
 		return 0;
 	}
 
+	@Override
 	public void b(int i, int j) {
 	}
 
+	@Override
 	public int g() {
 		return 0;
 	}
 
+	@Override
 	public boolean r_() {
 		return false;
 	}
 
+	@Override
 	public void a(ChestLock chestlock) {
 	}
 
+	@Override
 	public ChestLock i() {
 		return ChestLock.a;
 	}
 
+	@Override
 	public void l() {
 		for (int i = 0; i < this.items.length; ++i) {
 			this.items[i] = null;

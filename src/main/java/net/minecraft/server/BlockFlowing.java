@@ -20,9 +20,10 @@ public class BlockFlowing extends BlockFluids {
 
 	private void f(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		world.setTypeAndData(blockposition,
-				b(this.material).getBlockData().set(BlockFlowing.LEVEL, iblockdata.get(BlockFlowing.LEVEL)), 2);
+				b(this.material).getBlockData().set(BlockFluids.LEVEL, iblockdata.get(BlockFluids.LEVEL)), 2);
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		// CraftBukkit start
 		org.bukkit.World bworld = world.getWorld();
@@ -30,7 +31,7 @@ public class BlockFlowing extends BlockFluids {
 		org.bukkit.block.Block source = bworld == null ? null
 				: bworld.getBlockAt(blockposition.getX(), blockposition.getY(), blockposition.getZ());
 		// CraftBukkit end
-		int i = ((Integer) iblockdata.get(BlockFlowing.LEVEL)).intValue();
+		int i = iblockdata.get(BlockFluids.LEVEL).intValue();
 		byte b0 = 1;
 
 		if (this.material == Material.LAVA && !world.worldProvider.n()) {
@@ -49,7 +50,7 @@ public class BlockFlowing extends BlockFluids {
 
 			for (Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator(); iterator
 					.hasNext(); l = this.a(world, blockposition.shift(enumdirection), l)) {
-				enumdirection = (EnumDirection) iterator.next();
+				enumdirection = iterator.next();
 			}
 
 			int i1 = l + b0;
@@ -73,7 +74,7 @@ public class BlockFlowing extends BlockFluids {
 				if (iblockdata1.getBlock().getMaterial().isBuildable()) {
 					i1 = 0;
 				} else if (iblockdata1.getBlock().getMaterial() == this.material
-						&& ((Integer) iblockdata1.get(BlockFlowing.LEVEL)).intValue() == 0) {
+						&& iblockdata1.get(BlockFluids.LEVEL).intValue() == 0) {
 					i1 = 0;
 				}
 			}
@@ -90,9 +91,9 @@ public class BlockFlowing extends BlockFluids {
 				if (i1 < 0 || canFastDrain(world, blockposition)) { // CloudSpigot - Fast draining
 					world.setAir(blockposition);
 				} else {
-					iblockdata = iblockdata.set(BlockFlowing.LEVEL, Integer.valueOf(i1));
+					iblockdata = iblockdata.set(BlockFluids.LEVEL, Integer.valueOf(i1));
 					world.setTypeAndData(blockposition, iblockdata, 2);
-					world.a(blockposition, (Block) this, j);
+					world.a(blockposition, this, j);
 					// CloudSpigot start - Optimize draining
 					world.d(blockposition.west(), this);
 					world.d(blockposition.east(), this);
@@ -146,7 +147,7 @@ public class BlockFlowing extends BlockFluids {
 			Iterator<EnumDirection> iterator1 = set.iterator();
 
 			while (iterator1.hasNext()) {
-				EnumDirection enumdirection1 = (EnumDirection) iterator1.next();
+				EnumDirection enumdirection1 = iterator1.next();
 
 				// CraftBukkit start
 				BlockFromToEvent event = new BlockFromToEvent(source,
@@ -176,7 +177,7 @@ public class BlockFlowing extends BlockFluids {
 				}
 			}
 
-			world.setTypeAndData(blockposition, this.getBlockData().set(BlockFlowing.LEVEL, Integer.valueOf(i)), 3);
+			world.setTypeAndData(blockposition, this.getBlockData().set(BlockFluids.LEVEL, Integer.valueOf(i)), 3);
 		}
 
 	}
@@ -186,14 +187,14 @@ public class BlockFlowing extends BlockFluids {
 		Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
 		while (iterator.hasNext()) {
-			EnumDirection enumdirection1 = (EnumDirection) iterator.next();
+			EnumDirection enumdirection1 = iterator.next();
 
 			if (enumdirection1 != enumdirection) {
 				BlockPosition blockposition1 = blockposition.shift(enumdirection1);
 				IBlockData iblockdata = world.getType(blockposition1);
 
 				if (!this.g(world, blockposition1, iblockdata) && (iblockdata.getBlock().getMaterial() != this.material
-						|| ((Integer) iblockdata.get(BlockFlowing.LEVEL)).intValue() > 0)) {
+						|| iblockdata.get(BlockFluids.LEVEL).intValue() > 0)) {
 					if (!this.g(world, blockposition1.down(), iblockdata)) {
 						return i;
 					}
@@ -218,12 +219,12 @@ public class BlockFlowing extends BlockFluids {
 		Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
 		while (iterator.hasNext()) {
-			EnumDirection enumdirection = (EnumDirection) iterator.next();
+			EnumDirection enumdirection = iterator.next();
 			BlockPosition blockposition1 = blockposition.shift(enumdirection);
 			IBlockData iblockdata = world.getType(blockposition1);
 
 			if (!this.g(world, blockposition1, iblockdata) && (iblockdata.getBlock().getMaterial() != this.material
-					|| ((Integer) iblockdata.get(BlockFlowing.LEVEL)).intValue() > 0)) {
+					|| iblockdata.get(BlockFluids.LEVEL).intValue() > 0)) {
 				int j;
 
 				if (this.g(world, blockposition1.down(), world.getType(blockposition1.down()))) {
@@ -277,9 +278,10 @@ public class BlockFlowing extends BlockFluids {
 		return material != this.material && material != Material.LAVA && !this.g(world, blockposition, iblockdata);
 	}
 
+	@Override
 	public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		if (!this.e(world, blockposition, iblockdata)) {
-			world.a(blockposition, (Block) this, this.getFlowSpeed(world, blockposition)); // CloudSpigot
+			world.a(blockposition, this, this.getFlowSpeed(world, blockposition)); // CloudSpigot
 		}
 
 	}

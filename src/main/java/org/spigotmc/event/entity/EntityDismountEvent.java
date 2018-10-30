@@ -1,12 +1,11 @@
 package org.spigotmc.event.entity;
 
 import org.bukkit.entity.Entity;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.entity.EntityEvent;
-
 // CloudSpigot start
 import org.bukkit.event.Cancellable;
 // CloudSpigot end
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.entity.EntityEvent;
 
 /**
  * Called when an entity stops riding another entity.

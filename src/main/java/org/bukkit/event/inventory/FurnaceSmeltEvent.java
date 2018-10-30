@@ -60,10 +60,12 @@ public class FurnaceSmeltEvent extends BlockEvent implements Cancellable {
 		this.result = result;
 	}
 
+	@Override
 	public boolean isCancelled() {
 		return cancelled;
 	}
 
+	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
 	}

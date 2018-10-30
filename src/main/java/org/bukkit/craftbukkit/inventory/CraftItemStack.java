@@ -194,7 +194,7 @@ public final class CraftItemStack extends ItemStack {
 		int size = list.size();
 
 		for (int i = 0; i < size; i++) {
-			NBTTagCompound tag = (NBTTagCompound) list.get(i);
+			NBTTagCompound tag = list.get(i);
 			short id = tag.getShort(ENCHANTMENTS_ID.NBT);
 			if (id == ench.getId()) {
 				tag.setShort(ENCHANTMENTS_LVL.NBT, (short) level);
@@ -246,7 +246,7 @@ public final class CraftItemStack extends ItemStack {
 		int size = list.size();
 
 		for (int i = 0; i < size; i++) {
-			NBTTagCompound enchantment = (NBTTagCompound) list.get(i);
+			NBTTagCompound enchantment = list.get(i);
 			int id = 0xffff & enchantment.getShort(ENCHANTMENTS_ID.NBT);
 			if (id == ench.getId()) {
 				index = i;
@@ -293,8 +293,8 @@ public final class CraftItemStack extends ItemStack {
 		ImmutableMap.Builder<Enchantment, Integer> result = ImmutableMap.builder();
 
 		for (int i = 0; i < list.size(); i++) {
-			int id = 0xffff & ((NBTTagCompound) list.get(i)).getShort(ENCHANTMENTS_ID.NBT);
-			int level = 0xffff & ((NBTTagCompound) list.get(i)).getShort(ENCHANTMENTS_LVL.NBT);
+			int id = 0xffff & list.get(i).getShort(ENCHANTMENTS_ID.NBT);
+			int level = 0xffff & list.get(i).getShort(ENCHANTMENTS_LVL.NBT);
 
 			result.put(Enchantment.getById(id), level);
 		}

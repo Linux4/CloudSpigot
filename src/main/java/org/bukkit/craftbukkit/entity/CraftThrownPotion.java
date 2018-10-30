@@ -2,8 +2,6 @@ package org.bukkit.craftbukkit.entity;
 
 import java.util.Collection;
 
-import net.minecraft.server.EntityPotion;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.CraftServer;
@@ -14,6 +12,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 
+import net.minecraft.server.EntityPotion;
+
 public class CraftThrownPotion extends CraftProjectile implements ThrownPotion {
 	public CraftThrownPotion(CraftServer server, EntityPotion entity) {
 		super(server, entity);
@@ -21,11 +21,13 @@ public class CraftThrownPotion extends CraftProjectile implements ThrownPotion {
 
 	// TODO: This one does not handle custom NBT potion effects does it?
 	// In that case this method could be said to be misleading or incorrect
+	@Override
 	@SuppressWarnings("deprecation")
 	public Collection<PotionEffect> getEffects() {
 		return Potion.getBrewer().getEffectsFromDamage(getHandle().getPotionValue());
 	}
 
+	@Override
 	public ItemStack getItem() {
 		// We run this method once since it will set the item stack if there is none.
 		getHandle().getPotionValue();
@@ -33,6 +35,7 @@ public class CraftThrownPotion extends CraftProjectile implements ThrownPotion {
 		return CraftItemStack.asBukkitCopy(getHandle().item);
 	}
 
+	@Override
 	public void setItem(ItemStack item) {
 		// The ItemStack must not be null.
 		Validate.notNull(item, "ItemStack cannot be null.");
@@ -54,6 +57,7 @@ public class CraftThrownPotion extends CraftProjectile implements ThrownPotion {
 		return "CraftThrownPotion";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.SPLASH_POTION;
 	}

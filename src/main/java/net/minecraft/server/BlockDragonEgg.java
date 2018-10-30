@@ -11,14 +11,17 @@ public class BlockDragonEgg extends Block {
 		this.a(0.0625F, 0.0F, 0.0625F, 0.9375F, 1.0F, 0.9375F);
 	}
 
+	@Override
 	public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
-		world.a(blockposition, (Block) this, this.a(world));
+		world.a(blockposition, this, this.a(world));
 	}
 
+	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
-		world.a(blockposition, (Block) this, this.a(world));
+		world.a(blockposition, this, this.a(world));
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		this.e(world, blockposition);
 	}
@@ -31,10 +34,10 @@ public class BlockDragonEgg extends Block {
 					&& world.areChunksLoadedBetween(blockposition.a(-b0, -b0, -b0), blockposition.a(b0, b0, b0))) {
 				// CloudSpigot start - Add FallingBlock source location API
 				org.bukkit.Location loc = new org.bukkit.Location(world.getWorld(),
-						(double) ((float) blockposition.getX() + 0.5F), (double) blockposition.getY(),
-						(double) ((float) blockposition.getZ() + 0.5F));
-				world.addEntity(new EntityFallingBlock(loc, world, (double) ((float) blockposition.getX() + 0.5F),
-						(double) blockposition.getY(), (double) ((float) blockposition.getZ() + 0.5F),
+						blockposition.getX() + 0.5F, blockposition.getY(),
+						blockposition.getZ() + 0.5F);
+				world.addEntity(new EntityFallingBlock(loc, world, blockposition.getX() + 0.5F,
+						blockposition.getY(), blockposition.getZ() + 0.5F,
 						this.getBlockData()));
 				// CloudSpigot end
 			} else {
@@ -55,12 +58,14 @@ public class BlockDragonEgg extends Block {
 		}
 	}
 
+	@Override
 	public boolean interact(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		this.f(world, blockposition);
 		return true;
 	}
 
+	@Override
 	public void attack(World world, BlockPosition blockposition, EntityHuman entityhuman) {
 		this.f(world, blockposition);
 	}
@@ -96,17 +101,17 @@ public class BlockDragonEgg extends Block {
 							float f = (world.random.nextFloat() - 0.5F) * 0.2F;
 							float f1 = (world.random.nextFloat() - 0.5F) * 0.2F;
 							float f2 = (world.random.nextFloat() - 0.5F) * 0.2F;
-							double d1 = (double) blockposition1.getX()
-									+ (double) (blockposition.getX() - blockposition1.getX()) * d0
+							double d1 = blockposition1.getX()
+									+ (blockposition.getX() - blockposition1.getX()) * d0
 									+ (world.random.nextDouble() - 0.5D) * 1.0D + 0.5D;
-							double d2 = (double) blockposition1.getY()
-									+ (double) (blockposition.getY() - blockposition1.getY()) * d0
+							double d2 = blockposition1.getY()
+									+ (blockposition.getY() - blockposition1.getY()) * d0
 									+ world.random.nextDouble() * 1.0D - 0.5D;
-							double d3 = (double) blockposition1.getZ()
-									+ (double) (blockposition.getZ() - blockposition1.getZ()) * d0
+							double d3 = blockposition1.getZ()
+									+ (blockposition.getZ() - blockposition1.getZ()) * d0
 									+ (world.random.nextDouble() - 0.5D) * 1.0D + 0.5D;
 
-							world.addParticle(EnumParticle.PORTAL, d1, d2, d3, (double) f, (double) f1, (double) f2,
+							world.addParticle(EnumParticle.PORTAL, d1, d2, d3, f, f1, f2,
 									new int[0]);
 						}
 					} else {
@@ -121,14 +126,17 @@ public class BlockDragonEgg extends Block {
 		}
 	}
 
+	@Override
 	public int a(World world) {
 		return 5;
 	}
 
+	@Override
 	public boolean c() {
 		return false;
 	}
 
+	@Override
 	public boolean d() {
 		return false;
 	}

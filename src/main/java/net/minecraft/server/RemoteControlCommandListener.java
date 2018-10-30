@@ -20,10 +20,12 @@ public class RemoteControlCommandListener implements ICommandListener {
 		return this.b.toString();
 	}
 
+	@Override
 	public String getName() {
 		return "Rcon";
 	}
 
+	@Override
 	public IChatBaseComponent getScoreboardDisplayName() {
 		return new ChatComponentText(this.getName());
 	}
@@ -34,34 +36,42 @@ public class RemoteControlCommandListener implements ICommandListener {
 	}
 	// CraftBukkit end
 
+	@Override
 	public void sendMessage(IChatBaseComponent ichatbasecomponent) {
 		this.b.append(ichatbasecomponent.c());
 	}
 
+	@Override
 	public boolean a(int i, String s) {
 		return true;
 	}
 
+	@Override
 	public BlockPosition getChunkCoordinates() {
 		return new BlockPosition(0, 0, 0);
 	}
 
+	@Override
 	public Vec3D d() {
 		return new Vec3D(0.0D, 0.0D, 0.0D);
 	}
 
+	@Override
 	public World getWorld() {
 		return MinecraftServer.getServer().getWorld();
 	}
 
+	@Override
 	public Entity f() {
 		return null;
 	}
 
+	@Override
 	public boolean getSendCommandFeedback() {
 		return true;
 	}
 
+	@Override
 	public void a(CommandObjectiveExecutor.EnumCommandResult commandobjectiveexecutor_enumcommandresult, int i) {
 	}
 }

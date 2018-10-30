@@ -1,10 +1,10 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityMinecartAbstract;
-
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.RideableMinecart;
+
+import net.minecraft.server.EntityMinecartAbstract;
 
 public class CraftMinecartRideable extends CraftMinecart implements RideableMinecart {
 	public CraftMinecartRideable(CraftServer server, EntityMinecartAbstract entity) {
@@ -16,6 +16,7 @@ public class CraftMinecartRideable extends CraftMinecart implements RideableMine
 		return "CraftMinecartRideable";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.MINECART;
 	}

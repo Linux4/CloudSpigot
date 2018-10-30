@@ -4,11 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 // CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
-import org.bukkit.craftbukkit.entity.CraftLivingEntity;
-import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.EntityUnleashEvent;
 import org.bukkit.event.entity.EntityUnleashEvent.UnleashReason;
 // CraftBukkit end
@@ -55,6 +55,7 @@ public abstract class EntityInsentient extends EntityLiving {
 		// CraftBukkit end
 	}
 
+	@Override
 	protected void initAttributes() {
 		super.initAttributes();
 		this.getAttributeMap().b(GenericAttributes.FOLLOW_RANGE).setValue(16.0D);
@@ -133,6 +134,7 @@ public abstract class EntityInsentient extends EntityLiving {
 	public void v() {
 	}
 
+	@Override
 	protected void h() {
 		super.h();
 		this.datawatcher.a(15, Byte.valueOf((byte) 0));
@@ -151,6 +153,7 @@ public abstract class EntityInsentient extends EntityLiving {
 
 	}
 
+	@Override
 	public void K() {
 		super.K();
 		// this.world.methodProfiler.a("mobBaseTick"); // CloudSpigot
@@ -162,6 +165,7 @@ public abstract class EntityInsentient extends EntityLiving {
 		// this.world.methodProfiler.b(); // CloudSpigot
 	}
 
+	@Override
 	protected int getExpValue(EntityHuman entityhuman) {
 		if (this.b_ > 0) {
 			int i = this.b_;
@@ -188,10 +192,10 @@ public abstract class EntityInsentient extends EntityLiving {
 				double d3 = 10.0D;
 
 				this.world.addParticle(EnumParticle.EXPLOSION_NORMAL,
-						this.locX + (double) (this.random.nextFloat() * this.width * 2.0F) - (double) this.width
+						this.locX + this.random.nextFloat() * this.width * 2.0F - this.width
 								- d0 * d3,
-						this.locY + (double) (this.random.nextFloat() * this.length) - d1 * d3,
-						this.locZ + (double) (this.random.nextFloat() * this.width * 2.0F) - (double) this.width
+						this.locY + this.random.nextFloat() * this.length - d1 * d3,
+						this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width
 								- d2 * d3,
 						d0, d1, d2, new int[0]);
 			}
@@ -201,6 +205,7 @@ public abstract class EntityInsentient extends EntityLiving {
 
 	}
 
+	@Override
 	public void t_() {
 		super.t_();
 		if (!this.world.isClientSide) {
@@ -209,6 +214,7 @@ public abstract class EntityInsentient extends EntityLiving {
 
 	}
 
+	@Override
 	protected float h(float f, float f1) {
 		this.b.a();
 		return f1;
@@ -224,6 +230,7 @@ public abstract class EntityInsentient extends EntityLiving {
 
 	protected ItemStack headDrop = null; // CraftBukkit
 
+	@Override
 	protected void dropDeathLoot(boolean flag, int i) {
 		Item item = this.getLoot();
 
@@ -247,6 +254,7 @@ public abstract class EntityInsentient extends EntityLiving {
 		// CraftBukkit end
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		nbttagcompound.setBoolean("CanPickUpLoot", this.bY());
@@ -295,6 +303,7 @@ public abstract class EntityInsentient extends EntityLiving {
 
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 
@@ -343,11 +352,13 @@ public abstract class EntityInsentient extends EntityLiving {
 		this.ba = f;
 	}
 
+	@Override
 	public void k(float f) {
 		super.k(f);
 		this.n(f);
 	}
 
+	@Override
 	public void m() {
 		super.m();
 		// this.world.methodProfiler.a("looting"); // CloudSpigot
@@ -356,7 +367,7 @@ public abstract class EntityInsentient extends EntityLiving {
 			Iterator<EntityItem> iterator = list.iterator();
 
 			while (iterator.hasNext()) {
-				EntityItem entityitem = (EntityItem) iterator.next();
+				EntityItem entityitem = iterator.next();
 
 				if (!entityitem.dead && entityitem.getItemStack() != null && !entityitem.s()) {
 					this.a(entityitem);
@@ -419,7 +430,7 @@ public abstract class EntityInsentient extends EntityLiving {
 					EntityHuman entityhuman = this.world.a(entityitem.n());
 
 					if (entityhuman != null) {
-						entityhuman.b((Statistic) AchievementList.x);
+						entityhuman.b(AchievementList.x);
 					}
 				}
 
@@ -477,6 +488,7 @@ public abstract class EntityInsentient extends EntityLiving {
 		}
 	}
 
+	@Override
 	protected final void doTick() {
 		++this.ticksFarFromPlayer;
 		// this.world.methodProfiler.a("checkDespawn"); // CloudSpigot
@@ -535,14 +547,14 @@ public abstract class EntityInsentient extends EntityLiving {
 		if (entity instanceof EntityLiving) {
 			EntityLiving entityliving = (EntityLiving) entity;
 
-			d2 = entityliving.locY + (double) entityliving.getHeadHeight()
-					- (this.locY + (double) this.getHeadHeight());
+			d2 = entityliving.locY + entityliving.getHeadHeight()
+					- (this.locY + this.getHeadHeight());
 		} else {
 			d2 = (entity.getBoundingBox().b + entity.getBoundingBox().e) / 2.0D
-					- (this.locY + (double) this.getHeadHeight());
+					- (this.locY + this.getHeadHeight());
 		}
 
-		double d3 = (double) MathHelper.sqrt(d0 * d0 + d1 * d1);
+		double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1);
 		float f2 = (float) (MathHelper.b(d1, d0) * 180.0D / 3.1415927410125732D) - 90.0F;
 		float f3 = (float) (-(MathHelper.b(d2, d3) * 180.0D / 3.1415927410125732D));
 
@@ -569,7 +581,7 @@ public abstract class EntityInsentient extends EntityLiving {
 	}
 
 	public boolean canSpawn() {
-		return this.world.a(this.getBoundingBox(), (Entity) this)
+		return this.world.a(this.getBoundingBox(), this)
 				&& this.world.getCubes(this, this.getBoundingBox()).isEmpty()
 				&& !this.world.containsLiquid(this.getBoundingBox());
 	}
@@ -578,6 +590,7 @@ public abstract class EntityInsentient extends EntityLiving {
 		return 4;
 	}
 
+	@Override
 	public int aE() {
 		if (this.getGoalTarget() == null) {
 			return 3;
@@ -593,10 +606,12 @@ public abstract class EntityInsentient extends EntityLiving {
 		}
 	}
 
+	@Override
 	public ItemStack bA() {
 		return this.equipment[0];
 	}
 
+	@Override
 	public ItemStack getEquipment(int i) {
 		return this.equipment[i];
 	}
@@ -605,21 +620,24 @@ public abstract class EntityInsentient extends EntityLiving {
 		return this.equipment[i + 1];
 	}
 
+	@Override
 	public void setEquipment(int i, ItemStack itemstack) {
 		this.equipment[i] = itemstack;
 	}
 
+	@Override
 	public ItemStack[] getEquipment() {
 		return this.equipment;
 	}
 
+	@Override
 	protected void dropEquipment(boolean flag, int i) {
 		for (int j = 0; j < this.getEquipment().length; ++j) {
 			ItemStack itemstack = this.getEquipment(j);
 			boolean flag1 = this.dropChances[j] > 1.0F;
 
 			if (itemstack != null && (flag || flag1)
-					&& this.random.nextFloat() - (float) i * 0.01F < this.dropChances[j]) {
+					&& this.random.nextFloat() - i * 0.01F < this.dropChances[j]) {
 				if (!flag1 && itemstack.e()) {
 					int k = Math.max(itemstack.j() - 25, 1);
 					int l = itemstack.j() - this.random.nextInt(this.random.nextInt(k) + 1);
@@ -764,14 +782,14 @@ public abstract class EntityInsentient extends EntityLiving {
 		float f = difficultydamagescaler.c();
 
 		if (this.bA() != null && this.random.nextFloat() < 0.25F * f) {
-			EnchantmentManager.a(this.random, this.bA(), (int) (5.0F + f * (float) this.random.nextInt(18)));
+			EnchantmentManager.a(this.random, this.bA(), (int) (5.0F + f * this.random.nextInt(18)));
 		}
 
 		for (int i = 0; i < 4; ++i) {
 			ItemStack itemstack = this.q(i);
 
 			if (itemstack != null && this.random.nextFloat() < 0.5F * f) {
-				EnchantmentManager.a(this.random, itemstack, (int) (5.0F + f * (float) this.random.nextInt(18)));
+				EnchantmentManager.a(this.random, itemstack, (int) (5.0F + f * this.random.nextInt(18)));
 			}
 		}
 
@@ -807,6 +825,7 @@ public abstract class EntityInsentient extends EntityLiving {
 		return this.persistent;
 	}
 
+	@Override
 	public final boolean e(EntityHuman entityhuman) {
 		if (this.cc() && this.getLeashHolder() == entityhuman) {
 			// CraftBukkit start - fire PlayerUnleashEntityEvent
@@ -877,7 +896,6 @@ public abstract class EntityInsentient extends EntityLiving {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public void unleash(boolean flag, boolean flag1) {
 		if (this.bo) {
 			this.bo = false;
@@ -887,8 +905,8 @@ public abstract class EntityInsentient extends EntityLiving {
 			}
 
 			if (!this.world.isClientSide && flag && this.world instanceof WorldServer) {
-				((WorldServer) this.world).getTracker().a((Entity) this,
-						(Packet) (new PacketPlayOutAttachEntity(1, this, (Entity) null)));
+				((WorldServer) this.world).getTracker().a(this,
+						(new PacketPlayOutAttachEntity(1, this, (Entity) null)));
 			}
 		}
 
@@ -906,13 +924,12 @@ public abstract class EntityInsentient extends EntityLiving {
 		return this.bp;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public void setLeashHolder(Entity entity, boolean flag) {
 		this.bo = true;
 		this.bp = entity;
 		if (!this.world.isClientSide && flag && this.world instanceof WorldServer) {
-			((WorldServer) this.world).getTracker().a((Entity) this,
-					(Packet) (new PacketPlayOutAttachEntity(1, this, this.bp)));
+			((WorldServer) this.world).getTracker().a(this,
+					(new PacketPlayOutAttachEntity(1, this, this.bp)));
 		}
 
 	}
@@ -926,7 +943,7 @@ public abstract class EntityInsentient extends EntityLiving {
 				Iterator<EntityLiving> iterator = list.iterator();
 
 				while (iterator.hasNext()) {
-					EntityLiving entityliving = (EntityLiving) iterator.next();
+					EntityLiving entityliving = iterator.next();
 
 					if (entityliving.getUniqueID().equals(uuid)) {
 						this.bp = entityliving;
@@ -954,6 +971,7 @@ public abstract class EntityInsentient extends EntityLiving {
 		this.bq = null;
 	}
 
+	@Override
 	public boolean d(int i, ItemStack itemstack) {
 		int j;
 
@@ -974,6 +992,7 @@ public abstract class EntityInsentient extends EntityLiving {
 		}
 	}
 
+	@Override
 	public boolean bM() {
 		return super.bM() && !this.ce();
 	}

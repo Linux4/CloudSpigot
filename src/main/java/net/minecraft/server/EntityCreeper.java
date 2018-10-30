@@ -28,24 +28,28 @@ public class EntityCreeper extends EntityMonster {
 		this.targetSelector.a(2, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
 	}
 
+	@Override
 	protected void initAttributes() {
 		super.initAttributes();
 		this.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED).setValue(0.25D);
 	}
 
+	@Override
 	public int aE() {
 		return this.getGoalTarget() == null ? 3 : 3 + (int) (this.getHealth() - 1.0F);
 	}
 
+	@Override
 	public void e(float f, float f1) {
 		super.e(f, f1);
-		this.fuseTicks = (int) ((float) this.fuseTicks + f * 1.5F);
+		this.fuseTicks = (int) (this.fuseTicks + f * 1.5F);
 		if (this.fuseTicks > this.maxFuseTicks - 5) {
 			this.fuseTicks = this.maxFuseTicks - 5;
 		}
 
 	}
 
+	@Override
 	protected void h() {
 		super.h();
 		this.datawatcher.a(16, Byte.valueOf((byte) -1));
@@ -53,6 +57,7 @@ public class EntityCreeper extends EntityMonster {
 		this.datawatcher.a(18, Byte.valueOf((byte) 0));
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		if (this.datawatcher.getByte(17) == 1) {
@@ -64,6 +69,7 @@ public class EntityCreeper extends EntityMonster {
 		nbttagcompound.setBoolean("ignited", this.cn());
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		this.datawatcher.watch(17, Byte.valueOf((byte) (nbttagcompound.getBoolean("powered") ? 1 : 0)));
@@ -81,6 +87,7 @@ public class EntityCreeper extends EntityMonster {
 
 	}
 
+	@Override
 	public void t_() {
 		if (this.isAlive()) {
 			// this.a = this.fuseTicks; // CloudSpigot
@@ -108,14 +115,17 @@ public class EntityCreeper extends EntityMonster {
 		super.t_();
 	}
 
+	@Override
 	protected String bo() {
 		return "mob.creeper.say";
 	}
 
+	@Override
 	protected String bp() {
 		return "mob.creeper.death";
 	}
 
+	@Override
 	public void die(DamageSource damagesource) {
 		// super.die(damagesource); // CraftBukkit - Moved to end
 		if (damagesource.getEntity() instanceof EntitySkeleton) {
@@ -153,6 +163,7 @@ public class EntityCreeper extends EntityMonster {
 	}
 	// CraftBukkit end
 
+	@Override
 	public boolean r(Entity entity) {
 		return true;
 	}
@@ -161,6 +172,7 @@ public class EntityCreeper extends EntityMonster {
 		return this.datawatcher.getByte(17) == 1;
 	}
 
+	@Override
 	protected Item getLoot() {
 		return Items.GUNPOWDER;
 	}
@@ -173,6 +185,7 @@ public class EntityCreeper extends EntityMonster {
 		this.datawatcher.watch(16, Byte.valueOf((byte) i));
 	}
 
+	@Override
 	public void onLightningStrike(EntityLightning entitylightning) {
 		super.onLightningStrike(entitylightning);
 		// CraftBukkit start
@@ -193,6 +206,7 @@ public class EntityCreeper extends EntityMonster {
 		// CraftBukkit end
 	}
 
+	@Override
 	protected boolean a(EntityHuman entityhuman) {
 		ItemStack itemstack = entityhuman.inventory.getItemInHand();
 

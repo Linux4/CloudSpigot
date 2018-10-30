@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
 public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> extends PathfinderGoalTarget {
 
@@ -50,10 +51,10 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
 								f = 0.1F;
 							}
 
-							d0 *= (double) (0.7F * f);
+							d0 *= 0.7F * f;
 						}
 
-						if ((double) t0.g(PathfinderGoalNearestAttackableTarget.this.e) > d0) {
+						if (t0.g(PathfinderGoalNearestAttackableTarget.this.e) > d0) {
 							return false;
 						}
 					}
@@ -62,12 +63,14 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
 				}
 			}
 
+			@Override
 			public boolean apply(T object) {
-				return this.a((T) object); // CraftBukkit - fix decompile error
+				return this.a(object); // CraftBukkit - fix decompile error
 			}
 		};
 	}
 
+	@Override
 	public boolean a() {
 		if (this.g > 0 && this.e.bc().nextInt(this.g) != 0) {
 			return false;
@@ -80,12 +83,13 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
 			if (list.isEmpty()) {
 				return false;
 			} else {
-				this.d = (EntityLiving) list.get(0);
+				this.d = list.get(0);
 				return true;
 			}
 		}
 	}
 
+	@Override
 	public void c() {
 		this.e.setGoalTarget(this.d,
 				d instanceof EntityPlayer ? org.bukkit.event.entity.EntityTargetEvent.TargetReason.CLOSEST_PLAYER
@@ -109,8 +113,9 @@ public class PathfinderGoalNearestAttackableTarget<T extends EntityLiving> exten
 			return d0 < d1 ? -1 : (d0 > d1 ? 1 : 0);
 		}
 
+		@Override
 		public int compare(Entity object, Entity object1) { // CraftBukkit - fix decompile error
-			return this.a((Entity) object, (Entity) object1);
+			return this.a(object, object1);
 		}
 	}
 }

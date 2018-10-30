@@ -10,21 +10,25 @@ public class PathfinderGoalSwell extends PathfinderGoal {
 		this.a(1);
 	}
 
+	@Override
 	public boolean a() {
 		EntityLiving entityliving = this.a.getGoalTarget();
 
 		return this.a.cm() > 0 || entityliving != null && this.a.h(entityliving) < 9.0D;
 	}
 
+	@Override
 	public void c() {
 		this.a.getNavigation().n();
 		this.b = this.a.getGoalTarget();
 	}
 
+	@Override
 	public void d() {
 		this.b = null;
 	}
 
+	@Override
 	public void e() {
 		if (this.b == null) {
 			this.a.a(-1);

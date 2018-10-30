@@ -7,6 +7,7 @@ public class WorldGenPackedIce2 extends WorldGenerator {
 	public WorldGenPackedIce2() {
 	}
 
+	@Override
 	public boolean generate(World world, Random random, BlockPosition blockposition) {
 		while (world.isEmpty(blockposition) && blockposition.getY() > 2) {
 			blockposition = blockposition.down();
@@ -27,15 +28,15 @@ public class WorldGenPackedIce2 extends WorldGenerator {
 			int l;
 
 			for (k = 0; k < i; ++k) {
-				float f = (1.0F - (float) k / (float) i) * (float) j;
+				float f = (1.0F - (float) k / (float) i) * j;
 
 				l = MathHelper.f(f);
 
 				for (int i1 = -l; i1 <= l; ++i1) {
-					float f1 = (float) MathHelper.a(i1) - 0.25F;
+					float f1 = MathHelper.a(i1) - 0.25F;
 
 					for (int j1 = -l; j1 <= l; ++j1) {
-						float f2 = (float) MathHelper.a(j1) - 0.25F;
+						float f2 = MathHelper.a(j1) - 0.25F;
 
 						if ((i1 == 0 && j1 == 0 || f1 * f1 + f2 * f2 <= f * f)
 								&& (i1 != -l && i1 != l && j1 != -l && j1 != l || random.nextFloat() <= 0.75F)) {

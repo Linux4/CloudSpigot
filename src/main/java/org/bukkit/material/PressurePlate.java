@@ -43,6 +43,7 @@ public class PressurePlate extends MaterialData implements PressureSensor {
 		super(type, data);
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public boolean isPressed() {
 		return getData() == 0x1;

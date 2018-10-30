@@ -1,5 +1,7 @@
 package net.minecraft.server;
 
+import java.lang.reflect.Type;
+
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -8,7 +10,6 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import java.lang.reflect.Type;
 
 public class ChatModifier {
 
@@ -23,86 +24,107 @@ public class ChatModifier {
 	private ChatHoverable i;
 	private String j;
 	private static final ChatModifier k = new ChatModifier() {
+		@Override
 		public EnumChatFormat getColor() {
 			return null;
 		}
 
+		@Override
 		public boolean isBold() {
 			return false;
 		}
 
+		@Override
 		public boolean isItalic() {
 			return false;
 		}
 
+		@Override
 		public boolean isStrikethrough() {
 			return false;
 		}
 
+		@Override
 		public boolean isUnderlined() {
 			return false;
 		}
 
+		@Override
 		public boolean isRandom() {
 			return false;
 		}
 
+		@Override
 		public ChatClickable h() {
 			return null;
 		}
 
+		@Override
 		public ChatHoverable i() {
 			return null;
 		}
 
+		@Override
 		public String j() {
 			return null;
 		}
 
+		@Override
 		public ChatModifier setColor(EnumChatFormat enumchatformat) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public ChatModifier setBold(Boolean obool) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public ChatModifier setItalic(Boolean obool) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public ChatModifier setStrikethrough(Boolean obool) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public ChatModifier setUnderline(Boolean obool) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public ChatModifier setRandom(Boolean obool) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public ChatModifier setChatClickable(ChatClickable chatclickable) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public ChatModifier setChatHoverable(ChatHoverable chathoverable) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public ChatModifier setChatModifier(ChatModifier chatmodifier) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public String toString() {
 			return "Style.ROOT";
 		}
 
+		@Override
 		public ChatModifier clone() {
 			return this;
 		}
 
+		@Override
 		public ChatModifier n() {
 			return this;
 		}
@@ -206,12 +228,14 @@ public class ChatModifier {
 		return this.a == null ? ChatModifier.k : this.a;
 	}
 
+	@Override
 	public String toString() {
 		return "Style{hasParent=" + (this.a != null) + ", color=" + this.b + ", bold=" + this.c + ", italic=" + this.d
 				+ ", underlined=" + this.e + ", obfuscated=" + this.g + ", clickEvent=" + this.h() + ", hoverEvent="
 				+ this.i() + ", insertion=" + this.j() + '}';
 	}
 
+	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
 			return true;
@@ -260,6 +284,7 @@ public class ChatModifier {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		// CraftBukkit start - fix npe
 		int i = b == null ? 0 : this.b.hashCode();
@@ -276,6 +301,7 @@ public class ChatModifier {
 		return i;
 	}
 
+	@Override
 	public ChatModifier clone() {
 		ChatModifier chatmodifier = new ChatModifier();
 
@@ -446,11 +472,13 @@ public class ChatModifier {
 			}
 		}
 
+		@Override
 		public JsonElement serialize(ChatModifier object, Type type,
 				JsonSerializationContext jsonserializationcontext) { // CraftBukkit - fix decompile error
-			return this.a((ChatModifier) object, type, jsonserializationcontext);
+			return this.a(object, type, jsonserializationcontext);
 		}
 
+		@Override
 		public ChatModifier deserialize(JsonElement jsonelement, Type type,
 				JsonDeserializationContext jsondeserializationcontext) throws JsonParseException { // CraftBukkit - fix
 																									// decompile error

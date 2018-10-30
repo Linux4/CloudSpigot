@@ -47,7 +47,7 @@ public abstract class NavigationAbstract {
 			BlockPosition blockposition1 = new BlockPosition(this.b);
 			int i = (int) (f + 8.0F);
 			ChunkCache chunkcache = new ChunkCache(this.c, blockposition1.a(-i, -i, -i), blockposition1.a(i, i, i), 0);
-			PathEntity pathentity = this.j.a((IBlockAccess) chunkcache, (Entity) this.b, blockposition, f);
+			PathEntity pathentity = this.j.a(chunkcache, this.b, blockposition, f);
 
 			// this.c.methodProfiler.b(); // CloudSpigot
 			return pathentity;
@@ -55,8 +55,8 @@ public abstract class NavigationAbstract {
 	}
 
 	public boolean a(double d0, double d1, double d2, double d3) {
-		PathEntity pathentity = this.a((double) MathHelper.floor(d0), (double) ((int) d1),
-				(double) MathHelper.floor(d2));
+		PathEntity pathentity = this.a(MathHelper.floor(d0), ((int) d1),
+				MathHelper.floor(d2));
 
 		return this.a(pathentity, d3);
 	}
@@ -75,7 +75,7 @@ public abstract class NavigationAbstract {
 			BlockPosition blockposition = (new BlockPosition(this.b)).up();
 			int i = (int) (f + 16.0F);
 			ChunkCache chunkcache = new ChunkCache(this.c, blockposition.a(-i, -i, -i), blockposition.a(i, i, i), 0);
-			PathEntity pathentity = this.j.a((IBlockAccess) chunkcache, (Entity) this.b, entity, f);
+			PathEntity pathentity = this.j.a(chunkcache, this.b, entity, f);
 
 			// this.c.methodProfiler.b(); // CloudSpigot
 			return pathentity;
@@ -149,7 +149,7 @@ public abstract class NavigationAbstract {
 			}
 
 			if (!this.m()) {
-				vec3d = this.d.a((Entity) this.b);
+				vec3d = this.d.a(this.b);
 				if (vec3d != null) {
 					AxisAlignedBB axisalignedbb = (new AxisAlignedBB(vec3d.a, vec3d.b, vec3d.c, vec3d.a, vec3d.b,
 							vec3d.c)).grow(0.5D, 0.5D, 0.5D);
@@ -162,7 +162,7 @@ public abstract class NavigationAbstract {
 
 					for (Iterator<AxisAlignedBB> iterator = list.iterator(); iterator
 							.hasNext(); d0 = axisalignedbb1.b(axisalignedbb, d0)) {
-						axisalignedbb1 = (AxisAlignedBB) iterator.next();
+						axisalignedbb1 = iterator.next();
 					}
 
 					this.b.getControllerMove().a(vec3d.a, vec3d.b + d0, vec3d.c, this.e);
@@ -189,7 +189,7 @@ public abstract class NavigationAbstract {
 		for (k = this.d.e(); k < i; ++k) {
 			Vec3D vec3d1 = this.d.a(this.b, k);
 
-			if (vec3d.distanceSquared(vec3d1) < (double) f) {
+			if (vec3d.distanceSquared(vec3d1) < f) {
 				this.d.c(k + 1);
 			}
 		}

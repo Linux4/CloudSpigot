@@ -1,9 +1,8 @@
 package net.minecraft.server;
 
-import java.util.Random;
-
 // CraftBukkit start
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.Location;
 import org.bukkit.TreeType;
@@ -27,10 +26,12 @@ public class BlockSapling extends BlockPlant implements IBlockFragilePlantElemen
 		this.a(CreativeModeTab.c);
 	}
 
+	@Override
 	public String getName() {
 		return LocaleI18n.get(this.a() + "." + BlockWood.EnumLogVariant.OAK.d() + ".name");
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		if (!world.isClientSide) {
@@ -69,7 +70,7 @@ public class BlockSapling extends BlockPlant implements IBlockFragilePlantElemen
 	}
 
 	public void grow(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
-		if (((Integer) iblockdata.get(BlockSapling.STAGE)).intValue() == 0) {
+		if (iblockdata.get(BlockSapling.STAGE).intValue() == 0) {
 			world.setTypeAndData(blockposition, iblockdata.a(BlockSapling.STAGE), 4);
 		} else {
 			this.e(world, blockposition, iblockdata, random);
@@ -95,7 +96,7 @@ public class BlockSapling extends BlockPlant implements IBlockFragilePlantElemen
 		boolean flag = false;
 		IBlockData iblockdata1;
 
-		switch (BlockSapling.SyntheticClass_1.a[((BlockWood.EnumLogVariant) iblockdata.get(BlockSapling.TYPE))
+		switch (BlockSapling.SyntheticClass_1.a[iblockdata.get(BlockSapling.TYPE)
 				.ordinal()]) {
 		case 1:
 			label66: for (i = 0; i >= -1; --i) {
@@ -207,35 +208,42 @@ public class BlockSapling extends BlockPlant implements IBlockFragilePlantElemen
 		return iblockdata.getBlock() == this && iblockdata.get(BlockSapling.TYPE) == blockwood_enumlogvariant;
 	}
 
+	@Override
 	public int getDropData(IBlockData iblockdata) {
-		return ((BlockWood.EnumLogVariant) iblockdata.get(BlockSapling.TYPE)).a();
+		return iblockdata.get(BlockSapling.TYPE).a();
 	}
 
+	@Override
 	public boolean a(World world, BlockPosition blockposition, IBlockData iblockdata, boolean flag) {
 		return true;
 	}
 
+	@Override
 	public boolean a(World world, Random random, BlockPosition blockposition, IBlockData iblockdata) {
-		return (double) world.random.nextFloat() < 0.45D;
+		return world.random.nextFloat() < 0.45D;
 	}
 
+	@Override
 	public void b(World world, Random random, BlockPosition blockposition, IBlockData iblockdata) {
 		this.grow(world, blockposition, iblockdata, random);
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockSapling.TYPE, BlockWood.EnumLogVariant.a(i & 7)).set(BlockSapling.STAGE,
 				Integer.valueOf((i & 8) >> 3));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
 		byte b0 = 0;
-		int i = b0 | ((BlockWood.EnumLogVariant) iblockdata.get(BlockSapling.TYPE)).a();
+		int i = b0 | iblockdata.get(BlockSapling.TYPE).a();
 
-		i |= ((Integer) iblockdata.get(BlockSapling.STAGE)).intValue() << 3;
+		i |= iblockdata.get(BlockSapling.STAGE).intValue() << 3;
 		return i;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockSapling.TYPE, BlockSapling.STAGE });
 	}

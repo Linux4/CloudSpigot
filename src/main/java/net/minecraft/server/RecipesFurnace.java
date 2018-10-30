@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Maps;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.google.common.collect.Maps;
 
 public class RecipesFurnace {
 
@@ -96,9 +97,9 @@ public class RecipesFurnace {
 			}
 
 			entry = iterator.next();
-		} while (!this.a(itemstack, (ItemStack) entry.getKey()));
+		} while (!this.a(itemstack, entry.getKey()));
 
-		return (ItemStack) entry.getValue();
+		return entry.getValue();
 	}
 
 	private boolean a(ItemStack itemstack, ItemStack itemstack1) {
@@ -121,8 +122,8 @@ public class RecipesFurnace {
 			}
 
 			entry = iterator.next();
-		} while (!this.a(itemstack, (ItemStack) entry.getKey()));
+		} while (!this.a(itemstack, entry.getKey()));
 
-		return ((Float) entry.getValue()).floatValue();
+		return entry.getValue().floatValue();
 	}
 }

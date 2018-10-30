@@ -10,18 +10,22 @@ public class CommandTp extends CommandAbstract {
 	public CommandTp() {
 	}
 
+	@Override
 	public String getCommand() {
 		return "tp";
 	}
 
+	@Override
 	public int a() {
 		return 2;
 	}
 
+	@Override
 	public String getUsage(ICommandListener icommandlistener) {
 		return "commands.tp.usage";
 	}
 
+	@Override
 	public void execute(ICommandListener icommandlistener, String[] astring) throws CommandException {
 		if (astring.length < 1) {
 			throw new ExceptionUsage("commands.tp.usage", new Object[0]);
@@ -47,9 +51,9 @@ public class CommandTp extends CommandAbstract {
 							astring[i++], 0, 0, false);
 					CommandAbstract.CommandNumber commandabstract_commandnumber2 = a(((Entity) object).locZ,
 							astring[i++], true);
-					CommandAbstract.CommandNumber commandabstract_commandnumber3 = a((double) ((Entity) object).yaw,
+					CommandAbstract.CommandNumber commandabstract_commandnumber3 = a(((Entity) object).yaw,
 							astring.length > i ? astring[i++] : "~", false);
-					CommandAbstract.CommandNumber commandabstract_commandnumber4 = a((double) ((Entity) object).pitch,
+					CommandAbstract.CommandNumber commandabstract_commandnumber4 = a(((Entity) object).pitch,
 							astring.length > i ? astring[i] : "~", false);
 					float f;
 
@@ -133,10 +137,12 @@ public class CommandTp extends CommandAbstract {
 		}
 	}
 
+	@Override
 	public List<String> tabComplete(ICommandListener icommandlistener, String[] astring, BlockPosition blockposition) {
 		return astring.length != 1 && astring.length != 2 ? null : a(astring, MinecraftServer.getServer().getPlayers());
 	}
 
+	@Override
 	public boolean isListStart(String[] astring, int i) {
 		return i == 0;
 	}
@@ -144,7 +150,7 @@ public class CommandTp extends CommandAbstract {
 	// CraftBukkit start - fix decompile error
 	@Override
 	public int compareTo(ICommand o) {
-		return a((ICommand) o);
+		return a(o);
 	}
 	// CraftBukkit end
 }

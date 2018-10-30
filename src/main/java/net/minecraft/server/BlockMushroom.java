@@ -20,6 +20,7 @@ public class BlockMushroom extends BlockPlant implements IBlockFragilePlantEleme
 		this.a(true);
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		final int sourceX = blockposition.getX(), sourceY = blockposition.getY(), sourceZ = blockposition.getZ(); // CraftBukkit
 		if (random.nextInt(Math.max(1, (int) world.growthOdds / world.spigotConfig.mushroomModifier * 25)) == 0) { // Spigot
@@ -33,7 +34,7 @@ public class BlockMushroom extends BlockPlant implements IBlockFragilePlantEleme
 					.b(blockposition.a(-4, -1, -4), blockposition.a(4, 1, 4)).iterator();
 
 			while (iterator.hasNext()) {
-				BlockPosition blockposition1 = (BlockPosition) iterator.next();
+				BlockPosition blockposition1 = iterator.next();
 
 				if (world.getType(blockposition1).getBlock() == this) {
 					--i;
@@ -77,14 +78,17 @@ public class BlockMushroom extends BlockPlant implements IBlockFragilePlantEleme
 
 	}
 
+	@Override
 	public boolean canPlace(World world, BlockPosition blockposition) {
 		return super.canPlace(world, blockposition) && this.f(world, blockposition, this.getBlockData());
 	}
 
+	@Override
 	protected boolean c(Block block) {
 		return block.o();
 	}
 
+	@Override
 	public boolean f(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		if (blockposition.getY() >= 0 && blockposition.getY() < 256) {
 			IBlockData iblockdata1 = world.getType(blockposition.down());
@@ -118,14 +122,17 @@ public class BlockMushroom extends BlockPlant implements IBlockFragilePlantEleme
 		}
 	}
 
+	@Override
 	public boolean a(World world, BlockPosition blockposition, IBlockData iblockdata, boolean flag) {
 		return true;
 	}
 
+	@Override
 	public boolean a(World world, Random random, BlockPosition blockposition, IBlockData iblockdata) {
-		return (double) random.nextFloat() < 0.4D;
+		return random.nextFloat() < 0.4D;
 	}
 
+	@Override
 	public void b(World world, Random random, BlockPosition blockposition, IBlockData iblockdata) {
 		this.d(world, blockposition, iblockdata, random);
 	}

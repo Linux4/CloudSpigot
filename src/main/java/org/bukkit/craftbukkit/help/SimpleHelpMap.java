@@ -67,6 +67,7 @@ public class SimpleHelpMap implements HelpMap {
 		registerHelpTopicFactory(MultipleCommandAlias.class, new MultipleCommandAliasHelpTopicFactory());
 	}
 
+	@Override
 	public synchronized HelpTopic getHelpTopic(String topicName) {
 		if ("".equals(topicName)) { // CloudSpigot
 			return defaultTopic;
@@ -79,10 +80,12 @@ public class SimpleHelpMap implements HelpMap {
 		return null;
 	}
 
+	@Override
 	public Collection<HelpTopic> getHelpTopics() {
 		return helpTopics.values();
 	}
 
+	@Override
 	public synchronized void addTopic(HelpTopic topic) {
 		// Existing topics take priority
 		if (!helpTopics.containsKey(topic.getName())) {
@@ -90,10 +93,12 @@ public class SimpleHelpMap implements HelpMap {
 		}
 	}
 
+	@Override
 	public synchronized void clear() {
 		helpTopics.clear();
 	}
 
+	@Override
 	public List<String> getIgnoredPlugins() {
 		return yaml.getIgnoredPlugins();
 	}
@@ -244,6 +249,7 @@ public class SimpleHelpMap implements HelpMap {
 				&& ignoredPlugins.contains(((PluginIdentifiableCommand) command).getPlugin().getName());
 	}
 
+	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void registerHelpTopicFactory(Class commandClass, HelpTopicFactory factory) {
 		if (!Command.class.isAssignableFrom(commandClass) && !CommandExecutor.class.isAssignableFrom(commandClass)) {
@@ -254,6 +260,7 @@ public class SimpleHelpMap implements HelpMap {
 
 	private class IsCommandTopicPredicate implements Predicate<HelpTopic> {
 
+		@Override
 		public boolean apply(HelpTopic topic) {
 			return topic.getName().charAt(0) == '/';
 		}

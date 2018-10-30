@@ -1,9 +1,10 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityAmbient;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Ambient;
 import org.bukkit.entity.EntityType;
+
+import net.minecraft.server.EntityAmbient;
 
 public class CraftAmbient extends CraftLivingEntity implements Ambient {
 	public CraftAmbient(CraftServer server, EntityAmbient entity) {
@@ -20,6 +21,7 @@ public class CraftAmbient extends CraftLivingEntity implements Ambient {
 		return "CraftAmbient";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.UNKNOWN;
 	}

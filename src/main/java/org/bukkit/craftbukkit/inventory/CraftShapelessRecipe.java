@@ -2,12 +2,12 @@ package org.bukkit.craftbukkit.inventory;
 
 import java.util.List;
 
-import net.minecraft.server.CraftingManager;
-import net.minecraft.server.ShapelessRecipes;
-
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapelessRecipe;
+
+import net.minecraft.server.CraftingManager;
+import net.minecraft.server.ShapelessRecipes;
 
 public class CraftShapelessRecipe extends ShapelessRecipe implements CraftRecipe {
 	// TODO: Could eventually use this to add a matches() method or some such
@@ -34,6 +34,7 @@ public class CraftShapelessRecipe extends ShapelessRecipe implements CraftRecipe
 		return ret;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void addToCraftingManager() {
 		List<ItemStack> ingred = this.getIngredientList();

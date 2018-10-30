@@ -2,6 +2,7 @@ package org.bukkit.craftbukkit.map;
 
 import java.awt.Image;
 import java.util.Arrays;
+
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapCursorCollection;
 import org.bukkit.map.MapFont;
@@ -20,18 +21,22 @@ public class CraftMapCanvas implements MapCanvas {
 		Arrays.fill(buffer, (byte) -1);
 	}
 
+	@Override
 	public CraftMapView getMapView() {
 		return mapView;
 	}
 
+	@Override
 	public MapCursorCollection getCursors() {
 		return cursors;
 	}
 
+	@Override
 	public void setCursors(MapCursorCollection cursors) {
 		this.cursors = cursors;
 	}
 
+	@Override
 	public void setPixel(int x, int y, byte color) {
 		if (x < 0 || y < 0 || x >= 128 || y >= 128)
 			return;
@@ -41,12 +46,14 @@ public class CraftMapCanvas implements MapCanvas {
 		}
 	}
 
+	@Override
 	public byte getPixel(int x, int y) {
 		if (x < 0 || y < 0 || x >= 128 || y >= 128)
 			return 0;
 		return buffer[y * 128 + x];
 	}
 
+	@Override
 	public byte getBasePixel(int x, int y) {
 		if (x < 0 || y < 0 || x >= 128 || y >= 128)
 			return 0;
@@ -61,6 +68,7 @@ public class CraftMapCanvas implements MapCanvas {
 		return buffer;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void drawImage(int x, int y, Image image) {
 		byte[] bytes = MapPalette.imageToBytes(image);
@@ -71,6 +79,7 @@ public class CraftMapCanvas implements MapCanvas {
 		}
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void drawText(int x, int y, MapFont font, String text) {
 		int xStart = x;

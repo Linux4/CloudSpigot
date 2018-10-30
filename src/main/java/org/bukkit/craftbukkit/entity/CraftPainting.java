@@ -1,9 +1,5 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityPainting;
-import net.minecraft.server.EntityPainting.EnumArt;
-import net.minecraft.server.WorldServer;
-
 import org.bukkit.Art;
 import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.CraftArt;
@@ -12,21 +8,28 @@ import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Painting;
 
+import net.minecraft.server.EntityPainting;
+import net.minecraft.server.EntityPainting.EnumArt;
+import net.minecraft.server.WorldServer;
+
 public class CraftPainting extends CraftHanging implements Painting {
 
 	public CraftPainting(CraftServer server, EntityPainting entity) {
 		super(server, entity);
 	}
 
+	@Override
 	public Art getArt() {
 		EnumArt art = getHandle().art;
 		return CraftArt.NotchToBukkit(art);
 	}
 
+	@Override
 	public boolean setArt(Art art) {
 		return setArt(art, false);
 	}
 
+	@Override
 	public boolean setArt(Art art, boolean force) {
 		EntityPainting painting = this.getHandle();
 		EnumArt oldArt = painting.art;
@@ -42,6 +45,7 @@ public class CraftPainting extends CraftHanging implements Painting {
 		return true;
 	}
 
+	@Override
 	public boolean setFacingDirection(BlockFace face, boolean force) {
 		if (super.setFacingDirection(face, force)) {
 			update();
@@ -73,6 +77,7 @@ public class CraftPainting extends CraftHanging implements Painting {
 		return "CraftPainting{art=" + getArt() + "}";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.PAINTING;
 	}

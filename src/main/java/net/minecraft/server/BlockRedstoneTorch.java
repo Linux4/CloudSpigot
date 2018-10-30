@@ -50,10 +50,12 @@ public class BlockRedstoneTorch extends BlockTorch {
 		this.a((CreativeModeTab) null);
 	}
 
+	@Override
 	public int a(World world) {
 		return 2;
 	}
 
+	@Override
 	public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		if (this.isOn) {
 			// CloudSpigot start - Fix cannons
@@ -79,6 +81,7 @@ public class BlockRedstoneTorch extends BlockTorch {
 
 	}
 
+	@Override
 	public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		if (this.isOn) {
 			// CloudSpigot start - Fix cannons
@@ -104,20 +107,23 @@ public class BlockRedstoneTorch extends BlockTorch {
 
 	}
 
+	@Override
 	public int a(IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata,
 			EnumDirection enumdirection) {
-		return this.isOn && iblockdata.get(BlockRedstoneTorch.FACING) != enumdirection ? 15 : 0;
+		return this.isOn && iblockdata.get(BlockTorch.FACING) != enumdirection ? 15 : 0;
 	}
 
 	private boolean g(World world, BlockPosition blockposition, IBlockData iblockdata) {
-		EnumDirection enumdirection = ((EnumDirection) iblockdata.get(BlockRedstoneTorch.FACING)).opposite();
+		EnumDirection enumdirection = iblockdata.get(BlockTorch.FACING).opposite();
 
 		return world.isBlockFacePowered(blockposition.shift(enumdirection), enumdirection);
 	}
 
+	@Override
 	public void a(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		boolean flag = this.g(world, blockposition, iblockdata);
 		List<RedstoneUpdateInfo> list = BlockRedstoneTorch.b.get(world);
@@ -126,7 +132,7 @@ public class BlockRedstoneTorch extends BlockTorch {
 		if (list != null) {
 			int index = 0;
 			while (index < list.size()
-					&& world.getTime() - ((BlockRedstoneTorch.RedstoneUpdateInfo) list.get(index)).getTime() > 60L) {
+					&& world.getTime() - list.get(index).getTime() > 60L) {
 				index++;
 			}
 			if (index > 0) {
@@ -156,17 +162,17 @@ public class BlockRedstoneTorch extends BlockTorch {
 				}
 				// CraftBukkit end
 				world.setTypeAndData(blockposition, Blocks.UNLIT_REDSTONE_TORCH.getBlockData()
-						.set(BlockRedstoneTorch.FACING, iblockdata.get(BlockRedstoneTorch.FACING)), 3);
+						.set(BlockTorch.FACING, iblockdata.get(BlockTorch.FACING)), 3);
 				if (this.a(world, blockposition, true)) {
-					world.makeSound((double) ((float) blockposition.getX() + 0.5F),
-							(double) ((float) blockposition.getY() + 0.5F),
-							(double) ((float) blockposition.getZ() + 0.5F), "random.fizz", 0.5F,
+					world.makeSound(blockposition.getX() + 0.5F,
+							blockposition.getY() + 0.5F,
+							blockposition.getZ() + 0.5F, "random.fizz", 0.5F,
 							2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F);
 
 					for (int i = 0; i < 5; ++i) {
-						double d0 = (double) blockposition.getX() + random.nextDouble() * 0.6D + 0.2D;
-						double d1 = (double) blockposition.getY() + random.nextDouble() * 0.6D + 0.2D;
-						double d2 = (double) blockposition.getZ() + random.nextDouble() * 0.6D + 0.2D;
+						double d0 = blockposition.getX() + random.nextDouble() * 0.6D + 0.2D;
+						double d1 = blockposition.getY() + random.nextDouble() * 0.6D + 0.2D;
+						double d2 = blockposition.getZ() + random.nextDouble() * 0.6D + 0.2D;
 
 						world.addParticle(EnumParticle.SMOKE_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D, new int[0]);
 					}
@@ -184,34 +190,39 @@ public class BlockRedstoneTorch extends BlockTorch {
 				}
 			}
 			// CraftBukkit end
-			world.setTypeAndData(blockposition, Blocks.REDSTONE_TORCH.getBlockData().set(BlockRedstoneTorch.FACING,
-					iblockdata.get(BlockRedstoneTorch.FACING)), 3);
+			world.setTypeAndData(blockposition, Blocks.REDSTONE_TORCH.getBlockData().set(BlockTorch.FACING,
+					iblockdata.get(BlockTorch.FACING)), 3);
 		}
 
 	}
 
+	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
 		if (!this.e(world, blockposition, iblockdata)) {
 			if (this.isOn == this.g(world, blockposition, iblockdata)) {
-				world.a(blockposition, (Block) this, this.a(world));
+				world.a(blockposition, this, this.a(world));
 			}
 
 		}
 	}
 
+	@Override
 	public int b(IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata,
 			EnumDirection enumdirection) {
 		return enumdirection == EnumDirection.DOWN ? this.a(iblockaccess, blockposition, iblockdata, enumdirection) : 0;
 	}
 
+	@Override
 	public Item getDropType(IBlockData iblockdata, Random random, int i) {
 		return Item.getItemOf(Blocks.REDSTONE_TORCH);
 	}
 
+	@Override
 	public boolean isPowerSource() {
 		return true;
 	}
 
+	@Override
 	public boolean b(Block block) {
 		return block == Blocks.UNLIT_REDSTONE_TORCH || block == Blocks.REDSTONE_TORCH;
 	}

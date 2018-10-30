@@ -1,11 +1,12 @@
 package org.bukkit.craftbukkit.block;
 
-import net.minecraft.server.BlockPosition;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
+import java.util.List;
+
 import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.CraftChunk;
 import org.bukkit.craftbukkit.CraftWorld;
@@ -13,7 +14,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
-import java.util.List;
+import net.minecraft.server.BlockPosition;
 import net.minecraft.server.TileEntity;
 
 public class CraftBlockState implements BlockState {
@@ -63,28 +64,34 @@ public class CraftBlockState implements BlockState {
 		return new CraftBlockState(world.getWorld().getBlockAt(x, y, z), flag);
 	}
 
+	@Override
 	public World getWorld() {
 		requirePlaced();
 		return world;
 	}
 
+	@Override
 	public int getX() {
 		return x;
 	}
 
+	@Override
 	public int getY() {
 		return y;
 	}
 
+	@Override
 	public int getZ() {
 		return z;
 	}
 
+	@Override
 	public Chunk getChunk() {
 		requirePlaced();
 		return chunk;
 	}
 
+	@Override
 	public void setData(final MaterialData data) {
 		Material mat = getType();
 
@@ -100,15 +107,18 @@ public class CraftBlockState implements BlockState {
 		}
 	}
 
+	@Override
 	public MaterialData getData() {
 		return data;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setType(final Material type) {
 		setTypeId(type.getId());
 	}
 
+	@Override
 	public boolean setTypeId(final int type) {
 		if (this.type != type) {
 			this.type = type;
@@ -118,6 +128,7 @@ public class CraftBlockState implements BlockState {
 		return true;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public Material getType() {
 		return Material.getMaterial(getTypeId());
@@ -131,27 +142,33 @@ public class CraftBlockState implements BlockState {
 		return flag;
 	}
 
+	@Override
 	public int getTypeId() {
 		return type;
 	}
 
+	@Override
 	public byte getLightLevel() {
 		return light;
 	}
 
+	@Override
 	public Block getBlock() {
 		requirePlaced();
 		return world.getBlockAt(x, y, z);
 	}
 
+	@Override
 	public boolean update() {
 		return update(false);
 	}
 
+	@Override
 	public boolean update(boolean force) {
 		return update(force, true);
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public boolean update(boolean force, boolean applyPhysics) {
 		requirePlaced();
@@ -179,15 +196,18 @@ public class CraftBlockState implements BlockState {
 		}
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public byte getRawData() {
 		return data.getData();
 	}
 
+	@Override
 	public Location getLocation() {
 		return new Location(world, x, y, z);
 	}
 
+	@Override
 	public Location getLocation(Location loc) {
 		if (loc != null) {
 			loc.setWorld(world);
@@ -201,6 +221,7 @@ public class CraftBlockState implements BlockState {
 		return loc;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setRawData(byte data) {
 		this.data.setData(data);
@@ -249,21 +270,25 @@ public class CraftBlockState implements BlockState {
 		return null;
 	}
 
+	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
 		requirePlaced();
 		chunk.getCraftWorld().getBlockMetadata().setMetadata(getBlock(), metadataKey, newMetadataValue);
 	}
 
+	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
 		requirePlaced();
 		return chunk.getCraftWorld().getBlockMetadata().getMetadata(getBlock(), metadataKey);
 	}
 
+	@Override
 	public boolean hasMetadata(String metadataKey) {
 		requirePlaced();
 		return chunk.getCraftWorld().getBlockMetadata().hasMetadata(getBlock(), metadataKey);
 	}
 
+	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
 		requirePlaced();
 		chunk.getCraftWorld().getBlockMetadata().removeMetadata(getBlock(), metadataKey, owningPlugin);

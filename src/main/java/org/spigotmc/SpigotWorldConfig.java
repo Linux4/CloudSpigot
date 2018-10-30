@@ -53,10 +53,10 @@ public class SpigotWorldConfig {
 				config.getInt("world-settings.default." + path));
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	private <T> List getList(String path, T def) {
 		config.addDefault("world-settings.default." + path, def);
-		return (List<T>) config.getList("world-settings." + worldName + "." + path,
+		return config.getList("world-settings." + worldName + "." + path,
 				config.getList("world-settings.default." + path));
 	}
 

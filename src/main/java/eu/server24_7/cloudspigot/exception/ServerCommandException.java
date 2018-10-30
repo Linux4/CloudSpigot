@@ -1,9 +1,9 @@
 package eu.server24_7.cloudspigot.exception;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Thrown when a command throws an exception

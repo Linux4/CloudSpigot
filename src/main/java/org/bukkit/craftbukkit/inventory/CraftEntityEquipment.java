@@ -1,11 +1,11 @@
 package org.bukkit.craftbukkit.inventory;
 
-import net.minecraft.server.EntityInsentient;
-
 import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+
+import net.minecraft.server.EntityInsentient;
 
 public class CraftEntityEquipment implements EntityEquipment {
 	private static final int WEAPON_SLOT = 0;
@@ -21,46 +21,57 @@ public class CraftEntityEquipment implements EntityEquipment {
 		this.entity = entity;
 	}
 
+	@Override
 	public ItemStack getItemInHand() {
 		return getEquipment(WEAPON_SLOT);
 	}
 
+	@Override
 	public void setItemInHand(ItemStack stack) {
 		setEquipment(WEAPON_SLOT, stack);
 	}
 
+	@Override
 	public ItemStack getHelmet() {
 		return getEquipment(HELMET_SLOT);
 	}
 
+	@Override
 	public void setHelmet(ItemStack helmet) {
 		setEquipment(HELMET_SLOT, helmet);
 	}
 
+	@Override
 	public ItemStack getChestplate() {
 		return getEquipment(CHEST_SLOT);
 	}
 
+	@Override
 	public void setChestplate(ItemStack chestplate) {
 		setEquipment(CHEST_SLOT, chestplate);
 	}
 
+	@Override
 	public ItemStack getLeggings() {
 		return getEquipment(LEG_SLOT);
 	}
 
+	@Override
 	public void setLeggings(ItemStack leggings) {
 		setEquipment(LEG_SLOT, leggings);
 	}
 
+	@Override
 	public ItemStack getBoots() {
 		return getEquipment(BOOT_SLOT);
 	}
 
+	@Override
 	public void setBoots(ItemStack boots) {
 		setEquipment(BOOT_SLOT, boots);
 	}
 
+	@Override
 	public ItemStack[] getArmorContents() {
 		ItemStack[] armor = new ItemStack[INVENTORY_SLOTS - 1];
 		for (int slot = WEAPON_SLOT + 1; slot < INVENTORY_SLOTS; slot++) {
@@ -69,6 +80,7 @@ public class CraftEntityEquipment implements EntityEquipment {
 		return armor;
 	}
 
+	@Override
 	public void setArmorContents(ItemStack[] items) {
 		for (int slot = WEAPON_SLOT + 1; slot < INVENTORY_SLOTS; slot++) {
 			ItemStack equipment = items != null && slot <= items.length ? items[slot - 1] : null;
@@ -84,52 +96,64 @@ public class CraftEntityEquipment implements EntityEquipment {
 		entity.getHandle().setEquipment(slot, CraftItemStack.asNMSCopy(stack));
 	}
 
+	@Override
 	public void clear() {
 		for (int i = 0; i < INVENTORY_SLOTS; i++) {
 			setEquipment(i, null);
 		}
 	}
 
+	@Override
 	public Entity getHolder() {
 		return entity;
 	}
 
+	@Override
 	public float getItemInHandDropChance() {
 		return getDropChance(WEAPON_SLOT);
 	}
 
+	@Override
 	public void setItemInHandDropChance(float chance) {
 		setDropChance(WEAPON_SLOT, chance);
 	}
 
+	@Override
 	public float getHelmetDropChance() {
 		return getDropChance(HELMET_SLOT);
 	}
 
+	@Override
 	public void setHelmetDropChance(float chance) {
 		setDropChance(HELMET_SLOT, chance);
 	}
 
+	@Override
 	public float getChestplateDropChance() {
 		return getDropChance(CHEST_SLOT);
 	}
 
+	@Override
 	public void setChestplateDropChance(float chance) {
 		setDropChance(CHEST_SLOT, chance);
 	}
 
+	@Override
 	public float getLeggingsDropChance() {
 		return getDropChance(LEG_SLOT);
 	}
 
+	@Override
 	public void setLeggingsDropChance(float chance) {
 		setDropChance(LEG_SLOT, chance);
 	}
 
+	@Override
 	public float getBootsDropChance() {
 		return getDropChance(BOOT_SLOT);
 	}
 
+	@Override
 	public void setBootsDropChance(float chance) {
 		setDropChance(BOOT_SLOT, chance);
 	}

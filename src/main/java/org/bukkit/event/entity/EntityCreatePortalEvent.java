@@ -1,6 +1,7 @@
 package org.bukkit.event.entity;
 
 import java.util.List;
+
 import org.bukkit.PortalType;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.LivingEntity;
@@ -37,10 +38,12 @@ public class EntityCreatePortalEvent extends EntityEvent implements Cancellable 
 		return blocks;
 	}
 
+	@Override
 	public boolean isCancelled() {
 		return cancelled;
 	}
 
+	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
 	}

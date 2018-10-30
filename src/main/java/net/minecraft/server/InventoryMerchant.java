@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 // CraftBukkit start
 import java.util.List;
+
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.craftbukkit.entity.CraftVillager;
 import org.bukkit.entity.HumanEntity;
@@ -19,26 +20,32 @@ public class InventoryMerchant implements IInventory {
 	public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
 	private int maxStack = MAX_STACK;
 
+	@Override
 	public ItemStack[] getContents() {
 		return this.itemsInSlots;
 	}
 
+	@Override
 	public void onOpen(CraftHumanEntity who) {
 		transaction.add(who);
 	}
 
+	@Override
 	public void onClose(CraftHumanEntity who) {
 		transaction.remove(who);
 	}
 
+	@Override
 	public List<HumanEntity> getViewers() {
 		return transaction;
 	}
 
+	@Override
 	public void setMaxStackSize(int i) {
 		maxStack = i;
 	}
 
+	@Override
 	public org.bukkit.inventory.InventoryHolder getOwner() {
 		return (CraftVillager) ((EntityVillager) this.merchant).getBukkitEntity();
 	}
@@ -49,14 +56,17 @@ public class InventoryMerchant implements IInventory {
 		this.merchant = imerchant;
 	}
 
+	@Override
 	public int getSize() {
 		return this.itemsInSlots.length;
 	}
 
+	@Override
 	public ItemStack getItem(int i) {
 		return this.itemsInSlots[i];
 	}
 
+	@Override
 	public ItemStack splitStack(int i, int j) {
 		if (this.itemsInSlots[i] != null) {
 			ItemStack itemstack;
@@ -94,6 +104,7 @@ public class InventoryMerchant implements IInventory {
 		return i == 0 || i == 1;
 	}
 
+	@Override
 	public ItemStack splitWithoutUpdate(int i) {
 		if (this.itemsInSlots[i] != null) {
 			ItemStack itemstack = this.itemsInSlots[i];
@@ -105,6 +116,7 @@ public class InventoryMerchant implements IInventory {
 		}
 	}
 
+	@Override
 	public void setItem(int i, ItemStack itemstack) {
 		this.itemsInSlots[i] = itemstack;
 		if (itemstack != null && itemstack.count > this.getMaxStackSize()) {
@@ -117,37 +129,46 @@ public class InventoryMerchant implements IInventory {
 
 	}
 
+	@Override
 	public String getName() {
 		return "mob.villager";
 	}
 
+	@Override
 	public boolean hasCustomName() {
 		return false;
 	}
 
+	@Override
 	public IChatBaseComponent getScoreboardDisplayName() {
-		return (IChatBaseComponent) (this.hasCustomName() ? new ChatComponentText(this.getName())
-				: new ChatMessage(this.getName(), new Object[0]));
+		return this.hasCustomName() ? new ChatComponentText(this.getName())
+				: new ChatMessage(this.getName(), new Object[0]);
 	}
 
+	@Override
 	public int getMaxStackSize() {
 		return maxStack; // CraftBukkit
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		return this.merchant.v_() == entityhuman;
 	}
 
+	@Override
 	public void startOpen(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public void closeContainer(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public boolean b(int i, ItemStack itemstack) {
 		return true;
 	}
 
+	@Override
 	public void update() {
 		this.h();
 	}
@@ -199,17 +220,21 @@ public class InventoryMerchant implements IInventory {
 		this.h();
 	}
 
+	@Override
 	public int getProperty(int i) {
 		return 0;
 	}
 
+	@Override
 	public void b(int i, int j) {
 	}
 
+	@Override
 	public int g() {
 		return 0;
 	}
 
+	@Override
 	public void l() {
 		for (int i = 0; i < this.itemsInSlots.length; ++i) {
 			this.itemsInSlots[i] = null;

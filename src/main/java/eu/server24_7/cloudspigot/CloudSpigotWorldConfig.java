@@ -55,13 +55,13 @@ public class CloudSpigotWorldConfig {
 
 	private float getFloat(String path, float def) {
 		// TODO: Figure out why getFloat() always returns the default value.
-		return (float) getDouble(path, (double) def);
+		return (float) getDouble(path, def);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	private <T> List getList(String path, T def) {
 		config.addDefault("world-settings.default." + path, def);
-		return (List<T>) config.getList("world-settings." + worldName + "." + path,
+		return config.getList("world-settings." + worldName + "." + path,
 				config.getList("world-settings.default." + path));
 	}
 

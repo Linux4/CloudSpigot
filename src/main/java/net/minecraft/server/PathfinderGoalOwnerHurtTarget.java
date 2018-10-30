@@ -12,6 +12,7 @@ public class PathfinderGoalOwnerHurtTarget extends PathfinderGoalTarget {
 		this.a(1);
 	}
 
+	@Override
 	public boolean a() {
 		if (!this.a.isTamed()) {
 			return false;
@@ -29,6 +30,7 @@ public class PathfinderGoalOwnerHurtTarget extends PathfinderGoalTarget {
 		}
 	}
 
+	@Override
 	public void c() {
 		this.e.setGoalTarget(this.b, org.bukkit.event.entity.EntityTargetEvent.TargetReason.OWNER_ATTACKED_TARGET,
 				true); // CraftBukkit - reason

@@ -22,22 +22,27 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 	public List<HumanEntity> transaction = new java.util.ArrayList<HumanEntity>();
 	private int maxStack = MAX_STACK;
 
+	@Override
 	public ItemStack[] getContents() {
 		return this.items;
 	}
 
+	@Override
 	public void onOpen(CraftHumanEntity who) {
 		transaction.add(who);
 	}
 
+	@Override
 	public void onClose(CraftHumanEntity who) {
 		transaction.remove(who);
 	}
 
+	@Override
 	public List<HumanEntity> getViewers() {
 		return transaction;
 	}
 
+	@Override
 	public void setMaxStackSize(int size) {
 		maxStack = size;
 	}
@@ -46,6 +51,7 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 	public TileEntityHopper() {
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		NBTTagList nbttaglist = nbttagcompound.getList("Items", 10);
@@ -68,6 +74,7 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		NBTTagList nbttaglist = new NBTTagList();
@@ -90,18 +97,22 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 
 	}
 
+	@Override
 	public void update() {
 		super.update();
 	}
 
+	@Override
 	public int getSize() {
 		return this.items.length;
 	}
 
+	@Override
 	public ItemStack getItem(int i) {
 		return this.items[i];
 	}
 
+	@Override
 	public ItemStack splitStack(int i, int j) {
 		if (this.items[i] != null) {
 			ItemStack itemstack;
@@ -123,6 +134,7 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 		}
 	}
 
+	@Override
 	public ItemStack splitWithoutUpdate(int i) {
 		if (this.items[i] != null) {
 			ItemStack itemstack = this.items[i];
@@ -134,6 +146,7 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 		}
 	}
 
+	@Override
 	public void setItem(int i, ItemStack itemstack) {
 		this.items[i] = itemstack;
 		if (itemstack != null && itemstack.count > this.getMaxStackSize()) {
@@ -142,10 +155,12 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 
 	}
 
+	@Override
 	public String getName() {
 		return this.hasCustomName() ? this.f : "container.hopper";
 	}
 
+	@Override
 	public boolean hasCustomName() {
 		return this.f != null && this.f.length() > 0;
 	}
@@ -154,26 +169,32 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 		this.f = s;
 	}
 
+	@Override
 	public int getMaxStackSize() {
 		return maxStack; // CraftBukkit
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		return this.world.getTileEntity(this.position) != this ? false
-				: entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D,
-						(double) this.position.getZ() + 0.5D) <= 64.0D;
+				: entityhuman.e(this.position.getX() + 0.5D, this.position.getY() + 0.5D,
+						this.position.getZ() + 0.5D) <= 64.0D;
 	}
 
+	@Override
 	public void startOpen(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public void closeContainer(EntityHuman entityhuman) {
 	}
 
+	@Override
 	public boolean b(int i, ItemStack itemstack) {
 		return true;
 	}
 
+	@Override
 	public void c() {
 		if (this.world != null && !this.world.isClientSide) {
 			--this.g;
@@ -195,7 +216,7 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 				}
 
 				if (!this.q()) {
-					flag = a((IHopper) this) || flag;
+					flag = a(this) || flag;
 				}
 
 				if (flag) {
@@ -389,9 +410,9 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 					.iterator();
 
 			while (iterator.hasNext()) {
-				EntityItem entityitem = (EntityItem) iterator.next();
+				EntityItem entityitem = iterator.next();
 
-				if (a((IInventory) ihopper, entityitem)) {
+				if (a(ihopper, entityitem)) {
 					return true;
 				}
 			}
@@ -557,9 +578,9 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 	private IInventory H() {
 		EnumDirection enumdirection = BlockHopper.b(this.u());
 
-		return b(this.getWorld(), (double) (this.position.getX() + enumdirection.getAdjacentX()),
-				(double) (this.position.getY() + enumdirection.getAdjacentY()),
-				(double) (this.position.getZ() + enumdirection.getAdjacentZ()));
+		return b(this.getWorld(), this.position.getX() + enumdirection.getAdjacentX(),
+				this.position.getY() + enumdirection.getAdjacentY(),
+				this.position.getZ() + enumdirection.getAdjacentZ());
 	}
 
 	public static IInventory b(IHopper ihopper) {
@@ -585,7 +606,7 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 			TileEntity tileentity = world.getTileEntity(blockposition);
 
 			if (tileentity instanceof IInventory) {
-				object = (IInventory) tileentity;
+				object = tileentity;
 				if (object instanceof TileEntityChest && block instanceof BlockChest) {
 					object = ((BlockChest) block).f(world, blockposition);
 				}
@@ -598,7 +619,7 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 					IEntitySelector.c);
 
 			if (list.size() > 0) {
-				object = (IInventory) list.get(world.random.nextInt(list.size()));
+				object = list.get(world.random.nextInt(list.size()));
 			}
 		}
 
@@ -612,16 +633,19 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 								: ItemStack.equals(itemstack, itemstack1)));
 	}
 
+	@Override
 	public double A() {
-		return (double) this.position.getX() + 0.5D;
+		return this.position.getX() + 0.5D;
 	}
 
+	@Override
 	public double B() {
-		return (double) this.position.getY() + 0.5D;
+		return this.position.getY() + 0.5D;
 	}
 
+	@Override
 	public double C() {
-		return (double) this.position.getZ() + 0.5D;
+		return this.position.getZ() + 0.5D;
 	}
 
 	public void d(int i) {
@@ -636,25 +660,31 @@ public class TileEntityHopper extends TileEntityContainer implements IHopper, IU
 		return this.g <= 1;
 	}
 
+	@Override
 	public String getContainerName() {
 		return "minecraft:hopper";
 	}
 
+	@Override
 	public Container createContainer(PlayerInventory playerinventory, EntityHuman entityhuman) {
 		return new ContainerHopper(playerinventory, this, entityhuman);
 	}
 
+	@Override
 	public int getProperty(int i) {
 		return 0;
 	}
 
+	@Override
 	public void b(int i, int j) {
 	}
 
+	@Override
 	public int g() {
 		return 0;
 	}
 
+	@Override
 	public void l() {
 		for (int i = 0; i < this.items.length; ++i) {
 			this.items[i] = null;

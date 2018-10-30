@@ -49,6 +49,7 @@ public class Banner extends MaterialData implements Attachable {
 		return getItemType() == Material.WALL_BANNER;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public BlockFace getAttachedFace() {
 		if (isWallBanner()) {
@@ -74,6 +75,7 @@ public class Banner extends MaterialData implements Attachable {
 		}
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public BlockFace getFacing() {
 		byte data = getData();
@@ -135,6 +137,7 @@ public class Banner extends MaterialData implements Attachable {
 		}
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setFacingDirection(BlockFace face) {
 		byte data;

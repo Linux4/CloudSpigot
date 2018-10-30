@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import com.google.common.collect.Lists;
 
 public class ChunkProviderFlat implements IChunkProvider {
 
@@ -91,6 +92,7 @@ public class ChunkProviderFlat implements IChunkProvider {
 		this.f = flag1 ? false : d.b().containsKey("decoration");
 	}
 
+	@Override
 	public Chunk getOrCreateChunk(int i, int j) {
 		ChunkSnapshot chunksnapshot = new ChunkSnapshot();
 
@@ -111,7 +113,7 @@ public class ChunkProviderFlat implements IChunkProvider {
 		Iterator<StructureGenerator> iterator = this.e.iterator();
 
 		while (iterator.hasNext()) {
-			WorldGenBase worldgenbase = (WorldGenBase) iterator.next();
+			WorldGenBase worldgenbase = iterator.next();
 
 			worldgenbase.a(this, this.a, i, j, chunksnapshot);
 		}
@@ -129,10 +131,12 @@ public class ChunkProviderFlat implements IChunkProvider {
 		return chunk;
 	}
 
+	@Override
 	public boolean isChunkLoaded(int i, int j) {
 		return true;
 	}
 
+	@Override
 	public void getChunkAt(IChunkProvider ichunkprovider, int i, int j) {
 		int k = i * 16;
 		int l = j * 16;
@@ -144,12 +148,12 @@ public class ChunkProviderFlat implements IChunkProvider {
 		long i1 = this.b.nextLong() / 2L * 2L + 1L;
 		long j1 = this.b.nextLong() / 2L * 2L + 1L;
 
-		this.b.setSeed((long) i * i1 + (long) j * j1 ^ this.a.getSeed());
+		this.b.setSeed(i * i1 + j * j1 ^ this.a.getSeed());
 		ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(i, j);
 		Iterator<StructureGenerator> iterator = this.e.iterator();
 
 		while (iterator.hasNext()) {
-			StructureGenerator structuregenerator = (StructureGenerator) iterator.next();
+			StructureGenerator structuregenerator = iterator.next();
 			boolean flag1 = structuregenerator.a(this.a, this.b, chunkcoordintpair);
 
 			if (structuregenerator instanceof WorldGenVillage) {
@@ -184,41 +188,49 @@ public class ChunkProviderFlat implements IChunkProvider {
 
 	}
 
+	@Override
 	public boolean a(IChunkProvider ichunkprovider, Chunk chunk, int i, int j) {
 		return false;
 	}
 
+	@Override
 	public boolean saveChunks(boolean flag, IProgressUpdate iprogressupdate) {
 		return true;
 	}
 
+	@Override
 	public void c() {
 	}
 
+	@Override
 	public boolean unloadChunks() {
 		return false;
 	}
 
+	@Override
 	public boolean canSave() {
 		return true;
 	}
 
+	@Override
 	public String getName() {
 		return "FlatLevelSource";
 	}
 
+	@Override
 	public List<BiomeBase.BiomeMeta> getMobsFor(EnumCreatureType enumcreaturetype, BlockPosition blockposition) {
 		BiomeBase biomebase = this.a.getBiome(blockposition);
 
 		return biomebase.getMobs(enumcreaturetype);
 	}
 
+	@Override
 	public BlockPosition findNearestMapFeature(World world, String s, BlockPosition blockposition) {
 		if ("Stronghold".equals(s)) {
 			Iterator<StructureGenerator> iterator = this.e.iterator();
 
 			while (iterator.hasNext()) {
-				StructureGenerator structuregenerator = (StructureGenerator) iterator.next();
+				StructureGenerator structuregenerator = iterator.next();
 
 				if (structuregenerator instanceof WorldGenStronghold) {
 					return structuregenerator.getNearestGeneratedFeature(world, blockposition);
@@ -229,21 +241,24 @@ public class ChunkProviderFlat implements IChunkProvider {
 		return null;
 	}
 
+	@Override
 	public int getLoadedChunks() {
 		return 0;
 	}
 
+	@Override
 	public void recreateStructures(Chunk chunk, int i, int j) {
 		Iterator<StructureGenerator> iterator = this.e.iterator();
 
 		while (iterator.hasNext()) {
-			StructureGenerator structuregenerator = (StructureGenerator) iterator.next();
+			StructureGenerator structuregenerator = iterator.next();
 
 			structuregenerator.a(this, this.a, i, j, (ChunkSnapshot) null);
 		}
 
 	}
 
+	@Override
 	public Chunk getChunkAt(BlockPosition blockposition) {
 		return this.getOrCreateChunk(blockposition.getX() >> 4, blockposition.getZ() >> 4);
 	}

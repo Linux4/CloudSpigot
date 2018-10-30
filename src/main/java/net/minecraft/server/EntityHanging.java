@@ -2,8 +2,8 @@ package net.minecraft.server;
 
 import java.util.Iterator;
 import java.util.List;
-import org.apache.commons.lang3.Validate;
 
+import org.apache.commons.lang3.Validate;
 // CraftBukkit start
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Painting;
@@ -28,6 +28,7 @@ public abstract class EntityHanging extends Entity {
 		this.blockPosition = blockposition;
 	}
 
+	@Override
 	protected void h() {
 	}
 
@@ -35,7 +36,7 @@ public abstract class EntityHanging extends Entity {
 		Validate.notNull(enumdirection);
 		Validate.isTrue(enumdirection.k().c());
 		this.direction = enumdirection;
-		this.lastYaw = this.yaw = (float) (this.direction.b() * 90);
+		this.lastYaw = this.yaw = this.direction.b() * 90;
 		this.updateBoundingBox();
 	}
 
@@ -49,23 +50,23 @@ public abstract class EntityHanging extends Entity {
 	 */
 	public static AxisAlignedBB calculateBoundingBox(BlockPosition blockPosition, EnumDirection direction, int width,
 			int height) {
-		double d0 = (double) blockPosition.getX() + 0.5D;
-		double d1 = (double) blockPosition.getY() + 0.5D;
-		double d2 = (double) blockPosition.getZ() + 0.5D;
+		double d0 = blockPosition.getX() + 0.5D;
+		double d1 = blockPosition.getY() + 0.5D;
+		double d2 = blockPosition.getZ() + 0.5D;
 		// double d3 = 0.46875D; // CloudSpigot
 		double d4 = width % 32 == 0 ? 0.5D : 0.0D;
 		double d5 = height % 32 == 0 ? 0.5D : 0.0D;
 
-		d0 -= (double) direction.getAdjacentX() * 0.46875D;
-		d2 -= (double) direction.getAdjacentZ() * 0.46875D;
+		d0 -= direction.getAdjacentX() * 0.46875D;
+		d2 -= direction.getAdjacentZ() * 0.46875D;
 		d1 += d5;
 		EnumDirection enumdirection = direction.f();
 
-		d0 += d4 * (double) enumdirection.getAdjacentX();
-		d2 += d4 * (double) enumdirection.getAdjacentZ();
-		double d6 = (double) width;
-		double d7 = (double) height;
-		double d8 = (double) width;
+		d0 += d4 * enumdirection.getAdjacentX();
+		d2 += d4 * enumdirection.getAdjacentZ();
+		double d6 = width;
+		double d7 = height;
+		double d8 = width;
 
 		if (direction.k() == EnumDirection.EnumAxis.Z) {
 			d8 = 1.0D;
@@ -95,6 +96,7 @@ public abstract class EntityHanging extends Entity {
 	 * private double a(int i) { return i % 32 == 0 ? 0.5D : 0.0D; }
 	 */ // CloudSpigot
 
+	@Override
 	public void t_() {
 		this.lastX = this.locX;
 		this.lastY = this.locY;
@@ -166,26 +168,30 @@ public abstract class EntityHanging extends Entity {
 					return true;
 				}
 
-				entity = (Entity) iterator.next();
+				entity = iterator.next();
 			} while (!(entity instanceof EntityHanging));
 
 			return false;
 		}
 	}
 
+	@Override
 	public boolean ad() {
 		return true;
 	}
 
+	@Override
 	public boolean l(Entity entity) {
 		return entity instanceof EntityHuman ? this.damageEntity(DamageSource.playerAttack((EntityHuman) entity), 0.0F)
 				: false;
 	}
 
+	@Override
 	public EnumDirection getDirection() {
 		return this.direction;
 	}
 
+	@Override
 	public boolean damageEntity(DamageSource damagesource, float f) {
 		if (this.isInvulnerable(damagesource)) {
 			return false;
@@ -231,6 +237,7 @@ public abstract class EntityHanging extends Entity {
 		}
 	}
 
+	@Override
 	public void move(double d0, double d1, double d2) {
 		if (!this.world.isClientSide && !this.dead && d0 * d0 + d1 * d1 + d2 * d2 > 0.0D) {
 			if (this.dead)
@@ -253,6 +260,7 @@ public abstract class EntityHanging extends Entity {
 
 	}
 
+	@Override
 	public void g(double d0, double d1, double d2) {
 		/*
 		 * if (false && !this.world.isClientSide && !this.dead && d0 * d0 + d1 * d1 + d2
@@ -263,6 +271,7 @@ public abstract class EntityHanging extends Entity {
 
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		nbttagcompound.setByte("Facing", (byte) this.direction.b());
 		nbttagcompound.setInt("TileX", this.getBlockPosition().getX());
@@ -270,6 +279,7 @@ public abstract class EntityHanging extends Entity {
 		nbttagcompound.setInt("TileZ", this.getBlockPosition().getZ());
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		this.blockPosition = new BlockPosition(nbttagcompound.getInt("TileX"), nbttagcompound.getInt("TileY"),
 				nbttagcompound.getInt("TileZ"));
@@ -293,10 +303,12 @@ public abstract class EntityHanging extends Entity {
 
 	public abstract void b(Entity entity);
 
+	@Override
 	protected boolean af() {
 		return false;
 	}
 
+	@Override
 	public void setPosition(double d0, double d1, double d2) {
 		this.locX = d0;
 		this.locY = d1;

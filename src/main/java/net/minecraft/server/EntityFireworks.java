@@ -18,6 +18,7 @@ public class EntityFireworks extends Entity {
 		this.setSize(0.25F, 0.25F);
 	}
 
+	@Override
 	protected void h() {
 		this.datawatcher.add(8, 5);
 	}
@@ -45,6 +46,7 @@ public class EntityFireworks extends Entity {
 		this.expectedLifespan = 10 * i + this.random.nextInt(6) + this.random.nextInt(7);
 	}
 
+	@Override
 	public void t_() {
 		this.P = this.locX;
 		this.Q = this.locY;
@@ -58,7 +60,7 @@ public class EntityFireworks extends Entity {
 
 		this.yaw = (float) (MathHelper.b(this.motX, this.motZ) * 180.0D / 3.1415927410125732D);
 
-		for (this.pitch = (float) (MathHelper.b(this.motY, (double) f) * 180.0D / 3.1415927410125732D); this.pitch
+		for (this.pitch = (float) (MathHelper.b(this.motY, f) * 180.0D / 3.1415927410125732D); this.pitch
 				- this.lastPitch < -180.0F; this.lastPitch -= 360.0F) {
 			;
 		}
@@ -96,6 +98,7 @@ public class EntityFireworks extends Entity {
 
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		nbttagcompound.setInt("Life", this.ticksFlown);
 		nbttagcompound.setInt("LifeTime", this.expectedLifespan);
@@ -110,6 +113,7 @@ public class EntityFireworks extends Entity {
 
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		this.ticksFlown = nbttagcompound.getInt("Life");
 		this.expectedLifespan = nbttagcompound.getInt("LifeTime");
@@ -125,10 +129,12 @@ public class EntityFireworks extends Entity {
 
 	}
 
+	@Override
 	public float c(float f) {
 		return super.c(f);
 	}
 
+	@Override
 	public boolean aD() {
 		return false;
 	}

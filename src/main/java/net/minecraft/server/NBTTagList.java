@@ -1,13 +1,15 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.google.common.collect.Lists;
 
 public class NBTTagList extends NBTBase {
 
@@ -18,9 +20,10 @@ public class NBTTagList extends NBTBase {
 	public NBTTagList() {
 	}
 
+	@Override
 	void write(DataOutput dataoutput) throws IOException {
 		if (!this.list.isEmpty()) {
-			this.type = ((NBTBase) this.list.get(0)).getTypeId();
+			this.type = this.list.get(0).getTypeId();
 		} else {
 			this.type = 0;
 		}
@@ -29,11 +32,12 @@ public class NBTTagList extends NBTBase {
 		dataoutput.writeInt(this.list.size());
 
 		for (int i = 0; i < this.list.size(); ++i) {
-			((NBTBase) this.list.get(i)).write(dataoutput);
+			this.list.get(i).write(dataoutput);
 		}
 
 	}
 
+	@Override
 	void load(DataInput datainput, int i, NBTReadLimiter nbtreadlimiter) throws IOException {
 		nbtreadlimiter.a(296L);
 		if (i > 512) {
@@ -46,7 +50,7 @@ public class NBTTagList extends NBTBase {
 			if (this.type == 0 && j > 0) {
 				throw new RuntimeException("Missing type on ListTag");
 			} else {
-				nbtreadlimiter.a(32L * (long) j);
+				nbtreadlimiter.a(32L * j);
 				this.list = Lists.newArrayListWithCapacity(j);
 
 				for (int k = 0; k < j; ++k) {
@@ -60,10 +64,12 @@ public class NBTTagList extends NBTBase {
 		}
 	}
 
+	@Override
 	public byte getTypeId() {
 		return (byte) 9;
 	}
 
+	@Override
 	public String toString() {
 		StringBuilder stringbuilder = new StringBuilder("[");
 
@@ -111,16 +117,17 @@ public class NBTTagList extends NBTBase {
 	}
 
 	public NBTBase a(int i) {
-		return (NBTBase) this.list.remove(i);
+		return this.list.remove(i);
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return this.list.isEmpty();
 	}
 
 	public NBTTagCompound get(int i) {
 		if (i >= 0 && i < this.list.size()) {
-			NBTBase nbtbase = (NBTBase) this.list.get(i);
+			NBTBase nbtbase = this.list.get(i);
 
 			return nbtbase.getTypeId() == 10 ? (NBTTagCompound) nbtbase : new NBTTagCompound();
 		} else {
@@ -130,7 +137,7 @@ public class NBTTagList extends NBTBase {
 
 	public int[] c(int i) {
 		if (i >= 0 && i < this.list.size()) {
-			NBTBase nbtbase = (NBTBase) this.list.get(i);
+			NBTBase nbtbase = this.list.get(i);
 
 			return nbtbase.getTypeId() == 11 ? ((NBTTagIntArray) nbtbase).c() : new int[0];
 		} else {
@@ -140,7 +147,7 @@ public class NBTTagList extends NBTBase {
 
 	public double d(int i) {
 		if (i >= 0 && i < this.list.size()) {
-			NBTBase nbtbase = (NBTBase) this.list.get(i);
+			NBTBase nbtbase = this.list.get(i);
 
 			return nbtbase.getTypeId() == 6 ? ((NBTTagDouble) nbtbase).g() : 0.0D;
 		} else {
@@ -150,7 +157,7 @@ public class NBTTagList extends NBTBase {
 
 	public float e(int i) {
 		if (i >= 0 && i < this.list.size()) {
-			NBTBase nbtbase = (NBTBase) this.list.get(i);
+			NBTBase nbtbase = this.list.get(i);
 
 			return nbtbase.getTypeId() == 5 ? ((NBTTagFloat) nbtbase).h() : 0.0F;
 		} else {
@@ -160,7 +167,7 @@ public class NBTTagList extends NBTBase {
 
 	public String getString(int i) {
 		if (i >= 0 && i < this.list.size()) {
-			NBTBase nbtbase = (NBTBase) this.list.get(i);
+			NBTBase nbtbase = this.list.get(i);
 
 			return nbtbase.getTypeId() == 8 ? nbtbase.a_() : nbtbase.toString();
 		} else {
@@ -169,13 +176,14 @@ public class NBTTagList extends NBTBase {
 	}
 
 	public NBTBase g(int i) {
-		return (NBTBase) (i >= 0 && i < this.list.size() ? (NBTBase) this.list.get(i) : new NBTTagEnd());
+		return i >= 0 && i < this.list.size() ? (NBTBase) this.list.get(i) : new NBTTagEnd();
 	}
 
 	public int size() {
 		return this.list.size();
 	}
 
+	@Override
 	public NBTBase clone() {
 		NBTTagList nbttaglist = new NBTTagList();
 
@@ -183,7 +191,7 @@ public class NBTTagList extends NBTBase {
 		Iterator<NBTBase> iterator = this.list.iterator();
 
 		while (iterator.hasNext()) {
-			NBTBase nbtbase = (NBTBase) iterator.next();
+			NBTBase nbtbase = iterator.next();
 			NBTBase nbtbase1 = nbtbase.clone();
 
 			nbttaglist.list.add(nbtbase1);
@@ -192,6 +200,7 @@ public class NBTTagList extends NBTBase {
 		return nbttaglist;
 	}
 
+	@Override
 	public boolean equals(Object object) {
 		if (super.equals(object)) {
 			NBTTagList nbttaglist = (NBTTagList) object;
@@ -204,6 +213,7 @@ public class NBTTagList extends NBTBase {
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return super.hashCode() ^ this.list.hashCode();
 	}

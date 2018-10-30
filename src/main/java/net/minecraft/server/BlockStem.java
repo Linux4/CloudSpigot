@@ -1,10 +1,11 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
 import java.util.Iterator;
 import java.util.Random;
 
 import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
+
+import com.google.common.base.Predicate;
 
 public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
 
@@ -14,8 +15,9 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
 			return enumdirection != EnumDirection.DOWN;
 		}
 
+		@Override
 		public boolean apply(EnumDirection object) {
-			return this.a((EnumDirection) object);
+			return this.a(object);
 		}
 	});
 	private final Block blockFruit;
@@ -31,12 +33,13 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
 		this.a((CreativeModeTab) null);
 	}
 
+	@Override
 	public IBlockData updateState(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
 		iblockdata = iblockdata.set(BlockStem.FACING, EnumDirection.UP);
 		Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
 		while (iterator.hasNext()) {
-			EnumDirection enumdirection = (EnumDirection) iterator.next();
+			EnumDirection enumdirection = iterator.next();
 
 			if (iblockaccess.getType(blockposition.shift(enumdirection)).getBlock() == this.blockFruit) {
 				iblockdata = iblockdata.set(BlockStem.FACING, enumdirection);
@@ -47,19 +50,21 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
 		return iblockdata;
 	}
 
+	@Override
 	protected boolean c(Block block) {
 		return block == Blocks.FARMLAND;
 	}
 
+	@Override
 	public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
 		super.b(world, blockposition, iblockdata, random);
 		if (world.getLightLevel(blockposition.up()) >= 9) {
-			float f = BlockCrops.a((Block) this, world, blockposition);
+			float f = BlockCrops.a(this, world, blockposition);
 
 			if (random
 					.nextInt((int) (world.growthOdds / (this == Blocks.PUMPKIN_STEM ? world.spigotConfig.pumpkinModifier
 							: world.spigotConfig.melonModifier) * (25.0F / f)) + 1) == 0) { // Spigot
-				int i = ((Integer) iblockdata.get(BlockStem.AGE)).intValue();
+				int i = iblockdata.get(BlockStem.AGE).intValue();
 
 				if (i < 7) {
 					iblockdata = iblockdata.set(BlockStem.AGE, Integer.valueOf(i + 1));
@@ -70,7 +75,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
 					Iterator<EnumDirection> iterator = EnumDirection.EnumDirectionLimit.HORIZONTAL.iterator();
 
 					while (iterator.hasNext()) {
-						EnumDirection enumdirection = (EnumDirection) iterator.next();
+						EnumDirection enumdirection = iterator.next();
 
 						if (world.getType(blockposition.shift(enumdirection)).getBlock() == this.blockFruit) {
 							return;
@@ -94,7 +99,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
 	}
 
 	public void g(World world, BlockPosition blockposition, IBlockData iblockdata) {
-		int i = ((Integer) iblockdata.get(BlockStem.AGE)).intValue() + MathHelper.nextInt(world.random, 2, 5);
+		int i = iblockdata.get(BlockStem.AGE).intValue() + MathHelper.nextInt(world.random, 2, 5);
 
 		// world.setTypeAndData(blockposition, iblockdata.set(BlockStem.AGE,
 		// Integer.valueOf(Math.min(7, i))), 2);
@@ -102,27 +107,30 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
 				this, Math.min(7, i)); // CraftBukkit
 	}
 
+	@Override
 	public void j() {
 		float f = 0.125F;
 
 		this.a(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
 	}
 
+	@Override
 	public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
-		this.maxY = (double) ((float) (((Integer) iblockaccess.getType(blockposition).get(BlockStem.AGE)).intValue() * 2
-				+ 2) / 16.0F);
+		this.maxY = (iblockaccess.getType(blockposition).get(BlockStem.AGE).intValue() * 2
+				+ 2) / 16.0F;
 		float f = 0.125F;
 
 		this.a(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, (float) this.maxY, 0.5F + f);
 	}
 
+	@Override
 	public void dropNaturally(World world, BlockPosition blockposition, IBlockData iblockdata, float f, int i) {
 		super.dropNaturally(world, blockposition, iblockdata, f, i);
 		if (!world.isClientSide) {
 			Item item = this.l();
 
 			if (item != null) {
-				int j = ((Integer) iblockdata.get(BlockStem.AGE)).intValue();
+				int j = iblockdata.get(BlockStem.AGE).intValue();
 
 				for (int k = 0; k < 3; ++k) {
 					if (world.random.nextInt(15) <= j) {
@@ -139,30 +147,37 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
 				: (this.blockFruit == Blocks.MELON_BLOCK ? Items.MELON_SEEDS : null);
 	}
 
+	@Override
 	public Item getDropType(IBlockData iblockdata, Random random, int i) {
 		return null;
 	}
 
+	@Override
 	public boolean a(World world, BlockPosition blockposition, IBlockData iblockdata, boolean flag) {
-		return ((Integer) iblockdata.get(BlockStem.AGE)).intValue() != 7;
+		return iblockdata.get(BlockStem.AGE).intValue() != 7;
 	}
 
+	@Override
 	public boolean a(World world, Random random, BlockPosition blockposition, IBlockData iblockdata) {
 		return true;
 	}
 
+	@Override
 	public void b(World world, Random random, BlockPosition blockposition, IBlockData iblockdata) {
 		this.g(world, blockposition, iblockdata);
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockStem.AGE, Integer.valueOf(i));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
-		return ((Integer) iblockdata.get(BlockStem.AGE)).intValue();
+		return iblockdata.get(BlockStem.AGE).intValue();
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockStem.AGE, BlockStem.FACING });
 	}

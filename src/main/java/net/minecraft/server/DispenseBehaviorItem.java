@@ -10,6 +10,7 @@ public class DispenseBehaviorItem implements IDispenseBehavior {
 	public DispenseBehaviorItem() {
 	}
 
+	@Override
 	public final ItemStack a(ISourceBlock isourceblock, ItemStack itemstack) {
 		ItemStack itemstack1 = this.b(isourceblock, itemstack);
 
@@ -50,12 +51,12 @@ public class DispenseBehaviorItem implements IDispenseBehavior {
 		EntityItem entityitem = new EntityItem(world, d0, d1, d2, itemstack);
 		double d3 = world.random.nextDouble() * 0.1D + 0.2D;
 
-		entityitem.motX = (double) enumdirection.getAdjacentX() * d3;
+		entityitem.motX = enumdirection.getAdjacentX() * d3;
 		entityitem.motY = 0.20000000298023224D;
-		entityitem.motZ = (double) enumdirection.getAdjacentZ() * d3;
-		entityitem.motX += world.random.nextGaussian() * 0.007499999832361937D * (double) i;
-		entityitem.motY += world.random.nextGaussian() * 0.007499999832361937D * (double) i;
-		entityitem.motZ += world.random.nextGaussian() * 0.007499999832361937D * (double) i;
+		entityitem.motZ = enumdirection.getAdjacentZ() * d3;
+		entityitem.motX += world.random.nextGaussian() * 0.007499999832361937D * i;
+		entityitem.motY += world.random.nextGaussian() * 0.007499999832361937D * i;
+		entityitem.motZ += world.random.nextGaussian() * 0.007499999832361937D * i;
 
 		// CraftBukkit start
 		org.bukkit.block.Block block = world.getWorld().getBlockAt(isourceblock.getBlockPosition().getX(),
@@ -80,7 +81,7 @@ public class DispenseBehaviorItem implements IDispenseBehavior {
 		if (!event.getItem().getType().equals(craftItem.getType())) {
 			// Chain to handler for new item
 			ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-			IDispenseBehavior idispensebehavior = (IDispenseBehavior) BlockDispenser.REGISTRY.get(eventStack.getItem());
+			IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 			if (idispensebehavior != IDispenseBehavior.NONE
 					&& idispensebehavior.getClass() != DispenseBehaviorItem.class) {
 				idispensebehavior.a(isourceblock, eventStack);

@@ -6,14 +6,14 @@ import java.util.logging.Level;
 
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.util.Waitable;
-
-// CloudSpigot start - JLine update
-import net.minecraft.server.DedicatedServer; // CloudSpigot
 import org.jline.reader.Candidate;
 import org.jline.reader.Completer;
 import org.jline.reader.LineReader;
 import org.jline.reader.ParsedLine;
 // CloudSpigot end
+
+// CloudSpigot start - JLine update
+import net.minecraft.server.DedicatedServer; // CloudSpigot
 
 public class ConsoleCommandCompleter implements Completer {
 	private final DedicatedServer server; // CloudSpigot - CraftServer -> DedicatedServer
@@ -23,6 +23,7 @@ public class ConsoleCommandCompleter implements Completer {
 	}
 
 	// CloudSpigot start - Change method signature for JLine update
+	@Override
 	public void complete(LineReader reader, ParsedLine line, List<Candidate> candidates) {
 		final CraftServer server = this.server.server;
 		final String buffer = line.line();

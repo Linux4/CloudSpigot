@@ -1,7 +1,18 @@
 package net.minecraft.server;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.Callable;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelException;
@@ -18,14 +29,6 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.Callable;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class ServerConnection {
 
@@ -36,6 +39,7 @@ public class ServerConnection {
 					(new ThreadFactoryBuilder()).setNameFormat("Netty Server IO #%d").setDaemon(true).build());
 		}
 
+		@Override
 		protected NioEventLoopGroup init() {
 			return this.a();
 		}
@@ -46,6 +50,7 @@ public class ServerConnection {
 					(new ThreadFactoryBuilder()).setNameFormat("Netty Epoll Server IO #%d").setDaemon(true).build());
 		}
 
+		@Override
 		protected EpollEventLoopGroup init() {
 			return this.a();
 		}
@@ -56,6 +61,7 @@ public class ServerConnection {
 					(new ThreadFactoryBuilder()).setNameFormat("Netty Local Server IO #%d").setDaemon(true).build());
 		}
 
+		@Override
 		protected LocalEventLoopGroup init() {
 			return this.a();
 		}
@@ -88,8 +94,9 @@ public class ServerConnection {
 				ServerConnection.e.info("Using default channel type");
 			}
 
-			this.g.add(((ServerBootstrap) ((ServerBootstrap) (new ServerBootstrap()).channel(oclass))
+			this.g.add((new ServerBootstrap()).channel(oclass)
 					.childHandler(new ChannelInitializer() {
+						@Override
 						protected void initChannel(Channel channel) throws Exception {
 							try {
 								channel.config().setOption(ChannelOption.TCP_NODELAY, true);
@@ -108,9 +115,9 @@ public class ServerConnection {
 							ServerConnection.this.h.add(networkmanager);
 							channel.pipeline().addLast("packet_handler", networkmanager);
 							networkmanager.a(
-									(PacketListener) (new HandshakeListener(ServerConnection.this.f, networkmanager)));
+									(new HandshakeListener(ServerConnection.this.f, networkmanager)));
 						}
-					}).group((EventLoopGroup) lazyinitvar.c()).localAddress(inetaddress, i)).bind()
+					}).group((EventLoopGroup) lazyinitvar.c()).localAddress(inetaddress, i).bind()
 							.syncUninterruptibly());
 		}
 	}
@@ -120,7 +127,7 @@ public class ServerConnection {
 		Iterator<ChannelFuture> iterator = this.g.iterator();
 
 		while (iterator.hasNext()) {
-			ChannelFuture channelfuture = (ChannelFuture) iterator.next();
+			ChannelFuture channelfuture = iterator.next();
 
 			try {
 				channelfuture.channel().close().sync();
@@ -147,7 +154,7 @@ public class ServerConnection {
 			Iterator<NetworkManager> iterator = this.h.iterator();
 
 			while (iterator.hasNext()) {
-				final NetworkManager networkmanager = (NetworkManager) iterator.next();
+				final NetworkManager networkmanager = iterator.next();
 
 				if (!networkmanager.h()) {
 					if (!networkmanager.g()) {
@@ -172,6 +179,7 @@ public class ServerConnection {
 										return networkmanager.toString();
 									}
 
+									@Override
 									public String call() throws Exception {
 										return this.a();
 									}
@@ -185,6 +193,7 @@ public class ServerConnection {
 
 							networkmanager.a(new PacketPlayOutKickDisconnect(chatcomponenttext),
 									new GenericFutureListener() {
+										@Override
 										public void operationComplete(Future future) throws Exception {
 											networkmanager.close(chatcomponenttext);
 										}

@@ -1,12 +1,12 @@
 package org.bukkit.help;
 
+import java.util.Collection;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.ChatPaginator;
-
-import java.util.Collection;
 
 /**
  * This help topic generates a list of other help topics. This class is useful
@@ -44,6 +44,7 @@ public class IndexHelpTopic extends HelpTopic {
 		this.allTopics = topics;
 	}
 
+	@Override
 	public boolean canSee(CommandSender sender) {
 		if (sender instanceof ConsoleCommandSender) {
 			return true;
@@ -59,6 +60,7 @@ public class IndexHelpTopic extends HelpTopic {
 		permission = amendedPermission;
 	}
 
+	@Override
 	public String getFullText(CommandSender sender) {
 		StringBuilder sb = new StringBuilder();
 

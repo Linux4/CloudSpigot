@@ -14,6 +14,7 @@ import net.minecraft.server.MinecraftServer;
 
 public class CraftCrashReport implements Callable<Object> {
 
+	@Override
 	public Object call() throws Exception {
 		StringWriter value = new StringWriter();
 		try {

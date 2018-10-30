@@ -9,6 +9,7 @@ public abstract class EntityMonster extends EntityCreature implements IMonster {
 		this.b_ = 5;
 	}
 
+	@Override
 	public void m() {
 		this.bx();
 		float f = this.c(1.0F);
@@ -20,6 +21,7 @@ public abstract class EntityMonster extends EntityCreature implements IMonster {
 		super.m();
 	}
 
+	@Override
 	public void t_() {
 		super.t_();
 		if (!this.world.isClientSide && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
@@ -28,14 +30,17 @@ public abstract class EntityMonster extends EntityCreature implements IMonster {
 
 	}
 
+	@Override
 	protected String P() {
 		return "game.hostile.swim";
 	}
 
+	@Override
 	protected String aa() {
 		return "game.hostile.swim.splash";
 	}
 
+	@Override
 	public boolean damageEntity(DamageSource damagesource, float f) {
 		if (this.isInvulnerable(damagesource)) {
 			return false;
@@ -48,33 +53,37 @@ public abstract class EntityMonster extends EntityCreature implements IMonster {
 		}
 	}
 
+	@Override
 	protected String bo() {
 		return "game.hostile.hurt";
 	}
 
+	@Override
 	protected String bp() {
 		return "game.hostile.die";
 	}
 
+	@Override
 	protected String n(int i) {
 		return i > 4 ? "game.hostile.hurt.fall.big" : "game.hostile.hurt.fall.small";
 	}
 
+	@Override
 	public boolean r(Entity entity) {
 		float f = (float) this.getAttributeInstance(GenericAttributes.ATTACK_DAMAGE).getValue();
 		int i = 0;
 
 		if (entity instanceof EntityLiving) {
 			f += EnchantmentManager.a(this.bA(), ((EntityLiving) entity).getMonsterType());
-			i += EnchantmentManager.a((EntityLiving) this);
+			i += EnchantmentManager.a(this);
 		}
 
 		boolean flag = entity.damageEntity(DamageSource.mobAttack(this), f);
 
 		if (flag) {
 			if (i > 0) {
-				entity.g((double) (-MathHelper.sin(this.yaw * 3.1415927F / 180.0F) * (float) i * 0.5F), 0.1D,
-						(double) (MathHelper.cos(this.yaw * 3.1415927F / 180.0F) * (float) i * 0.5F));
+				entity.g(-MathHelper.sin(this.yaw * 3.1415927F / 180.0F) * i * 0.5F, 0.1D,
+						MathHelper.cos(this.yaw * 3.1415927F / 180.0F) * i * 0.5F);
 				this.motX *= 0.6D;
 				this.motZ *= 0.6D;
 			}
@@ -94,12 +103,13 @@ public abstract class EntityMonster extends EntityCreature implements IMonster {
 				// CraftBukkit end
 			}
 
-			this.a((EntityLiving) this, entity);
+			this.a(this, entity);
 		}
 
 		return flag;
 	}
 
+	@Override
 	public float a(BlockPosition blockposition) {
 		return 0.5F - this.world.o(blockposition);
 	}
@@ -124,15 +134,18 @@ public abstract class EntityMonster extends EntityCreature implements IMonster {
 		}
 	}
 
+	@Override
 	public boolean bR() {
 		return this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.n_() && super.bR();
 	}
 
+	@Override
 	protected void initAttributes() {
 		super.initAttributes();
 		this.getAttributeMap().b(GenericAttributes.ATTACK_DAMAGE);
 	}
 
+	@Override
 	protected boolean ba() {
 		return true;
 	}

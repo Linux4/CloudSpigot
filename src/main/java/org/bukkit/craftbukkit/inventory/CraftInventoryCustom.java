@@ -2,16 +2,16 @@ package org.bukkit.craftbukkit.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.server.ChatComponentText;
 
-import net.minecraft.server.IChatBaseComponent;
 import org.apache.commons.lang.Validate;
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.InventoryHolder;
 
+import net.minecraft.server.ChatComponentText;
 import net.minecraft.server.EntityHuman;
+import net.minecraft.server.IChatBaseComponent;
 import net.minecraft.server.IInventory;
 import net.minecraft.server.ItemStack;
 
@@ -63,14 +63,17 @@ public class CraftInventoryCustom extends CraftInventory {
 			this.type = InventoryType.CHEST;
 		}
 
+		@Override
 		public int getSize() {
 			return items.length;
 		}
 
+		@Override
 		public ItemStack getItem(int i) {
 			return items[i];
 		}
 
+		@Override
 		public ItemStack splitStack(int i, int j) {
 			ItemStack stack = this.getItem(i);
 			ItemStack result;
@@ -87,6 +90,7 @@ public class CraftInventoryCustom extends CraftInventory {
 			return result;
 		}
 
+		@Override
 		public ItemStack splitWithoutUpdate(int i) {
 			ItemStack stack = this.getItem(i);
 			ItemStack result;
@@ -102,6 +106,7 @@ public class CraftInventoryCustom extends CraftInventory {
 			return result;
 		}
 
+		@Override
 		public void setItem(int i, ItemStack itemstack) {
 			items[i] = itemstack;
 			if (itemstack != null && this.getMaxStackSize() > 0 && itemstack.count > this.getMaxStackSize()) {
@@ -109,33 +114,41 @@ public class CraftInventoryCustom extends CraftInventory {
 			}
 		}
 
+		@Override
 		public int getMaxStackSize() {
 			return maxStack;
 		}
 
+		@Override
 		public void setMaxStackSize(int size) {
 			maxStack = size;
 		}
 
+		@Override
 		public void update() {
 		}
 
+		@Override
 		public boolean a(EntityHuman entityhuman) {
 			return true;
 		}
 
+		@Override
 		public ItemStack[] getContents() {
 			return items;
 		}
 
+		@Override
 		public void onOpen(CraftHumanEntity who) {
 			viewers.add(who);
 		}
 
+		@Override
 		public void onClose(CraftHumanEntity who) {
 			viewers.remove(who);
 		}
 
+		@Override
 		public List<HumanEntity> getViewers() {
 			return viewers;
 		}
@@ -144,10 +157,12 @@ public class CraftInventoryCustom extends CraftInventory {
 			return type;
 		}
 
+		@Override
 		public InventoryHolder getOwner() {
 			return owner;
 		}
 
+		@Override
 		public boolean b(int i, ItemStack itemstack) {
 			return true;
 		}

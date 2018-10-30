@@ -40,6 +40,7 @@ public class SecondaryWorldServer extends WorldServer {
 
 	// protected void a() {} // CraftBukkit
 
+	@Override
 	public World b() {
 		this.worldMaps = this.a.T();
 		// this.scoreboard = this.a.getScoreboard(); // CraftBukkit
@@ -51,7 +52,7 @@ public class SecondaryWorldServer extends WorldServer {
 			this.worldMaps.a(s, this.villages);
 		} else {
 			this.villages = persistentvillage;
-			this.villages.a((World) this);
+			this.villages.a(this);
 		}
 
 		return super.b(); // CraftBukkit

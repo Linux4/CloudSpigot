@@ -6,6 +6,7 @@ public class ItemFireball extends Item {
 		this.a(CreativeModeTab.f);
 	}
 
+	@Override
 	public boolean interactWith(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		if (world.isClientSide) {
@@ -26,9 +27,9 @@ public class ItemFireball extends Item {
 						return false;
 					}
 					// CraftBukkit end
-					world.makeSound((double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.5D,
-							(double) blockposition.getZ() + 0.5D, "item.fireCharge.use", 1.0F,
-							(ItemFireball.g.nextFloat() - ItemFireball.g.nextFloat()) * 0.2F + 1.0F);
+					world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
+							blockposition.getZ() + 0.5D, "item.fireCharge.use", 1.0F,
+							(Item.g.nextFloat() - Item.g.nextFloat()) * 0.2F + 1.0F);
 					world.setTypeUpdate(blockposition, Blocks.FIRE.getBlockData());
 				}
 

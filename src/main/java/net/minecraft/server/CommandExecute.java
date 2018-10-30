@@ -1,7 +1,7 @@
 package net.minecraft.server;
 
-import java.util.Collection;
 import java.util.List;
+
 // CraftBukkit start
 import org.bukkit.craftbukkit.command.ProxiedNativeCommandSender;
 import org.bukkit.craftbukkit.command.VanillaCommandWrapper;
@@ -12,18 +12,22 @@ public class CommandExecute extends CommandAbstract {
 	public CommandExecute() {
 	}
 
+	@Override
 	public String getCommand() {
 		return "execute";
 	}
 
+	@Override
 	public int a() {
 		return 2;
 	}
 
+	@Override
 	public String getUsage(ICommandListener icommandlistener) {
 		return "commands.execute.usage";
 	}
 
+	@Override
 	public void execute(final ICommandListener icommandlistener, String[] astring) throws CommandException {
 		if (astring.length < 5) {
 			throw new ExceptionUsage("commands.execute.usage", new Object[0]);
@@ -54,38 +58,47 @@ public class CommandExecute extends CommandAbstract {
 
 			String s = a(astring, b0);
 			ICommandListener icommandlistener1 = new ICommandListener() {
+				@Override
 				public String getName() {
 					return entity.getName();
 				}
 
+				@Override
 				public IChatBaseComponent getScoreboardDisplayName() {
 					return entity.getScoreboardDisplayName();
 				}
 
+				@Override
 				public void sendMessage(IChatBaseComponent ichatbasecomponent) {
 					icommandlistener.sendMessage(ichatbasecomponent);
 				}
 
+				@Override
 				public boolean a(int i, String s) {
 					return icommandlistener.a(i, s);
 				}
 
+				@Override
 				public BlockPosition getChunkCoordinates() {
 					return blockposition;
 				}
 
+				@Override
 				public Vec3D d() {
 					return new Vec3D(d0, d1, d2);
 				}
 
+				@Override
 				public World getWorld() {
 					return entity.world;
 				}
 
+				@Override
 				public Entity f() {
 					return entity;
 				}
 
+				@Override
 				public boolean getSendCommandFeedback() {
 					MinecraftServer minecraftserver = MinecraftServer.getServer();
 
@@ -93,6 +106,7 @@ public class CommandExecute extends CommandAbstract {
 							|| minecraftserver.worldServer[0].getGameRules().getBoolean("commandBlockOutput");
 				}
 
+				@Override
 				public void a(CommandObjectiveExecutor.EnumCommandResult commandobjectiveexecutor_enumcommandresult,
 						int i) {
 					entity.a(commandobjectiveexecutor_enumcommandresult, i);
@@ -134,17 +148,18 @@ public class CommandExecute extends CommandAbstract {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
+	@Override
 	public List<String> tabComplete(ICommandListener icommandlistener, String[] astring, BlockPosition blockposition) {
 		return astring.length == 1 ? a(astring, MinecraftServer.getServer().getPlayers())
 				: (astring.length > 1 && astring.length <= 4 ? a(astring, 1, blockposition)
 						: (astring.length > 5 && astring.length <= 8 && "detect".equals(astring[4])
 								? a(astring, 5, blockposition)
 								: (astring.length == 9 && "detect".equals(astring[4])
-										? a(astring, (Collection) Block.REGISTRY.keySet())
+										? a(astring, Block.REGISTRY.keySet())
 										: null)));
 	}
 
+	@Override
 	public boolean isListStart(String[] astring, int i) {
 		return i == 0;
 	}
@@ -152,7 +167,7 @@ public class CommandExecute extends CommandAbstract {
 	// CraftBukkit start - fix decompiler error
 	@Override
 	public int compareTo(ICommand o) {
-		return a((ICommand) o);
+		return a(o);
 	}
 	// CraftBukkit end
 }

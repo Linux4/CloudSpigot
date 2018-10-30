@@ -1,7 +1,8 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
+
+import com.google.common.collect.Lists;
 
 public class RecipeFireworks extends ShapelessRecipes implements IRecipe { // CraftBukkit - added extends
 
@@ -13,6 +14,7 @@ public class RecipeFireworks extends ShapelessRecipes implements IRecipe { // Cr
 	}
 	// CraftBukkit end
 
+	@Override
 	public boolean a(InventoryCrafting inventorycrafting, World world) {
 		this.a = null;
 		int i = 0;
@@ -114,7 +116,7 @@ public class RecipeFireworks extends ShapelessRecipes implements IRecipe { // Cr
 				int[] aint = new int[arraylist.size()];
 
 				for (int j2 = 0; j2 < aint.length; ++j2) {
-					aint[j2] = ((Integer) arraylist.get(j2)).intValue();
+					aint[j2] = arraylist.get(j2).intValue();
 				}
 
 				nbttagcompound1.setIntArray("Colors", aint);
@@ -141,7 +143,7 @@ public class RecipeFireworks extends ShapelessRecipes implements IRecipe { // Cr
 				int[] aint1 = new int[arraylist1.size()];
 
 				for (int l2 = 0; l2 < aint1.length; ++l2) {
-					aint1[l2] = ((Integer) arraylist1.get(l2)).intValue();
+					aint1[l2] = arraylist1.get(l2).intValue();
 				}
 
 				if (this.a != null && this.a.hasTag()) {
@@ -164,18 +166,22 @@ public class RecipeFireworks extends ShapelessRecipes implements IRecipe { // Cr
 		}
 	}
 
+	@Override
 	public ItemStack craftItem(InventoryCrafting inventorycrafting) {
 		return this.a.cloneItemStack();
 	}
 
+	@Override
 	public int a() {
 		return 10;
 	}
 
+	@Override
 	public ItemStack b() {
 		return this.a;
 	}
 
+	@Override
 	public ItemStack[] b(InventoryCrafting inventorycrafting) {
 		ItemStack[] aitemstack = new ItemStack[inventorycrafting.getSize()];
 

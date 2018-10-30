@@ -1,16 +1,17 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Maps;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
-import java.util.Map.Entry;
 
 // CraftBukkit start
 import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 // CraftBukkit end
+
+import com.google.common.collect.Maps;
 
 public class MobEffectList {
 
@@ -102,7 +103,7 @@ public class MobEffectList {
 	}
 
 	public static MobEffectList b(String s) {
-		return (MobEffectList) MobEffectList.I.get(new MinecraftKey(s));
+		return MobEffectList.I.get(new MinecraftKey(s));
 	}
 
 	public static Set<MinecraftKey> c() {
@@ -131,7 +132,7 @@ public class MobEffectList {
 		} else if (this.id == MobEffectList.WITHER.id) {
 			entityliving.damageEntity(DamageSource.WITHER, 1.0F);
 		} else if (this.id == MobEffectList.HUNGER.id && entityliving instanceof EntityHuman) {
-			((EntityHuman) entityliving).applyExhaustion(0.025F * (float) (i + 1));
+			((EntityHuman) entityliving).applyExhaustion(0.025F * (i + 1));
 		} else if (this.id == MobEffectList.SATURATION.id && entityliving instanceof EntityHuman) {
 			if (!entityliving.world.isClientSide) {
 				// CraftBukkit start
@@ -154,10 +155,10 @@ public class MobEffectList {
 				&& (this.id != MobEffectList.HARM.id || !entityliving.bm())) {
 			if (this.id == MobEffectList.HARM.id && !entityliving.bm()
 					|| this.id == MobEffectList.HEAL.id && entityliving.bm()) {
-				entityliving.damageEntity(DamageSource.MAGIC, (float) (6 << i));
+				entityliving.damageEntity(DamageSource.MAGIC, 6 << i);
 			}
 		} else {
-			entityliving.heal((float) Math.max(4 << i, 0), RegainReason.MAGIC); // CraftBukkit
+			entityliving.heal(Math.max(4 << i, 0), RegainReason.MAGIC); // CraftBukkit
 		}
 
 	}
@@ -169,16 +170,16 @@ public class MobEffectList {
 				&& (this.id != MobEffectList.HARM.id || !entityliving.bm())) {
 			if (this.id == MobEffectList.HARM.id && !entityliving.bm()
 					|| this.id == MobEffectList.HEAL.id && entityliving.bm()) {
-				j = (int) (d0 * (double) (6 << i) + 0.5D);
+				j = (int) (d0 * (6 << i) + 0.5D);
 				if (entity == null) {
-					entityliving.damageEntity(DamageSource.MAGIC, (float) j);
+					entityliving.damageEntity(DamageSource.MAGIC, j);
 				} else {
-					entityliving.damageEntity(DamageSource.b(entity, entity1), (float) j);
+					entityliving.damageEntity(DamageSource.b(entity, entity1), j);
 				}
 			}
 		} else {
-			j = (int) (d0 * (double) (4 << i) + 0.5D);
-			entityliving.heal((float) j, RegainReason.MAGIC); // CraftBukkit
+			j = (int) (d0 * (4 << i) + 0.5D);
+			entityliving.heal(j, RegainReason.MAGIC); // CraftBukkit
 		}
 
 	}
@@ -242,10 +243,10 @@ public class MobEffectList {
 
 		while (iterator.hasNext()) {
 			Entry<IAttribute, AttributeModifier> entry = iterator.next();
-			AttributeInstance attributeinstance = attributemapbase.a((IAttribute) entry.getKey());
+			AttributeInstance attributeinstance = attributemapbase.a(entry.getKey());
 
 			if (attributeinstance != null) {
-				attributeinstance.c((AttributeModifier) entry.getValue());
+				attributeinstance.c(entry.getValue());
 			}
 		}
 
@@ -256,10 +257,10 @@ public class MobEffectList {
 
 		while (iterator.hasNext()) {
 			Entry<IAttribute, AttributeModifier> entry = iterator.next();
-			AttributeInstance attributeinstance = attributemapbase.a((IAttribute) entry.getKey());
+			AttributeInstance attributeinstance = attributemapbase.a(entry.getKey());
 
 			if (attributeinstance != null) {
-				AttributeModifier attributemodifier = (AttributeModifier) entry.getValue();
+				AttributeModifier attributemodifier = entry.getValue();
 
 				attributeinstance.c(attributemodifier);
 				attributeinstance.b(new AttributeModifier(attributemodifier.a(), this.a() + " " + i,
@@ -270,6 +271,6 @@ public class MobEffectList {
 	}
 
 	public double a(int i, AttributeModifier attributemodifier) {
-		return attributemodifier.d() * (double) (i + 1);
+		return attributemodifier.d() * (i + 1);
 	}
 }

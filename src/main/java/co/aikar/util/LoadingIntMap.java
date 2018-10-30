@@ -7,6 +7,7 @@
 package co.aikar.util;
 
 import com.google.common.base.Function;
+
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**

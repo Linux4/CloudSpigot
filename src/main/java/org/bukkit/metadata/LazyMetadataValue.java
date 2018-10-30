@@ -59,6 +59,7 @@ public class LazyMetadataValue extends MetadataValueAdapter implements MetadataV
 		super(owningPlugin);
 	}
 
+	@Override
 	public Object value() {
 		eval();
 		Object value = internalValue.get();
@@ -87,6 +88,7 @@ public class LazyMetadataValue extends MetadataValueAdapter implements MetadataV
 		}
 	}
 
+	@Override
 	public synchronized void invalidate() {
 		if (cacheStrategy != CacheStrategy.CACHE_ETERNALLY) {
 			internalValue.clear();

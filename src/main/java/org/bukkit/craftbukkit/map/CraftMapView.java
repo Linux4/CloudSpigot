@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.server.WorldMap;
-
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
+
+import net.minecraft.server.WorldMap;
 
 public final class CraftMapView implements MapView {
 
@@ -27,6 +27,7 @@ public final class CraftMapView implements MapView {
 		addRenderer(new CraftMapRenderer(this, worldMap));
 	}
 
+	@Override
 	public short getId() {
 		String text = worldMap.id;
 		if (text.startsWith("map_")) {
@@ -40,20 +41,24 @@ public final class CraftMapView implements MapView {
 		}
 	}
 
+	@Override
 	public boolean isVirtual() {
 		return renderers.size() > 0 && !(renderers.get(0) instanceof CraftMapRenderer);
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public Scale getScale() {
 		return Scale.valueOf(worldMap.scale);
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setScale(Scale scale) {
 		worldMap.scale = scale.getValue();
 	}
 
+	@Override
 	public World getWorld() {
 		byte dimension = worldMap.map;
 		for (World world : Bukkit.getServer().getWorlds()) {
@@ -64,30 +69,37 @@ public final class CraftMapView implements MapView {
 		return null;
 	}
 
+	@Override
 	public void setWorld(World world) {
 		worldMap.map = (byte) ((CraftWorld) world).getHandle().dimension;
 	}
 
+	@Override
 	public int getCenterX() {
 		return worldMap.centerX;
 	}
 
+	@Override
 	public int getCenterZ() {
 		return worldMap.centerZ;
 	}
 
+	@Override
 	public void setCenterX(int x) {
 		worldMap.centerX = x;
 	}
 
+	@Override
 	public void setCenterZ(int z) {
 		worldMap.centerZ = z;
 	}
 
+	@Override
 	public List<MapRenderer> getRenderers() {
 		return new ArrayList<MapRenderer>(renderers);
 	}
 
+	@Override
 	public void addRenderer(MapRenderer renderer) {
 		if (!renderers.contains(renderer)) {
 			renderers.add(renderer);
@@ -96,6 +108,7 @@ public final class CraftMapView implements MapView {
 		}
 	}
 
+	@Override
 	public boolean removeRenderer(MapRenderer renderer) {
 		if (renderers.contains(renderer)) {
 			renderers.remove(renderer);

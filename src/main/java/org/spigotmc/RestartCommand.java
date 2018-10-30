@@ -1,11 +1,12 @@
 package org.spigotmc;
 
 import java.io.File;
-import java.util.List;
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
 
 public class RestartCommand extends Command {
 
@@ -44,7 +45,7 @@ public class RestartCommand extends Command {
 				WatchdogThread.doStop();
 
 				// Kick all players
-				for (EntityPlayer p : (List<EntityPlayer>) MinecraftServer.getServer().getPlayerList().players) {
+				for (EntityPlayer p : MinecraftServer.getServer().getPlayerList().players) {
 					p.playerConnection.disconnect(SpigotConfig.restartMessage);
 				}
 				// Give the socket a chance to send the packets

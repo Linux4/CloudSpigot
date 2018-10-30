@@ -4,6 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.commons.lang.Validate;
+import org.bukkit.Material;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
+
 import net.minecraft.server.IHopper;
 import net.minecraft.server.IInventory;
 import net.minecraft.server.InventoryCrafting;
@@ -15,14 +23,6 @@ import net.minecraft.server.TileEntityBrewingStand;
 import net.minecraft.server.TileEntityDispenser;
 import net.minecraft.server.TileEntityDropper;
 import net.minecraft.server.TileEntityFurnace;
-
-import org.apache.commons.lang.Validate;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.Material;
 
 @SuppressWarnings("deprecation")
 public class CraftInventory implements Inventory {
@@ -36,19 +36,23 @@ public class CraftInventory implements Inventory {
 		return inventory;
 	}
 
+	@Override
 	public int getSize() {
 		return getInventory().getSize();
 	}
 
+	@Override
 	public String getName() {
 		return getInventory().getName();
 	}
 
+	@Override
 	public ItemStack getItem(int index) {
 		net.minecraft.server.ItemStack item = getInventory().getItem(index);
 		return item == null ? null : CraftItemStack.asCraftMirror(item);
 	}
 
+	@Override
 	public ItemStack[] getContents() {
 		ItemStack[] items = new ItemStack[getSize()];
 		net.minecraft.server.ItemStack[] mcItems = getInventory().getContents();
@@ -60,6 +64,7 @@ public class CraftInventory implements Inventory {
 		return items;
 	}
 
+	@Override
 	public void setContents(ItemStack[] items) {
 		if (getInventory().getContents().length < items.length) {
 			throw new IllegalArgumentException(
@@ -77,11 +82,13 @@ public class CraftInventory implements Inventory {
 		}
 	}
 
+	@Override
 	public void setItem(int index, ItemStack item) {
 		getInventory().setItem(index,
 				((item == null || item.getTypeId() == 0) ? null : CraftItemStack.asNMSCopy(item)));
 	}
 
+	@Override
 	public boolean contains(int materialId) {
 		for (ItemStack item : getContents()) {
 			if (item != null && item.getTypeId() == materialId) {
@@ -91,11 +98,13 @@ public class CraftInventory implements Inventory {
 		return false;
 	}
 
+	@Override
 	public boolean contains(Material material) {
 		Validate.notNull(material, "Material cannot be null");
 		return contains(material.getId());
 	}
 
+	@Override
 	public boolean contains(ItemStack item) {
 		if (item == null) {
 			return false;
@@ -108,6 +117,7 @@ public class CraftInventory implements Inventory {
 		return false;
 	}
 
+	@Override
 	public boolean contains(int materialId, int amount) {
 		if (amount <= 0) {
 			return true;
@@ -122,11 +132,13 @@ public class CraftInventory implements Inventory {
 		return false;
 	}
 
+	@Override
 	public boolean contains(Material material, int amount) {
 		Validate.notNull(material, "Material cannot be null");
 		return contains(material.getId(), amount);
 	}
 
+	@Override
 	public boolean contains(ItemStack item, int amount) {
 		if (item == null) {
 			return false;
@@ -142,6 +154,7 @@ public class CraftInventory implements Inventory {
 		return false;
 	}
 
+	@Override
 	public boolean containsAtLeast(ItemStack item, int amount) {
 		if (item == null) {
 			return false;
@@ -157,6 +170,7 @@ public class CraftInventory implements Inventory {
 		return false;
 	}
 
+	@Override
 	public HashMap<Integer, ItemStack> all(int materialId) {
 		HashMap<Integer, ItemStack> slots = new HashMap<Integer, ItemStack>();
 
@@ -170,11 +184,13 @@ public class CraftInventory implements Inventory {
 		return slots;
 	}
 
+	@Override
 	public HashMap<Integer, ItemStack> all(Material material) {
 		Validate.notNull(material, "Material cannot be null");
 		return all(material.getId());
 	}
 
+	@Override
 	public HashMap<Integer, ItemStack> all(ItemStack item) {
 		HashMap<Integer, ItemStack> slots = new HashMap<Integer, ItemStack>();
 		if (item != null) {
@@ -188,6 +204,7 @@ public class CraftInventory implements Inventory {
 		return slots;
 	}
 
+	@Override
 	public int first(int materialId) {
 		ItemStack[] inventory = getContents();
 		for (int i = 0; i < inventory.length; i++) {
@@ -199,11 +216,13 @@ public class CraftInventory implements Inventory {
 		return -1;
 	}
 
+	@Override
 	public int first(Material material) {
 		Validate.notNull(material, "Material cannot be null");
 		return first(material.getId());
 	}
 
+	@Override
 	public int first(ItemStack item) {
 		return first(item, true);
 	}
@@ -224,6 +243,7 @@ public class CraftInventory implements Inventory {
 		return -1;
 	}
 
+	@Override
 	public int firstEmpty() {
 		ItemStack[] inventory = getContents();
 		for (int i = 0; i < inventory.length; i++) {
@@ -265,6 +285,7 @@ public class CraftInventory implements Inventory {
 		return -1;
 	}
 
+	@Override
 	public HashMap<Integer, ItemStack> addItem(ItemStack... items) {
 		Validate.noNullElements(items, "Item cannot be null");
 		HashMap<Integer, ItemStack> leftover = new HashMap<Integer, ItemStack>();
@@ -329,6 +350,7 @@ public class CraftInventory implements Inventory {
 		return leftover;
 	}
 
+	@Override
 	public HashMap<Integer, ItemStack> removeItem(ItemStack... items) {
 		Validate.notNull(items, "Items cannot be null");
 		HashMap<Integer, ItemStack> leftover = new HashMap<Integer, ItemStack>();
@@ -376,6 +398,7 @@ public class CraftInventory implements Inventory {
 		return getInventory().getMaxStackSize();
 	}
 
+	@Override
 	public void remove(int materialId) {
 		ItemStack[] items = getContents();
 		for (int i = 0; i < items.length; i++) {
@@ -385,11 +408,13 @@ public class CraftInventory implements Inventory {
 		}
 	}
 
+	@Override
 	public void remove(Material material) {
 		Validate.notNull(material, "Material cannot be null");
 		remove(material.getId());
 	}
 
+	@Override
 	public void remove(ItemStack item) {
 		ItemStack[] items = getContents();
 		for (int i = 0; i < items.length; i++) {
@@ -399,20 +424,24 @@ public class CraftInventory implements Inventory {
 		}
 	}
 
+	@Override
 	public void clear(int index) {
 		setItem(index, null);
 	}
 
+	@Override
 	public void clear() {
 		for (int i = 0; i < getSize(); i++) {
 			clear(i);
 		}
 	}
 
+	@Override
 	public ListIterator<ItemStack> iterator() {
 		return new InventoryIterator(this);
 	}
 
+	@Override
 	public ListIterator<ItemStack> iterator(int index) {
 		if (index < 0) {
 			index += getSize() + 1; // ie, with -1, previous() will return the last element
@@ -420,14 +449,17 @@ public class CraftInventory implements Inventory {
 		return new InventoryIterator(this, index);
 	}
 
+	@Override
 	public List<HumanEntity> getViewers() {
 		return this.inventory.getViewers();
 	}
 
+	@Override
 	public String getTitle() {
 		return inventory.getName();
 	}
 
+	@Override
 	public InventoryType getType() {
 		// Thanks to Droppers extending Dispensers, order is important.
 		if (inventory instanceof InventoryCrafting) {
@@ -461,14 +493,17 @@ public class CraftInventory implements Inventory {
 		}
 	}
 
+	@Override
 	public InventoryHolder getHolder() {
 		return inventory.getOwner();
 	}
 
+	@Override
 	public int getMaxStackSize() {
 		return inventory.getMaxStackSize();
 	}
 
+	@Override
 	public void setMaxStackSize(int size) {
 		inventory.setMaxStackSize(size);
 	}

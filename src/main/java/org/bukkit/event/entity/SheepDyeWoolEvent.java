@@ -19,10 +19,12 @@ public class SheepDyeWoolEvent extends EntityEvent implements Cancellable {
 		this.color = color;
 	}
 
+	@Override
 	public boolean isCancelled() {
 		return cancel;
 	}
 
+	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancel = cancel;
 	}

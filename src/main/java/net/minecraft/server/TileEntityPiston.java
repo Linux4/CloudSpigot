@@ -1,8 +1,9 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 public class TileEntityPiston extends TileEntity implements IUpdatePlayerListBox {
 
@@ -28,6 +29,7 @@ public class TileEntityPiston extends TileEntity implements IUpdatePlayerListBox
 		return this.a;
 	}
 
+	@Override
 	public int u() {
 		return 0;
 	}
@@ -65,25 +67,25 @@ public class TileEntityPiston extends TileEntity implements IUpdatePlayerListBox
 				Iterator<Entity> iterator = this.k.iterator();
 
 				while (iterator.hasNext()) {
-					Entity entity = (Entity) iterator.next();
+					Entity entity = iterator.next();
 
 					if (this.a.getBlock() == Blocks.SLIME && this.g) {
 						switch (TileEntityPiston.SyntheticClass_1.a[this.f.k().ordinal()]) {
 						case 1:
-							entity.motX = (double) this.f.getAdjacentX();
+							entity.motX = this.f.getAdjacentX();
 							break;
 
 						case 2:
-							entity.motY = (double) this.f.getAdjacentY();
+							entity.motY = this.f.getAdjacentY();
 							break;
 
 						case 3:
-							entity.motZ = (double) this.f.getAdjacentZ();
+							entity.motZ = this.f.getAdjacentZ();
 						}
 					} else {
-						entity.move((double) (f1 * (float) this.f.getAdjacentX()),
-								(double) (f1 * (float) this.f.getAdjacentY()),
-								(double) (f1 * (float) this.f.getAdjacentZ()));
+						entity.move(f1 * this.f.getAdjacentX(),
+								f1 * this.f.getAdjacentY(),
+								f1 * this.f.getAdjacentZ());
 					}
 				}
 
@@ -106,6 +108,7 @@ public class TileEntityPiston extends TileEntity implements IUpdatePlayerListBox
 
 	}
 
+	@Override
 	public void c() {
 		if (this.world == null)
 			return; // CraftBukkit
@@ -132,6 +135,7 @@ public class TileEntityPiston extends TileEntity implements IUpdatePlayerListBox
 		}
 	}
 
+	@Override
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		this.a = Block.getById(nbttagcompound.getInt("blockId")).fromLegacyData(nbttagcompound.getInt("blockData"));
@@ -140,6 +144,7 @@ public class TileEntityPiston extends TileEntity implements IUpdatePlayerListBox
 		this.g = nbttagcompound.getBoolean("extending");
 	}
 
+	@Override
 	public void b(NBTTagCompound nbttagcompound) {
 		super.b(nbttagcompound);
 		nbttagcompound.setInt("blockId", Block.getId(this.a.getBlock()));

@@ -1,7 +1,7 @@
 package org.bukkit.material;
 
-import org.bukkit.block.BlockFace;
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 
 /**
  * MaterialData for signs
@@ -59,6 +59,7 @@ public class Sign extends MaterialData implements Attachable {
 	 *
 	 * @return BlockFace attached to
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public BlockFace getAttachedFace() {
 		if (isWallSign()) {
@@ -89,6 +90,7 @@ public class Sign extends MaterialData implements Attachable {
 	 *
 	 * @return BlockFace indicating where this sign is facing
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public BlockFace getFacing() {
 		byte data = getData();
@@ -150,6 +152,7 @@ public class Sign extends MaterialData implements Attachable {
 		}
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setFacingDirection(BlockFace face) {
 		byte data;

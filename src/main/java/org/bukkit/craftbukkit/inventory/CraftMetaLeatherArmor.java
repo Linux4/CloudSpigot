@@ -4,9 +4,6 @@ import static org.bukkit.craftbukkit.inventory.CraftItemFactory.DEFAULT_LEATHER_
 
 import java.util.Map;
 
-import net.minecraft.server.NBTTagCompound;
-import net.minecraft.server.NBTTagInt;
-
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
@@ -14,6 +11,9 @@ import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import com.google.common.collect.ImmutableMap.Builder;
+
+import net.minecraft.server.NBTTagCompound;
+import net.minecraft.server.NBTTagInt;
 
 @DelegateDeserialization(SerializableMeta.class)
 class CraftMetaLeatherArmor extends CraftMetaItem implements LeatherArmorMeta {
@@ -82,10 +82,12 @@ class CraftMetaLeatherArmor extends CraftMetaItem implements LeatherArmorMeta {
 		return (CraftMetaLeatherArmor) super.clone();
 	}
 
+	@Override
 	public Color getColor() {
 		return color;
 	}
 
+	@Override
 	public void setColor(Color color) {
 		this.color = color == null ? DEFAULT_LEATHER_COLOR : color;
 	}

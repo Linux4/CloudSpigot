@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
 //import java.util.Collections; // CloudSpigot
 import java.util.Iterator;
 import java.util.List;
@@ -22,11 +23,14 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.server.ServerListPingEvent;
+import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.help.HelpMap;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.map.MapView;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.plugin.PluginManager;
@@ -39,10 +43,6 @@ import org.bukkit.util.CachedServerIcon;
 
 import com.avaje.ebean.config.ServerConfig;
 import com.google.common.collect.ImmutableList;
-import org.bukkit.generator.ChunkGenerator;
-
-import org.bukkit.inventory.ItemFactory;
-import org.bukkit.inventory.meta.ItemMeta;
 
 /**
  * Represents a server implementation.

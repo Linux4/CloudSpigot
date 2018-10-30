@@ -25,7 +25,7 @@ public class ContainerPlayer extends Container {
 		this.craftInventory.resultInventory = this.resultInventory; // CraftBukkit - let InventoryCrafting know about
 																	// its result slot
 		this.player = playerinventory; // CraftBukkit - save player
-		this.a((Slot) (new SlotResult(playerinventory.player, this.craftInventory, this.resultInventory, 0, 144, 36)));
+		this.a((new SlotResult(playerinventory.player, this.craftInventory, this.resultInventory, 0, 144, 36)));
 
 		// CraftBukkit - fixed multiple decompiler errors below, good luck
 		int j;
@@ -39,10 +39,12 @@ public class ContainerPlayer extends Container {
 		for (int ii = 0; ii < 4; ++ii) {
 			final int i = ii;
 			this.a(new Slot(playerinventory, playerinventory.getSize() - 1 - ii, 8, 8 + ii * 18) {
+				@Override
 				public int getMaxStackSize() {
 					return 1;
 				}
 
+				@Override
 				public boolean isAllowed(ItemStack itemstack) {
 					return itemstack == null ? false
 							: (itemstack.getItem() instanceof ItemArmor ? ((ItemArmor) itemstack.getItem()).b == i
@@ -66,6 +68,7 @@ public class ContainerPlayer extends Container {
 		// just sets result slot to empty
 	}
 
+	@Override
 	public void a(IInventory iinventory) {
 		// this.resultInventory.setItem(0,
 		// CraftingManager.getInstance().craft(this.craftInventory, this.h.world));
@@ -83,6 +86,7 @@ public class ContainerPlayer extends Container {
 		// CraftBukkit end
 	}
 
+	@Override
 	public void b(EntityHuman entityhuman) {
 		super.b(entityhuman);
 
@@ -97,13 +101,15 @@ public class ContainerPlayer extends Container {
 		this.resultInventory.setItem(0, (ItemStack) null);
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		return true;
 	}
 
+	@Override
 	public ItemStack b(EntityHuman entityhuman, int i) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) this.c.get(i);
+		Slot slot = this.c.get(i);
 
 		if (slot != null && slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
@@ -124,7 +130,7 @@ public class ContainerPlayer extends Container {
 					return null;
 				}
 			} else if (itemstack.getItem() instanceof ItemArmor
-					&& !((Slot) this.c.get(5 + ((ItemArmor) itemstack.getItem()).b)).hasItem()) {
+					&& !this.c.get(5 + ((ItemArmor) itemstack.getItem()).b).hasItem()) {
 				int j = 5 + ((ItemArmor) itemstack.getItem()).b;
 
 				if (!this.a(itemstack1, j, j + 1, false)) {
@@ -158,6 +164,7 @@ public class ContainerPlayer extends Container {
 		return itemstack;
 	}
 
+	@Override
 	public boolean a(ItemStack itemstack, Slot slot) {
 		return slot.inventory != this.resultInventory && super.a(itemstack, slot);
 	}

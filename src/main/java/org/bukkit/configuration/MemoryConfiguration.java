@@ -41,6 +41,7 @@ public class MemoryConfiguration extends MemorySection implements Configuration 
 		defaults.set(path, value);
 	}
 
+	@Override
 	public void addDefaults(Map<String, Object> defaults) {
 		Validate.notNull(defaults, "Defaults may not be null");
 
@@ -49,18 +50,21 @@ public class MemoryConfiguration extends MemorySection implements Configuration 
 		}
 	}
 
+	@Override
 	public void addDefaults(Configuration defaults) {
 		Validate.notNull(defaults, "Defaults may not be null");
 
 		addDefaults(defaults.getValues(true));
 	}
 
+	@Override
 	public void setDefaults(Configuration defaults) {
 		Validate.notNull(defaults, "Defaults may not be null");
 
 		this.defaults = defaults;
 	}
 
+	@Override
 	public Configuration getDefaults() {
 		return defaults;
 	}
@@ -70,6 +74,7 @@ public class MemoryConfiguration extends MemorySection implements Configuration 
 		return null;
 	}
 
+	@Override
 	public MemoryConfigurationOptions options() {
 		if (options == null) {
 			options = new MemoryConfigurationOptions(this);

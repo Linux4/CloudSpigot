@@ -33,6 +33,7 @@ public class RecipesBanner {
 		}
 		// CraftBukkit end
 
+		@Override
 		public boolean a(InventoryCrafting inventorycrafting, World world) {
 			boolean flag = false;
 
@@ -59,6 +60,7 @@ public class RecipesBanner {
 			}
 		}
 
+		@Override
 		public ItemStack craftItem(InventoryCrafting inventorycrafting) {
 			ItemStack itemstack = null;
 
@@ -109,14 +111,17 @@ public class RecipesBanner {
 			return itemstack;
 		}
 
+		@Override
 		public int a() {
 			return 10;
 		}
 
+		@Override
 		public ItemStack b() {
 			return null;
 		}
 
+		@Override
 		public ItemStack[] b(InventoryCrafting inventorycrafting) {
 			ItemStack[] aitemstack = new ItemStack[inventorycrafting.getSize()];
 
@@ -230,6 +235,7 @@ public class RecipesBanner {
 		}
 		// CraftBukkit end
 
+		@Override
 		public boolean a(InventoryCrafting inventorycrafting, World world) {
 			ItemStack itemstack = null;
 			ItemStack itemstack1 = null;
@@ -280,6 +286,7 @@ public class RecipesBanner {
 			return itemstack != null && itemstack1 != null;
 		}
 
+		@Override
 		public ItemStack craftItem(InventoryCrafting inventorycrafting) {
 			for (int i = 0; i < inventorycrafting.getSize(); ++i) {
 				ItemStack itemstack = inventorycrafting.getItem(i);
@@ -295,14 +302,17 @@ public class RecipesBanner {
 			return null;
 		}
 
+		@Override
 		public int a() {
 			return 2;
 		}
 
+		@Override
 		public ItemStack b() {
 			return null;
 		}
 
+		@Override
 		public ItemStack[] b(InventoryCrafting inventorycrafting) {
 			ItemStack[] aitemstack = new ItemStack[inventorycrafting.getSize()];
 

@@ -17,6 +17,7 @@ public class BlockMonsterEggs extends Block {
 		this.a(CreativeModeTab.c);
 	}
 
+	@Override
 	public int a(Random random) {
 		return 0;
 	}
@@ -28,9 +29,10 @@ public class BlockMonsterEggs extends Block {
 				|| block == Blocks.COBBLESTONE || block == Blocks.STONEBRICK;
 	}
 
+	@Override
 	protected ItemStack i(IBlockData iblockdata) {
-		switch (BlockMonsterEggs.SyntheticClass_1.a[((BlockMonsterEggs.EnumMonsterEggVarient) iblockdata
-				.get(BlockMonsterEggs.VARIANT)).ordinal()]) {
+		switch (BlockMonsterEggs.SyntheticClass_1.a[iblockdata
+				.get(BlockMonsterEggs.VARIANT).ordinal()]) {
 		case 1:
 			return new ItemStack(Blocks.COBBLESTONE);
 
@@ -51,32 +53,37 @@ public class BlockMonsterEggs extends Block {
 		}
 	}
 
+	@Override
 	public void dropNaturally(World world, BlockPosition blockposition, IBlockData iblockdata, float f, int i) {
 		if (!world.isClientSide && world.getGameRules().getBoolean("doTileDrops")) {
 			EntitySilverfish entitysilverfish = new EntitySilverfish(world);
 
-			entitysilverfish.setPositionRotation((double) blockposition.getX() + 0.5D, (double) blockposition.getY(),
-					(double) blockposition.getZ() + 0.5D, 0.0F, 0.0F);
+			entitysilverfish.setPositionRotation(blockposition.getX() + 0.5D, blockposition.getY(),
+					blockposition.getZ() + 0.5D, 0.0F, 0.0F);
 			world.addEntity(entitysilverfish, SpawnReason.SILVERFISH_BLOCK); // CraftBukkit - add SpawnReason
 			entitysilverfish.y();
 		}
 
 	}
 
+	@Override
 	public int getDropData(World world, BlockPosition blockposition) {
 		IBlockData iblockdata = world.getType(blockposition);
 
 		return iblockdata.getBlock().toLegacyData(iblockdata);
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockMonsterEggs.VARIANT, BlockMonsterEggs.EnumMonsterEggVarient.a(i));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
-		return ((BlockMonsterEggs.EnumMonsterEggVarient) iblockdata.get(BlockMonsterEggs.VARIANT)).a();
+		return iblockdata.get(BlockMonsterEggs.VARIANT).a();
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockMonsterEggs.VARIANT });
 	}
@@ -126,18 +133,21 @@ public class BlockMonsterEggs extends Block {
 
 		STONE(0, "stone") {
 			;
+			@Override
 			public IBlockData d() {
 				return Blocks.STONE.getBlockData().set(BlockStone.VARIANT, BlockStone.EnumStoneVariant.STONE);
 			}
 		},
 		COBBLESTONE(1, "cobblestone", "cobble") {
 			;
+			@Override
 			public IBlockData d() {
 				return Blocks.COBBLESTONE.getBlockData();
 			}
 		},
 		STONEBRICK(2, "stone_brick", "brick") {
 			;
+			@Override
 			public IBlockData d() {
 				return Blocks.STONEBRICK.getBlockData().set(BlockSmoothBrick.VARIANT,
 						BlockSmoothBrick.EnumStonebrickType.DEFAULT);
@@ -145,6 +155,7 @@ public class BlockMonsterEggs extends Block {
 		},
 		MOSSY_STONEBRICK(3, "mossy_brick", "mossybrick") {
 			;
+			@Override
 			public IBlockData d() {
 				return Blocks.STONEBRICK.getBlockData().set(BlockSmoothBrick.VARIANT,
 						BlockSmoothBrick.EnumStonebrickType.MOSSY);
@@ -152,6 +163,7 @@ public class BlockMonsterEggs extends Block {
 		},
 		CRACKED_STONEBRICK(4, "cracked_brick", "crackedbrick") {
 			;
+			@Override
 			public IBlockData d() {
 				return Blocks.STONEBRICK.getBlockData().set(BlockSmoothBrick.VARIANT,
 						BlockSmoothBrick.EnumStonebrickType.CRACKED);
@@ -159,6 +171,7 @@ public class BlockMonsterEggs extends Block {
 		},
 		CHISELED_STONEBRICK(5, "chiseled_brick", "chiseledbrick") {
 			;
+			@Override
 			public IBlockData d() {
 				return Blocks.STONEBRICK.getBlockData().set(BlockSmoothBrick.VARIANT,
 						BlockSmoothBrick.EnumStonebrickType.CHISELED);
@@ -184,6 +197,7 @@ public class BlockMonsterEggs extends Block {
 			return this.h;
 		}
 
+		@Override
 		public String toString() {
 			return this.i;
 		}
@@ -196,6 +210,7 @@ public class BlockMonsterEggs extends Block {
 			return BlockMonsterEggs.EnumMonsterEggVarient.g[i];
 		}
 
+		@Override
 		public String getName() {
 			return this.i;
 		}

@@ -44,6 +44,7 @@ public class TileEntityEnderChest extends TileEntity { // CloudSpigot - remove I
 		// CloudSpigot end
 	}
 
+	@Override
 	public boolean c(int i, int j) {
 		if (i == 1) {
 			this.g = j;
@@ -53,6 +54,7 @@ public class TileEntityEnderChest extends TileEntity { // CloudSpigot - remove I
 		}
 	}
 
+	@Override
 	public void y() {
 		this.E();
 		super.y();
@@ -65,10 +67,10 @@ public class TileEntityEnderChest extends TileEntity { // CloudSpigot - remove I
 		if (this.g > 0 && this.a == 0.0F) {
 			this.a = 0.7F;
 
-			double d1 = (double) this.getPosition().getX() + 0.5D;
-			double d0 = (double) this.getPosition().getZ() + 0.5D;
+			double d1 = this.getPosition().getX() + 0.5D;
+			double d0 = this.getPosition().getZ() + 0.5D;
 
-			this.world.makeSound(d1, (double) this.getPosition().getY() + 0.5D, d0, "random.chestopen", 0.5F,
+			this.world.makeSound(d1, this.getPosition().getY() + 0.5D, d0, "random.chestopen", 0.5F,
 					this.world.random.nextFloat() * 0.1F + 0.9F);
 		}
 		// CloudSpigot end
@@ -81,10 +83,10 @@ public class TileEntityEnderChest extends TileEntity { // CloudSpigot - remove I
 
 		// CloudSpigot start - Move enderchest close sounds out of the tick loop
 		if (this.g == 0 && this.a > 0.0F || this.g > 0 && this.a < 1.0F) {
-			double d0 = (double) this.getPosition().getX() + 0.5D;
-			double d2 = (double) this.getPosition().getZ() + 0.5D;
+			double d0 = this.getPosition().getX() + 0.5D;
+			double d2 = this.getPosition().getZ() + 0.5D;
 
-			this.world.makeSound(d0, (double) this.getPosition().getY() + 0.5D, d2, "random.chestclosed", 0.5F,
+			this.world.makeSound(d0, this.getPosition().getY() + 0.5D, d2, "random.chestclosed", 0.5F,
 					this.world.random.nextFloat() * 0.1F + 0.9F);
 			this.a = 0.0F;
 		}
@@ -95,7 +97,7 @@ public class TileEntityEnderChest extends TileEntity { // CloudSpigot - remove I
 
 	public boolean a(EntityHuman entityhuman) {
 		return this.world.getTileEntity(this.position) != this ? false
-				: entityhuman.e((double) this.position.getX() + 0.5D, (double) this.position.getY() + 0.5D,
-						(double) this.position.getZ() + 0.5D) <= 64.0D;
+				: entityhuman.e(this.position.getX() + 0.5D, this.position.getY() + 0.5D,
+						this.position.getZ() + 0.5D) <= 64.0D;
 	}
 }

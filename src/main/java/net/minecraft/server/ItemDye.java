@@ -13,12 +13,14 @@ public class ItemDye extends Item {
 		this.a(CreativeModeTab.l);
 	}
 
+	@Override
 	public String e_(ItemStack itemstack) {
 		int i = itemstack.getData();
 
 		return super.getName() + "." + EnumColor.fromInvColorIndex(i).d();
 	}
 
+	@Override
 	public boolean interactWith(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		if (!entityhuman.a(blockposition.shift(enumdirection), enumdirection, itemstack)) {
@@ -88,6 +90,7 @@ public class ItemDye extends Item {
 		return false;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public boolean a(ItemStack itemstack, EntityHuman entityhuman, EntityLiving entityliving) {
 		if (entityliving instanceof EntitySheep) {
@@ -105,7 +108,7 @@ public class ItemDye extends Item {
 					return false;
 				}
 
-				enumcolor = EnumColor.fromColorIndex((byte) event.getColor().getWoolData());
+				enumcolor = EnumColor.fromColorIndex(event.getColor().getWoolData());
 				// CraftBukkit end
 				entitysheep.setColor(enumcolor);
 				--itemstack.count;

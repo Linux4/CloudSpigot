@@ -28,6 +28,7 @@ public class AttributeRanged extends AttributeBase {
 		return this.c;
 	}
 
+	@Override
 	public double a(double d0) {
 		d0 = MathHelper.a(d0, this.a, this.b);
 		return d0;

@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 // CraftBukkit start
 import java.util.List;
+
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;
 // CraftBukkit end

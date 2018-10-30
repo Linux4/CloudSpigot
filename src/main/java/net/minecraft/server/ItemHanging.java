@@ -16,6 +16,7 @@ public class ItemHanging extends Item {
 		this.a(CreativeModeTab.c);
 	}
 
+	@Override
 	public boolean interactWith(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		if (enumdirection == EnumDirection.DOWN) {
@@ -70,7 +71,7 @@ public class ItemHanging extends Item {
 	}
 
 	private EntityHanging a(World world, BlockPosition blockposition, EnumDirection enumdirection) {
-		return (EntityHanging) (this.a == EntityPainting.class ? new EntityPainting(world, blockposition, enumdirection)
-				: (this.a == EntityItemFrame.class ? new EntityItemFrame(world, blockposition, enumdirection) : null));
+		return this.a == EntityPainting.class ? new EntityPainting(world, blockposition, enumdirection)
+				: (this.a == EntityItemFrame.class ? new EntityItemFrame(world, blockposition, enumdirection) : null);
 	}
 }

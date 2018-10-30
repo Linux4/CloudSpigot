@@ -12,16 +12,17 @@ public class ItemBow extends Item {
 		this.a(CreativeModeTab.j);
 	}
 
+	@Override
 	public void a(ItemStack itemstack, World world, EntityHuman entityhuman, int i) {
 		boolean flag = entityhuman.abilities.canInstantlyBuild
 				|| EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_INFINITE.id, itemstack) > 0;
 
 		if (flag || entityhuman.inventory.b(Items.ARROW)) {
 			int j = this.d(itemstack) - i;
-			float f = (float) j / 20.0F;
+			float f = j / 20.0F;
 
 			f = (f * f + f * 2.0F) / 3.0F;
-			if ((double) f < 0.1D) {
+			if (f < 0.1D) {
 				return;
 			}
 
@@ -38,7 +39,7 @@ public class ItemBow extends Item {
 			int k = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_DAMAGE.id, itemstack);
 
 			if (k > 0) {
-				entityarrow.b(entityarrow.j() + (double) k * 0.5D + 0.5D);
+				entityarrow.b(entityarrow.j() + k * 0.5D + 0.5D);
 			}
 
 			int l = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_KNOCKBACK.id, itemstack);
@@ -72,7 +73,7 @@ public class ItemBow extends Item {
 			// CraftBukkit end
 
 			itemstack.damage(1, entityhuman);
-			world.makeSound(entityhuman, "random.bow", 1.0F, 1.0F / (ItemBow.g.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+			world.makeSound(entityhuman, "random.bow", 1.0F, 1.0F / (Item.g.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 			if (flag) {
 				entityarrow.fromPlayer = 2;
 			} else {
@@ -88,18 +89,22 @@ public class ItemBow extends Item {
 
 	}
 
+	@Override
 	public ItemStack b(ItemStack itemstack, World world, EntityHuman entityhuman) {
 		return itemstack;
 	}
 
+	@Override
 	public int d(ItemStack itemstack) {
 		return 72000;
 	}
 
+	@Override
 	public EnumAnimation e(ItemStack itemstack) {
 		return EnumAnimation.BOW;
 	}
 
+	@Override
 	public ItemStack a(ItemStack itemstack, World world, EntityHuman entityhuman) {
 		if (entityhuman.abilities.canInstantlyBuild || entityhuman.inventory.b(Items.ARROW)) {
 			entityhuman.a(itemstack, this.d(itemstack));
@@ -108,6 +113,7 @@ public class ItemBow extends Item {
 		return itemstack;
 	}
 
+	@Override
 	public int b() {
 		return 1;
 	}

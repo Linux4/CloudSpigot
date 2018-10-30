@@ -11,6 +11,7 @@ public class ItemLeash extends Item {
 		this.a(CreativeModeTab.i);
 	}
 
+	@Override
 	public boolean interactWith(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		Block block = world.getType(blockposition).getBlock();
@@ -34,12 +35,12 @@ public class ItemLeash extends Item {
 		int i = blockposition.getX();
 		int j = blockposition.getY();
 		int k = blockposition.getZ();
-		List<EntityInsentient> list = world.a(EntityInsentient.class, new AxisAlignedBB((double) i - d0,
-				(double) j - d0, (double) k - d0, (double) i + d0, (double) j + d0, (double) k + d0));
+		List<EntityInsentient> list = world.a(EntityInsentient.class, new AxisAlignedBB(i - d0,
+				j - d0, k - d0, i + d0, j + d0, k + d0));
 		Iterator<EntityInsentient> iterator = list.iterator();
 
 		while (iterator.hasNext()) {
-			EntityInsentient entityinsentient = (EntityInsentient) iterator.next();
+			EntityInsentient entityinsentient = iterator.next();
 
 			if (entityinsentient.cc() && entityinsentient.getLeashHolder() == entityhuman) {
 				if (entityleash == null) {

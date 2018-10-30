@@ -5,6 +5,8 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.ServerOperator;
 
+import org.bukkit.permissions.Permissible;
+
 /**
  * 
  * Called whenever a {@link Permissible}'s hasPermission() method is called

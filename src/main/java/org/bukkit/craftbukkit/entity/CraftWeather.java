@@ -1,9 +1,10 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityWeather;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Weather;
+
+import net.minecraft.server.EntityWeather;
 
 public class CraftWeather extends CraftEntity implements Weather {
 	public CraftWeather(final CraftServer server, final EntityWeather entity) {
@@ -20,6 +21,7 @@ public class CraftWeather extends CraftEntity implements Weather {
 		return "CraftWeather";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.WEATHER;
 	}

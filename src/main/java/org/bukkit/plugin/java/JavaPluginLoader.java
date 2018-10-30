@@ -60,6 +60,7 @@ public final class JavaPluginLoader implements PluginLoader {
 		server = instance;
 	}
 
+	@Override
 	public Plugin loadPlugin(final File file) throws InvalidPluginException {
 		Validate.notNull(file, "File cannot be null");
 
@@ -126,6 +127,7 @@ public final class JavaPluginLoader implements PluginLoader {
 		return loader.plugin;
 	}
 
+	@Override
 	public PluginDescriptionFile getPluginDescription(File file) throws InvalidDescriptionException {
 		Validate.notNull(file, "File cannot be null");
 
@@ -164,6 +166,7 @@ public final class JavaPluginLoader implements PluginLoader {
 		}
 	}
 
+	@Override
 	public Pattern[] getPluginFileFilters() {
 		return fileFilters.clone();
 	}
@@ -216,6 +219,7 @@ public final class JavaPluginLoader implements PluginLoader {
 		}
 	}
 
+	@Override
 	public Map<Class<? extends Event>, Set<RegisteredListener>> createRegisteredListeners(Listener listener,
 			final Plugin plugin) {
 		Validate.notNull(plugin, "Plugin can not be null");
@@ -287,6 +291,7 @@ public final class JavaPluginLoader implements PluginLoader {
 			}
 
 			EventExecutor executor = new EventExecutor() {
+				@Override
 				public void execute(Listener listener, Event event) throws EventException {
 					try {
 						if (!eventClass.isAssignableFrom(event.getClass())) {
@@ -312,6 +317,7 @@ public final class JavaPluginLoader implements PluginLoader {
 		return ret;
 	}
 
+	@Override
 	public void enablePlugin(final Plugin plugin) {
 		Validate.isTrue(plugin instanceof JavaPlugin, "Plugin is not associated with this PluginLoader");
 
@@ -343,6 +349,7 @@ public final class JavaPluginLoader implements PluginLoader {
 		}
 	}
 
+	@Override
 	@SuppressWarnings("resource")
 	public void disablePlugin(Plugin plugin) {
 		Validate.isTrue(plugin instanceof JavaPlugin, "Plugin is not associated with this PluginLoader");

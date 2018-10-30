@@ -18,12 +18,14 @@ public class PathfinderGoalHurtByTarget extends PathfinderGoalTarget {
 		this.a(1);
 	}
 
+	@Override
 	public boolean a() {
 		int i = this.e.be();
 
 		return i != this.b && this.a(this.e.getLastDamager(), false);
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public void c() {
 		this.e.setGoalTarget(this.e.getLastDamager(),

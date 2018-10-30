@@ -10,12 +10,13 @@ public class ItemMinecart extends Item {
 	private static final IDispenseBehavior a = new DispenseBehaviorItem() {
 		private final DispenseBehaviorItem b = new DispenseBehaviorItem();
 
+		@Override
 		public ItemStack b(ISourceBlock isourceblock, ItemStack itemstack) {
 			EnumDirection enumdirection = BlockDispenser.b(isourceblock.f());
 			World world = isourceblock.getWorld();
-			double d0 = isourceblock.getX() + (double) enumdirection.getAdjacentX() * 1.125D;
-			double d1 = Math.floor(isourceblock.getY()) + (double) enumdirection.getAdjacentY();
-			double d2 = isourceblock.getZ() + (double) enumdirection.getAdjacentZ() * 1.125D;
+			double d0 = isourceblock.getX() + enumdirection.getAdjacentX() * 1.125D;
+			double d1 = Math.floor(isourceblock.getY()) + enumdirection.getAdjacentY();
+			double d2 = isourceblock.getZ() + enumdirection.getAdjacentZ() * 1.125D;
 			BlockPosition blockposition = isourceblock.getBlockPosition().shift(enumdirection);
 			IBlockData iblockdata = world.getType(blockposition);
 			BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = iblockdata
@@ -75,7 +76,7 @@ public class ItemMinecart extends Item {
 				itemstack.count++;
 				// Chain to handler for new item
 				ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-				IDispenseBehavior idispensebehavior = (IDispenseBehavior) BlockDispenser.REGISTRY
+				IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
 						.get(eventStack.getItem());
 				if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 					idispensebehavior.a(isourceblock, eventStack);
@@ -97,6 +98,7 @@ public class ItemMinecart extends Item {
 			return itemstack;
 		}
 
+		@Override
 		protected void a(ISourceBlock isourceblock) {
 			isourceblock.getWorld().triggerEffect(1000, isourceblock.getBlockPosition(), 0);
 		}
@@ -110,6 +112,7 @@ public class ItemMinecart extends Item {
 		BlockDispenser.REGISTRY.a(this, ItemMinecart.a);
 	}
 
+	@Override
 	public boolean interactWith(ItemStack itemstack, EntityHuman entityhuman, World world, BlockPosition blockposition,
 			EnumDirection enumdirection, float f, float f1, float f2) {
 		IBlockData iblockdata = world.getType(blockposition);
@@ -138,8 +141,8 @@ public class ItemMinecart extends Item {
 				// CraftBukkit end
 
 				EntityMinecartAbstract entityminecartabstract = EntityMinecartAbstract.a(world,
-						(double) blockposition.getX() + 0.5D, (double) blockposition.getY() + 0.0625D + d0,
-						(double) blockposition.getZ() + 0.5D, this.b);
+						blockposition.getX() + 0.5D, blockposition.getY() + 0.0625D + d0,
+						blockposition.getZ() + 0.5D, this.b);
 
 				if (itemstack.hasName()) {
 					entityminecartabstract.setCustomName(itemstack.getName());

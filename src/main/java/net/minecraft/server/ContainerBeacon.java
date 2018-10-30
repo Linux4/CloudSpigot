@@ -14,7 +14,7 @@ public class ContainerBeacon extends Container {
 	public ContainerBeacon(IInventory iinventory, IInventory iinventory1) {
 		player = (PlayerInventory) iinventory; // CraftBukkit - TODO: check this
 		this.beacon = iinventory1;
-		this.a((Slot) (this.f = new ContainerBeacon.SlotBeacon(iinventory1, 0, 136, 110)));
+		this.a(this.f = new ContainerBeacon.SlotBeacon(iinventory1, 0, 136, 110));
 		byte b0 = 36;
 		short short0 = 137;
 
@@ -32,6 +32,7 @@ public class ContainerBeacon extends Container {
 
 	}
 
+	@Override
 	public void addSlotListener(ICrafting icrafting) {
 		super.addSlotListener(icrafting);
 		icrafting.setContainerData(this, this.beacon);
@@ -41,6 +42,7 @@ public class ContainerBeacon extends Container {
 		return this.beacon;
 	}
 
+	@Override
 	public void b(EntityHuman entityhuman) {
 		super.b(entityhuman);
 		if (entityhuman != null && !entityhuman.world.isClientSide) {
@@ -53,15 +55,17 @@ public class ContainerBeacon extends Container {
 		}
 	}
 
+	@Override
 	public boolean a(EntityHuman entityhuman) {
 		if (!this.checkReachable)
 			return true; // CraftBukkit
 		return this.beacon.a(entityhuman);
 	}
 
+	@Override
 	public ItemStack b(EntityHuman entityhuman, int i) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) this.c.get(i);
+		Slot slot = this.c.get(i);
 
 		if (slot != null && slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
@@ -111,12 +115,14 @@ public class ContainerBeacon extends Container {
 			super(iinventory, i, j, k);
 		}
 
+		@Override
 		public boolean isAllowed(ItemStack itemstack) {
 			return itemstack == null ? false
 					: itemstack.getItem() == Items.EMERALD || itemstack.getItem() == Items.DIAMOND
 							|| itemstack.getItem() == Items.GOLD_INGOT || itemstack.getItem() == Items.IRON_INGOT;
 		}
 
+		@Override
 		public int getMaxStackSize() {
 			return 1;
 		}

@@ -21,12 +21,14 @@ public class EntitySnowman extends EntityGolem implements IRangedEntity {
 				new PathfinderGoalNearestAttackableTarget(this, EntityInsentient.class, 10, true, false, IMonster.d));
 	}
 
+	@Override
 	protected void initAttributes() {
 		super.initAttributes();
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(4.0D);
 		this.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED).setValue(0.20000000298023224D);
 	}
 
+	@Override
 	public void m() {
 		super.m();
 		if (!this.world.isClientSide) {
@@ -44,9 +46,9 @@ public class EntitySnowman extends EntityGolem implements IRangedEntity {
 			}
 
 			for (int l = 0; l < 4; ++l) {
-				i = MathHelper.floor(this.locX + (double) ((float) (l % 2 * 2 - 1) * 0.25F));
+				i = MathHelper.floor(this.locX + (l % 2 * 2 - 1) * 0.25F);
 				j = MathHelper.floor(this.locY);
-				k = MathHelper.floor(this.locZ + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
+				k = MathHelper.floor(this.locZ + (l / 2 % 2 * 2 - 1) * 0.25F);
 				BlockPosition blockposition = new BlockPosition(i, j, k);
 
 				if (this.world.getType(blockposition).getBlock().getMaterial() == Material.AIR
@@ -70,10 +72,12 @@ public class EntitySnowman extends EntityGolem implements IRangedEntity {
 
 	}
 
+	@Override
 	protected Item getLoot() {
 		return Items.SNOWBALL;
 	}
 
+	@Override
 	protected void dropDeathLoot(boolean flag, int i) {
 		int j = this.random.nextInt(16);
 
@@ -83,19 +87,21 @@ public class EntitySnowman extends EntityGolem implements IRangedEntity {
 
 	}
 
+	@Override
 	public void a(EntityLiving entityliving, float f) {
 		EntitySnowball entitysnowball = new EntitySnowball(this.world, this);
-		double d0 = entityliving.locY + (double) entityliving.getHeadHeight() - 1.100000023841858D;
+		double d0 = entityliving.locY + entityliving.getHeadHeight() - 1.100000023841858D;
 		double d1 = entityliving.locX - this.locX;
 		double d2 = d0 - entitysnowball.locY;
 		double d3 = entityliving.locZ - this.locZ;
 		float f1 = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
 
-		entitysnowball.shoot(d1, d2 + (double) f1, d3, 1.6F, 12.0F);
+		entitysnowball.shoot(d1, d2 + f1, d3, 1.6F, 12.0F);
 		this.makeSound("random.bow", 1.0F, 1.0F / (this.bc().nextFloat() * 0.4F + 0.8F));
 		this.world.addEntity(entitysnowball);
 	}
 
+	@Override
 	public float getHeadHeight() {
 		return 1.7F;
 	}

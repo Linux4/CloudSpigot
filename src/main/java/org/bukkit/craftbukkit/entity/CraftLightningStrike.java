@@ -1,15 +1,17 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityLightning;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
+
+import net.minecraft.server.EntityLightning;
 
 public class CraftLightningStrike extends CraftEntity implements LightningStrike {
 	public CraftLightningStrike(final CraftServer server, final EntityLightning entity) {
 		super(server, entity);
 	}
 
+	@Override
 	public boolean isEffect() {
 		return ((EntityLightning) super.getHandle()).isEffect;
 	}
@@ -24,6 +26,7 @@ public class CraftLightningStrike extends CraftEntity implements LightningStrike
 		return "CraftLightningStrike";
 	}
 
+	@Override
 	public EntityType getType() {
 		return EntityType.LIGHTNING;
 	}

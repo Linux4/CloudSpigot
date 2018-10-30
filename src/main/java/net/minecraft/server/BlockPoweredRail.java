@@ -1,8 +1,8 @@
 package net.minecraft.server;
 
-import com.google.common.base.Predicate;
-
 import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
+
+import com.google.common.base.Predicate;
 
 public class BlockPoweredRail extends BlockMinecartTrackAbstract {
 
@@ -17,8 +17,9 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
 							&& blockminecarttrackabstract_enumtrackposition != BlockMinecartTrackAbstract.EnumTrackPosition.SOUTH_WEST;
 				}
 
+				@Override
 				public boolean apply(BlockMinecartTrackAbstract.EnumTrackPosition object) {
-					return this.a((BlockMinecartTrackAbstract.EnumTrackPosition) object);
+					return this.a(object);
 				}
 			});
 	public static final BlockStateBoolean POWERED = BlockStateBoolean.of("powered");
@@ -38,7 +39,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
 			int k = blockposition.getY();
 			int l = blockposition.getZ();
 			boolean flag1 = true;
-			BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = (BlockMinecartTrackAbstract.EnumTrackPosition) iblockdata
+			BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = iblockdata
 					.get(BlockPoweredRail.SHAPE);
 
 			switch (BlockPoweredRail.SyntheticClass_1.a[blockminecarttrackabstract_enumtrackposition.ordinal()]) {
@@ -120,7 +121,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
 		if (iblockdata.getBlock() != this) {
 			return false;
 		} else {
-			BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition1 = (BlockMinecartTrackAbstract.EnumTrackPosition) iblockdata
+			BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition1 = iblockdata
 					.get(BlockPoweredRail.SHAPE);
 
 			return blockminecarttrackabstract_enumtrackposition == BlockMinecartTrackAbstract.EnumTrackPosition.EAST_WEST
@@ -133,7 +134,7 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
 													|| blockminecarttrackabstract_enumtrackposition1 == BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_EAST
 													|| blockminecarttrackabstract_enumtrackposition1 == BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_WEST)
 															? false
-															: (((Boolean) iblockdata.get(BlockPoweredRail.POWERED))
+															: (iblockdata.get(BlockPoweredRail.POWERED)
 																	.booleanValue()
 																			? (world.isBlockIndirectlyPowered(
 																					blockposition)
@@ -146,15 +147,16 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
 		}
 	}
 
+	@Override
 	protected void b(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
-		boolean flag = ((Boolean) iblockdata.get(BlockPoweredRail.POWERED)).booleanValue();
+		boolean flag = iblockdata.get(BlockPoweredRail.POWERED).booleanValue();
 		boolean flag1 = world.isBlockIndirectlyPowered(blockposition)
 				|| this.a(world, blockposition, iblockdata, true, 0)
 				|| this.a(world, blockposition, iblockdata, false, 0);
 
 		if (flag1 != flag) {
 			// CraftBukkit start
-			int power = (Boolean) iblockdata.get(POWERED) ? 15 : 0;
+			int power = iblockdata.get(POWERED) ? 15 : 0;
 			int newPower = CraftEventFactory.callRedstoneChange(world, blockposition.getX(), blockposition.getY(),
 					blockposition.getZ(), power, 15 - power).getNewCurrent();
 			if (newPower == power) {
@@ -163,33 +165,37 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
 			// CraftBukkit end
 			world.setTypeAndData(blockposition, iblockdata.set(BlockPoweredRail.POWERED, Boolean.valueOf(flag1)), 3);
 			world.applyPhysics(blockposition.down(), this);
-			if (((BlockMinecartTrackAbstract.EnumTrackPosition) iblockdata.get(BlockPoweredRail.SHAPE)).c()) {
+			if (iblockdata.get(BlockPoweredRail.SHAPE).c()) {
 				world.applyPhysics(blockposition.up(), this);
 			}
 		}
 
 	}
 
+	@Override
 	public IBlockState<BlockMinecartTrackAbstract.EnumTrackPosition> n() {
 		return BlockPoweredRail.SHAPE;
 	}
 
+	@Override
 	public IBlockData fromLegacyData(int i) {
 		return this.getBlockData().set(BlockPoweredRail.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.a(i & 7))
 				.set(BlockPoweredRail.POWERED, Boolean.valueOf((i & 8) > 0));
 	}
 
+	@Override
 	public int toLegacyData(IBlockData iblockdata) {
 		byte b0 = 0;
-		int i = b0 | ((BlockMinecartTrackAbstract.EnumTrackPosition) iblockdata.get(BlockPoweredRail.SHAPE)).a();
+		int i = b0 | iblockdata.get(BlockPoweredRail.SHAPE).a();
 
-		if (((Boolean) iblockdata.get(BlockPoweredRail.POWERED)).booleanValue()) {
+		if (iblockdata.get(BlockPoweredRail.POWERED).booleanValue()) {
 			i |= 8;
 		}
 
 		return i;
 	}
 
+	@Override
 	protected BlockStateList getStateList() {
 		return new BlockStateList(this, new IBlockState[] { BlockPoweredRail.SHAPE, BlockPoweredRail.POWERED });
 	}

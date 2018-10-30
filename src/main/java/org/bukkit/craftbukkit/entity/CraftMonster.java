@@ -1,9 +1,9 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityMonster;
-
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Monster;
+
+import net.minecraft.server.EntityMonster;
 
 public class CraftMonster extends CraftCreature implements Monster {
 

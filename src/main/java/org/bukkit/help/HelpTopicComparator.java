@@ -1,7 +1,5 @@
 package org.bukkit.help;
 
-import org.bukkit.help.HelpTopic;
-
 import java.util.Comparator;
 
 /**
@@ -28,6 +26,7 @@ public class HelpTopicComparator implements Comparator<HelpTopic> {
 	private HelpTopicComparator() {
 	}
 
+	@Override
 	public int compare(HelpTopic lhs, HelpTopic rhs) {
 		return tnc.compare(lhs.getName(), rhs.getName());
 	}
@@ -36,6 +35,7 @@ public class HelpTopicComparator implements Comparator<HelpTopic> {
 		private TopicNameComparator() {
 		}
 
+		@Override
 		public int compare(String lhs, String rhs) {
 			boolean lhsStartSlash = lhs.startsWith("/");
 			boolean rhsStartSlash = rhs.startsWith("/");

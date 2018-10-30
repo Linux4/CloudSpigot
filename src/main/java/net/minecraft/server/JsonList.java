@@ -1,5 +1,22 @@
 package net.minecraft.server;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -13,21 +30,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class JsonList<K, V extends JsonListEntry<K>> {
 
@@ -37,14 +39,17 @@ public class JsonList<K, V extends JsonListEntry<K>> {
 	private final Map<String, V> d = Maps.newHashMap();
 	private boolean e = true;
 	private static final ParameterizedType f = new ParameterizedType() {
+		@Override
 		public Type[] getActualTypeArguments() {
 			return new Type[] { JsonListEntry.class };
 		}
 
+		@Override
 		public Type getRawType() {
 			return List.class;
 		}
 
+		@Override
 		public Type getOwnerType() {
 			return null;
 		}
@@ -84,7 +89,7 @@ public class JsonList<K, V extends JsonListEntry<K>> {
 
 	public V get(K k0) {
 		this.h();
-		return (V) this.d.get(this.a(k0)); // CraftBukkit - fix decompile error
+		return this.d.get(this.a(k0)); // CraftBukkit - fix decompile error
 	}
 
 	public void remove(K k0) {
@@ -99,7 +104,7 @@ public class JsonList<K, V extends JsonListEntry<K>> {
 	}
 
 	public String[] getEntries() {
-		return (String[]) this.d.keySet().toArray(new String[this.d.size()]);
+		return this.d.keySet().toArray(new String[this.d.size()]);
 	}
 
 	// CraftBukkit start
@@ -232,12 +237,13 @@ public class JsonList<K, V extends JsonListEntry<K>> {
 			}
 		}
 
-		@SuppressWarnings({ "rawtypes", "unchecked" })
+		@Override
 		public JsonElement serialize(JsonListEntry<K> object, Type type,
 				JsonSerializationContext jsonserializationcontext) { // CraftBukkit - fix decompile error
-			return this.a((JsonListEntry) object, type, jsonserializationcontext);
+			return this.a(object, type, jsonserializationcontext);
 		}
 
+		@Override
 		public JsonListEntry<K> deserialize(JsonElement jsonelement, Type type,
 				JsonDeserializationContext jsondeserializationcontext) throws JsonParseException { // CraftBukkit - fix
 																									// decompile error

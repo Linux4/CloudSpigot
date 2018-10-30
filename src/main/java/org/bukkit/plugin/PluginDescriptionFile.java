@@ -11,10 +11,10 @@ import java.util.Set;
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.AbstractConstruct;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
@@ -24,6 +24,9 @@ import org.yaml.snakeyaml.nodes.Tag;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 
 /**
  * This type is the runtime-container for the information in the plugin.yml. All

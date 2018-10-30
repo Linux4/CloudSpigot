@@ -186,9 +186,11 @@ public abstract class MinecraftServer
 			this.getConvertable().convert(s, new IProgressUpdate() {
 				private long b = System.currentTimeMillis();
 
+				@Override
 				public void a(String s) {
 				}
 
+				@Override
 				public void a(int i) {
 					if (System.currentTimeMillis() - this.b >= 1000L) {
 						this.b = System.currentTimeMillis();
@@ -197,6 +199,7 @@ public abstract class MinecraftServer
 
 				}
 
+				@Override
 				public void c(String s) {
 				}
 			});
@@ -569,6 +572,7 @@ public abstract class MinecraftServer
 	}
 	// CloudSpigot End
 
+	@Override
 	public void run() {
 		try {
 			if (this.init()) {
@@ -733,7 +737,7 @@ public abstract class MinecraftServer
 			int j = MathHelper.nextInt(this.s, 0, this.I() - agameprofile.length);
 
 			for (int k = 0; k < agameprofile.length; ++k) {
-				agameprofile[k] = ((EntityPlayer) this.v.v().get(j + k)).getProfile();
+				agameprofile[k] = this.v.v().get(j + k).getProfile();
 			}
 
 			Collections.shuffle(Arrays.asList(agameprofile));
@@ -801,7 +805,7 @@ public abstract class MinecraftServer
 		// player is in.
 		if (this.ticks % 20 == 0) {
 			for (int i = 0; i < this.getPlayerList().players.size(); ++i) {
-				EntityPlayer entityplayer = (EntityPlayer) this.getPlayerList().players.get(i);
+				EntityPlayer entityplayer = this.getPlayerList().players.get(i);
 				entityplayer.playerConnection.sendPacket(new PacketPlayOutUpdateTime(entityplayer.world.getTime(),
 						entityplayer.getPlayerTime(), entityplayer.world.getGameRules().getBoolean("doDaylightCycle"))); // Add
 																															// support
@@ -882,7 +886,7 @@ public abstract class MinecraftServer
 		// this.methodProfiler.c("tickables"); // CloudSpigot
 
 		for (i = 0; i < this.p.size(); ++i) {
-			((IUpdatePlayerListBox) this.p.get(i)).c();
+			this.p.get(i).c();
 		}
 
 		// this.methodProfiler.b(); // CloudSpigot
@@ -1053,6 +1057,7 @@ public abstract class MinecraftServer
 				return "N/A (disabled)"; // CloudSpigot
 			}
 
+			@Override
 			public String call() throws Exception {
 				return this.a();
 			}
@@ -1064,6 +1069,7 @@ public abstract class MinecraftServer
 							+ "; " + MinecraftServer.this.v.v();
 				}
 
+				@Override
 				public String call() throws Exception {
 					return this.a();
 				}
@@ -1109,15 +1115,18 @@ public abstract class MinecraftServer
 		return true; // CraftBukkit
 	}
 
+	@Override
 	public String getName() {
 		return "Server";
 	}
 
+	@Override
 	public void sendMessage(IChatBaseComponent ichatbasecomponent) {
 		MinecraftServer.LOGGER.info(org.bukkit.craftbukkit.util.CraftChatMessage.fromComponent(ichatbasecomponent,
 				net.minecraft.server.EnumChatFormat.WHITE)); // CloudSpigot - Log message with colors
 	}
 
+	@Override
 	public boolean a(int i, String s) {
 		return true;
 	}
@@ -1399,18 +1408,22 @@ public abstract class MinecraftServer
 		this.T = true;
 	}
 
+	@Override
 	public BlockPosition getChunkCoordinates() {
 		return BlockPosition.ZERO;
 	}
 
+	@Override
 	public Vec3D d() {
 		return new Vec3D(0.0D, 0.0D, 0.0D);
 	}
 
+	@Override
 	public World getWorld() {
 		return this.worlds.get(0); // CraftBukkit
 	}
 
+	@Override
 	public Entity f() {
 		return null;
 	}
@@ -1447,6 +1460,7 @@ public abstract class MinecraftServer
 		this.G = i;
 	}
 
+	@Override
 	public IChatBaseComponent getScoreboardDisplayName() {
 		return new ChatComponentText(this.getName());
 	}
@@ -1496,10 +1510,12 @@ public abstract class MinecraftServer
 		return null;
 	}
 
+	@Override
 	public boolean getSendCommandFeedback() {
 		return getServer().worlds.get(0).getGameRules().getBoolean("sendCommandFeedback");
 	}
 
+	@Override
 	public void a(CommandObjectiveExecutor.EnumCommandResult commandobjectiveexecutor_enumcommandresult, int i) {
 	}
 
@@ -1526,11 +1542,13 @@ public abstract class MinecraftServer
 		}
 	}
 
+	@Override
 	public ListenableFuture<Object> postToMainThread(Runnable runnable) {
 		Validate.notNull(runnable);
 		return this.a(Executors.callable(runnable));
 	}
 
+	@Override
 	public boolean isMainThread() {
 		return Thread.currentThread() == this.serverThread;
 	}

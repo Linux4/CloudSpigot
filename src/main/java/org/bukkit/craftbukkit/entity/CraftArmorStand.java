@@ -1,12 +1,13 @@
 package org.bukkit.craftbukkit.entity;
 
-import net.minecraft.server.EntityArmorStand;
-import net.minecraft.server.Vector3f;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
+
+import net.minecraft.server.EntityArmorStand;
+import net.minecraft.server.Vector3f;
 
 public class CraftArmorStand extends CraftLivingEntity implements ArmorStand {
 
