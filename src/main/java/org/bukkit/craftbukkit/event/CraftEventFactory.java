@@ -661,7 +661,7 @@ public class CraftEventFactory {
 			event = new EntityDamageByEntityEvent(damager.getBukkitEntity(), damagee.getBukkitEntity(), cause,
 					modifiers, modifierFunctions);
 			// CloudSpigot start - AntiReach
-			if (damager.getBukkitEntity() instanceof Player) {
+			if (damager.getBukkitEntity() instanceof Player && damagee instanceof org.bukkit.entity.LivingEntity) {
 				final Player player = (Player) damager.getBukkitEntity();
 				final org.bukkit.entity.LivingEntity entity = (org.bukkit.entity.LivingEntity) damagee
 						.getBukkitEntity();
