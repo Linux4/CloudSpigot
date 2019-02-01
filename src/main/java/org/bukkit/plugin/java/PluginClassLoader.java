@@ -1,6 +1,7 @@
 package org.bukkit.plugin.java;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -76,11 +77,13 @@ public final class PluginClassLoader extends URLClassLoader { // Spigot
 						"main class `" + description.getMain() + "' does not extend JavaPlugin", ex);
 			}
 
-			plugin = pluginClass.newInstance();
+			plugin = pluginClass.getDeclaredConstructor().newInstance();
 		} catch (IllegalAccessException ex) {
 			throw new InvalidPluginException("No public constructor", ex);
 		} catch (InstantiationException ex) {
 			throw new InvalidPluginException("Abnormal plugin type", ex);
+		} catch (IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			throw new InvalidPluginException("Exception while enabling plugin", e);
 		}
 	}
 

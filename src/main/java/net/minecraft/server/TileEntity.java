@@ -66,15 +66,14 @@ public abstract class TileEntity {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public static TileEntity c(NBTTagCompound nbttagcompound) {
 		TileEntity tileentity = null;
 
 		try {
-			Class oclass = TileEntity.f.get(nbttagcompound.getString("id"));
+			Class<? extends TileEntity> oclass = TileEntity.f.get(nbttagcompound.getString("id"));
 
 			if (oclass != null) {
-				tileentity = (TileEntity) oclass.newInstance();
+				tileentity = (TileEntity) oclass.getDeclaredConstructor().newInstance();
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();

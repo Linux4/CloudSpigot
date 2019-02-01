@@ -34,7 +34,7 @@ public class EntitySpider extends EntityMonster {
 	@Override
 	protected void h() {
 		super.h();
-		this.datawatcher.a(16, new Byte((byte) 0));
+		this.datawatcher.a(16, (byte) 0);
 	}
 
 	@Override
