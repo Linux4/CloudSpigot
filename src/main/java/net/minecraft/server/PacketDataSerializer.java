@@ -817,26 +817,6 @@ public class PacketDataSerializer extends ByteBuf {
 	}
 
 	@Override
-	public int forEachByte(ByteBufProcessor bytebufprocessor) {
-		return this.a.forEachByte(bytebufprocessor);
-	}
-
-	@Override
-	public int forEachByte(int i, int j, ByteBufProcessor bytebufprocessor) {
-		return this.a.forEachByte(i, j, bytebufprocessor);
-	}
-
-	@Override
-	public int forEachByteDesc(ByteBufProcessor bytebufprocessor) {
-		return this.a.forEachByteDesc(bytebufprocessor);
-	}
-
-	@Override
-	public int forEachByteDesc(int i, int j, ByteBufProcessor bytebufprocessor) {
-		return this.a.forEachByteDesc(i, j, bytebufprocessor);
-	}
-
-	@Override
 	public ByteBuf copy() {
 		return this.a.copy();
 	}
@@ -969,5 +949,25 @@ public class PacketDataSerializer extends ByteBuf {
 	@Override
 	public boolean release(int i) {
 		return this.a.release(i);
+	}
+
+	@Override
+	public int forEachByte(ByteBufProcessor processor) {
+		return a.forEachByte(processor);
+	}
+
+	@Override
+	public int forEachByte(int index, int length, ByteBufProcessor processor) {
+		return a.forEachByte(index, length, processor);
+	}
+
+	@Override
+	public int forEachByteDesc(ByteBufProcessor processor) {
+		return a.forEachByteDesc(processor);
+	}
+
+	@Override
+	public int forEachByteDesc(int index, int length, ByteBufProcessor processor) {
+		return a.forEachByteDesc(index, length, processor);
 	}
 }

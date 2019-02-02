@@ -31,12 +31,11 @@ import io.netty.util.AttributeKey;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({ "rawtypes", "deprecation" })
 public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 
 	private static final Logger g = LogManager.getLogger();
 	public static final Marker a = MarkerManager.getMarker("NETWORK");
-	@SuppressWarnings("deprecation")
 	public static final Marker b = MarkerManager.getMarker("NETWORK_PACKETS", NetworkManager.a);
 	public static final AttributeKey<EnumProtocol> c = AttributeKey.valueOf("protocol");
 	public static final LazyInitVar<NioEventLoopGroup> d = new LazyInitVar<NioEventLoopGroup>() {

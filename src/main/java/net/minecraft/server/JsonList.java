@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -167,7 +166,7 @@ public class JsonList<K, V extends JsonListEntry<K>> {
 			bufferedwriter = Files.newWriter(this.c, Charsets.UTF_8);
 			bufferedwriter.write(s);
 		} finally {
-			IOUtils.closeQuietly(bufferedwriter);
+			bufferedwriter.close();
 		}
 
 	}
@@ -192,7 +191,11 @@ public class JsonList<K, V extends JsonListEntry<K>> {
 			this.c.delete();
 			// Spigot End
 		} finally {
-			IOUtils.closeQuietly(bufferedreader);
+			try {
+				bufferedreader.close();
+			} catch (Exception e) {
+				;
+			}
 		}
 
 		if (collection != null) {

@@ -40,6 +40,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.base64.Base64;
+import io.netty.util.ResourceLeakDetector.Level;
 import joptsimple.OptionSet;
 
 public abstract class MinecraftServer
@@ -131,9 +132,8 @@ public abstract class MinecraftServer
 	public final RollingAverage tps15 = new RollingAverage(60 * 15);
 	public double[] recentTps = new double[3]; // CloudSpigot - Fine have your darn compat with bad plugins
 
-	@SuppressWarnings("deprecation")
 	public MinecraftServer(OptionSet options, Proxy proxy, File file1) {
-		io.netty.util.ResourceLeakDetector.setEnabled(false); // Spigot - disable
+		io.netty.util.ResourceLeakDetector.setLevel(Level.DISABLED); // Spigot - disable
 		this.e = proxy;
 		MinecraftServer.l = this;
 		// this.universe = file; // CraftBukkit

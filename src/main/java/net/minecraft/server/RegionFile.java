@@ -9,6 +9,7 @@ import java.io.EOFException; // CloudSpigot
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.Buffer;
 import java.nio.ByteBuffer; // CloudSpigot
 import java.nio.IntBuffer; // CloudSpigot
 import java.util.List;
@@ -78,7 +79,7 @@ public class RegionFile {
 				if (this.c.getChannel().read(header) == -1)
 					throw new EOFException();
 			}
-			header.clear();
+			((Buffer) header).clear();
 			IntBuffer headerAsInts = header.asIntBuffer();
 			// CloudSpigot end
 

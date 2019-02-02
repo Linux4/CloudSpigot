@@ -3,6 +3,7 @@ package net.minecraft.server;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -46,7 +47,7 @@ public class ServerStatisticManager extends StatisticManager {
 		if (this.d.isFile()) {
 			try {
 				this.a.clear();
-				this.a.putAll(this.a(FileUtils.readFileToString(this.d)));
+				this.a.putAll(this.a(FileUtils.readFileToString(this.d, StandardCharsets.UTF_8)));
 			} catch (IOException ioexception) {
 				ServerStatisticManager.b.error("Couldn\'t read statistics file " + this.d, ioexception);
 			} catch (JsonParseException jsonparseexception) {
@@ -60,7 +61,7 @@ public class ServerStatisticManager extends StatisticManager {
 		if (org.spigotmc.SpigotConfig.disableStatSaving)
 			return; // Spigot
 		try {
-			FileUtils.writeStringToFile(this.d, a(this.a));
+			FileUtils.writeStringToFile(this.d, a(this.a), StandardCharsets.UTF_8);
 		} catch (IOException ioexception) {
 			ServerStatisticManager.b.error("Couldn\'t save stats", ioexception);
 		}

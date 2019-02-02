@@ -18,8 +18,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.io.IOUtils;
-
 import com.google.common.base.Charsets;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -210,7 +208,7 @@ public class UserCache {
 				}
 			}
 		} catch (FileNotFoundException filenotfoundexception) {
-			// ;
+			;
 			// Spigot Start
 		} catch (com.google.gson.JsonSyntaxException ex) {
 			JsonList.a
@@ -218,9 +216,13 @@ public class UserCache {
 			this.g.delete();
 			// Spigot End
 		} catch (JsonParseException jsonparseexception) {
-			// ;
+			;
 		} finally {
-			IOUtils.closeQuietly(bufferedreader);
+			try {
+				bufferedreader.close();
+			} catch (Exception e) {
+				;
+			}
 		}
 
 	}
@@ -236,9 +238,13 @@ public class UserCache {
 		} catch (FileNotFoundException filenotfoundexception) {
 			return;
 		} catch (IOException ioexception) {
-			// ;
+			;
 		} finally {
-			IOUtils.closeQuietly(bufferedwriter);
+			try {
+				bufferedwriter.close();
+			} catch (IOException e) {
+				;
+			}
 		}
 
 	}

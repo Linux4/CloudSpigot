@@ -5,13 +5,13 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.google.common.base.Charsets;
 import com.google.gson.Gson;
 
 public class MojangNameLookup {
@@ -31,7 +31,7 @@ public class MojangNameLookup {
 			connection.setReadTimeout(15000);
 			connection.setUseCaches(false);
 			inputStream = connection.getInputStream();
-			String result = IOUtils.toString(inputStream, Charsets.UTF_8);
+			String result = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 			Gson gson = new Gson();
 			Response response = gson.fromJson(result, Response.class);
 			if (response == null || response.name == null) {
@@ -49,9 +49,17 @@ public class MojangNameLookup {
 			logger.warn("Malformed URL in UUID lookup");
 			return null;
 		} catch (IOException ex) {
-			IOUtils.closeQuietly(inputStream);
+			try {
+				inputStream.close();
+			} catch (IOException e) {
+				;
+			}
 		} finally {
-			IOUtils.closeQuietly(inputStream);
+			try {
+				inputStream.close();
+			} catch (IOException e) {
+				;
+			}
 		}
 
 		return null;

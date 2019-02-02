@@ -35,6 +35,7 @@ public final class PluginClassLoader extends URLClassLoader { // Spigot
 		try {
 			java.lang.reflect.Method method = ClassLoader.class.getDeclaredMethod("registerAsParallelCapable");
 			if (method != null) {
+				@SuppressWarnings("deprecation")
 				boolean oldAccessible = method.isAccessible();
 				method.setAccessible(true);
 				method.invoke(null);

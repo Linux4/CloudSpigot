@@ -66,7 +66,7 @@ public class HandshakeListener implements PacketHandshakingInListener {
 				org.apache.logging.log4j.LogManager.getLogger().debug("Failed to check connection throttle", t);
 			}
 			// CraftBukkit end
-
+			
 			if (packethandshakinginsetprotocol.b() > 47) {
 				chatcomponenttext = new ChatComponentText(java.text.MessageFormat
 						.format(org.spigotmc.SpigotConfig.outdatedServerMessage.replaceAll("'", "''"), "1.8.10")); // Spigot

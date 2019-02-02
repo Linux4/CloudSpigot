@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.management.ManagementFactory;
@@ -12,7 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -206,8 +206,12 @@ public class CrashReport {
 			((Throwable) object).printStackTrace(printwriter);
 			s = stringwriter.toString();
 		} finally {
-			IOUtils.closeQuietly(stringwriter);
-			IOUtils.closeQuietly(printwriter);
+			try {
+				stringwriter.close();
+				printwriter.close();
+			} catch (IOException e) {
+				;
+			}
 		}
 
 		return s;

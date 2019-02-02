@@ -3,9 +3,9 @@ package eu.server24_7.cloudspigot;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,7 +39,11 @@ public class CloudSpigotEULA {
 			flag = true;
 			this.b();
 		} finally {
-			IOUtils.closeQuietly(fileinputstream);
+			try {
+				fileinputstream.close();
+			} catch (Exception e) {
+				;
+			}
 		}
 
 		return flag;
@@ -62,7 +66,11 @@ public class CloudSpigotEULA {
 		} catch (Exception exception) {
 			a.warn("Failed to save " + this.b, exception);
 		} finally {
-			IOUtils.closeQuietly(fileoutputstream);
+			try {
+				fileoutputstream.close();
+			} catch (IOException e) {
+				;
+			}
 		}
 	}
 }
