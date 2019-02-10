@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>eu.server24-7</groupId>
-	<artifactId>cloudspigot</artifactId>
-	<packaging>jar</packaging>
+	<artifactId>cloudspigot-parent</artifactId>
 	<version>1.8.10-R0.1-SNAPSHOT</version>
-	<name>CloudSpigot</name>
+	<name>CloudSpigot-Parent</name>
+	<packaging>pom</packaging>
 	<url>https://cloudspigot.server24-7.eu/</url>
 
 	<properties>
@@ -17,6 +17,11 @@
 		<buildtag.prefix>git-Bukkit-</buildtag.prefix>
 		<buildtag.suffix></buildtag.suffix>
 	</properties>
+
+	<modules>
+		<module>cloudspigot-java8</module>
+		<module>cloudspigot-java11</module>
+	</modules>
 
 	<repositories>
 		<repository>
@@ -154,199 +159,4 @@
 		</dependency>
 	</dependencies>
 
-	<!-- required until fixed plexus-compiler-eclipse is deployed -->
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spigotmc-public</id>
-			<url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
-		</pluginRepository>
-		<!-- CloudSpigot - Repo for gitdescribe -->
-		<pluginRepository>
-			<id>destroystokyo</id>
-			<url>https://ci.destroystokyo.com/plugin/repository/everything/</url>
-		</pluginRepository>
-	</pluginRepositories>
-
-	<!-- This builds a completely 'ready to start' jar with all dependencies 
-		inside -->
-	<build>
-		<defaultGoal>install</defaultGoal>
-		<plugins>
-			<plugin>
-				<groupId>com.lukegb.mojo</groupId>
-				<artifactId>gitdescribe-maven-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<outputPrefix>git-CloudSpigot-</outputPrefix>
-					<scmDirectory>.</scmDirectory>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>compile</phase>
-						<goals>
-							<goal>gitdescribe</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.1.1</version>
-				<configuration>
-					<forceCreation>true</forceCreation> <!-- Required to prevent shading the jar multiple times -->
-					<archive>
-						<manifestEntries>
-							<Multi-Release>true</Multi-Release>
-							<Main-Class>org.bukkit.craftbukkit.Main</Main-Class>
-							<Implementation-Title>CraftBukkit</Implementation-Title>
-							<Implementation-Version>${describe}</Implementation-Version>
-							<Implementation-Vendor>Bukkit Team</Implementation-Vendor>
-							<Specification-Title>Bukkit</Specification-Title>
-							<Specification-Version>${api.version}</Specification-Version>
-							<Specification-Vendor>Bukkit Team</Specification-Vendor>
-						</manifestEntries>
-						<manifestSections>
-							<manifestSection>
-								<name>net/bukkit/</name>
-								<manifestEntries>
-									<Sealed>true</Sealed>
-								</manifestEntries>
-							</manifestSection>
-							<manifestSection>
-								<name>com/bukkit/</name>
-								<manifestEntries>
-									<Sealed>true</Sealed>
-								</manifestEntries>
-							</manifestSection>
-							<manifestSection>
-								<name>org/bukkit/</name>
-								<manifestEntries>
-									<Sealed>true</Sealed>
-								</manifestEntries>
-							</manifestSection>
-						</manifestSections>
-						<compress>false</compress>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.2.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<transformers>
-								<transformer
-									implementation="com.github.edwgiz.mavenShadePlugin.log4j2CacheTransformer.PluginsCacheFileTransformer" />
-							</transformers>
-							<relocations>
-								<relocation>
-									<pattern>joptsimple</pattern>
-									<shadedPattern>org.bukkit.craftbukkit.libs.joptsimple</shadedPattern>
-								</relocation>
-								<relocation>
-									<pattern>org.ibex</pattern>
-									<shadedPattern>org.bukkit.craftbukkit.libs.org.ibex</shadedPattern>
-								</relocation>
-								<relocation>
-									<pattern>org.gjt</pattern>
-									<shadedPattern>org.bukkit.craftbukkit.libs.org.gjt</shadedPattern>
-								</relocation>
-								<relocation>
-									<pattern>org.bukkit.craftbukkit</pattern>
-									<shadedPattern>org.bukkit.craftbukkit.v${minecraft_version}</shadedPattern>
-									<excludes>
-										<exclude>org.bukkit.craftbukkit.Main*</exclude>
-									</excludes>
-								</relocation>
-								<relocation>
-									<pattern>net.minecraft.server</pattern>
-									<shadedPattern>net.minecraft.server.v${minecraft_version}</shadedPattern>
-								</relocation>
-							</relocations>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>com.github.edwgiz</groupId>
-						<artifactId>maven-shade-plugin.log4j2-cachefile-transformer</artifactId>
-						<version>2.8.1</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<optimize>true</optimize>
-					<compilerArgs>
-						<arg></arg>
-					</compilerArgs>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.1.0</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.1.0</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<version>3.0.0-M1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>versions-maven-plugin</artifactId>
-				<version>2.7</version>
-				<configuration>
-					<generateBackupPoms>false</generateBackupPoms>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>3.0.0-M2</version>
-				<executions>
-					<execution>
-						<id>enforce-maven</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireMavenVersion>
-									<version>3.0.5</version>
-								</requireMavenVersion>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>3.0.0-M1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.7.1</version>
-			</plugin>
-		</plugins>
-	</build>
 </project>
