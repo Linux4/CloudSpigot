@@ -7,15 +7,6 @@ High performance PaperSpigot fork used by Minecraft Server Cloudz.ml.
 **Support and Project Discussion:**
  - [Discord](https://discord.gg/5qp26hf)
 
-**IMPORTANT**
------
-  
-CloudSpigot only supports Java 11, for Java 8 support compile this source code:
-[Java 8 Source](https://github.com/Server24-7/CloudSpigot/tree/f95f066c00821037111f78f21da969d3692990c1)
-or download precompiled jar: [Java 8 Precompiled](https://ci.server24-7.eu/job/CloudSpigot/2/)
-  
-------
-
 How To (Server Admins)
 ------
 CloudSpigot is a jar file that you can download and run just like a normal jar file.
