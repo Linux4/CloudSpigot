@@ -69,9 +69,10 @@ public interface Permissible extends ServerOperator {
 	 * @return The PermissionAttachment that was just created
 	 */
 	public PermissionAttachment addAttachment(Plugin plugin);
-	
+
 	/**
 	 * Adds a custom {@link PermissionAttachment} to this object
+	 * 
 	 * @param attachment The custom PermissionAttachment
 	 * @return The custom PermissionAttachment
 	 */
@@ -126,5 +127,5 @@ public interface Permissible extends ServerOperator {
 	 * @return Set of currently effective permissions
 	 */
 	public Set<PermissionAttachmentInfo> getEffectivePermissions();
-	
+
 }

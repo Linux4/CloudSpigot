@@ -3,4 +3,3 @@
  * code at specific time intervals, including thread safety.
  */
 package org.bukkit.scheduler;
-

@@ -78,8 +78,7 @@ public abstract class BlockPressurePlateAbstract extends Block {
 	}
 
 	private boolean m(World world, BlockPosition blockposition) {
-		return World.a(world, blockposition)
-				|| world.getType(blockposition).getBlock() instanceof BlockFence;
+		return World.a(world, blockposition) || world.getType(blockposition).getBlock() instanceof BlockFence;
 	}
 
 	@Override
@@ -137,11 +136,11 @@ public abstract class BlockPressurePlateAbstract extends Block {
 		}
 
 		if (!flag1 && flag) {
-			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.1D,
-					blockposition.getZ() + 0.5D, "random.click", 0.3F, 0.5F);
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.1D, blockposition.getZ() + 0.5D,
+					"random.click", 0.3F, 0.5F);
 		} else if (flag1 && !flag) {
-			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.1D,
-					blockposition.getZ() + 0.5D, "random.click", 0.3F, 0.6F);
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.1D, blockposition.getZ() + 0.5D,
+					"random.click", 0.3F, 0.6F);
 		}
 
 		if (flag1) {
@@ -153,10 +152,8 @@ public abstract class BlockPressurePlateAbstract extends Block {
 	protected AxisAlignedBB getBoundingBox(BlockPosition blockposition) {
 		// float f = 0.125F; // CloudSpigot
 
-		return new AxisAlignedBB(blockposition.getX() + 0.125F, blockposition.getY(),
-				blockposition.getZ() + 0.125F,
-				blockposition.getX() + 1 - 0.125F, blockposition.getY() + 0.25D,
-				blockposition.getZ() + 1 - 0.125F);
+		return new AxisAlignedBB(blockposition.getX() + 0.125F, blockposition.getY(), blockposition.getZ() + 0.125F,
+				blockposition.getX() + 1 - 0.125F, blockposition.getY() + 0.25D, blockposition.getZ() + 1 - 0.125F);
 	}
 
 	@Override

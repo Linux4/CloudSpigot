@@ -76,8 +76,7 @@ public class ItemMinecart extends Item {
 				itemstack.count++;
 				// Chain to handler for new item
 				ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-				IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
-						.get(eventStack.getItem());
+				IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 				if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 					idispensebehavior.a(isourceblock, eventStack);
 					return itemstack;
@@ -141,8 +140,8 @@ public class ItemMinecart extends Item {
 				// CraftBukkit end
 
 				EntityMinecartAbstract entityminecartabstract = EntityMinecartAbstract.a(world,
-						blockposition.getX() + 0.5D, blockposition.getY() + 0.0625D + d0,
-						blockposition.getZ() + 0.5D, this.b);
+						blockposition.getX() + 0.5D, blockposition.getY() + 0.0625D + d0, blockposition.getZ() + 0.5D,
+						this.b);
 
 				if (itemstack.hasName()) {
 					entityminecartabstract.setCustomName(itemstack.getName());

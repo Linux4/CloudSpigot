@@ -65,8 +65,7 @@ public class WorldGenVillagePieces {
 
 		for (Iterator<WorldGenVillagePieceWeight> iterator = list.iterator(); iterator
 				.hasNext(); i += worldgenvillagepieces_worldgenvillagepieceweight.b) {
-			worldgenvillagepieces_worldgenvillagepieceweight = iterator
-					.next();
+			worldgenvillagepieces_worldgenvillagepieceweight = iterator.next();
 			if (worldgenvillagepieces_worldgenvillagepieceweight.d > 0
 					&& worldgenvillagepieces_worldgenvillagepieceweight.c < worldgenvillagepieces_worldgenvillagepieceweight.d) {
 				flag = true;
@@ -681,8 +680,7 @@ public class WorldGenVillagePieces {
 					structureboundingbox);
 			this.a(world, Blocks.OAK_STAIRS.fromLegacyData(this.a(Blocks.OAK_STAIRS, 1)), 1, 1, 4,
 					structureboundingbox);
-			if (!this.b && structureboundingbox
-					.b((new BlockPosition(this.a(5, 5), this.d(1), this.b(5, 5))))) {
+			if (!this.b && structureboundingbox.b((new BlockPosition(this.a(5, 5), this.d(1), this.b(5, 5))))) {
 				this.b = true;
 				this.a(world, structureboundingbox, random, 5, 1, 5, WorldGenVillagePieces.WorldGenVillageBlacksmith.a,
 						3 + random.nextInt(6));

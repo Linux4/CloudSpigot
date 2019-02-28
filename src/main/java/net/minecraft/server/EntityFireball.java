@@ -149,8 +149,8 @@ public abstract class EntityFireball extends Entity {
 
 			this.yaw = (float) (MathHelper.b(this.motZ, this.motX) * 180.0D / 3.1415927410125732D) + 90.0F;
 
-			for (this.pitch = (float) (MathHelper.b(f1, this.motY) * 180.0D / 3.1415927410125732D)
-					- 90.0F; this.pitch - this.lastPitch < -180.0F; this.lastPitch -= 360.0F) {
+			for (this.pitch = (float) (MathHelper.b(f1, this.motY) * 180.0D / 3.1415927410125732D) - 90.0F; this.pitch
+					- this.lastPitch < -180.0F; this.lastPitch -= 360.0F) {
 				;
 			}
 
@@ -175,8 +175,8 @@ public abstract class EntityFireball extends Entity {
 					float f3 = 0.25F;
 
 					this.world.addParticle(EnumParticle.WATER_BUBBLE, this.locX - this.motX * f3,
-							this.locY - this.motY * f3, this.locZ - this.motZ * f3, this.motX,
-							this.motY, this.motZ, new int[0]);
+							this.locY - this.motY * f3, this.locZ - this.motZ * f3, this.motX, this.motY, this.motZ,
+							new int[0]);
 				}
 
 				f2 = 0.8F;

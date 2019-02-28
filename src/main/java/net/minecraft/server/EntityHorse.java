@@ -345,8 +345,7 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener {
 				this.passenger.damageEntity(DamageSource.FALL, i);
 			}
 
-			Block block = this.world
-					.getType(new BlockPosition(this.locX, this.locY - 0.2D - this.lastYaw, this.locZ))
+			Block block = this.world.getType(new BlockPosition(this.locX, this.locY - 0.2D - this.lastYaw, this.locZ))
 					.getBlock();
 
 			if (block.getMaterial() != Material.AIR && !this.R()) {
@@ -1315,8 +1314,8 @@ public class EntityHorse extends EntityAnimal implements IInventoryListener {
 			float f2 = 0.7F * this.bK;
 			float f3 = 0.15F * this.bK;
 
-			this.passenger.setPosition(this.locX + f2 * f,
-					this.locY + this.an() + this.passenger.am() + f3, this.locZ - f2 * f1);
+			this.passenger.setPosition(this.locX + f2 * f, this.locY + this.an() + this.passenger.am() + f3,
+					this.locZ - f2 * f1);
 			if (this.passenger instanceof EntityLiving) {
 				((EntityLiving) this.passenger).aI = this.aI;
 			}

@@ -22,8 +22,7 @@ public class ItemArmor extends Item {
 			int i = blockposition.getX();
 			int j = blockposition.getY();
 			int k = blockposition.getZ();
-			AxisAlignedBB axisalignedbb = new AxisAlignedBB(i, j, k, i + 1,
-					j + 1, k + 1);
+			AxisAlignedBB axisalignedbb = new AxisAlignedBB(i, j, k, i + 1, j + 1, k + 1);
 			List<EntityLiving> list = isourceblock.getWorld().a(EntityLiving.class, axisalignedbb,
 					Predicates.and(IEntitySelector.d, new IEntitySelector.EntitySelectorEquipable(itemstack)));
 
@@ -54,8 +53,7 @@ public class ItemArmor extends Item {
 					itemstack.count++;
 					// Chain to handler for new item
 					ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
-							.get(eventStack.getItem());
+					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 					if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 						idispensebehavior.a(isourceblock, eventStack);
 						return itemstack;

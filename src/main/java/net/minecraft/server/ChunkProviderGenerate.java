@@ -201,8 +201,7 @@ public class ChunkProviderGenerate implements IChunkProvider {
 		float f = this.r.a;
 		float f1 = this.r.b;
 
-		this.d = this.k.a(this.d, i, j, k, 5, 33, 5, f / this.r.h, f1 / this.r.i,
-				f / this.r.j);
+		this.d = this.k.a(this.d, i, j, k, 5, 33, 5, f / this.r.h, f1 / this.r.i, f / this.r.j);
 		this.e = this.i.a(this.e, i, j, k, 5, 33, 5, f, f1, f);
 		this.f = this.j.a(this.f, i, j, k, 5, 33, 5, f, f1, f);
 		// boolean flag = false; // CloudSpigot

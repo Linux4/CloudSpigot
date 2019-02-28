@@ -110,8 +110,7 @@ public class PlayerInteractManager {
 				blockposition, enumdirection, this.player.inventory.getItemInHand());
 		if (event.isCancelled()) {
 			// Let the client know the block still exists
-			this.player.playerConnection
-					.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
+			this.player.playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
 			// Update any tile entity data for this block
 			TileEntity tileentity = this.world.getTileEntity(blockposition);
 			if (tileentity != null) {
@@ -159,13 +158,11 @@ public class PlayerInteractManager {
 				if (block == Blocks.WOODEN_DOOR) {
 					// For some reason *BOTH* the bottom/top part have to be marked updated.
 					boolean bottom = data.get(BlockDoor.HALF) == BlockDoor.EnumDoorHalf.LOWER;
-					this.player.playerConnection
-							.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
+					this.player.playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
 					this.player.playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world,
 							bottom ? blockposition.up() : blockposition.down()));
 				} else if (block == Blocks.TRAPDOOR) {
-					this.player.playerConnection
-							.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
+					this.player.playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
 				}
 			} else if (block.getMaterial() != Material.AIR) {
 				block.attack(this.world, blockposition, this.player);
@@ -177,8 +174,7 @@ public class PlayerInteractManager {
 			if (event.useItemInHand() == Event.Result.DENY) {
 				// If we 'insta destroyed' then the client needs to be informed.
 				if (f > 1.0f) {
-					this.player.playerConnection
-							.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
+					this.player.playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
 				}
 				return;
 			}
@@ -188,8 +184,7 @@ public class PlayerInteractManager {
 
 			if (blockEvent.isCancelled()) {
 				// Let the client know the block still exists
-				this.player.playerConnection
-						.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
+				this.player.playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
 				return;
 			}
 
@@ -305,8 +300,7 @@ public class PlayerInteractManager {
 					return false;
 				}
 				// Let the client know the block still exists
-				this.player.playerConnection
-						.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
+				this.player.playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
 				// Update any tile entity data for this block
 				TileEntity tileentity = this.world.getTileEntity(blockposition);
 				if (tileentity != null) {

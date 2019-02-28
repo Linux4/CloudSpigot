@@ -738,8 +738,7 @@ public abstract class PlayerList {
 		if (exitWorld != null) {
 			if ((cause == TeleportCause.END_PORTAL) && (i == 0)) {
 				// THE_END -> NORMAL; use bed if available, otherwise default spawn
-				exit = entityplayer.getBukkitEntity()
-						.getBedSpawnLocation();
+				exit = entityplayer.getBukkitEntity().getBedSpawnLocation();
 				if (exit == null || ((CraftWorld) exit.getWorld()).getHandle().dimension != 0) {
 					exit = exitWorld.getWorld().getSpawnLocation();
 				}
@@ -1274,11 +1273,11 @@ public abstract class PlayerList {
 	public void u() {
 		for (int i = 0; i < this.players.size(); ++i) {
 			this.players.get(i).playerConnection.disconnect(this.server.server.getShutdownMessage()); // CraftBukkit
-																														// -
-																														// add
-																														// custom
-																														// shutdown
-																														// message
+																										// -
+																										// add
+																										// custom
+																										// shutdown
+																										// message
 		}
 
 	}

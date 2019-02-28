@@ -115,8 +115,8 @@ public class BlockLever extends Block {
 
 	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
-		if (this.e(world, blockposition, iblockdata) && !a(world, blockposition,
-				iblockdata.get(BlockLever.FACING).c().opposite())) {
+		if (this.e(world, blockposition, iblockdata)
+				&& !a(world, blockposition, iblockdata.get(BlockLever.FACING).c().opposite())) {
 			this.b(world, blockposition, iblockdata, 0);
 			world.setAir(blockposition);
 		}
@@ -137,8 +137,7 @@ public class BlockLever extends Block {
 	public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
 		float f = 0.1875F;
 
-		switch (BlockLever.SyntheticClass_1.b[iblockaccess.getType(blockposition)
-				.get(BlockLever.FACING).ordinal()]) {
+		switch (BlockLever.SyntheticClass_1.b[iblockaccess.getType(blockposition).get(BlockLever.FACING).ordinal()]) {
 		case 1:
 			this.a(0.0F, 0.2F, 0.5F - f, f * 2.0F, 0.8F, 0.5F + f);
 			break;
@@ -192,9 +191,8 @@ public class BlockLever extends Block {
 
 			iblockdata = iblockdata.a(BlockLever.POWERED);
 			world.setTypeAndData(blockposition, iblockdata, 3);
-			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
-					blockposition.getZ() + 0.5D, "random.click", 0.3F,
-					iblockdata.get(BlockLever.POWERED).booleanValue() ? 0.6F : 0.5F);
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D,
+					"random.click", 0.3F, iblockdata.get(BlockLever.POWERED).booleanValue() ? 0.6F : 0.5F);
 			world.applyPhysics(blockposition, this);
 			EnumDirection enumdirection1 = iblockdata.get(BlockLever.FACING).c();
 

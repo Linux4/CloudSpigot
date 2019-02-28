@@ -134,16 +134,12 @@ public class BlockPoweredRail extends BlockMinecartTrackAbstract {
 													|| blockminecarttrackabstract_enumtrackposition1 == BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_EAST
 													|| blockminecarttrackabstract_enumtrackposition1 == BlockMinecartTrackAbstract.EnumTrackPosition.ASCENDING_WEST)
 															? false
-															: (iblockdata.get(BlockPoweredRail.POWERED)
-																	.booleanValue()
-																			? (world.isBlockIndirectlyPowered(
-																					blockposition)
-																							? true
-																							: this.a(world,
-																									blockposition,
-																									iblockdata, flag,
-																									i + 1))
-																			: false));
+															: (iblockdata.get(BlockPoweredRail.POWERED).booleanValue()
+																	? (world.isBlockIndirectlyPowered(blockposition)
+																			? true
+																			: this.a(world, blockposition, iblockdata,
+																					flag, i + 1))
+																	: false));
 		}
 	}
 

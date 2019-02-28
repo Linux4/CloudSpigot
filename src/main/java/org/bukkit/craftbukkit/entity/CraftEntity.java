@@ -724,7 +724,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
 	public PermissionAttachment addAttachment(Plugin plugin) {
 		return perm.addAttachment(plugin);
 	}
-	
+
 	@Override
 	public PermissionAttachment addAttachment(PermissionAttachment attachment) {
 		return perm.addAttachment(attachment);

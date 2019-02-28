@@ -3,4 +3,3 @@
  * including special states.
  */
 package org.bukkit.block;
-

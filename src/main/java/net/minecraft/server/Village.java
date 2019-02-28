@@ -77,8 +77,7 @@ public class Village {
 					this.a.random.nextInt(16) - 8);
 
 			if (this.a(blockposition1) && this.a(new BlockPosition(i, j, k), blockposition1)) {
-				return new Vec3D(blockposition1.getX(), blockposition1.getY(),
-						blockposition1.getZ());
+				return new Vec3D(blockposition1.getX(), blockposition1.getY(), blockposition1.getZ());
 			}
 		}
 
@@ -108,18 +107,16 @@ public class Village {
 
 	private void j() {
 		List<EntityIronGolem> list = this.a.a(EntityIronGolem.class,
-				new AxisAlignedBB(this.d.getX() - this.e, this.d.getY() - 4,
-						this.d.getZ() - this.e, this.d.getX() + this.e,
-						this.d.getY() + 4, this.d.getZ() + this.e));
+				new AxisAlignedBB(this.d.getX() - this.e, this.d.getY() - 4, this.d.getZ() - this.e,
+						this.d.getX() + this.e, this.d.getY() + 4, this.d.getZ() + this.e));
 
 		this.l = list.size();
 	}
 
 	private void k() {
 		List<EntityVillager> list = this.a.a(EntityVillager.class,
-				new AxisAlignedBB(this.d.getX() - this.e, this.d.getY() - 4,
-						this.d.getZ() - this.e, this.d.getX() + this.e,
-						this.d.getY() + 4, this.d.getZ() + this.e));
+				new AxisAlignedBB(this.d.getX() - this.e, this.d.getY() - 4, this.d.getZ() - this.e,
+						this.d.getX() + this.e, this.d.getY() + 4, this.d.getZ() + this.e));
 
 		this.h = list.size();
 		if (this.h == 0) {

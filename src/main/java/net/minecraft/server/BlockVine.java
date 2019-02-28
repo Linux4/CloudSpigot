@@ -233,8 +233,7 @@ public class BlockVine extends Block {
 				} else {
 					BlockPosition blockposition2;
 
-					if (enumdirection.k().c()
-							&& !iblockdata.get(getDirection(enumdirection)).booleanValue()) {
+					if (enumdirection.k().c() && !iblockdata.get(getDirection(enumdirection)).booleanValue()) {
 						if (!flag) {
 							blockposition2 = blockposition.shift(enumdirection);
 							Block block = world.getType(blockposition2).getBlock();
@@ -333,8 +332,7 @@ public class BlockVine extends Block {
 									enumdirection3 = iterator1.next();
 									BlockStateBoolean blockstateboolean = getDirection(enumdirection3);
 
-									if (random.nextBoolean()
-											&& iblockdata.get(blockstateboolean).booleanValue()) {
+									if (random.nextBoolean() && iblockdata.get(blockstateboolean).booleanValue()) {
 										iblockdata3 = iblockdata3.set(blockstateboolean, true);
 									}
 								}

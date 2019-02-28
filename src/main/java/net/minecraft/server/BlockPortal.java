@@ -55,8 +55,7 @@ public class BlockPortal extends BlockHalfTransparent {
 
 	@Override
 	public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
-		EnumDirection.EnumAxis enumdirection_enumaxis = iblockaccess.getType(blockposition)
-				.get(BlockPortal.AXIS);
+		EnumDirection.EnumAxis enumdirection_enumaxis = iblockaccess.getType(blockposition).get(BlockPortal.AXIS);
 		float f = 0.125F;
 		float f1 = 0.125F;
 

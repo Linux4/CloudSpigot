@@ -153,9 +153,8 @@ public class BlockPiston extends Block {
 			}
 
 			world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, true), 2);
-			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
-					blockposition.getZ() + 0.5D, "tile.piston.out", 0.5F,
-					world.random.nextFloat() * 0.25F + 0.6F);
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D,
+					"tile.piston.out", 0.5F, world.random.nextFloat() * 0.25F + 0.6F);
 		} else if (i == 1) {
 			TileEntity tileentity = world.getTileEntity(blockposition.shift(enumdirection));
 
@@ -201,9 +200,8 @@ public class BlockPiston extends Block {
 				world.setAir(blockposition.shift(enumdirection));
 			}
 
-			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
-					blockposition.getZ() + 0.5D, "tile.piston.in", 0.5F,
-					world.random.nextFloat() * 0.15F + 0.6F);
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D,
+					"tile.piston.in", 0.5F, world.random.nextFloat() * 0.15F + 0.6F);
 		}
 
 		return true;
@@ -360,8 +358,7 @@ public class BlockPiston extends Block {
 					if (index >= size() || index < 0) {
 						throw new ArrayIndexOutOfBoundsException(index);
 					}
-					BlockPosition pos = index < moved.size() ? moved.get(index)
-							: broken.get(index - moved.size());
+					BlockPosition pos = index < moved.size() ? moved.get(index) : broken.get(index - moved.size());
 					return bblock.getWorld().getBlockAt(pos.getX(), pos.getY(), pos.getZ());
 				}
 			};

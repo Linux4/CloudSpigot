@@ -33,12 +33,10 @@ public class BlockDragonEgg extends Block {
 			if (!BlockFalling.instaFall
 					&& world.areChunksLoadedBetween(blockposition.a(-b0, -b0, -b0), blockposition.a(b0, b0, b0))) {
 				// CloudSpigot start - Add FallingBlock source location API
-				org.bukkit.Location loc = new org.bukkit.Location(world.getWorld(),
-						blockposition.getX() + 0.5F, blockposition.getY(),
-						blockposition.getZ() + 0.5F);
-				world.addEntity(new EntityFallingBlock(loc, world, blockposition.getX() + 0.5F,
-						blockposition.getY(), blockposition.getZ() + 0.5F,
-						this.getBlockData()));
+				org.bukkit.Location loc = new org.bukkit.Location(world.getWorld(), blockposition.getX() + 0.5F,
+						blockposition.getY(), blockposition.getZ() + 0.5F);
+				world.addEntity(new EntityFallingBlock(loc, world, blockposition.getX() + 0.5F, blockposition.getY(),
+						blockposition.getZ() + 0.5F, this.getBlockData()));
 				// CloudSpigot end
 			} else {
 				world.setAir(blockposition);
@@ -101,18 +99,14 @@ public class BlockDragonEgg extends Block {
 							float f = (world.random.nextFloat() - 0.5F) * 0.2F;
 							float f1 = (world.random.nextFloat() - 0.5F) * 0.2F;
 							float f2 = (world.random.nextFloat() - 0.5F) * 0.2F;
-							double d1 = blockposition1.getX()
-									+ (blockposition.getX() - blockposition1.getX()) * d0
+							double d1 = blockposition1.getX() + (blockposition.getX() - blockposition1.getX()) * d0
 									+ (world.random.nextDouble() - 0.5D) * 1.0D + 0.5D;
-							double d2 = blockposition1.getY()
-									+ (blockposition.getY() - blockposition1.getY()) * d0
+							double d2 = blockposition1.getY() + (blockposition.getY() - blockposition1.getY()) * d0
 									+ world.random.nextDouble() * 1.0D - 0.5D;
-							double d3 = blockposition1.getZ()
-									+ (blockposition.getZ() - blockposition1.getZ()) * d0
+							double d3 = blockposition1.getZ() + (blockposition.getZ() - blockposition1.getZ()) * d0
 									+ (world.random.nextDouble() - 0.5D) * 1.0D + 0.5D;
 
-							world.addParticle(EnumParticle.PORTAL, d1, d2, d3, f, f1, f2,
-									new int[0]);
+							world.addParticle(EnumParticle.PORTAL, d1, d2, d3, f, f1, f2, new int[0]);
 						}
 					} else {
 						world.setTypeAndData(blockposition1, iblockdata, 2);

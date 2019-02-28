@@ -606,8 +606,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
 		float f = this.width / 2.0F;
 		float f1 = this.length;
 
-		this.a(new AxisAlignedBB(d0 - f, d1, d2 - f, d0 + f, d1 + f1,
-				d2 + f));
+		this.a(new AxisAlignedBB(d0 - f, d1, d2 - f, d0 + f, d1 + f1, d2 + f));
 	}
 
 	public Vec3D k(double d0, double d1, double d2) {

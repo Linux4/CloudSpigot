@@ -1272,8 +1272,7 @@ public class CraftWorld implements World {
 					boolean taken = false;
 					AxisAlignedBB bb = EntityHanging.calculateBoundingBox(pos,
 							CraftBlock.blockFaceToNotch(dir).opposite(), width, height);
-					List<net.minecraft.server.Entity> list = world.getEntities(null,
-							bb);
+					List<net.minecraft.server.Entity> list = world.getEntities(null, bb);
 					for (Iterator<net.minecraft.server.Entity> it = list.iterator(); !taken && it.hasNext();) {
 						net.minecraft.server.Entity e = it.next();
 						if (e instanceof EntityHanging) {

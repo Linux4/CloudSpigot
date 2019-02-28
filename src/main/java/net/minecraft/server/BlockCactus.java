@@ -51,9 +51,8 @@ public class BlockCactus extends Block {
 	public AxisAlignedBB a(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		float f = 0.0625F;
 
-		return new AxisAlignedBB(blockposition.getX() + f, blockposition.getY(),
-				blockposition.getZ() + f, blockposition.getX() + 1 - f,
-				blockposition.getY() + 1 - f, blockposition.getZ() + 1 - f);
+		return new AxisAlignedBB(blockposition.getX() + f, blockposition.getY(), blockposition.getZ() + f,
+				blockposition.getX() + 1 - f, blockposition.getY() + 1 - f, blockposition.getZ() + 1 - f);
 	}
 
 	@Override

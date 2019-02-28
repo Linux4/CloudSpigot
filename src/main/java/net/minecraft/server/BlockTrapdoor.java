@@ -96,8 +96,7 @@ public class BlockTrapdoor extends Block {
 		} else {
 			iblockdata = iblockdata.a(BlockTrapdoor.OPEN);
 			world.setTypeAndData(blockposition, iblockdata, 2);
-			world.a(entityhuman, iblockdata.get(BlockTrapdoor.OPEN).booleanValue() ? 1003 : 1006,
-					blockposition, 0);
+			world.a(entityhuman, iblockdata.get(BlockTrapdoor.OPEN).booleanValue() ? 1003 : 1006, blockposition, 0);
 			return true;
 		}
 	}
@@ -105,8 +104,7 @@ public class BlockTrapdoor extends Block {
 	@Override
 	public void doPhysics(World world, BlockPosition blockposition, IBlockData iblockdata, Block block) {
 		if (!world.isClientSide) {
-			BlockPosition blockposition1 = blockposition
-					.shift(iblockdata.get(BlockTrapdoor.FACING).opposite());
+			BlockPosition blockposition1 = blockposition.shift(iblockdata.get(BlockTrapdoor.FACING).opposite());
 
 			if (!c(world.getType(blockposition1).getBlock())) {
 				world.setAir(blockposition);

@@ -170,10 +170,8 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
 	private AxisAlignedBB a(BlockPosition blockposition) {
 		// float f = 0.2F; // CloudSpigot
 
-		return new AxisAlignedBB(blockposition.getX() + 0.2F, blockposition.getY(),
-				blockposition.getZ() + 0.2F, blockposition.getX() + 1 - 0.2F,
-				blockposition.getY() + 1 - 0.2F,
-				blockposition.getZ() + 1 - 0.2F);
+		return new AxisAlignedBB(blockposition.getX() + 0.2F, blockposition.getY(), blockposition.getZ() + 0.2F,
+				blockposition.getX() + 1 - 0.2F, blockposition.getY() + 1 - 0.2F, blockposition.getZ() + 1 - 0.2F);
 	}
 
 	@Override

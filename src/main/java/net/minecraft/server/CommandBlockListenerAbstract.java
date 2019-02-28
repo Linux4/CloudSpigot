@@ -247,8 +247,7 @@ public abstract class CommandBlockListenerAbstract implements ICommandListener {
 
 	private static ArrayList<String[]> buildCommands(ICommandListener sender, String[] args, int pos) {
 		ArrayList<String[]> commands = new ArrayList<String[]>();
-		java.util.List<EntityPlayer> players = PlayerSelector.getPlayers(sender,
-				args[pos], EntityPlayer.class);
+		java.util.List<EntityPlayer> players = PlayerSelector.getPlayers(sender, args[pos], EntityPlayer.class);
 
 		if (players != null) {
 			for (EntityPlayer player : players) {

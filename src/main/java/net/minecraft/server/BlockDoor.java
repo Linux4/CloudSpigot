@@ -116,8 +116,7 @@ public class BlockDoor extends Block {
 				iblockdata = iblockdata1.a(BlockDoor.OPEN);
 				world.setTypeAndData(blockposition1, iblockdata, 2);
 				world.b(blockposition1, blockposition);
-				world.a(entityhuman, iblockdata.get(BlockDoor.OPEN).booleanValue() ? 1003 : 1006,
-						blockposition, 0);
+				world.a(entityhuman, iblockdata.get(BlockDoor.OPEN).booleanValue() ? 1003 : 1006, blockposition, 0);
 				return true;
 			}
 		}

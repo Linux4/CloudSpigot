@@ -40,9 +40,8 @@ public class BlockTNT extends Block {
 			double y = blockposition.getY();
 			if (!world.cloudSpigotConfig.fixCannons)
 				y += 0.5;
-			EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(loc, world,
-					blockposition.getX() + 0.5F, y, blockposition.getZ() + 0.5F,
-					explosion.getSource()); // CloudSpigot - add loc
+			EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(loc, world, blockposition.getX() + 0.5F, y,
+					blockposition.getZ() + 0.5F, explosion.getSource()); // CloudSpigot - add loc
 			// CloudSpigot end
 
 			entitytntprimed.fuseTicks = world.random.nextInt(entitytntprimed.fuseTicks / 4)
@@ -65,8 +64,7 @@ public class BlockTNT extends Block {
 				double y = blockposition.getY();
 				if (!world.cloudSpigotConfig.fixCannons)
 					y += 0.5;
-				EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(loc, world,
-						blockposition.getX() + 0.5F, y,
+				EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(loc, world, blockposition.getX() + 0.5F, y,
 						blockposition.getZ() + 0.5F, entityliving); // CloudSpigot - add loc
 				// CloudSpigot end
 

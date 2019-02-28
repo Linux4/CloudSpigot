@@ -85,8 +85,7 @@ public class BaseBlockPosition implements Comparable<BaseBlockPosition> {
 	}
 
 	public double i(BaseBlockPosition baseblockposition) {
-		return this.c(baseblockposition.getX(), baseblockposition.getY(),
-				baseblockposition.getZ());
+		return this.c(baseblockposition.getX(), baseblockposition.getY(), baseblockposition.getZ());
 	}
 
 	@Override

@@ -158,8 +158,7 @@ public class WorldMap extends PersistentBase {
 		}
 
 		for (int i = 0; i < this.g.size(); ++i) {
-			WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker1 = this.g
-					.get(i);
+			WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker1 = this.g.get(i);
 
 			if (!worldmap_worldmaphumantracker1.trackee.dead
 					&& (worldmap_worldmaphumantracker1.trackee.inventory.c(itemstack) || itemstack.y())) {
@@ -181,8 +180,7 @@ public class WorldMap extends PersistentBase {
 
 			this.a(1, entityhuman.world,
 					UUID.nameUUIDFromBytes(("frame-" + entityitemframe.getId()).getBytes(Charsets.US_ASCII)),
-					blockposition.getX(), blockposition.getZ(),
-					entityitemframe.direction.b() * 90); // Spigot
+					blockposition.getX(), blockposition.getZ(), entityitemframe.direction.b() * 90); // Spigot
 		}
 
 		if (itemstack.hasTag() && itemstack.getTag().hasKeyOfType("Decorations", 9)) {
@@ -250,8 +248,7 @@ public class WorldMap extends PersistentBase {
 
 	@SuppressWarnings("rawtypes")
 	public Packet a(ItemStack itemstack, World world, EntityHuman entityhuman) {
-		WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker = this.i
-				.get(entityhuman);
+		WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker = this.i.get(entityhuman);
 
 		return worldmap_worldmaphumantracker == null ? null : worldmap_worldmaphumantracker.a(itemstack);
 	}
@@ -261,8 +258,7 @@ public class WorldMap extends PersistentBase {
 		Iterator<WorldMapHumanTracker> iterator = this.g.iterator();
 
 		while (iterator.hasNext()) {
-			WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker = iterator
-					.next();
+			WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker = iterator.next();
 
 			worldmap_worldmaphumantracker.a(i, j);
 		}
@@ -270,8 +266,7 @@ public class WorldMap extends PersistentBase {
 	}
 
 	public WorldMap.WorldMapHumanTracker a(EntityHuman entityhuman) {
-		WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker = this.i
-				.get(entityhuman);
+		WorldMap.WorldMapHumanTracker worldmap_worldmaphumantracker = this.i.get(entityhuman);
 
 		if (worldmap_worldmaphumantracker == null) {
 			worldmap_worldmaphumantracker = new WorldMap.WorldMapHumanTracker(entityhuman);

@@ -640,8 +640,7 @@ public class WorldData {
 		});
 		crashreportsystemdetails.a("Level spawn location", new Callable<String>() {
 			public String a() throws Exception {
-				return CrashReportSystemDetails.a(WorldData.this.e, WorldData.this.f,
-						WorldData.this.g);
+				return CrashReportSystemDetails.a(WorldData.this.e, WorldData.this.f, WorldData.this.g);
 			}
 
 			@Override

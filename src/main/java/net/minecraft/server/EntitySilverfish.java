@@ -169,8 +169,7 @@ public class EntitySilverfish extends EntityMonster {
 					if (org.bukkit.craftbukkit.event.CraftEventFactory
 							.callEntityChangeBlockEvent(this.silverfish, blockposition.getX(), blockposition.getY(),
 									blockposition.getZ(), Blocks.MONSTER_EGG,
-									Block.getId(
-											Block.getById(iblockdata.getBlock().toLegacyData(iblockdata))))
+									Block.getId(Block.getById(iblockdata.getBlock().toLegacyData(iblockdata))))
 							.isCancelled()) {
 						return;
 					}
@@ -232,9 +231,7 @@ public class EntitySilverfish extends EntityMonster {
 								if (world.getGameRules().getBoolean("mobGriefing")) {
 									world.setAir(blockposition1, true);
 								} else {
-									world.setTypeAndData(blockposition1,
-											iblockdata
-													.get(BlockMonsterEggs.VARIANT).d(),
+									world.setTypeAndData(blockposition1, iblockdata.get(BlockMonsterEggs.VARIANT).d(),
 											3);
 								}
 

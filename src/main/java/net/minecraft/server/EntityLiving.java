@@ -188,8 +188,7 @@ public abstract class EntityLiving extends Entity {
 			if (this.inBlock()) {
 				this.damageEntity(DamageSource.STUCK, 1.0F);
 			} else if (flag && !this.world.getWorldBorder().a(this.getBoundingBox())) {
-				double d0 = this.world.getWorldBorder().a(this)
-						+ this.world.getWorldBorder().getDamageBuffer();
+				double d0 = this.world.getWorldBorder().a(this) + this.world.getWorldBorder().getDamageBuffer();
 
 				if (d0 < 0.0D) {
 					this.damageEntity(DamageSource.STUCK,
@@ -216,9 +215,8 @@ public abstract class EntityLiving extends Entity {
 							float f1 = this.random.nextFloat() - this.random.nextFloat();
 							float f2 = this.random.nextFloat() - this.random.nextFloat();
 
-							this.world.addParticle(EnumParticle.WATER_BUBBLE, this.locX + f,
-									this.locY + f1, this.locZ + f2, this.motX, this.motY, this.motZ,
-									new int[0]);
+							this.world.addParticle(EnumParticle.WATER_BUBBLE, this.locX + f, this.locY + f1,
+									this.locZ + f2, this.motX, this.motY, this.motZ, new int[0]);
 						}
 
 						this.damageEntity(DamageSource.DROWN, 2.0F);
@@ -325,8 +323,7 @@ public abstract class EntityLiving extends Entity {
 				this.world.addParticle(EnumParticle.EXPLOSION_NORMAL,
 						this.locX + this.random.nextFloat() * this.width * 2.0F - this.width,
 						this.locY + this.random.nextFloat() * this.length,
-						this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width, d0,
-						d1, d2, new int[0]);
+						this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2, new int[0]);
 			}
 		}
 
@@ -869,8 +866,7 @@ public abstract class EntityLiving extends Entity {
 		this.makeSound("random.break", 0.8F, 0.8F + this.world.random.nextFloat() * 0.4F);
 
 		for (int i = 0; i < 5; ++i) {
-			Vec3D vec3d = new Vec3D((this.random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D,
-					0.0D);
+			Vec3D vec3d = new Vec3D((this.random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
 
 			vec3d = vec3d.a(-this.pitch * 3.1415927F / 180.0F);
 			vec3d = vec3d.b(-this.yaw * 3.1415927F / 180.0F);
@@ -1240,8 +1236,7 @@ public abstract class EntityLiving extends Entity {
 			this.as = -1;
 			this.ar = true;
 			if (this.world instanceof WorldServer) {
-				((WorldServer) this.world).getTracker().a(this,
-						(new PacketPlayOutAnimation(this, 0)));
+				((WorldServer) this.world).getTracker().a(this, (new PacketPlayOutAnimation(this, 0)));
 			}
 		}
 

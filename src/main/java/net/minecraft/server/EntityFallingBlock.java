@@ -122,10 +122,13 @@ public class EntityFallingBlock extends Entity {
 					if (this.world.getType(blockposition).getBlock() != Blocks.PISTON_EXTENSION) {
 						this.die();
 						if (!this.e) {
-							if (this.world.a(block, blockposition, true, EnumDirection.UP, (Entity) null,
-									(ItemStack) null)
-									&& !BlockFalling.canFall(this.world,
-											blockposition.down()) /* mimic the false conditions of setTypeIdAndData */
+							if (this.world
+									.a(block, blockposition, true, EnumDirection.UP, (Entity) null, (ItemStack) null)
+									&& !BlockFalling.canFall(this.world, blockposition.down()) /*
+																								 * mimic the false
+																								 * conditions of
+																								 * setTypeIdAndData
+																								 */
 									&& blockposition.getX() >= -30000000 && blockposition.getZ() >= -30000000
 									&& blockposition.getX() < 30000000 && blockposition.getZ() < 30000000
 									&& blockposition.getY() >= 0 && blockposition.getY() < 256
@@ -297,8 +300,7 @@ public class EntityFallingBlock extends Entity {
 			Block block = this.block.getBlock();
 
 			crashreportsystemdetails.a("Immitating block ID", Integer.valueOf(Block.getId(block)));
-			crashreportsystemdetails.a("Immitating block data",
-					Integer.valueOf(block.toLegacyData(this.block)));
+			crashreportsystemdetails.a("Immitating block data", Integer.valueOf(block.toLegacyData(this.block)));
 		}
 
 	}

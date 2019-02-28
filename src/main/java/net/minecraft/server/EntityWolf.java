@@ -206,8 +206,8 @@ public class EntityWolf extends EntityTameableAnimal {
 					float f1 = (this.random.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
 					float f2 = (this.random.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
 
-					this.world.addParticle(EnumParticle.WATER_SPLASH, this.locX + f1, f + 0.8F,
-							this.locZ + f2, this.motX, this.motY, this.motZ, new int[0]);
+					this.world.addParticle(EnumParticle.WATER_SPLASH, this.locX + f1, f + 0.8F, this.locZ + f2,
+							this.motX, this.motY, this.motZ, new int[0]);
 				}
 			}
 		}

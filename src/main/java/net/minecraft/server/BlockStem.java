@@ -116,8 +116,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
 
 	@Override
 	public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
-		this.maxY = (iblockaccess.getType(blockposition).get(BlockStem.AGE).intValue() * 2
-				+ 2) / 16.0F;
+		this.maxY = (iblockaccess.getType(blockposition).get(BlockStem.AGE).intValue() * 2 + 2) / 16.0F;
 		float f = 0.125F;
 
 		this.a(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, (float) this.maxY, 0.5F + f);

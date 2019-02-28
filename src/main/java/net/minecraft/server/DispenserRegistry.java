@@ -117,8 +117,7 @@ public class DispenserRegistry {
 					itemstack.count++;
 					// Chain to handler for new item
 					ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
-							.get(eventStack.getItem());
+					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 					if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 						idispensebehavior.a(isourceblock, eventStack);
 						return itemstack;
@@ -169,8 +168,7 @@ public class DispenserRegistry {
 					itemstack.count++;
 					// Chain to handler for new item
 					ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
-							.get(eventStack.getItem());
+					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 					if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 						idispensebehavior.a(isourceblock, eventStack);
 						return itemstack;
@@ -227,8 +225,7 @@ public class DispenserRegistry {
 					itemstack.count++;
 					// Chain to handler for new item
 					ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
-							.get(eventStack.getItem());
+					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 					if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 						idispensebehavior.a(isourceblock, eventStack);
 						return itemstack;
@@ -298,8 +295,7 @@ public class DispenserRegistry {
 					itemstack.count++;
 					// Chain to handler for new item
 					ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
-							.get(eventStack.getItem());
+					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 					if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 						idispensebehavior.a(isourceblock, eventStack);
 						return itemstack;
@@ -352,8 +348,7 @@ public class DispenserRegistry {
 					if (!event.getItem().equals(craftItem)) {
 						// Chain to handler for new item
 						ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-						IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
-								.get(eventStack.getItem());
+						IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 						if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 							idispensebehavior.a(isourceblock, eventStack);
 							return itemstack;
@@ -425,8 +420,7 @@ public class DispenserRegistry {
 				if (!event.getItem().equals(craftItem)) {
 					// Chain to handler for new item
 					ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
-							.get(eventStack.getItem());
+					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 					if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 						idispensebehavior.a(isourceblock, eventStack);
 						return itemstack;
@@ -471,8 +465,7 @@ public class DispenserRegistry {
 				if (!event.getItem().equals(craftItem)) {
 					// Chain to handler for new item
 					ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
-							.get(eventStack.getItem());
+					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 					if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 						idispensebehavior.a(isourceblock, eventStack);
 						return itemstack;
@@ -541,8 +534,7 @@ public class DispenserRegistry {
 					if (!event.getItem().equals(craftItem)) {
 						// Chain to handler for new item
 						ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-						IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
-								.get(eventStack.getItem());
+						IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 						if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 							idispensebehavior.a(isourceblock, eventStack);
 							return itemstack;
@@ -609,8 +601,7 @@ public class DispenserRegistry {
 					itemstack.count++;
 					// Chain to handler for new item
 					ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY
-							.get(eventStack.getItem());
+					IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
 					if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
 						idispensebehavior.a(isourceblock, eventStack);
 						return itemstack;

@@ -119,8 +119,7 @@ public class ServerStatisticManager extends StatisticManager {
 				if (statistic != null) {
 					StatisticWrapper statisticwrapper = new StatisticWrapper();
 
-					if (entry.getValue().isJsonPrimitive()
-							&& entry.getValue().getAsJsonPrimitive().isNumber()) {
+					if (entry.getValue().isJsonPrimitive() && entry.getValue().getAsJsonPrimitive().isNumber()) {
 						statisticwrapper.a(entry.getValue().getAsInt());
 					} else if (entry.getValue().isJsonObject()) {
 						JsonObject jsonobject1 = entry.getValue().getAsJsonObject();
@@ -146,8 +145,8 @@ public class ServerStatisticManager extends StatisticManager {
 
 					hashmap.put(statistic, statisticwrapper);
 				} else {
-					ServerStatisticManager.b.warn(
-							"Invalid statistic in " + this.d + ": Don\'t know what " + entry.getKey() + " is");
+					ServerStatisticManager.b
+							.warn("Invalid statistic in " + this.d + ": Don\'t know what " + entry.getKey() + " is");
 				}
 			}
 
@@ -170,14 +169,14 @@ public class ServerStatisticManager extends StatisticManager {
 				try {
 					jsonobject1.add("progress", entry.getValue().b().a());
 				} catch (Throwable throwable) {
-					ServerStatisticManager.b.warn("Couldn\'t save statistic " + entry.getKey().e()
-							+ ": error serializing progress", throwable);
+					ServerStatisticManager.b.warn(
+							"Couldn\'t save statistic " + entry.getKey().e() + ": error serializing progress",
+							throwable);
 				}
 
 				jsonobject.add(entry.getKey().name, jsonobject1);
 			} else {
-				jsonobject.addProperty(entry.getKey().name,
-						Integer.valueOf(entry.getValue().a()));
+				jsonobject.addProperty(entry.getKey().name, Integer.valueOf(entry.getValue().a()));
 			}
 		}
 

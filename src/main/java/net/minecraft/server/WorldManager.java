@@ -61,8 +61,8 @@ public class WorldManager implements IWorldAccess {
 	@Override
 	public void a(EntityHuman entityhuman, int i, BlockPosition blockposition, int j) {
 		// CraftBukkit - this.world.dimension
-		this.a.getPlayerList().sendPacketNearby(entityhuman, blockposition.getX(),
-				blockposition.getY(), blockposition.getZ(), 64.0D, this.world.dimension,
+		this.a.getPlayerList().sendPacketNearby(entityhuman, blockposition.getX(), blockposition.getY(),
+				blockposition.getZ(), 64.0D, this.world.dimension,
 				new PacketPlayOutWorldEvent(i, blockposition, j, false));
 	}
 

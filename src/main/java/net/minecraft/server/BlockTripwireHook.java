@@ -206,18 +206,17 @@ public class BlockTripwireHook extends Block {
 	private void a(World world, BlockPosition blockposition, boolean flag, boolean flag1, boolean flag2,
 			boolean flag3) {
 		if (flag1 && !flag3) {
-			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.1D,
-					blockposition.getZ() + 0.5D, "random.click", 0.4F, 0.6F);
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.1D, blockposition.getZ() + 0.5D,
+					"random.click", 0.4F, 0.6F);
 		} else if (!flag1 && flag3) {
-			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.1D,
-					blockposition.getZ() + 0.5D, "random.click", 0.4F, 0.5F);
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.1D, blockposition.getZ() + 0.5D,
+					"random.click", 0.4F, 0.5F);
 		} else if (flag && !flag2) {
-			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.1D,
-					blockposition.getZ() + 0.5D, "random.click", 0.4F, 0.7F);
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.1D, blockposition.getZ() + 0.5D,
+					"random.click", 0.4F, 0.7F);
 		} else if (!flag && flag2) {
-			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.1D,
-					blockposition.getZ() + 0.5D, "random.bowhit", 0.4F,
-					1.2F / (world.random.nextFloat() * 0.2F + 0.9F));
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.1D, blockposition.getZ() + 0.5D,
+					"random.bowhit", 0.4F, 1.2F / (world.random.nextFloat() * 0.2F + 0.9F));
 		}
 
 	}
@@ -241,8 +240,8 @@ public class BlockTripwireHook extends Block {
 	public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
 		float f = 0.1875F;
 
-		switch (BlockTripwireHook.SyntheticClass_1.a[iblockaccess.getType(blockposition)
-				.get(BlockTripwireHook.FACING).ordinal()]) {
+		switch (BlockTripwireHook.SyntheticClass_1.a[iblockaccess.getType(blockposition).get(BlockTripwireHook.FACING)
+				.ordinal()]) {
 		case 1:
 			this.a(0.0F, 0.2F, 0.5F - f, f * 2.0F, 0.8F, 0.5F + f);
 			break;
@@ -272,8 +271,7 @@ public class BlockTripwireHook extends Block {
 
 		if (flag1) {
 			world.applyPhysics(blockposition, this);
-			world.applyPhysics(
-					blockposition.shift(iblockdata.get(BlockTripwireHook.FACING).opposite()), this);
+			world.applyPhysics(blockposition.shift(iblockdata.get(BlockTripwireHook.FACING).opposite()), this);
 		}
 
 		super.remove(world, blockposition, iblockdata);

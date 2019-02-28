@@ -30,18 +30,18 @@ public abstract class EntityProjectile extends Entity implements IProjectile {
 		this.shooter = entityliving;
 		this.projectileSource = (org.bukkit.entity.LivingEntity) entityliving.getBukkitEntity(); // CraftBukkit
 		this.setSize(0.25F, 0.25F);
-		this.setPositionRotation(entityliving.locX, entityliving.locY + entityliving.getHeadHeight(),
-				entityliving.locZ, entityliving.yaw, entityliving.pitch);
+		this.setPositionRotation(entityliving.locX, entityliving.locY + entityliving.getHeadHeight(), entityliving.locZ,
+				entityliving.yaw, entityliving.pitch);
 		this.locX -= MathHelper.cos(this.yaw / 180.0F * 3.1415927F) * 0.16F;
 		this.locY -= 0.10000000149011612D;
 		this.locZ -= MathHelper.sin(this.yaw / 180.0F * 3.1415927F) * 0.16F;
 		this.setPosition(this.locX, this.locY, this.locZ);
 		float f = 0.4F;
 
-		this.motX = -MathHelper.sin(this.yaw / 180.0F * 3.1415927F)
-				* MathHelper.cos(this.pitch / 180.0F * 3.1415927F) * f;
-		this.motZ = MathHelper.cos(this.yaw / 180.0F * 3.1415927F)
-				* MathHelper.cos(this.pitch / 180.0F * 3.1415927F) * f;
+		this.motX = -MathHelper.sin(this.yaw / 180.0F * 3.1415927F) * MathHelper.cos(this.pitch / 180.0F * 3.1415927F)
+				* f;
+		this.motZ = MathHelper.cos(this.yaw / 180.0F * 3.1415927F) * MathHelper.cos(this.pitch / 180.0F * 3.1415927F)
+				* f;
 		this.motY = -MathHelper.sin((this.pitch + this.l()) / 180.0F * 3.1415927F) * f;
 		this.shoot(this.motX, this.motY, this.motZ, this.j(), 1.0F);
 	}
@@ -215,8 +215,8 @@ public abstract class EntityProjectile extends Entity implements IProjectile {
 				float f4 = 0.25F;
 
 				this.world.addParticle(EnumParticle.WATER_BUBBLE, this.locX - this.motX * f4,
-						this.locY - this.motY * f4, this.locZ - this.motZ * f4, this.motX, this.motY,
-						this.motZ, new int[0]);
+						this.locY - this.motY * f4, this.locZ - this.motZ * f4, this.motX, this.motY, this.motZ,
+						new int[0]);
 			}
 
 			f2 = 0.8F;

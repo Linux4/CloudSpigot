@@ -7,18 +7,19 @@ import javax.crypto.Cipher;
 
 public class PacketEncrypter extends MessageToByteEncoder<ByteBuf> {
 
-    private final PacketEncryptionHandler a;
+	private final PacketEncryptionHandler a;
 
-    public PacketEncrypter(Cipher cipher) {
-        this.a = new PacketEncryptionHandler(cipher);
-    }
+	public PacketEncrypter(Cipher cipher) {
+		this.a = new PacketEncryptionHandler(cipher);
+	}
 
-    protected void a(ChannelHandlerContext channelhandlercontext, ByteBuf bytebuf, ByteBuf bytebuf1) throws Exception {
-        this.a.a(bytebuf, bytebuf1);
-    }
+	protected void a(ChannelHandlerContext channelhandlercontext, ByteBuf bytebuf, ByteBuf bytebuf1) throws Exception {
+		this.a.a(bytebuf, bytebuf1);
+	}
 
-    @Override
-    protected void encode(ChannelHandlerContext channelhandlercontext, ByteBuf object, ByteBuf bytebuf) throws Exception {
-        this.a(channelhandlercontext, (ByteBuf) object, bytebuf);
-    }
+	@Override
+	protected void encode(ChannelHandlerContext channelhandlercontext, ByteBuf object, ByteBuf bytebuf)
+			throws Exception {
+		this.a(channelhandlercontext, (ByteBuf) object, bytebuf);
+	}
 }

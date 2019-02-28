@@ -155,8 +155,8 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 			--this.m;
 		}
 
-		if (this.player.D() > 0L && this.minecraftServer.getIdleTimeout() > 0 && MinecraftServer.az()
-				- this.player.D() > this.minecraftServer.getIdleTimeout() * 1000 * 60) {
+		if (this.player.D() > 0L && this.minecraftServer.getIdleTimeout() > 0
+				&& MinecraftServer.az() - this.player.D() > this.minecraftServer.getIdleTimeout() * 1000 * 60) {
 			this.player.resetIdleTimer(); // CraftBukkit - SPIGOT-854
 			this.disconnect("You have been idle for too long!");
 		}
@@ -450,9 +450,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 					}
 
 					float f4 = 0.0625F;
-					boolean flag = worldserver
-							.getCubes(this.player,
-									this.player.getBoundingBox().shrink(f4, f4, f4))
+					boolean flag = worldserver.getCubes(this.player, this.player.getBoundingBox().shrink(f4, f4, f4))
 							.isEmpty();
 
 					if (this.player.onGround && !packetplayinflying.f() && d12 > 0.0D) {
@@ -484,9 +482,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 					this.player.checkMovement(this.player.locX - d0, this.player.locY - d1, this.player.locZ - d2);
 					if (!this.player.noclip) {
 						boolean flag2 = worldserver
-								.getCubes(this.player,
-										this.player.getBoundingBox().shrink(f4, f4, f4))
-								.isEmpty();
+								.getCubes(this.player, this.player.getBoundingBox().shrink(f4, f4, f4)).isEmpty();
 
 						if (flag && (flag1 || !flag2) && !this.player.isSleeping()) {
 							this.a(this.o, this.p, this.q, f2, f3);
@@ -494,8 +490,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 						}
 					}
 
-					AxisAlignedBB axisalignedbb = this.player.getBoundingBox()
-							.grow(f4, f4, f4).a(0.0D, -0.55D, 0.0D);
+					AxisAlignedBB axisalignedbb = this.player.getBoundingBox().grow(f4, f4, f4).a(0.0D, -0.55D, 0.0D);
 
 					if (!this.minecraftServer.getAllowFlight() && !this.player.abilities.canFly
 							&& !worldserver.c(axisalignedbb)) {
@@ -2119,8 +2114,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 				lines[i] = line;
 				// CloudSpigot end
 			}
-			SignChangeEvent event = new SignChangeEvent(
-					player.getWorld().getBlockAt(x, y, z),
+			SignChangeEvent event = new SignChangeEvent(player.getWorld().getBlockAt(x, y, z),
 					this.server.getPlayer(this.player), lines);
 			this.server.getPluginManager().callEvent(event);
 

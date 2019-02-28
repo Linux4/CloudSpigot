@@ -85,16 +85,14 @@ public class EntityArrow extends Entity implements IProjectile {
 		}
 
 		this.setSize(0.5F, 0.5F);
-		this.setPositionRotation(entityliving.locX, entityliving.locY + entityliving.getHeadHeight(),
-				entityliving.locZ, entityliving.yaw, entityliving.pitch);
+		this.setPositionRotation(entityliving.locX, entityliving.locY + entityliving.getHeadHeight(), entityliving.locZ,
+				entityliving.yaw, entityliving.pitch);
 		this.locX -= MathHelper.cos(this.yaw / 180.0F * 3.1415927F) * 0.16F;
 		this.locY -= 0.10000000149011612D;
 		this.locZ -= MathHelper.sin(this.yaw / 180.0F * 3.1415927F) * 0.16F;
 		this.setPosition(this.locX, this.locY, this.locZ);
-		this.motX = -MathHelper.sin(this.yaw / 180.0F * 3.1415927F)
-				* MathHelper.cos(this.pitch / 180.0F * 3.1415927F);
-		this.motZ = MathHelper.cos(this.yaw / 180.0F * 3.1415927F)
-				* MathHelper.cos(this.pitch / 180.0F * 3.1415927F);
+		this.motX = -MathHelper.sin(this.yaw / 180.0F * 3.1415927F) * MathHelper.cos(this.pitch / 180.0F * 3.1415927F);
+		this.motZ = MathHelper.cos(this.yaw / 180.0F * 3.1415927F) * MathHelper.cos(this.pitch / 180.0F * 3.1415927F);
 		this.motY = (-MathHelper.sin(this.pitch / 180.0F * 3.1415927F));
 		this.shoot(this.motX, this.motY, this.motZ, f * 1.5F, 1.0F);
 	}
@@ -111,12 +109,9 @@ public class EntityArrow extends Entity implements IProjectile {
 		d0 /= f2;
 		d1 /= f2;
 		d2 /= f2;
-		d0 += this.random.nextGaussian() * (this.random.nextBoolean() ? -1 : 1) * 0.007499999832361937D
-				* f1;
-		d1 += this.random.nextGaussian() * (this.random.nextBoolean() ? -1 : 1) * 0.007499999832361937D
-				* f1;
-		d2 += this.random.nextGaussian() * (this.random.nextBoolean() ? -1 : 1) * 0.007499999832361937D
-				* f1;
+		d0 += this.random.nextGaussian() * (this.random.nextBoolean() ? -1 : 1) * 0.007499999832361937D * f1;
+		d1 += this.random.nextGaussian() * (this.random.nextBoolean() ? -1 : 1) * 0.007499999832361937D * f1;
+		d2 += this.random.nextGaussian() * (this.random.nextBoolean() ? -1 : 1) * 0.007499999832361937D * f1;
 		d0 *= f;
 		d1 *= f;
 		d2 *= f;
@@ -295,10 +290,8 @@ public class EntityArrow extends Entity implements IProjectile {
 								f3 = MathHelper.sqrt(this.motX * this.motX + this.motZ * this.motZ);
 								if (f3 > 0.0F) {
 									movingobjectposition.entity.g(
-											this.motX * this.knockbackStrength * 0.6000000238418579D
-													/ f3,
-											0.1D, this.motZ * this.knockbackStrength * 0.6000000238418579D
-													/ f3);
+											this.motX * this.knockbackStrength * 0.6000000238418579D / f3, 0.1D,
+											this.motZ * this.knockbackStrength * 0.6000000238418579D / f3);
 								}
 							}
 
@@ -357,8 +350,8 @@ public class EntityArrow extends Entity implements IProjectile {
 			if (this.isCritical()) {
 				for (j = 0; j < 4; ++j) {
 					this.world.addParticle(EnumParticle.CRIT, this.locX + this.motX * j / 4.0D,
-							this.locY + this.motY * j / 4.0D, this.locZ + this.motZ * j / 4.0D,
-							-this.motX, -this.motY + 0.2D, -this.motZ, new int[0]);
+							this.locY + this.motY * j / 4.0D, this.locZ + this.motZ * j / 4.0D, -this.motX,
+							-this.motY + 0.2D, -this.motZ, new int[0]);
 				}
 			}
 
@@ -394,8 +387,8 @@ public class EntityArrow extends Entity implements IProjectile {
 				for (int l = 0; l < 4; ++l) {
 					f3 = 0.25F;
 					this.world.addParticle(EnumParticle.WATER_BUBBLE, this.locX - this.motX * f3,
-							this.locY - this.motY * f3, this.locZ - this.motZ * f3, this.motX,
-							this.motY, this.motZ, new int[0]);
+							this.locY - this.motY * f3, this.locZ - this.motZ * f3, this.motX, this.motY, this.motZ,
+							new int[0]);
 				}
 
 				f4 = 0.6F;

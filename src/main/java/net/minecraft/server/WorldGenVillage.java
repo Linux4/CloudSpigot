@@ -94,8 +94,8 @@ public class WorldGenVillage extends StructureGenerator {
 					world.getWorldChunkManager(), 0, random, (i << 4) + 2, (j << 4) + 2, list, k);
 
 			this.a.add(worldgenvillagepieces_worldgenvillagestartpiece);
-			worldgenvillagepieces_worldgenvillagestartpiece
-					.a(worldgenvillagepieces_worldgenvillagestartpiece, this.a, random);
+			worldgenvillagepieces_worldgenvillagestartpiece.a(worldgenvillagepieces_worldgenvillagestartpiece, this.a,
+					random);
 			List<StructurePiece> list1 = worldgenvillagepieces_worldgenvillagestartpiece.g;
 			List<StructurePiece> list2 = worldgenvillagepieces_worldgenvillagestartpiece.f;
 

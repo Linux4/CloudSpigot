@@ -297,8 +297,7 @@ public class CrashReport {
 
 			this.g = crashreportsystemdetails.a(stacktraceelement, stacktraceelement1);
 			if (j > 0 && !this.e.isEmpty()) {
-				CrashReportSystemDetails crashreportsystemdetails1 = this.e
-						.get(this.e.size() - 1);
+				CrashReportSystemDetails crashreportsystemdetails1 = this.e.get(this.e.size() - 1);
 
 				crashreportsystemdetails1.b(j);
 			} else if (astacktraceelement != null && astacktraceelement.length >= j && 0 <= k

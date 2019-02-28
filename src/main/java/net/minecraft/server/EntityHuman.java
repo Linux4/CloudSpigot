@@ -82,8 +82,8 @@ public abstract class EntityHuman extends EntityLiving {
 		this.activeContainer = this.defaultContainer;
 		BlockPosition blockposition = world.getSpawn();
 
-		this.setPositionRotation(blockposition.getX() + 0.5D, blockposition.getY() + 1,
-				blockposition.getZ() + 0.5D, 0.0F, 0.0F);
+		this.setPositionRotation(blockposition.getX() + 0.5D, blockposition.getY() + 1, blockposition.getZ() + 0.5D,
+				0.0F, 0.0F);
 		this.aV = 180.0F;
 		this.maxFireTicks = 20;
 	}
@@ -275,8 +275,7 @@ public abstract class EntityHuman extends EntityLiving {
 
 		if (itemstack.m() == EnumAnimation.EAT) {
 			for (int j = 0; j < i; ++j) {
-				Vec3D vec3d = new Vec3D((this.random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D,
-						0.0D);
+				Vec3D vec3d = new Vec3D((this.random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
 
 				vec3d = vec3d.a(-this.pitch * 3.1415927F / 180.0F);
 				vec3d = vec3d.b(-this.yaw * 3.1415927F / 180.0F);
@@ -317,8 +316,7 @@ public abstract class EntityHuman extends EntityLiving {
 				// Update client
 				if (this instanceof EntityPlayer) {
 					((EntityPlayer) this).playerConnection.sendPacket(new PacketPlayOutSetSlot((byte) 0,
-							activeContainer.getSlot(this.inventory, this.inventory.itemInHandIndex).index,
-							this.g));
+							activeContainer.getSlot(this.inventory, this.inventory.itemInHandIndex).index, this.g));
 					// Spigot Start
 					((EntityPlayer) this).getBukkitEntity().updateInventory();
 					((EntityPlayer) this).getBukkitEntity().updateScaledHealth();
@@ -334,8 +332,7 @@ public abstract class EntityHuman extends EntityLiving {
 				// Update client
 				if (this instanceof EntityPlayer) {
 					((EntityPlayer) this).playerConnection.sendPacket(new PacketPlayOutSetSlot((byte) 0,
-							activeContainer.getSlot(this.inventory, this.inventory.itemInHandIndex).index,
-							this.g));
+							activeContainer.getSlot(this.inventory, this.inventory.itemInHandIndex).index, this.g));
 				}
 				return;
 			}
@@ -1062,8 +1059,8 @@ public abstract class EntityHuman extends EntityLiving {
 
 					if (flag2) {
 						if (i > 0) {
-							entity.g(-MathHelper.sin(this.yaw * 3.1415927F / 180.0F) * i * 0.5F,
-									0.1D, MathHelper.cos(this.yaw * 3.1415927F / 180.0F) * i * 0.5F);
+							entity.g(-MathHelper.sin(this.yaw * 3.1415927F / 180.0F) * i * 0.5F, 0.1D,
+									MathHelper.cos(this.yaw * 3.1415927F / 180.0F) * i * 0.5F);
 							this.motX *= 0.6D;
 							this.motZ *= 0.6D;
 							this.setSprinting(false);
@@ -1198,8 +1195,7 @@ public abstract class EntityHuman extends EntityLiving {
 				return EntityHuman.EnumBedResult.NOT_POSSIBLE_NOW;
 			}
 
-			if (Math.abs(this.locX - blockposition.getX()) > 3.0D
-					|| Math.abs(this.locY - blockposition.getY()) > 2.0D
+			if (Math.abs(this.locX - blockposition.getX()) > 3.0D || Math.abs(this.locY - blockposition.getY()) > 2.0D
 					|| Math.abs(this.locZ - blockposition.getZ()) > 3.0D) {
 				return EntityHuman.EnumBedResult.TOO_FAR_AWAY;
 			}
@@ -1207,9 +1203,8 @@ public abstract class EntityHuman extends EntityLiving {
 			double d0 = 8.0D;
 			double d1 = 5.0D;
 			List<EntityMonster> list = this.world.a(EntityMonster.class,
-					new AxisAlignedBB(blockposition.getX() - d0, blockposition.getY() - d1,
-							blockposition.getZ() - d0, blockposition.getX() + d0,
-							blockposition.getY() + d1, blockposition.getZ() + d0));
+					new AxisAlignedBB(blockposition.getX() - d0, blockposition.getY() - d1, blockposition.getZ() - d0,
+							blockposition.getX() + d0, blockposition.getY() + d1, blockposition.getZ() + d0));
 
 			if (!list.isEmpty()) {
 				return EntityHuman.EnumBedResult.NOT_SAFE;
@@ -1237,8 +1232,7 @@ public abstract class EntityHuman extends EntityLiving {
 
 		this.setSize(0.2F, 0.2F);
 		if (this.world.isLoaded(blockposition)) {
-			EnumDirection enumdirection = this.world.getType(blockposition)
-					.get(BlockDirectional.FACING);
+			EnumDirection enumdirection = this.world.getType(blockposition).get(BlockDirectional.FACING);
 			float f = 0.5F;
 			float f1 = 0.5F;
 
@@ -1260,11 +1254,9 @@ public abstract class EntityHuman extends EntityLiving {
 			}
 
 			this.a(enumdirection);
-			this.setPosition(blockposition.getX() + f,
-					blockposition.getY() + 0.6875F, blockposition.getZ() + f1);
+			this.setPosition(blockposition.getX() + f, blockposition.getY() + 0.6875F, blockposition.getZ() + f1);
 		} else {
-			this.setPosition(blockposition.getX() + 0.5F,
-					blockposition.getY() + 0.6875F, blockposition.getZ() + 0.5F);
+			this.setPosition(blockposition.getX() + 0.5F, blockposition.getY() + 0.6875F, blockposition.getZ() + 0.5F);
 		}
 
 		this.sleeping = true;
@@ -1312,8 +1304,7 @@ public abstract class EntityHuman extends EntityLiving {
 				blockposition = this.bx.up();
 			}
 
-			this.setPosition(blockposition.getX() + 0.5F,
-					blockposition.getY() + 0.1F, blockposition.getZ() + 0.5F);
+			this.setPosition(blockposition.getX() + 0.5F, blockposition.getY() + 0.1F, blockposition.getZ() + 0.5F);
 		}
 
 		this.sleeping = false;
@@ -1468,21 +1459,21 @@ public abstract class EntityHuman extends EntityLiving {
 				if (i > 0) {
 					this.a(StatisticList.p, i);
 					this.applyExhaustion(world.cloudSpigotConfig.playerSwimmingExhaustion * i * 0.01F); // CloudSpigot
-																												// -
-																												// Configurable
-																												// swimming
-																												// exhaustion
+																										// -
+																										// Configurable
+																										// swimming
+																										// exhaustion
 				}
 			} else if (this.V()) {
 				i = Math.round(MathHelper.sqrt(d0 * d0 + d2 * d2) * 100.0F);
 				if (i > 0) {
 					this.a(StatisticList.l, i);
 					this.applyExhaustion(world.cloudSpigotConfig.playerSwimmingExhaustion * i * 0.01F); // CloudSpigot
-																												// -
-																												// Configurable
-																												// swimming
-																												// (diving)
-																												// exhaustion
+																										// -
+																										// Configurable
+																										// swimming
+																										// (diving)
+																										// exhaustion
 				}
 			} else if (this.k_()) {
 				if (d1 > 0.0D) {

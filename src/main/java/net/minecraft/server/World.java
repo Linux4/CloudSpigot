@@ -1009,8 +1009,7 @@ public abstract class World implements IBlockAccess {
 
 	public void a(EntityHuman entityhuman, String s, float f, float f1) {
 		for (int i = 0; i < this.u.size(); ++i) {
-			this.u.get(i).a(entityhuman, s, entityhuman.locX, entityhuman.locY, entityhuman.locZ, f,
-					f1);
+			this.u.get(i).a(entityhuman, s, entityhuman.locX, entityhuman.locY, entityhuman.locZ, f, f1);
 		}
 
 	}
@@ -1163,8 +1162,7 @@ public abstract class World implements IBlockAccess {
 				if (o instanceof WorldMap) {
 					WorldMap map = (WorldMap) o;
 					map.i.remove(entity);
-					for (Iterator<WorldMap.WorldMapHumanTracker> iter = map.g
-							.iterator(); iter.hasNext();) {
+					for (Iterator<WorldMap.WorldMapHumanTracker> iter = map.g.iterator(); iter.hasNext();) {
 						if (iter.next().trackee == entity) {
 							iter.remove();
 						}
@@ -1884,8 +1882,7 @@ public abstract class World implements IBlockAccess {
 						Block block = iblockdata.getBlock();
 
 						if (block.getMaterial() == material) {
-							double d0 = l1 + 1
-									- BlockFluids.b(iblockdata.get(BlockFluids.LEVEL).intValue());
+							double d0 = l1 + 1 - BlockFluids.b(iblockdata.get(BlockFluids.LEVEL).intValue());
 
 							if (l >= d0) {
 								flag = true;
@@ -2133,14 +2130,16 @@ public abstract class World implements IBlockAccess {
 		IBlockData iblockdata = iblockaccess.getType(blockposition);
 		Block block = iblockdata.getBlock();
 
-		return block.getMaterial().k() && block.d() ? true
-				: (block instanceof BlockStairs ? iblockdata.get(BlockStairs.HALF) == BlockStairs.EnumHalf.TOP
-						: (block instanceof BlockStepAbstract
-								? iblockdata.get(BlockStepAbstract.HALF) == BlockStepAbstract.EnumSlabHalf.TOP
-								: (block instanceof BlockHopper ? true
-										: (block instanceof BlockSnow
-												? iblockdata.get(BlockSnow.LAYERS).intValue() == 7
-												: false))));
+		return block.getMaterial().k()
+				&& block.d()
+						? true
+						: (block instanceof BlockStairs ? iblockdata.get(BlockStairs.HALF) == BlockStairs.EnumHalf.TOP
+								: (block instanceof BlockStepAbstract
+										? iblockdata.get(BlockStepAbstract.HALF) == BlockStepAbstract.EnumSlabHalf.TOP
+										: (block instanceof BlockHopper ? true
+												: (block instanceof BlockSnow
+														? iblockdata.get(BlockSnow.LAYERS).intValue() == 7
+														: false))));
 	}
 
 	public boolean d(BlockPosition blockposition, boolean flag) {
@@ -2342,11 +2341,9 @@ public abstract class World implements IBlockAccess {
 			i1 += j;
 			if (block.getMaterial() == Material.AIR && this.k(blockposition) <= this.random.nextInt(8)
 					&& this.b(EnumSkyBlock.SKY, blockposition) <= 0) {
-				EntityHuman entityhuman = this.findNearbyPlayer(l + 0.5D, j1 + 0.5D,
-						i1 + 0.5D, 8.0D);
+				EntityHuman entityhuman = this.findNearbyPlayer(l + 0.5D, j1 + 0.5D, i1 + 0.5D, 8.0D);
 
-				if (entityhuman != null
-						&& entityhuman.e(l + 0.5D, j1 + 0.5D, i1 + 0.5D) > 4.0D) {
+				if (entityhuman != null && entityhuman.e(l + 0.5D, j1 + 0.5D, i1 + 0.5D) > 4.0D) {
 					this.makeSound(l + 0.5D, j1 + 0.5D, i1 + 0.5D, "ambient.cave.cave", 0.7F,
 							0.8F + this.random.nextFloat() * 0.2F);
 					this.L = this.random.nextInt(12000) + 6000;

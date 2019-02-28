@@ -3,4 +3,3 @@
  * {@link org.bukkit.inventory.ItemStack item stacks}.
  */
 package org.bukkit.inventory.meta;
-

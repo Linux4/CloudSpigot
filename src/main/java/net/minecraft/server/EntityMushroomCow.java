@@ -39,8 +39,8 @@ public class EntityMushroomCow extends EntityCow {
 			}
 			// CraftBukkit end
 			this.die();
-			this.world.addParticle(EnumParticle.EXPLOSION_LARGE, this.locX, this.locY + this.length / 2.0F,
-					this.locZ, 0.0D, 0.0D, 0.0D, new int[0]);
+			this.world.addParticle(EnumParticle.EXPLOSION_LARGE, this.locX, this.locY + this.length / 2.0F, this.locZ,
+					0.0D, 0.0D, 0.0D, new int[0]);
 			if (!this.world.isClientSide) {
 				EntityCow entitycow = new EntityCow(this.world);
 
@@ -54,8 +54,8 @@ public class EntityMushroomCow extends EntityCow {
 				this.world.addEntity(entitycow);
 
 				for (int i = 0; i < 5; ++i) {
-					this.world.addEntity(new EntityItem(this.world, this.locX, this.locY + this.length,
-							this.locZ, new ItemStack(Blocks.RED_MUSHROOM)));
+					this.world.addEntity(new EntityItem(this.world, this.locX, this.locY + this.length, this.locZ,
+							new ItemStack(Blocks.RED_MUSHROOM)));
 				}
 
 				itemstack.damage(1, entityhuman);

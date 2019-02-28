@@ -372,9 +372,9 @@ public class BlockRedstoneWire extends Block {
 
 		return !flag1 && flag && e(iblockaccess, blockposition1.up()) ? true
 				: (a(iblockdata, enumdirection) ? true
-						: (block == Blocks.POWERED_REPEATER
-								&& iblockdata.get(BlockDirectional.FACING) == enumdirection ? true
-										: !flag && e(iblockaccess, blockposition1.down())));
+						: (block == Blocks.POWERED_REPEATER && iblockdata.get(BlockDirectional.FACING) == enumdirection
+								? true
+								: !flag && e(iblockaccess, blockposition1.down())));
 	}
 
 	protected static boolean e(IBlockAccess iblockaccess, BlockPosition blockposition) {

@@ -52,8 +52,8 @@ public class BlockJukeBox extends BlockContainer {
 					double d1 = world.random.nextFloat() * f + (1.0F - f) * 0.2D + 0.6D;
 					double d2 = world.random.nextFloat() * f + (1.0F - f) * 0.5D;
 					ItemStack itemstack1 = itemstack.cloneItemStack();
-					EntityItem entityitem = new EntityItem(world, blockposition.getX() + d0,
-							blockposition.getY() + d1, blockposition.getZ() + d2, itemstack1);
+					EntityItem entityitem = new EntityItem(world, blockposition.getX() + d0, blockposition.getY() + d1,
+							blockposition.getZ() + d2, itemstack1);
 
 					entityitem.p();
 					world.addEntity(entityitem);

@@ -36,8 +36,7 @@ public class PortalTravelAgent {
 			// int k = MathHelper.floor(entity.locZ); // CloudSpigot
 			// CraftBukkit start - Modularize end portal creation
 			BlockPosition created = this.createEndPortal(entity.locX, entity.locY, entity.locZ);
-			entity.setPositionRotation(created.getX(), created.getY(), created.getZ(),
-					entity.yaw, 0.0F);
+			entity.setPositionRotation(created.getX(), created.getY(), created.getZ(), entity.yaw, 0.0F);
 			entity.motX = entity.motY = entity.motZ = 0.0D;
 		}
 	}
@@ -130,8 +129,7 @@ public class PortalTravelAgent {
 		long k = ChunkCoordIntPair.a(i, j);
 
 		if (this.c.contains(k)) {
-			PortalTravelAgent.ChunkCoordinatesPortal portaltravelagent_chunkcoordinatesportal = this.c
-					.getEntry(k);
+			PortalTravelAgent.ChunkCoordinatesPortal portaltravelagent_chunkcoordinatesportal = this.c.getEntry(k);
 
 			d0 = 0.0D;
 			object = portaltravelagent_chunkcoordinatesportal;
@@ -249,8 +247,7 @@ public class PortalTravelAgent {
 			// CraftBukkit start - Adjust position and velocity instances instead of entity
 			velocity.setX(d6 * f1 + d7 * f4);
 			velocity.setZ(d6 * f3 + d7 * f2);
-			f = f - entity.aH().opposite().b() * 90
-					+ shapedetector_shapedetectorcollection.b().b() * 90;
+			f = f - entity.aH().opposite().b() * 90 + shapedetector_shapedetectorcollection.b().b() * 90;
 			// entity.setPositionRotation(d2, d3, d4, entity.yaw, entity.pitch);
 			position.setX(d2);
 			position.setY(d3);

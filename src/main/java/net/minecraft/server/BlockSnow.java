@@ -26,8 +26,8 @@ public class BlockSnow extends Block {
 		float f = 0.125F;
 
 		return new AxisAlignedBB(blockposition.getX() + this.minX, blockposition.getY() + this.minY,
-				blockposition.getZ() + this.minZ, blockposition.getX() + this.maxX,
-				blockposition.getY() + i * f, blockposition.getZ() + this.maxZ);
+				blockposition.getZ() + this.minZ, blockposition.getX() + this.maxX, blockposition.getY() + i * f,
+				blockposition.getZ() + this.maxZ);
 	}
 
 	@Override
@@ -85,8 +85,7 @@ public class BlockSnow extends Block {
 	@Override
 	public void a(World world, EntityHuman entityhuman, BlockPosition blockposition, IBlockData iblockdata,
 			TileEntity tileentity) {
-		a(world, blockposition,
-				new ItemStack(Items.SNOWBALL, iblockdata.get(BlockSnow.LAYERS).intValue() + 1, 0));
+		a(world, blockposition, new ItemStack(Items.SNOWBALL, iblockdata.get(BlockSnow.LAYERS).intValue() + 1, 0));
 		world.setAir(blockposition);
 		entityhuman.b(StatisticList.MINE_BLOCK_COUNT[Block.getId(this)]);
 	}

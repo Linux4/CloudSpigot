@@ -48,8 +48,7 @@ public class WorldBorder {
 
 	// Inlined the getters from ChunkCoordIntPair
 	public boolean isInBounds(int x, int z) {
-		return (x << 4) + 15 > this.b() && x << 4 < this.d()
-				&& (z << 4) + 15 > this.c() && x << 4 < this.e();
+		return (x << 4) + 15 > this.b() && x << 4 < this.d() && (z << 4) + 15 > this.c() && x << 4 < this.e();
 	}
 
 	public boolean a(AxisAlignedBB axisalignedbb) {

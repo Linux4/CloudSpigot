@@ -130,7 +130,7 @@ public abstract class Entity implements ICommandListener {
 	public int getChunkZ() {
 		return ag;
 	} // PAIL
-	// CloudSpigot end
+		// CloudSpigot end
 
 	// Spigot start
 	public final byte activationType = org.spigotmc.ActivationRange.initializeEntityActivationType(this);
@@ -286,8 +286,7 @@ public abstract class Entity implements ICommandListener {
 		float f = this.width / 2.0F;
 		float f1 = this.length;
 
-		this.a(new AxisAlignedBB(d0 - f, d1, d2 - f, d0 + f, d1 + f1,
-				d2 + f));
+		this.a(new AxisAlignedBB(d0 - f, d1, d2 - f, d0 + f, d1 + f1, d2 + f));
 	}
 
 	public void t_() {
@@ -978,16 +977,15 @@ public abstract class Entity implements ICommandListener {
 		for (i = 0; i < 1.0F + this.width * 20.0F; ++i) {
 			f2 = (this.random.nextFloat() * 2.0F - 1.0F) * this.width;
 			f3 = (this.random.nextFloat() * 2.0F - 1.0F) * this.width;
-			this.world.addParticle(EnumParticle.WATER_BUBBLE, this.locX + f2, f1 + 1.0F,
-					this.locZ + f3, this.motX, this.motY - this.random.nextFloat() * 0.2F,
-					this.motZ, new int[0]);
+			this.world.addParticle(EnumParticle.WATER_BUBBLE, this.locX + f2, f1 + 1.0F, this.locZ + f3, this.motX,
+					this.motY - this.random.nextFloat() * 0.2F, this.motZ, new int[0]);
 		}
 
 		for (i = 0; i < 1.0F + this.width * 20.0F; ++i) {
 			f2 = (this.random.nextFloat() * 2.0F - 1.0F) * this.width;
 			f3 = (this.random.nextFloat() * 2.0F - 1.0F) * this.width;
-			this.world.addParticle(EnumParticle.WATER_SPLASH, this.locX + f2, f1 + 1.0F,
-					this.locZ + f3, this.motX, this.motY, this.motZ, new int[0]);
+			this.world.addParticle(EnumParticle.WATER_SPLASH, this.locX + f2, f1 + 1.0F, this.locZ + f3, this.motX,
+					this.motY, this.motZ, new int[0]);
 		}
 
 	}
@@ -1008,11 +1006,9 @@ public abstract class Entity implements ICommandListener {
 		Block block = iblockdata.getBlock();
 
 		if (block.b() != -1) {
-			this.world.addParticle(EnumParticle.BLOCK_CRACK,
-					this.locX + (this.random.nextFloat() - 0.5D) * this.width,
-					this.getBoundingBox().b + 0.1D,
-					this.locZ + (this.random.nextFloat() - 0.5D) * this.width, -this.motX * 4.0D,
-					1.5D, -this.motZ * 4.0D, new int[] { Block.getCombinedId(iblockdata) });
+			this.world.addParticle(EnumParticle.BLOCK_CRACK, this.locX + (this.random.nextFloat() - 0.5D) * this.width,
+					this.getBoundingBox().b + 0.1D, this.locZ + (this.random.nextFloat() - 0.5D) * this.width,
+					-this.motX * 4.0D, 1.5D, -this.motZ * 4.0D, new int[] { Block.getCombinedId(iblockdata) });
 		}
 
 	}
@@ -1065,8 +1061,7 @@ public abstract class Entity implements ICommandListener {
 	}
 
 	public float c(float f) {
-		BlockPosition blockposition = new BlockPosition(this.locX, this.locY + this.getHeadHeight(),
-				this.locZ);
+		BlockPosition blockposition = new BlockPosition(this.locX, this.locY + this.getHeadHeight(), this.locZ);
 
 		return this.world.isLoaded(blockposition) ? this.world.o(blockposition) : 0.0F;
 	}
@@ -1103,8 +1098,7 @@ public abstract class Entity implements ICommandListener {
 	}
 
 	public void setPositionRotation(BlockPosition blockposition, float f, float f1) {
-		this.setPositionRotation(blockposition.getX() + 0.5D, blockposition.getY(),
-				blockposition.getZ() + 0.5D, f, f1);
+		this.setPositionRotation(blockposition.getX() + 0.5D, blockposition.getY(), blockposition.getZ() + 0.5D, f, f1);
 	}
 
 	public void setPositionRotation(double d0, double d1, double d2, float f, float f1) {
@@ -1533,8 +1527,7 @@ public abstract class Entity implements ICommandListener {
 					Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
 
 			for (int i = 0; i < 8; ++i) {
-				int j = MathHelper.floor(
-						this.locY + ((i >> 0) % 2 - 0.5F) * 0.1F + this.getHeadHeight());
+				int j = MathHelper.floor(this.locY + ((i >> 0) % 2 - 0.5F) * 0.1F + this.getHeadHeight());
 				int k = MathHelper.floor(this.locX + ((i >> 1) % 2 - 0.5F) * this.width * 0.8F);
 				int l = MathHelper.floor(this.locZ + ((i >> 2) % 2 - 0.5F) * this.width * 0.8F);
 
@@ -1571,8 +1564,7 @@ public abstract class Entity implements ICommandListener {
 				this.vehicle.al();
 				this.as += this.vehicle.yaw - this.vehicle.lastYaw;
 
-				for (this.ar += this.vehicle.pitch
-						- this.vehicle.lastPitch; this.as >= 180.0D; this.as -= 360.0D) {
+				for (this.ar += this.vehicle.pitch - this.vehicle.lastPitch; this.as >= 180.0D; this.as -= 360.0D) {
 					;
 				}
 
@@ -1667,9 +1659,8 @@ public abstract class Entity implements ICommandListener {
 				if (dismountEvent.isCancelled())
 					return;
 				// CloudSpigot end
-				this.setPositionRotation(this.vehicle.locX,
-						this.vehicle.getBoundingBox().b + this.vehicle.length, this.vehicle.locZ, this.yaw,
-						this.pitch);
+				this.setPositionRotation(this.vehicle.locX, this.vehicle.getBoundingBox().b + this.vehicle.length,
+						this.vehicle.locZ, this.yaw, this.pitch);
 				this.vehicle.passenger = null;
 			}
 
@@ -1703,8 +1694,8 @@ public abstract class Entity implements ICommandListener {
 					if (exitEvent != null && this.vehicle == originalVehicle && this.vehicle != null
 							&& this.vehicle.passenger == originalPassenger) {
 						this.setPositionRotation(this.vehicle.locX,
-								this.vehicle.getBoundingBox().b + this.vehicle.length, this.vehicle.locZ,
-								this.yaw, this.pitch);
+								this.vehicle.getBoundingBox().b + this.vehicle.length, this.vehicle.locZ, this.yaw,
+								this.pitch);
 						this.vehicle.passenger = null;
 						this.vehicle = null;
 					}
@@ -1767,8 +1758,7 @@ public abstract class Entity implements ICommandListener {
 								.c() == EnumDirection.EnumAxisDirection.NEGATIVE ? 1 : 0),
 						d0, d0 - shapedetector_shapedetectorcollection.d()));
 				double d2 = MathHelper.c(this.locY - 1.0D, shapedetector_shapedetectorcollection.a().getY(),
-						shapedetector_shapedetectorcollection.a().getY()
-								- shapedetector_shapedetectorcollection.e());
+						shapedetector_shapedetectorcollection.a().getY() - shapedetector_shapedetectorcollection.e());
 
 				this.ao = new Vec3D(d1, d2, 0.0D);
 				this.ap = shapedetector_shapedetectorcollection.b();
@@ -2194,9 +2184,8 @@ public abstract class Entity implements ICommandListener {
 		});
 		crashreportsystemdetails.a("Entity\'s Exact location", String.format("%.2f, %.2f, %.2f",
 				new Object[] { Double.valueOf(this.locX), Double.valueOf(this.locY), Double.valueOf(this.locZ) }));
-		crashreportsystemdetails.a("Entity\'s Block location",
-				CrashReportSystemDetails.a(MathHelper.floor(this.locX),
-						MathHelper.floor(this.locY), MathHelper.floor(this.locZ)));
+		crashreportsystemdetails.a("Entity\'s Block location", CrashReportSystemDetails.a(MathHelper.floor(this.locX),
+				MathHelper.floor(this.locY), MathHelper.floor(this.locZ)));
 		crashreportsystemdetails.a("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f",
 				new Object[] { Double.valueOf(this.motX), Double.valueOf(this.motY), Double.valueOf(this.motZ) }));
 		crashreportsystemdetails.a("Entity\'s Rider", new Callable<String>() {

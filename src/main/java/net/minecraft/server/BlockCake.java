@@ -15,8 +15,7 @@ public class BlockCake extends Block {
 	@Override
 	public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
 		float f = 0.0625F;
-		float f1 = (1 + iblockaccess.getType(blockposition).get(BlockCake.BITES).intValue() * 2)
-				/ 16.0F;
+		float f1 = (1 + iblockaccess.getType(blockposition).get(BlockCake.BITES).intValue() * 2) / 16.0F;
 		float f2 = 0.5F;
 
 		this.a(f1, 0.0F, f, 1.0F - f, f2, 1.0F - f);
@@ -36,9 +35,8 @@ public class BlockCake extends Block {
 		float f1 = (1 + iblockdata.get(BlockCake.BITES).intValue() * 2) / 16.0F;
 		float f2 = 0.5F;
 
-		return new AxisAlignedBB(blockposition.getX() + f1, blockposition.getY(),
-				blockposition.getZ() + f, blockposition.getX() + 1 - f,
-				blockposition.getY() + f2, blockposition.getZ() + 1 - f);
+		return new AxisAlignedBB(blockposition.getX() + f1, blockposition.getY(), blockposition.getZ() + f,
+				blockposition.getX() + 1 - f, blockposition.getY() + f2, blockposition.getZ() + 1 - f);
 	}
 
 	@Override

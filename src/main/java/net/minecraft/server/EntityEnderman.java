@@ -98,8 +98,8 @@ public class EntityEnderman extends EntityMonster {
 			return false;
 		} else {
 			Vec3D vec3d = entityhuman.d(1.0F).a();
-			Vec3D vec3d1 = new Vec3D(this.locX - entityhuman.locX, this.getBoundingBox().b
-					+ this.length / 2.0F - (entityhuman.locY + entityhuman.getHeadHeight()),
+			Vec3D vec3d1 = new Vec3D(this.locX - entityhuman.locX,
+					this.getBoundingBox().b + this.length / 2.0F - (entityhuman.locY + entityhuman.getHeadHeight()),
 					this.locZ - entityhuman.locZ);
 			double d0 = vec3d1.b();
 
@@ -119,8 +119,7 @@ public class EntityEnderman extends EntityMonster {
 	public void m() {
 		if (this.world.isClientSide) {
 			for (int i = 0; i < 2; ++i) {
-				this.world.addParticle(EnumParticle.PORTAL,
-						this.locX + (this.random.nextDouble() - 0.5D) * this.width,
+				this.world.addParticle(EnumParticle.PORTAL, this.locX + (this.random.nextDouble() - 0.5D) * this.width,
 						this.locY + this.random.nextDouble() * this.length - 0.25D,
 						this.locZ + (this.random.nextDouble() - 0.5D) * this.width,
 						(this.random.nextDouble() - 0.5D) * 2.0D, -this.random.nextDouble(),
@@ -241,8 +240,7 @@ public class EntityEnderman extends EntityMonster {
 				double d8 = d4 + (this.locY - d4) * d6 + this.random.nextDouble() * this.length;
 				double d9 = d5 + (this.locZ - d5) * d6 + (this.random.nextDouble() - 0.5D) * this.width * 2.0D;
 
-				this.world.addParticle(EnumParticle.PORTAL, d7, d8, d9, f, f1, f2,
-						new int[0]);
+				this.world.addParticle(EnumParticle.PORTAL, d7, d8, d9, f, f1, f2, new int[0]);
 			}
 
 			this.world.makeSound(d3, d4, d5, "mob.endermen.portal", 1.0F, 1.0F);

@@ -134,8 +134,7 @@ public class WorldGenRegistration {
 						this.e = true;
 						EntityWitch entitywitch = new EntityWitch(world);
 
-						entitywitch.setPositionRotation(i1 + 0.5D, j1, k1 + 0.5D, 0.0F,
-								0.0F);
+						entitywitch.setPositionRotation(i1 + 0.5D, j1, k1 + 0.5D, 0.0F, 0.0F);
 						entitywitch.prepare(world.E(new BlockPosition(i1, j1, k1)), (GroupDataEntity) null);
 						world.addEntity(entitywitch, org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.CHUNK_GEN); // CraftBukkit
 																														// -

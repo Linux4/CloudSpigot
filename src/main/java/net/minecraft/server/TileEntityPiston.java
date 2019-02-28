@@ -83,9 +83,7 @@ public class TileEntityPiston extends TileEntity implements IUpdatePlayerListBox
 							entity.motZ = this.f.getAdjacentZ();
 						}
 					} else {
-						entity.move(f1 * this.f.getAdjacentX(),
-								f1 * this.f.getAdjacentY(),
-								f1 * this.f.getAdjacentZ());
+						entity.move(f1 * this.f.getAdjacentX(), f1 * this.f.getAdjacentY(), f1 * this.f.getAdjacentZ());
 					}
 				}
 

@@ -23,8 +23,7 @@ public class GameProfileBanEntry extends ExpirableListEntry<GameProfile> {
 	@Override
 	protected void a(JsonObject jsonobject) {
 		if (this.getKey() != null) {
-			jsonobject.addProperty("uuid", this.getKey().getId() == null ? ""
-					: this.getKey().getId().toString());
+			jsonobject.addProperty("uuid", this.getKey().getId() == null ? "" : this.getKey().getId().toString());
 			jsonobject.addProperty("name", this.getKey().getName());
 			super.a(jsonobject);
 		}

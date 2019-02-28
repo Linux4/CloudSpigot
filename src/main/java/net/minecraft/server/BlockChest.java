@@ -438,10 +438,10 @@ public class BlockChest extends BlockContainer {
 			return false;
 		}
 		// CloudSpigot end
-		Iterator<EntityOcelot> iterator = world.a(EntityOcelot.class,
-				new AxisAlignedBB(blockposition.getX(), blockposition.getY() + 1,
-						blockposition.getZ(), blockposition.getX() + 1,
-						blockposition.getY() + 2, blockposition.getZ() + 1))
+		Iterator<EntityOcelot> iterator = world
+				.a(EntityOcelot.class,
+						new AxisAlignedBB(blockposition.getX(), blockposition.getY() + 1, blockposition.getZ(),
+								blockposition.getX() + 1, blockposition.getY() + 2, blockposition.getZ() + 1))
 				.iterator();
 
 		EntityOcelot entityocelot;

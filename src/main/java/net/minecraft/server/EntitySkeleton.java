@@ -253,8 +253,7 @@ public class EntitySkeleton extends EntityMonster implements IRangedEntity {
 		int i = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_DAMAGE.id, this.bA());
 		int j = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_KNOCKBACK.id, this.bA());
 
-		entityarrow.b(f * 2.0F + this.random.nextGaussian() * 0.25D
-				+ this.world.getDifficulty().a() * 0.11F);
+		entityarrow.b(f * 2.0F + this.random.nextGaussian() * 0.25D + this.world.getDifficulty().a() * 0.11F);
 		if (i > 0) {
 			entityarrow.b(entityarrow.j() + i * 0.5D + 0.5D);
 		}

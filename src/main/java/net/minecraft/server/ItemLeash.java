@@ -35,8 +35,8 @@ public class ItemLeash extends Item {
 		int i = blockposition.getX();
 		int j = blockposition.getY();
 		int k = blockposition.getZ();
-		List<EntityInsentient> list = world.a(EntityInsentient.class, new AxisAlignedBB(i - d0,
-				j - d0, k - d0, i + d0, j + d0, k + d0));
+		List<EntityInsentient> list = world.a(EntityInsentient.class,
+				new AxisAlignedBB(i - d0, j - d0, k - d0, i + d0, j + d0, k + d0));
 		Iterator<EntityInsentient> iterator = list.iterator();
 
 		while (iterator.hasNext()) {

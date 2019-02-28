@@ -90,8 +90,7 @@ public class ContainerWorkbench extends Container {
 		if (!this.checkReachable)
 			return true; // CraftBukkit
 		return this.g.getType(this.h).getBlock() != Blocks.CRAFTING_TABLE ? false
-				: entityhuman.e(this.h.getX() + 0.5D, this.h.getY() + 0.5D,
-						this.h.getZ() + 0.5D) <= 64.0D;
+				: entityhuman.e(this.h.getX() + 0.5D, this.h.getY() + 0.5D, this.h.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

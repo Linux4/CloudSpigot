@@ -192,12 +192,10 @@ public abstract class EntityInsentient extends EntityLiving {
 				double d3 = 10.0D;
 
 				this.world.addParticle(EnumParticle.EXPLOSION_NORMAL,
-						this.locX + this.random.nextFloat() * this.width * 2.0F - this.width
-								- d0 * d3,
+						this.locX + this.random.nextFloat() * this.width * 2.0F - this.width - d0 * d3,
 						this.locY + this.random.nextFloat() * this.length - d1 * d3,
-						this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width
-								- d2 * d3,
-						d0, d1, d2, new int[0]);
+						this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width - d2 * d3, d0, d1, d2,
+						new int[0]);
 			}
 		} else {
 			this.world.broadcastEntityEffect(this, (byte) 20);
@@ -547,11 +545,9 @@ public abstract class EntityInsentient extends EntityLiving {
 		if (entity instanceof EntityLiving) {
 			EntityLiving entityliving = (EntityLiving) entity;
 
-			d2 = entityliving.locY + entityliving.getHeadHeight()
-					- (this.locY + this.getHeadHeight());
+			d2 = entityliving.locY + entityliving.getHeadHeight() - (this.locY + this.getHeadHeight());
 		} else {
-			d2 = (entity.getBoundingBox().b + entity.getBoundingBox().e) / 2.0D
-					- (this.locY + this.getHeadHeight());
+			d2 = (entity.getBoundingBox().b + entity.getBoundingBox().e) / 2.0D - (this.locY + this.getHeadHeight());
 		}
 
 		double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1);
@@ -581,8 +577,7 @@ public abstract class EntityInsentient extends EntityLiving {
 	}
 
 	public boolean canSpawn() {
-		return this.world.a(this.getBoundingBox(), this)
-				&& this.world.getCubes(this, this.getBoundingBox()).isEmpty()
+		return this.world.a(this.getBoundingBox(), this) && this.world.getCubes(this, this.getBoundingBox()).isEmpty()
 				&& !this.world.containsLiquid(this.getBoundingBox());
 	}
 
@@ -636,8 +631,7 @@ public abstract class EntityInsentient extends EntityLiving {
 			ItemStack itemstack = this.getEquipment(j);
 			boolean flag1 = this.dropChances[j] > 1.0F;
 
-			if (itemstack != null && (flag || flag1)
-					&& this.random.nextFloat() - i * 0.01F < this.dropChances[j]) {
+			if (itemstack != null && (flag || flag1) && this.random.nextFloat() - i * 0.01F < this.dropChances[j]) {
 				if (!flag1 && itemstack.e()) {
 					int k = Math.max(itemstack.j() - 25, 1);
 					int l = itemstack.j() - this.random.nextInt(this.random.nextInt(k) + 1);
@@ -928,8 +922,7 @@ public abstract class EntityInsentient extends EntityLiving {
 		this.bo = true;
 		this.bp = entity;
 		if (!this.world.isClientSide && flag && this.world instanceof WorldServer) {
-			((WorldServer) this.world).getTracker().a(this,
-					(new PacketPlayOutAttachEntity(1, this, this.bp)));
+			((WorldServer) this.world).getTracker().a(this, (new PacketPlayOutAttachEntity(1, this, this.bp)));
 		}
 
 	}

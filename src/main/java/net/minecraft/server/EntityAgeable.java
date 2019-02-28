@@ -144,8 +144,8 @@ public abstract class EntityAgeable extends EntityCreature {
 					this.world.addParticle(EnumParticle.VILLAGER_HAPPY,
 							this.locX + this.random.nextFloat() * this.width * 2.0F - this.width,
 							this.locY + 0.5D + this.random.nextFloat() * this.length,
-							this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width,
-							0.0D, 0.0D, 0.0D, new int[0]);
+							this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width, 0.0D, 0.0D, 0.0D,
+							new int[0]);
 				}
 
 				--this.c;

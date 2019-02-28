@@ -45,8 +45,10 @@ public class BlockDaylightDetector extends BlockContainer {
 
 			if (iblockdata.get(BlockDaylightDetector.POWER).intValue() != i) {
 				i = org.bukkit.craftbukkit.event.CraftEventFactory.callRedstoneChange(world, blockposition.getX(),
-						blockposition.getY(), blockposition.getZ(), (iblockdata.get(POWER)), i)
-						.getNewCurrent(); // CraftBukkit - Call BlockRedstoneEvent
+						blockposition.getY(), blockposition.getZ(), (iblockdata.get(POWER)), i).getNewCurrent(); // CraftBukkit
+																													// -
+																													// Call
+																													// BlockRedstoneEvent
 				world.setTypeAndData(blockposition, iblockdata.set(BlockDaylightDetector.POWER, Integer.valueOf(i)), 3);
 			}
 

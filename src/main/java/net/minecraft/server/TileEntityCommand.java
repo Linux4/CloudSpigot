@@ -15,8 +15,7 @@ public class TileEntityCommand extends TileEntity {
 		@Override
 		public Vec3D d() {
 			return new Vec3D(TileEntityCommand.this.position.getX() + 0.5D,
-					TileEntityCommand.this.position.getY() + 0.5D,
-					TileEntityCommand.this.position.getZ() + 0.5D);
+					TileEntityCommand.this.position.getY() + 0.5D, TileEntityCommand.this.position.getZ() + 0.5D);
 		}
 
 		@Override

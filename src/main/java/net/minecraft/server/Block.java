@@ -293,8 +293,8 @@ public class Block {
 
 	public AxisAlignedBB a(World world, BlockPosition blockposition, IBlockData iblockdata) {
 		return new AxisAlignedBB(blockposition.getX() + this.minX, blockposition.getY() + this.minY,
-				blockposition.getZ() + this.minZ, blockposition.getX() + this.maxX,
-				blockposition.getY() + this.maxY, blockposition.getZ() + this.maxZ);
+				blockposition.getZ() + this.minZ, blockposition.getX() + this.maxX, blockposition.getY() + this.maxY,
+				blockposition.getZ() + this.maxZ);
 	}
 
 	public boolean c() {
@@ -378,8 +378,8 @@ public class Block {
 			double d0 = world.random.nextFloat() * f + (1.0F - f) * 0.5D;
 			double d1 = world.random.nextFloat() * f + (1.0F - f) * 0.5D;
 			double d2 = world.random.nextFloat() * f + (1.0F - f) * 0.5D;
-			EntityItem entityitem = new EntityItem(world, blockposition.getX() + d0,
-					blockposition.getY() + d1, blockposition.getZ() + d2, itemstack);
+			EntityItem entityitem = new EntityItem(world, blockposition.getX() + d0, blockposition.getY() + d1,
+					blockposition.getZ() + d2, itemstack);
 
 			entityitem.p();
 			world.addEntity(entityitem);
@@ -392,8 +392,8 @@ public class Block {
 				int j = EntityExperienceOrb.getOrbValue(i);
 
 				i -= j;
-				world.addEntity(new EntityExperienceOrb(world, blockposition.getX() + 0.5D,
-						blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D, j));
+				world.addEntity(new EntityExperienceOrb(world, blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
+						blockposition.getZ() + 0.5D, j));
 			}
 		}
 
@@ -409,10 +409,8 @@ public class Block {
 
 	public MovingObjectPosition a(World world, BlockPosition blockposition, Vec3D vec3d, Vec3D vec3d1) {
 		this.updateShape(world, blockposition);
-		vec3d = vec3d.add((-blockposition.getX()), (-blockposition.getY()),
-				(-blockposition.getZ()));
-		vec3d1 = vec3d1.add((-blockposition.getX()), (-blockposition.getY()),
-				(-blockposition.getZ()));
+		vec3d = vec3d.add((-blockposition.getX()), (-blockposition.getY()), (-blockposition.getZ()));
+		vec3d1 = vec3d1.add((-blockposition.getX()), (-blockposition.getY()), (-blockposition.getZ()));
 		Vec3D vec3d2 = vec3d.a(vec3d1, this.minX);
 		Vec3D vec3d3 = vec3d.a(vec3d1, this.maxX);
 		Vec3D vec3d4 = vec3d.b(vec3d1, this.minY);
@@ -499,8 +497,9 @@ public class Block {
 				enumdirection = EnumDirection.SOUTH;
 			}
 
-			return new MovingObjectPosition(vec3d8.add(blockposition.getX(), blockposition.getY(),
-					blockposition.getZ()), enumdirection, blockposition);
+			return new MovingObjectPosition(
+					vec3d8.add(blockposition.getX(), blockposition.getY(), blockposition.getZ()), enumdirection,
+					blockposition);
 		}
 	}
 

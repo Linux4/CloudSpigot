@@ -24,9 +24,8 @@ public class BlockSoil extends Block {
 
 	@Override
 	public AxisAlignedBB a(World world, BlockPosition blockposition, IBlockData iblockdata) {
-		return new AxisAlignedBB(blockposition.getX(), blockposition.getY(),
-				blockposition.getZ(), blockposition.getX() + 1, blockposition.getY() + 1,
-				blockposition.getZ() + 1);
+		return new AxisAlignedBB(blockposition.getX(), blockposition.getY(), blockposition.getZ(),
+				blockposition.getX() + 1, blockposition.getY() + 1, blockposition.getZ() + 1);
 	}
 
 	@Override

@@ -37,8 +37,7 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimal {
 				this.world.addParticle(EnumParticle.HEART,
 						this.locX + this.random.nextFloat() * this.width * 2.0F - this.width,
 						this.locY + 0.5D + this.random.nextFloat() * this.length,
-						this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width, d0,
-						d1, d2, new int[0]);
+						this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2, new int[0]);
 			}
 		}
 

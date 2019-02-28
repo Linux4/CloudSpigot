@@ -47,8 +47,8 @@ public class PacketEncoder extends MessageToByteEncoder<Packet<?>> {
 	}
 
 	@Override
-	protected void encode(ChannelHandlerContext channelhandlercontext, Packet<?> object,
-			ByteBuf bytebuf) throws Exception {
+	protected void encode(ChannelHandlerContext channelhandlercontext, Packet<?> object, ByteBuf bytebuf)
+			throws Exception {
 		this.a(channelhandlercontext, object, bytebuf);
 	}
 }

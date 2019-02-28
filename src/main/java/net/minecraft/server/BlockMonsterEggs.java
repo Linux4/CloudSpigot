@@ -31,8 +31,7 @@ public class BlockMonsterEggs extends Block {
 
 	@Override
 	protected ItemStack i(IBlockData iblockdata) {
-		switch (BlockMonsterEggs.SyntheticClass_1.a[iblockdata
-				.get(BlockMonsterEggs.VARIANT).ordinal()]) {
+		switch (BlockMonsterEggs.SyntheticClass_1.a[iblockdata.get(BlockMonsterEggs.VARIANT).ordinal()]) {
 		case 1:
 			return new ItemStack(Blocks.COBBLESTONE);
 

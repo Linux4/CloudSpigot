@@ -65,15 +65,14 @@ public class BlockPumpkin extends BlockDirectional {
 			EntitySnowman entitysnowman = new EntitySnowman(world);
 			BlockPosition blockposition1 = shapedetector_shapedetectorcollection.a(0, 2, 0).getPosition();
 
-			entitysnowman.setPositionRotation(blockposition1.getX() + 0.5D,
-					blockposition1.getY() + 0.05D, blockposition1.getZ() + 0.5D, 0.0F, 0.0F);
+			entitysnowman.setPositionRotation(blockposition1.getX() + 0.5D, blockposition1.getY() + 0.05D,
+					blockposition1.getZ() + 0.5D, 0.0F, 0.0F);
 			// CraftBukkit start
 			if (world.addEntity(entitysnowman, SpawnReason.BUILD_SNOWMAN)) {
 				blockList.updateList();
 
 				for (j = 0; j < 120; ++j) {
-					world.addParticle(EnumParticle.SNOW_SHOVEL,
-							blockposition1.getX() + world.random.nextDouble(),
+					world.addParticle(EnumParticle.SNOW_SHOVEL, blockposition1.getX() + world.random.nextDouble(),
 							blockposition1.getY() + world.random.nextDouble() * 2.5D,
 							blockposition1.getZ() + world.random.nextDouble(), 0.0D, 0.0D, 0.0D, new int[0]);
 				}
@@ -103,8 +102,8 @@ public class BlockPumpkin extends BlockDirectional {
 			EntityIronGolem entityirongolem = new EntityIronGolem(world);
 
 			entityirongolem.setPlayerCreated(true);
-			entityirongolem.setPositionRotation(blockposition2.getX() + 0.5D,
-					blockposition2.getY() + 0.05D, blockposition2.getZ() + 0.5D, 0.0F, 0.0F);
+			entityirongolem.setPositionRotation(blockposition2.getX() + 0.5D, blockposition2.getY() + 0.05D,
+					blockposition2.getZ() + 0.5D, 0.0F, 0.0F);
 
 			// CraftBukkit start
 			if (world.addEntity(entityirongolem, SpawnReason.BUILD_IRONGOLEM)) {
@@ -130,8 +129,7 @@ public class BlockPumpkin extends BlockDirectional {
 
 	@Override
 	public boolean canPlace(World world, BlockPosition blockposition) {
-		return world.getType(blockposition).getBlock().material.isReplaceable()
-				&& World.a(world, blockposition.down());
+		return world.getType(blockposition).getBlock().material.isReplaceable() && World.a(world, blockposition.down());
 	}
 
 	@Override

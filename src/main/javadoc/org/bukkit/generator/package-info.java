@@ -3,4 +3,3 @@
  * implementation.
  */
 package org.bukkit.generator;
-

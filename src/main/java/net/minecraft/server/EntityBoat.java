@@ -187,10 +187,10 @@ public class EntityBoat extends Entity {
 		double d0 = 0.0D;
 
 		for (int i = 0; i < b0; ++i) {
-			double d1 = this.getBoundingBox().b
-					+ (this.getBoundingBox().e - this.getBoundingBox().b) * (i + 0) / b0 - 0.125D;
-			double d2 = this.getBoundingBox().b
-					+ (this.getBoundingBox().e - this.getBoundingBox().b) * (i + 1) / b0 - 0.125D;
+			double d1 = this.getBoundingBox().b + (this.getBoundingBox().e - this.getBoundingBox().b) * (i + 0) / b0
+					- 0.125D;
+			double d2 = this.getBoundingBox().b + (this.getBoundingBox().e - this.getBoundingBox().b) * (i + 1) / b0
+					- 0.125D;
 			AxisAlignedBB axisalignedbb = new AxisAlignedBB(this.getBoundingBox().a, d1, this.getBoundingBox().c,
 					this.getBoundingBox().d, d2, this.getBoundingBox().f);
 
@@ -274,10 +274,8 @@ public class EntityBoat extends Entity {
 				EntityLiving entityliving = (EntityLiving) this.passenger;
 				float f = this.passenger.yaw + -entityliving.aZ * 90.0F;
 
-				this.motX += -Math.sin(f * 3.1415927F / 180.0F) * this.b * entityliving.ba
-						* 0.05000000074505806D;
-				this.motZ += Math.cos(f * 3.1415927F / 180.0F) * this.b * entityliving.ba
-						* 0.05000000074505806D;
+				this.motX += -Math.sin(f * 3.1415927F / 180.0F) * this.b * entityliving.ba * 0.05000000074505806D;
+				this.motZ += Math.cos(f * 3.1415927F / 180.0F) * this.b * entityliving.ba * 0.05000000074505806D;
 			}
 			// CraftBukkit start - Support unoccupied deceleration
 			else if (unoccupiedDeceleration >= 0) {

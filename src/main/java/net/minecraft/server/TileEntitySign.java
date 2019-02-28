@@ -64,8 +64,7 @@ public class TileEntitySign extends TileEntity {
 
 			@Override
 			public Vec3D d() {
-				return new Vec3D(TileEntitySign.this.position.getX() + 0.5D,
-						TileEntitySign.this.position.getY() + 0.5D,
+				return new Vec3D(TileEntitySign.this.position.getX() + 0.5D, TileEntitySign.this.position.getY() + 0.5D,
 						TileEntitySign.this.position.getZ() + 0.5D);
 			}
 
@@ -194,8 +193,8 @@ public class TileEntitySign extends TileEntity {
 					// CraftBukkit start
 					// MinecraftServer.getServer().getCommandHandler().a(tileentitysignplayerwrapper,
 					// chatclickable.b());
-					CommandBlockListenerAbstract.executeCommand(entityhuman,
-							entityhuman.getBukkitEntity(), chatclickable.b());
+					CommandBlockListenerAbstract.executeCommand(entityhuman, entityhuman.getBukkitEntity(),
+							chatclickable.b());
 					// CraftBukkit end
 				}
 			}

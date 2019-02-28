@@ -57,17 +57,16 @@ public class NameReferencingFileConverter {
 
 	private static void a(MinecraftServer minecraftserver, Collection<String> collection,
 			ProfileLookupCallback profilelookupcallback) {
-		String[] astring = Iterators
-				.toArray(Iterators.filter(collection.iterator(), new Predicate<String>() {
-					public boolean a(String s) {
-						return !UtilColor.b(s);
-					}
+		String[] astring = Iterators.toArray(Iterators.filter(collection.iterator(), new Predicate<String>() {
+			public boolean a(String s) {
+				return !UtilColor.b(s);
+			}
 
-					@Override
-					public boolean apply(String object) {
-						return this.a(object);
-					}
-				}), String.class);
+			@Override
+			public boolean apply(String object) {
+				return this.a(object);
+			}
+		}), String.class);
 
 		if (minecraftserver.getOnlineMode() || org.spigotmc.SpigotConfig.bungee) { // Spigot: bungee = online mode, for
 																					// now.
@@ -330,8 +329,7 @@ public class NameReferencingFileConverter {
 				};
 
 				a(minecraftserver, Lists.newArrayList(new String[] { s }), profilelookupcallback);
-				return arraylist.size() > 0 && arraylist.get(0).getId() != null
-						? arraylist.get(0).getId().toString()
+				return arraylist.size() > 0 && arraylist.get(0).getId() != null ? arraylist.get(0).getId().toString()
 						: "";
 			} else {
 				return EntityHuman.a(new GameProfile((UUID) null, s)).toString();

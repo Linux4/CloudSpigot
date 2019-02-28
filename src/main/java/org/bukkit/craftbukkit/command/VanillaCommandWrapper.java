@@ -113,8 +113,7 @@ public final class VanillaCommandWrapper extends VanillaCommand {
 		try {
 			if (vanillaCommand.canUse(icommandlistener)) {
 				if (i > -1) {
-					List<Entity> list = (PlayerSelector.getPlayers(icommandlistener, as[i],
-							Entity.class));
+					List<Entity> list = (PlayerSelector.getPlayers(icommandlistener, as[i], Entity.class));
 					String s2 = as[i];
 
 					icommandlistener.a(CommandObjectiveExecutor.EnumCommandResult.AFFECTED_ENTITIES, list.size());

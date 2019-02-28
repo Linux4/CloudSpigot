@@ -127,8 +127,7 @@ public class ItemWorldMap extends ItemWorldMapBase {
 								}
 
 								k3 /= i * i;
-								double d2 = (d1 - d0) * 4.0D / (i + 4)
-										+ ((k1 + l1 & 1) - 0.5D) * 0.4D;
+								double d2 = (d1 - d0) * 4.0D / (i + 4) + ((k1 + l1 & 1) - 0.5D) * 0.4D;
 								byte b0 = 1;
 
 								if (d2 > 0.6D) {

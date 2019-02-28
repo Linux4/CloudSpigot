@@ -91,9 +91,8 @@ public class TileEntityBeacon extends TileEntityContainer implements IUpdatePlay
 			int i = this.position.getX();
 			int j = this.position.getY();
 			int k = this.position.getZ();
-			AxisAlignedBB axisalignedbb = (new AxisAlignedBB(i, j, k, i + 1,
-					j + 1, k + 1)).grow(d0, d0, d0).a(0.0D, this.world.getHeight(),
-							0.0D);
+			AxisAlignedBB axisalignedbb = (new AxisAlignedBB(i, j, k, i + 1, j + 1, k + 1)).grow(d0, d0, d0).a(0.0D,
+					this.world.getHeight(), 0.0D);
 			List<EntityHuman> list = this.world.a(EntityHuman.class, axisalignedbb);
 			Iterator<EntityHuman> iterator = list.iterator();
 
@@ -228,9 +227,8 @@ public class TileEntityBeacon extends TileEntityContainer implements IUpdatePlay
 		}
 
 		if (!this.world.isClientSide && this.j == 4 && i < this.j) {
-			Iterator<EntityHuman> iterator = this.world.a(EntityHuman.class,
-					(new AxisAlignedBB(j, k, l, j, k - 4, l))
-							.grow(10.0D, 5.0D, 10.0D))
+			Iterator<EntityHuman> iterator = this.world
+					.a(EntityHuman.class, (new AxisAlignedBB(j, k, l, j, k - 4, l)).grow(10.0D, 5.0D, 10.0D))
 					.iterator();
 
 			while (iterator.hasNext()) {

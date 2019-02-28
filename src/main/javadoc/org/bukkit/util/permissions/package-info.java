@@ -3,4 +3,3 @@
  * permission} functionality.
  */
 package org.bukkit.util.permissions;
-

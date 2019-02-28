@@ -315,8 +315,7 @@ public class EnchantmentManager {
 			Map<Integer, WeightedRandomEnchant> map = b(l, itemstack);
 
 			if (map != null && !map.isEmpty()) {
-				WeightedRandomEnchant weightedrandomenchant = WeightedRandom.a(random,
-						map.values());
+				WeightedRandomEnchant weightedrandomenchant = WeightedRandom.a(random, map.values());
 
 				if (weightedrandomenchant != null) {
 					arraylist = Lists.newArrayList();
@@ -332,8 +331,7 @@ public class EnchantmentManager {
 
 							while (true) {
 								if (iterator1.hasNext()) {
-									WeightedRandomEnchant weightedrandomenchant1 = iterator1
-											.next();
+									WeightedRandomEnchant weightedrandomenchant1 = iterator1.next();
 
 									if (weightedrandomenchant1.enchantment.a(Enchantment.getById(integer.intValue()))) {
 										continue;
@@ -350,8 +348,7 @@ public class EnchantmentManager {
 						}
 
 						if (!map.isEmpty()) {
-							WeightedRandomEnchant weightedrandomenchant2 = WeightedRandom
-									.a(random, map.values());
+							WeightedRandomEnchant weightedrandomenchant2 = WeightedRandom.a(random, map.values());
 
 							arraylist.add(weightedrandomenchant2);
 						}

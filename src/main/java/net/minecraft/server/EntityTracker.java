@@ -137,8 +137,7 @@ public class EntityTracker {
 			entity.appendEntityCrashDetails(crashreportsystemdetails);
 			CrashReportSystemDetails crashreportsystemdetails1 = crashreport.a("Entity That Is Already Tracked");
 
-			this.trackedEntities.get(entity.getId()).tracker
-					.appendEntityCrashDetails(crashreportsystemdetails1);
+			this.trackedEntities.get(entity.getId()).tracker.appendEntityCrashDetails(crashreportsystemdetails1);
 
 			try {
 				throw new ReportedException(crashreport);

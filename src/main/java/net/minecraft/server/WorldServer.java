@@ -452,8 +452,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 					i1 = this.m >> 2;
 					blockposition = this.a(new BlockPosition(k + (i1 & 15), 0, l + (i1 >> 8 & 15)));
 					if (this.isRainingAt(blockposition)) {
-						this.strikeLightning(new EntityLightning(this, blockposition.getX(),
-								blockposition.getY(), blockposition.getZ()));
+						this.strikeLightning(new EntityLightning(this, blockposition.getX(), blockposition.getY(),
+								blockposition.getZ()));
 					}
 				}
 
@@ -524,8 +524,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
 								if (block.isTicking()) {
 									// ++i; // CloudSpigot
-									block.a(this,
-											new BlockPosition(j2 + k, l2 + chunksection.getYPosition(), k2 + l),
+									block.a(this, new BlockPosition(j2 + k, l2 + chunksection.getYPosition(), k2 + l),
 											iblockdata, this.random);
 								}
 							}
@@ -559,8 +558,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 			}
 		});
 
-		return !list.isEmpty() ? list.get(this.random.nextInt(list.size())).getChunkCoordinates()
-				: blockposition1;
+		return !list.isEmpty() ? list.get(this.random.nextInt(list.size())).getChunkCoordinates() : blockposition1;
 	}
 
 	@Override
@@ -1164,8 +1162,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
 				if (this.a(blockactiondata)) {
 					// CraftBukkit - this.worldProvider.dimension -> this.dimension
-					this.server.getPlayerList().sendPacketNearby(blockactiondata.a().getX(),
-							blockactiondata.a().getY(), blockactiondata.a().getZ(), 64.0D, dimension,
+					this.server.getPlayerList().sendPacketNearby(blockactiondata.a().getX(), blockactiondata.a().getY(),
+							blockactiondata.a().getZ(), 64.0D, dimension,
 							new PacketPlayOutBlockAction(blockactiondata.a(), blockactiondata.d(), blockactiondata.b(),
 									blockactiondata.c()));
 				}

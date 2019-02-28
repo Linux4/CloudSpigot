@@ -38,8 +38,8 @@ public class BlockDropper extends BlockDispenser {
 				if (itemstack != null) {
 					EnumDirection enumdirection = world.getType(blockposition).get(BlockDispenser.FACING);
 					BlockPosition blockposition1 = blockposition.shift(enumdirection);
-					IInventory iinventory = TileEntityHopper.b(world, blockposition1.getX(),
-							blockposition1.getY(), blockposition1.getZ());
+					IInventory iinventory = TileEntityHopper.b(world, blockposition1.getX(), blockposition1.getY(),
+							blockposition1.getZ());
 					ItemStack itemstack1;
 
 					if (iinventory == null) {

@@ -66,8 +66,7 @@ public class EntityEgg extends EntityProjectile {
 
 		for (int j = 0; j < 8; ++j) {
 			this.world.addParticle(EnumParticle.ITEM_CRACK, this.locX, this.locY, this.locZ,
-					(this.random.nextFloat() - 0.5D) * 0.08D,
-					(this.random.nextFloat() - 0.5D) * 0.08D,
+					(this.random.nextFloat() - 0.5D) * 0.08D, (this.random.nextFloat() - 0.5D) * 0.08D,
 					(this.random.nextFloat() - 0.5D) * 0.08D, new int[] { Item.getId(Items.EGG) });
 		}
 

@@ -348,8 +348,8 @@ public class EntityRabbit extends EntityAnimal {
 		this.world.addParticle(EnumParticle.BLOCK_DUST,
 				this.locX + this.random.nextFloat() * this.width * 2.0F - this.width,
 				this.locY + 0.5D + this.random.nextFloat() * this.length,
-				this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width, 0.0D, 0.0D,
-				0.0D, new int[] { Block.getCombinedId(Blocks.CARROTS.fromLegacyData(7)) });
+				this.locZ + this.random.nextFloat() * this.width * 2.0F - this.width, 0.0D, 0.0D, 0.0D,
+				new int[] { Block.getCombinedId(Blocks.CARROTS.fromLegacyData(7)) });
 		this.bu = 100;
 	}
 
@@ -463,16 +463,15 @@ public class EntityRabbit extends EntityAnimal {
 		@Override
 		public void e() {
 			super.e();
-			this.c.getControllerLook().a(this.b.getX() + 0.5D, this.b.getY() + 1,
-					this.b.getZ() + 0.5D, 10.0F, this.c.bQ());
+			this.c.getControllerLook().a(this.b.getX() + 0.5D, this.b.getY() + 1, this.b.getZ() + 0.5D, 10.0F,
+					this.c.bQ());
 			if (this.f()) {
 				World world = this.c.world;
 				BlockPosition blockposition = this.b.up();
 				IBlockData iblockdata = world.getType(blockposition);
 				Block block = iblockdata.getBlock();
 
-				if (this.e && block instanceof BlockCarrots
-						&& iblockdata.get(BlockCrops.AGE).intValue() == 7) {
+				if (this.e && block instanceof BlockCarrots && iblockdata.get(BlockCrops.AGE).intValue() == 7) {
 					world.setTypeAndData(blockposition, Blocks.AIR.getBlockData(), 2);
 					world.setAir(blockposition, true);
 					this.c.cp();
@@ -493,8 +492,8 @@ public class EntityRabbit extends EntityAnimal {
 				IBlockData iblockdata = world.getType(blockposition);
 
 				block = iblockdata.getBlock();
-				if (block instanceof BlockCarrots && iblockdata.get(BlockCrops.AGE).intValue() == 7
-						&& this.d && !this.e) {
+				if (block instanceof BlockCarrots && iblockdata.get(BlockCrops.AGE).intValue() == 7 && this.d
+						&& !this.e) {
 					this.e = true;
 					return true;
 				}

@@ -277,8 +277,8 @@ public abstract class BiomeBase {
 
 	public final float a(BlockPosition blockposition) {
 		if (blockposition.getY() > 64) {
-			float f = (float) (BiomeBase.ae.a(blockposition.getX() * 1.0D / 8.0D,
-					blockposition.getZ() * 1.0D / 8.0D) * 4.0D);
+			float f = (float) (BiomeBase.ae.a(blockposition.getX() * 1.0D / 8.0D, blockposition.getZ() * 1.0D / 8.0D)
+					* 4.0D);
 
 			return this.temperature - (f + blockposition.getY() - 64.0F) * 0.05F / 30.0F;
 		} else {

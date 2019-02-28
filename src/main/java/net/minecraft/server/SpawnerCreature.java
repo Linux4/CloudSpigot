@@ -159,11 +159,10 @@ public final class SpawnerCreature {
 												float f = j3 + 0.5F;
 												float f1 = l3 + 0.5F;
 
-												if (!worldserver.isPlayerNearbyWhoAffectsSpawning(f,
-														k3, f1, 24.0D)
-														&& blockposition.c(f, k3,
-																f1) >= 576.0D) { // CloudSpigot - Affects
-																							// Spawning API
+												if (!worldserver.isPlayerNearbyWhoAffectsSpawning(f, k3, f1, 24.0D)
+														&& blockposition.c(f, k3, f1) >= 576.0D) { // CloudSpigot -
+																									// Affects
+																									// Spawning API
 													if (biomebase_biomemeta == null) {
 														biomebase_biomemeta = worldserver.a(enumcreaturetype,
 																blockposition2);
@@ -188,9 +187,8 @@ public final class SpawnerCreature {
 															return j1;
 														}
 
-														entityinsentient.setPositionRotation(f, k3,
-																f1, worldserver.random.nextFloat() * 360.0F,
-																0.0F);
+														entityinsentient.setPositionRotation(f, k3, f1,
+																worldserver.random.nextFloat() * 360.0F, 0.0F);
 														if (entityinsentient.bR() && entityinsentient.canSpawn()) {
 															groupdataentity = entityinsentient.prepare(
 																	worldserver.E(new BlockPosition(entityinsentient)),
@@ -297,8 +295,7 @@ public final class SpawnerCreature {
 							EntityInsentient entityinsentient;
 
 							try {
-								entityinsentient = biomebase_biomemeta.b
-										.getConstructor(new Class[] { World.class })
+								entityinsentient = biomebase_biomemeta.b.getConstructor(new Class[] { World.class })
 										.newInstance(new Object[] { world });
 							} catch (Exception exception) {
 								exception.printStackTrace();
@@ -306,8 +303,7 @@ public final class SpawnerCreature {
 								continue;
 							}
 
-							entityinsentient.setPositionRotation(j1 + 0.5F,
-									blockposition.getY(), k1 + 0.5F,
+							entityinsentient.setPositionRotation(j1 + 0.5F, blockposition.getY(), k1 + 0.5F,
 									random.nextFloat() * 360.0F, 0.0F);
 							// CraftBukkit start - Added a reason for spawning this creature, moved
 							// entityinsentient.prepare(groupdataentity) up

@@ -164,8 +164,8 @@ public abstract class BlockButtonAbstract extends Block {
 			// CraftBukkit end
 			world.setTypeAndData(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, true), 3);
 			world.b(blockposition, blockposition);
-			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
-					blockposition.getZ() + 0.5D, "random.click", 0.3F, 0.6F);
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D,
+					"random.click", 0.3F, 0.6F);
 			this.c(world, blockposition, iblockdata.get(BlockButtonAbstract.FACING));
 			world.a(blockposition, this, this.a(world));
 			return true;
@@ -222,8 +222,8 @@ public abstract class BlockButtonAbstract extends Block {
 				// CraftBukkit end
 				world.setTypeUpdate(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, false));
 				this.c(world, blockposition, iblockdata.get(BlockButtonAbstract.FACING));
-				world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
-						blockposition.getZ() + 0.5D, "random.click", 0.3F, 0.5F);
+				world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D,
+						"random.click", 0.3F, 0.5F);
 				world.b(blockposition, blockposition);
 			}
 		}
@@ -299,8 +299,8 @@ public abstract class BlockButtonAbstract extends Block {
 			world.setTypeUpdate(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, true));
 			this.c(world, blockposition, iblockdata.get(BlockButtonAbstract.FACING));
 			world.b(blockposition, blockposition);
-			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
-					blockposition.getZ() + 0.5D, "random.click", 0.3F, 0.6F);
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D,
+					"random.click", 0.3F, 0.6F);
 		}
 
 		if (!flag && flag1) {
@@ -318,8 +318,8 @@ public abstract class BlockButtonAbstract extends Block {
 			world.setTypeUpdate(blockposition, iblockdata.set(BlockButtonAbstract.POWERED, false));
 			this.c(world, blockposition, iblockdata.get(BlockButtonAbstract.FACING));
 			world.b(blockposition, blockposition);
-			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
-					blockposition.getZ() + 0.5D, "random.click", 0.3F, 0.5F);
+			world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D,
+					"random.click", 0.3F, 0.5F);
 		}
 
 		if (flag) {
@@ -371,8 +371,7 @@ public abstract class BlockButtonAbstract extends Block {
 	public int toLegacyData(IBlockData iblockdata) {
 		int i;
 
-		switch (BlockButtonAbstract.SyntheticClass_1.a[iblockdata.get(BlockButtonAbstract.FACING)
-				.ordinal()]) {
+		switch (BlockButtonAbstract.SyntheticClass_1.a[iblockdata.get(BlockButtonAbstract.FACING).ordinal()]) {
 		case 1:
 			i = 1;
 			break;

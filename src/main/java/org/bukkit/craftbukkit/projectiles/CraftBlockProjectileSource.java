@@ -132,9 +132,8 @@ public class CraftBlockProjectileSource implements BlockProjectileSource {
 				b *= 1.25F;
 			}
 			// Copied from DispenseBehaviorProjectile
-			((IProjectile) launch).shoot(enumdirection.getAdjacentX(),
-					enumdirection.getAdjacentY() + 0.1F, enumdirection.getAdjacentZ(), b,
-					a);
+			((IProjectile) launch).shoot(enumdirection.getAdjacentX(), enumdirection.getAdjacentY() + 0.1F,
+					enumdirection.getAdjacentZ(), b, a);
 		}
 
 		if (velocity != null) {

@@ -159,9 +159,8 @@ public class BlockRedstoneOre extends Block {
 				d1 = blockposition.getX() - d0;
 			}
 
-			if (d1 < blockposition.getX() || d1 > blockposition.getX() + 1 || d2 < 0.0D
-					|| d2 > blockposition.getY() + 1 || d3 < blockposition.getZ()
-					|| d3 > blockposition.getZ() + 1) {
+			if (d1 < blockposition.getX() || d1 > blockposition.getX() + 1 || d2 < 0.0D || d2 > blockposition.getY() + 1
+					|| d3 < blockposition.getZ() || d3 > blockposition.getZ() + 1) {
 				world.addParticle(EnumParticle.REDSTONE, d1, d2, d3, 0.0D, 0.0D, 0.0D, new int[0]);
 			}
 		}

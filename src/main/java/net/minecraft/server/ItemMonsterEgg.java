@@ -53,8 +53,8 @@ public class ItemMonsterEgg extends Item {
 				d0 = 0.5D;
 			}
 
-			Entity entity = a(world, itemstack.getData(), blockposition.getX() + 0.5D,
-					blockposition.getY() + d0, blockposition.getZ() + 0.5D);
+			Entity entity = a(world, itemstack.getData(), blockposition.getX() + 0.5D, blockposition.getY() + d0,
+					blockposition.getZ() + 0.5D);
 
 			if (entity != null) {
 				if (entity instanceof EntityLiving && itemstack.hasName()) {

@@ -4,8 +4,7 @@ public class EntityMinecartCommandBlock extends EntityMinecartAbstract {
 
 	private final CommandBlockListenerAbstract a = new CommandBlockListenerAbstract() {
 		{
-			this.sender = EntityMinecartCommandBlock.this
-					.getBukkitEntity(); // CraftBukkit - Set the sender
+			this.sender = EntityMinecartCommandBlock.this.getBukkitEntity(); // CraftBukkit - Set the sender
 		}
 
 		@Override

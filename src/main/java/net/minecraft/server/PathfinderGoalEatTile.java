@@ -10,8 +10,8 @@ import com.google.common.base.Predicates;
 
 public class PathfinderGoalEatTile extends PathfinderGoal {
 
-	private static final Predicate<IBlockData> b = BlockStatePredicate.a(Blocks.TALLGRASS)
-			.a(BlockLongGrass.TYPE, Predicates.equalTo(BlockLongGrass.EnumTallGrassType.GRASS));
+	private static final Predicate<IBlockData> b = BlockStatePredicate.a(Blocks.TALLGRASS).a(BlockLongGrass.TYPE,
+			Predicates.equalTo(BlockLongGrass.EnumTallGrassType.GRASS));
 	private EntityInsentient c;
 	private World d;
 	int a;

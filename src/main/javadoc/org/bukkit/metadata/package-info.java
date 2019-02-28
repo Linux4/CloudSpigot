@@ -3,4 +3,3 @@
  * Minecraft concepts.
  */
 package org.bukkit.metadata;
-

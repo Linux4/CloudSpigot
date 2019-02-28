@@ -194,9 +194,7 @@ public class ContainerAnvil extends Container {
 						Enchantment enchantment = Enchantment.getById(i1);
 
 						if (enchantment != null) {
-							j1 = map.containsKey(Integer.valueOf(i1))
-									? map.get(Integer.valueOf(i1)).intValue()
-									: 0;
+							j1 = map.containsKey(Integer.valueOf(i1)) ? map.get(Integer.valueOf(i1)).intValue() : 0;
 							int l1 = map1.get(Integer.valueOf(i1)).intValue();
 							int i2;
 
@@ -336,8 +334,7 @@ public class ContainerAnvil extends Container {
 		if (!this.checkReachable)
 			return true; // CraftBukkit
 		return this.i.getType(this.j).getBlock() != Blocks.ANVIL ? false
-				: entityhuman.e(this.j.getX() + 0.5D, this.j.getY() + 0.5D,
-						this.j.getZ() + 0.5D) <= 64.0D;
+				: entityhuman.e(this.j.getX() + 0.5D, this.j.getY() + 0.5D, this.j.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

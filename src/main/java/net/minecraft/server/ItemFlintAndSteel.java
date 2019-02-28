@@ -35,9 +35,8 @@ public class ItemFlintAndSteel extends Item {
 				CraftBlockState blockState = CraftBlockState.getBlockState(world, blockposition.getX(),
 						blockposition.getY(), blockposition.getZ());
 				// CraftBukkit end
-				world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
-						blockposition.getZ() + 0.5D, "fire.ignite", 1.0F,
-						Item.g.nextFloat() * 0.4F + 0.8F);
+				world.makeSound(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D,
+						"fire.ignite", 1.0F, Item.g.nextFloat() * 0.4F + 0.8F);
 				world.setTypeUpdate(blockposition, Blocks.FIRE.getBlockData());
 
 				// CraftBukkit start

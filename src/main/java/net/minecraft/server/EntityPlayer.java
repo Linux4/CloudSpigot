@@ -94,8 +94,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
 		if (!worldserver.worldProvider.o()
 				&& worldserver.getWorldData().getGameType() != WorldSettings.EnumGamemode.ADVENTURE) {
 			int i = Math.max(5, minecraftserver.getSpawnProtection() - 6);
-			int j = MathHelper.floor(
-					worldserver.getWorldBorder().b(blockposition.getX(), blockposition.getZ()));
+			int j = MathHelper.floor(worldserver.getWorldBorder().b(blockposition.getX(), blockposition.getZ()));
 
 			if (j < i) {
 				i = j;
@@ -271,8 +270,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
 
 			if (!arraylist.isEmpty()) {
 				if (arraylist.size() == 1) {
-					this.playerConnection
-							.sendPacket(new PacketPlayOutMapChunk(arraylist.get(0), true, '\uffff'));
+					this.playerConnection.sendPacket(new PacketPlayOutMapChunk(arraylist.get(0), true, '\uffff'));
 				} else {
 					this.playerConnection.sendPacket(new PacketPlayOutMapChunkBulk(arraylist));
 				}
@@ -374,8 +372,8 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
 			}
 
 			if (this.oldLevel != this.expLevel) {
-				CraftEventFactory.callPlayerLevelChangeEvent(this.world.getServer().getPlayer(this),
-						this.oldLevel, this.expLevel);
+				CraftEventFactory.callPlayerLevelChangeEvent(this.world.getServer().getPlayer(this), this.oldLevel,
+						this.expLevel);
 				this.oldLevel = this.expLevel;
 			}
 			// CraftBukkit end

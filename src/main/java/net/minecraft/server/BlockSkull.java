@@ -53,8 +53,7 @@ public class BlockSkull extends BlockContainer {
 
 	@Override
 	public void updateShape(IBlockAccess iblockaccess, BlockPosition blockposition) {
-		switch (BlockSkull.SyntheticClass_1.a[iblockaccess.getType(blockposition)
-				.get(BlockSkull.FACING).ordinal()]) {
+		switch (BlockSkull.SyntheticClass_1.a[iblockaccess.getType(blockposition).get(BlockSkull.FACING).ordinal()]) {
 		case 1:
 		default:
 			this.a(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
@@ -218,8 +217,8 @@ public class BlockSkull extends BlockContainer {
 				EntityWither entitywither = new EntityWither(world);
 				BlockPosition blockposition2 = shapedetector_shapedetectorcollection.a(1, 2, 0).getPosition();
 
-				entitywither.setPositionRotation(blockposition2.getX() + 0.5D,
-						blockposition2.getY() + 0.55D, blockposition2.getZ() + 0.5D,
+				entitywither.setPositionRotation(blockposition2.getX() + 0.5D, blockposition2.getY() + 0.55D,
+						blockposition2.getZ() + 0.5D,
 						shapedetector_shapedetectorcollection.b().k() == EnumDirection.EnumAxis.X ? 0.0F : 90.0F, 0.0F);
 				entitywither.aI = shapedetector_shapedetectorcollection.b().k() == EnumDirection.EnumAxis.X ? 0.0F
 						: 90.0F;
@@ -240,11 +239,9 @@ public class BlockSkull extends BlockContainer {
 					int k;
 
 					for (k = 0; k < 120; ++k) {
-						world.addParticle(EnumParticle.SNOWBALL,
-								blockposition1.getX() + world.random.nextDouble(),
+						world.addParticle(EnumParticle.SNOWBALL, blockposition1.getX() + world.random.nextDouble(),
 								blockposition1.getY() - 2 + world.random.nextDouble() * 3.9D,
-								blockposition1.getZ() + world.random.nextDouble(), 0.0D, 0.0D, 0.0D,
-								new int[0]);
+								blockposition1.getZ() + world.random.nextDouble(), 0.0D, 0.0D, 0.0D, new int[0]);
 					}
 
 					for (k = 0; k < shapedetector.c(); ++k) {

@@ -163,13 +163,12 @@ public class ItemBucket extends Item {
 					int j = blockposition.getY();
 					int k = blockposition.getZ();
 
-					world.makeSound(i + 0.5F, j + 0.5F,
-							k + 0.5F, "random.fizz", 0.5F,
+					world.makeSound(i + 0.5F, j + 0.5F, k + 0.5F, "random.fizz", 0.5F,
 							2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F);
 
 					for (int l = 0; l < 8; ++l) {
-						world.addParticle(EnumParticle.SMOKE_LARGE, i + Math.random(),
-								j + Math.random(), k + Math.random(), 0.0D, 0.0D, 0.0D, new int[0]);
+						world.addParticle(EnumParticle.SMOKE_LARGE, i + Math.random(), j + Math.random(),
+								k + Math.random(), 0.0D, 0.0D, 0.0D, new int[0]);
 					}
 				} else {
 					if (!world.isClientSide && flag && !material.isLiquid()) {

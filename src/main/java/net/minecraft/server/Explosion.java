@@ -114,8 +114,7 @@ public class Explosion {
 		int j1 = MathHelper.floor(this.posZ - f3 - 1.0D);
 		int k1 = MathHelper.floor(this.posZ + f3 + 1.0D);
 		// CloudSpigot start - Fix lag from explosions processing dead entities
-		List<Entity> list = this.world.a(this.source,
-				new AxisAlignedBB(i, l, j1, j, i1, k1),
+		List<Entity> list = this.world.a(this.source, new AxisAlignedBB(i, l, j1, j, i1, k1),
 				new com.google.common.base.Predicate<Entity>() {
 					@Override
 					public boolean apply(Entity entity) {

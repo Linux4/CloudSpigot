@@ -213,8 +213,7 @@ public class EntityOcelot extends EntityTameableAnimal {
 
 	@Override
 	public boolean canSpawn() {
-		if (this.world.a(this.getBoundingBox(), this)
-				&& this.world.getCubes(this, this.getBoundingBox()).isEmpty()
+		if (this.world.a(this.getBoundingBox(), this) && this.world.getCubes(this, this.getBoundingBox()).isEmpty()
 				&& !this.world.containsLiquid(this.getBoundingBox())) {
 			BlockPosition blockposition = new BlockPosition(this.locX, this.getBoundingBox().b, this.locZ);
 

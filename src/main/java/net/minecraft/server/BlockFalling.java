@@ -41,12 +41,11 @@ public class BlockFalling extends Block {
 					&& world.areChunksLoadedBetween(blockposition.a(-b0, -b0, -b0), blockposition.a(b0, b0, b0))) {
 				if (!world.isClientSide) {
 					// CloudSpigot start - Add FallingBlock source location API
-					org.bukkit.Location loc = new org.bukkit.Location(world.getWorld(),
-							blockposition.getX() + 0.5F, blockposition.getY(),
-							blockposition.getZ() + 0.5F);
+					org.bukkit.Location loc = new org.bukkit.Location(world.getWorld(), blockposition.getX() + 0.5F,
+							blockposition.getY(), blockposition.getZ() + 0.5F);
 					EntityFallingBlock entityfallingblock = new EntityFallingBlock(loc, world,
-							blockposition.getX() + 0.5D, blockposition.getY(),
-							blockposition.getZ() + 0.5D, world.getType(blockposition));
+							blockposition.getX() + 0.5D, blockposition.getY(), blockposition.getZ() + 0.5D,
+							world.getType(blockposition));
 					// CloudSpigot end
 
 					this.a(entityfallingblock);

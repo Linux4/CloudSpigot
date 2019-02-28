@@ -3,4 +3,3 @@
  * properties and manipulation.
  */
 package org.bukkit.potion;
-

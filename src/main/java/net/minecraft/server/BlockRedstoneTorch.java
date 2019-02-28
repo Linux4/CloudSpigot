@@ -131,8 +131,7 @@ public class BlockRedstoneTorch extends BlockTorch {
 		// CloudSpigot start
 		if (list != null) {
 			int index = 0;
-			while (index < list.size()
-					&& world.getTime() - list.get(index).getTime() > 60L) {
+			while (index < list.size() && world.getTime() - list.get(index).getTime() > 60L) {
 				index++;
 			}
 			if (index > 0) {
@@ -161,11 +160,10 @@ public class BlockRedstoneTorch extends BlockTorch {
 					}
 				}
 				// CraftBukkit end
-				world.setTypeAndData(blockposition, Blocks.UNLIT_REDSTONE_TORCH.getBlockData()
-						.set(BlockTorch.FACING, iblockdata.get(BlockTorch.FACING)), 3);
+				world.setTypeAndData(blockposition, Blocks.UNLIT_REDSTONE_TORCH.getBlockData().set(BlockTorch.FACING,
+						iblockdata.get(BlockTorch.FACING)), 3);
 				if (this.a(world, blockposition, true)) {
-					world.makeSound(blockposition.getX() + 0.5F,
-							blockposition.getY() + 0.5F,
+					world.makeSound(blockposition.getX() + 0.5F, blockposition.getY() + 0.5F,
 							blockposition.getZ() + 0.5F, "random.fizz", 0.5F,
 							2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F);
 
@@ -190,8 +188,8 @@ public class BlockRedstoneTorch extends BlockTorch {
 				}
 			}
 			// CraftBukkit end
-			world.setTypeAndData(blockposition, Blocks.REDSTONE_TORCH.getBlockData().set(BlockTorch.FACING,
-					iblockdata.get(BlockTorch.FACING)), 3);
+			world.setTypeAndData(blockposition,
+					Blocks.REDSTONE_TORCH.getBlockData().set(BlockTorch.FACING, iblockdata.get(BlockTorch.FACING)), 3);
 		}
 
 	}

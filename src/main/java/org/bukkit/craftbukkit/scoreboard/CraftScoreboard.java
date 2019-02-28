@@ -58,8 +58,8 @@ public final class CraftScoreboard implements org.bukkit.scoreboard.Scoreboard {
 
 	@Override
 	public ImmutableSet<Objective> getObjectives() {
-		return ImmutableSet.copyOf(Iterables.transform(this.board.getObjectives(),
-				new Function<ScoreboardObjective, Objective>() {
+		return ImmutableSet
+				.copyOf(Iterables.transform(this.board.getObjectives(), new Function<ScoreboardObjective, Objective>() {
 
 					@Override
 					public Objective apply(ScoreboardObjective input) {
@@ -138,14 +138,13 @@ public final class CraftScoreboard implements org.bukkit.scoreboard.Scoreboard {
 
 	@Override
 	public ImmutableSet<Team> getTeams() {
-		return ImmutableSet.copyOf(Iterables.transform(this.board.getTeams(),
-				new Function<ScoreboardTeam, Team>() {
+		return ImmutableSet.copyOf(Iterables.transform(this.board.getTeams(), new Function<ScoreboardTeam, Team>() {
 
-					@Override
-					public Team apply(ScoreboardTeam input) {
-						return new CraftTeam(CraftScoreboard.this, input);
-					}
-				}));
+			@Override
+			public Team apply(ScoreboardTeam input) {
+				return new CraftTeam(CraftScoreboard.this, input);
+			}
+		}));
 	}
 
 	@Override

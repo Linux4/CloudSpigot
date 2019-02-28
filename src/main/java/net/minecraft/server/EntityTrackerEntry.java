@@ -473,8 +473,7 @@ public class EntityTrackerEntry {
 		double d1 = entityplayer.locZ - this.tracker.locZ;
 		// CraftBukkit end
 
-		return d0 >= (-this.b) && d0 <= this.b && d1 >= (-this.b) && d1 <= this.b
-				&& this.tracker.a(entityplayer);
+		return d0 >= (-this.b) && d0 <= this.b && d1 >= (-this.b) && d1 <= this.b && this.tracker.a(entityplayer);
 	}
 
 	private boolean e(EntityPlayer entityplayer) {

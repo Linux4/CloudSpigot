@@ -126,8 +126,8 @@ public class EntityTNTPrimed extends Entity {
 		server.getPluginManager().callEvent(event);
 
 		if (!event.isCancelled()) {
-			this.world.createExplosion(this, this.locX, this.locY + this.length / 2.0F, this.locZ,
-					event.getRadius(), event.getFire(), true);
+			this.world.createExplosion(this, this.locX, this.locY + this.length / 2.0F, this.locZ, event.getRadius(),
+					event.getFire(), true);
 		}
 		// CraftBukkit end
 

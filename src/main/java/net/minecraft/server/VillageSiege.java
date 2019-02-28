@@ -158,8 +158,7 @@ public class VillageSiege {
 
 			if (this.f.a(blockposition1)
 					&& SpawnerCreature.a(EntityInsentient.EnumEntityPositionType.ON_GROUND, this.a, blockposition1)) {
-				return new Vec3D(blockposition1.getX(), blockposition1.getY(),
-						blockposition1.getZ());
+				return new Vec3D(blockposition1.getX(), blockposition1.getY(), blockposition1.getZ());
 			}
 		}
 

@@ -55,9 +55,8 @@ public abstract class MobSpawnerAbstract {
 	private boolean g() {
 		BlockPosition blockposition = this.b();
 
-		return this.a().isPlayerNearbyWhoAffectsSpawning(blockposition.getX() + 0.5D,
-				blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D,
-				this.requiredPlayerRange); // CloudSpigot - Affects Spawning API
+		return this.a().isPlayerNearbyWhoAffectsSpawning(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
+				blockposition.getZ() + 0.5D, this.requiredPlayerRange); // CloudSpigot - Affects Spawning API
 	}
 
 	public void c() {
@@ -102,13 +101,10 @@ public abstract class MobSpawnerAbstract {
 						return;
 					}
 
-					int j = this.a()
-							.a(entity.getClass(),
-									(new AxisAlignedBB(blockposition.getX(), blockposition.getY(),
-											blockposition.getZ(), blockposition.getX() + 1,
-											blockposition.getY() + 1, blockposition.getZ() + 1))
-													.grow(this.spawnRange, this.spawnRange,
-															this.spawnRange))
+					int j = this.a().a(entity.getClass(),
+							(new AxisAlignedBB(blockposition.getX(), blockposition.getY(), blockposition.getZ(),
+									blockposition.getX() + 1, blockposition.getY() + 1, blockposition.getZ() + 1))
+											.grow(this.spawnRange, this.spawnRange, this.spawnRange))
 							.size();
 
 					if (j >= this.maxNearbyEntities) {
@@ -117,12 +113,10 @@ public abstract class MobSpawnerAbstract {
 					}
 
 					d0 = blockposition.getX()
-							+ (this.a().random.nextDouble() - this.a().random.nextDouble()) * this.spawnRange
-							+ 0.5D;
+							+ (this.a().random.nextDouble() - this.a().random.nextDouble()) * this.spawnRange + 0.5D;
 					double d3 = blockposition.getY() + this.a().random.nextInt(3) - 1;
 					double d4 = blockposition.getZ()
-							+ (this.a().random.nextDouble() - this.a().random.nextDouble()) * this.spawnRange
-							+ 0.5D;
+							+ (this.a().random.nextDouble() - this.a().random.nextDouble()) * this.spawnRange + 0.5D;
 					EntityInsentient entityinsentient = entity instanceof EntityInsentient ? (EntityInsentient) entity
 							: null;
 

@@ -178,9 +178,8 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
 		if (this.cl() > 0) {
 			for (j = 0; j < 3; ++j) {
 				this.world.addParticle(EnumParticle.SPELL_MOB, this.locX + this.random.nextGaussian() * 1.0D,
-						this.locY + this.random.nextFloat() * 3.3F,
-						this.locZ + this.random.nextGaussian() * 1.0D, 0.699999988079071D, 0.699999988079071D,
-						0.8999999761581421D, new int[0]);
+						this.locY + this.random.nextFloat() * 3.3F, this.locZ + this.random.nextGaussian() * 1.0D,
+						0.699999988079071D, 0.699999988079071D, 0.8999999761581421D, new int[0]);
 			}
 		}
 
@@ -412,8 +411,8 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
 	}
 
 	private void a(int i, EntityLiving entityliving) {
-		this.a(i, entityliving.locX, entityliving.locY + entityliving.getHeadHeight() * 0.5D,
-				entityliving.locZ, i == 0 && this.random.nextFloat() < 0.001F);
+		this.a(i, entityliving.locX, entityliving.locY + entityliving.getHeadHeight() * 0.5D, entityliving.locZ,
+				i == 0 && this.random.nextFloat() < 0.001F);
 	}
 
 	private void a(int i, double d0, double d1, double d2, boolean flag) {

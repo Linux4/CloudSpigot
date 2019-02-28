@@ -191,8 +191,7 @@ public class ContainerEnchantTable extends Container {
 							List<WeightedRandomEnchant> list = this.a(itemstack, j, this.costs[j]);
 
 							if (list != null && !list.isEmpty()) {
-								WeightedRandomEnchant weightedrandomenchant = list
-										.get(this.k.nextInt(list.size()));
+								WeightedRandomEnchant weightedrandomenchant = list.get(this.k.nextInt(list.size()));
 
 								this.h[j] = weightedrandomenchant.enchantment.id | weightedrandomenchant.level << 8;
 							}

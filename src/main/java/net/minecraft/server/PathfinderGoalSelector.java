@@ -51,8 +51,7 @@ public class PathfinderGoalSelector {
 			iterator = this.b.iterator();
 
 			while (iterator.hasNext()) {
-				pathfindergoalselector_pathfindergoalselectoritem = iterator
-						.next();
+				pathfindergoalselector_pathfindergoalselectoritem = iterator.next();
 				boolean flag = this.c.contains(pathfindergoalselector_pathfindergoalselectoritem);
 
 				if (flag) {
@@ -75,8 +74,7 @@ public class PathfinderGoalSelector {
 			iterator = this.c.iterator();
 
 			while (iterator.hasNext()) {
-				pathfindergoalselector_pathfindergoalselectoritem = iterator
-						.next();
+				pathfindergoalselector_pathfindergoalselectoritem = iterator.next();
 				if (!this.a(pathfindergoalselector_pathfindergoalselectoritem)) {
 					pathfindergoalselector_pathfindergoalselectoritem.a.d();
 					iterator.remove();
@@ -89,8 +87,7 @@ public class PathfinderGoalSelector {
 		iterator = this.c.iterator();
 
 		while (iterator.hasNext()) {
-			pathfindergoalselector_pathfindergoalselectoritem = iterator
-					.next();
+			pathfindergoalselector_pathfindergoalselectoritem = iterator.next();
 			pathfindergoalselector_pathfindergoalselectoritem.a.e();
 		}
 

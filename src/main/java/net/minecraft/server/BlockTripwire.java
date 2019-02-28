@@ -89,8 +89,7 @@ public class BlockTripwire extends Block {
 
 	@Override
 	public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
-		iblockdata = iblockdata.set(BlockTripwire.SUSPENDED,
-				Boolean.valueOf(!World.a(world, blockposition.down())));
+		iblockdata = iblockdata.set(BlockTripwire.SUSPENDED, Boolean.valueOf(!World.a(world, blockposition.down())));
 		world.setTypeAndData(blockposition, iblockdata, 3);
 		this.e(world, blockposition, iblockdata);
 	}

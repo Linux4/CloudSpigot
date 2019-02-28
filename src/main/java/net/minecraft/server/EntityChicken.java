@@ -155,8 +155,7 @@ public class EntityChicken extends EntityAnimal {
 		float f2 = 0.1F;
 		float f3 = 0.0F;
 
-		this.passenger.setPosition(this.locX + f2 * f,
-				this.locY + this.length * 0.5F + this.passenger.am() + f3,
+		this.passenger.setPosition(this.locX + f2 * f, this.locY + this.length * 0.5F + this.passenger.am() + f3,
 				this.locZ - f2 * f1);
 		if (this.passenger instanceof EntityLiving) {
 			((EntityLiving) this.passenger).aI = this.aI;

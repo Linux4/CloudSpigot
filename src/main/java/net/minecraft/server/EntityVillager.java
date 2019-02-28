@@ -994,8 +994,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, NPC {
 
 		public int a(Random random) {
 			return this.a().intValue() >= this.b().intValue() ? this.a().intValue()
-					: this.a().intValue()
-							+ random.nextInt(this.b().intValue() - this.a().intValue() + 1);
+					: this.a().intValue() + random.nextInt(this.b().intValue() - this.a().intValue() + 1);
 		}
 	}
 }

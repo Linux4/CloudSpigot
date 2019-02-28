@@ -96,8 +96,7 @@ public class BlockSapling extends BlockPlant implements IBlockFragilePlantElemen
 		boolean flag = false;
 		IBlockData iblockdata1;
 
-		switch (BlockSapling.SyntheticClass_1.a[iblockdata.get(BlockSapling.TYPE)
-				.ordinal()]) {
+		switch (BlockSapling.SyntheticClass_1.a[iblockdata.get(BlockSapling.TYPE).ordinal()]) {
 		case 1:
 			label66: for (i = 0; i >= -1; --i) {
 				for (j = 0; j >= -1; --j) {

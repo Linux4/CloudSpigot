@@ -165,8 +165,7 @@ public class BlockPosition extends BaseBlockPosition {
 	}
 
 	public long asLong() {
-		return (this.getX() & BlockPosition.h) << BlockPosition.g
-				| (this.getY() & BlockPosition.i) << BlockPosition.f
+		return (this.getX() & BlockPosition.h) << BlockPosition.g | (this.getY() & BlockPosition.i) << BlockPosition.f
 				| (this.getZ() & BlockPosition.j) << 0;
 	}
 

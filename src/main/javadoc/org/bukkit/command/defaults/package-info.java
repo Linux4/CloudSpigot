@@ -3,4 +3,3 @@
  * use by a Bukkit implementation.
  */
 package org.bukkit.command.defaults;
-

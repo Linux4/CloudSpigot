@@ -148,8 +148,7 @@ public abstract class BlockDiodeAbstract extends BlockDirectional {
 			IBlockData iblockdata1 = world.getType(blockposition1);
 
 			return Math.max(i,
-					iblockdata1.getBlock() == Blocks.REDSTONE_WIRE
-							? iblockdata1.get(BlockRedstoneWire.POWER).intValue()
+					iblockdata1.getBlock() == Blocks.REDSTONE_WIRE ? iblockdata1.get(BlockRedstoneWire.POWER).intValue()
 							: 0);
 		}
 	}

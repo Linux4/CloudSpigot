@@ -13,8 +13,7 @@ public class EntityLeash extends EntityHanging {
 
 	public EntityLeash(World world, BlockPosition blockposition) {
 		super(world, blockposition);
-		this.setPosition(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D,
-				blockposition.getZ() + 0.5D);
+		this.setPosition(blockposition.getX() + 0.5D, blockposition.getY() + 0.5D, blockposition.getZ() + 0.5D);
 		/*
 		 * float f = 0.125F; float f1 = 0.1875F; float f2 = 0.25F;
 		 */ // CloudSpigot
@@ -149,8 +148,8 @@ public class EntityLeash extends EntityHanging {
 		int i = blockposition.getX();
 		int j = blockposition.getY();
 		int k = blockposition.getZ();
-		List<EntityLeash> list = world.a(EntityLeash.class, new AxisAlignedBB(i - 1.0D, j - 1.0D,
-				k - 1.0D, i + 1.0D, j + 1.0D, k + 1.0D));
+		List<EntityLeash> list = world.a(EntityLeash.class,
+				new AxisAlignedBB(i - 1.0D, j - 1.0D, k - 1.0D, i + 1.0D, j + 1.0D, k + 1.0D));
 		Iterator<EntityLeash> iterator = list.iterator();
 
 		EntityLeash entityleash;

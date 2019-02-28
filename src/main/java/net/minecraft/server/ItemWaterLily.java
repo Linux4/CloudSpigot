@@ -29,8 +29,7 @@ public class ItemWaterLily extends ItemWithAuxData {
 				IBlockData iblockdata = world.getType(blockposition);
 
 				if (iblockdata.getBlock().getMaterial() == Material.WATER
-						&& iblockdata.get(BlockFluids.LEVEL).intValue() == 0
-						&& world.isEmpty(blockposition1)) {
+						&& iblockdata.get(BlockFluids.LEVEL).intValue() == 0 && world.isEmpty(blockposition1)) {
 					// CraftBukkit start - special case for handling block placement with water
 					// lilies
 					org.bukkit.block.BlockState blockstate = org.bukkit.craftbukkit.block.CraftBlockState
