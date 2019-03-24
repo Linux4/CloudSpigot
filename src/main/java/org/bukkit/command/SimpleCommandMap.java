@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Server;
+import org.bukkit.command.defaults.CloudSpigotCommand;
 import org.bukkit.command.defaults.HelpCommand;
 import org.bukkit.command.defaults.PluginsCommand;
 import org.bukkit.command.defaults.ReloadCommand;
