@@ -35,8 +35,8 @@ public class CloudSpigotCommand extends BukkitCommand {
 		sender.sendMessage(CloudSpigot.serverPrefix + "§9Java-Version: §a" + Updater.getJavaVersion());
 		sender.sendMessage(CloudSpigot.serverPrefix + "§9Threads: §a" + Thread.activeCount());
 		sender.sendMessage(CloudSpigot.serverPrefix + "§9Memory (max/used/free): §a"
-				+ Runtime.getRuntime().maxMemory() / 1024 / 1024 + "§9/"
-				+ (Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024 + "§9/"
+				+ Runtime.getRuntime().maxMemory() / 1024 / 1024 + "§9/§a"
+				+ (Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024 + "§9/§a"
 				+ Runtime.getRuntime().freeMemory() / 1024 / 1024 + " MB");
 		sender.sendMessage(CloudSpigot.serverPrefix + "§9CPU Count: §a" + Runtime.getRuntime().availableProcessors());
 
