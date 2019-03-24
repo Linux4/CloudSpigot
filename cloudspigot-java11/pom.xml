@@ -238,6 +238,7 @@
 						</manifestSections>
 						<compress>false</compress>
 					</archive>
+					<finalName>cloudspigot-${project.version}</finalName>
 				</configuration>
 			</plugin>
 			<plugin>

@@ -230,7 +230,7 @@ public class VersionCommand extends BukkitCommand {
 		}
 	}
 
-	private static int getDistance(String repo, String verInfo) { // CloudSpigot
+	public static int getDistance(String repo, String verInfo) { // CloudSpigot
 		try {
 			int currentVer = Integer.decode(verInfo);
 			return getFromJenkins(currentVer);
