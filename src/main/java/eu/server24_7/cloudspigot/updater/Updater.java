@@ -22,7 +22,7 @@ import com.google.common.base.Charsets;
 public class Updater {
 
 	private static final String BASE_URL = "https://ci.server24-7.eu/job/CloudSpigot/latest/";
-	private static final String URL = BASE_URL + "%t%/cloudspigot-1.8.10-R0.1-SNAPSHOT.jar";
+	private static final String URL = BASE_URL + "cloudspigot-%t%/cloudspigot-1.8.10-R0.1-SNAPSHOT.jar";
 	private static final String GIT_URL = BASE_URL + ".gitrev";
 
 	public static Status checkUpdate() {
