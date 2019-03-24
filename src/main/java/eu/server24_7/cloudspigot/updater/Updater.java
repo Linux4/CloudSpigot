@@ -51,15 +51,15 @@ public class Updater {
 		ERROR, LATEST_VERSION, UNKNOWN_VERSION, UPDATE_AVAILABLE;
 	}
 
-	private static boolean isJava8() {
+	public static boolean isJava8() {
 		return getJavaVersion() == 1.8;
 	}
 
-	private static boolean isJava9Up() {
+	public static boolean isJava9Up() {
 		return getJavaVersion() > 1.8;
 	}
 
-	private static double getJavaVersion() {
+	public static double getJavaVersion() {
 		String version = System.getProperty("java.version");
 		int pos = version.indexOf('.');
 		pos = version.indexOf('.', pos + 1);

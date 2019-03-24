@@ -43,6 +43,7 @@ public class SimpleCommandMap implements CommandMap {
 		register("bukkit", new ReloadCommand("reload"));
 		register("bukkit", new PluginsCommand("plugins"));
 		register("cloudspigot", new UpdateCommand("update"));
+		register("cloudspigot", new CloudSpigotCommand("cloudspigot"));
 	}
 
 	public void setFallbackCommands() {
