@@ -17,6 +17,7 @@ import org.bukkit.Server;
 import org.bukkit.command.defaults.HelpCommand;
 import org.bukkit.command.defaults.PluginsCommand;
 import org.bukkit.command.defaults.ReloadCommand;
+import org.bukkit.command.defaults.UpdateCommand;
 import org.bukkit.command.defaults.VanillaCommand;
 import org.bukkit.command.defaults.VersionCommand;
 import org.bukkit.entity.Player;
@@ -41,6 +42,7 @@ public class SimpleCommandMap implements CommandMap {
 		register("bukkit", new VersionCommand("version"));
 		register("bukkit", new ReloadCommand("reload"));
 		register("bukkit", new PluginsCommand("plugins"));
+		register("cloudspigot", new UpdateCommand("update"));
 	}
 
 	public void setFallbackCommands() {

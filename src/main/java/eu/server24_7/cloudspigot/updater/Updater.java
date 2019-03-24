@@ -1,19 +1,31 @@
 package eu.server24_7.cloudspigot.updater;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.defaults.VersionCommand;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import com.google.common.base.Charsets;
 
 public class Updater {
 
-	private static final String BASE_URL = "https://ci.server24-7.eu/job/CloudSpigot/%b%/";
+	private static final String BASE_URL = "https://ci.server24-7.eu/job/CloudSpigot/latest/";
 	private static final String URL = BASE_URL + "%t%/cloudspigot-1.8.10-R0.1-SNAPSHOT.jar";
+	private static final String GIT_URL = BASE_URL + ".gitrev";
 
-	public static StatusInfo checkUpdate() {
+	public static Status checkUpdate() {
 		String version = Bukkit.getVersion();
 		if (version == null)
 			version = "Custom";
@@ -22,42 +34,21 @@ public class Updater {
 			int distance = VersionCommand.getDistance(null, parts[0]);
 			switch (distance) {
 			case -1:
-				return StatusInfo.ERROR;
+				return Status.ERROR;
 			case 0:
-				return StatusInfo.LATEST;
+				return Status.LATEST_VERSION;
 			case -2:
-				return StatusInfo.LATEST;
+				return Status.LATEST_VERSION;
 			default:
-				return new StatusInfo(Status.UPDATE_AVAILABLE, distance);
+				return Status.UPDATE_AVAILABLE;
 			}
 		} else {
-			return StatusInfo.ERROR;
+			return Status.ERROR;
 		}
 	}
 
 	public enum Status {
 		ERROR, LATEST_VERSION, UNKNOWN_VERSION, UPDATE_AVAILABLE;
-	}
-
-	public static class StatusInfo {
-		public static final StatusInfo ERROR = new StatusInfo(Status.ERROR, -1);
-		public static final StatusInfo UNKNOWN = new StatusInfo(Status.UNKNOWN_VERSION, -1);
-		public static final StatusInfo LATEST = new StatusInfo(Status.LATEST_VERSION, 0);
-		private Status s;
-		private int c;
-
-		public StatusInfo(Status s, int c) {
-			this.s = s;
-			this.c = c;
-		}
-
-		public Status getStatus() {
-			return s;
-		}
-
-		public int getVersionsBehind() {
-			return c;
-		}
 	}
 
 	private static boolean isJava8() {
@@ -75,25 +66,79 @@ public class Updater {
 		return Double.parseDouble(version.substring(0, pos));
 	}
 
-	private static long getNewestBuild() {
-		long b = 0;
-		while (true) {
-			b++;
+	public static boolean update() {
+		if (newestAvailable()) {
 			try {
-				URL url = new URL(BASE_URL.replaceFirst("%b%", "" + b));
-				HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-				if (conn.getResponseCode() != 200) {
-					b--;
-					break;
+				URL url = new URL(URL.replaceFirst("%t%", "java8"));
+				if (isJava9Up()) {
+					url = new URL(URL.replaceFirst("%t%", "java11"));
+				} else {
+					if (!isJava8()) {
+						throw new IllegalStateException("Unsupported Java version: " + getJavaVersion());
+					}
 				}
-			} catch (IOException e) {
-				break;
+
+				File jar = new File(Updater.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+				if (jar.isDirectory()) {
+					throw new IllegalStateException("Not running from JAR file!");
+				} else {
+					try {
+						download(url, jar);
+					} catch (IOException e) {
+						e.printStackTrace();
+						return false;
+					}
+				}
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+				return false;
 			}
+			return true;
+		} else {
+			return false;
 		}
-		return b;
 	}
 
-	public static void update() {
+	private static void download(URL url, File f) throws IOException {
+		BufferedInputStream in = new BufferedInputStream(url.openStream());
+		FileOutputStream fileOutputStream = new FileOutputStream(f);
+		byte dataBuffer[] = new byte[1024];
+		int bytesRead;
+		while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+			fileOutputStream.write(dataBuffer, 0, bytesRead);
+		}
+		fileOutputStream.close();
+	}
+
+	private static String getNewestCommit() {
+		try {
+			HttpsURLConnection connection = (HttpsURLConnection) new URL(
+					"https://api.github.com/repos/Server24-7/CloudSpigot/commits/master").openConnection();
+			connection.connect();
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(connection.getInputStream(), Charsets.UTF_8));
+			JSONObject obj = (JSONObject) new JSONParser().parse(reader);
+			return (String) obj.get("sha");
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
+
+	private static boolean newestAvailable() {
+		String hash = getNewestCommit();
+		try {
+			HttpsURLConnection connection = (HttpsURLConnection) new URL(GIT_URL).openConnection();
+			connection.connect();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			return hash.equalsIgnoreCase(reader.readLine());
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
+	public static void main(String[] args) {
 
 	}
 
