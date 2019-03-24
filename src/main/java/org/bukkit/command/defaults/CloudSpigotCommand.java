@@ -26,20 +26,20 @@ public class CloudSpigotCommand extends BukkitCommand {
 
 		sender.sendMessage(CloudSpigot.serverPrefix + "§9Server Information: ");
 		sender.sendMessage(
-				CloudSpigot.serverPrefix + "§9Version: " + CloudSpigot.class.getPackage().getImplementationVersion());
-		sender.sendMessage(CloudSpigot.serverPrefix + "§9API-Version: "
+				CloudSpigot.serverPrefix + "§9Version: §a" + CloudSpigot.class.getPackage().getImplementationVersion());
+		sender.sendMessage(CloudSpigot.serverPrefix + "§9API-Version: §a"
 				+ CloudSpigot.class.getPackage().getSpecificationVersion());
 		sender.sendMessage(
-				CloudSpigot.serverPrefix + "§9Author: " + CloudSpigot.class.getPackage().getImplementationVendor());
+				CloudSpigot.serverPrefix + "§9Author: §a" + CloudSpigot.class.getPackage().getImplementationVendor());
 		sender.sendMessage(CloudSpigot.serverPrefix + "§9Java Information: ");
-		sender.sendMessage(CloudSpigot.serverPrefix + "§9Java-Version: " + Updater.getJavaVersion());
-		sender.sendMessage(CloudSpigot.serverPrefix + "§9Threads: " + Thread.activeCount());
-		sender.sendMessage(
-				CloudSpigot.serverPrefix + "§9Memory (max/used/free): " + Runtime.getRuntime().maxMemory() / 1024 / 1024
-						+ "/" + (Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024
-						+ "/" + Runtime.getRuntime().freeMemory() / 1024 / 1024 + " MB");
-		sender.sendMessage(CloudSpigot.serverPrefix + "§9CPU Count: " + Runtime.getRuntime().availableProcessors());
-		
+		sender.sendMessage(CloudSpigot.serverPrefix + "§9Java-Version: §a" + Updater.getJavaVersion());
+		sender.sendMessage(CloudSpigot.serverPrefix + "§9Threads: §a" + Thread.activeCount());
+		sender.sendMessage(CloudSpigot.serverPrefix + "§9Memory (max/used/free): §a"
+				+ Runtime.getRuntime().maxMemory() / 1024 / 1024 + "§9/"
+				+ (Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024 + "§9/"
+				+ Runtime.getRuntime().freeMemory() / 1024 / 1024 + " MB");
+		sender.sendMessage(CloudSpigot.serverPrefix + "§9CPU Count: §a" + Runtime.getRuntime().availableProcessors());
+
 		return true;
 	}
 
