@@ -1,10 +1,8 @@
 package eu.server24_7.cloudspigot;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
-
 import org.bukkit.entity.Player;
+
+import com.google.common.base.Preconditions;
 
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -90,7 +88,7 @@ public final class Title {
 	 * @param subtitle the secondary text of the title
 	 */
 	public Title(BaseComponent title, BaseComponent subtitle) {
-		this(title, subtitle, DEFAULT_FADE_IN, DEFAULT_STAY, DEFAULT_FADE_OUT);
+		this(title, subtitle, Title.DEFAULT_FADE_IN, Title.DEFAULT_STAY, Title.DEFAULT_FADE_OUT);
 	}
 
 	/**
@@ -104,7 +102,7 @@ public final class Title {
 	 * @param subtitle the secondary text of the title
 	 */
 	public Title(BaseComponent[] title, BaseComponent[] subtitle) {
-		this(title, subtitle, DEFAULT_FADE_IN, DEFAULT_STAY, DEFAULT_FADE_OUT);
+		this(title, subtitle, Title.DEFAULT_FADE_IN, Title.DEFAULT_STAY, Title.DEFAULT_FADE_OUT);
 	}
 
 	/**
@@ -118,7 +116,7 @@ public final class Title {
 	 * @param subtitle the secondary text of the title
 	 */
 	public Title(String title, String subtitle) {
-		this(title, subtitle, DEFAULT_FADE_IN, DEFAULT_STAY, DEFAULT_FADE_OUT);
+		this(title, subtitle, Title.DEFAULT_FADE_IN, Title.DEFAULT_STAY, Title.DEFAULT_FADE_OUT);
 	}
 
 	/**
@@ -132,7 +130,7 @@ public final class Title {
 	 * @throws IllegalArgumentException if any of the times are negative
 	 */
 	public Title(BaseComponent title, BaseComponent subtitle, int fadeIn, int stay, int fadeOut) {
-		this(new BaseComponent[] { checkNotNull(title, "title") },
+		this(new BaseComponent[] { Preconditions.checkNotNull(title, "title") },
 				subtitle == null ? null : new BaseComponent[] { subtitle }, fadeIn, stay, fadeOut);
 	}
 
@@ -147,10 +145,10 @@ public final class Title {
 	 * @throws IllegalArgumentException if any of the times are negative
 	 */
 	public Title(BaseComponent[] title, BaseComponent[] subtitle, int fadeIn, int stay, int fadeOut) {
-		checkArgument(fadeIn >= 0, "Negative fadeIn: %s", fadeIn);
-		checkArgument(stay >= 0, "Negative stay: %s", stay);
-		checkArgument(fadeOut >= 0, "Negative fadeOut: %s", fadeOut);
-		this.title = checkNotNull(title, "title");
+		Preconditions.checkArgument(fadeIn >= 0, "Negative fadeIn: %s", fadeIn);
+		Preconditions.checkArgument(stay >= 0, "Negative stay: %s", stay);
+		Preconditions.checkArgument(fadeOut >= 0, "Negative fadeOut: %s", fadeOut);
+		this.title = Preconditions.checkNotNull(title, "title");
 		this.subtitle = subtitle;
 		this.fadeIn = fadeIn;
 		this.stay = stay;
@@ -171,7 +169,7 @@ public final class Title {
 	 * @param fadeOut  the number of ticks for the title to fade out
 	 */
 	public Title(String title, String subtitle, int fadeIn, int stay, int fadeOut) {
-		this(TextComponent.fromLegacyText(checkNotNull(title, "title")),
+		this(TextComponent.fromLegacyText(Preconditions.checkNotNull(title, "title")),
 				subtitle == null ? null : TextComponent.fromLegacyText(subtitle), fadeIn, stay, fadeOut);
 	}
 
@@ -181,7 +179,7 @@ public final class Title {
 	 * @return the text
 	 */
 	public BaseComponent[] getTitle() {
-		return this.title;
+		return title;
 	}
 
 	/**
@@ -190,7 +188,7 @@ public final class Title {
 	 * @return the text
 	 */
 	public BaseComponent[] getSubtitle() {
-		return this.subtitle;
+		return subtitle;
 	}
 
 	/**
@@ -203,7 +201,7 @@ public final class Title {
 	 * @return the number of ticks to fade in
 	 */
 	public int getFadeIn() {
-		return this.fadeIn;
+		return fadeIn;
 	}
 
 	/**
@@ -216,7 +214,7 @@ public final class Title {
 	 * @return the number of ticks to stay
 	 */
 	public int getStay() {
-		return this.stay;
+		return stay;
 	}
 
 	/**
@@ -229,7 +227,7 @@ public final class Title {
 	 * @return the number of ticks to fade out
 	 */
 	public int getFadeOut() {
-		return this.fadeOut;
+		return fadeOut;
 	}
 
 	public static Builder builder() {
@@ -243,9 +241,9 @@ public final class Title {
 
 		private BaseComponent[] title;
 		private BaseComponent[] subtitle;
-		private int fadeIn = DEFAULT_FADE_IN;
-		private int stay = DEFAULT_STAY;
-		private int fadeOut = DEFAULT_FADE_OUT;
+		private int fadeIn = Title.DEFAULT_FADE_IN;
+		private int stay = Title.DEFAULT_STAY;
+		private int fadeOut = Title.DEFAULT_FADE_OUT;
 
 		/**
 		 * Sets the title to the given text.
@@ -255,7 +253,7 @@ public final class Title {
 		 * @throws NullPointerException if the title is null
 		 */
 		public Builder title(BaseComponent title) {
-			return this.title(new BaseComponent[] { checkNotNull(title, "title") });
+			return this.title(new BaseComponent[] { Preconditions.checkNotNull(title, "title") });
 		}
 
 		/**
@@ -266,7 +264,7 @@ public final class Title {
 		 * @throws NullPointerException if the title is null
 		 */
 		public Builder title(BaseComponent[] title) {
-			this.title = checkNotNull(title, "title");
+			this.title = Preconditions.checkNotNull(title, "title");
 			return this;
 		}
 
@@ -282,7 +280,7 @@ public final class Title {
 		 * @throws NullPointerException if the title is null
 		 */
 		public Builder title(String title) {
-			return this.title(TextComponent.fromLegacyText(checkNotNull(title, "title")));
+			return this.title(TextComponent.fromLegacyText(Preconditions.checkNotNull(title, "title")));
 		}
 
 		/**
@@ -328,7 +326,7 @@ public final class Title {
 		 * @throws IllegalArgumentException if it is negative
 		 */
 		public Builder fadeIn(int fadeIn) {
-			checkArgument(fadeIn >= 0, "Negative fadeIn: %s", fadeIn);
+			Preconditions.checkArgument(fadeIn >= 0, "Negative fadeIn: %s", fadeIn);
 			this.fadeIn = fadeIn;
 			return this;
 		}
@@ -341,7 +339,7 @@ public final class Title {
 		 * @throws IllegalArgumentException if it is negative
 		 */
 		public Builder stay(int stay) {
-			checkArgument(stay >= 0, "Negative stay: %s", stay);
+			Preconditions.checkArgument(stay >= 0, "Negative stay: %s", stay);
 			this.stay = stay;
 			return this;
 		}
@@ -354,7 +352,7 @@ public final class Title {
 		 * @throws IllegalArgumentException if it is negative
 		 */
 		public Builder fadeOut(int fadeOut) {
-			checkArgument(fadeOut >= 0, "Negative fadeOut: %s", fadeOut);
+			Preconditions.checkArgument(fadeOut >= 0, "Negative fadeOut: %s", fadeOut);
 			this.fadeOut = fadeOut;
 			return this;
 		}
@@ -366,8 +364,8 @@ public final class Title {
 		 * @throws IllegalStateException if title isn't specified
 		 */
 		public Title build() {
-			checkState(title != null, "Title not specified");
-			return new Title(this.title, this.subtitle, this.fadeIn, this.stay, this.fadeOut);
+			Preconditions.checkState(title != null, "Title not specified");
+			return new Title(title, subtitle, fadeIn, stay, fadeOut);
 		}
 	}
 }

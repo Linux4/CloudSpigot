@@ -23,11 +23,11 @@ public class ServerSchedulerReportingWrapper implements Runnable {
 	public void run() {
 		try {
 			internalTask.run();
-		} catch (RuntimeException e) {
+		} catch (final RuntimeException e) {
 			internalTask.getOwner().getServer().getPluginManager()
 					.callEvent(new ServerExceptionEvent(new ServerSchedulerException(e, internalTask)));
 			throw e;
-		} catch (Throwable t) {
+		} catch (final Throwable t) {
 			internalTask.getOwner().getServer().getPluginManager()
 					.callEvent(new ServerExceptionEvent(new ServerSchedulerException(t, internalTask))); // Do not
 																											// rethrow,

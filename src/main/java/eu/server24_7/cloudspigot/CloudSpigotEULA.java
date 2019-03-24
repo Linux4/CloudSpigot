@@ -10,7 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * 
+ *
  * EULA class which automatically accepts the EULA
  *
  */
@@ -21,8 +21,8 @@ public class CloudSpigotEULA {
 	private final boolean c;
 
 	public CloudSpigotEULA(File file1) {
-		this.b = file1;
-		this.c = this.a(file1);
+		b = file1;
+		c = this.a(file1);
 	}
 
 	private boolean a(File file1) {
@@ -30,18 +30,18 @@ public class CloudSpigotEULA {
 		boolean flag = false;
 
 		try {
-			Properties properties = new Properties();
+			final Properties properties = new Properties();
 
 			fileinputstream = new FileInputStream(file1);
 			properties.load(fileinputstream);
 			flag = Boolean.parseBoolean(properties.getProperty("eula", "false"));
-		} catch (Exception exception) {
+		} catch (final Exception exception) {
 			flag = true;
-			this.b();
+			b();
 		} finally {
 			try {
 				fileinputstream.close();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				;
 			}
 		}
@@ -50,25 +50,25 @@ public class CloudSpigotEULA {
 	}
 
 	public boolean a() {
-		return this.c;
+		return c;
 	}
 
 	public void b() {
 		FileOutputStream fileoutputstream = null;
 
 		try {
-			Properties properties = new Properties();
+			final Properties properties = new Properties();
 
-			fileoutputstream = new FileOutputStream(this.b);
+			fileoutputstream = new FileOutputStream(b);
 			properties.setProperty("eula", "true");
 			properties.store(fileoutputstream,
 					"By changing the setting below to TRUE you are indicating your agreement to our EULA (https://account.mojang.com/documents/minecraft_eula).");
-		} catch (Exception exception) {
-			a.warn("Failed to save " + this.b, exception);
+		} catch (final Exception exception) {
+			CloudSpigotEULA.a.warn("Failed to save " + b, exception);
 		} finally {
 			try {
 				fileoutputstream.close();
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				;
 			}
 		}

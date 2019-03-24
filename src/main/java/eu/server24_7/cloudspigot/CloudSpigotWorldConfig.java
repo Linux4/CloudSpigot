@@ -14,12 +14,12 @@ public class CloudSpigotWorldConfig {
 
 	public CloudSpigotWorldConfig(String worldName) {
 		this.worldName = worldName;
-		this.config = CloudSpigotConfig.config;
+		config = CloudSpigotConfig.config;
 		init();
 	}
 
 	public void init() {
-		this.verbose = getBoolean("verbose", true);
+		verbose = getBoolean("verbose", true);
 
 		log("-------- World Settings For [" + worldName + "] --------");
 		CloudSpigotConfig.readConfig(CloudSpigotWorldConfig.class, this);
@@ -280,14 +280,18 @@ public class CloudSpigotWorldConfig {
 			// Migrate default value
 
 			boolean value = config.getBoolean("world-settings.default.fix-cannons", false);
-			if (!value)
+			if (!value) {
 				value = config.getBoolean("world-settings.default.tnt-gameplay.fix-directional-bias", false);
-			if (!value)
+			}
+			if (!value) {
 				value = !config.getBoolean("world-settings.default.tnt-gameplay.moves-in-water", true);
-			if (!value)
+			}
+			if (!value) {
 				value = config.getBoolean("world-settings.default.tnt-gameplay.legacy-explosion-height", false);
-			if (value)
+			}
+			if (value) {
 				config.set("world-settings.default.fix-cannons", true);
+			}
 
 			if (config.contains("world-settings.default.tnt-gameplay")) {
 				config.getDefaults().set("world-settings.default.tnt-gameplay", null);
@@ -297,15 +301,19 @@ public class CloudSpigotWorldConfig {
 			// Migrate world setting
 
 			value = config.getBoolean("world-settings." + worldName + ".fix-cannons", false);
-			if (!value)
+			if (!value) {
 				value = config.getBoolean("world-settings." + worldName + ".tnt-gameplay.fix-directional-bias", false);
-			if (!value)
+			}
+			if (!value) {
 				value = !config.getBoolean("world-settings." + worldName + ".tnt-gameplay.moves-in-water", true);
-			if (!value)
+			}
+			if (!value) {
 				value = config.getBoolean("world-settings." + worldName + ".tnt-gameplay.legacy-explosion-height",
 						false);
-			if (value)
+			}
+			if (value) {
 				config.set("world-settings." + worldName + ".fix-cannons", true);
+			}
 
 			if (config.contains("world-settings." + worldName + ".tnt-gameplay")) {
 				config.getDefaults().set("world-settings." + worldName + ".tnt-gameplay", null);

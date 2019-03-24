@@ -42,42 +42,42 @@ public class CloudSpigotConfig {
 	/* ======================================================================== */
 
 	public static void init(File configFile) {
-		CONFIG_FILE = configFile;
-		config = new YamlConfiguration();
+		CloudSpigotConfig.CONFIG_FILE = configFile;
+		CloudSpigotConfig.config = new YamlConfiguration();
 		try {
-			config.load(CONFIG_FILE);
-		} catch (IOException ex) {
-		} catch (InvalidConfigurationException ex) {
+			CloudSpigotConfig.config.load(CloudSpigotConfig.CONFIG_FILE);
+		} catch (final IOException ex) {
+		} catch (final InvalidConfigurationException ex) {
 			Bukkit.getLogger().log(Level.SEVERE, "Could not load paper.yml, please correct your syntax errors", ex);
 			throw Throwables.propagate(ex);
 		}
-		config.options().header(HEADER);
-		config.options().copyDefaults(true);
+		CloudSpigotConfig.config.options().header(CloudSpigotConfig.HEADER);
+		CloudSpigotConfig.config.options().copyDefaults(true);
 
-		commands = new HashMap<String, Command>();
+		CloudSpigotConfig.commands = new HashMap<String, Command>();
 
-		version = getInt("config-version", 9);
-		set("config-version", 9);
-		readConfig(CloudSpigotConfig.class, null);
+		CloudSpigotConfig.version = CloudSpigotConfig.getInt("config-version", 9);
+		CloudSpigotConfig.set("config-version", 9);
+		CloudSpigotConfig.readConfig(CloudSpigotConfig.class, null);
 	}
 
 	public static void registerCommands() {
-		for (Map.Entry<String, Command> entry : commands.entrySet()) {
+		for (final Map.Entry<String, Command> entry : CloudSpigotConfig.commands.entrySet()) {
 			MinecraftServer.getServer().server.getCommandMap().register(entry.getKey(), "CloudSpigot",
 					entry.getValue());
 		}
 	}
 
 	static void readConfig(Class<?> clazz, Object instance) {
-		for (Method method : clazz.getDeclaredMethods()) {
+		for (final Method method : clazz.getDeclaredMethods()) {
 			if (Modifier.isPrivate(method.getModifiers())) {
 				if (method.getParameterTypes().length == 0 && method.getReturnType() == Void.TYPE) {
 					try {
 						method.setAccessible(true);
 						method.invoke(instance);
-					} catch (InvocationTargetException ex) {
+					} catch (final InvocationTargetException ex) {
 						throw Throwables.propagate(ex.getCause());
-					} catch (Exception ex) {
+					} catch (final Exception ex) {
 						Bukkit.getLogger().log(Level.SEVERE, "Error invoking " + method, ex);
 					}
 				}
@@ -85,59 +85,61 @@ public class CloudSpigotConfig {
 		}
 
 		try {
-			config.save(CONFIG_FILE);
-		} catch (IOException ex) {
-			Bukkit.getLogger().log(Level.SEVERE, "Could not save " + CONFIG_FILE, ex);
+			CloudSpigotConfig.config.save(CloudSpigotConfig.CONFIG_FILE);
+		} catch (final IOException ex) {
+			Bukkit.getLogger().log(Level.SEVERE, "Could not save " + CloudSpigotConfig.CONFIG_FILE, ex);
 		}
 	}
 
 	private static void set(String path, Object val) {
-		config.set(path, val);
+		CloudSpigotConfig.config.set(path, val);
 	}
 
 	private static boolean getBoolean(String path, boolean def) {
-		config.addDefault(path, def);
-		return config.getBoolean(path, config.getBoolean(path));
+		CloudSpigotConfig.config.addDefault(path, def);
+		return CloudSpigotConfig.config.getBoolean(path, CloudSpigotConfig.config.getBoolean(path));
 	}
 
 	private static double getDouble(String path, double def) {
-		config.addDefault(path, def);
-		return config.getDouble(path, config.getDouble(path));
+		CloudSpigotConfig.config.addDefault(path, def);
+		return CloudSpigotConfig.config.getDouble(path, CloudSpigotConfig.config.getDouble(path));
 	}
 
 	private static float getFloat(String path, float def) {
 		// TODO: Figure out why getFloat() always returns the default value.
-		return (float) getDouble(path, def);
+		return (float) CloudSpigotConfig.getDouble(path, def);
 	}
 
 	private static int getInt(String path, int def) {
-		config.addDefault(path, def);
-		return config.getInt(path, config.getInt(path));
+		CloudSpigotConfig.config.addDefault(path, def);
+		return CloudSpigotConfig.config.getInt(path, CloudSpigotConfig.config.getInt(path));
 	}
 
 	@SuppressWarnings({ "rawtypes" })
 	private static <T> List getList(String path, T def) {
-		config.addDefault(path, def);
-		return config.getList(path, config.getList(path));
+		CloudSpigotConfig.config.addDefault(path, def);
+		return CloudSpigotConfig.config.getList(path, CloudSpigotConfig.config.getList(path));
 	}
 
 	private static String getString(String path, String def) {
-		config.addDefault(path, def);
-		return config.getString(path, config.getString(path));
+		CloudSpigotConfig.config.addDefault(path, def);
+		return CloudSpigotConfig.config.getString(path, CloudSpigotConfig.config.getString(path));
 	}
 
 	public static double babyZombieMovementSpeed;
 
 	private static void babyZombieMovementSpeed() {
-		babyZombieMovementSpeed = getDouble("settings.baby-zombie-movement-speed", 0.5D); // Player moves at 0.1F, for
-																							// reference
+		CloudSpigotConfig.babyZombieMovementSpeed = CloudSpigotConfig.getDouble("settings.baby-zombie-movement-speed",
+				0.5D); // Player moves at 0.1F, for
+		// reference
 	}
 
 	public static boolean interactLimitEnabled;
 
 	private static void interactLimitEnabled() {
-		interactLimitEnabled = getBoolean("settings.limit-player-interactions", true);
-		if (!interactLimitEnabled) {
+		CloudSpigotConfig.interactLimitEnabled = CloudSpigotConfig.getBoolean("settings.limit-player-interactions",
+				true);
+		if (!CloudSpigotConfig.interactLimitEnabled) {
 			Bukkit.getLogger().log(Level.INFO,
 					"Disabling player interaction limiter, your server may be more vulnerable to malicious users");
 		}
@@ -146,29 +148,31 @@ public class CloudSpigotConfig {
 	public static boolean animateExplosions;
 
 	private static void animateExplosions() {
-		animateExplosions = getBoolean("settings.animate-explosions", false);
+		CloudSpigotConfig.animateExplosions = CloudSpigotConfig.getBoolean("settings.animate-explosions", false);
 	}
 
 	public static boolean autoRespawnPlayers;
 
 	private static void autoRespawnPlayers() {
-		autoRespawnPlayers = getBoolean("settings.autorespawn-players", false);
+		CloudSpigotConfig.autoRespawnPlayers = CloudSpigotConfig.getBoolean("settings.autorespawn-players", false);
 	}
 
 	public static double strengthEffectModifier;
 	public static double weaknessEffectModifier;
 
 	private static void effectModifiers() {
-		strengthEffectModifier = getDouble("effect-modifiers.strength", 1.3D);
-		weaknessEffectModifier = getDouble("effect-modifiers.weakness", -0.5D);
+		CloudSpigotConfig.strengthEffectModifier = CloudSpigotConfig.getDouble("effect-modifiers.strength", 1.3D);
+		CloudSpigotConfig.weaknessEffectModifier = CloudSpigotConfig.getDouble("effect-modifiers.weakness", -0.5D);
 	}
 
 	public static Set<Integer> dataValueAllowedItems;
 
 	@SuppressWarnings("unchecked")
 	private static void dataValueAllowedItems() {
-		dataValueAllowedItems = new HashSet<Integer>(getList("data-value-allowed-items", Collections.emptyList()));
-		Bukkit.getLogger().info("Data value allowed items: " + StringUtils.join(dataValueAllowedItems, ", "));
+		CloudSpigotConfig.dataValueAllowedItems = new HashSet<Integer>(
+				CloudSpigotConfig.getList("data-value-allowed-items", Collections.emptyList()));
+		Bukkit.getLogger()
+				.info("Data value allowed items: " + StringUtils.join(CloudSpigotConfig.dataValueAllowedItems, ", "));
 	}
 
 	public static boolean stackableLavaBuckets;
@@ -176,9 +180,9 @@ public class CloudSpigotConfig {
 	public static boolean stackableMilkBuckets;
 
 	private static void stackableBuckets() {
-		stackableLavaBuckets = getBoolean("stackable-buckets.lava", false);
-		stackableWaterBuckets = getBoolean("stackable-buckets.water", false);
-		stackableMilkBuckets = getBoolean("stackable-buckets.milk", false);
+		CloudSpigotConfig.stackableLavaBuckets = CloudSpigotConfig.getBoolean("stackable-buckets.lava", false);
+		CloudSpigotConfig.stackableWaterBuckets = CloudSpigotConfig.getBoolean("stackable-buckets.water", false);
+		CloudSpigotConfig.stackableMilkBuckets = CloudSpigotConfig.getBoolean("stackable-buckets.milk", false);
 
 		Field maxStack;
 
@@ -186,30 +190,30 @@ public class CloudSpigotConfig {
 			maxStack = Material.class.getDeclaredField("maxStack");
 			maxStack.setAccessible(true);
 
-			Field modifiers = Field.class.getDeclaredField("modifiers");
+			final Field modifiers = Field.class.getDeclaredField("modifiers");
 			modifiers.setAccessible(true);
 			modifiers.setInt(maxStack, maxStack.getModifiers() & ~Modifier.FINAL);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			return;
 		}
 
 		try {
-			if (stackableLavaBuckets) {
+			if (CloudSpigotConfig.stackableLavaBuckets) {
 				maxStack.set(Material.LAVA_BUCKET, Material.BUCKET.getMaxStackSize());
 				Items.LAVA_BUCKET.c(Material.BUCKET.getMaxStackSize());
 			}
 
-			if (stackableWaterBuckets) {
+			if (CloudSpigotConfig.stackableWaterBuckets) {
 				maxStack.set(Material.WATER_BUCKET, Material.BUCKET.getMaxStackSize());
 				Items.WATER_BUCKET.c(Material.BUCKET.getMaxStackSize());
 			}
 
-			if (stackableMilkBuckets) {
+			if (CloudSpigotConfig.stackableMilkBuckets) {
 				maxStack.set(Material.MILK_BUCKET, Material.BUCKET.getMaxStackSize());
 				Items.MILK_BUCKET.c(Material.BUCKET.getMaxStackSize());
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -217,6 +221,7 @@ public class CloudSpigotConfig {
 	public static boolean warnForExcessiveVelocity;
 
 	private static void excessiveVelocityWarning() {
-		warnForExcessiveVelocity = getBoolean("warnWhenSettingExcessiveVelocity", true);
+		CloudSpigotConfig.warnForExcessiveVelocity = CloudSpigotConfig.getBoolean("warnWhenSettingExcessiveVelocity",
+				true);
 	}
 }
