@@ -14,16 +14,13 @@ import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
 import com.google.common.collect.Queues;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.local.LocalChannel;
-import io.netty.channel.local.LocalEventLoopGroup;
 import io.netty.channel.local.LocalServerChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.handler.timeout.TimeoutException;
@@ -40,8 +37,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 	public static final AttributeKey<EnumProtocol> c = AttributeKey.valueOf("protocol");
 	public static final LazyInitVar<NioEventLoopGroup> d = new LazyInitVar<NioEventLoopGroup>() {
 		protected NioEventLoopGroup a() {
-			return new NioEventLoopGroup(0,
-					(new ThreadFactoryBuilder()).setNameFormat("Netty Client IO #%d").setDaemon(true).build());
+			return new NioEventLoopGroup();
 		}
 
 		@Override
@@ -49,25 +45,23 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 			return this.a();
 		}
 	};
-	public static final LazyInitVar<EpollEventLoopGroup> e = new LazyInitVar<EpollEventLoopGroup>() {
-		protected EpollEventLoopGroup a() {
-			return new EpollEventLoopGroup(0,
-					(new ThreadFactoryBuilder()).setNameFormat("Netty Epoll Client IO #%d").setDaemon(true).build());
+	public static final LazyInitVar<NioEventLoopGroup> e = new LazyInitVar<NioEventLoopGroup>() {
+		protected NioEventLoopGroup a() {
+			return new NioEventLoopGroup();
 		}
 
 		@Override
-		protected EpollEventLoopGroup init() {
+		protected NioEventLoopGroup init() {
 			return this.a();
 		}
 	};
-	public static final LazyInitVar<LocalEventLoopGroup> f = new LazyInitVar<LocalEventLoopGroup>() {
-		protected LocalEventLoopGroup a() {
-			return new LocalEventLoopGroup(0,
-					(new ThreadFactoryBuilder()).setNameFormat("Netty Local Client IO #%d").setDaemon(true).build());
+	public static final LazyInitVar<NioEventLoopGroup> f = new LazyInitVar<NioEventLoopGroup>() {
+		protected NioEventLoopGroup a() {
+			return new NioEventLoopGroup();
 		}
 
 		@Override
-		protected LocalEventLoopGroup init() {
+		protected NioEventLoopGroup init() {
 			return this.a();
 		}
 	};
@@ -347,10 +341,11 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	protected void channelRead0(ChannelHandlerContext channelhandlercontext, Packet object) throws Exception { // CraftBukkit
-																												// - fix
-																												// decompile
-																												// error
+	protected void messageReceived(ChannelHandlerContext channelhandlercontext, Packet object) throws Exception { // CraftBukkit
+																													// -
+																													// fix
+																													// decompile
+																													// error
 		this.a(channelhandlercontext, object);
 	}
 

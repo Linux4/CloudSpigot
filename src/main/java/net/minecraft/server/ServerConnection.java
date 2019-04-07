@@ -11,7 +11,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.Lists;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -19,11 +18,6 @@ import io.netty.channel.ChannelException;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.epoll.Epoll;
-import io.netty.channel.epoll.EpollEventLoopGroup;
-import io.netty.channel.epoll.EpollServerSocketChannel;
-import io.netty.channel.local.LocalEventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.timeout.ReadTimeoutHandler;
@@ -35,8 +29,7 @@ public class ServerConnection {
 	private static final Logger e = LogManager.getLogger();
 	public static final LazyInitVar<NioEventLoopGroup> a = new LazyInitVar<NioEventLoopGroup>() {
 		protected NioEventLoopGroup a() {
-			return new NioEventLoopGroup(0,
-					(new ThreadFactoryBuilder()).setNameFormat("Netty Server IO #%d").setDaemon(true).build());
+			return new NioEventLoopGroup();
 		}
 
 		@Override
@@ -44,25 +37,23 @@ public class ServerConnection {
 			return this.a();
 		}
 	};
-	public static final LazyInitVar<EpollEventLoopGroup> b = new LazyInitVar<EpollEventLoopGroup>() {
-		protected EpollEventLoopGroup a() {
-			return new EpollEventLoopGroup(0,
-					(new ThreadFactoryBuilder()).setNameFormat("Netty Epoll Server IO #%d").setDaemon(true).build());
+	public static final LazyInitVar<NioEventLoopGroup> b = new LazyInitVar<NioEventLoopGroup>() {
+		protected NioEventLoopGroup a() {
+			return new NioEventLoopGroup();
 		}
 
 		@Override
-		protected EpollEventLoopGroup init() {
+		protected NioEventLoopGroup init() {
 			return this.a();
 		}
 	};
-	public static final LazyInitVar<LocalEventLoopGroup> c = new LazyInitVar<LocalEventLoopGroup>() {
-		protected LocalEventLoopGroup a() {
-			return new LocalEventLoopGroup(0,
-					(new ThreadFactoryBuilder()).setNameFormat("Netty Local Server IO #%d").setDaemon(true).build());
+	public static final LazyInitVar<NioEventLoopGroup> c = new LazyInitVar<NioEventLoopGroup>() {
+		protected NioEventLoopGroup a() {
+			return new NioEventLoopGroup();
 		}
 
 		@Override
-		protected LocalEventLoopGroup init() {
+		protected NioEventLoopGroup init() {
 			return this.a();
 		}
 	};
@@ -76,25 +67,13 @@ public class ServerConnection {
 		this.d = true;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes" })
 	public void a(InetAddress inetaddress, int i) throws IOException {
 		// List<ChannelFuture> list = this.g; // CloudSpigot
 
 		synchronized (this.g) {
-			Class oclass;
-			LazyInitVar lazyinitvar;
 
-			if (Epoll.isAvailable() && this.f.ai()) {
-				oclass = EpollServerSocketChannel.class;
-				lazyinitvar = ServerConnection.b;
-				ServerConnection.e.info("Using epoll channel type");
-			} else {
-				oclass = NioServerSocketChannel.class;
-				lazyinitvar = ServerConnection.a;
-				ServerConnection.e.info("Using default channel type");
-			}
-
-			this.g.add((new ServerBootstrap()).channel(oclass).childHandler(new ChannelInitializer() {
+			this.g.add((new ServerBootstrap()).channel(NioServerSocketChannel.class).childHandler(new ChannelInitializer() {
 				@Override
 				protected void initChannel(Channel channel) throws Exception {
 					try {
@@ -115,7 +94,7 @@ public class ServerConnection {
 					channel.pipeline().addLast("packet_handler", networkmanager);
 					networkmanager.a((new HandshakeListener(ServerConnection.this.f, networkmanager)));
 				}
-			}).group((EventLoopGroup) lazyinitvar.c()).localAddress(inetaddress, i).bind().syncUninterruptibly());
+			}).group(a.c()).localAddress(inetaddress, i).bind().syncUninterruptibly());
 		}
 	}
 

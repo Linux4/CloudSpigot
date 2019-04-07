@@ -22,7 +22,7 @@ import com.google.common.base.Charsets;
 public class Updater {
 
 	private static final String BASE_URL = "https://ci.server24-7.eu/job/CloudSpigot/latest/";
-	private static final String URL = BASE_URL + "cloudspigot-%t%/cloudspigot-1.8.10-R0.1-SNAPSHOT.jar";
+	private static final String URL = BASE_URL + "cloudspigot-1.8.10-R0.1-SNAPSHOT.jar";
 	private static final String GIT_URL = BASE_URL + ".gitrev";
 
 	public static Status checkUpdate() {
@@ -47,18 +47,6 @@ public class Updater {
 		}
 	}
 
-	public enum Status {
-		ERROR, LATEST_VERSION, UNKNOWN_VERSION, UPDATE_AVAILABLE;
-	}
-
-	public static boolean isJava8() {
-		return getJavaVersion() == 1.8;
-	}
-
-	public static boolean isJava9Up() {
-		return getJavaVersion() > 1.8;
-	}
-
 	public static double getJavaVersion() {
 		String version = System.getProperty("java.version");
 		int pos = version.indexOf('.');
@@ -66,18 +54,14 @@ public class Updater {
 		return Double.parseDouble(version.substring(0, pos));
 	}
 
+	public enum Status {
+		ERROR, LATEST_VERSION, UNKNOWN_VERSION, UPDATE_AVAILABLE;
+	}
+
 	public static boolean update() {
 		if (newestAvailable()) {
 			try {
-				URL url = new URL(URL.replaceFirst("%t%", "java8"));
-				if (isJava9Up()) {
-					url = new URL(URL.replaceFirst("%t%", "java11"));
-				} else {
-					if (!isJava8()) {
-						throw new IllegalStateException("Unsupported Java version: " + getJavaVersion());
-					}
-				}
-
+				URL url = new URL(URL);
 				File jar = new File(Updater.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 				if (jar.isDirectory()) {
 					throw new IllegalStateException("Not running from JAR file!");
