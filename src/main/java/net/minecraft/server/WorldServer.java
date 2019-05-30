@@ -70,7 +70,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 	@SuppressWarnings("deprecation")
 	public WorldServer(MinecraftServer minecraftserver, IDataManager idatamanager, WorldData worlddata, int i,
 			MethodProfiler methodprofiler, org.bukkit.World.Environment env, org.bukkit.generator.ChunkGenerator gen) {
-		super(idatamanager, worlddata, WorldProvider.byDimension(env.getId()), methodprofiler, false, gen, env);
+		super(idatamanager, worlddata, WorldProvider.byDimension(env.getId()), false, gen, env);
 		this.dimension = i;
 		this.pvpMode = minecraftserver.getPVP();
 		worlddata.world = this;

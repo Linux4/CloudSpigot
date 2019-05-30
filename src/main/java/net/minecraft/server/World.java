@@ -95,7 +95,7 @@ public abstract class World implements IBlockAccess {
 	protected boolean isLoading;
 	public PersistentCollection worldMaps; // CraftBukkit - public
 	protected PersistentVillage villages;
-	public final MethodProfiler methodProfiler;
+	// public final MethodProfiler methodProfiler; // CloudSpigot
 	private final Calendar K = Calendar.getInstance();
 	public Scoreboard scoreboard = new Scoreboard(); // CraftBukkit - public
 	public final boolean isClientSide;
@@ -189,7 +189,7 @@ public abstract class World implements IBlockAccess {
 	}
 
 	protected World(IDataManager idatamanager, WorldData worlddata, WorldProvider worldprovider,
-			MethodProfiler methodprofiler, boolean flag, ChunkGenerator gen, org.bukkit.World.Environment env) {
+			/*MethodProfiler methodprofiler,*/ boolean flag, ChunkGenerator gen, org.bukkit.World.Environment env) {
 		this.spigotConfig = new org.spigotmc.SpigotWorldConfig(worlddata.getName()); // Spigot
 		this.cloudSpigotConfig = new eu.server24_7.cloudspigot.CloudSpigotWorldConfig(worlddata.getName()); // CloudSpigot
 		this.generator = gen;
@@ -210,7 +210,7 @@ public abstract class World implements IBlockAccess {
 		this.allowAnimals = true;
 		this.H = new int['\u8000'];
 		this.dataManager = idatamanager;
-		this.methodProfiler = methodprofiler;
+		//this.methodProfiler = methodprofiler; // CloudSpigot
 		this.worldData = worlddata;
 		this.worldProvider = worldprovider;
 		this.isClientSide = flag;

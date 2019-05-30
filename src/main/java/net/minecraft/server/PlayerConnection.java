@@ -133,7 +133,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 	public void c() {
 		// this.h = false; // CloudSpigot
 		++this.e;
-		this.minecraftServer.methodProfiler.a("keepAlive");
+		// this.minecraftServer.methodProfiler.a("keepAlive"); // CloudSpigot
 		if (this.e - this.k > 40L) {
 			this.k = this.e;
 			this.j = this.d();
@@ -141,7 +141,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 			this.sendPacket(new PacketPlayOutKeepAlive(this.i));
 		}
 
-		this.minecraftServer.methodProfiler.b();
+		// this.minecraftServer.methodProfiler.b(); // CloudSpigot
 		// CraftBukkit start
 		for (int spam; (spam = this.chatThrottle) > 0 && !chatSpamField.compareAndSet(this, spam, spam - 1);)
 			;
