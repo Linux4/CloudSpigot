@@ -56,7 +56,7 @@ import com.google.common.collect.Lists;
 import com.google.common.primitives.Doubles;
 import com.google.common.primitives.Floats;
 
-import eu.server24_7.cloudspigot.CloudSpigotConfig; // CloudSpigot
+import eu.minewars.cloudspigot.CloudSpigotConfig;
 //import com.google.common.util.concurrent.Futures; // CloudSpigot
 import io.netty.buffer.Unpooled;
 import io.netty.util.concurrent.Future;

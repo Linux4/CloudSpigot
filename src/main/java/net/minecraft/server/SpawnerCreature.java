@@ -9,7 +9,7 @@ import org.bukkit.craftbukkit.util.LongHash;
 import org.bukkit.craftbukkit.util.LongHashSet;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import eu.server24_7.cloudspigot.exception.ServerInternalException;
+import eu.minewars.cloudspigot.exception.ServerInternalException;
 // CraftBukkit end
 import net.minecraft.server.BiomeBase.BiomeMeta;
 

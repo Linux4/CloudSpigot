@@ -3,7 +3,7 @@ package net.minecraft.server;
 import java.util.Iterator;
 import java.util.List;
 
-import eu.server24_7.cloudspigot.exception.ServerInternalException;
+import eu.minewars.cloudspigot.exception.ServerInternalException;
 
 public class VillageSiege {
 

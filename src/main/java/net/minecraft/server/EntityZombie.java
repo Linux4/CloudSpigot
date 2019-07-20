@@ -16,7 +16,7 @@ public class EntityZombie extends EntityMonster {
 			0.0D, 1.0D)).a("Spawn Reinforcements Chance");
 	private static final UUID b = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier c = new AttributeModifier(EntityZombie.b, "Baby speed boost",
-			eu.server24_7.cloudspigot.CloudSpigotConfig.babyZombieMovementSpeed, 1); // CloudSpigot - Configurable baby
+			eu.minewars.cloudspigot.CloudSpigotConfig.babyZombieMovementSpeed, 1); // CloudSpigot - Configurable baby
 																						// zombie movement speed
 	private final PathfinderGoalBreakDoor bm = new PathfinderGoalBreakDoor(this);
 	private int bn;

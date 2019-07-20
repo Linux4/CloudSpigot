@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.channels.FileChannel;
 import java.nio.channels.GatheringByteChannel;
 import java.nio.channels.ScatteringByteChannel;
 import java.nio.charset.Charset;
@@ -19,10 +20,11 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.ByteBufProcessor;
 import io.netty.handler.codec.DecoderException;
 import io.netty.handler.codec.EncoderException;
+import io.netty.util.ByteProcessor;
 
+@SuppressWarnings("deprecation")
 public class PacketDataSerializer extends ByteBuf {
 
 	public static int a(int i) {
@@ -289,24 +291,196 @@ public class PacketDataSerializer extends ByteBuf {
 		return i;
 	}
 
-	@Override
-	public int forEachByte(ByteBufProcessor processor) {
+	public boolean isReadOnly() {
+		return a.isReadOnly();
+	}
+
+	public ByteBuf asReadOnly() {
+		return a.asReadOnly();
+	}
+
+	public short getShortLE(int index) {
+		return a.getShortLE(index);
+	}
+
+	public int getUnsignedShortLE(int index) {
+		return a.getUnsignedShortLE(index);
+	}
+
+	public int getMediumLE(int index) {
+		return a.getMediumLE(index);
+	}
+
+	public int getUnsignedMediumLE(int index) {
+		return a.getUnsignedMediumLE(index);
+	}
+
+	public int getIntLE(int index) {
+		return a.getIntLE(index);
+	}
+
+	public long getUnsignedIntLE(int index) {
+		return a.getUnsignedIntLE(index);
+	}
+
+	public long getLongLE(int index) {
+		return a.getLongLE(index);
+	}
+
+	public float getFloatLE(int index) {
+		return a.getFloatLE(index);
+	}
+
+	public double getDoubleLE(int index) {
+		return a.getDoubleLE(index);
+	}
+
+	public int getBytes(int index, FileChannel out, long position, int length) throws IOException {
+		return a.getBytes(index, out, position, length);
+	}
+
+	public CharSequence getCharSequence(int index, int length, Charset charset) {
+		return a.getCharSequence(index, length, charset);
+	}
+
+	public ByteBuf setShortLE(int index, int value) {
+		return a.setShortLE(index, value);
+	}
+
+	public ByteBuf setMediumLE(int index, int value) {
+		return a.setMediumLE(index, value);
+	}
+
+	public ByteBuf setIntLE(int index, int value) {
+		return a.setIntLE(index, value);
+	}
+
+	public ByteBuf setLongLE(int index, long value) {
+		return a.setLongLE(index, value);
+	}
+
+	public ByteBuf setFloatLE(int index, float value) {
+		return a.setFloatLE(index, value);
+	}
+
+	public ByteBuf setDoubleLE(int index, double value) {
+		return a.setDoubleLE(index, value);
+	}
+
+	public int setBytes(int index, FileChannel in, long position, int length) throws IOException {
+		return a.setBytes(index, in, position, length);
+	}
+
+	public int setCharSequence(int index, CharSequence sequence, Charset charset) {
+		return a.setCharSequence(index, sequence, charset);
+	}
+
+	public short readShortLE() {
+		return a.readShortLE();
+	}
+
+	public int readUnsignedShortLE() {
+		return a.readUnsignedShortLE();
+	}
+
+	public int readMediumLE() {
+		return a.readMediumLE();
+	}
+
+	public int readUnsignedMediumLE() {
+		return a.readUnsignedMediumLE();
+	}
+
+	public int readIntLE() {
+		return a.readIntLE();
+	}
+
+	public long readUnsignedIntLE() {
+		return a.readUnsignedIntLE();
+	}
+
+	public long readLongLE() {
+		return a.readLongLE();
+	}
+
+	public float readFloatLE() {
+		return a.readFloatLE();
+	}
+
+	public double readDoubleLE() {
+		return a.readDoubleLE();
+	}
+
+	public ByteBuf readRetainedSlice(int length) {
+		return a.readRetainedSlice(length);
+	}
+
+	public CharSequence readCharSequence(int length, Charset charset) {
+		return a.readCharSequence(length, charset);
+	}
+
+	public int readBytes(FileChannel out, long position, int length) throws IOException {
+		return a.readBytes(out, position, length);
+	}
+
+	public ByteBuf writeShortLE(int value) {
+		return a.writeShortLE(value);
+	}
+
+	public ByteBuf writeMediumLE(int value) {
+		return a.writeMediumLE(value);
+	}
+
+	public ByteBuf writeIntLE(int value) {
+		return a.writeIntLE(value);
+	}
+
+	public ByteBuf writeLongLE(long value) {
+		return a.writeLongLE(value);
+	}
+
+	public ByteBuf writeFloatLE(float value) {
+		return a.writeFloatLE(value);
+	}
+
+	public ByteBuf writeDoubleLE(double value) {
+		return a.writeDoubleLE(value);
+	}
+
+	public int writeBytes(FileChannel in, long position, int length) throws IOException {
+		return a.writeBytes(in, position, length);
+	}
+
+	public int writeCharSequence(CharSequence sequence, Charset charset) {
+		return a.writeCharSequence(sequence, charset);
+	}
+
+	public int forEachByte(ByteProcessor processor) {
 		return a.forEachByte(processor);
 	}
 
-	@Override
-	public int forEachByte(int index, int length, ByteBufProcessor processor) {
+	public int forEachByte(int index, int length, ByteProcessor processor) {
 		return a.forEachByte(index, length, processor);
 	}
 
-	@Override
-	public int forEachByteDesc(ByteBufProcessor processor) {
+	public int forEachByteDesc(ByteProcessor processor) {
 		return a.forEachByteDesc(processor);
 	}
 
-	@Override
-	public int forEachByteDesc(int index, int length, ByteBufProcessor processor) {
+	public int forEachByteDesc(int index, int length, ByteProcessor processor) {
 		return a.forEachByteDesc(index, length, processor);
+	}
+
+	public ByteBuf retainedSlice() {
+		return a.retainedSlice();
+	}
+
+	public ByteBuf retainedSlice(int index, int length) {
+		return a.retainedSlice(index, length);
+	}
+
+	public ByteBuf retainedDuplicate() {
+		return a.retainedDuplicate();
 	}
 
 	public UUID g() {

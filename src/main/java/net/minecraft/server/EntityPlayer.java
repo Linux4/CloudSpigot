@@ -22,10 +22,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mojang.authlib.GameProfile;
 
-// CloudSpigot start
-import eu.server24_7.cloudspigot.CloudSpigotConfig;
-import eu.server24_7.cloudspigot.event.player.PlayerAutoRespawnEvent;
-import eu.server24_7.cloudspigot.event.player.PlayerPreAutoRespawnEvent;
+import eu.minewars.cloudspigot.CloudSpigotConfig;
+import eu.minewars.cloudspigot.event.player.PlayerAutoRespawnEvent;
+import eu.minewars.cloudspigot.event.player.PlayerPreAutoRespawnEvent;
 import io.netty.buffer.Unpooled;
 // CloudSpigot end
 

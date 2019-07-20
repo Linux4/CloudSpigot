@@ -22,7 +22,7 @@ import org.bukkit.util.Vector;
 
 import com.google.common.base.Preconditions;
 
-import eu.server24_7.cloudspigot.CloudSpigotConfig;
+import eu.minewars.cloudspigot.CloudSpigotConfig;
 import net.minecraft.server.Entity;
 import net.minecraft.server.EntityAmbient;
 import net.minecraft.server.EntityAnimal;

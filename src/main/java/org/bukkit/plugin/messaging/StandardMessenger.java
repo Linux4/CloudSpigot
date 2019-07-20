@@ -11,8 +11,8 @@ import org.bukkit.plugin.Plugin;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 
-import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
-import eu.server24_7.cloudspigot.exception.ServerPluginMessageException;
+import eu.minewars.cloudspigot.event.ServerExceptionEvent;
+import eu.minewars.cloudspigot.exception.ServerPluginMessageException;
 
 /**
  * Standard implementation to {@link Messenger}

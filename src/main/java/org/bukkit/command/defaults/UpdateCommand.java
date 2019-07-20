@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import org.bukkit.command.CommandSender;
 
-import eu.server24_7.cloudspigot.CloudSpigot;
-import eu.server24_7.cloudspigot.updater.Updater;
+import eu.minewars.cloudspigot.CloudSpigot;
+import eu.minewars.cloudspigot.updater.Updater;
 
 public class UpdateCommand extends BukkitCommand {
 

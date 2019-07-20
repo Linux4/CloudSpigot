@@ -22,9 +22,9 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
 
-import eu.server24_7.cloudspigot.ServerSchedulerReportingWrapper;
-import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
-import eu.server24_7.cloudspigot.exception.ServerSchedulerException;
+import eu.minewars.cloudspigot.ServerSchedulerReportingWrapper;
+import eu.minewars.cloudspigot.event.ServerExceptionEvent;
+import eu.minewars.cloudspigot.exception.ServerSchedulerException;
 
 /**
  * The fundamental concepts for this implementation:

@@ -29,7 +29,7 @@ import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.Resources;
 
-import eu.server24_7.cloudspigot.CloudSpigot;
+import eu.minewars.cloudspigot.CloudSpigot;
 
 public class VersionCommand extends BukkitCommand {
 

@@ -18,7 +18,7 @@ import org.bukkit.event.world.StructureGrowEvent;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-import eu.server24_7.cloudspigot.CloudSpigotConfig; // CloudSpigot
+import eu.minewars.cloudspigot.CloudSpigotConfig;
 
 public final class ItemStack {
 

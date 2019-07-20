@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-import eu.server24_7.cloudspigot.CloudSpigotConfig; // CloudSpigot
+import eu.minewars.cloudspigot.CloudSpigotConfig;
 
 public class ItemMilkBucket extends Item {
 

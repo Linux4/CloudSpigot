@@ -19,7 +19,7 @@ import java.util.zip.InflaterInputStream;
 
 import com.google.common.collect.Lists;
 
-import eu.server24_7.cloudspigot.exception.ServerInternalException;
+import eu.minewars.cloudspigot.exception.ServerInternalException;
 
 public class RegionFile {
 

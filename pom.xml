@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>eu.server24-7</groupId>
+	<groupId>eu.minewars.cloudspigot</groupId>
 	<artifactId>cloudspigot</artifactId>
 	<version>1.8.10-R0.1-SNAPSHOT</version>
 	<name>CloudSpigot</name>
@@ -20,8 +20,8 @@
 
 	<repositories>
 		<repository>
-			<id>server24-7</id>
-			<url>https://mvn.server24-7.eu/</url>
+			<id>linux4.de</id>
+			<url>https://mvn.linux4.de/</url>
 		</repository>
 	</repositories>
 
@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
-			<version>5.0.0.Alpha2</version>
+			<version>4.1.36.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.trove4j</groupId>

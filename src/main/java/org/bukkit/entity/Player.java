@@ -20,9 +20,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.messaging.PluginMessageRecipient;
 import org.bukkit.scoreboard.Scoreboard;
 
-// CloudSpigot start
-import eu.server24_7.cloudspigot.Title;
-// CloudSpigot end
+import eu.minewars.cloudspigot.Title;
 
 /**
  * Represents a player, connected or not

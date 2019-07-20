@@ -27,7 +27,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.ProfileLookupCallback;
 import com.mojang.authlib.yggdrasil.ProfileNotFoundException;
 
-import eu.server24_7.cloudspigot.exception.ServerInternalException;
+import eu.minewars.cloudspigot.exception.ServerInternalException;
 
 public class NameReferencingFileConverter {
 

@@ -16,8 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.google.common.collect.Lists;
 
-import eu.server24_7.cloudspigot.event.block.BeaconEffectEvent;
-// CloudSpigot end
+import eu.minewars.cloudspigot.event.block.BeaconEffectEvent;
 
 public class TileEntityBeacon extends TileEntityContainer implements IUpdatePlayerListBox, IInventory {
 

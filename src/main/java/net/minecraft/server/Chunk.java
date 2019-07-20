@@ -19,8 +19,7 @@ import com.google.common.collect.Lists; // CraftBukkit
 import com.google.common.collect.Maps;
 import com.google.common.collect.Queues;
 
-//import eu.server24_7.cloudspigot.event.ServerExceptionEvent; // CloudSpigot
-import eu.server24_7.cloudspigot.exception.ServerInternalException;
+import eu.minewars.cloudspigot.exception.ServerInternalException;
 
 public class Chunk {
 
