@@ -13,7 +13,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 
-import eu.minewars.cloudspigot.exception.ServerInternalException;
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
+// CraftBukkit end
 
 public class WorldNBTStorage implements IDataManager, IPlayerFileData {
 

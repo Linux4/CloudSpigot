@@ -16,8 +16,9 @@ import org.bukkit.craftbukkit.util.LongHashSet;
 import org.bukkit.craftbukkit.util.LongObjectHashMap;
 import org.bukkit.event.world.ChunkUnloadEvent;
 
-import eu.minewars.cloudspigot.event.ServerExceptionEvent;
-import eu.minewars.cloudspigot.exception.ServerInternalException;
+import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
+// CraftBukkit end
 
 public class ChunkProviderServer implements IChunkProvider {
 

@@ -66,7 +66,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.authlib.GameProfile;
 
-import eu.minewars.cloudspigot.Title;
+// CloudSpigot start
+import eu.server24_7.cloudspigot.Title;
 // CloudSpigot end
 import io.netty.buffer.Unpooled;
 import net.md_5.bungee.api.chat.BaseComponent;

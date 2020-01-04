@@ -24,9 +24,9 @@ import org.bukkit.command.defaults.VersionCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
-import eu.minewars.cloudspigot.event.ServerExceptionEvent;
-import eu.minewars.cloudspigot.exception.ServerCommandException;
-import eu.minewars.cloudspigot.exception.ServerTabCompleteException;
+import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
+import eu.server24_7.cloudspigot.exception.ServerCommandException;
+import eu.server24_7.cloudspigot.exception.ServerTabCompleteException;
 
 @SuppressWarnings("deprecation")
 public class SimpleCommandMap implements CommandMap {

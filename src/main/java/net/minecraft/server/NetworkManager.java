@@ -341,11 +341,11 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	protected void channelRead0(ChannelHandlerContext channelhandlercontext, Packet object) throws Exception { // CraftBukkit
-																												// -
-																												// fix
-																												// decompile
-																												// error
+	protected void messageReceived(ChannelHandlerContext channelhandlercontext, Packet object) throws Exception { // CraftBukkit
+																													// -
+																													// fix
+																													// decompile
+																													// error
 		this.a(channelhandlercontext, object);
 	}
 

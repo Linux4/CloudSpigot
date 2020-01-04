@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
-import eu.minewars.cloudspigot.event.permission.PermissionCheckEvent;
+import eu.server24_7.cloudspigot.event.permission.PermissionCheckEvent; // CloudSpigot -add PermissionCheckEvent
 
 /**
  * Base Permissible for use in any Permissible object via proxy or extension

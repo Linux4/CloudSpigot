@@ -20,7 +20,9 @@ import org.bukkit.event.server.ServerCommandEvent;
 
 import com.google.common.collect.Lists;
 
-import eu.minewars.cloudspigot.CloudSpigotEULA;
+//CloudSpigot start
+import eu.server24_7.cloudspigot.CloudSpigotEULA;
+//CloudSpigot end
 
 public class DedicatedServer extends MinecraftServer implements IMinecraftServer {
 
@@ -61,7 +63,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
 				}
 				// CraftBukkit end
 				// CloudSpigot start - Use TerminalConsoleAppender
-				new eu.minewars.cloudspigot.console.CloudSpigotConsole(DedicatedServer.this).start();
+				new eu.server24_7.cloudspigot.console.CloudSpigotConsole(DedicatedServer.this).start();
 				/*
 				 * jline.console.ConsoleReader bufferedreader = reader; // CraftBukkit String s;
 				 * 
@@ -175,8 +177,8 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
 			org.spigotmc.SpigotConfig.registerCommands();
 			// Spigot end
 			// CloudSpigot start
-			eu.minewars.cloudspigot.CloudSpigotConfig.init((File) options.valueOf("paper-settings"));
-			eu.minewars.cloudspigot.CloudSpigotConfig.registerCommands();
+			eu.server24_7.cloudspigot.CloudSpigotConfig.init((File) options.valueOf("paper-settings"));
+			eu.server24_7.cloudspigot.CloudSpigotConfig.registerCommands();
 			// CloudSpigot end
 
 			DedicatedServer.LOGGER.info("Generating keypair");

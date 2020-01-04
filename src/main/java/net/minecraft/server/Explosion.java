@@ -17,7 +17,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
-import eu.minewars.cloudspigot.AnimatedExplosion;
+import eu.server24_7.cloudspigot.AnimatedExplosion; // CloudSpigot
 
 public class Explosion {
 
@@ -242,7 +242,7 @@ public class Explosion {
 				return;
 			}
 			// CraftBukkit end
-			if (eu.minewars.cloudspigot.CloudSpigotConfig.animateExplosions) {
+			if (eu.server24_7.cloudspigot.CloudSpigotConfig.animateExplosions) {
 				new AnimatedExplosion(bukkitBlocks);
 			}
 

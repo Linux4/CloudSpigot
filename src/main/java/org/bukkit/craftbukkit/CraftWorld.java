@@ -120,7 +120,7 @@ import org.bukkit.util.Vector;
 
 import com.google.common.base.Preconditions;
 
-import eu.minewars.cloudspigot.exception.ServerInternalException;
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
 import net.minecraft.server.*;
 
 @SuppressWarnings("deprecation")

@@ -34,8 +34,9 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
-import eu.minewars.cloudspigot.event.ServerExceptionEvent;
-import eu.minewars.cloudspigot.exception.ServerInternalException;
+import eu.server24_7.cloudspigot.event.ServerExceptionEvent;
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
+// CloudSpigot end
 
 // CraftBukkit start
 // CraftBukkit end
@@ -157,7 +158,7 @@ public abstract class World implements IBlockAccess {
 																													// Optimize
 																													// explosions
 	public final org.spigotmc.SpigotWorldConfig spigotConfig; // Spigot
-	public final eu.minewars.cloudspigot.CloudSpigotWorldConfig cloudSpigotConfig; // CloudSpigot
+	public final eu.server24_7.cloudspigot.CloudSpigotWorldConfig cloudSpigotConfig; // CloudSpigot
 	public Map<BlockPosition, TileEntity> capturedTileEntities = Maps.newHashMap();
 
 	public static long chunkToKey(int x, int z) {
@@ -190,7 +191,7 @@ public abstract class World implements IBlockAccess {
 	protected World(IDataManager idatamanager, WorldData worlddata, WorldProvider worldprovider,
 			MethodProfiler methodprofiler, boolean flag, ChunkGenerator gen, org.bukkit.World.Environment env) {
 		this.spigotConfig = new org.spigotmc.SpigotWorldConfig(worlddata.getName()); // Spigot
-		this.cloudSpigotConfig = new eu.minewars.cloudspigot.CloudSpigotWorldConfig(worlddata.getName()); // CloudSpigot
+		this.cloudSpigotConfig = new eu.server24_7.cloudspigot.CloudSpigotWorldConfig(worlddata.getName()); // CloudSpigot
 		this.generator = gen;
 		this.world = new CraftWorld((WorldServer) this, gen, env);
 		this.ticksPerAnimalSpawns = this.getServer().getTicksPerAnimalSpawns(); // CraftBukkit

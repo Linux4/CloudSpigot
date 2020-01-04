@@ -76,7 +76,7 @@ public abstract class PlayerList {
 
 	public PlayerList(MinecraftServer minecraftserver) {
 		this.cserver = minecraftserver.server = new CraftServer(minecraftserver, this);
-		minecraftserver.console = new eu.minewars.cloudspigot.console.TerminalConsoleCommandSender(); // CloudSpigot
+		minecraftserver.console = new eu.server24_7.cloudspigot.console.TerminalConsoleCommandSender(); // CloudSpigot
 		// CraftBukkit end
 
 		this.k = new GameProfileBanList(PlayerList.a);

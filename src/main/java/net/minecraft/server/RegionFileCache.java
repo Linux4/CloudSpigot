@@ -9,7 +9,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import eu.minewars.cloudspigot.exception.ServerInternalException;
+import eu.server24_7.cloudspigot.exception.ServerInternalException;
 
 public class RegionFileCache {
 
